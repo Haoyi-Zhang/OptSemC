@@ -201,6 +201,7 @@ class DuckDBRunner:
         self._create_catalog()
 
     def _create_catalog(self) -> None:
+        self.connection.execute("CREATE OR REPLACE MACRO expensive_udf(x) AS (length(CAST(x AS VARCHAR)) % 2 = 0)")
         for schema in ALL_SCHEMAS:
             if schema != "main":
                 self.connection.execute(f"CREATE SCHEMA IF NOT EXISTS {schema}")
@@ -217,7 +218,7 @@ class DuckDBRunner:
         sql = sql_for_engine(str(probe.get("sql_skeleton", "")), self.engine)
         plan_rows = self.connection.execute("EXPLAIN " + sql).fetchall()
         plan_text_value = "\n".join(" ".join(map(str, row)) for row in plan_rows)
-        result_rows = self.connection.execute(f"SELECT COUNT(*) FROM ({sql}) AS optsemc_probe").fetchone()[0]
+        result_rows = self.connection.execute(f"SELECT COUNT(*) FROM ({sql}\n) AS optsemc_probe").fetchone()[0]
         expected, observed, matched, rate = tag_columns(probe.get("feature_vector", {}), plan_text_value)
         return ValidationRow(self.engine, subset, str(probe["probe_id"]), True, True, int(result_rows), plan_hash(plan_text_value), expected, observed, matched, rate, "")
 
@@ -242,6 +243,7 @@ class PostgresRunner:
 
     def _create_catalog(self) -> None:
         with self.connection.cursor() as cur:
+            cur.execute("CREATE OR REPLACE FUNCTION expensive_udf(text) RETURNS boolean LANGUAGE SQL IMMUTABLE AS $$ SELECT length($1) % 2 = 0 $$")
             for schema in ALL_SCHEMAS:
                 if schema != "main":
                     cur.execute(f"CREATE SCHEMA IF NOT EXISTS {schema}")
@@ -260,7 +262,7 @@ class PostgresRunner:
         with self.connection.cursor() as cur:
             cur.execute("EXPLAIN (FORMAT TEXT) " + sql)
             plan_text_value = "\n".join(row[0] for row in cur.fetchall())
-            cur.execute(f"SELECT COUNT(*) FROM ({sql}) AS optsemc_probe")
+            cur.execute(f"SELECT COUNT(*) FROM ({sql}\n) AS optsemc_probe")
             result_rows = cur.fetchone()[0]
         expected, observed, matched, rate = tag_columns(probe.get("feature_vector", {}), plan_text_value)
         return ValidationRow(self.engine, subset, str(probe["probe_id"]), True, True, int(result_rows), plan_hash(plan_text_value), expected, observed, matched, rate, "")

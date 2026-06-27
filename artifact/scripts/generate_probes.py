@@ -172,14 +172,21 @@ def render_sql(a:Assignment, idx:int)->str:
     elif js=='binary':
         select=f"SELECT {hint}d1.custkey, f.orderkey"; from_clause=f"FROM {rel('customer')} d1 JOIN {rel('orders')} f ON d1.custkey = f.custkey"
     elif js in ['star','snowflake']:
-        select=f"SELECT {hint}f.key, d1.attr, d2.attr, SUM(f.measure)"; from_clause=f"FROM {rel('fact')} f JOIN {rel('dim1')} d1 ON f.k1=d1.k JOIN {rel('dim2')} d2 ON f.k2=d2.k"
+        select=f"SELECT {hint}f.key, d1.attr, d2.attr"; from_clause=f"FROM {rel('fact')} f JOIN {rel('dim1')} d1 ON f.k1=d1.k JOIN {rel('dim2')} d2 ON f.k2=d2.k"
     elif js=='chain':
-        select=f"SELECT {hint}a.k, COUNT(*)"; from_clause=f"FROM {rel('a')} a JOIN {rel('b')} b ON a.k=b.k JOIN {rel('c')} c ON b.k=c.k JOIN {rel('d')} d ON c.k=d.k"
+        select=f"SELECT {hint}a.k"; from_clause=f"FROM {rel('a')} a JOIN {rel('b')} b ON a.k=b.k JOIN {rel('c')} c ON b.k=c.k JOIN {rel('d')} d ON c.k=d.k"
     else:
-        select=f"SELECT {hint}a.k, COUNT(*)"; from_clause=f"FROM {rel('a')} a JOIN {rel('b')} b ON a.k=b.k JOIN {rel('c')} c ON a.k=c.k JOIN {rel('d')} d ON b.k=d.k"
+        select=f"SELECT {hint}a.k"; from_clause=f"FROM {rel('a')} a JOIN {rel('b')} b ON a.k=b.k JOIN {rel('c')} c ON a.k=c.k JOIN {rel('d')} d ON b.k=d.k"
     if agg in ['group_by','group_by_after_join']:
-        select = select if ('SUM' in select or 'COUNT' in select) else 'SELECT d1.nationkey, COUNT(*)'
-        group=' GROUP BY 1' if 'SUM' not in select else ' GROUP BY f.key, d1.attr, d2.attr'
+        if js in ['star', 'snowflake']:
+            select=f"SELECT {hint}f.key, d1.attr, d2.attr, SUM(f.measure)"
+            group=' GROUP BY f.key, d1.attr, d2.attr'
+        elif js in ['chain', 'clique']:
+            select=f"SELECT {hint}a.k, COUNT(*)"
+            group=' GROUP BY a.k'
+        else:
+            select=f"SELECT {hint}d1.nationkey, COUNT(*)"
+            group=' GROUP BY d1.nationkey'
     elif agg=='distinct':
         select=select.replace('SELECT','SELECT DISTINCT',1); group=''
     elif agg=='expression_aggregate':
@@ -197,8 +204,8 @@ def render_sql(a:Assignment, idx:int)->str:
     elif order=='order_by': q+='\nORDER BY 1'
     elif order=='limit': q+='\nLIMIT 10'
     elif order=='window_order': q='SELECT *, ROW_NUMBER() OVER (ORDER BY 1) AS rn FROM ('+q+') s'
-    if control=='join_distribution_broadcast': q+='\n-- contract probe: join_distribution_type=BROADCAST'
-    if control=='no_reorder_setting': q+='\n-- contract probe: join_reordering_strategy=NONE'
+    if control=='join_distribution_broadcast': q+='\n/* contract probe: join_distribution_type=BROADCAST */'
+    if control=='no_reorder_setting': q+='\n/* contract probe: join_reordering_strategy=NONE */'
     return q+';'
 
 def expand_rule_guards(rules_path:Optional[Path], domain:Dict[str,List[str]])->List[Assignment]:
