@@ -1,0 +1,23 @@
+check,passed,details
+full_has_duckdb_and_postgres,true,"engines=['duckdb', 'postgres']"
+full_detail_row_count,true,rows=8432;expected=8432
+full_all_detail_success,true,
+full_duckdb_all_probes_present,true,probes=4216;expected=4216
+full_duckdb_no_execution_failures,true,plan=4216;exec=4216;fail=0
+full_duckdb_visible_match_floor,true,mean_visible_match_rate=0.705487
+full_duckdb_plan_diversity_present,true,distinct_plan_hashes=169
+full_postgres_all_probes_present,true,probes=4216;expected=4216
+full_postgres_no_execution_failures,true,plan=4216;exec=4216;fail=0
+full_postgres_visible_match_floor,true,mean_visible_match_rate=0.796371
+full_postgres_plan_diversity_present,true,distinct_plan_hashes=114
+motif_has_duckdb_and_postgres,true,"engines=['duckdb', 'postgres']"
+motif_detail_row_count,true,rows=142;expected=142
+motif_all_detail_success,true,
+motif_duckdb_all_probes_present,true,probes=71;expected=71
+motif_duckdb_no_execution_failures,true,plan=71;exec=71;fail=0
+motif_duckdb_visible_match_floor,true,mean_visible_match_rate=0.755869
+motif_duckdb_plan_diversity_present,true,distinct_plan_hashes=25
+motif_postgres_all_probes_present,true,probes=71;expected=71
+motif_postgres_no_execution_failures,true,plan=71;exec=71;fail=0
+motif_postgres_visible_match_floor,true,mean_visible_match_rate=0.819249
+motif_postgres_plan_diversity_present,true,distinct_plan_hashes=20
