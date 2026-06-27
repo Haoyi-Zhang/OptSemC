@@ -1,5 +1,5 @@
 check,passed,details
 score_file_present,true,percent=100.0
 score_package_grade,true,percent=100.0
-audit_all_hard_gates_pass,true,11/11
-audit_has_at_least_ten_dimensions,true,11
+audit_all_hard_gates_pass,true,12/12
+audit_has_at_least_ten_dimensions,true,12

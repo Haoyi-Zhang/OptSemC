@@ -18,5 +18,6 @@ rank,gate_id,gate,path,claims_covered
 17,gate:claim_row_3_checked,claim_row_3_checked,artifact/evaluation/claim_ledger_check.csv,1
 18,gate:claim_row_2_checked,claim_row_2_checked,artifact/evaluation/claim_ledger_check.csv,1
 19,gate:claim_row_1_checked,claim_row_1_checked,artifact/evaluation/claim_ledger_check.csv,1
-20,gate:claim_row_11_checked,claim_row_11_checked,artifact/evaluation/claim_ledger_check.csv,1
-21,gate:claim_row_10_checked,claim_row_10_checked,artifact/evaluation/claim_ledger_check.csv,1
+20,gate:claim_row_12_checked,claim_row_12_checked,artifact/evaluation/claim_ledger_check.csv,1
+21,gate:claim_row_11_checked,claim_row_11_checked,artifact/evaluation/claim_ledger_check.csv,1
+22,gate:claim_row_10_checked,claim_row_10_checked,artifact/evaluation/claim_ledger_check.csv,1

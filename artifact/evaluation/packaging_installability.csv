@@ -1,5 +1,7 @@
 check,passed,details
-project_version_is_stable,true,project=1.0.0
+project_version_not_hardcoded,true,dynamic=['version']
+dynamic_version_backend_declared,true,"['setuptools-scm>=8', 'setuptools>=68']"
+dynamic_version_git_root_declared,true,"{'root': '..', 'relative_to': 'pyproject.toml'}"
 package_dir_exists,true,optsemc
 optsemc_declared_package,true,{'optsemc'}
 readme_exists,true,README.md

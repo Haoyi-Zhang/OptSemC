@@ -1,5 +1,5 @@
 check,passed,details
-claim_graph_has_claims,true,claims=21
-claim_graph_has_edges,true,edges=70
-all_claims_have_existing_support,true,21/21
-gate_cover_nonempty,true,cover_size=21
+claim_graph_has_claims,true,claims=22
+claim_graph_has_edges,true,edges=78
+all_claims_have_existing_support,true,22/22
+gate_cover_nonempty,true,cover_size=22

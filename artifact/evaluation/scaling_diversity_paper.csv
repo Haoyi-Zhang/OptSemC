@@ -1,5 +1,5 @@
 projection,false_at_1x,false_probes,feature_axes,family_regions,checks_at_8x,min_checks_per_second,incremental_drift
-strict,0,--,--,0/6,"708,288","139,186",0
-keyword,254,254,9,3/6,"708,288","207,729",0
-operator-only,238,238,8,2/6,"708,288","242,540",0
-surface,0,--,--,0/6,"708,288","131,314",0
+strict,0,--,--,0/6,"708,288","257,227",0
+keyword,254,254,9,3/6,"708,288","321,414",0
+operator-only,238,238,8,2/6,"708,288","337,362",0
+surface,0,--,--,0/6,"708,288","265,000",0

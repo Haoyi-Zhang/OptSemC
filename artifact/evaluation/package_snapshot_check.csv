@@ -9,7 +9,7 @@ certificate:format_compliance,true,6/6
 certificate:manuscript_style,true,7/7
 certificate:latex_compile_check,true,10/10
 certificate:pdf_integrity,true,6/6
-certificate:reference_quality,true,80/80
+certificate:reference_quality,true,81/81
 certificate:paper_table_source_check,true,27/27
 certificate:claim_evidence_graph_check,true,4/4
 certificate:data_contracts_check,true,3/3

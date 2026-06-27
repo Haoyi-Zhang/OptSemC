@@ -1,7 +1,7 @@
 metric,value
-python_files,260
-syntax_ok_files,260
-functions,1952
-classes,81
+python_files,264
+syntax_ok_files,264
+functions,1986
+classes,86
 max_function_lines,247
-files_over_120_function_lines,1
+files_over_120_function_lines,2
