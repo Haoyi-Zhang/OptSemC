@@ -60,7 +60,7 @@ for pyc in ROOT.rglob('*.py[co]'):
     try: pyc.unlink()
     except OSError: pass
 
-allowed_top_level = {'.git', '.gitignore', 'Paper', 'README.md', 'artifact'}
+allowed_top_level = {'.git', '.github', '.gitignore', 'Paper', 'README.md', 'artifact'}
 top = sorted(p.name for p in ROOT.iterdir())
 unexpected_top = [name for name in top if name not in allowed_top_level]
 add('clean_top_level', not unexpected_top and {'Paper', 'artifact'}.issubset(set(top)), ','.join(unexpected_top))

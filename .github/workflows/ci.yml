@@ -1,0 +1,19 @@
+name: mainline
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install package
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -e artifact
+      - name: Run mainline checks
+        run: |
+          cd artifact
+          ./run_mainline_checks.sh
