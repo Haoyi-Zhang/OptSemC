@@ -304,7 +304,7 @@ def summarize(rows: Sequence[ValidationRow]) -> list[dict[str, str]]:
     for row in rows:
         grouped.setdefault((row.engine, row.subset), []).append(row)
     out = []
-    for (engine, subset), group in sorted(grouped):
+    for (engine, subset), group in sorted(grouped.items()):
         visible_expected = sum(1 for row in group if row.visible_expected_tags)
         avg_match = sum(float(row.visible_match_rate) for row in group) / len(group) if group else 0.0
         out.append({
