@@ -32,8 +32,12 @@ add('no_visible_repository_or_report_terms', not hits, ';'.join(hits))
 sections = re.findall(r'\\section\{([^}]*)\}', text)
 add('has_regular_research_structure', sections[:5] == ['Introduction','The Failure Mode','Contract Semantics','Benchmark and Grounded Corpus','Evaluation'], '|'.join(sections[:7]))
 add('has_tikz_mechanism_figure', '\\begin{tikzpicture}' in text and 'Projection kernel' in text, '')
-add('has_formal_statements_and_proofs', text.count('\\begin{theorem}') >= 5 and text.count('\\begin{proof}') >= 5, f"theorems={text.count('\\begin{theorem}')};proofs={text.count('\\begin{proof}')}")
-add('references_70_to_80', 70 <= len(re.findall(r'\\bibitem\{', text)) <= 80, len(re.findall(r'\\bibitem\{', text)))
+theorem_count = text.count('\\begin{theorem}')
+proof_count = text.count('\\begin{proof}')
+add('has_formal_statements_and_proofs', theorem_count >= 5 and proof_count >= 5, f"theorems={theorem_count};proofs={proof_count}")
+refs_bib = PAPER / 'refs.bib'
+reference_count = len(re.findall(r'^@\w+\s*\{', refs_bib.read_text(encoding='utf-8'), flags=re.M)) if refs_bib.exists() else len(re.findall(r'\\bibitem\{', text))
+add('references_70_to_80', 70 <= reference_count <= 80, reference_count)
 # Basic PDF text check.
 try:
     proc = subprocess.run(['pdftotext', str(PDF), '-'], text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=30)
