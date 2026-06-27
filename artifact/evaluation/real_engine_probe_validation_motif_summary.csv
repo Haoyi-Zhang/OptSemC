@@ -1,0 +1,3 @@
+engine,subset,probes,plan_successes,execution_successes,execution_failures,visible_expected_probe_rows,mean_visible_match_rate,distinct_plan_hashes
+duckdb,motif,71,71,71,0,50,0.755869,25
+postgres,motif,71,71,71,0,50,0.819249,20

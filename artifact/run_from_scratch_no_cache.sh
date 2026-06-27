@@ -15,5 +15,6 @@ rm -f benchmark/generated_probes.jsonl \
 rm -rf benchmark/sql_bundle/representative
 find . -type f -name '*.gz' -delete
 ./recompute_grounded_mainline.sh
+PYTHON="${PYTHON:-python}" ./run_cloud_real_engine_validation.sh
 RUN_EXPENSIVE_RECOMPUTE=1 RUN_LATEX_COMPILE=1 ./run_deep_checks.sh
 ./run_mainline_checks.sh

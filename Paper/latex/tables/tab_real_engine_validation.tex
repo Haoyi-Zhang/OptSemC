@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\caption{Real-engine validation of generated SQL probes. The check records parse, plan, execution, visible plan tags, and plan-hash diversity; it is not a latency benchmark.}
+\label{tab:real-engine-validation}
+\small
+\begin{tabular}{llrrrr}
+\toprule
+Engine & Scope & Probes & Exec. & Fail & Mean tag match \\
+\midrule
+DuckDB & Full & 4,216 & 4,216 & 0 & 0.705 \\
+PostgreSQL & Full & 4,216 & 4,216 & 0 & 0.796 \\
+DuckDB & Motifs & 71 & 71 & 0 & 0.756 \\
+PostgreSQL & Motifs & 71 & 71 & 0 & 0.819 \\
+\bottomrule
+\end{tabular}
+\Description{Real-engine validation table showing successful execution of full and motif probe scopes on DuckDB and PostgreSQL with zero failures.}
+\end{table}

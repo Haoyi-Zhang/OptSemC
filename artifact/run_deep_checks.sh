@@ -53,6 +53,7 @@ run_py scripts/compute_benchmark_motif_difficulty.py
 run_py scripts/check_benchmark_motif_difficulty.py
 run_py scripts/execute_external_motif_suite.py
 run_py scripts/check_external_motif_execution.py
+run_py scripts/check_real_engine_validation.py
 run_py scripts/check_no_cache_package.py
 run_py scripts/refresh_grounded_summaries.py
 run_py scripts/check_grounded_summary_consistency.py

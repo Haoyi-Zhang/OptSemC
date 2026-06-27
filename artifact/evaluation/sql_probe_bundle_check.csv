@@ -1,6 +1,6 @@
 check,passed,details
 manifest_has_all_generated_probes,true,rows=4216
-bundle_summary_matches_manifest,true,"{'generated_probe_sql_queries': '4216', 'representative_sql_files': '48', 'full_probe_bundle_sha256': 'df107f018e37debab23c5b51bff18c7cf86f40c577c46acf9137d96597e1e222', 'shape_invalid_queries': '0'}"
+bundle_summary_matches_manifest,true,"{'generated_probe_sql_queries': '4216', 'representative_sql_files': '48', 'full_probe_bundle_sha256': '06dd246e3ddde12483145ebffdcc44f625c0c0e5d201b1536ab9894fc506260c', 'shape_invalid_queries': '0'}"
 representative_sql_cover_present,true,files=48
 shape_check_has_zero_invalid_queries,true,invalid=0
-raw_full_sql_bundle_readable,true,markers=4216;chars=2144825
+raw_full_sql_bundle_readable,true,markers=4216;chars=2144695

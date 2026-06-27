@@ -29,42 +29,42 @@ FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 -- OptSemBench-C probe P0005
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0006
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0007
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0008
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=shuffle, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0009
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0010
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -192,7 +192,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -262,28 +262,28 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P0038
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0039
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0040
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0041
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -457,7 +457,7 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P0064
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -722,7 +722,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 -- features: adaptivity_trigger=none, aggregation=expression_aggregate, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, SUM(d1.acctbal * 1.08)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -757,7 +757,7 @@ WHERE d1.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = d1.custkey);
 
 -- OptSemBench-C probe P0106
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_statistics_propagation, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -814,7 +814,7 @@ FROM customer d1 GROUP BY d1.nationkey;
 -- OptSemBench-C probe P0114
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=join_distribution_partitioned, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -829,14 +829,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=correlated, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey
-WHERE f.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = f.custkey) GROUP BY 1;
+WHERE f.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = f.custkey) GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0117
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_from_collapse_1, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -890,7 +890,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P0124
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=disable_hashjoin, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -914,7 +914,7 @@ ORDER BY 1;
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=shuffle, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -970,7 +970,7 @@ FROM customer d1;
 -- OptSemBench-C probe P0135
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=disable_mergejoin, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -983,7 +983,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 
 -- OptSemBench-C probe P0137
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -1012,28 +1012,28 @@ FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey) s;
 -- OptSemBench-C probe P0141
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=disable_statistics_propagation, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0142
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=shuffle_replicate_nl_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0143
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=disable_nestloop, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0144
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=duck_disable_optimizer, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -1054,105 +1054,105 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P0147
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=disable_materialization, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0148
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=disable_optimizer, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0149
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=dynamic_filtering_disabled, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0150
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=explain_analyze, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0151
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=explain_logical, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0152
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_hashagg_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0153
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_hashjoin_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0154
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_incremental_sort_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0155
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_indexscan_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0156
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_memoize_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0157
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_mergejoin_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0158
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_nestloop_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0159
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_join_collapse_1, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0160
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=spark_aqe_disabled, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0161
 -- features: adaptivity_trigger=runtime_stats, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=skewed, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -1173,7 +1173,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P0164
 -- features: adaptivity_trigger=stage_boundary, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -1195,7 +1195,7 @@ ORDER BY 1 LIMIT 10;
 -- OptSemBench-C probe P0167
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=duck_disable_optimizer, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -1203,7 +1203,7 @@ FROM remote_pg.customer d1 GROUP BY 1;
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=simple, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey
-WHERE d1.flag = 1 GROUP BY 1;
+WHERE d1.flag = 1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -1211,7 +1211,7 @@ WHERE d1.flag = 1 GROUP BY 1;
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=conjunctive, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM remote_pg.customer d1
-WHERE d1.flag = 1 GROUP BY 1;
+WHERE d1.flag = 1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -1219,7 +1219,7 @@ WHERE d1.flag = 1 GROUP BY 1;
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=disjunctive, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM remote_pg.customer d1
-WHERE (d1.flag = 1 OR d1.region = 'EU') GROUP BY 1;
+WHERE (d1.flag = 1 OR d1.region = 'EU') GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -1227,7 +1227,7 @@ WHERE (d1.flag = 1 OR d1.region = 'EU') GROUP BY 1;
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=function, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM remote_pg.customer d1
-WHERE expensive_udf(d1.comment) = TRUE GROUP BY 1;
+WHERE expensive_udf(d1.comment) = TRUE GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -1235,21 +1235,21 @@ WHERE expensive_udf(d1.comment) = TRUE GROUP BY 1;
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=udf, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM remote_pg.customer d1
-WHERE expensive_udf(d1.comment) = TRUE GROUP BY 1;
+WHERE expensive_udf(d1.comment) = TRUE GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0173
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=aqe_disabled, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0174
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=disable_mergejoin, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -1263,7 +1263,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P0176
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=duck_disable_statistics_propagation, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -1284,7 +1284,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P0179
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_indexonlyscan_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -1365,156 +1365,156 @@ FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY
 -- OptSemBench-C probe P0190
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=aqe_disabled, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0191
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=broadcast_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+SELECT /*+ BROADCAST(d1) */ d1.nationkey, COUNT(*)
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0192
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=clickhouse_join_algorithm_auto, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0193
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=clickhouse_join_algorithm_direct, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0194
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=clickhouse_join_algorithm_full_sorting_merge, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0195
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=clickhouse_join_algorithm_grace_hash, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0196
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=clickhouse_join_algorithm_hash, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0197
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=clickhouse_join_algorithm_parallel_hash, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0198
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=clickhouse_join_algorithm_partial_merge, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0199
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=disable_materialization, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0200
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=disable_nestloop, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0201
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=disable_optimizer, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0202
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=duck_disable_filter_pushdown, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0203
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=duck_disable_statistics_propagation, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0204
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=dynamic_filtering_disabled, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0205
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=explain_analyze, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0206
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=explain_distributed, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0207
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=explain_logical, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0208
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1
--- contract probe: join_distribution_type=BROADCAST;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0209
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=merge_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0210
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1
--- contract probe: join_reordering_strategy=NONE;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0211
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=limit, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY 1
+FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
 LIMIT 10;
 
 -- ----------------------------------------------------------------------
@@ -1522,21 +1522,21 @@ LIMIT 10;
 -- OptSemBench-C probe P0212
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0213
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=medium
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0214
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=order_by, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1
+FROM remote_pg.customer d1 GROUP BY d1.nationkey
 ORDER BY 1;
 
 -- ----------------------------------------------------------------------
@@ -1544,119 +1544,119 @@ ORDER BY 1;
 -- OptSemBench-C probe P0215
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=window_order, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT *, ROW_NUMBER() OVER (ORDER BY 1) AS rn FROM (SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1) s;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey) s;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0216
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=pg_enable_hashagg_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0217
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=pg_enable_hashjoin_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0218
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=pg_enable_incremental_sort_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0219
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=pg_enable_indexscan_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0220
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=pg_enable_memoize_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0221
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=pg_enable_mergejoin_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0222
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=pg_enable_nestloop_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0223
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=pg_from_collapse_1, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0224
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=pg_join_collapse_1, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0225
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=shuffle_hash_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0226
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=spark_aqe_disabled, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0227
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=spark_merge_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0228
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=spark_shuffle_hash_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0229
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=spark_shuffle_replicate_nl_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0230
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=trino_join_distribution_partitioned, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0231
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=explain_distributed, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -1671,7 +1671,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=conjunctive, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
-WHERE d1.flag = 1 GROUP BY 1;
+WHERE d1.flag = 1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -1679,7 +1679,7 @@ WHERE d1.flag = 1 GROUP BY 1;
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=disjunctive, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
-WHERE (d1.flag = 1 OR d1.region = 'EU') GROUP BY 1;
+WHERE (d1.flag = 1 OR d1.region = 'EU') GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -1693,69 +1693,69 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P0236
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=supports_join_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0237
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=supports_limit_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0238
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0239
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0240
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0241
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0242
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0243
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0244
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0245
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -1800,14 +1800,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P0251
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=broadcast_candidate, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0252
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=shuffle, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -1828,14 +1828,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P0255
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=broadcast_candidate, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0256
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=skewed, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -2026,7 +2026,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 -- features: adaptivity_trigger=none, aggregation=distinct, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT DISTINCT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -2478,42 +2478,42 @@ ORDER BY 1 LIMIT 10;
 -- OptSemBench-C probe P0347
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=disable_filter_pushdown, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0348
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=disable_hashjoin, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0349
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=join_distribution_partitioned, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0350
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=broadcast_candidate, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0351
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0352
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=topn, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY 1
+FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
 ORDER BY 1 LIMIT 10;
 
 -- ----------------------------------------------------------------------
@@ -2521,42 +2521,42 @@ ORDER BY 1 LIMIT 10;
 -- OptSemBench-C probe P0353
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0354
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT a.k, COUNT(*)
-FROM remote_pg.a a JOIN remote_pg.b b ON a.k=b.k JOIN remote_pg.c c ON b.k=c.k JOIN remote_pg.d d ON c.k=d.k GROUP BY 1;
+FROM remote_pg.a a JOIN remote_pg.b b ON a.k=b.k JOIN remote_pg.c c ON b.k=c.k JOIN remote_pg.d d ON c.k=d.k GROUP BY a.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0355
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT a.k, COUNT(*)
-FROM remote_pg.a a JOIN remote_pg.b b ON a.k=b.k JOIN remote_pg.c c ON a.k=c.k JOIN remote_pg.d d ON b.k=d.k GROUP BY 1;
+FROM remote_pg.a a JOIN remote_pg.b b ON a.k=b.k JOIN remote_pg.c c ON a.k=c.k JOIN remote_pg.d d ON b.k=d.k GROUP BY a.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0356
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0357
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=high
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0358
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=unavailable
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -2591,93 +2591,93 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P0363
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=pg_enable_indexonlyscan_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0364
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=broadcast_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
-SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+SELECT /*+ BROADCAST(d1) */ d1.nationkey, COUNT(*)
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0365
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_auto, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0366
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_direct, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0367
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_full_sorting_merge, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0368
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_grace_hash, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0369
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_hash, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0370
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_parallel_hash, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0371
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_partial_merge, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0372
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=disable_statistics_propagation, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0373
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1
--- contract probe: join_distribution_type=BROADCAST;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0374
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=merge_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0375
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1
--- contract probe: join_reordering_strategy=NONE;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -2685,42 +2685,42 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=correlated, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
-WHERE f.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = f.custkey) GROUP BY 1;
+WHERE f.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = f.custkey) GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0377
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=shuffle_hash_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0378
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=shuffle_replicate_nl_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0379
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=spark_merge_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0380
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=spark_shuffle_hash_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0381
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=spark_shuffle_replicate_nl_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -2734,7 +2734,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P0383
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=supports_topn_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=topn, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY 1
+FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
 ORDER BY 1 LIMIT 10;
 
 -- ----------------------------------------------------------------------
@@ -3177,7 +3177,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -3185,7 +3185,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -3193,7 +3193,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -3243,7 +3243,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -3251,7 +3251,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -3259,20 +3259,20 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0458
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0459
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -3814,7 +3814,7 @@ FROM customer d1;
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=broadcast_candidate, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -3836,34 +3836,34 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=broadcast_candidate, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0539
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=broadcast_candidate, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0540
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=broadcast_candidate, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0541
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=shuffle, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0542
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=skewed, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -3997,7 +3997,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 -- OptSemBench-C probe P0561
 -- features: adaptivity_trigger=skew, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -4166,20 +4166,20 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=shuffle, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0586
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=shuffle, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0587
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=shuffle, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -4447,7 +4447,7 @@ FROM customer d1;
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=skewed, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -4469,20 +4469,20 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=skewed, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0629
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=skewed, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0630
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=skewed, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -4709,49 +4709,49 @@ FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY
 -- OptSemBench-C probe P0662
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_basic_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0663
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_join_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0664
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_limit_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0665
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_materialized_view_rewrite, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0666
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_projection_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0667
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_search_optimization, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0668
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_topn_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=topn, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY 1
+FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
 ORDER BY 1 LIMIT 10;
 
 -- ----------------------------------------------------------------------
@@ -4760,14 +4760,14 @@ ORDER BY 1 LIMIT 10;
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=function, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
-WHERE expensive_udf(d1.comment) = TRUE GROUP BY 1;
+WHERE expensive_udf(d1.comment) = TRUE GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0670
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -4775,42 +4775,42 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=simple, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
-WHERE d1.flag = 1 GROUP BY 1;
+WHERE d1.flag = 1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0672
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0673
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=supports_basic_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0674
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=supports_materialized_view_rewrite, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0675
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=supports_projection_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0676
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=supports_search_optimization, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -4928,7 +4928,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 
 -- OptSemBench-C probe P0693
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -5574,7 +5574,7 @@ ORDER BY 1 LIMIT 10;
 SELECT d1.custkey, f.orderkey
 FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey
 ORDER BY 1 LIMIT 10
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -5606,7 +5606,7 @@ ORDER BY 1 LIMIT 10;
 SELECT d1.custkey, f.orderkey
 FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey
 ORDER BY 1 LIMIT 10
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -5644,7 +5644,7 @@ ORDER BY 1 LIMIT 10;
 
 -- OptSemBench-C probe P0784
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_topn_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=topn, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM remote_pg.a a JOIN remote_pg.b b ON a.k=b.k JOIN remote_pg.c c ON b.k=c.k JOIN remote_pg.d d ON c.k=d.k
 ORDER BY 1 LIMIT 10;
 
@@ -5652,7 +5652,7 @@ ORDER BY 1 LIMIT 10;
 
 -- OptSemBench-C probe P0785
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_topn_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=topn, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM remote_pg.a a JOIN remote_pg.b b ON a.k=b.k JOIN remote_pg.c c ON a.k=c.k JOIN remote_pg.d d ON b.k=d.k
 ORDER BY 1 LIMIT 10;
 
@@ -5699,7 +5699,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 
 -- OptSemBench-C probe P0791
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_topn_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=topn, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM remote_pg.fact f JOIN remote_pg.dim1 d1 ON f.k1=d1.k JOIN remote_pg.dim2 d2 ON f.k2=d2.k
 ORDER BY 1 LIMIT 10;
 
@@ -5707,7 +5707,7 @@ ORDER BY 1 LIMIT 10;
 
 -- OptSemBench-C probe P0792
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_topn_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=topn, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM remote_pg.fact f JOIN remote_pg.dim1 d1 ON f.k1=d1.k JOIN remote_pg.dim2 d2 ON f.k2=d2.k
 ORDER BY 1 LIMIT 10;
 
@@ -5874,7 +5874,7 @@ FROM customer d1 GROUP BY d1.nationkey;
 -- OptSemBench-C probe P0813
 -- features: adaptivity_trigger=runtime_stats, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=skewed, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -6564,7 +6564,7 @@ FROM customer d1;
 -- features: adaptivity_trigger=none, aggregation=distinct, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT DISTINCT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -6572,7 +6572,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=distinct, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT DISTINCT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -6580,7 +6580,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=distinct, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT DISTINCT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -6644,7 +6644,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 -- features: adaptivity_trigger=none, aggregation=distinct, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT DISTINCT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -6659,7 +6659,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- features: adaptivity_trigger=none, aggregation=distinct, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT DISTINCT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -6700,14 +6700,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P0929
 -- features: adaptivity_trigger=none, aggregation=distinct, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT DISTINCT a.k, COUNT(*)
+SELECT DISTINCT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0930
 -- features: adaptivity_trigger=none, aggregation=distinct, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT DISTINCT a.k, COUNT(*)
+SELECT DISTINCT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -6904,14 +6904,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P0956
 -- features: adaptivity_trigger=none, aggregation=distinct, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT DISTINCT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT DISTINCT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P0957
 -- features: adaptivity_trigger=none, aggregation=distinct, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT DISTINCT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT DISTINCT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -7838,7 +7838,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- features: adaptivity_trigger=none, aggregation=expression_aggregate, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, SUM(d1.acctbal * 1.08)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -7853,7 +7853,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- features: adaptivity_trigger=none, aggregation=expression_aggregate, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, SUM(d1.acctbal * 1.08)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -7917,7 +7917,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 -- features: adaptivity_trigger=none, aggregation=expression_aggregate, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, SUM(d1.acctbal * 1.08)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -7925,7 +7925,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
 -- features: adaptivity_trigger=none, aggregation=expression_aggregate, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, SUM(d1.acctbal * 1.08)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -7933,7 +7933,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
 -- features: adaptivity_trigger=none, aggregation=expression_aggregate, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, SUM(d1.acctbal * 1.08)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -8622,7 +8622,7 @@ ORDER BY 1 LIMIT 10;
 -- OptSemBench-C probe P1198
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=aqe_disabled, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -8636,14 +8636,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1200
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=aqe_disabled, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1201
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=broadcast_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
-SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+SELECT /*+ BROADCAST(d1) */ d1.nationkey, COUNT(*)
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -8656,15 +8656,15 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 
 -- OptSemBench-C probe P1203
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=broadcast_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
-SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+SELECT /*+ BROADCAST(d1) */ d1.nationkey, COUNT(*)
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1204
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_auto, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -8678,14 +8678,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1206
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_auto, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1207
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_direct, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -8699,14 +8699,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1209
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_direct, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1210
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_full_sorting_merge, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -8720,14 +8720,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1212
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_full_sorting_merge, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1213
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_grace_hash, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -8741,14 +8741,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1215
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_grace_hash, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1216
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_hash, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -8762,14 +8762,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1218
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_hash, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1219
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_parallel_hash, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -8783,14 +8783,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1221
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_parallel_hash, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1222
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_partial_merge, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -8804,14 +8804,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1224
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_partial_merge, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1225
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=disable_filter_pushdown, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -8825,14 +8825,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1227
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=disable_filter_pushdown, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1228
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=disable_hashjoin, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -8846,14 +8846,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1230
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=disable_hashjoin, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1231
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=disable_materialization, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -8867,14 +8867,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1233
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=disable_materialization, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1234
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=disable_mergejoin, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -8888,14 +8888,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1236
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=disable_mergejoin, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1237
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=disable_nestloop, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -8909,14 +8909,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1239
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=disable_nestloop, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1240
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=disable_optimizer, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -8930,14 +8930,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1242
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=disable_optimizer, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1243
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=disable_statistics_propagation, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -8951,14 +8951,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1245
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=disable_statistics_propagation, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1246
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=duck_disable_filter_pushdown, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -8972,14 +8972,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1248
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=duck_disable_filter_pushdown, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1249
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=duck_disable_optimizer, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -8993,14 +8993,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1251
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=duck_disable_optimizer, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1252
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=duck_disable_statistics_propagation, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9014,14 +9014,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1254
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=duck_disable_statistics_propagation, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1255
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=dynamic_filtering_disabled, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9035,14 +9035,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1257
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=dynamic_filtering_disabled, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1258
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=explain_analyze, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9056,14 +9056,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1260
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=explain_analyze, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1261
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=explain_distributed, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9077,14 +9077,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1263
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=explain_distributed, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1264
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=explain_logical, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9098,15 +9098,15 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1266
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=explain_logical, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1267
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1
--- contract probe: join_distribution_type=BROADCAST;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -9120,8 +9120,8 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1269
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1
--- contract probe: join_distribution_type=BROADCAST;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -9135,7 +9135,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1271
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=join_distribution_partitioned, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9156,7 +9156,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1274
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=merge_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9170,15 +9170,15 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1276
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=merge_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1277
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1
--- contract probe: join_reordering_strategy=NONE;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -9192,15 +9192,15 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1279
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1
--- contract probe: join_reordering_strategy=NONE;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1280
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9208,7 +9208,7 @@ FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=conjunctive, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1
-WHERE d1.flag = 1 GROUP BY 1;
+WHERE d1.flag = 1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9223,7 +9223,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=conjunctive, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1
-WHERE d1.flag = 1 GROUP BY 1;
+WHERE d1.flag = 1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9231,7 +9231,7 @@ WHERE d1.flag = 1 GROUP BY 1;
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=correlated, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1
-WHERE d1.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = d1.custkey) GROUP BY 1;
+WHERE d1.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = d1.custkey) GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9246,7 +9246,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=correlated, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1
-WHERE d1.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = d1.custkey) GROUP BY 1;
+WHERE d1.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = d1.custkey) GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9254,7 +9254,7 @@ WHERE d1.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = d1.custkey) G
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=disjunctive, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1
-WHERE (d1.flag = 1 OR d1.region = 'EU') GROUP BY 1;
+WHERE (d1.flag = 1 OR d1.region = 'EU') GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9269,7 +9269,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=disjunctive, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1
-WHERE (d1.flag = 1 OR d1.region = 'EU') GROUP BY 1;
+WHERE (d1.flag = 1 OR d1.region = 'EU') GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9277,7 +9277,7 @@ WHERE (d1.flag = 1 OR d1.region = 'EU') GROUP BY 1;
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=function, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1
-WHERE expensive_udf(d1.comment) = TRUE GROUP BY 1;
+WHERE expensive_udf(d1.comment) = TRUE GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9292,7 +9292,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=function, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1
-WHERE expensive_udf(d1.comment) = TRUE GROUP BY 1;
+WHERE expensive_udf(d1.comment) = TRUE GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9300,7 +9300,7 @@ WHERE expensive_udf(d1.comment) = TRUE GROUP BY 1;
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=simple, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1
-WHERE d1.flag = 1 GROUP BY 1;
+WHERE d1.flag = 1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9315,7 +9315,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=simple, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1
-WHERE d1.flag = 1 GROUP BY 1;
+WHERE d1.flag = 1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9323,7 +9323,7 @@ WHERE d1.flag = 1 GROUP BY 1;
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=udf, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1
-WHERE expensive_udf(d1.comment) = TRUE GROUP BY 1;
+WHERE expensive_udf(d1.comment) = TRUE GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9338,7 +9338,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=udf, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1
-WHERE expensive_udf(d1.comment) = TRUE GROUP BY 1;
+WHERE expensive_udf(d1.comment) = TRUE GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9359,7 +9359,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1301
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=pg_enable_hashagg_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9373,14 +9373,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1303
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=pg_enable_hashagg_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1304
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=pg_enable_hashjoin_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9394,14 +9394,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1306
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=pg_enable_hashjoin_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1307
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=pg_enable_incremental_sort_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9415,28 +9415,28 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1309
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=pg_enable_incremental_sort_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1310
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=pg_enable_indexonlyscan_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1311
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=pg_enable_indexonlyscan_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1312
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=pg_enable_indexscan_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9450,14 +9450,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1314
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=pg_enable_indexscan_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1315
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=pg_enable_memoize_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9471,14 +9471,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1317
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=pg_enable_memoize_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1318
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=pg_enable_mergejoin_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9492,14 +9492,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1320
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=pg_enable_mergejoin_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1321
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=pg_enable_nestloop_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9513,14 +9513,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1323
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=pg_enable_nestloop_off, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1324
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=pg_from_collapse_1, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9534,14 +9534,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1326
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=pg_from_collapse_1, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1327
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=pg_join_collapse_1, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9555,14 +9555,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1329
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=pg_join_collapse_1, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1330
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=shuffle_hash_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9576,14 +9576,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1332
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=shuffle_hash_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1333
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=shuffle_replicate_nl_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9597,14 +9597,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1335
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=shuffle_replicate_nl_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1336
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=spark_aqe_disabled, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9618,14 +9618,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1338
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=spark_aqe_disabled, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 GROUP BY 1;
+FROM customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1339
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=spark_merge_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9639,14 +9639,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1341
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=spark_merge_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1342
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=spark_shuffle_hash_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9660,14 +9660,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1344
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=spark_shuffle_hash_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1345
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=spark_shuffle_replicate_nl_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9681,14 +9681,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1347
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=spark_shuffle_replicate_nl_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1348
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=trino_join_distribution_partitioned, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9702,7 +9702,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1350
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=not_applicable, control_surface=trino_join_distribution_partitioned, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9710,7 +9710,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=conjunctive, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey
-WHERE d1.flag = 1 GROUP BY 1;
+WHERE d1.flag = 1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9718,7 +9718,7 @@ WHERE d1.flag = 1 GROUP BY 1;
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=disjunctive, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey
-WHERE (d1.flag = 1 OR d1.region = 'EU') GROUP BY 1;
+WHERE (d1.flag = 1 OR d1.region = 'EU') GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9726,7 +9726,7 @@ WHERE (d1.flag = 1 OR d1.region = 'EU') GROUP BY 1;
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=function, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey
-WHERE expensive_udf(d1.comment) = TRUE GROUP BY 1;
+WHERE expensive_udf(d1.comment) = TRUE GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9734,14 +9734,14 @@ WHERE expensive_udf(d1.comment) = TRUE GROUP BY 1;
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=udf, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey
-WHERE expensive_udf(d1.comment) = TRUE GROUP BY 1;
+WHERE expensive_udf(d1.comment) = TRUE GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1355
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=order_by, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY 1
+FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
 ORDER BY 1;
 
 -- ----------------------------------------------------------------------
@@ -9749,14 +9749,14 @@ ORDER BY 1;
 -- OptSemBench-C probe P1356
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=window_order, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT *, ROW_NUMBER() OVER (ORDER BY 1) AS rn FROM (SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY 1) s;
+FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey) s;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1357
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=limit, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1
+FROM remote_pg.customer d1 GROUP BY d1.nationkey
 LIMIT 10;
 
 -- ----------------------------------------------------------------------
@@ -9765,7 +9765,7 @@ LIMIT 10;
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=correlated, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM remote_pg.customer d1
-WHERE d1.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = d1.custkey) GROUP BY 1;
+WHERE d1.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = d1.custkey) GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9773,14 +9773,14 @@ WHERE d1.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = d1.custkey) G
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=simple, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM remote_pg.customer d1
-WHERE d1.flag = 1 GROUP BY 1;
+WHERE d1.flag = 1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1360
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=topn, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1
+FROM remote_pg.customer d1 GROUP BY d1.nationkey
 ORDER BY 1 LIMIT 10;
 
 -- ----------------------------------------------------------------------
@@ -9788,56 +9788,56 @@ ORDER BY 1 LIMIT 10;
 -- OptSemBench-C probe P1361
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=shuffle, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1362
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_basic_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1363
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_join_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1364
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_limit_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1365
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_materialized_view_rewrite, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1366
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_projection_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1367
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_search_optimization, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1;
+FROM remote_pg.customer d1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1368
 -- features: adaptivity_trigger=none, aggregation=group_by, connector_capability=supports_topn_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=none, join_type=none, order_limit=topn, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 GROUP BY 1
+FROM remote_pg.customer d1 GROUP BY d1.nationkey
 ORDER BY 1 LIMIT 10;
 
 -- ----------------------------------------------------------------------
@@ -9845,7 +9845,7 @@ ORDER BY 1 LIMIT 10;
 -- OptSemBench-C probe P1369
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=aqe_disabled, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9859,21 +9859,21 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1371
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=aqe_disabled, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1372
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=broadcast_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
-SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+SELECT /*+ BROADCAST(d1) */ d1.nationkey, COUNT(*)
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1373
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=broadcast_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+SELECT /*+ BROADCAST(d1) */ d1.nationkey, COUNT(*)
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9887,14 +9887,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1375
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_auto, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1376
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_auto, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9908,14 +9908,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1378
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_direct, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1379
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_direct, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9929,14 +9929,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1381
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_full_sorting_merge, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1382
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_full_sorting_merge, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9950,14 +9950,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1384
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_grace_hash, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1385
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_grace_hash, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9971,14 +9971,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1387
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_hash, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1388
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_hash, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -9992,14 +9992,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1390
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_parallel_hash, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1391
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_parallel_hash, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10013,14 +10013,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1393
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_partial_merge, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1394
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_partial_merge, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10034,35 +10034,35 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1396
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=disable_filter_pushdown, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1397
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=disable_filter_pushdown, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1398
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=disable_filter_pushdown, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1399
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=disable_hashjoin, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1400
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=disable_hashjoin, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10076,7 +10076,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1402
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=disable_materialization, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10090,14 +10090,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1404
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=disable_materialization, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1405
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=disable_mergejoin, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10111,14 +10111,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1407
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=disable_mergejoin, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1408
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=disable_nestloop, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10132,14 +10132,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1410
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=disable_nestloop, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1411
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=disable_optimizer, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10153,21 +10153,21 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1413
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=disable_optimizer, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1414
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=disable_statistics_propagation, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1415
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=disable_statistics_propagation, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10181,28 +10181,28 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1417
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=duck_disable_filter_pushdown, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1418
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=duck_disable_filter_pushdown, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1419
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=duck_disable_filter_pushdown, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1420
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=duck_disable_optimizer, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10216,14 +10216,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1422
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=duck_disable_optimizer, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1423
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=duck_disable_statistics_propagation, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10237,14 +10237,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1425
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=duck_disable_statistics_propagation, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1426
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=dynamic_filtering_disabled, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10258,14 +10258,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1428
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=dynamic_filtering_disabled, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1429
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=explain_analyze, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10279,14 +10279,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1431
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=explain_analyze, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1432
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=explain_distributed, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10300,14 +10300,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1434
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=explain_distributed, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1435
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=explain_logical, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10321,23 +10321,23 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1437
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=explain_logical, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1438
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1
--- contract probe: join_distribution_type=BROADCAST;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1439
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1
--- contract probe: join_distribution_type=BROADCAST;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -10351,21 +10351,21 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1441
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=join_distribution_partitioned, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1442
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=join_distribution_partitioned, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1443
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=join_distribution_partitioned, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10386,14 +10386,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1446
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=merge_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1447
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=merge_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10407,16 +10407,16 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1449
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1
--- contract probe: join_reordering_strategy=NONE;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1450
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1
--- contract probe: join_reordering_strategy=NONE;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -10430,21 +10430,21 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1452
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=broadcast_candidate, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1453
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1454
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=limit, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
 LIMIT 10;
 
 -- ----------------------------------------------------------------------
@@ -10453,7 +10453,7 @@ LIMIT 10;
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=conjunctive, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
-WHERE d1.flag = 1 GROUP BY 1;
+WHERE d1.flag = 1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10461,7 +10461,7 @@ WHERE d1.flag = 1 GROUP BY 1;
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=conjunctive, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
-WHERE d1.flag = 1 GROUP BY 1;
+WHERE d1.flag = 1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10476,7 +10476,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=correlated, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
-WHERE f.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = f.custkey) GROUP BY 1;
+WHERE f.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = f.custkey) GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10484,7 +10484,7 @@ WHERE f.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = f.custkey) GRO
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=correlated, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
-WHERE f.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = f.custkey) GROUP BY 1;
+WHERE f.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = f.custkey) GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10499,7 +10499,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=disjunctive, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
-WHERE (d1.flag = 1 OR d1.region = 'EU') GROUP BY 1;
+WHERE (d1.flag = 1 OR d1.region = 'EU') GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10514,7 +10514,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=disjunctive, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
-WHERE (d1.flag = 1 OR d1.region = 'EU') GROUP BY 1;
+WHERE (d1.flag = 1 OR d1.region = 'EU') GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10522,7 +10522,7 @@ WHERE (d1.flag = 1 OR d1.region = 'EU') GROUP BY 1;
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=function, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
-WHERE expensive_udf(d1.comment) = TRUE GROUP BY 1;
+WHERE expensive_udf(d1.comment) = TRUE GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10537,35 +10537,35 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=function, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
-WHERE expensive_udf(d1.comment) = TRUE GROUP BY 1;
+WHERE expensive_udf(d1.comment) = TRUE GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1467
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1468
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1469
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1470
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10573,7 +10573,7 @@ FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GRO
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=simple, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
-WHERE d1.flag = 1 GROUP BY 1;
+WHERE d1.flag = 1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10588,7 +10588,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=simple, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
-WHERE d1.flag = 1 GROUP BY 1;
+WHERE d1.flag = 1 GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10596,7 +10596,7 @@ WHERE d1.flag = 1 GROUP BY 1;
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=udf, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
-WHERE expensive_udf(d1.comment) = TRUE GROUP BY 1;
+WHERE expensive_udf(d1.comment) = TRUE GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10604,7 +10604,7 @@ WHERE expensive_udf(d1.comment) = TRUE GROUP BY 1;
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=udf, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
-WHERE expensive_udf(d1.comment) = TRUE GROUP BY 1;
+WHERE expensive_udf(d1.comment) = TRUE GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10612,14 +10612,14 @@ WHERE expensive_udf(d1.comment) = TRUE GROUP BY 1;
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=udf, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
-WHERE expensive_udf(d1.comment) = TRUE GROUP BY 1;
+WHERE expensive_udf(d1.comment) = TRUE GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1477
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=order_by, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
 ORDER BY 1;
 
 -- ----------------------------------------------------------------------
@@ -10627,35 +10627,35 @@ ORDER BY 1;
 -- OptSemBench-C probe P1478
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=window_order, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT *, ROW_NUMBER() OVER (ORDER BY 1) AS rn FROM (SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1) s;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey) s;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1479
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1480
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1481
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT a.k, COUNT(*)
-FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k GROUP BY 1;
+FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k GROUP BY a.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1482
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT a.k, COUNT(*)
-FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k GROUP BY 1;
+FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k GROUP BY a.k;
 
 -- ----------------------------------------------------------------------
 
@@ -10676,7 +10676,7 @@ FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k GROUP BY f.key, 
 -- OptSemBench-C probe P1485
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=shuffle, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10697,7 +10697,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1488
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_hashagg_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10711,14 +10711,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1490
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_hashagg_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1491
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_hashjoin_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10732,14 +10732,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1493
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_hashjoin_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1494
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_incremental_sort_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10753,14 +10753,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1496
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_incremental_sort_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1497
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_indexonlyscan_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10774,14 +10774,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1499
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_indexonlyscan_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1500
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_indexscan_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10795,14 +10795,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1502
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_indexscan_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1503
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_memoize_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10816,14 +10816,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1505
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_memoize_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1506
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_mergejoin_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10837,14 +10837,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1508
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_mergejoin_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1509
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_nestloop_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10858,14 +10858,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1511
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_enable_nestloop_off, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1512
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_from_collapse_1, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10879,14 +10879,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1514
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_from_collapse_1, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1515
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_join_collapse_1, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10900,21 +10900,21 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1517
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=pg_join_collapse_1, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1518
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=shuffle_hash_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1519
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=shuffle_hash_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10928,14 +10928,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1521
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=shuffle_replicate_nl_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1522
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=shuffle_replicate_nl_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10949,7 +10949,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1524
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=spark_aqe_disabled, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10963,21 +10963,21 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1526
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=spark_aqe_disabled, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1527
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=spark_merge_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1528
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=spark_merge_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -10991,14 +10991,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1530
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=spark_shuffle_hash_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1531
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=spark_shuffle_hash_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -11012,14 +11012,14 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1533
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=spark_shuffle_replicate_nl_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1534
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=spark_shuffle_replicate_nl_hint, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -11033,77 +11033,77 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- OptSemBench-C probe P1536
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=trino_join_distribution_partitioned, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1537
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=trino_join_distribution_partitioned, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1538
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=trino_join_distribution_partitioned, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1539
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=supports_aggregate_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1540
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=supports_basic_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1541
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=supports_join_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1542
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=supports_limit_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1543
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=supports_materialized_view_rewrite, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1544
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=supports_projection_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1545
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=supports_search_optimization, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1546
 -- features: adaptivity_trigger=none, aggregation=group_by_after_join, connector_capability=supports_topn_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=topn, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY 1
+FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey
 ORDER BY 1 LIMIT 10;
 
 -- ----------------------------------------------------------------------
@@ -11208,14 +11208,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P1561
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=aqe_disabled, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1562
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=aqe_disabled, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -11335,14 +11335,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P1578
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=aqe_disabled, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1579
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=aqe_disabled, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -11539,28 +11539,28 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P1606
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=broadcast_hint, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT /*+ BROADCAST(d1) */ a.k, COUNT(*)
+SELECT /*+ BROADCAST(d1) */ a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1607
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=broadcast_hint, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT /*+ BROADCAST(d1) */ a.k, COUNT(*)
+SELECT /*+ BROADCAST(d1) */ a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1608
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=broadcast_hint, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT /*+ BROADCAST(d1) */ f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT /*+ BROADCAST(d1) */ f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1609
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=broadcast_hint, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT /*+ BROADCAST(d1) */ f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT /*+ BROADCAST(d1) */ f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -11764,28 +11764,28 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P1637
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_auto, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1638
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_auto, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1639
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_auto, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1640
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_auto, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -11974,28 +11974,28 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P1666
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_direct, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1667
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_direct, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1668
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_direct, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1669
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_direct, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -12199,28 +12199,28 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P1697
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_full_sorting_merge, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1698
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_full_sorting_merge, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1699
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_full_sorting_merge, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1700
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_full_sorting_merge, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -12424,28 +12424,28 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P1728
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_grace_hash, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1729
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_grace_hash, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1730
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_grace_hash, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1731
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_grace_hash, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -12649,28 +12649,28 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P1759
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_hash, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1760
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_hash, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1761
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_hash, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1762
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_hash, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -12874,28 +12874,28 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P1790
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_parallel_hash, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1791
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_parallel_hash, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1792
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_parallel_hash, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1793
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_parallel_hash, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -13099,28 +13099,28 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P1821
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_partial_merge, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1822
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_partial_merge, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1823
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_partial_merge, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1824
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=clickhouse_join_algorithm_partial_merge, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -13232,14 +13232,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P1840
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_filter_pushdown, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1841
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_filter_pushdown, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -13359,14 +13359,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P1857
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_filter_pushdown, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1858
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_filter_pushdown, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -13478,14 +13478,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P1874
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_hashjoin, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1875
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_hashjoin, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -13605,14 +13605,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P1891
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_hashjoin, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1892
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_hashjoin, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -13724,14 +13724,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P1908
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_materialization, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1909
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_materialization, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -13851,14 +13851,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P1925
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_materialization, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1926
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_materialization, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -13970,14 +13970,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P1942
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_mergejoin, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1943
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_mergejoin, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -14097,14 +14097,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P1959
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_mergejoin, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1960
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_mergejoin, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -14216,14 +14216,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P1976
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_nestloop, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1977
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_nestloop, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -14335,14 +14335,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P1992
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_nestloop, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P1993
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_nestloop, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -14454,14 +14454,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P2009
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_optimizer, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2010
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_optimizer, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -14581,14 +14581,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P2026
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_optimizer, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2027
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_optimizer, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -14700,14 +14700,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P2043
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_statistics_propagation, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2044
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_statistics_propagation, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -14827,7 +14827,7 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P2060
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=disable_statistics_propagation, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -14939,14 +14939,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P2076
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=duck_disable_filter_pushdown, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2077
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=duck_disable_filter_pushdown, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -15066,14 +15066,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P2093
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=duck_disable_filter_pushdown, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2094
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=duck_disable_filter_pushdown, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -15185,14 +15185,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P2110
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=duck_disable_optimizer, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2111
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=duck_disable_optimizer, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -15305,14 +15305,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P2126
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=duck_disable_optimizer, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2127
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=duck_disable_optimizer, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -15424,14 +15424,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P2143
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=duck_disable_statistics_propagation, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2144
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=duck_disable_statistics_propagation, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -15551,14 +15551,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P2160
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=duck_disable_statistics_propagation, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2161
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=duck_disable_statistics_propagation, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -15670,14 +15670,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P2177
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=dynamic_filtering_disabled, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2178
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=dynamic_filtering_disabled, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -15797,14 +15797,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P2194
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=dynamic_filtering_disabled, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2195
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=dynamic_filtering_disabled, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -15916,14 +15916,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P2211
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=explain_analyze, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2212
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=explain_analyze, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -16043,14 +16043,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P2228
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=explain_analyze, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2229
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=explain_analyze, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -16155,14 +16155,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P2244
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=explain_distributed, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2245
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=explain_distributed, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -16282,14 +16282,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P2261
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=explain_distributed, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2262
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=explain_distributed, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -16401,14 +16401,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P2278
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=explain_logical, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2279
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=explain_logical, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -16528,14 +16528,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P2295
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=explain_logical, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2296
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=explain_logical, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -16551,7 +16551,7 @@ FROM customer d1;
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=broadcast_candidate, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16559,7 +16559,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16567,7 +16567,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16575,7 +16575,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16584,7 +16584,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 LIMIT 10
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16593,7 +16593,7 @@ LIMIT 10
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 WHERE d1.flag = 1
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16602,7 +16602,7 @@ WHERE d1.flag = 1
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 WHERE f.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = f.custkey)
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16611,7 +16611,7 @@ WHERE f.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = f.custkey)
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 WHERE (d1.flag = 1 OR d1.region = 'EU')
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16620,7 +16620,7 @@ WHERE (d1.flag = 1 OR d1.region = 'EU')
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 WHERE expensive_udf(d1.comment) = TRUE
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16628,7 +16628,7 @@ WHERE expensive_udf(d1.comment) = TRUE
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16636,7 +16636,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16644,7 +16644,7 @@ FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16652,7 +16652,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16660,7 +16660,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16675,7 +16675,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16684,7 +16684,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 WHERE d1.flag = 1
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16693,7 +16693,7 @@ WHERE d1.flag = 1
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 WHERE expensive_udf(d1.comment) = TRUE
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16702,7 +16702,7 @@ WHERE expensive_udf(d1.comment) = TRUE
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 ORDER BY 1
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16710,7 +16710,7 @@ ORDER BY 1
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=window_order, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT *, ROW_NUMBER() OVER (ORDER BY 1) AS rn FROM (SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey) s
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16718,7 +16718,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey) s
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16726,7 +16726,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16734,7 +16734,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16742,7 +16742,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16750,7 +16750,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16758,39 +16758,39 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2324
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2325
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2326
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2327
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16798,7 +16798,7 @@ FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=shuffle, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -16895,14 +16895,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P2342
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_partitioned, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2343
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_partitioned, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -17022,14 +17022,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P2359
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_partitioned, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2360
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_partitioned, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -17380,28 +17380,28 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P2409
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=merge_hint, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2410
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=merge_hint, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2411
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=merge_hint, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2412
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=merge_hint, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -17417,7 +17417,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=broadcast_candidate, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17425,7 +17425,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17433,7 +17433,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17441,7 +17441,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17450,7 +17450,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 LIMIT 10
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17459,7 +17459,7 @@ LIMIT 10
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 WHERE d1.flag = 1
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17468,7 +17468,7 @@ WHERE d1.flag = 1
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 WHERE f.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = f.custkey)
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17477,7 +17477,7 @@ WHERE f.custkey IN (SELECT x.custkey FROM aux x WHERE x.custkey = f.custkey)
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 WHERE (d1.flag = 1 OR d1.region = 'EU')
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17486,7 +17486,7 @@ WHERE (d1.flag = 1 OR d1.region = 'EU')
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 WHERE expensive_udf(d1.comment) = TRUE
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17494,7 +17494,7 @@ WHERE expensive_udf(d1.comment) = TRUE
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17502,7 +17502,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17510,7 +17510,7 @@ FROM remote_pg.customer d1 JOIN hive.orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17518,7 +17518,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17526,7 +17526,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17541,7 +17541,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=single_cte, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17550,7 +17550,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 WHERE d1.flag = 1
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17559,7 +17559,7 @@ WHERE d1.flag = 1
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 WHERE expensive_udf(d1.comment) = TRUE
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17568,7 +17568,7 @@ WHERE expensive_udf(d1.comment) = TRUE
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 ORDER BY 1
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17576,7 +17576,7 @@ ORDER BY 1
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=window_order, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT *, ROW_NUMBER() OVER (ORDER BY 1) AS rn FROM (SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey) s
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17584,7 +17584,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey) s
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17592,7 +17592,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17600,7 +17600,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17608,7 +17608,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17616,7 +17616,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17624,39 +17624,39 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2440
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2441
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2442
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2443
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17664,7 +17664,7 @@ FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=shuffle, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -17698,14 +17698,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P2449
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=broadcast_candidate, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2450
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=broadcast_candidate, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -17811,14 +17811,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P2464
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=broadcast_candidate, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2465
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=broadcast_candidate, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -18208,28 +18208,28 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey) s;
 
 -- OptSemBench-C probe P2516
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2517
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2518
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2519
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=limit, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k
 LIMIT 10;
 
@@ -18237,7 +18237,7 @@ LIMIT 10;
 
 -- OptSemBench-C probe P2520
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=conjunctive, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k
 WHERE a.flag = 1;
 
@@ -18245,7 +18245,7 @@ WHERE a.flag = 1;
 
 -- OptSemBench-C probe P2521
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=correlated, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k
 WHERE a.k IN (SELECT x.k FROM aux x WHERE x.k = a.k);
 
@@ -18253,7 +18253,7 @@ WHERE a.k IN (SELECT x.k FROM aux x WHERE x.k = a.k);
 
 -- OptSemBench-C probe P2522
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=disjunctive, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k
 WHERE (a.flag = 1 OR a.region = 'EU');
 
@@ -18261,7 +18261,7 @@ WHERE (a.flag = 1 OR a.region = 'EU');
 
 -- OptSemBench-C probe P2523
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=function, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k
 WHERE expensive_udf(a.comment) = TRUE;
 
@@ -18269,28 +18269,28 @@ WHERE expensive_udf(a.comment) = TRUE;
 
 -- OptSemBench-C probe P2524
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2525
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM remote_pg.a a JOIN remote_pg.b b ON a.k=b.k JOIN hive.c c ON b.k=c.k JOIN hive.d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2526
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2527
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -18304,7 +18304,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 
 -- OptSemBench-C probe P2529
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=simple, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k
 WHERE a.flag = 1;
 
@@ -18312,7 +18312,7 @@ WHERE a.flag = 1;
 
 -- OptSemBench-C probe P2530
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=udf, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k
 WHERE expensive_udf(a.comment) = TRUE;
 
@@ -18320,7 +18320,7 @@ WHERE expensive_udf(a.comment) = TRUE;
 
 -- OptSemBench-C probe P2531
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=order_by, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k
 ORDER BY 1;
 
@@ -18328,77 +18328,77 @@ ORDER BY 1;
 
 -- OptSemBench-C probe P2532
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=window_order, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT *, ROW_NUMBER() OVER (ORDER BY 1) AS rn FROM (SELECT a.k, COUNT(*)
+SELECT *, ROW_NUMBER() OVER (ORDER BY 1) AS rn FROM (SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k) s;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2533
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2534
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2535
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2536
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2537
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2538
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2539
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2540
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2541
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2542
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=limit, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k
 LIMIT 10;
 
@@ -18406,7 +18406,7 @@ LIMIT 10;
 
 -- OptSemBench-C probe P2543
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=conjunctive, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k
 WHERE a.flag = 1;
 
@@ -18414,7 +18414,7 @@ WHERE a.flag = 1;
 
 -- OptSemBench-C probe P2544
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=correlated, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k
 WHERE a.k IN (SELECT x.k FROM aux x WHERE x.k = a.k);
 
@@ -18422,7 +18422,7 @@ WHERE a.k IN (SELECT x.k FROM aux x WHERE x.k = a.k);
 
 -- OptSemBench-C probe P2545
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=disjunctive, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k
 WHERE (a.flag = 1 OR a.region = 'EU');
 
@@ -18430,7 +18430,7 @@ WHERE (a.flag = 1 OR a.region = 'EU');
 
 -- OptSemBench-C probe P2546
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=function, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k
 WHERE expensive_udf(a.comment) = TRUE;
 
@@ -18438,28 +18438,28 @@ WHERE expensive_udf(a.comment) = TRUE;
 
 -- OptSemBench-C probe P2547
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2548
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM remote_pg.a a JOIN remote_pg.b b ON a.k=b.k JOIN hive.c c ON a.k=c.k JOIN hive.d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2549
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2550
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -18473,7 +18473,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 
 -- OptSemBench-C probe P2552
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=simple, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k
 WHERE a.flag = 1;
 
@@ -18481,7 +18481,7 @@ WHERE a.flag = 1;
 
 -- OptSemBench-C probe P2553
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=udf, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k
 WHERE expensive_udf(a.comment) = TRUE;
 
@@ -18489,7 +18489,7 @@ WHERE expensive_udf(a.comment) = TRUE;
 
 -- OptSemBench-C probe P2554
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=order_by, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k
 ORDER BY 1;
 
@@ -18497,49 +18497,49 @@ ORDER BY 1;
 
 -- OptSemBench-C probe P2555
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=window_order, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT *, ROW_NUMBER() OVER (ORDER BY 1) AS rn FROM (SELECT a.k, COUNT(*)
+SELECT *, ROW_NUMBER() OVER (ORDER BY 1) AS rn FROM (SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k) s;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2556
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2557
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2558
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2559
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2560
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2561
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -19132,28 +19132,28 @@ WHERE expensive_udf(d1.comment) = TRUE) s;
 
 -- OptSemBench-C probe P2636
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2637
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2638
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2639
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=limit, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
 LIMIT 10;
 
@@ -19161,7 +19161,7 @@ LIMIT 10;
 
 -- OptSemBench-C probe P2640
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=conjunctive, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
 WHERE f.flag = 1;
 
@@ -19169,7 +19169,7 @@ WHERE f.flag = 1;
 
 -- OptSemBench-C probe P2641
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=correlated, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
 WHERE f.k1 IN (SELECT x.k1 FROM aux x WHERE x.k1 = f.k1);
 
@@ -19177,7 +19177,7 @@ WHERE f.k1 IN (SELECT x.k1 FROM aux x WHERE x.k1 = f.k1);
 
 -- OptSemBench-C probe P2642
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=disjunctive, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
 WHERE (f.flag = 1 OR f.region = 'EU');
 
@@ -19185,7 +19185,7 @@ WHERE (f.flag = 1 OR f.region = 'EU');
 
 -- OptSemBench-C probe P2643
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=function, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
 WHERE expensive_udf(f.comment) = TRUE;
 
@@ -19193,35 +19193,35 @@ WHERE expensive_udf(f.comment) = TRUE;
 
 -- OptSemBench-C probe P2644
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2645
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM hive.fact f JOIN remote_pg.dim1 d1 ON f.k1=d1.k JOIN remote_pg.dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2646
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2647
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2648
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -19235,7 +19235,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 
 -- OptSemBench-C probe P2650
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=simple, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
 WHERE f.flag = 1;
 
@@ -19243,7 +19243,7 @@ WHERE f.flag = 1;
 
 -- OptSemBench-C probe P2651
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=udf, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
 WHERE expensive_udf(f.comment) = TRUE;
 
@@ -19251,7 +19251,7 @@ WHERE expensive_udf(f.comment) = TRUE;
 
 -- OptSemBench-C probe P2652
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=order_by, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
 ORDER BY 1;
 
@@ -19259,77 +19259,77 @@ ORDER BY 1;
 
 -- OptSemBench-C probe P2653
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=window_order, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT *, ROW_NUMBER() OVER (ORDER BY 1) AS rn FROM (SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT *, ROW_NUMBER() OVER (ORDER BY 1) AS rn FROM (SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k) s;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2654
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2655
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2656
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2657
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2658
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2659
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2660
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2661
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2662
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=anti, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2663
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=limit, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
 LIMIT 10;
 
@@ -19337,7 +19337,7 @@ LIMIT 10;
 
 -- OptSemBench-C probe P2664
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=conjunctive, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
 WHERE f.flag = 1;
 
@@ -19345,7 +19345,7 @@ WHERE f.flag = 1;
 
 -- OptSemBench-C probe P2665
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=correlated, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
 WHERE f.k1 IN (SELECT x.k1 FROM aux x WHERE x.k1 = f.k1);
 
@@ -19353,7 +19353,7 @@ WHERE f.k1 IN (SELECT x.k1 FROM aux x WHERE x.k1 = f.k1);
 
 -- OptSemBench-C probe P2666
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=disjunctive, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
 WHERE (f.flag = 1 OR f.region = 'EU');
 
@@ -19361,7 +19361,7 @@ WHERE (f.flag = 1 OR f.region = 'EU');
 
 -- OptSemBench-C probe P2667
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=function, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
 WHERE expensive_udf(f.comment) = TRUE;
 
@@ -19369,35 +19369,35 @@ WHERE expensive_udf(f.comment) = TRUE;
 
 -- OptSemBench-C probe P2668
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=nested_view, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2669
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=cross_connector, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM hive.fact f JOIN remote_pg.dim1 d1 ON f.k1=d1.k JOIN remote_pg.dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2670
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2671
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2672
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -19411,7 +19411,7 @@ SELECT c1.custkey FROM cte c1 JOIN cte c2 ON c1.custkey = c2.custkey WHERE c1.n 
 
 -- OptSemBench-C probe P2674
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=simple, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
 WHERE f.flag = 1;
 
@@ -19419,7 +19419,7 @@ WHERE f.flag = 1;
 
 -- OptSemBench-C probe P2675
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=udf, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
 WHERE expensive_udf(f.comment) = TRUE;
 
@@ -19427,7 +19427,7 @@ WHERE expensive_udf(f.comment) = TRUE;
 
 -- OptSemBench-C probe P2676
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=order_by, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k
 ORDER BY 1;
 
@@ -19435,49 +19435,49 @@ ORDER BY 1;
 
 -- OptSemBench-C probe P2677
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=window_order, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT *, ROW_NUMBER() OVER (ORDER BY 1) AS rn FROM (SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT *, ROW_NUMBER() OVER (ORDER BY 1) AS rn FROM (SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k) s;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2678
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=high
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2679
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2680
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=outer, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2681
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2682
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=medium
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2683
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=semi, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=unavailable
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -19512,14 +19512,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P2688
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=shuffle, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2689
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=shuffle, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -19625,14 +19625,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P2703
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=shuffle, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2704
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=shuffle, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -19961,14 +19961,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P2751
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_hashagg_off, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2752
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_hashagg_off, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -20088,14 +20088,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P2768
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_hashagg_off, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2769
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_hashagg_off, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -20207,14 +20207,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P2785
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_hashjoin_off, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2786
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_hashjoin_off, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -20334,14 +20334,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P2802
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_hashjoin_off, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2803
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_hashjoin_off, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -20453,14 +20453,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P2819
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_incremental_sort_off, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2820
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_incremental_sort_off, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -20580,14 +20580,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P2836
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_incremental_sort_off, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2837
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_incremental_sort_off, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -20699,14 +20699,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P2853
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_indexonlyscan_off, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2854
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_indexonlyscan_off, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -20826,14 +20826,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P2870
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_indexonlyscan_off, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2871
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_indexonlyscan_off, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -20945,14 +20945,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P2887
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_indexscan_off, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2888
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_indexscan_off, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -21072,14 +21072,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P2904
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_indexscan_off, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2905
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_indexscan_off, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -21191,14 +21191,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P2921
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_memoize_off, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2922
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_memoize_off, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -21318,14 +21318,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P2938
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_memoize_off, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2939
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_memoize_off, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -21437,14 +21437,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P2955
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_mergejoin_off, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2956
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_mergejoin_off, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -21564,14 +21564,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P2972
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_mergejoin_off, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2973
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_mergejoin_off, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -21683,14 +21683,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P2989
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_nestloop_off, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P2990
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_nestloop_off, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -21810,14 +21810,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P3006
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_nestloop_off, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3007
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_enable_nestloop_off, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -21929,14 +21929,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P3023
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_from_collapse_1, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3024
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_from_collapse_1, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -22056,14 +22056,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P3040
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_from_collapse_1, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3041
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_from_collapse_1, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -22175,14 +22175,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P3057
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_join_collapse_1, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3058
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_join_collapse_1, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -22302,14 +22302,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P3074
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_join_collapse_1, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3075
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=pg_join_collapse_1, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -22513,28 +22513,28 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P3103
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=shuffle_hash_hint, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3104
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=shuffle_hash_hint, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3105
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=shuffle_hash_hint, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3106
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=shuffle_hash_hint, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -22738,28 +22738,28 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P3134
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=shuffle_replicate_nl_hint, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3135
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=shuffle_replicate_nl_hint, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3136
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=shuffle_replicate_nl_hint, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3137
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=shuffle_replicate_nl_hint, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -22871,14 +22871,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P3153
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=spark_aqe_disabled, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3154
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=spark_aqe_disabled, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -22998,14 +22998,14 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P3170
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=spark_aqe_disabled, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3171
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=spark_aqe_disabled, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -23209,28 +23209,28 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P3199
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=spark_merge_hint, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3200
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=spark_merge_hint, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3201
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=spark_merge_hint, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3202
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=spark_merge_hint, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -23434,28 +23434,28 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P3230
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=spark_shuffle_hash_hint, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3231
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=spark_shuffle_hash_hint, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3232
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=spark_shuffle_hash_hint, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3233
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=spark_shuffle_hash_hint, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -23659,28 +23659,28 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P3261
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=spark_shuffle_replicate_nl_hint, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3262
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=spark_shuffle_replicate_nl_hint, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3263
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=spark_shuffle_replicate_nl_hint, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3264
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=spark_shuffle_replicate_nl_hint, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -23877,28 +23877,28 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P3291
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=trino_join_distribution_partitioned, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3292
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=trino_join_distribution_partitioned, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3293
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=trino_join_distribution_partitioned, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3294
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=not_applicable, control_surface=trino_join_distribution_partitioned, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -24075,7 +24075,7 @@ FROM remote_pg.customer d1;
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_basic_pushdown, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -24097,7 +24097,7 @@ FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey;
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_basic_pushdown, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -24139,14 +24139,14 @@ FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P3328
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_basic_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM remote_pg.a a JOIN remote_pg.b b ON a.k=b.k JOIN remote_pg.c c ON b.k=c.k JOIN remote_pg.d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3329
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_basic_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM remote_pg.a a JOIN remote_pg.b b ON a.k=b.k JOIN remote_pg.c c ON a.k=c.k JOIN remote_pg.d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -24259,14 +24259,14 @@ FROM remote_pg.customer d1) s;
 
 -- OptSemBench-C probe P3344
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_basic_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM remote_pg.fact f JOIN remote_pg.dim1 d1 ON f.k1=d1.k JOIN remote_pg.dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3345
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_basic_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM remote_pg.fact f JOIN remote_pg.dim1 d1 ON f.k1=d1.k JOIN remote_pg.dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -24569,7 +24569,7 @@ FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey;
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_join_pushdown, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -24591,7 +24591,7 @@ FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey;
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_join_pushdown, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -24739,28 +24739,28 @@ FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P3411
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_join_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM remote_pg.a a JOIN remote_pg.b b ON a.k=b.k JOIN remote_pg.c c ON b.k=c.k JOIN remote_pg.d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3412
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_join_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM remote_pg.a a JOIN remote_pg.b b ON a.k=b.k JOIN remote_pg.c c ON a.k=c.k JOIN remote_pg.d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3413
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_join_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM remote_pg.fact f JOIN remote_pg.dim1 d1 ON f.k1=d1.k JOIN remote_pg.dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3414
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_join_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM remote_pg.fact f JOIN remote_pg.dim1 d1 ON f.k1=d1.k JOIN remote_pg.dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -25063,7 +25063,7 @@ FROM remote_pg.customer d1;
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_limit_pushdown, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -25085,7 +25085,7 @@ FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey;
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_limit_pushdown, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -25127,14 +25127,14 @@ FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P3466
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_limit_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM remote_pg.a a JOIN remote_pg.b b ON a.k=b.k JOIN remote_pg.c c ON b.k=c.k JOIN remote_pg.d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3467
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_limit_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM remote_pg.a a JOIN remote_pg.b b ON a.k=b.k JOIN remote_pg.c c ON a.k=c.k JOIN remote_pg.d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -25247,14 +25247,14 @@ FROM remote_pg.customer d1) s;
 
 -- OptSemBench-C probe P3482
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_limit_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM remote_pg.fact f JOIN remote_pg.dim1 d1 ON f.k1=d1.k JOIN remote_pg.dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3483
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_limit_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM remote_pg.fact f JOIN remote_pg.dim1 d1 ON f.k1=d1.k JOIN remote_pg.dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -25550,7 +25550,7 @@ FROM remote_pg.customer d1;
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_materialized_view_rewrite, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -25572,7 +25572,7 @@ FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey;
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_materialized_view_rewrite, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -25606,14 +25606,14 @@ FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P3533
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_materialized_view_rewrite, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM remote_pg.a a JOIN remote_pg.b b ON a.k=b.k JOIN remote_pg.c c ON b.k=c.k JOIN remote_pg.d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3534
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_materialized_view_rewrite, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM remote_pg.a a JOIN remote_pg.b b ON a.k=b.k JOIN remote_pg.c c ON a.k=c.k JOIN remote_pg.d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -25734,14 +25734,14 @@ FROM remote_pg.customer d1) s;
 
 -- OptSemBench-C probe P3550
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_materialized_view_rewrite, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM remote_pg.fact f JOIN remote_pg.dim1 d1 ON f.k1=d1.k JOIN remote_pg.dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3551
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_materialized_view_rewrite, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM remote_pg.fact f JOIN remote_pg.dim1 d1 ON f.k1=d1.k JOIN remote_pg.dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -26044,7 +26044,7 @@ FROM remote_pg.customer d1;
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_projection_pushdown, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -26066,7 +26066,7 @@ FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey;
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_projection_pushdown, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -26100,14 +26100,14 @@ FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P3602
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_projection_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM remote_pg.a a JOIN remote_pg.b b ON a.k=b.k JOIN remote_pg.c c ON b.k=c.k JOIN remote_pg.d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3603
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_projection_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM remote_pg.a a JOIN remote_pg.b b ON a.k=b.k JOIN remote_pg.c c ON a.k=c.k JOIN remote_pg.d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -26228,14 +26228,14 @@ FROM remote_pg.customer d1) s;
 
 -- OptSemBench-C probe P3619
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_projection_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM remote_pg.fact f JOIN remote_pg.dim1 d1 ON f.k1=d1.k JOIN remote_pg.dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3620
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_projection_pushdown, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM remote_pg.fact f JOIN remote_pg.dim1 d1 ON f.k1=d1.k JOIN remote_pg.dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -26531,7 +26531,7 @@ FROM remote_pg.customer d1;
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_search_optimization, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -26553,7 +26553,7 @@ FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey;
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_search_optimization, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -26587,14 +26587,14 @@ FROM remote_pg.customer d1 JOIN remote_pg.orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P3670
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_search_optimization, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM remote_pg.a a JOIN remote_pg.b b ON a.k=b.k JOIN remote_pg.c c ON b.k=c.k JOIN remote_pg.d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3671
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_search_optimization, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM remote_pg.a a JOIN remote_pg.b b ON a.k=b.k JOIN remote_pg.c c ON a.k=c.k JOIN remote_pg.d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -26715,14 +26715,14 @@ FROM remote_pg.customer d1) s;
 
 -- OptSemBench-C probe P3687
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_search_optimization, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM remote_pg.fact f JOIN remote_pg.dim1 d1 ON f.k1=d1.k JOIN remote_pg.dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3688
 -- features: adaptivity_trigger=none, aggregation=none, connector_capability=supports_search_optimization, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=same_connector, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM remote_pg.fact f JOIN remote_pg.dim1 d1 ON f.k1=d1.k JOIN remote_pg.dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -27394,7 +27394,7 @@ FROM customer d1;
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -27402,7 +27402,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=shuffle, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -27410,7 +27410,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=skewed, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -27481,7 +27481,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -27489,7 +27489,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=shuffle, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -27497,90 +27497,90 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=skewed, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3797
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=broadcast_candidate, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3798
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=broadcast_candidate, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3799
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3800
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3801
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3802
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3803
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=shuffle, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3804
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=shuffle, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3805
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=shuffle, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3806
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=skewed, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3807
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=skewed, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3808
 -- features: adaptivity_trigger=runtime_stats, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=skewed, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -27980,7 +27980,7 @@ FROM customer d1 GROUP BY d1.nationkey;
 -- OptSemBench-C probe P3865
 -- features: adaptivity_trigger=skew, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -28471,7 +28471,7 @@ FROM customer d1;
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=broadcast_candidate, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -28479,7 +28479,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -28487,7 +28487,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=skewed, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -28558,7 +28558,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=broadcast_candidate, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -28566,7 +28566,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -28574,27 +28574,27 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=skewed, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3950
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=broadcast_candidate, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3951
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=broadcast_candidate, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3952
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=broadcast_candidate, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -28629,14 +28629,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P3957
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3958
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -28749,49 +28749,49 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P3973
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3974
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3975
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=shuffle, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3976
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=skewed, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3977
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=skewed, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3978
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=skewed, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P3979
 -- features: adaptivity_trigger=skew, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=skewed, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -29233,7 +29233,7 @@ FROM customer d1 GROUP BY d1.nationkey;
 -- OptSemBench-C probe P4042
 -- features: adaptivity_trigger=stage_boundary, aggregation=group_by_after_join, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.nationkey, COUNT(*)
-FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY 1;
+FROM customer d1 JOIN orders f ON d1.custkey = f.custkey GROUP BY d1.nationkey;
 
 -- ----------------------------------------------------------------------
 
@@ -29724,7 +29724,7 @@ FROM customer d1;
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=broadcast_candidate, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -29732,7 +29732,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -29740,7 +29740,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=join_distribution_broadcast, distribution_trigger=shuffle, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_distribution_type=BROADCAST;
+/* contract probe: join_distribution_type=BROADCAST */;
 
 -- ----------------------------------------------------------------------
 
@@ -29811,7 +29811,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=broadcast_candidate, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -29819,7 +29819,7 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=none, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
@@ -29827,27 +29827,27 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=no_reorder_setting, distribution_trigger=shuffle, join_shape=binary, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
 SELECT d1.custkey, f.orderkey
 FROM customer d1 JOIN orders f ON d1.custkey = f.custkey
--- contract probe: join_reordering_strategy=NONE;
+/* contract probe: join_reordering_strategy=NONE */;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P4127
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=broadcast_candidate, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P4128
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=broadcast_candidate, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P4129
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=broadcast_candidate, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
@@ -29882,14 +29882,14 @@ FROM customer d1 JOIN orders f ON d1.custkey = f.custkey;
 
 -- OptSemBench-C probe P4134
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P4135
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
@@ -30002,49 +30002,49 @@ FROM customer d1) s;
 
 -- OptSemBench-C probe P4150
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P4151
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=none, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P4152
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=shuffle, join_shape=chain, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON b.k=c.k JOIN d d ON c.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P4153
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=shuffle, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P4154
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=shuffle, join_shape=snowflake, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P4155
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=shuffle, join_shape=star, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT f.key, d1.attr, d2.attr, SUM(f.measure)
+SELECT f.key, d1.attr, d2.attr
 FROM fact f JOIN dim1 d1 ON f.k1=d1.k JOIN dim2 d2 ON f.k2=d2.k;
 
 -- ----------------------------------------------------------------------
 
 -- OptSemBench-C probe P4156
 -- features: adaptivity_trigger=stage_boundary, aggregation=none, connector_capability=not_applicable, control_surface=none_control, distribution_trigger=skewed, join_shape=clique, join_type=inner, order_limit=none, predicate_class=none, reuse_structure=none, source_boundary=local, statistics_need=low
-SELECT a.k, COUNT(*)
+SELECT a.k
 FROM a a JOIN b b ON a.k=b.k JOIN c c ON a.k=c.k JOIN d d ON b.k=d.k;
 
 -- ----------------------------------------------------------------------

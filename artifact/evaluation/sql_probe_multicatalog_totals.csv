@@ -4,4 +4,4 @@ probes_per_catalog,4216
 total_probe_catalog_runs,12648
 total_execution_successes,12648
 total_execution_failures,0
-total_result_rows,69759
+total_result_rows,77003

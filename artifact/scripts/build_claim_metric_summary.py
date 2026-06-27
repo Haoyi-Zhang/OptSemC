@@ -103,6 +103,26 @@ def metric_rows():
     except FileNotFoundError:
         pass
 
+    for subset in ['motif', 'full']:
+        try:
+            real_rows = read_csv(E/f'real_engine_probe_validation_{subset}_summary.csv')
+            total_probes = sum(int(r['probes']) for r in real_rows)
+            total_success = sum(int(r['execution_successes']) for r in real_rows)
+            total_failures = sum(int(r['execution_failures']) for r in real_rows)
+            min_match = min(float(r['mean_visible_match_rate']) for r in real_rows) if real_rows else 0.0
+            add(f'real_engine_{subset}_engines', len(real_rows), f'evaluation/real_engine_probe_validation_{subset}_summary.csv')
+            add(f'real_engine_{subset}_validations', total_probes, f'evaluation/real_engine_probe_validation_{subset}_summary.csv')
+            add(f'real_engine_{subset}_execution_successes', total_success, f'evaluation/real_engine_probe_validation_{subset}_summary.csv')
+            add(f'real_engine_{subset}_execution_failures', total_failures, f'evaluation/real_engine_probe_validation_{subset}_summary.csv')
+            add(f'real_engine_{subset}_min_visible_match_rate', f'{min_match:.6f}', f'evaluation/real_engine_probe_validation_{subset}_summary.csv')
+            for r in real_rows:
+                engine = r['engine']
+                add(f'real_engine_{subset}_{engine}_probes', r['probes'], f'evaluation/real_engine_probe_validation_{subset}_summary.csv')
+                add(f'real_engine_{subset}_{engine}_execution_successes', r['execution_successes'], f'evaluation/real_engine_probe_validation_{subset}_summary.csv')
+                add(f'real_engine_{subset}_{engine}_distinct_plan_hashes', r['distinct_plan_hashes'], f'evaluation/real_engine_probe_validation_{subset}_summary.csv')
+        except FileNotFoundError:
+            pass
+
     try:
         scale = {r['metric']: r['value'] for r in read_csv(E/'scalability_stress_summary.csv')}
         for key in ['full_pairwise_comparisons_per_projection','full_min_comparisons_per_second','full_elapsed_ms_total']:
