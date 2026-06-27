@@ -65,7 +65,7 @@ def baseline_table() -> None:
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Executable projection baselines. False equivalence is conditional on the baseline declaring equivalence; the full artifact checks 17 projections.}",
+        r"\caption{Executable projection baselines. False equivalence is conditional on the baseline declaring equivalence; the full baseline portfolio contains 17 projections.}",
         r"\label{tab:baseline-portfolio}",
         r"\scriptsize",
         r"\begin{tabular}{@{}p{0.78in}rrr@{}}",
