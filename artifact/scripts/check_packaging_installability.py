@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
 """Validate that the artifact is a clean installable Python package."""
 from __future__ import annotations
-import csv, importlib, sys, tomllib
+import csv, importlib, sys
 from pathlib import Path
+
+try:
+    import tomllib
+except ModuleNotFoundError:  # Python 3.10 compatibility
+    import tomli as tomllib  # type: ignore[no-redef]
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "evaluation" / "packaging_installability.csv"
 rows=[]
