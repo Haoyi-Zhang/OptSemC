@@ -1,5 +1,5 @@
 check,passed,details
-two_folder_top_level,true,"Paper,artifact"
+clean_top_level,true,
 raw_generated_outputs_present,true,
 no_transient_products,true,
 manifest_complete,true,
@@ -13,7 +13,7 @@ certificate_pass:format_compliance.csv,true,6/6
 certificate_pass:projection_resolution_check.csv,true,12/12
 certificate_pass:projection_frontier_antichain_check.csv,true,11/11
 certificate_pass:architecture_contract.csv,true,7/7
-certificate_pass:packaging_installability.csv,true,7/7
+certificate_pass:packaging_installability.csv,true,9/9
 certificate_pass:scalability_stress_check.csv,true,10/10
 certificate_pass:algorithmic_scaling_check.csv,true,8/8
 certificate_pass:guard_quality_check.csv,true,7/7
@@ -28,7 +28,7 @@ certificate_pass:witness_dispersion_check.csv,true,9/9
 certificate_pass:paper_numeric_claims.csv,true,5/5
 certificate_pass:latex_compile_check.csv,true,10/10
 certificate_pass:pdf_integrity.csv,true,6/6
-certificate_pass:reference_quality.csv,true,80/80
+certificate_pass:reference_quality.csv,true,81/81
 certificate_pass:paper_quality.csv,true,7/7
 certificate_pass:paper_table_source_check.csv,true,27/27
 certificate_pass:repository_quality_check.csv,true,4/4
