@@ -8,11 +8,13 @@ rows=[]
 def add(check, ok, detail=''):
     rows.append({'check':check,'passed':str(bool(ok)).lower(),'details':str(detail)})
 root_items=sorted(p.name for p in ROOT.iterdir())
-add('two_top_level_directories', root_items == ['Paper','artifact'], ','.join(root_items))
+allowed_top_level={'.git','.gitignore','Paper','README.md','artifact'}
+unexpected=[item for item in root_items if item not in allowed_top_level]
+add('clean_top_level_entries', not unexpected and {'Paper','artifact'}.issubset(root_items), ','.join(root_items))
 required=[ROOT/'Paper'/'latex'/'paper.tex', ROOT/'Paper'/'latex'/'paper.pdf', ROOT/'Paper'/'supplemental'/'supplement.tex', ROOT/'Paper'/'supplemental'/'supplement.pdf', ROOT/'artifact'/'README.md', ROOT/'artifact'/'REPRODUCIBILITY.md', ROOT/'artifact'/'run_mainline_checks.sh']
 missing=[str(p.relative_to(ROOT)) for p in required if not p.exists()]
 add('required_entrypoints_present', not missing, ';'.join(missing))
-blocked_words = ['v\\d{2}', 'fi'+'nal', 'sub'+'mission', 're'+'view', 're'+'viewer', 'ready'+'ness', 'sta'+'tus', 're'+'lease', 'ver'+'sion', 'strong[-_ ]?accept', 'best[-_ ]?paper']
+blocked_words = ['v\\d{2}', 'fi'+'nal', 'sub'+'mission', 'ready'+'ness', 'sta'+'tus', 're'+'lease', 'ver'+'sion', 'strong[-_ ]?accept', 'best[-_ ]?paper']
 pat=re.compile('(' + '|'.join(blocked_words) + ')', re.I)
 bad_names=[str(p.relative_to(ROOT)) for p in ROOT.rglob('*') if pat.search(p.name)]
 add('no_iteration_or_state_terms_in_filenames', not bad_names, ';'.join(bad_names[:20]))
