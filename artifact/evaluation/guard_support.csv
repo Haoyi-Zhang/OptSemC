@@ -1,0 +1,288 @@
+rule_id,engine,state,action_key,guard_width,expanded_guard_width,support_count,total_probes,support_share,support_class
+GT-BQ-FED-PUSHDOWN-001,BigQuery,MAY,Filter|pushdown|federated_pushdown|logical_rewrite|connector_source|compile_time|stage_graph,1,1,633,4216,0.150142,medium
+GT-BQ-JOIN-SHUFFLE-001,BigQuery,MAY,Join|choose|hash_shuffle_join|distributed_planning|cloud_service|runtime|stage_graph,2,2,89,4216,0.021110,narrow
+GT-BQ-RUNTIME-REPARTITION-001,BigQuery,MAY,Exchange|adapt|runtime_repartition|runtime_adaptation|cloud_service|runtime|stage_graph,2,2,52,4216,0.012334,narrow
+GT-BQ-SHUFFLE-METRICS-001,BigQuery,MAY,Exchange|observe|shuffle_metrics|plan_observability|cloud_service|profile_time|stage_graph,1,1,236,4216,0.055977,medium
+GT-BQ-STAGE-GRAPH-001,BigQuery,MAY,QueryPlanStage|observe|stage_graph|plan_observability|cloud_service|profile_time|stage_graph,1,1,236,4216,0.055977,medium
+GT-CH-JOIN-AUTO-001,ClickHouse,MAY,Join|adapt|hash_to_partial_merge|runtime_adaptation|local_engine|runtime|runtime_profile,2,2,90,4216,0.021347,narrow
+GT-DUCK-CTE-INLINE-001,DuckDB,MAY,Materialize|inline|cte_inline|logical_rewrite|local_engine|compile_time|estimated_physical_plan,3,3,3,4216,0.000712,narrow
+GT-DUCK-CTE-MAT-001,DuckDB,MAY,Materialize|materialize|cte_default_materialized|logical_rewrite|local_engine|compile_time|estimated_physical_plan,1,1,364,4216,0.086338,medium
+GT-PG-EXPLAIN-COST-001,PostgreSQL,MAY,Plan|observe|cost_rows_width|plan_observability|local_engine|compile_time|estimated_physical_plan,1,1,3398,4216,0.805977,broad
+GT-PG-EXPLAIN-ROWS-001,PostgreSQL,MAY,Statistics|estimate|emitted_rows|statistics_contract|local_engine|compile_time|estimated_physical_plan,1,1,3398,4216,0.805977,broad
+GT-PG-GEQO-FALLBACK-001,PostgreSQL,MAY,Join|fallback|geqo|physical_planning|local_engine|compile_time|estimated_physical_plan,2,2,4,4216,0.000949,narrow
+GT-PG-INNER-JOIN-REORDER-001,PostgreSQL,MAY,Join|reorder|exhaustive_or_cost_based|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,1731,4216,0.410579,broad
+GT-PG-JOIN-COLLAPSE-001,PostgreSQL,MUST,Join|choose|join_collapse_limit|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,1731,4216,0.410579,broad
+GT-PG-OUTER-JOIN-CONSTRAINT-001,PostgreSQL,MUST_NOT,Join|reorder|outer_join_reorder|logical_rewrite|local_engine|compile_time|estimated_physical_plan,2,2,4,4216,0.000949,narrow
+GT-SNOW-EXPLAIN-LOGICAL-001,Snowflake,MAY,Plan|observe|logical_plan|plan_observability|cloud_service|compile_time|logical_plan,1,1,3398,4216,0.805977,broad
+GT-SNOW-EXPLAIN-NOEXEC-001,Snowflake,MUST,Plan|observe|compile_only|plan_observability|cloud_service|compile_time|logical_plan,1,1,3398,4216,0.805977,broad
+GT-SNOW-LOGICAL-ORDER-001,Snowflake,MUST_NOT,Plan|observe|actual_order_match|plan_observability|cloud_service|compile_time|logical_plan,1,1,3398,4216,0.805977,broad
+GT-SPARK-AQE-001,Spark SQL,MAY,Plan|adapt|aqe|runtime_adaptation|distributed_worker|runtime|runtime_profile,1,1,235,4216,0.055740,medium
+GT-SPARK-COALESCE-001,Spark SQL,MAY,Exchange|coalesce|coalesce_post_shuffle|runtime_adaptation|distributed_worker|runtime|runtime_profile,2,2,52,4216,0.012334,narrow
+GT-SPARK-RUNTIME-STATS-001,Spark SQL,MAY,RuntimeStatistics|observe|runtime_stats|statistics_contract|distributed_worker|runtime|runtime_profile,1,1,235,4216,0.055740,medium
+GT-SPARK-SMJ-BHJ-001,Spark SQL,MAY,Join|convert|sort_merge_to_broadcast|runtime_adaptation|distributed_worker|runtime|runtime_profile,3,3,22,4216,0.005218,narrow
+GT-TRINO-AGG-EXPR-NO-001,Trino,MUST_NOT,Aggregate|pushdown|aggregation_expression|logical_rewrite|connector_source|compile_time|estimated_physical_plan,2,2,9,4216,0.002135,narrow
+GT-TRINO-AGG-PUSH-001,Trino,MAY,Aggregate|pushdown|aggregation|logical_rewrite|connector_source|compile_time|estimated_physical_plan,2,2,82,4216,0.019450,narrow
+GT-TRINO-JOIN-DIST-001,Trino,MAY,Join|choose|broadcast_or_partitioned|distributed_planning|distributed_worker|compile_time|estimated_physical_plan,3,3,1,4216,0.000237,narrow
+GT-TRINO-JOIN-ENUM-001,Trino,MAY,Join|reorder|cost_based|physical_planning|distributed_worker|compile_time|estimated_physical_plan,1,1,259,4216,0.061433,medium
+GT-TRINO-JOIN-FALLBACK-001,Trino,MUST,Join|fallback|eliminate_cross_joins|physical_planning|distributed_worker|compile_time|estimated_physical_plan,1,1,258,4216,0.061195,medium
+GT-TRINO-JOIN-PUSH-001,Trino,MAY,Join|delegate|join|physical_planning|connector_source|compile_time|estimated_physical_plan,2,2,231,4216,0.054791,medium
+GT-TRINO-LIMIT-PUSH-001,Trino,MAY,Limit|pushdown|limit|logical_rewrite|connector_source|compile_time|estimated_physical_plan,2,2,8,4216,0.001898,narrow
+GT-TRINO-PRED-PUSH-001,Trino,MAY,Filter|pushdown|predicate|logical_rewrite|connector_source|compile_time|estimated_physical_plan,2,2,9,4216,0.002135,narrow
+GT-TRINO-PROJ-PUSH-001,Trino,MAY,Project|pushdown|projection|logical_rewrite|connector_source|compile_time|estimated_physical_plan,1,1,633,4216,0.150142,medium
+GT-TRINO-TOPN-PUSH-001,Trino,MAY,TopN|pushdown|topn|logical_rewrite|connector_source|compile_time|estimated_physical_plan,2,2,82,4216,0.019450,narrow
+GT12-BQ-AGG-SHUFFLE-001,BigQuery,MAY,Aggregate|observe|aggregation_shuffle_stats|plan_observability|cloud_service|profile_time|stage_graph,2,2,2,4216,0.000474,narrow
+GT12-BQ-CLOUDSQL-AGG-BLOCK-001,BigQuery,MUST_NOT,Aggregate|pushdown|cloudsql_aggregation_pushdown|logical_rewrite|connector_source|compile_time|stage_graph,3,3,74,4216,0.017552,narrow
+GT12-BQ-CLOUDSQL-COL-FILTER-001,BigQuery,MAY,Filter|pushdown|cloudsql_filter_pushdown|logical_rewrite|connector_source|compile_time|stage_graph,2,2,78,4216,0.018501,narrow
+GT12-BQ-CLOUDSQL-JOIN-BLOCK-001,BigQuery,MUST_NOT,Join|delegate|cloudsql_join_pushdown|physical_planning|connector_source|compile_time|stage_graph,2,2,78,4216,0.018501,narrow
+GT12-BQ-CLOUDSQL-LIMIT-BLOCK-001,BigQuery,MUST_NOT,Limit|pushdown|cloudsql_limit_pushdown|logical_rewrite|connector_source|compile_time|stage_graph,3,3,1,4216,0.000237,narrow
+GT12-BQ-FED-PUSHDOWN-001,BigQuery,MAY,SourceDelegate|delegate|federated_sql_pushdown|logical_rewrite|connector_source|compile_time|stage_graph,2,2,78,4216,0.018501,narrow
+GT12-BQ-FED-PUSHDOWN-OBS-001,BigQuery,MAY,Plan|observe|federated_pushdown_visible_in_plan|plan_observability|cloud_service|compile_time|stage_graph,2,2,78,4216,0.018501,narrow
+GT12-BQ-FILTER-STEP-001,BigQuery,MAY,Filter|observe|filter_step|plan_observability|cloud_service|profile_time|stage_graph,1,1,102,4216,0.024194,medium
+GT12-BQ-PARTITION-OR-BLOCK-001,BigQuery,MUST_NOT,PartitionPrune|prune|or_predicate_pruning_block|physical_planning|cloud_service|compile_time|stage_graph,1,1,100,4216,0.023719,medium
+GT12-BQ-PARTITION-PRUNE-001,BigQuery,MAY,PartitionPrune|prune|isolate_partition_column|physical_planning|cloud_service|compile_time|stage_graph,1,1,102,4216,0.024194,medium
+GT12-BQ-READ-STEP-001,BigQuery,MAY,Read|observe|read_step|plan_observability|cloud_service|profile_time|stage_graph,0,0,4216,4216,1.000000,global
+GT12-BQ-RUNTIME-REPARTITION-001,BigQuery,MAY,Exchange|adapt|runtime_repartition_stage|runtime_adaptation|cloud_service|runtime|stage_graph,2,2,51,4216,0.012097,narrow
+GT12-BQ-SEARCH-INDEX-BLOCK-001,BigQuery,MUST_NOT,SearchIndex|choose|search_index_external_table_block|physical_planning|cloud_service|compile_time|stage_graph,1,1,185,4216,0.043880,medium
+GT12-BQ-SPANNER-PARTIAL-AGG-001,BigQuery,MAY,Aggregate|pushdown|spanner_partial_aggregate_pushdown|logical_rewrite|connector_source|compile_time|stage_graph,3,3,74,4216,0.017552,narrow
+GT12-BQ-STAGE-GRAPH-001,BigQuery,MAY,QueryPlanStage|observe|stages_and_shuffle_edges|plan_observability|cloud_service|profile_time|stage_graph,0,0,4216,4216,1.000000,global
+GT12-BQ-WRITE-SHUFFLE-001,BigQuery,MAY,Write|observe|write_to_shuffle_memory|plan_observability|cloud_service|profile_time|stage_graph,1,1,236,4216,0.055977,medium
+GT12-CH-AUTO-GRACE-SPILL-001,ClickHouse,MAY,GraceHashJoinAlgorithm|convert|auto_convert_to_grace_hash_spill|runtime_adaptation|local_engine|runtime|runtime_profile,2,2,4,4216,0.000949,narrow
+GT12-CH-BUILD-SIDE-SWAP-001,ClickHouse,MAY,Join|choose|build_side_swap_by_size|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,259,4216,0.061433,medium
+GT12-CH-DIRECT-INDEX-FILTER-001,ClickHouse,MAY,Filter|pushdown|direct_join_storage_filter|logical_rewrite|local_engine|compile_time|estimated_physical_plan,2,2,1,4216,0.000237,narrow
+GT12-CH-DIRECT-JOIN-001,ClickHouse,MAY,DirectJoinAlgorithm|choose|direct_join|physical_planning|local_engine|compile_time|estimated_physical_plan,2,2,58,4216,0.013757,narrow
+GT12-CH-FULL-SORTING-MERGE-001,ClickHouse,MAY,FullSortingMergeJoinAlgorithm|choose|full_sorting_merge_skip_sort|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,70,4216,0.016603,narrow
+GT12-CH-GRACE-HASH-001,ClickHouse,MAY,GraceHashJoinAlgorithm|choose|grace_hash_join_algorithm|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,70,4216,0.016603,narrow
+GT12-CH-HASH-JOIN-001,ClickHouse,MAY,HashJoinAlgorithm|choose|hash_join_algorithm|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,70,4216,0.016603,narrow
+GT12-CH-JOIN-ALGORITHM-SETTING-001,ClickHouse,MAY,HashJoinAlgorithm|choose|explicit_join_algorithm_hash|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,70,4216,0.016603,narrow
+GT12-CH-JOIN-AUTO-SWITCH-001,ClickHouse,MAY,PartialMergeJoinAlgorithm|convert|auto_hash_to_partial_merge|runtime_adaptation|local_engine|runtime|runtime_profile,2,2,4,4216,0.000949,narrow
+GT12-CH-JOIN-REORDER-2TABLE-001,ClickHouse,MAY,Join|reorder|two_table_join_reordering|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,2021,4216,0.479364,broad
+GT12-CH-JOIN-REORDER-3PLUS-001,ClickHouse,MAY,Join|reorder|three_plus_table_join_reordering|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,99,4216,0.023482,narrow
+GT12-CH-PARALLEL-HASH-001,ClickHouse,MAY,ParallelHashJoinAlgorithm|choose|parallel_hash_join_algorithm|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,70,4216,0.016603,narrow
+GT12-CH-PARTIAL-MERGE-001,ClickHouse,MAY,PartialMergeJoinAlgorithm|choose|partial_merge_join_algorithm|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,70,4216,0.016603,narrow
+GT12-CH-PRED-PUSHDOWN-JOIN-001,ClickHouse,MAY,Filter|pushdown|join_condition_pushdown|logical_rewrite|local_engine|compile_time|estimated_physical_plan,2,2,36,4216,0.008539,narrow
+GT12-DUCK-CTE-DEFAULT-MAT-001,DuckDB,MAY,Materialize|materialize|cte_default_materialized|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,364,4216,0.086338,medium
+GT12-DUCK-CTE-EVALUATE-ONCE-001,DuckDB,MAY,Materialize|reuse|materialized_cte_reuse|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,288,4216,0.068311,medium
+GT12-DUCK-CTE-HEURISTIC-CHOOSE-001,DuckDB,MAY,Materialize|choose|cte_inline_or_materialize_heuristic|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,364,4216,0.086338,medium
+GT12-DUCK-CTE-INLINE-SINGLE-001,DuckDB,MAY,Materialize|inline|cte_inline_heuristics|logical_rewrite|local_engine|compile_time|estimated_physical_plan,2,2,58,4216,0.013757,narrow
+GT12-DUCK-CTE-MATERIALIZED-HINT-001,DuckDB,MUST,Materialize|materialize|as_materialized_hint|logical_rewrite|local_engine|compile_time|estimated_physical_plan,2,2,58,4216,0.013757,narrow
+GT12-DUCK-CTE-NO-INLINE-GROUPED-001,DuckDB,MUST_NOT,Materialize|inline|grouped_cte_inline|logical_rewrite|local_engine|compile_time|estimated_physical_plan,2,2,53,4216,0.012571,narrow
+GT12-DUCK-CTE-NO-INLINE-REUSED-001,DuckDB,MUST_NOT,Materialize|inline|reused_cte_inline|logical_rewrite|local_engine|compile_time|estimated_physical_plan,1,1,288,4216,0.068311,medium
+GT12-DUCK-CTE-NO-INLINE-VOLATILE-001,DuckDB,MUST_NOT,Materialize|inline|volatile_cte_inline|logical_rewrite|local_engine|compile_time|estimated_physical_plan,2,2,7,4216,0.001660,narrow
+GT12-DUCK-CTE-NOT-MATERIALIZED-HINT-001,DuckDB,MAY,Materialize|inline|as_not_materialized_hint|logical_rewrite|local_engine|compile_time|estimated_physical_plan,2,2,58,4216,0.013757,narrow
+GT12-DUCK-CTE-READCSV-NOINLINE-001,DuckDB,MUST_NOT,Materialize|inline|non_inlineable_table_function_cte|logical_rewrite|local_engine|compile_time|estimated_physical_plan,2,2,7,4216,0.001660,narrow
+GT12-PG-CFG-GEQO-001,PostgreSQL,MAY,Join|fallback|geqo_heuristic_search|physical_planning|local_engine|compile_time|estimated_physical_plan,0,0,4216,4216,1.000000,global
+GT12-PG-CFG-HASHAGG-OFF-001,PostgreSQL,MUST_NOT,HashAggregate|choose|hashagg_disabled|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,73,4216,0.017315,narrow
+GT12-PG-CFG-HASHJOIN-OFF-001,PostgreSQL,MUST_NOT,HashJoin|choose|hashjoin_disabled|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,73,4216,0.017315,narrow
+GT12-PG-CFG-INCREMENTAL-SORT-OFF-001,PostgreSQL,MUST_NOT,IncrementalSort|choose|incremental_sort_disabled|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,73,4216,0.017315,narrow
+GT12-PG-CFG-INDEXSCAN-OFF-001,PostgreSQL,MUST_NOT,IndexScan|choose|indexscan_disabled|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,73,4216,0.017315,narrow
+GT12-PG-CFG-MATERIAL-OFF-001,PostgreSQL,MUST_NOT,Materialize|materialize|materialization_disabled|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,73,4216,0.017315,narrow
+GT12-PG-CFG-MEMOIZE-OFF-001,PostgreSQL,MUST_NOT,Memoize|choose|memoize_disabled|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,73,4216,0.017315,narrow
+GT12-PG-CFG-MERGEJOIN-OFF-001,PostgreSQL,MUST_NOT,MergeJoin|choose|mergejoin_disabled|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,73,4216,0.017315,narrow
+GT12-PG-CFG-NESTLOOP-OFF-001,PostgreSQL,MUST_NOT,NestedLoopJoin|choose|nestloop_disabled_discouraged|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,73,4216,0.017315,narrow
+GT12-PG-CFG-PARTITION-PRUNE-001,PostgreSQL,MAY,PartitionPrune|prune|partition_pruning|physical_planning|local_engine|compile_time|estimated_physical_plan,0,0,4216,4216,1.000000,global
+GT12-PG-CFG-PARTITIONWISE-AGG-001,PostgreSQL,MAY,Aggregate|choose|partitionwise_aggregate|physical_planning|local_engine|compile_time|estimated_physical_plan,0,0,4216,4216,1.000000,global
+GT12-PG-CFG-PARTITIONWISE-JOIN-001,PostgreSQL,MAY,Join|choose|partitionwise_join|physical_planning|local_engine|compile_time|estimated_physical_plan,0,0,4216,4216,1.000000,global
+GT12-PG-CFG-PLAN-CACHE-001,PostgreSQL,MAY,Plan|choose|custom_or_generic_plan_cache|physical_planning|local_engine|compile_time|estimated_physical_plan,0,0,4216,4216,1.000000,global
+GT12-PG-CFG-PRESORTED-AGG-001,PostgreSQL,MAY,Aggregate|choose|presorted_aggregate|physical_planning|local_engine|compile_time|estimated_physical_plan,0,0,4216,4216,1.000000,global
+GT12-PG-CFG-STATISTICS-TARGET-001,PostgreSQL,MAY,Statistics|estimate|statistics_target|statistics_contract|local_engine|compile_time|estimated_physical_plan,0,0,4216,4216,1.000000,global
+GT12-PG-EXPLAIN-ANALYZE-001,PostgreSQL,MAY,Plan|observe|explain_analyze_actuals|plan_observability|local_engine|profile_time|runtime_profile,1,1,73,4216,0.017315,narrow
+GT12-PG-EXPLAIN-COST-UNITS-001,PostgreSQL,MAY,Statistics|estimate|planner_cost_units|statistics_contract|local_engine|compile_time|estimated_physical_plan,0,0,4216,4216,1.000000,global
+GT12-PG-EXPLAIN-PLAN-TREE-001,PostgreSQL,MAY,Plan|observe|plan_tree_with_costs|plan_observability|local_engine|compile_time|estimated_physical_plan,1,1,936,4216,0.222011,medium
+GT12-PG-EXPLAIN-ROWS-001,PostgreSQL,MAY,Statistics|estimate|emitted_rows_estimate|statistics_contract|local_engine|compile_time|estimated_physical_plan,0,0,4216,4216,1.000000,global
+GT12-PG-GEQO-FALLBACK-001,PostgreSQL,MAY,Join|fallback|geqo_join_order_search|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,259,4216,0.061433,medium
+GT12-PG-HASH-JOIN-001,PostgreSQL,MAY,HashJoin|choose|hash_join|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,1731,4216,0.410579,broad
+GT12-PG-INCREMENTAL-SORT-LIMIT-001,PostgreSQL,MAY,IncrementalSort|choose|incremental_sort_with_limit|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,101,4216,0.023956,medium
+GT12-PG-INDEX-COND-001,PostgreSQL,MAY,IndexScan|observe|index_cond_vs_filter|plan_observability|local_engine|compile_time|estimated_physical_plan,1,1,102,4216,0.024194,medium
+GT12-PG-INNER-JOIN-ORDER-001,PostgreSQL,MAY,Join|reorder|inner_join_order_search|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,1731,4216,0.410579,broad
+GT12-PG-JOIN-COLLAPSE-001,PostgreSQL,MUST_NOT,Join|reorder|explicit_join_order_forced|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,73,4216,0.017315,narrow
+GT12-PG-LIMIT-PLAN-CHANGE-001,PostgreSQL,MAY,Limit|choose|limit_changes_plan|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,89,4216,0.021110,narrow
+GT12-PG-MATERIALIZE-NESTLOOP-001,PostgreSQL,MAY,Materialize|materialize|nested_loop_inner_materialize|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,1731,4216,0.410579,broad
+GT12-PG-MERGE-JOIN-001,PostgreSQL,MAY,MergeJoin|choose|merge_join|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,1731,4216,0.410579,broad
+GT12-PG-ORDER-BY-INDEX-001,PostgreSQL,MAY,Sort|choose|order_by_index_or_sort|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,89,4216,0.021110,narrow
+GT12-PG-OUTER-JOIN-CONSTRAINT-001,PostgreSQL,MAY,Join|reorder|outer_join_limited_reorder|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,229,4216,0.054317,medium
+GT12-PG-SEQSCAN-FILTER-001,PostgreSQL,MAY,Filter|observe|seqscan_filter_condition|plan_observability|local_engine|compile_time|estimated_physical_plan,1,1,102,4216,0.024194,medium
+GT12-PG-WITH-EVAL-ONCE-001,PostgreSQL,MAY,Materialize|materialize|cte_evaluated_once|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,288,4216,0.068311,medium
+GT12-PG-WITH-EXPENSIVE-FUNC-001,PostgreSQL,MAY,Materialize|materialize|avoid_repeated_function_eval|physical_planning|local_engine|compile_time|estimated_physical_plan,2,2,5,4216,0.001186,narrow
+GT12-PG-WITH-FOLD-SINGLE-001,PostgreSQL,MAY,Materialize|inline|side_effect_free_single_cte_fold|logical_rewrite|local_engine|compile_time|estimated_physical_plan,1,1,364,4216,0.086338,medium
+GT12-PG-WITH-MATERIALIZED-001,PostgreSQL,MUST,Materialize|materialize|materialized_cte_hint|logical_rewrite|local_engine|compile_time|estimated_physical_plan,2,2,58,4216,0.013757,narrow
+GT12-PG-WITH-NOT-MATERIALIZED-001,PostgreSQL,MUST,Materialize|inline|not_materialized_cte_merge|logical_rewrite|local_engine|compile_time|estimated_physical_plan,2,2,5,4216,0.001186,narrow
+GT12-PG-WITH-PUSHDOWN-BARRIER-001,PostgreSQL,MUST_NOT,Filter|pushdown|parent_restriction_into_reused_cte|logical_rewrite|local_engine|compile_time|estimated_physical_plan,2,2,5,4216,0.001186,narrow
+GT12-SNOW-ACTUAL-ORDER-DIFF-001,Snowflake,MUST,Plan|observe|logical_order_not_runtime_order|plan_observability|cloud_service|compile_time|logical_plan,0,0,4216,4216,1.000000,global
+GT12-SNOW-ASSIGNED-UPPER-BOUND-001,Snowflake,MAY,Statistics|estimate|assigned_partitions_bytes_upper_bound|statistics_contract|cloud_service|compile_time|logical_plan,0,0,4216,4216,1.000000,global
+GT12-SNOW-EXPLAIN-COMPILE-ONLY-001,Snowflake,MUST,Plan|observe|compile_without_execution|plan_observability|cloud_service|compile_time|logical_plan,1,1,73,4216,0.017315,narrow
+GT12-SNOW-EXPLAIN-LOGICAL-001,Snowflake,MUST,Plan|observe|logical_explain_plan|plan_observability|cloud_service|compile_time|logical_plan,1,1,73,4216,0.017315,narrow
+GT12-SNOW-EXPLAIN-OPS-001,Snowflake,MAY,Plan|observe|explain_columns_operations_partitions_bytes|plan_observability|cloud_service|compile_time|logical_plan,1,1,73,4216,0.017315,narrow
+GT12-SNOW-OPSTATS-001,Snowflake,MAY,QueryProfile|profile|get_query_operator_stats|plan_observability|cloud_service|profile_time|runtime_profile,0,0,4216,4216,1.000000,global
+GT12-SNOW-OPSTATS-PROBLEM-001,Snowflake,MAY,Plan|observe|operator_stats_problem_identification|plan_observability|cloud_service|profile_time|runtime_profile,0,0,4216,4216,1.000000,global
+GT12-SNOW-WAREHOUSE-SIZE-PLAN-001,Snowflake,MAY,Plan|choose|warehouse_size_affects_optimization|physical_planning|cloud_service|compile_time|logical_plan,0,0,4216,4216,1.000000,global
+GT12-SPARK-AQE-COALESCE-001,Spark SQL,MAY,Exchange|coalesce|coalesce_post_shuffle_partitions|runtime_adaptation|distributed_worker|runtime|runtime_profile,3,3,6,4216,0.001423,narrow
+GT12-SPARK-AQE-DISABLED-001,Spark SQL,MUST_NOT,Plan|adapt|aqe_runtime_reoptimization|runtime_adaptation|distributed_worker|runtime|runtime_profile,1,1,73,4216,0.017315,narrow
+GT12-SPARK-AQE-LOCAL-SHUFFLE-READER-001,Spark SQL,MAY,LocalShuffleReader|choose|local_shuffle_reader|runtime_adaptation|distributed_worker|runtime|runtime_profile,3,3,6,4216,0.001423,narrow
+GT12-SPARK-AQE-RUNTIME-001,Spark SQL,MAY,Plan|adapt|aqe_runtime_reoptimization|runtime_adaptation|distributed_worker|runtime|runtime_profile,2,2,51,4216,0.012097,narrow
+GT12-SPARK-AQE-SHUFFLE-HASH-001,Spark SQL,MAY,ShuffleHashJoin|convert|sort_merge_to_shuffle_hash_join|runtime_adaptation|distributed_worker|runtime|runtime_profile,4,4,5,4216,0.001186,narrow
+GT12-SPARK-AQE-SKEW-001,Spark SQL,MAY,Exchange|adapt|skew_partition_split_replicate|runtime_adaptation|distributed_worker|runtime|runtime_profile,3,3,5,4216,0.001186,narrow
+GT12-SPARK-AQE-SMJ-TO-BHJ-001,Spark SQL,MAY,BroadcastHashJoin|convert|sort_merge_to_broadcast_hash_join|runtime_adaptation|distributed_worker|runtime|runtime_profile,4,4,5,4216,0.001186,narrow
+GT12-SPARK-AUTO-BROADCAST-THRESHOLD-001,Spark SQL,MAY,BroadcastHashJoin|threshold|auto_broadcast_join_threshold|distributed_planning|distributed_worker|compile_time|estimated_physical_plan,1,1,232,4216,0.055028,medium
+GT12-SPARK-EXPLAIN-COST-001,Spark SQL,MAY,Plan|observe|explain_cost_statistics|plan_observability|coordinator|compile_time|estimated_physical_plan,1,1,259,4216,0.061433,medium
+GT12-SPARK-JOIN-HINT-BROADCAST-001,Spark SQL,MAY,BroadcastHashJoin|choose|broadcast_join_hint|distributed_planning|distributed_worker|compile_time|estimated_physical_plan,2,2,4,4216,0.000949,narrow
+GT12-SPARK-JOIN-HINT-PRIORITY-001,Spark SQL,MAY,Join|choose|join_hint_priority|distributed_planning|distributed_worker|compile_time|estimated_physical_plan,1,1,70,4216,0.016603,narrow
+GT12-SPARK-JOIN-HINT-WARN-001,Spark SQL,MAY,Join|fallback|join_hint_override_warning|distributed_planning|distributed_worker|compile_time|estimated_physical_plan,1,1,70,4216,0.016603,narrow
+GT12-SPARK-PARTITION-HINTS-001,Spark SQL,MAY,Exchange|partition|partitioning_hints|distributed_planning|distributed_worker|compile_time|estimated_physical_plan,1,1,936,4216,0.222011,medium
+GT12-SPARK-REBALANCE-AQE-001,Spark SQL,MUST_NOT,Exchange|partition|rebalance_hint|distributed_planning|distributed_worker|compile_time|estimated_physical_plan,1,1,73,4216,0.017315,narrow
+GT12-SPARK-SPJ-NO-EXCHANGE-001,Spark SQL,MAY,Exchange|choose|storage_partition_join_no_exchange|distributed_planning|distributed_worker|compile_time|estimated_physical_plan,2,2,9,4216,0.002135,narrow
+GT12-SPARK-SQLUI-RUNTIME-STATS-001,Spark SQL,MAY,RuntimeStatistics|observe|sql_ui_runtime_statistics|plan_observability|coordinator|profile_time|runtime_profile,1,1,235,4216,0.055740,medium
+GT12-SPARK-STATS-SOURCES-001,Spark SQL,MAY,Statistics|estimate|data_source_catalog_runtime_stats|statistics_contract|distributed_worker|compile_time|estimated_physical_plan,1,1,259,4216,0.061433,medium
+GT12-TRINO-ADAPTIVE-DISABLED-001,Trino,MUST_NOT,Plan|adapt|adaptive_plan_optimization_disabled|runtime_adaptation|distributed_worker|runtime|runtime_profile,1,1,73,4216,0.017315,narrow
+GT12-TRINO-ADAPTIVE-JOIN-REORDER-001,Trino,MAY,Join|reorder|adaptive_partitioned_join_reordering|runtime_adaptation|distributed_worker|runtime|runtime_profile,3,3,22,4216,0.005218,narrow
+GT12-TRINO-ADAPTIVE-PLAN-001,Trino,MAY,Plan|adapt|adaptive_plan_optimization|runtime_adaptation|distributed_worker|runtime|runtime_profile,1,1,235,4216,0.055740,medium
+GT12-TRINO-AGG-EXPR-BLOCK-001,Trino,MUST_NOT,Aggregate|pushdown|expression_aggregate_pushdown|logical_rewrite|connector_source|compile_time|estimated_physical_plan,3,3,1,4216,0.000237,narrow
+GT12-TRINO-AGG-FILTER-BLOCK-001,Trino,MUST_NOT,Aggregate|pushdown|complex_aggregation_pushdown|logical_rewrite|connector_source|compile_time|estimated_physical_plan,3,3,1,4216,0.000237,narrow
+GT12-TRINO-AGG-OBS-001,Trino,MAY,Plan|observe|aggregate_operator_absence_when_pushed|plan_observability|coordinator|compile_time|estimated_physical_plan,3,3,74,4216,0.017552,narrow
+GT12-TRINO-AGG-PUSHDOWN-001,Trino,MAY,Aggregate|pushdown|aggregation_pushdown|logical_rewrite|connector_source|compile_time|estimated_physical_plan,3,3,74,4216,0.017552,narrow
+GT12-TRINO-CBO-STATS-001,Trino,MAY,Statistics|estimate|connector_table_statistics|statistics_contract|connector_source|compile_time|estimated_physical_plan,1,1,259,4216,0.061433,medium
+GT12-TRINO-DEREF-PUSHDOWN-001,Trino,MAY,Project|pushdown|dereference_pushdown|logical_rewrite|connector_source|compile_time|estimated_physical_plan,2,2,78,4216,0.018501,narrow
+GT12-TRINO-DYNAMIC-FILTER-001,Trino,MAY,RuntimeFilter|pushdown|dynamic_filter_runtime_predicate|runtime_adaptation|distributed_worker|runtime|runtime_profile,3,3,22,4216,0.005218,narrow
+GT12-TRINO-DYNAMIC-FILTER-ANALYZE-001,Trino,MAY,Plan|observe|dynamic_filter_explain_analyze|plan_observability|coordinator|profile_time|runtime_profile,3,3,22,4216,0.005218,narrow
+GT12-TRINO-DYNAMIC-FILTER-DEFAULT-001,Trino,MUST_NOT,RuntimeFilter|pushdown|dynamic_filter_runtime_predicate|runtime_adaptation|distributed_worker|runtime|runtime_profile,1,1,73,4216,0.017315,narrow
+GT12-TRINO-DYNAMIC-FILTER-EXPLAIN-001,Trino,MAY,Plan|observe|dynamic_filter_explain_annotations|plan_observability|coordinator|compile_time|estimated_physical_plan,3,3,22,4216,0.005218,narrow
+GT12-TRINO-DYNAMIC-FILTER-GUARD-001,Trino,MAY,RuntimeFilter|choose|dynamic_filter_guarded_by_join_connector_size|runtime_adaptation|coordinator|runtime|runtime_profile,3,3,22,4216,0.005218,narrow
+GT12-TRINO-JOIN-BROADCAST-CAP-001,Trino,MAY,Exchange|threshold|replicated_table_size_cap|distributed_planning|distributed_worker|compile_time|estimated_physical_plan,1,1,232,4216,0.055028,medium
+GT12-TRINO-JOIN-DIST-AUTO-001,Trino,MAY,Exchange|choose|broadcast_or_partitioned_join_distribution|distributed_planning|distributed_worker|compile_time|estimated_physical_plan,3,3,1,4216,0.000237,narrow
+GT12-TRINO-JOIN-ENUM-AUTO-001,Trino,MAY,Join|reorder|cost_based_join_enumeration|physical_planning|distributed_worker|compile_time|estimated_physical_plan,2,2,46,4216,0.010911,narrow
+GT12-TRINO-JOIN-FALLBACK-002,Trino,MUST,Join|fallback|eliminate_cross_joins_on_missing_cost|physical_planning|distributed_worker|compile_time|estimated_physical_plan,1,1,258,4216,0.061195,medium
+GT12-TRINO-JOIN-NONE-001,Trino,MUST_NOT,Join|reorder|none_strategy_no_reorder|physical_planning|distributed_worker|compile_time|estimated_physical_plan,1,1,70,4216,0.016603,narrow
+GT12-TRINO-JOIN-PUSHDOWN-001,Trino,MAY,Join|delegate|join_pushdown|physical_planning|connector_source|compile_time|estimated_physical_plan,4,4,1,4216,0.000237,narrow
+GT12-TRINO-JOIN-PUSHDOWN-OBS-001,Trino,MAY,Plan|observe|join_operator_absence_when_pushed|plan_observability|coordinator|compile_time|estimated_physical_plan,3,3,75,4216,0.017789,narrow
+GT12-TRINO-LIMIT-PUSHDOWN-001,Trino,MAY,Limit|pushdown|limit_pushdown|logical_rewrite|connector_source|compile_time|estimated_physical_plan,3,3,1,4216,0.000237,narrow
+GT12-TRINO-PRED-OBS-001,Trino,MAY,Plan|observe|scanfilterproject_absence_for_predicate_pushdown|plan_observability|coordinator|compile_time|estimated_physical_plan,3,3,1,4216,0.000237,narrow
+GT12-TRINO-PRED-PUSHDOWN-001,Trino,MAY,Filter|pushdown|predicate_pushdown|logical_rewrite|connector_source|compile_time|estimated_physical_plan,3,3,1,4216,0.000237,narrow
+GT12-TRINO-PROJ-PUSHDOWN-001,Trino,MAY,Project|pushdown|projection_pushdown|logical_rewrite|connector_source|compile_time|estimated_physical_plan,2,2,78,4216,0.018501,narrow
+GT12-TRINO-PUSHDOWN-GENERAL-001,Trino,MAY,SourceDelegate|delegate|connector_specific_pushdown|logical_rewrite|connector_source|compile_time|estimated_physical_plan,2,2,78,4216,0.018501,narrow
+GT12-TRINO-SYNTACTIC-JOIN-001,Trino,MAY,Join|fallback|syntactic_join_order_fallback|physical_planning|distributed_worker|compile_time|estimated_physical_plan,1,1,258,4216,0.061195,medium
+GT12-TRINO-TOPN-PUSHDOWN-001,Trino,MAY,TopN|pushdown|topn_pushdown|logical_rewrite|connector_source|compile_time|estimated_physical_plan,3,3,74,4216,0.017552,narrow
+PG13-ASYNC-APPEND-001,PostgreSQL,MAY,Plan|choose|async_append|physical_planning|local_engine|compile_time|estimated_physical_plan,0,0,4216,4216,1.000000,global
+PG13-BITMAPSCAN-001,PostgreSQL,MAY,Scan|choose|bitmap_scan|physical_planning|local_engine|compile_time|estimated_physical_plan,0,0,4216,4216,1.000000,global
+PG13-DISTINCT-REORDER-001,PostgreSQL,MAY,Sort|rewrite|distinct_key_reordering|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,243,4216,0.057638,medium
+PG13-GATHER-MERGE-001,PostgreSQL,MAY,Exchange|choose|gather_merge|physical_planning|local_engine|compile_time|estimated_physical_plan,0,0,4216,4216,1.000000,global
+PG13-GROUP-BY-REORDER-001,PostgreSQL,MAY,Sort|rewrite|group_by_key_reordering|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,257,4216,0.060958,medium
+PG13-HASHAGG-MAY-001,PostgreSQL,MAY,HashAggregate|choose|hashagg_plan_type|physical_planning|local_engine|compile_time|estimated_physical_plan,1,2,500,4216,0.118596,medium
+PG13-HASHJOIN-MAY-001,PostgreSQL,MAY,HashJoin|choose|hash_join_plan_type|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,1731,4216,0.410579,broad
+PG13-INCREMENTAL-SORT-MAY-001,PostgreSQL,MAY,IncrementalSort|choose|incremental_sort_plan_type|physical_planning|local_engine|compile_time|estimated_physical_plan,1,2,190,4216,0.045066,medium
+PG13-INDEXSCAN-MAY-001,PostgreSQL,MAY,IndexScan|choose|index_scan_plan_type|physical_planning|local_engine|compile_time|estimated_physical_plan,1,2,202,4216,0.047913,medium
+PG13-INDEXONLY-MAY-001,PostgreSQL,MAY,IndexOnlyScan|choose|index_only_scan_plan_type|physical_planning|local_engine|compile_time|estimated_physical_plan,1,2,202,4216,0.047913,medium
+PG13-MATERIALIZE-MAY-001,PostgreSQL,MAY,Materialize|materialize|planner_materialize_node|physical_planning|local_engine|compile_time|estimated_physical_plan,0,0,4216,4216,1.000000,global
+PG13-MEMOIZE-MAY-001,PostgreSQL,MAY,Memoize|cache|memoize_parameterized_nested_loop|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,1731,4216,0.410579,broad
+PG13-MERGEJOIN-MAY-001,PostgreSQL,MAY,MergeJoin|choose|merge_join_plan_type|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,1731,4216,0.410579,broad
+PG13-NESTLOOP-MAY-001,PostgreSQL,MAY,NestedLoopJoin|choose|nested_loop_plan_type|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,1731,4216,0.410579,broad
+PG13-PARALLEL-APPEND-001,PostgreSQL,MAY,Exchange|choose|parallel_append_plan_type|physical_planning|local_engine|compile_time|estimated_physical_plan,0,0,4216,4216,1.000000,global
+PG13-PARALLEL-HASH-001,PostgreSQL,MAY,HashJoin|choose|parallel_hash_join_plan_type|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,236,4216,0.055977,medium
+PG13-PARTITION-PRUNING-PLAN-001,PostgreSQL,MAY,PartitionPrune|prune|planner_partition_pruning|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,102,4216,0.024194,medium
+PG13-PARTITION-PRUNING-EXEC-001,PostgreSQL,MAY,PartitionPrune|prune|executor_partition_pruning|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,235,4216,0.055740,medium
+PG13-PARTITIONWISE-JOIN-MAY-001,PostgreSQL,MAY,Join|choose|partitionwise_join|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,1731,4216,0.410579,broad
+PG13-PARTITIONWISE-AGG-MAY-001,PostgreSQL,MAY,Aggregate|choose|partitionwise_aggregate|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,257,4216,0.060958,medium
+PG13-PRESORTED-AGG-MAY-001,PostgreSQL,MAY,Aggregate|choose|presorted_aggregate_input|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,243,4216,0.057638,medium
+PG13-SELF-JOIN-ELIM-001,PostgreSQL,MAY,Join|rewrite|self_join_elimination|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,1731,4216,0.410579,broad
+PG13-SEQSCAN-MAY-001,PostgreSQL,MAY,Scan|choose|sequential_scan_plan_type|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,3398,4216,0.805977,broad
+PG13-SORT-MAY-001,PostgreSQL,MAY,Sort|choose|explicit_sort_step|physical_planning|local_engine|compile_time|estimated_physical_plan,1,2,190,4216,0.045066,medium
+PG13-COST-SCALE-001,PostgreSQL,MAY,Statistics|estimate|planner_cost_scale_arbitrary|physical_planning|local_engine|compile_time|estimated_physical_plan,0,0,4216,4216,1.000000,global
+PG13-RANDOM-PAGE-COST-001,PostgreSQL,MAY,Statistics|estimate|random_page_cost_index_preference|physical_planning|local_engine|compile_time|estimated_physical_plan,1,2,202,4216,0.047913,medium
+PG13-EFFECTIVE-CACHE-001,PostgreSQL,MAY,Statistics|estimate|effective_cache_size_index_cost|physical_planning|local_engine|compile_time|estimated_physical_plan,1,2,202,4216,0.047913,medium
+PG13-CURSOR-TUPLE-001,PostgreSQL,MAY,Plan|choose|cursor_fast_start_fraction|physical_planning|local_engine|compile_time|estimated_physical_plan,0,0,4216,4216,1.000000,global
+PG13-FROM-COLLAPSE-001,PostgreSQL,MAY,Plan|rewrite|from_collapse_limit_subquery_merge|physical_planning|local_engine|compile_time|estimated_physical_plan,1,3,297,4216,0.070446,medium
+PG13-JOIN-COLLAPSE-EXPLICIT-001,PostgreSQL,MAY,Join|reorder|explicit_join_rewrite_limit|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,1731,4216,0.410579,broad
+PG13-PLAN-CACHE-AUTO-001,PostgreSQL,MAY,Plan|choose|custom_or_generic_plan_auto|physical_planning|local_engine|compile_time|estimated_physical_plan,0,0,4216,4216,1.000000,global
+PG13-WITH-FOLD-SINGLE-001,PostgreSQL,MAY,Materialize|inline|side_effect_free_single_reference_fold|logical_rewrite|local_engine|compile_time|estimated_physical_plan,1,1,364,4216,0.086338,medium
+PG13-WITH-MULTI-MAT-001,PostgreSQL,MAY,Materialize|materialize|multi_reference_default_materialize|logical_rewrite|local_engine|compile_time|estimated_physical_plan,1,1,288,4216,0.068311,medium
+PG13-WITH-MATERIALIZED-FORCE-001,PostgreSQL,MUST,Materialize|materialize|materialized_keyword_force|logical_rewrite|local_engine|compile_time|estimated_physical_plan,1,1,68,4216,0.016129,narrow
+PG13-WITH-NOT-MAT-FORCE-001,PostgreSQL,MAY,Materialize|inline|not_materialized_keyword_merge|logical_rewrite|local_engine|compile_time|estimated_physical_plan,1,1,68,4216,0.016129,narrow
+PG13-WITH-INDEX-BARRIER-001,PostgreSQL,MAY,IndexScan|choose|materialized_cte_index_barrier|logical_rewrite|local_engine|compile_time|estimated_physical_plan,1,1,288,4216,0.068311,medium
+PG13-WITH-EXPENSIVE-MAT-001,PostgreSQL,MAY,Materialize|materialize|avoid_duplicate_expensive_function|logical_rewrite|local_engine|compile_time|estimated_physical_plan,2,2,5,4216,0.001186,narrow
+TR13-JOIN-REORDER-AUTO-001,Trino,MAY,Join|reorder|automatic_stats_cost_join_reordering|distributed_planning|distributed_worker|compile_time|estimated_physical_plan,1,1,259,4216,0.061433,medium
+TR13-JOIN-REORDER-NONE-001,Trino,MUST_NOT,Join|reorder|join_reordering_none_maintains_order|distributed_planning|distributed_worker|compile_time|estimated_physical_plan,1,1,70,4216,0.016603,narrow
+TR13-JOIN-REORDER-CROSS-001,Trino,MAY,Join|reorder|eliminate_cross_joins_strategy|distributed_planning|distributed_worker|compile_time|estimated_physical_plan,1,1,258,4216,0.061195,medium
+TR13-JOIN-MAX-REORDERED-001,Trino,MAY,Join|threshold|max_reordered_joins_bound|distributed_planning|distributed_worker|compile_time|estimated_physical_plan,1,1,99,4216,0.023482,narrow
+TR13-DUP-INSENSITIVE-JOIN-001,Trino,MAY,Join|rewrite|duplicate_insensitive_join_output|distributed_planning|distributed_worker|compile_time|estimated_physical_plan,1,1,1731,4216,0.410579,broad
+TR13-EXACT-PARTITIONING-001,Trino,MAY,Exchange|partition|exact_partitioning_stage_requirement|distributed_planning|distributed_worker|compile_time|estimated_physical_plan,1,1,236,4216,0.055977,medium
+TR13-TABLE-SCAN-PARTITIONING-001,Trino,MAY,Scan|partition|connector_table_scan_node_partitioning|statistics_contract|distributed_worker|compile_time|estimated_physical_plan,1,1,92,4216,0.021822,narrow
+TR13-COLOCATED-JOIN-001,Trino,MAY,Join|choose|colocated_join_matching_partitioning|distributed_planning|distributed_worker|compile_time|estimated_physical_plan,2,2,89,4216,0.021110,narrow
+TR13-FILTER-INDEP-001,Trino,MAY,Statistics|estimate|filter_conjunction_independence_factor|statistics_contract|distributed_worker|compile_time|estimated_physical_plan,1,1,100,4216,0.023719,medium
+TR13-JOIN-MULTI-CLAUSE-001,Trino,MAY,Statistics|estimate|join_multi_clause_independence_factor|statistics_contract|distributed_worker|compile_time|estimated_physical_plan,1,1,1731,4216,0.410579,broad
+TR13-NON-ESTIMATABLE-PRED-001,Trino,MAY,Statistics|estimate|non_estimatable_predicate_approximation|statistics_contract|distributed_worker|compile_time|estimated_physical_plan,1,1,101,4216,0.023956,medium
+TR13-PARTITIONED-BUILD-THRESHOLD-001,Trino,MAY,Join|choose|partitioned_build_min_row_count|distributed_planning|distributed_worker|compile_time|estimated_physical_plan,2,2,90,4216,0.021347,narrow
+TR13-MIN-INPUT-SIZE-TASK-001,Trino,MAY,Exchange|partition|hash_partition_count_by_input_size|distributed_planning|distributed_worker|compile_time|estimated_physical_plan,1,1,236,4216,0.055977,medium
+TR13-MIN-INPUT-ROWS-TASK-001,Trino,MAY,Exchange|partition|hash_partition_count_by_input_rows|distributed_planning|distributed_worker|compile_time|estimated_physical_plan,2,2,1,4216,0.000237,narrow
+TR13-COST-BASED-PARTITIONING-001,Trino,MAY,Exchange|choose|cost_based_repartitioning|distributed_planning|distributed_worker|compile_time|estimated_physical_plan,2,2,1,4216,0.000237,narrow
+TR13-DYNFILTER-DEFAULT-001,Trino,MAY,RuntimeFilter|pushdown|dynamic_filtering_enabled_by_default|logical_rewrite|distributed_worker|compile_time|estimated_physical_plan,1,1,936,4216,0.222011,medium
+TR13-DYNFILTER-DISABLED-001,Trino,MUST_NOT,RuntimeFilter|pushdown|dynamic_filtering_disabled|logical_rewrite|distributed_worker|compile_time|estimated_physical_plan,1,1,73,4216,0.017315,narrow
+TR13-DYNFILTER-JOIN-GUARD-001,Trino,MAY,RuntimeFilter|pushdown|supported_join_conditions|logical_rewrite|distributed_worker|compile_time|estimated_physical_plan,1,1,1731,4216,0.410579,broad
+TR13-DYNFILTER-CONNECTOR-GUARD-001,Trino,MAY,RuntimeFilter|pushdown|connector_runtime_scan_filter|runtime_adaptation|distributed_worker|runtime|runtime_profile,1,1,92,4216,0.021822,narrow
+TR13-DYNFILTER-EXPLAIN-001,Trino,MAY,RuntimeFilter|observe|dynamic_filter_assignments_explain|plan_observability|distributed_worker|compile_time|estimated_physical_plan,1,1,1731,4216,0.410579,broad
+TR13-DYNFILTER-QUERYINFO-001,Trino,MAY,RuntimeStatistics|observe|dynamic_filters_stats_queryinfo|plan_observability|distributed_worker|profile_time|runtime_profile,1,1,235,4216,0.055740,medium
+TR13-DYNFILTER-SPLITS-001,Trino,MAY,RuntimeStatistics|observe|dynamic_filter_splits_processed|plan_observability|distributed_worker|profile_time|runtime_profile,1,1,235,4216,0.055740,medium
+TR13-DYNFILTER-BUILD-SIDE-001,Trino,MAY,Join|choose|dynamic_filter_build_side_by_cbo|logical_rewrite|distributed_worker|compile_time|estimated_physical_plan,2,2,55,4216,0.013046,narrow
+SP13-HINT-COALESCE-001,Spark SQL,MAY,Exchange|coalesce|coalesce_partition_hint|distributed_planning|distributed_worker|compile_time|optimized_logical_plan,2,2,52,4216,0.012334,narrow
+SP13-HINT-REPARTITION-001,Spark SQL,MAY,Exchange|partition|repartition_hint|distributed_planning|distributed_worker|compile_time|optimized_logical_plan,1,1,236,4216,0.055977,medium
+SP13-HINT-REPARTITION-RANGE-001,Spark SQL,MAY,Exchange|partition|repartition_by_range_hint|distributed_planning|distributed_worker|compile_time|optimized_logical_plan,1,1,89,4216,0.021110,narrow
+SP13-HINT-REBALANCE-001,Spark SQL,MAY,Exchange|partition|rebalance_hint_best_effort|distributed_planning|distributed_worker|runtime|runtime_profile,1,1,231,4216,0.054791,medium
+SP13-HINT-REBALANCE-AQE-OFF-001,Spark SQL,MUST_NOT,Exchange|partition|rebalance_hint_ignored_without_aqe|distributed_planning|distributed_worker|compile_time|optimized_logical_plan,1,1,73,4216,0.017315,narrow
+SP13-HINT-LEFTMOST-001,Spark SQL,MAY,Plan|choose|leftmost_partition_hint_selected|distributed_planning|distributed_worker|compile_time|optimized_logical_plan,0,0,4216,4216,1.000000,global
+SP13-HINT-BROADCAST-001,Spark SQL,MAY,BroadcastHashJoin|choose|broadcast_join_hint|distributed_planning|distributed_worker|compile_time|optimized_logical_plan,2,2,58,4216,0.013757,narrow
+SP13-HINT-MERGE-001,Spark SQL,MAY,SortMergeJoin|choose|merge_join_hint|distributed_planning|distributed_worker|compile_time|optimized_logical_plan,2,2,58,4216,0.013757,narrow
+SP13-HINT-SHUFFLE-HASH-001,Spark SQL,MAY,ShuffleHashJoin|choose|shuffle_hash_join_hint|distributed_planning|distributed_worker|compile_time|optimized_logical_plan,2,2,58,4216,0.013757,narrow
+SP13-HINT-SHUFFLE-REPL-NL-001,Spark SQL,MAY,ShuffleReplicateNLJoin|choose|shuffle_replicate_nl_hint|distributed_planning|distributed_worker|compile_time|optimized_logical_plan,2,2,58,4216,0.013757,narrow
+SP13-HINT-PRIORITY-001,Spark SQL,MAY,Join|choose|join_hint_priority_order|distributed_planning|distributed_worker|compile_time|optimized_logical_plan,1,1,1731,4216,0.410579,broad
+SP13-HINT-NOT-GUARANTEED-001,Spark SQL,MAY,Join|choose|hint_strategy_not_guaranteed|distributed_planning|distributed_worker|compile_time|optimized_logical_plan,1,1,229,4216,0.054317,medium
+SP13-HINT-BUILD-SIDE-STATS-001,Spark SQL,MAY,Join|choose|hint_build_side_stats|distributed_planning|distributed_worker|compile_time|optimized_logical_plan,2,2,55,4216,0.013046,narrow
+SP13-STORAGE-PARTITION-NO-EXCHANGE-001,Spark SQL,MAY,Exchange|choose|storage_partition_join_no_exchange|distributed_planning|distributed_worker|compile_time|optimized_logical_plan,2,2,9,4216,0.002135,narrow
+SP13-STORAGE-PARTITION-COMPAT-001,Spark SQL,MAY,Exchange|choose|v2_partitioning_avoid_shuffle|distributed_planning|distributed_worker|compile_time|optimized_logical_plan,2,2,9,4216,0.002135,narrow
+BQ13-STAGE-DEPS-001,BigQuery,MAY,QueryPlanStage|observe|input_stage_dependency_graph|plan_observability|cloud_service|profile_time|stage_graph,0,0,4216,4216,1.000000,global
+BQ13-STAGE-RECORDS-001,BigQuery,MAY,QueryPlanStage|observe|records_read_written|plan_observability|cloud_service|profile_time|stage_graph,0,0,4216,4216,1.000000,global
+BQ13-SHUFFLE-SPILL-001,BigQuery,MAY,Exchange|observe|shuffle_bytes_spilled|plan_observability|cloud_service|profile_time|stage_graph,1,1,236,4216,0.055977,medium
+BQ13-READ-STEP-001,BigQuery,MAY,Read|observe|read_step_columns|plan_observability|cloud_service|profile_time|stage_graph,0,0,4216,4216,1.000000,global
+BQ13-WRITE-HASH-001,BigQuery,MAY,Write|observe|hash_partitioned_write_step|plan_observability|cloud_service|profile_time|stage_graph,1,1,236,4216,0.055977,medium
+BQ13-FILTER-STEP-001,BigQuery,MAY,Filter|observe|filter_step|plan_observability|cloud_service|profile_time|stage_graph,1,2,202,4216,0.047913,medium
+BQ13-SORT-STEP-001,BigQuery,MAY,Sort|observe|sort_step|plan_observability|cloud_service|profile_time|stage_graph,1,1,89,4216,0.021110,narrow
+BQ13-AGG-STEP-001,BigQuery,MAY,Aggregate|observe|aggregate_step|plan_observability|cloud_service|profile_time|stage_graph,1,2,500,4216,0.118596,medium
+BQ13-LIMIT-STEP-001,BigQuery,MAY,Limit|observe|limit_step|plan_observability|cloud_service|profile_time|stage_graph,1,2,190,4216,0.045066,medium
+BQ13-UDF-STEP-001,BigQuery,MAY,UDF|observe|user_defined_function_step|plan_observability|cloud_service|profile_time|stage_graph,1,1,100,4216,0.023719,medium
+BQ13-READ-SHUFFLE-001,BigQuery,MAY,Read|observe|read_from_shuffle|plan_observability|cloud_service|profile_time|stage_graph,1,1,236,4216,0.055977,medium
+BQ13-WRITE-SHUFFLE-001,BigQuery,MAY,Write|observe|write_to_shuffle_memory|plan_observability|cloud_service|profile_time|stage_graph,1,1,236,4216,0.055977,medium
+BQ13-BROADCAST-JOIN-001,BigQuery,MAY,Join|choose|broadcast_join_pattern|distributed_planning|cloud_service|runtime|stage_graph,2,2,90,4216,0.021347,narrow
+BQ13-HASH-JOIN-001,BigQuery,MAY,Join|choose|hash_shuffle_join_pattern|distributed_planning|cloud_service|runtime|stage_graph,2,2,89,4216,0.021110,narrow
+BQ13-SKEW-JOIN-OBS-001,BigQuery,MAY,Join|observe|skewed_join_plan_diagnostic|plan_observability|cloud_service|profile_time|stage_graph,1,1,181,4216,0.042932,medium
+BQ13-OPT-JOIN-ORDER-001,BigQuery,MAY,Join|choose|optimizer_join_side_choice|distributed_planning|cloud_service|runtime|stage_graph,1,1,1731,4216,0.410579,broad
+SN13-EXPLAIN-OPS-001,Snowflake,MAY,Plan|observe|logical_operations_list|plan_observability|cloud_service|compile_time|logical_plan,0,0,4216,4216,1.000000,global
+SN13-EXPLAIN-PARTITIONS-001,Snowflake,MAY,Statistics|estimate|partitions_assigned_bytes_assigned|runtime_adaptation|cloud_service|compile_time|logical_plan,0,0,4216,4216,1.000000,global
+SN13-EXPLAIN-COMPILE-ONLY-001,Snowflake,MUST,Plan|observe|compile_no_execute|plan_observability|cloud_service|compile_time|logical_plan,0,0,4216,4216,1.000000,global
+SN13-EXPLAIN-RUNTIME-PRUNE-001,Snowflake,MAY,MicroPartitionPrune|prune|runtime_optimization_reduces_assigned_bytes|runtime_adaptation|cloud_service|runtime|logical_plan,0,0,4216,4216,1.000000,global
+SN13-PROFILE-TABLESCAN-001,Snowflake,MAY,TableScan|profile|query_profile_table_scan_attributes|plan_observability|cloud_service|profile_time|runtime_profile,0,0,4216,4216,1.000000,global
+SN13-PROFILE-INDEXSCAN-001,Snowflake,MAY,IndexScan|profile|query_profile_index_scan_attributes|plan_observability|cloud_service|profile_time|runtime_profile,0,0,4216,4216,1.000000,global
+SN13-PROFILE-FILTER-001,Snowflake,MAY,Filter|profile|query_profile_filter_condition|plan_observability|cloud_service|profile_time|runtime_profile,1,2,202,4216,0.047913,medium
+SN13-PROFILE-JOIN-001,Snowflake,MAY,Join|profile|query_profile_join_attributes|plan_observability|cloud_service|profile_time|runtime_profile,1,1,1731,4216,0.410579,broad
+SN13-PROFILE-AGG-001,Snowflake,MAY,Aggregate|profile|query_profile_aggregate_attributes|plan_observability|cloud_service|profile_time|runtime_profile,1,2,500,4216,0.118596,medium
+SN13-PROFILE-WINDOW-001,Snowflake,MAY,Window|profile|query_profile_window_function|plan_observability|cloud_service|profile_time|runtime_profile,1,1,89,4216,0.021110,narrow
+SN13-PROFILE-SORT-001,Snowflake,MAY,Sort|profile|query_profile_sort_keys|plan_observability|cloud_service|profile_time|runtime_profile,1,1,89,4216,0.021110,narrow
+SN13-PROFILE-SORT-LIMIT-001,Snowflake,MAY,TopN|profile|query_profile_sort_with_limit|plan_observability|cloud_service|profile_time|runtime_profile,1,1,101,4216,0.023956,medium
+SN13-OPSTATS-SORT-001,Snowflake,MAY,Sort|profile|operator_stats_sort_rows_keys|plan_observability|cloud_service|profile_time|runtime_profile,1,1,89,4216,0.021110,narrow
+SN13-OPSTATS-JOIN-001,Snowflake,MAY,Join|profile|operator_stats_join_condition_type|plan_observability|cloud_service|profile_time|runtime_profile,1,1,1731,4216,0.410579,broad
+SN13-OPSTATS-TABLESCAN-001,Snowflake,MAY,TableScan|profile|operator_stats_tablescan_columns|plan_observability|cloud_service|profile_time|runtime_profile,0,0,4216,4216,1.000000,global
+DU13-CTE-MAT-DEFAULT-001,DuckDB,MAY,Materialize|materialize|cte_materialized_default_eval_once|logical_rewrite|local_engine|compile_time|estimated_physical_plan,1,1,364,4216,0.086338,medium
+DU13-CTE-INLINE-SINGLE-001,DuckDB,MAY,Materialize|inline|cte_single_reference_inline_heuristic|logical_rewrite|local_engine|compile_time|estimated_physical_plan,1,1,364,4216,0.086338,medium
+DU13-CTE-INLINE-NOVOLATILE-001,DuckDB,MAY,Materialize|inline|cte_no_volatile_inline_heuristic|logical_rewrite|local_engine|compile_time|estimated_physical_plan,1,1,102,4216,0.024194,medium
+DU13-CTE-INLINE-NOTMAT-001,DuckDB,MAY,Materialize|inline|cte_not_materialized_hint|logical_rewrite|local_engine|compile_time|estimated_physical_plan,1,1,68,4216,0.016129,narrow
+DU13-CTE-INLINE-NOGROUP-001,DuckDB,MUST_NOT,Materialize|inline|cte_no_grouped_aggregation_inline_heuristic|logical_rewrite|local_engine|compile_time|estimated_physical_plan,1,1,257,4216,0.060958,medium
+DU13-CTE-MATERIALIZED-HINT-001,DuckDB,MUST,Materialize|materialize|cte_materialized_hint|logical_rewrite|local_engine|compile_time|estimated_physical_plan,1,1,68,4216,0.016129,narrow
+DU13-CTE-READCSV-NOINLINE-001,DuckDB,MUST_NOT,Materialize|inline|cte_read_csv_cannot_inline|logical_rewrite|local_engine|compile_time|estimated_physical_plan,1,1,633,4216,0.150142,medium
+DU13-CTE-EXPENSIVE-EVAL-ONCE-001,DuckDB,MAY,Materialize|materialize|cte_expensive_query_eval_once|logical_rewrite|local_engine|compile_time|estimated_physical_plan,1,1,288,4216,0.068311,medium
+DU13-CTE-NOTMAT-DISABLE-001,DuckDB,MAY,Materialize|inline|not_materialized_disable_materialization|logical_rewrite|local_engine|compile_time|estimated_physical_plan,1,1,68,4216,0.016129,narrow
+CH13-PREWHERE-FILTER-FIRST-001,ClickHouse,MAY,Prewhere|pushdown|prewhere_filter_before_non_filter_columns|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,102,4216,0.024194,medium
+CH13-PREWHERE-INDEX-001,ClickHouse,MAY,PrimaryIndex|prune|primary_index_granule_pruning_prewhere|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,102,4216,0.024194,medium
+CH13-SKIP-INDEX-FULLSCAN-001,ClickHouse,MAY,SkipIndex|skip|skip_index_for_non_primary_predicates|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,102,4216,0.024194,medium
+CH13-EXTERNAL-JOIN-SPILL-001,ClickHouse,MAY,GraceHashJoinAlgorithm|spill|hash_join_convert_to_grace_hash_on_memory_ratio|runtime_adaptation|local_engine|runtime|runtime_profile,2,2,90,4216,0.021347,narrow
+CH13-EXTERNAL-SORT-SPILL-001,ClickHouse,MAY,Sort|spill|external_sort_memory_threshold|runtime_adaptation|local_engine|runtime|runtime_profile,1,1,89,4216,0.021110,narrow
+CH13-DISTRIBUTED-READ-LEAF-001,ClickHouse,MAY,Read|threshold|distributed_leaf_read_limit|runtime_adaptation|local_engine|runtime|runtime_profile,1,1,236,4216,0.055977,medium
+CH13-EXECUTION-TIME-ESTIMATE-001,ClickHouse,MAY,Plan|estimate|max_estimated_execution_time_check|runtime_adaptation|local_engine|runtime|runtime_profile,1,1,235,4216,0.055740,medium
+CH13-JOIN-ALGO-DEFAULT-001,ClickHouse,MAY,Join|choose|default_direct_or_hash_join|physical_planning|local_engine|compile_time|estimated_physical_plan,1,1,1731,4216,0.410579,broad
+CH13-JOIN-ALGO-AUTO-RUNTIME-001,ClickHouse,MAY,Join|adapt|auto_hash_to_partial_merge|runtime_adaptation|local_engine|runtime|runtime_profile,1,1,70,4216,0.016603,narrow
+CH13-JOIN-ALGO-TRACE-001,ClickHouse,MAY,QueryProfile|observe|join_algorithm_trace_logging|plan_observability|local_engine|profile_time|runtime_profile,1,1,1731,4216,0.410579,broad
+CH13-JOIN-FILTER-BOTH-SIDES-001,ClickHouse,MAY,Filter|pushdown|manual_filter_both_join_sides|physical_planning|local_engine|compile_time|estimated_physical_plan,2,2,36,4216,0.008539,narrow

@@ -1,0 +1,8 @@
+method,projected_groups,lossy_groups,lossy_group_rate,mean_full_signatures_per_projected_group,max_full_signatures_per_projected_group
+keyword,27615,254,0.009198,1.009198,2
+yesno,27863,6,0.000215,1.000215,2
+operator_only,27631,238,0.008614,1.008614,2
+no_placement,27869,0,0.000000,1.000000,1
+no_decision_time,27869,0,0.000000,1.000000,1
+no_observability,27869,0,0.000000,1.000000,1
+no_modality,27869,0,0.000000,1.000000,1

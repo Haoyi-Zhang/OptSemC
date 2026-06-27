@@ -1,0 +1,4 @@
+projection,false_witnesses,both_sides_supported,both_sides_supported_share,min_left_sources,min_right_sources,distinct_sources,zero_shared_source_witnesses,zero_shared_source_share
+keyword,254,254,1.000000,1,1,11,254,1.000000
+operator_only,238,238,1.000000,1,1,8,238,1.000000
+yesno,6,6,1.000000,1,2,3,6,1.000000

@@ -1,0 +1,4 @@
+method,full_false_equivalences,full_conditional_rate,leave_one_source_runs,min_false_equivalences,max_false_equivalences,min_conditional_rate,max_conditional_rate,runs_with_nonzero_false_equivalences
+keyword,254,0.111208,26,115,413,0.016703,0.144423,26
+yesno,6,0.002947,26,0,120,0.000000,0.052038,25
+operator_only,238,0.104938,26,115,381,0.031838,0.148422,26

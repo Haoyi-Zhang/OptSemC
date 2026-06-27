@@ -1,0 +1,6 @@
+motif_id,benchmark_family,literature_anchor,optimizer_surface,covered_requirements,total_requirements,coverage,missing_requirements
+JOB-join-order-sensitivity,Join Order Benchmark / optimizer-quality studies,leis2015good,multi-join join-order search under selective predicates,8,8,1.000000,
+ExactCardinality-optimizer-testing,exact-cardinality optimizer testing,chaudhuri2009exact,optimizer decisions separated from cardinality-estimation error,9,9,1.000000,
+CardEst-plan-quality,cardinality-estimation benchmark evaluation,han2022cardest,"statistics need, unavailable statistics, and join-plan sensitivity",8,8,1.000000,
+AdaptiveJoin-runtime-replanning,adaptive query processing,polar2024,runtime or stage-boundary adaptation of join/distribution choices,9,9,1.000000,
+LakeCrossSource-joinability,data-lake joinability / cross-source analytics,deng2024lakebench,source-boundary and connector-capability surfaces for cross-source joinability,7,7,1.000000,

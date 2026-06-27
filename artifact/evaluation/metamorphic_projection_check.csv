@@ -1,0 +1,4 @@
+check,passed,details
+metamorphic_suite_nonempty,true,rows=45
+metamorphic_suite_all_pass,true,45/45
+separator_soundness_checked,true,

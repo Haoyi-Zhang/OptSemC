@@ -1,0 +1,4 @@
+check,passed,details
+rows_present,true,5
+strict_no_false_kernel_classes,true,0
+lossy_kernel_classes_exist,true,

@@ -1,0 +1,64 @@
+method,engine_pair,projected_equivalences,true_equivalences,false_equivalences,conditional_false_equivalence_rate
+keyword,BigQuery--ClickHouse,203,0,203,1.000000
+keyword,BigQuery--Trino,45,0,45,1.000000
+keyword,ClickHouse--Trino,660,654,6,0.009091
+keyword,BigQuery--DuckDB,0,0,0,0.000000
+keyword,BigQuery--PostgreSQL,0,0,0,0.000000
+keyword,BigQuery--Snowflake,0,0,0,0.000000
+keyword,BigQuery--Spark SQL,0,0,0,0.000000
+keyword,ClickHouse--DuckDB,718,718,0,0.000000
+keyword,ClickHouse--PostgreSQL,0,0,0,0.000000
+keyword,ClickHouse--Snowflake,0,0,0,0.000000
+keyword,ClickHouse--Spark SQL,0,0,0,0.000000
+keyword,DuckDB--PostgreSQL,0,0,0,0.000000
+keyword,DuckDB--Snowflake,0,0,0,0.000000
+keyword,DuckDB--Spark SQL,0,0,0,0.000000
+keyword,DuckDB--Trino,658,658,0,0.000000
+keyword,PostgreSQL--Snowflake,0,0,0,0.000000
+keyword,PostgreSQL--Spark SQL,0,0,0,0.000000
+keyword,PostgreSQL--Trino,0,0,0,0.000000
+keyword,Snowflake--Spark SQL,0,0,0,0.000000
+keyword,Snowflake--Trino,0,0,0,0.000000
+keyword,Spark SQL--Trino,0,0,0,0.000000
+operator_only,ClickHouse--Trino,777,654,123,0.158301
+operator_only,Spark SQL--Trino,115,0,115,1.000000
+operator_only,BigQuery--ClickHouse,0,0,0,0.000000
+operator_only,BigQuery--DuckDB,0,0,0,0.000000
+operator_only,BigQuery--PostgreSQL,0,0,0,0.000000
+operator_only,BigQuery--Snowflake,0,0,0,0.000000
+operator_only,BigQuery--Spark SQL,0,0,0,0.000000
+operator_only,BigQuery--Trino,0,0,0,0.000000
+operator_only,ClickHouse--DuckDB,718,718,0,0.000000
+operator_only,ClickHouse--PostgreSQL,0,0,0,0.000000
+operator_only,ClickHouse--Snowflake,0,0,0,0.000000
+operator_only,ClickHouse--Spark SQL,0,0,0,0.000000
+operator_only,DuckDB--PostgreSQL,0,0,0,0.000000
+operator_only,DuckDB--Snowflake,0,0,0,0.000000
+operator_only,DuckDB--Spark SQL,0,0,0,0.000000
+operator_only,DuckDB--Trino,658,658,0,0.000000
+operator_only,PostgreSQL--Snowflake,0,0,0,0.000000
+operator_only,PostgreSQL--Spark SQL,0,0,0,0.000000
+operator_only,PostgreSQL--Trino,0,0,0,0.000000
+operator_only,Snowflake--Spark SQL,0,0,0,0.000000
+operator_only,Snowflake--Trino,0,0,0,0.000000
+yesno,ClickHouse--Trino,660,654,6,0.009091
+yesno,BigQuery--ClickHouse,0,0,0,0.000000
+yesno,BigQuery--DuckDB,0,0,0,0.000000
+yesno,BigQuery--PostgreSQL,0,0,0,0.000000
+yesno,BigQuery--Snowflake,0,0,0,0.000000
+yesno,BigQuery--Spark SQL,0,0,0,0.000000
+yesno,BigQuery--Trino,0,0,0,0.000000
+yesno,ClickHouse--DuckDB,718,718,0,0.000000
+yesno,ClickHouse--PostgreSQL,0,0,0,0.000000
+yesno,ClickHouse--Snowflake,0,0,0,0.000000
+yesno,ClickHouse--Spark SQL,0,0,0,0.000000
+yesno,DuckDB--PostgreSQL,0,0,0,0.000000
+yesno,DuckDB--Snowflake,0,0,0,0.000000
+yesno,DuckDB--Spark SQL,0,0,0,0.000000
+yesno,DuckDB--Trino,658,658,0,0.000000
+yesno,PostgreSQL--Snowflake,0,0,0,0.000000
+yesno,PostgreSQL--Spark SQL,0,0,0,0.000000
+yesno,PostgreSQL--Trino,0,0,0,0.000000
+yesno,Snowflake--Spark SQL,0,0,0,0.000000
+yesno,Snowflake--Trino,0,0,0,0.000000
+yesno,Spark SQL--Trino,0,0,0,0.000000

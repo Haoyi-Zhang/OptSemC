@@ -1,0 +1,5 @@
+check,passed,details
+python_loc_substantial,true,loc=23929
+public_api_substantial,true,classes=81;functions=1921
+python_file_surface_substantial,true,files=260
+no_transient_bloat,true,

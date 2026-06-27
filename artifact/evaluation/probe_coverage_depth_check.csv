@@ -1,0 +1,6 @@
+check,passed,details
+strengths_1_2_3_present,true,"[1, 2, 3]"
+onewise_complete,true,1.000000
+twowise_nontrivial,true,3978
+threewise_nontrivial,true,36453
+feature_value_counts_present,true,

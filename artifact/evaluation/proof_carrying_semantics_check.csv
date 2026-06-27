@@ -1,0 +1,6 @@
+check,passed,details
+certificate_bundle_present,true,artifact/evaluation/proof_carrying_semantics.json
+bundle_hash_valid,true,
+certificate_count,true,5
+headline_projections_present,true,"['keyword', 'yesno', 'operator_only', 'all_headline', 'all_headline']"
+frontier_and_hitting_set_present,true,"['keyword', 'yesno', 'operator_only', 'all_headline', 'all_headline']"

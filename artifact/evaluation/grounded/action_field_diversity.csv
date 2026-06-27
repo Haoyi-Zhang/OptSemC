@@ -1,0 +1,8 @@
+engine,operator_values,kind_values,layer_values,placement_values,decision_time_values,observability_values
+BigQuery,14,6,5,2,3,1
+ClickHouse,15,11,4,1,3,2
+DuckDB,1,4,2,1,1,1
+PostgreSQL,19,11,4,1,2,2
+Snowflake,12,5,4,1,3,2
+Spark SQL,10,9,4,2,3,3
+Trino,13,11,6,3,3,2

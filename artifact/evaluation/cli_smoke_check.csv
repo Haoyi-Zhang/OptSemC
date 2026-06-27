@@ -1,0 +1,6 @@
+check,passed,details
+summary_command,true,"metric,value"
+metrics_command,true,"projection,comparisons,projected_equivalences,true_equivalences,false_equivalences,false_differences,projected_equivalence_rate,conditional_false_equivalence_rate,exact_equivalence_rate"
+manifest_command,true,"category,files,bytes,lines"
+contracts_command,true,"contract,path,rows,errors,warnings,passed"
+claim_graph_command,true,"metric,value"

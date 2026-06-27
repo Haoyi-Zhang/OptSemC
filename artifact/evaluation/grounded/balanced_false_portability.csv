@@ -1,0 +1,4 @@
+projection,declared_equivalences,false_equivalences,micro_conditional_rate,engine_pair_macro_rate,engine_pairs_with_declared_equivalence,engine_pairs_with_false_equivalence,probe_macro_rate,probes_with_declared_equivalence,probes_with_false_equivalence
+keyword,2284,254,0.111208,0.401818,5,3,0.168212,1510,254
+yesno,2036,6,0.002947,0.003030,3,1,0.004754,1262,6
+operator_only,2268,238,0.104938,0.289575,4,2,0.156081,1480,238

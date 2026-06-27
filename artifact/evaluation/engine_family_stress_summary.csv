@@ -1,0 +1,5 @@
+projection,pair_families,comparisons,false_equivalences,repaired_by_layer_placement,unresolved_after_layer_placement,families_with_false_equivalence
+keyword,6,88536,254,254,0,3
+yesno,6,88536,6,6,0,1
+operator_only,6,88536,238,238,0,2
+operator_kind_surface,6,88536,0,0,0,0

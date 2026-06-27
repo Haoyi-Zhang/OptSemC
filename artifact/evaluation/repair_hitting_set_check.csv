@@ -1,0 +1,4 @@
+check,passed,details
+repair_hitting_sets_match_direct_enumeration,true,11/11 rows passed
+all_grounded_witnesses_singleton_separable,true,keyword:all_fields=0;keyword:semantic_no_variant=0;keyword:core_semantic_state_free=0;yesno:all_fields=0;yesno:semantic_no_variant=0;yesno:core_semantic_state_free=0;operator_only:all_fields=0;operator_only:semantic_no_variant=0;operator_only:core_semantic_state_free=0;all_projections:semantic_no_variant=0;all_projections:core_semantic_state_free=0
+layer_placement_is_core_two_field_basis,true,operator+layer;layer+placement;layer+decision_time;layer+observability;placement+decision_time;placement+observability

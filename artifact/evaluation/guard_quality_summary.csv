@@ -1,0 +1,13 @@
+metric,value
+rules,287
+zero_support_rules,0
+triggered_rules,287
+global_rules,35
+non_global_guarded_rules,252
+narrow_rules,131
+medium_rules,91
+broad_rules,30
+min_support,1
+median_support,102
+mean_support,840.229965
+max_support,4216

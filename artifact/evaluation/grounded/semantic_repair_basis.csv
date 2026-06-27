@@ -1,0 +1,5 @@
+scope,false_equivalences,semantic_fields_allowed,minimal_semantic_repair_size,minimal_semantic_repair_sets,num_minimal_semantic_repair_sets
+keyword,254,operator;kind;layer;placement;decision_time;observability;state,1,placement,1
+yesno,6,operator;kind;layer;placement;decision_time;observability;state,1,layer;placement;state,3
+operator_only,238,operator;kind;layer;placement;decision_time;observability;state,1,layer,1
+all_projections,498,operator;kind;layer;placement;decision_time;observability;state,2,operator+layer;kind+placement;layer+placement;layer+decision_time;layer+observability;layer+state;placement+decision_time;placement+observability;placement+state;decision_time+state;observability+state,11

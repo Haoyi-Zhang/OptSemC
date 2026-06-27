@@ -1,0 +1,44 @@
+# Reviewer-facing baseline catalog.  The executable projection functions live in
+# artifact/optsemc/projections.py; this catalog documents the comparison object
+# and the semantics erased by each baseline.
+baselines:
+  - baseline_id: B0-exact-contract
+    projection: strict
+    comparison_object: full evidence atom
+    erased_semantics: none
+    role: negative control
+  - baseline_id: B1-keyword-matrix
+    projection: keyword
+    comparison_object: optimizer feature-name checklist
+    erased_semantics: operator, variant, layer, placement, decision time, observability, modality
+    role: coarse external baseline
+  - baseline_id: B2-yes-no-operator-kind
+    projection: yesno
+    comparison_object: operator/action yes-no matrix
+    erased_semantics: variant, layer, placement, decision time, observability, modality
+    role: medium-granularity baseline
+  - baseline_id: B3-operator-only
+    projection: operator_only
+    comparison_object: native plan-operator-name comparison
+    erased_semantics: kind, variant, layer, placement, decision time, observability, modality
+    role: plan-token baseline
+  - baseline_id: B4-placement-ablated
+    projection: no_placement
+    comparison_object: full contract minus placement
+    erased_semantics: execution placement
+    role: ablation control
+  - baseline_id: B5-decision-time-ablated
+    projection: no_decision_time
+    comparison_object: full contract minus decision time
+    erased_semantics: decision time
+    role: ablation control
+  - baseline_id: B6-observability-ablated
+    projection: no_observability
+    comparison_object: full contract minus observability
+    erased_semantics: plan observability
+    role: ablation control
+  - baseline_id: B7-modality-ablated
+    projection: no_modality
+    comparison_object: full contract minus modal state
+    erased_semantics: MUST/MAY/MUST_NOT
+    role: ablation control

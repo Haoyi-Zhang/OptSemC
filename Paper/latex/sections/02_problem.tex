@@ -1,0 +1,15 @@
+\section{The Failure Mode}
+\label{sec:problem}
+Figure~\ref{fig:projection-trap} gives the smallest example.  A feature matrix maps several public optimizer contracts into the same label.  After the mapping, behaviors with different placement, action kind, and evidence layer become indistinguishable.
+
+\input{figures/fig_projection_trap}
+
+\textbf{Feature-name collision.} A cell such as \texttt{pushdown=yes} may denote predicate movement inside an engine, partition pruning, connector-side predicate delegation, aggregation delegation, join delegation, limit pushdown, Top-N delegation, or runtime filtering.  These actions affect different operators and have different guards, placements, decision times, and observable plan effects.  Collapsing them loses the distinctions optimizers use to choose access paths, plan operators, distribution strategies, and reoptimization points \cite{ives1999tukwila,cole1994optimization,galindo1992outerjoin,neumann2011efficient,armbrust2015spark,begoli2018calcite,soliman2014orca,melnik2010dremel}.
+
+\textbf{Operator disappearance.} A missing native plan node is not a reliable semantics.  It may indicate source delegation, logical-plan observability, rewrite, stage-level aggregation, or runtime-only visibility.  OptSem-C represents source-delegated execution as a positive contract action rather than as absence.  This matters for modern analytical systems whose public surfaces combine local plans, cloud-service stages, connector adapters, and logical explanation outputs \cite{dageville2016snowflake,raasveldt2019duckdb,boncz2005monetdb,gupta2015redshift,shute2013f1,zaharia2012resilient}.
+
+\textbf{Architecture ranking.} A local engine should not be ranked below a distributed engine merely because broadcast, shuffle, or remote-source delegation is not applicable.  Conversely, a federated or cloud engine should not be credited with local optimizer behavior when the public contract exposes delegation or service-side stages.  OptSem-C separates non-applicability, documented absence, documented optional behavior, and unspecified evidence.
+
+\textbf{Observable contract versus hidden implementation.} The object of study is not what an engine could do internally.  It is what the public contract supports as a comparison claim.  This distinction is analogous to the separation between SQL equivalence and optimizer-contract equivalence: result-preserving rewrites can be semantically equivalent while exposing different optimizer behavior, different evidence layers, and different portability obligations \cite{chu2017cosette,chu2018usemiring,wang2024qed,chandra1977optimal,aho1979equivalences}.
+
+These failures imply a minimum payload for comparing public optimizer behavior: guard, canonical action, modality, placement, decision time, observability, version, and provenance.  The rest of the paper formalizes this payload and measures what happens when a comparison vocabulary projects it away.

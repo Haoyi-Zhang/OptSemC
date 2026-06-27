@@ -1,0 +1,11 @@
+check,passed,details
+keyword_matches_conditional_trap_rate,true,baseline=2284/254;reported=2284/254
+yesno_matches_conditional_trap_rate,true,baseline=2036/6;reported=2036/6
+operator_only_matches_conditional_trap_rate,true,baseline=2268/238;reported=2268/238
+strict_baseline_is_negative_control,true,
+headline_baselines_cover_three_granularities,true,
+keyword_and_operator_baselines_are_lossy,true,
+diagnostic_ablations_noninflating,true,
+adversarial_projection_suite_present,true,
+strengthened_surface_baseline_safe,true,
+coarse_one_field_baselines_fail,true,

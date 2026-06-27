@@ -1,0 +1,8 @@
+engine,rules,sources,segments,operators,layers
+BigQuery,37,4,37,14,5
+ClickHouse,26,4,26,15,4
+DuckDB,21,1,21,1,2
+PostgreSQL,80,4,80,19,4
+Snowflake,26,3,26,12,4
+Spark SQL,36,4,36,10,4
+Trino,61,6,61,13,6

@@ -1,0 +1,6 @@
+check,passed,details
+scalability_table_matches_scaling_diversity,true,
+witness_table_matches_dispersion_csv,true,
+abstract_and_intro_headline_counts_match,true,
+evaluation_scaling_claims_match_outputs,true,
+evaluation_frontier_antichain_claims_match_outputs,true,

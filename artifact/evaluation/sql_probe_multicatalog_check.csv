@@ -1,0 +1,6 @@
+check,passed,details
+three_catalog_sizes_present,true,"['1', '5', '17']"
+all_catalog_runs_execute,true,"{'catalogs': '3', 'probes_per_catalog': '4216', 'total_probe_catalog_runs': '12648', 'total_execution_successes': '12648', 'total_execution_failures': '0', 'total_result_rows': '69759'}"
+per_catalog_full_coverage,true,"[{'rows_per_table': '1', 'probes': '4216', 'plan_successes': '4216', 'execution_successes': '4216', 'execution_failures': '0', 'total_result_rows': '3802', 'distinct_plan_hashes': '89', 'max_plan_steps': '12'}, {'rows_per_table': '5', 'probes': '4216', 'plan_successes': '4216', 'execution_successes': '4216', 'execution_failures': '0', 'total_result_rows': '16988', 'distinct_plan_hashes': '89', 'max_plan_steps': '12'}, {'rows_per_table': '17', 'probes': '4216', 'plan_successes': '4216', 'execution_successes': '4216', 'execution_failures': '0', 'total_result_rows': '48969', 'distinct_plan_hashes': '89', 'max_plan_steps': '12'}]"
+nontrivial_result_population,true,69759
+stable_plan_diversity,true,89;89;89

@@ -1,0 +1,4 @@
+projection,false_witnesses,distinct_probes,distinct_engine_pairs,distinct_feature_values,feature_dimensions_touched,singleton_probe_witnesses,max_witnesses_per_probe,median_witnesses_per_probe
+keyword,254,254,3,92,12,254,1,1.0
+operator_only,238,238,2,75,12,238,1,1.0
+yesno,6,6,1,15,12,6,1,1.0

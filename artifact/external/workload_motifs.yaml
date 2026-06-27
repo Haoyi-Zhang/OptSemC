@@ -1,0 +1,52 @@
+# Published optimizer/benchmark motifs represented as OptSemBench-C feature requirements.
+# These are not copies of third-party benchmark queries; they are public workload
+# motifs used to audit whether the generated probe space reaches recognizable
+# query-processing surfaces from the DB literature.
+motifs:
+  - motif_id: JOB-join-order-sensitivity
+    benchmark_family: Join Order Benchmark / optimizer-quality studies
+    literature_anchor: leis2015good
+    optimizer_surface: multi-join join-order search under selective predicates
+    feature_requirements:
+      join_shape: [chain, star]
+      join_type: [inner]
+      predicate_class: [simple, conjunctive]
+      statistics_need: [medium, high]
+      control_surface: [no_reorder_setting]
+  - motif_id: ExactCardinality-optimizer-testing
+    benchmark_family: exact-cardinality optimizer testing
+    literature_anchor: chaudhuri2009exact
+    optimizer_surface: optimizer decisions separated from cardinality-estimation error
+    feature_requirements:
+      join_shape: [binary, chain]
+      statistics_need: [low, high]
+      predicate_class: [simple, conjunctive]
+      control_surface: [pg_enable_hashjoin_off, pg_enable_mergejoin_off, pg_enable_nestloop_off]
+  - motif_id: CardEst-plan-quality
+    benchmark_family: cardinality-estimation benchmark evaluation
+    literature_anchor: han2022cardest
+    optimizer_surface: statistics need, unavailable statistics, and join-plan sensitivity
+    feature_requirements:
+      join_shape: [chain, snowflake]
+      join_type: [inner, outer]
+      statistics_need: [high, unavailable]
+      predicate_class: [conjunctive, correlated]
+  - motif_id: AdaptiveJoin-runtime-replanning
+    benchmark_family: adaptive query processing
+    literature_anchor: polar2024
+    optimizer_surface: runtime or stage-boundary adaptation of join/distribution choices
+    feature_requirements:
+      join_shape: [binary, chain]
+      join_type: [inner]
+      adaptivity_trigger: [runtime_stats, stage_boundary]
+      distribution_trigger: [broadcast_candidate, shuffle, skewed]
+      control_surface: [spark_aqe_disabled]
+  - motif_id: LakeCrossSource-joinability
+    benchmark_family: data-lake joinability / cross-source analytics
+    literature_anchor: deng2024lakebench
+    optimizer_surface: source-boundary and connector-capability surfaces for cross-source joinability
+    feature_requirements:
+      source_boundary: [same_connector, cross_connector]
+      connector_capability: [supports_basic_pushdown, supports_join_pushdown, supports_aggregate_pushdown]
+      join_shape: [binary]
+      predicate_class: [simple]

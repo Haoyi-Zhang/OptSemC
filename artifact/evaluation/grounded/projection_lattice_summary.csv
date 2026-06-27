@@ -1,0 +1,9 @@
+scope,field_universe,baseline_false_equivalences,total_subsets,safe_subsets,unsafe_subsets,minimum_safe_size,num_minimum_safe_sets,example_minimum_safe_sets,maximum_unsafe_size,example_maximum_unsafe_sets
+keyword,semantic_no_variant,254,128,108,20,1,8,placement;operator+layer;operator+state;layer+decision_time;layer+observability;layer+state;decision_time+state;observability+state,4,operator+kind+decision_time+observability
+keyword,core_semantic_state_free,254,32,23,9,1,4,placement;operator+layer;layer+decision_time;layer+observability,3,operator+decision_time+observability
+yesno,semantic_no_variant,6,128,112,16,1,3,layer;placement;state,4,operator+kind+decision_time+observability
+yesno,core_semantic_state_free,6,32,24,8,1,2,layer;placement,3,operator+decision_time+observability
+operator_only,semantic_no_variant,238,128,108,20,1,8,layer;kind+placement;kind+state;placement+decision_time;placement+observability;placement+state;decision_time+state;observability+state,4,operator+kind+decision_time+observability
+operator_only,core_semantic_state_free,238,32,22,10,1,3,layer;placement+decision_time;placement+observability,3,operator+decision_time+observability
+all_projections,semantic_no_variant,498,128,105,23,2,12,operator+layer;kind+placement;layer+placement;layer+decision_time;layer+observability;layer+state;placement+decision_time;placement+observability;placement+state;decision_time+state;observability+state;operator+kind+state,4,operator+kind+decision_time+observability
+all_projections,core_semantic_state_free,498,32,21,11,2,6,operator+layer;layer+placement;layer+decision_time;layer+observability;placement+decision_time;placement+observability,3,operator+decision_time+observability

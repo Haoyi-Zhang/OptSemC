@@ -1,0 +1,11 @@
+contract,path,rows,errors,warnings,passed
+grounded_rules,artifact/grounded/verified_rules.jsonl,287,0,0,true
+grounded_segments,artifact/grounded/verified_segments.jsonl,287,0,0,true
+grounded_sources,artifact/grounded/verified_sources.csv,26,0,0,true
+generated_probes,artifact/benchmark/generated_probes.jsonl,4216,0,0,true
+contract_maps,artifact/evaluation/grounded_contract_maps.jsonl,24342,0,0,true
+baseline_portfolio,artifact/evaluation/grounded/baseline_portfolio.csv,17,0,0,true
+projection_mutation_suite,artifact/evaluation/projection_mutation_suite.csv,41,0,0,true
+external_benchmark_suite,artifact/evaluation/external_benchmark_suite.csv,12,0,0,true
+theorem_ledger,artifact/evaluation/theorem_ledger.csv,10,0,0,true
+repository_audit,artifact/evaluation/repository_audit.csv,11,0,0,true

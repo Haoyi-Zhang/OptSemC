@@ -1,0 +1,11 @@
+rank,probe_id,left_engine,right_engine,covered_unsafe_subsets,covered_subset_keys
+1,P0456,ClickHouse,Trino,11,kind+decision_time;kind+decision_time+observability;kind+observability;operator;operator+decision_time;operator+decision_time+observability;operator+kind;operator+kind+decision_time;operator+kind+decision_time+observability;operator+kind+observability;operator+observability
+2,P0026,DuckDB,PostgreSQL,9,decision_time+observability+state;observability+state;placement+decision_time;placement+decision_time+observability;placement+decision_time+observability+state;placement+decision_time+state;placement+observability;placement+observability+state;placement+state
+3,P0134,Spark SQL,Trino,8,layer;layer+decision_time;layer+decision_time+state;layer+placement;layer+placement+decision_time;layer+placement+decision_time+state;layer+placement+state;layer+state
+4,P0002,DuckDB,Trino,6,decision_time;decision_time+observability;layer+decision_time+observability;layer+observability;none;observability
+5,P0005,Spark SQL,Trino,3,decision_time+state;placement;state
+6,P4146,DuckDB,Trino,2,layer+decision_time+observability+state;layer+observability+state
+7,P0223,BigQuery,Trino,2,kind;kind+layer
+8,P4087,Spark SQL,Trino,1,operator+placement
+9,P3773,Spark SQL,Trino,1,operator+state
+10,P1697,BigQuery,ClickHouse,1,kind+state

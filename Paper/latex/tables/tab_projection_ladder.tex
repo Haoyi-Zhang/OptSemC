@@ -1,0 +1,25 @@
+\begin{table}[t]
+\centering
+\caption{Projection repair ladder. Rows show how false equivalence changes as semantic fields are restored to a coarse projection.}
+\label{tab:projection-ladder}
+\small
+\begin{tabular}{llrr}
+\toprule
+Projection & Restored fields & Eq. & False \\
+\midrule
+Keyword & -- & 2,284 & 254 \\
+Keyword & operator & 2,036 & 6 \\
+Keyword & layer & 2,072 & 42 \\
+Keyword & placement & 2,030 & 0 \\
+Keyword & layer+placement & 2,030 & 0 \\
+Yes/No & -- & 2,036 & 6 \\
+Yes/No & layer & 2,030 & 0 \\
+Yes/No & placement & 2,030 & 0 \\
+Operator & -- & 2,268 & 238 \\
+Operator & kind & 2,036 & 6 \\
+Operator & placement & 2,062 & 32 \\
+Operator & layer & 2,030 & 0 \\
+Operator & layer+placement & 2,030 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}

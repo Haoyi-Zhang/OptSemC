@@ -1,0 +1,9 @@
+check,passed,details
+rule_segments_resolve,true,rule_segments=287;segments=287
+rule_sources_resolve,true,rule_sources=26;sources=26
+contract_map_probes_resolve,true,map_probes=4216;probes=4216
+grounded_rule_count,true,rules=287
+evidence_span_count,true,segments=287
+evidence_segments_hashed,true,segments=287
+probe_count,true,probes=4216
+nonempty_contract_maps,true,nonempty_maps=24342;maps=24342

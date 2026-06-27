@@ -1,0 +1,5 @@
+theme,rules,engines,states,placements,decision_times,observability_modes
+C1_pushdown_is_not_binary,16,2,"MAY,MUST_NOT","cloud_service,connector_source",compile_time,"estimated_physical_plan,stage_graph"
+C2_observability_is_non_isomorphic,16,4,"MAY,MUST,MUST_NOT","cloud_service,distributed_worker,local_engine","compile_time,profile_time,runtime","estimated_physical_plan,logical_plan,runtime_profile,stage_graph"
+C3_decision_time_matters,16,3,"MAY,MUST_NOT","cloud_service,distributed_worker,local_engine",runtime,"runtime_profile,stage_graph"
+C4_materialization_and_reuse,16,2,"MAY,MUST,MUST_NOT",local_engine,compile_time,estimated_physical_plan

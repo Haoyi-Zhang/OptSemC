@@ -1,0 +1,8 @@
+check,passed,details
+all_287_rules_audited,true,287
+no_zero_support_rules,true,
+support_counts_within_probe_domain,true,
+support_classes_cover_narrow_to_global,true,"broad,global,medium,narrow"
+no_invalid_guard_dimensions,true,0
+same_action_guard_overlap_audited,true,4
+guard_containment_is_finite,true,3/4

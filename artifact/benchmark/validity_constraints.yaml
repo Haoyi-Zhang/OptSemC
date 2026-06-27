@@ -1,0 +1,68 @@
+constraints:
+  - name: no_join_shape_implies_no_join_type
+    rule: "join_shape == none -> join_type == none"
+  - name: join_type_requires_join_shape
+    rule: "join_type != none -> join_shape != none"
+  - name: join_shape_requires_join_type
+    rule: "join_shape != none -> join_type != none"
+  - name: cross_connector_requires_composition
+    rule: "source_boundary == cross_connector -> join_shape != none"
+  - name: local_source_has_no_connector_capability
+    rule: "source_boundary == local -> connector_capability == not_applicable"
+  - name: connector_capability_requires_connector_source
+    rule: "connector_capability != not_applicable -> source_boundary != local"
+  - name: join_pushdown_capability_requires_join
+    rule: "connector_capability == supports_join_pushdown -> join_shape != none"
+  - name: aggregate_pushdown_capability_requires_aggregation
+    rule: "connector_capability == supports_aggregate_pushdown -> aggregation != none"
+  - name: topn_pushdown_capability_requires_topn
+    rule: "connector_capability == supports_topn_pushdown -> order_limit == topn"
+  - name: topn_requires_order_and_limit
+    rule: "order_limit == topn -> order_limit != none"
+  - name: expression_aggregate_requires_aggregation
+    rule: "aggregation == expression_aggregate -> aggregation != none"
+  - name: groupby_after_join_requires_join
+    rule: "aggregation == group_by_after_join -> join_shape != none"
+  - name: skew_requires_adaptivity_or_distribution
+    rule: "distribution_trigger == skewed -> adaptivity_trigger in [skew, runtime_stats, stage_boundary]"
+  - name: reused_cte_requires_reuse
+    rule: "reuse_structure == reused_cte -> reuse_structure != none"
+
+  - name: broadcast_hint_requires_join
+    rule: "control_surface == broadcast_hint -> join_shape != none"
+  - name: join_distribution_setting_requires_join
+    rule: "control_surface == join_distribution_broadcast -> join_shape != none"
+  - name: no_reorder_setting_requires_join
+    rule: "control_surface == no_reorder_setting -> join_shape != none"
+  - name: merge_hint_requires_join
+    rule: "control_surface == merge_hint -> join_type != none"
+  - name: shuffle_hash_hint_requires_join
+    rule: "control_surface == shuffle_hash_hint -> join_type != none"
+  - name: shuffle_replicate_nl_hint_requires_join
+    rule: "control_surface == shuffle_replicate_nl_hint -> join_type != none"
+  - name: spark_merge_hint_requires_join
+    rule: "control_surface == spark_merge_hint -> join_type != none"
+  - name: spark_shuffle_hash_hint_requires_join
+    rule: "control_surface == spark_shuffle_hash_hint -> join_type != none"
+  - name: spark_shuffle_replicate_nl_hint_requires_join
+    rule: "control_surface == spark_shuffle_replicate_nl_hint -> join_type != none"
+  - name: trino_join_distribution_partitioned_requires_join
+    rule: "control_surface == trino_join_distribution_partitioned -> join_type != none"
+  - name: clickhouse_hash_algorithm_requires_join
+    rule: "control_surface == clickhouse_join_algorithm_hash -> join_type != none"
+  - name: clickhouse_parallel_hash_algorithm_requires_join
+    rule: "control_surface == clickhouse_join_algorithm_parallel_hash -> join_type != none"
+  - name: clickhouse_grace_hash_algorithm_requires_join
+    rule: "control_surface == clickhouse_join_algorithm_grace_hash -> join_type != none"
+  - name: clickhouse_full_sorting_merge_algorithm_requires_join
+    rule: "control_surface == clickhouse_join_algorithm_full_sorting_merge -> join_type != none"
+  - name: clickhouse_partial_merge_algorithm_requires_join
+    rule: "control_surface == clickhouse_join_algorithm_partial_merge -> join_type != none"
+  - name: clickhouse_direct_algorithm_requires_join
+    rule: "control_surface == clickhouse_join_algorithm_direct -> join_type != none"
+  - name: clickhouse_auto_algorithm_requires_join
+    rule: "control_surface == clickhouse_join_algorithm_auto -> join_type != none"
+  - name: materialized_hint_requires_cte
+    rule: "control_surface == materialized_hint -> reuse_structure != none"
+  - name: not_materialized_hint_requires_cte
+    rule: "control_surface == not_materialized_hint -> reuse_structure != none"

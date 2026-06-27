@@ -1,0 +1,5 @@
+metric,value
+generated_probe_sql_queries,4216
+representative_sql_files,48
+full_probe_bundle_sha256,df107f018e37debab23c5b51bff18c7cf86f40c577c46acf9137d96597e1e222
+shape_invalid_queries,0

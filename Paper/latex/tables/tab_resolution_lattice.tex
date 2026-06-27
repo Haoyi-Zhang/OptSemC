@@ -1,0 +1,23 @@
+\begin{table}[t]
+\centering
+\caption{Exhaustive field-resolution lattice. The baseline retains only the listed public optimizer fields and no engine or probe identifiers; rows without the action-variant identifier show the semantic no-variant frontier.}
+\label{tab:resolution-lattice}
+\scriptsize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{lrrrrr}
+\toprule
+Retained fields & $|R|$ & Classes & Ent. & Eq. & False \\
+\midrule
+None & 0 & 1 & -0.000 & 61,576 & 59,546 \\
+Operator & 1 & 387 & 0.787 & 2,268 & 238 \\
+Action kind & 1 & 183 & 0.661 & 2,282 & 252 \\
+Layer & 1 & 52 & 0.552 & 2,479 & 449 \\
+Placement & 1 & 9 & 0.280 & 12,732 & 10,702 \\
+Operator+layer & 2 & 591 & 0.850 & 2,030 & 0 \\
+Kind+placement & 2 & 214 & 0.680 & 2,030 & 0 \\
+Op+kind+layer+placement+obs. & 5 & 820 & 0.904 & 2,030 & 0 \\
+All semantic fields & 7 & 947 & 0.934 & 2,030 & 0 \\
+\bottomrule
+\end{tabular}
+\Description{Exhaustive field-resolution lattice table showing field count, projected classes, entropy retained, declared equivalences, and false equivalences.}
+\end{table}

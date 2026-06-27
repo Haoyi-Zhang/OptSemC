@@ -1,0 +1,115 @@
+join_shape:
+- none
+- binary
+- chain
+- star
+- snowflake
+- clique
+join_type:
+- none
+- inner
+- outer
+- semi
+- anti
+predicate_class:
+- none
+- simple
+- conjunctive
+- disjunctive
+- function
+- udf
+- correlated
+aggregation:
+- none
+- group_by
+- distinct
+- expression_aggregate
+- group_by_after_join
+order_limit:
+- none
+- order_by
+- limit
+- topn
+- window_order
+source_boundary:
+- local
+- same_connector
+- cross_connector
+connector_capability:
+- not_applicable
+- supports_basic_pushdown
+- supports_join_pushdown
+- supports_aggregate_pushdown
+- supports_topn_pushdown
+- supports_limit_pushdown
+- supports_projection_pushdown
+- supports_search_optimization
+- supports_materialized_view_rewrite
+statistics_need:
+- low
+- medium
+- high
+- unavailable
+reuse_structure:
+- none
+- single_cte
+- reused_cte
+- nested_view
+distribution_trigger:
+- none
+- broadcast_candidate
+- shuffle
+- skewed
+adaptivity_trigger:
+- none
+- runtime_stats
+- skew
+- stage_boundary
+control_surface:
+- none_control
+- broadcast_hint
+- merge_hint
+- shuffle_hash_hint
+- shuffle_replicate_nl_hint
+- join_distribution_broadcast
+- join_distribution_partitioned
+- no_reorder_setting
+- materialized_hint
+- not_materialized_hint
+- disable_hashjoin
+- disable_mergejoin
+- disable_nestloop
+- disable_materialization
+- disable_filter_pushdown
+- disable_statistics_propagation
+- disable_optimizer
+- aqe_disabled
+- dynamic_filtering_disabled
+- explain_logical
+- explain_distributed
+- explain_analyze
+- pg_enable_hashjoin_off
+- pg_enable_mergejoin_off
+- pg_enable_nestloop_off
+- pg_enable_hashagg_off
+- pg_enable_indexscan_off
+- pg_enable_indexonlyscan_off
+- pg_enable_incremental_sort_off
+- pg_enable_memoize_off
+- pg_join_collapse_1
+- pg_from_collapse_1
+- duck_disable_optimizer
+- duck_disable_filter_pushdown
+- duck_disable_statistics_propagation
+- spark_merge_hint
+- spark_shuffle_hash_hint
+- spark_shuffle_replicate_nl_hint
+- spark_aqe_disabled
+- trino_join_distribution_partitioned
+- clickhouse_join_algorithm_hash
+- clickhouse_join_algorithm_parallel_hash
+- clickhouse_join_algorithm_grace_hash
+- clickhouse_join_algorithm_full_sorting_merge
+- clickhouse_join_algorithm_partial_merge
+- clickhouse_join_algorithm_direct
+- clickhouse_join_algorithm_auto

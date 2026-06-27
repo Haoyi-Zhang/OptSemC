@@ -1,0 +1,16 @@
+projection,scope_kind,cases,all_scope_false_equivalences,min_false_equivalences,max_false_equivalences,scopes_with_false_equivalences,max_unresolved_after_layer_placement,repair_stable
+keyword,all,1,254,254,254,1,0,true
+keyword,leave_engine,7,-1,6,254,7,0,true
+keyword,leave_family,3,-1,6,203,3,0,true
+operator_kind_surface,all,1,0,0,0,0,0,true
+operator_kind_surface,leave_engine,7,-1,0,0,0,0,true
+operator_kind_surface,leave_family,3,-1,0,0,0,0,true
+operator_only,all,1,238,238,238,1,0,true
+operator_only,leave_engine,7,-1,0,238,6,0,true
+operator_only,leave_family,3,-1,0,238,2,0,true
+strict,all,1,0,0,0,0,0,true
+strict,leave_engine,7,-1,0,0,0,0,true
+strict,leave_family,3,-1,0,0,0,0,true
+yesno,all,1,6,6,6,1,0,true
+yesno,leave_engine,7,-1,0,6,5,0,true
+yesno,leave_family,3,-1,0,6,1,0,true

@@ -1,0 +1,4 @@
+method,heldout_engine_pairs,heldout_false_equivalences,heldout_resolved,heldout_unresolved,heldout_resolution_rate,distinct_learned_repairs
+keyword,3,254,206,48,0.811024,decision_time;layer;placement
+yesno,1,6,0,6,0.000000,none
+operator_only,2,238,118,120,0.495798,decision_time;layer

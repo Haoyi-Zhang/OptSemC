@@ -1,0 +1,9 @@
+check,passed,details
+engine_rule_counts_current,true,"expected={'BigQuery': 37, 'ClickHouse': 26, 'DuckDB': 21, 'PostgreSQL': 80, 'Snowflake': 26, 'Spark SQL': 36, 'Trino': 61}"
+state_rule_counts_current,true,"expected={'MAY': 240, 'MUST': 13, 'MUST_NOT': 34}"
+source_rule_counts_current,true,sources=26
+summary_rules_current,true,summary=287 actual=287
+summary_segments_current,true,summary=287 actual=287
+summary_sources_current,true,summary=26 actual=26
+summary_status_current,true,grounded_mainline_current
+source_hashes_cover_current_sources,true,missing=[] extra=[]

@@ -1,0 +1,14 @@
+metric,value
+engine_count,7
+probe_count,4216
+projection_count,5
+budget_rows,30
+delta_rows,21080
+max_drift,0
+full_incremental_comparisons_per_projection,88536
+repeated_prefix_work_reduction_at_full,2108.5
+strict__false_equivalences,0
+keyword__false_equivalences,254
+yesno__false_equivalences,6
+operator_only__false_equivalences,238
+operator_kind_surface__false_equivalences,0

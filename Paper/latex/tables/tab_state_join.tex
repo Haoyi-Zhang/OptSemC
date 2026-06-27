@@ -1,0 +1,16 @@
+\begin{table}[H]
+\centering
+\caption{State join. U=UNSPEC, N=MUST\_NOT, C=CONFLICT.}
+\label{tab:state-join}
+\small
+\begin{tabular}{lcccc}
+\toprule
+$\sqcup$ & U & MAY & MUST & N \\
+\midrule
+U & U & MAY & MUST & N \\
+MAY & MAY & MAY & MUST & C \\
+MUST & MUST & MUST & MUST & C \\
+N & N & C & C & N \\
+\bottomrule
+\end{tabular}
+\end{table}

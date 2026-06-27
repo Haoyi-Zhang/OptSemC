@@ -1,0 +1,12 @@
+check,passed,score,weight,details
+codebase_scale,true,10,10,python_loc=24905;threshold=20000
+library_modularity,true,10,10,modules=53;classes=81;functions=1924;thresholds=30/55/250
+script_surface,true,10,10,scripts=173
+test_surface,true,10,10,tests=35
+package_reuse,true,10,10,script_package_import_edges=138
+ci_and_cli,true,10,10,"ci, pyproject, makefile present"
+package_manifest_breadth,true,10,10,files=695;library_files=53;thresholds=300/25
+no_stale_version_tokens,true,10,10,
+no_secret_or_local_path_tokens,true,10,10,
+no_transient_build_artifacts,true,10,10,
+no_duplicate_top_level_docs,true,10,10,

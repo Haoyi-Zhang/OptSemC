@@ -1,0 +1,13 @@
+check,passed,details
+all_256_field_subsets_present,true,256
+full_field_signature_safe,true,
+empty_projection_is_unsafe,true,59546
+common_denominator_across_lattice,true,true={'2030'};comparisons={'88536'}
+field_lattice_closure,true,
+minimum_safe_field_count_at_most_five,true,1
+semantic_no_variant_lattice_present,true,"{'all_field_subsets': '256', 'all_safe_subsets': '212', 'all_unsafe_subsets': '44', 'all_minimum_safe_field_count': '1', 'all_minimum_safe_field_sets': 'variant', 'semantic_no_variant_subsets': '128', 'semantic_no_variant_safe_subsets': '84', 'semantic_no_variant_unsafe_subsets': '44', 'semantic_no_variant_minimum_safe_field_count': '2', 'semantic_no_variant_minimum_safe_field_sets': 'kind+placement;operator+layer'}"
+semantic_no_variant_minimum_safe_is_two_fields,true,kind+placement;operator+layer
+counterexample_cover_covers_all_unsafe_subsets,true,covered=44;unsafe=44
+counterexample_cover_is_compact,true,cover=10;unsafe=44
+counterexample_cover_witnesses_verify,true,
+minimum_safe_summary_matches_lattice,true,1

@@ -1,0 +1,85 @@
+engine,feature,groups,pairs,mean_distance,max_distance,nonzero_fraction,metric
+BigQuery,aggregation,250,1459,0.077379,0.333333,0.514051,dominant_controlled_toggle
+BigQuery,statistics_need,260,1382,0.0,0.0,0.0,dominant_controlled_toggle
+BigQuery,source_boundary,57,61,0.194232,0.416667,1.0,dominant_controlled_toggle
+BigQuery,adaptivity_trigger,235,1075,0.021154,0.153846,0.236279,dominant_controlled_toggle
+BigQuery,distribution_trigger,237,1097,0.373372,0.625,0.890611,dominant_controlled_toggle
+BigQuery,reuse_structure,289,1380,0.0,0.0,0.0,dominant_controlled_toggle
+BigQuery,join_type,229,1201,0.071835,0.285714,0.430475,dominant_controlled_toggle
+BigQuery,order_limit,89,487,0.150928,0.333333,0.856263,dominant_controlled_toggle
+BigQuery,join_shape,99,690,0.0,0.0,0.0,dominant_controlled_toggle
+BigQuery,predicate_class,102,1822,0.187108,0.375,0.886389,dominant_controlled_toggle
+BigQuery,connector_capability,95,1323,0.097254,0.416667,0.353741,dominant_controlled_toggle
+BigQuery,control_surface,172,48417,0.0,0.0,0.0,dominant_controlled_toggle
+ClickHouse,aggregation,250,1459,0.0,0.0,0.0,dominant_controlled_toggle
+ClickHouse,statistics_need,260,1382,0.285287,1.0,0.519537,dominant_controlled_toggle
+ClickHouse,source_boundary,57,61,0.0,0.0,0.0,dominant_controlled_toggle
+ClickHouse,adaptivity_trigger,235,1075,0.348915,1.0,0.502326,dominant_controlled_toggle
+ClickHouse,distribution_trigger,237,1097,0.323709,1.0,0.53783,dominant_controlled_toggle
+ClickHouse,reuse_structure,289,1380,0.0,0.0,0.0,dominant_controlled_toggle
+ClickHouse,join_type,229,1201,0.26421,1.0,0.430475,dominant_controlled_toggle
+ClickHouse,order_limit,89,487,0.35065,1.0,0.511294,dominant_controlled_toggle
+ClickHouse,join_shape,99,690,0.210822,1.0,0.572464,dominant_controlled_toggle
+ClickHouse,predicate_class,102,1822,0.258732,1.0,0.305159,dominant_controlled_toggle
+ClickHouse,connector_capability,95,1323,0.0,0.0,0.0,dominant_controlled_toggle
+ClickHouse,control_surface,172,48417,0.07762,0.75,0.222422,dominant_controlled_toggle
+DuckDB,aggregation,250,1459,0.205366,1.0,0.387937,dominant_controlled_toggle
+DuckDB,statistics_need,260,1382,0.0,0.0,0.0,dominant_controlled_toggle
+DuckDB,source_boundary,57,61,0.590164,1.0,0.622951,dominant_controlled_toggle
+DuckDB,adaptivity_trigger,235,1075,0.0,0.0,0.0,dominant_controlled_toggle
+DuckDB,distribution_trigger,237,1097,0.0,0.0,0.0,dominant_controlled_toggle
+DuckDB,reuse_structure,289,1380,0.826542,1.0,0.854348,dominant_controlled_toggle
+DuckDB,join_type,229,1201,0.0,0.0,0.0,dominant_controlled_toggle
+DuckDB,order_limit,89,487,0.0,0.0,0.0,dominant_controlled_toggle
+DuckDB,join_shape,99,690,0.0,0.0,0.0,dominant_controlled_toggle
+DuckDB,predicate_class,102,1822,0.265679,1.0,0.320527,dominant_controlled_toggle
+DuckDB,connector_capability,95,1323,0.0,0.0,0.0,dominant_controlled_toggle
+DuckDB,control_surface,172,48417,0.010517,1.0,0.019291,dominant_controlled_toggle
+PostgreSQL,aggregation,250,1459,0.065424,0.181818,0.860864,dominant_controlled_toggle
+PostgreSQL,statistics_need,260,1382,0.022681,0.083333,0.519537,dominant_controlled_toggle
+PostgreSQL,source_boundary,57,61,0.06632,0.142857,0.622951,dominant_controlled_toggle
+PostgreSQL,adaptivity_trigger,235,1075,0.019575,0.047619,0.502326,dominant_controlled_toggle
+PostgreSQL,distribution_trigger,237,1097,0.021144,0.052632,0.53783,dominant_controlled_toggle
+PostgreSQL,reuse_structure,289,1380,0.090092,0.25,0.854348,dominant_controlled_toggle
+PostgreSQL,join_type,229,1201,0.178176,0.419355,0.810158,dominant_controlled_toggle
+PostgreSQL,order_limit,89,487,0.084422,0.181818,0.889117,dominant_controlled_toggle
+PostgreSQL,join_shape,99,690,0.018145,0.083333,0.556522,dominant_controlled_toggle
+PostgreSQL,predicate_class,102,1822,0.09823,0.294118,0.562569,dominant_controlled_toggle
+PostgreSQL,connector_capability,95,1323,0.0,0.0,0.0,dominant_controlled_toggle
+PostgreSQL,control_surface,172,48417,0.022423,0.136364,0.452981,dominant_controlled_toggle
+Snowflake,aggregation,250,1459,0.030564,0.076923,0.514051,dominant_controlled_toggle
+Snowflake,statistics_need,260,1382,0.0,0.0,0.0,dominant_controlled_toggle
+Snowflake,source_boundary,57,61,0.11344,0.2,0.622951,dominant_controlled_toggle
+Snowflake,adaptivity_trigger,235,1075,0.0,0.0,0.0,dominant_controlled_toggle
+Snowflake,distribution_trigger,237,1097,0.0,0.0,0.0,dominant_controlled_toggle
+Snowflake,reuse_structure,289,1380,0.0,0.0,0.0,dominant_controlled_toggle
+Snowflake,join_type,229,1201,0.050605,0.142857,0.430475,dominant_controlled_toggle
+Snowflake,order_limit,89,487,0.096881,0.2,0.889117,dominant_controlled_toggle
+Snowflake,join_shape,99,690,0.0,0.0,0.0,dominant_controlled_toggle
+Snowflake,predicate_class,102,1822,0.030747,0.076923,0.498902,dominant_controlled_toggle
+Snowflake,connector_capability,95,1323,0.0,0.0,0.0,dominant_controlled_toggle
+Snowflake,control_surface,172,48417,0.008069,0.2,0.049012,dominant_controlled_toggle
+Spark SQL,aggregation,250,1459,0.0,0.0,0.0,dominant_controlled_toggle
+Spark SQL,statistics_need,260,1382,0.301234,0.666667,0.519537,dominant_controlled_toggle
+Spark SQL,source_boundary,57,61,0.007026,0.428571,0.016393,dominant_controlled_toggle
+Spark SQL,adaptivity_trigger,235,1075,0.442429,0.8,0.857674,dominant_controlled_toggle
+Spark SQL,distribution_trigger,237,1097,0.33411,0.75,0.865998,dominant_controlled_toggle
+Spark SQL,reuse_structure,289,1380,0.0,0.0,0.0,dominant_controlled_toggle
+Spark SQL,join_type,229,1201,0.368945,0.75,0.810158,dominant_controlled_toggle
+Spark SQL,order_limit,89,487,0.179319,0.5,0.511294,dominant_controlled_toggle
+Spark SQL,join_shape,99,690,0.0,0.0,0.0,dominant_controlled_toggle
+Spark SQL,predicate_class,102,1822,0.0,0.0,0.0,dominant_controlled_toggle
+Spark SQL,connector_capability,95,1323,0.0,0.0,0.0,dominant_controlled_toggle
+Spark SQL,control_surface,172,48417,0.09256,0.8,0.212425,dominant_controlled_toggle
+Trino,aggregation,250,1459,0.007814,0.714286,0.026731,dominant_controlled_toggle
+Trino,statistics_need,260,1382,0.742347,1.0,0.853111,dominant_controlled_toggle
+Trino,source_boundary,57,61,0.256187,0.666667,0.622951,dominant_controlled_toggle
+Trino,adaptivity_trigger,235,1075,0.317324,1.0,0.502326,dominant_controlled_toggle
+Trino,distribution_trigger,237,1097,0.519231,1.0,0.86144,dominant_controlled_toggle
+Trino,reuse_structure,289,1380,0.0,0.0,0.0,dominant_controlled_toggle
+Trino,join_type,229,1201,0.306625,1.0,0.430475,dominant_controlled_toggle
+Trino,order_limit,89,487,0.027525,0.6,0.102669,dominant_controlled_toggle
+Trino,join_shape,99,690,0.086721,0.5,0.465217,dominant_controlled_toggle
+Trino,predicate_class,102,1822,0.280371,1.0,0.57135,dominant_controlled_toggle
+Trino,connector_capability,95,1323,0.27562,0.833333,0.610733,dominant_controlled_toggle
+Trino,control_surface,172,48417,0.08456,1.0,0.155751,dominant_controlled_toggle

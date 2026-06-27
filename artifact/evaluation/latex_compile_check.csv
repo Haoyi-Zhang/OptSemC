@@ -1,0 +1,11 @@
+check,passed,count,examples
+compiler_return_codes_nonfatal,true,0,
+fatal_error,true,0,
+undefined_refs,true,0,
+undefined_cites,true,0,
+overfull_hbox,true,0,
+temporary_extra_page,true,0,
+overfull_vbox_tiny_nonfatal,true,0,
+underfull_boxes_nonfatal,true,12,
+pdf_eof_marker,true,1,paper.pdf
+expected_total_pages,true,13,body_12_references_start_page_13

@@ -1,0 +1,14 @@
+metric,value
+verified_rules,287
+verified_segments,287
+verified_sources,26
+engines_covered,7
+states_covered,3
+operators_covered,47
+action_kinds_covered,21
+variants_covered,277
+layers_covered,6
+placements_covered,5
+decision_times_covered,3
+observability_modes_covered,5
+grounding_status,grounded_mainline_current

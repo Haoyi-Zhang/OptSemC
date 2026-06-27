@@ -1,0 +1,4 @@
+check,passed,details
+contract_files_present,true,contracts=10
+all_data_contracts_pass,true,10/10
+cross_file_invariants_pass,true,8/8

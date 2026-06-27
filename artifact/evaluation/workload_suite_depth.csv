@@ -1,0 +1,13 @@
+suite_id,motifs,min_hits,median_hits,max_hits,total_hits
+TPC-H,8,1,87,1384,2039
+TPC-DS,8,86,229,287,1375
+JOB,8,55,87,236,927
+SSB,6,89,102,3442,4080
+CEB-CardEst,7,72,228,259,1244
+Adaptive-Distributed,6,72,230,235,1022
+Federated-Lakehouse,8,72,92,633,1339
+Optimizer-Controls,8,70,72,73,575
+PostgreSQL-Controls,8,72,73,73,583
+DuckDB-Controls,8,68,72,364,1291
+ClickHouse-JoinAlgorithms,7,70,70,70,490
+Spark-Trino-Distribution,8,69,70,236,729

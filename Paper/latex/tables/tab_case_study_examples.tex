@@ -1,0 +1,24 @@
+\begin{table*}[t]
+\centering
+\caption{Representative grounded case-study rules. Guards and source IDs are abbreviated; the table reports representative evidence-backed rules.}
+\label{tab:case-study-examples}
+\scriptsize
+\begin{tabular}{lllllll}
+\toprule
+Case & Engine & State & Operator & Action & Placement/time & Source \\ 
+\midrule
+C1 & BigQuery & MAY & Filter & pushdown:federated\_pushdown & connector\_source/compile\_time & BIGQUERY-PLAN-001 \\ 
+C1 & Trino & MUST\_NOT & Aggregate & pushdown:aggregation\_expression & connector\_source/compile\_time & TRINO-PUSH-001 \\ 
+C1 & Trino & MAY & Aggregate & pushdown:aggregation & connector\_source/compile\_time & TRINO-PUSH-001 \\ 
+C2 & BigQuery & MAY & Exchange & observe:shuffle\_metrics & cloud\_service/profile\_time & BIGQUERY-PLAN-001 \\ 
+C2 & BigQuery & MAY & QueryPlanStage & observe:stage\_graph & cloud\_service/profile\_time & BIGQUERY-PLAN-001 \\ 
+C2 & PostgreSQL & MAY & Plan & observe:cost\_rows\_width & local\_engine/compile\_time & PG-EXPLAIN-001 \\ 
+C3 & BigQuery & MAY & Join & choose:shuffle\_join & cloud\_service/runtime & BIGQUERY-PLAN-001 \\ 
+C3 & BigQuery & MAY & Exchange & adapt:runtime\_repartition & cloud\_service/runtime & BIGQUERY-PLAN-001 \\ 
+C3 & ClickHouse & MAY & Join & adapt:hash\_to\_partial\_merge & local\_engine/runtime & CLICKHOUSE-JOINING-001 \\ 
+C4 & DuckDB & MAY & Materialize & inline:cte\_inline & local\_engine/compile\_time & DUCK-WITH-001 \\ 
+C4 & DuckDB & MAY & Materialize & materialize:cte\_default\_materializ & local\_engine/compile\_time & DUCK-WITH-001 \\ 
+C4 & DuckDB & MAY & Materialize & reuse:materialized\_cte\_reuse & local\_engine/compile\_time & DUCK-WITH-001 \\ 
+\bottomrule
+\end{tabular}
+\end{table*}

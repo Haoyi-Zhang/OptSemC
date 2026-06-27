@@ -1,0 +1,6 @@
+check,passed,details
+all_claim_support_files_exist,true,
+headline_numeric_values_current,true,
+baseline_size_current,true,size=17
+semantic_basis_current,true,layer+placement:498/498
+ledger_has_benchmark_theory_artifact_rows,true,rows=11

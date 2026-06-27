@@ -1,0 +1,13 @@
+suite_id,motifs,min_matching_probes,median_matching_probes,max_matching_probes,single_probe_motifs,sparse_motifs_le_5
+Adaptive-Distributed,6,72,205.5,235,0,0
+CEB-CardEst,7,72,228.0,259,0,0
+ClickHouse-JoinAlgorithms,7,70,70.0,70,0,0
+DuckDB-Controls,8,68,72.0,364,0,0
+Federated-Lakehouse,8,72,91.5,633,0,0
+JOB,8,55,87.0,236,0,0
+Optimizer-Controls,8,70,72.0,73,0,0
+PostgreSQL-Controls,8,72,73.0,73,0,0
+SSB,6,89,101.0,3442,0,0
+Spark-Trino-Distribution,8,69,70.0,236,0,0
+TPC-DS,8,86,164.5,287,0,0
+TPC-H,8,1,87.0,1384,1,1

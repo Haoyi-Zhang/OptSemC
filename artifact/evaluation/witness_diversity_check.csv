@@ -1,0 +1,9 @@
+check,passed,details
+required_outputs_present,true,
+headline_witness_counts_match,true,"{'strict': {'projection': 'strict', 'witnesses': '0', 'distinct_probes': '0', 'distinct_engine_pairs': '0', 'feature_axes_with_multiple_values': '0', 'max_feature_values': '0', 'mean_normalized_entropy': '0.000000', 'max_single_value_share': '0.000000'}, 'keyword': {'projection': 'keyword', 'witnesses': '254', 'distinct_probes': '254', 'distinct_engine_pairs': '3', 'feature_axes_with_multiple_values': '9', 'max_feature_values': '46', 'mean_normalized_entropy': '0.440045', 'max_single_value_share': '0.948819'}, 'yesno': {'projection': 'yesno', 'witnesses': '6', 'distinct_probes': '6', 'distinct_engine_pairs': '1', 'feature_axes_with_multiple_values': '2', 'max_feature_values': '3', 'mean_normalized_entropy': '0.222222', 'max_single_value_share': '1.000000'}, 'operator_only': {'projection': 'operator_only', 'witnesses': '238', 'distinct_probes': '238', 'distinct_engine_pairs': '2', 'feature_axes_with_multiple_values': '8', 'max_feature_values': '40', 'mean_normalized_entropy': '0.569265', 'max_single_value_share': '1.000000'}, 'operator_kind_surface': {'projection': 'operator_kind_surface', 'witnesses': '0', 'distinct_probes': '0', 'distinct_engine_pairs': '0', 'feature_axes_with_multiple_values': '0', 'max_feature_values': '0', 'mean_normalized_entropy': '0.000000', 'max_single_value_share': '0.000000'}}"
+keyword_not_single_probe,true,254
+operator_not_single_probe,true,238
+keyword_feature_diversity,true,9
+operator_feature_diversity,true,8
+strengthened_surface_zero_witnesses,true,"{'projection': 'operator_kind_surface', 'witnesses': '0', 'distinct_probes': '0', 'distinct_engine_pairs': '0', 'feature_axes_with_multiple_values': '0', 'max_feature_values': '0', 'mean_normalized_entropy': '0.000000', 'max_single_value_share': '0.000000'}"
+headline_engine_pair_coverage,true,keyword=3;operator=2

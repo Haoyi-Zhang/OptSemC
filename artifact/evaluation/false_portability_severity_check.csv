@@ -1,0 +1,7 @@
+check,passed,details
+severity_file_present,true,rows=10
+headline_false_counts_match,true,
+strict_repair_control_zero,true,"{'projection': 'operator_kind_surface', 'false_equivalences': '0', 'mean_exact_distance': '0.000000', 'median_exact_distance': '0.000000', 'p90_exact_distance': '0.000000', 'max_exact_distance': '0.000000', 'mean_atom_delta': '0.000000', 'median_atom_delta': '0.000000', 'max_atom_delta': '0', 'pairs_with_distance_ge_half': '0', 'dominant_field_delta': 'none'}"
+severity_nontrivial_for_headlines,true,keyword=1.000000;operator=1.000000
+extreme_single_field_baselines_severe,true,
+dominant_fields_interpretable,true,keyword=variant;operator=variant

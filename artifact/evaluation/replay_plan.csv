@@ -1,0 +1,10 @@
+step_id,command,inputs,outputs,expensive
+refresh-summaries,python scripts/refresh_grounded_summaries.py,grounded/verified_rules.jsonl,grounded/verified_core_summary.csv,false
+public-provenance,python scripts/check_public_provenance.py,grounded/verified_segments.jsonl,evaluation/public_provenance_summary.csv,false
+baseline-portfolio,python scripts/compute_baseline_portfolio.py,evaluation/grounded_contract_maps.jsonl,evaluation/grounded/baseline_portfolio.csv,false
+external-suite,python scripts/compute_external_benchmark_suite.py,external/benchmark_suites.yaml;benchmark/generated_probes.jsonl,evaluation/external_benchmark_suite.csv,false
+projection-mutations,python scripts/compute_projection_mutation_suite.py,evaluation/grounded_contract_maps.jsonl,evaluation/projection_mutation_suite.csv,false
+semantic-frontier,python scripts/compute_semantic_frontier.py,evaluation/grounded_contract_maps.jsonl,evaluation/grounded/semantic_frontier.csv,false
+proof-carrying,python scripts/build_proof_carrying_semantics.py,evaluation/grounded_contract_maps.jsonl,evaluation/proof_carrying_semantics.json,false
+repository-audit,python scripts/run_repository_audit.py,optsemc;scripts,evaluation/repository_audit.csv,false
+integrity-suite,python scripts/run_integrity_suite.py,evaluation/package_snapshot_check.csv,evaluation/integrity_suite.csv,false

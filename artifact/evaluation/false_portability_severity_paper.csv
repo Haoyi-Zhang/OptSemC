@@ -1,0 +1,7 @@
+projection,false_equivalences,mean_exact_distance,median_exact_distance,p90_exact_distance,max_exact_distance,mean_atom_delta,median_atom_delta,max_atom_delta,pairs_with_distance_ge_half,dominant_field_delta
+keyword,254,1.000000,1.000000,1.000000,1.000000,9.094488,8.000000,17,254,variant
+yesno,6,1.000000,1.000000,1.000000,1.000000,3.000000,3.000000,3,6,variant
+operator_only,238,1.000000,1.000000,1.000000,1.000000,5.844538,5.000000,14,238,variant
+placement_only,10702,1.000000,1.000000,1.000000,1.000000,21.289105,22.000000,53,10702,kind
+state_only,23593,1.000000,1.000000,1.000000,1.000000,13.056161,9.000000,64,23593,variant
+operator_kind_surface,0,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0,0,none

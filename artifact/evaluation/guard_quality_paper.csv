@@ -1,0 +1,7 @@
+check,value,interpretation
+grounded rules,287,finite public-contract relation
+rules with probe support,287/287,no admitted rule is outside the generated denominator
+guarded non-global rules,252,query-conditional contracts rather than engine-level labels
+median probe support,102,guards range from narrow motifs to global observability
+same-action guard containments,3,"finite overlap, explicitly audited"
+invalid guard dimensions,0,guard values are inside the benchmark feature domain

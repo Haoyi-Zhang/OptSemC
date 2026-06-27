@@ -1,0 +1,5 @@
+check,passed,details
+suite_rows_present,true,suites=12
+all_suites_fully_covered,true,
+all_suites_have_probe_hits,true,
+motif_count_substantial,true,90

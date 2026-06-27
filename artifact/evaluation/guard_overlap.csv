@@ -1,0 +1,5 @@
+left_rule_id,right_rule_id,engine,state,action_key,overlap_type,intersection_support,left_support,right_support,guard_containment
+GT12-BQ-FILTER-STEP-001,BQ13-FILTER-STEP-001,BigQuery,MAY,Filter|observe|filter_step|plan_observability|cloud_service|profile_time|stage_graph,support_containment,102,102,202,false
+GT12-BQ-WRITE-SHUFFLE-001,BQ13-WRITE-SHUFFLE-001,BigQuery,MAY,Write|observe|write_to_shuffle_memory|plan_observability|cloud_service|profile_time|stage_graph,identical_support,236,236,236,true
+GT12-PG-CFG-PARTITIONWISE-AGG-001,PG13-PARTITIONWISE-AGG-MAY-001,PostgreSQL,MAY,Aggregate|choose|partitionwise_aggregate|physical_planning|local_engine|compile_time|estimated_physical_plan,support_containment,257,4216,257,true
+GT12-PG-CFG-PARTITIONWISE-JOIN-001,PG13-PARTITIONWISE-JOIN-MAY-001,PostgreSQL,MAY,Join|choose|partitionwise_join|physical_planning|local_engine|compile_time|estimated_physical_plan,support_containment,1731,4216,1731,true

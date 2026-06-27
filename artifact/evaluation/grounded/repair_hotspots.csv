@@ -1,0 +1,7 @@
+method,engine_pair,false_equivalences,dominant_repair_field,dominant_repair_count
+keyword,BigQuery--ClickHouse,203,operator,203
+keyword,BigQuery--Trino,45,operator,45
+keyword,ClickHouse--Trino,6,variant,6
+yesno,ClickHouse--Trino,6,variant,6
+operator_only,ClickHouse--Trino,123,kind,117
+operator_only,Spark SQL--Trino,115,kind,115

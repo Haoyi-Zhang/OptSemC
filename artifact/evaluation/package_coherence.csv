@@ -1,0 +1,6 @@
+check,passed,details
+stable_main_tex_exists,true,Paper/latex/paper.tex
+no_old_versioned_drafts_in_package,true,
+no_stale_version_labels_in_active_paper,true,
+readme_points_to_stable_draft,true,
+no_truncated_table_ellipses,true,

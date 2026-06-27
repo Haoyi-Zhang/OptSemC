@@ -1,0 +1,4 @@
+method,false_equivalences,minimal_universal_repair_size,repair_sets,num_minimal_repair_sets
+keyword,254,1,variant;placement,2
+yesno,6,1,variant;layer;placement;state,4
+operator_only,238,1,variant;layer,2

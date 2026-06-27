@@ -1,0 +1,6 @@
+metric,value
+probes,4216
+forced_by_rule_guard,99
+issues,0
+sql_sanity_issues,0
+status,PASS

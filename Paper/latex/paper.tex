@@ -1,0 +1,87 @@
+﻿\documentclass[sigconf,nonacm]{acmart}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,shapes.geometric}
+\usepackage{placeins}
+\usepackage{amsmath,amsthm}
+\usepackage{enumitem}
+\settopmatter{printacmref=false}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\pagestyle{plain}
+\flushbottom
+\setlength{\textfloatsep}{6pt plus 1pt minus 2pt}
+\setlength{\floatsep}{6pt plus 1pt minus 2pt}
+\setlength{\intextsep}{6pt plus 1pt minus 2pt}
+\setlength{\emergencystretch}{2em}
+\Urlmuskip=0mu plus 2mu
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+
+\newcommand\vldbdoi{}
+\newcommand\vldbpages{}
+\newcommand\vldbvolume{20}
+\newcommand\vldbissue{1}
+\newcommand\vldbyear{2027}
+\newcommand\vldbauthors{Zhang and Ran}
+\newcommand\vldbtitle{OptSem-C: Public Optimizer Contracts for Query Engine Portability}
+\newcommand\vldbavailabilityurl{}
+\newcommand\vldbpagestyle{plain}
+
+\title{OptSem-C: Public Optimizer Contracts for Query Engine Portability}
+
+\author{Haoyi Zhang}
+\orcid{0009-0009-3693-786X}
+\affiliation{%
+  \institution{Xi'an Jiaotong-Liverpool University}
+  \city{Suzhou}
+  \country{China}
+}
+\email{hyeliozhang@gmail.com}
+
+\author{Huaijin Ran}
+\orcid{0009-0009-2482-2344}
+\affiliation{%
+  \institution{Nanyang Technological University}
+  \city{Suzhou}
+  \country{China}
+}
+\email{huaijin003@e.ntu.edu.sg}
+
+\begin{document}
+\begin{abstract}
+SQL is portable at the language boundary, but optimizer behavior is not.  Query engines expose public contracts for pushdown, join ordering, statistics, materialization, distributed placement, runtime adaptation, and plan evidence.  Today these behaviors are often compared through coarse labels such as \texttt{pushdown}, \texttt{join}, or \texttt{cost-based}.  Such projections collapse local rewrites, source delegation, service-side stages, and runtime decisions into the same apparent capability; in short, coarse optimizer comparison fabricates portability by declaring two engine--query pairs portable even when their public optimizer contracts disagree.
+
+This paper introduces OptSem-C, a formal semantics and benchmark methodology for public optimizer behavior contracts.  A contract rule is a guarded modal statement over query features with explicit operator, action variant, modality, optimizer layer, placement, decision time, observability, version, and public evidence.  The semantics separates behavioral worlds from evidential support, defines a conflict-aware state join, and characterizes lossy optimizer comparison as a projection kernel over exact contract signatures.  On top of this semantics, OptSem-C computes information profiles, exhaustive field-resolution lattices, antichain frontiers, and minimum repair certificates that identify which optimizer-semantic fields are necessary and sufficient for safe comparison.
+
+The grounded study contains 287 verified public-contract rules, 287 source-linked evidence spans, 26 public source records, and 4,216 executable SQL probes covering 7,112 valid optimizer-feature interactions.  Keyword projection declares 2,284 equivalences, 254 of which exact contracts refute; operator-only projection declares 2,268 equivalences, 238 of which are false.  Exhaustively evaluating all 256 retained-field vocabularies shows that 44 remain unsafe, and after action-variant identifiers are removed the minimum safe semantic vocabularies have size two.  Placement repairs keyword collisions, optimizer layer repairs operator-only collisions, and a layer+placement basis repairs all 498 headline witnesses.  OptSem-C turns optimizer portability from an informal feature checklist into a finite, auditable query-processing relation.
+\end{abstract}
+
+\maketitle
+
+
+\ifdefempty{\vldbavailabilityurl}{}{%
+\begingroup\small\noindent\raggedright\textbf{PVLDB Artifact Availability:}\\
+The source code, data, and other materials have been made available at \url{\vldbavailabilityurl}.
+\endgroup
+}
+
+\input{sections/01_intro}
+\input{sections/02_problem}
+\input{sections/03_model}
+\input{sections/04_benchmark_corpus}
+\input{sections/05_evaluation}
+\input{sections/06_cases}
+\input{sections/07_discussion_related}
+
+
+\clearpage
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{refs}
+\end{document}
+

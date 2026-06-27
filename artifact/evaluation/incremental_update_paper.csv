@@ -1,0 +1,6 @@
+source,engine,rules,affected_maps,affected_map_share,actions
+PG-RUNTIME-QUERY,PostgreSQL,46,4216,14.3\%,82897
+BIGQUERY-PLAN,BigQuery,27,4216,14.3\%,26833
+PG-EXPLAIN,PostgreSQL,14,4216,14.3\%,21913
+SNOWFLAKE-EXPLAIN,Snowflake,13,4216,14.3\%,39925
+SPARK-HINTS-LATEST,Spark SQL,13,4216,14.3\%,7144

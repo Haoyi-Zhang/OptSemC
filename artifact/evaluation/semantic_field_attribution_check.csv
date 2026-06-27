@@ -1,0 +1,4 @@
+method,false_equivalences,shapley_total_sum,abs_error,fields,passed
+keyword,254,254.000000,0.00000000,8,true
+operator_only,238,238.000000,0.00000000,8,true
+yesno,6,6.000000,0.00000000,8,true

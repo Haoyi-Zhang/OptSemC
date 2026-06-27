@@ -1,0 +1,7 @@
+method,step,added_field,fields_used,comparisons,projected_equivalences,true_equivalences,false_equivalences,conditional_false_equivalence_rate,false_equivalence_repaired
+keyword,0,baseline,baseline,88536,2284,2030,254,0.111208,0.000000
+keyword,1,placement,placement,88536,2030,2030,0,0.000000,1.000000
+yesno,0,baseline,baseline,88536,2036,2030,6,0.002947,0.000000
+yesno,1,layer,layer,88536,2030,2030,0,0.000000,1.000000
+operator_only,0,baseline,baseline,88536,2268,2030,238,0.104938,0.000000
+operator_only,1,layer,layer,88536,2030,2030,0,0.000000,1.000000

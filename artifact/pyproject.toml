@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68", "setuptools-scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "optsemc"
+dynamic = ["version"]
+description = "OptSem-C: public optimizer-contract semantics, covering probes, baseline repair certificates, and reproducibility checks."
+requires-python = ">=3.10"
+dependencies = ["PyYAML>=6.0"]
+readme = "README.md"
+license = "MIT"
+keywords = ["query optimization", "database systems", "optimizer contracts", "benchmarking", "PVLDB"]
+
+[tool.setuptools]
+package-dir = {"optsemc" = "optsemc"}
+packages = ["optsemc"]
+
+[tool.setuptools_scm]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[project.scripts]
+optsemc = "optsemc.cli:main"

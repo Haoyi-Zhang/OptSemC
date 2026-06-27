@@ -1,0 +1,7 @@
+check,passed,details
+feature_holdout_folds_present,true,22
+headline_methods_present,true,"keyword,operator_only,yesno"
+heldout_false_equivalences_nonzero,true,
+robust_basis_resolves_all_heldout,true,
+robust_basis_is_layer_placement,true,
+point_minimum_stress_is_nontrivial,true,

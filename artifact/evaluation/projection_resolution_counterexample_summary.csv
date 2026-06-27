@@ -1,0 +1,6 @@
+metric,value
+field_subsets,256
+unsafe_field_subsets,44
+counterexample_cover_size,10
+minimum_safe_field_count,1
+minimum_safe_field_sets,variant

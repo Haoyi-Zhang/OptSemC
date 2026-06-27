@@ -1,0 +1,17 @@
+scope,field,false_equivalences_repaired_by_field,fraction
+keyword,placement,254,1.000000
+keyword,operator,248,0.976378
+keyword,decision_time,248,0.976378
+keyword,observability,248,0.976378
+keyword,layer,212,0.834646
+keyword,state,53,0.208661
+keyword,kind,2,0.007874
+yesno,layer,6,1.000000
+yesno,placement,6,1.000000
+yesno,state,6,1.000000
+operator_only,layer,238,1.000000
+operator_only,kind,232,0.974790
+operator_only,placement,206,0.865546
+operator_only,state,160,0.672269
+operator_only,decision_time,118,0.495798
+operator_only,observability,118,0.495798

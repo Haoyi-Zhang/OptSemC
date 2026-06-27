@@ -1,0 +1,11 @@
+check,passed,details
+four_projection_profiles,true,keyword;operator_kind_surface;operator_only;strict;yesno
+contains_all_engine_scope,true,
+contains_leave_engine_scopes,true,
+contains_leave_family_scopes,true,
+all_repairs_resolved,true,
+headline_counts_preserved,true,
+surface_projection_negative_control,true,
+summary_has_scope_groups,true,
+paper_rows_complete,true,
+paper_repair_column_zero,true,

@@ -1,0 +1,20 @@
+method,mechanism,false_equivalences_with_mechanism,false_equivalences_for_method,fraction_of_false_equivalences
+keyword,action-variant collision,254,254,1.000000
+keyword,execution-placement collision,254,254,1.000000
+keyword,decision-time collision,248,254,0.976378
+keyword,operator-family collision,248,254,0.976378
+keyword,plan-evidence collision,248,254,0.976378
+keyword,optimizer-layer collision,205,254,0.807087
+keyword,modality collision,54,254,0.212598
+keyword,action-kind collision,2,254,0.007874
+operator_only,action-variant collision,238,238,1.000000
+operator_only,optimizer-layer collision,225,238,0.945378
+operator_only,execution-placement collision,206,238,0.865546
+operator_only,action-kind collision,121,238,0.508403
+operator_only,plan-evidence collision,118,238,0.495798
+operator_only,decision-time collision,114,238,0.478992
+operator_only,modality collision,35,238,0.147059
+operator_only,operator-family collision,33,238,0.138655
+yesno,action-variant collision,6,6,1.000000
+yesno,execution-placement collision,6,6,1.000000
+yesno,modality collision,6,6,1.000000

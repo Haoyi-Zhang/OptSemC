@@ -1,0 +1,34 @@
+\begin{figure}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.04}
+\begin{tabular}{@{}lr@{}}
+\toprule
+\textbf{Grounded and generated object} & \textbf{Value}\\
+\midrule
+Verified public contract rules & 287\\
+Evidence spans / source records & 287 / 26\\
+Generated SQL probes & 4,216\\
+Valid optimizer-feature interactions & 7,112\\
+Rules triggered by probes & 287 / 287\\
+SQL probes executed & 4,216 / 4,216\\
+External motifs covered and executed & 90 / 90\\
+Audit / merge / shape / execution issues & 0 / 0 / 0 / 0\\
+\bottomrule
+\end{tabular}
+\vspace{0.4em}
+\begin{tabular}{@{}p{0.43\columnwidth}p{0.47\columnwidth}@{}}
+\toprule
+\textbf{Design invariant} & \textbf{What it prevents}\\
+\midrule
+Ground first & Unsupported optimizer folklore entering the mainline corpus.\\
+Cover then execute & Feature-complete but non-runnable benchmark probes.\\
+Separate then repair & Counting false portability without a semantic explanation.\\
+Crosswalk externally & Treating a private feature grid as a benchmark substitute.\\
+\bottomrule
+\end{tabular}
+\caption{Corpus, benchmark, and execution denominators. Every mainline rule is public-evidence grounded and every generated SQL probe executes in the validation catalog.}
+\Description{A compact figure summarizing the grounded corpus, generated SQL probes, external motif coverage, and design invariants.}
+\label{fig:benchmark-snapshot}
+\end{figure}

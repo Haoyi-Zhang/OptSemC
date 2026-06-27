@@ -1,0 +1,8 @@
+check,passed,details
+keyword_headline_counts_match,true,recomputed=2284/254;reported=2284/254
+yesno_headline_counts_match,true,recomputed=2036/6;reported=2036/6
+operator_only_headline_counts_match,true,recomputed=2268/238;reported=2268/238
+strict_projection_zero_false_equivalence,true,"{'method': 'strict', 'projected_equivalences': 2030, 'true_equivalences': 2030, 'false_equivalences': 0, 'projected_differences': 86506, 'false_differences': 0, 'lossy_projected_groups': 0, 'projected_groups': 27869, 'atom_projection': 'true', 'state_collapsing': 'false'}"
+headline_projections_are_lossy,true,
+state_collapsing_declared_for_coarse_projections,true,
+projection_outputs_present,true,evaluation/projection_contract_semantics.csv

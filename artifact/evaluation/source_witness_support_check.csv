@@ -1,0 +1,7 @@
+check,passed,details
+detail_witness_count,true,witnesses=498
+summary_projection_counts,true,"{'keyword': '254', 'yesno': '6', 'operator_only': '238'}"
+all_witnesses_have_public_sources,true,
+all_summary_cross_source,true,
+source_breadth_present,true,"{'keyword': {'projection': 'keyword', 'false_witnesses': '254', 'distinct_sources': '11', 'min_sources_per_witness': '2', 'median_sources_per_witness': '2.0', 'max_sources_per_witness': '5', 'cross_source_witnesses': '254', 'cross_source_share': '1.000000'}, 'operator_only': {'projection': 'operator_only', 'false_witnesses': '238', 'distinct_sources': '8', 'min_sources_per_witness': '2', 'median_sources_per_witness': '3.0', 'max_sources_per_witness': '6', 'cross_source_witnesses': '238', 'cross_source_share': '1.000000'}, 'yesno': {'projection': 'yesno', 'false_witnesses': '6', 'distinct_sources': '3', 'min_sources_per_witness': '3', 'median_sources_per_witness': '3.0', 'max_sources_per_witness': '3', 'cross_source_witnesses': '6', 'cross_source_share': '1.000000'}}"
+paper_rows_present,true,

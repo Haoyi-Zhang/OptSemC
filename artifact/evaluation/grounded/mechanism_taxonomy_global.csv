@@ -1,0 +1,9 @@
+mechanism,false_equivalences_with_mechanism,all_false_equivalences,fraction_of_all_false_equivalences
+action-variant collision,498,498,1.000000
+execution-placement collision,466,498,0.935743
+optimizer-layer collision,430,498,0.863454
+plan-evidence collision,366,498,0.734940
+decision-time collision,362,498,0.726908
+operator-family collision,281,498,0.564257
+action-kind collision,123,498,0.246988
+modality collision,95,498,0.190763

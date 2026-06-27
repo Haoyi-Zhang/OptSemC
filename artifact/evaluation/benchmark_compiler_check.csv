@@ -1,0 +1,6 @@
+check,passed,details
+motif_denominator_large,true,motifs=90
+all_motifs_covered,true,90/90
+all_suites_complete,true,suites=12
+greedy_cover_compact,true,cover=48;motifs=90
+no_zero_redundancy,true,

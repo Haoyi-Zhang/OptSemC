@@ -1,0 +1,6 @@
+projection,all_false,leave_engine_false_range,leave_family_false_range,max_unresolved_after_repair
+strict,0,0--0,0--0,0
+keyword,254,6--254,6--203,0
+yesno,6,0--6,0--6,0
+operator_only,238,0--238,0--238,0
+operator_kind_surface,0,0--0,0--0,0

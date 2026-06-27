@@ -1,0 +1,14 @@
+check,passed,details
+required_methods_present,true,"methods=['keyword', 'operator_only', 'yesno']"
+keyword_has_eight_fields,true,fields=8
+keyword_shares_nonnegative,true,
+keyword_shares_sum_to_one,true,sum=1.000000001000
+keyword_false_equivalences_match_conditional,true,shapley=[254] cond=254
+operator_only_has_eight_fields,true,fields=8
+operator_only_shares_nonnegative,true,
+operator_only_shares_sum_to_one,true,sum=0.999999999000
+operator_only_false_equivalences_match_conditional,true,shapley=[238] cond=238
+yesno_has_eight_fields,true,fields=8
+yesno_shares_nonnegative,true,
+yesno_shares_sum_to_one,true,sum=1.000000000000
+yesno_false_equivalences_match_conditional,true,shapley=[6] cond=6

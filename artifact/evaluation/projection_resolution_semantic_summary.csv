@@ -1,0 +1,11 @@
+metric,value
+all_field_subsets,256
+all_safe_subsets,212
+all_unsafe_subsets,44
+all_minimum_safe_field_count,1
+all_minimum_safe_field_sets,variant
+semantic_no_variant_subsets,128
+semantic_no_variant_safe_subsets,84
+semantic_no_variant_unsafe_subsets,44
+semantic_no_variant_minimum_safe_field_count,2
+semantic_no_variant_minimum_safe_field_sets,kind+placement;operator+layer

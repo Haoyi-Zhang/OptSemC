@@ -1,0 +1,7 @@
+projection,left_engine,right_engine,false_equivalences
+keyword,BigQuery,ClickHouse,203
+keyword,BigQuery,Trino,45
+keyword,ClickHouse,Trino,6
+yesno,ClickHouse,Trino,6
+operator_only,ClickHouse,Trino,123
+operator_only,Spark SQL,Trino,115

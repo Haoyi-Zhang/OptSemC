@@ -1,0 +1,8 @@
+engine,family
+BigQuery,cloud_service
+ClickHouse,local_embedded
+DuckDB,local_embedded
+PostgreSQL,local_embedded
+Snowflake,cloud_service
+Spark SQL,distributed_sql
+Trino,distributed_sql

@@ -1,0 +1,6 @@
+check,passed,details
+two_top_level_directories,true,"Paper,artifact"
+required_entrypoints_present,true,
+no_iteration_or_state_terms_in_filenames,true,
+no_iteration_or_state_terms_in_public_text,true,
+no_transient_build_files,true,

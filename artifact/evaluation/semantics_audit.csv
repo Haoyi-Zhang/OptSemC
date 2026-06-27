@@ -1,0 +1,6 @@
+check,value,passed,details
+accepted_rules,287,true,
+invalid_rule_states,0,true,
+merge_conflict_records,0,true,
+conflict_states_in_maps,0,true,
+state_join_properties_passed,9,true,9/9

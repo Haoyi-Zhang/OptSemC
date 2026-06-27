@@ -1,0 +1,13 @@
+suite_id,suite_name,motifs,covered_motifs,coverage_rate,matching_probes
+TPC-H,TPC-H decision-support optimizer motifs,8,8,1.000000,2039
+TPC-DS,TPC-DS snowflake and nested analytics motifs,8,8,1.000000,1375
+JOB,Join Order Benchmark motifs,8,8,1.000000,927
+SSB,Star Schema Benchmark motifs,6,6,1.000000,4080
+CEB-CardEst,Cardinality-estimation and plan-quality motifs,7,7,1.000000,1244
+Adaptive-Distributed,Adaptive and distributed query processing motifs,6,6,1.000000,1022
+Federated-Lakehouse,Federated and lakehouse pushdown motifs,8,8,1.000000,1339
+Optimizer-Controls,User-visible optimizer-control motifs,8,8,1.000000,575
+PostgreSQL-Controls,PostgreSQL optimizer GUC and planning-control motifs,8,8,1.000000,583
+DuckDB-Controls,DuckDB optimizer-control and pushdown-disable motifs,8,8,1.000000,1291
+ClickHouse-JoinAlgorithms,ClickHouse join-algorithm control motifs,7,7,1.000000,490
+Spark-Trino-Distribution,"Spark/Trino distribution, hint, and adaptive motifs",8,8,1.000000,729

@@ -1,0 +1,73 @@
+\section{Evaluation}
+\label{sec:eval}
+The evaluation asks four questions.  First, when a coarse optimizer comparison declares two public contracts equivalent, how often is that equivalence false?  Second, which semantic fields repair the false equivalence?  Third, do the observed failures correspond to recognizable query-processing mechanisms rather than corpus-construction effects?  Fourth, how much distinguishability does each comparison vocabulary retain?
+
+\textbf{Coarse comparison fabricates equivalence.} Table~\ref{tab:false-portability} reports the main measurement.  The keyword projection declares 2,284 equivalences, including 254 false ones.  The operator-only projection declares 2,268 equivalences, including 238 false ones.  These errors are conditional on the baseline declaring equivalence, which is the decision faced by a user of a feature matrix.  The results are stable under binomial and probe-cluster uncertainty estimates, and false equivalence remains nonzero for keyword and operator-only projections after removing any single public source.  A strict-projection negative control yields zero false equivalences.
+
+\input{tables/tab_false_portability}
+
+Counts alone understate the failure.  Table~\ref{tab:false-severity} measures how far apart the exact contracts are after a projection has declared them equal.  For the headline projections, every false-equivalent pair has exact-signature Jaccard distance 1.0: the projected comparison has equated disjoint public contract signatures rather than near duplicates.  Keyword false equivalences differ by 9.09 evidence atoms on average, and operator-only false equivalences differ by 5.84 atoms.  The strengthened surface projection is the control: it returns to the exact-equivalence denominator and has zero fabricated equivalence.
+
+\input{tables/tab_false_portability_severity}
+
+Table~\ref{tab:baseline-portfolio} makes the baseline portfolio explicit.  The baseline portfolio evaluates exact negative controls, common matrices, one-field adversarial baselines, and strengthened high-information baselines.  The exact-contract baseline produces no false equivalence.  Keyword, kind-only, and operator-only comparisons fabricate false equivalence at similar rates, so the result is not tied to one synonym list.  One-field baselines such as placement-only, decision-time-only, and state-only are much worse, showing that comparing a single optimizer dimension is not a safe substitute for contract semantics.  By contrast, the strengthened operator/action/layer/placement/observability baseline has zero false equivalence, which localizes the missing semantics rather than merely declaring all coarse comparisons bad.
+
+\input{tables/tab_baseline_portfolio}
+
+\textbf{Projection kernels are measurable objects.} Table~\ref{tab:information-profile} reports the finite information profile of representative projections.  Exact signatures form 1,288 observed classes.  Keyword projection compresses them into 148 projected classes, 81 of which contain multiple exact classes, retaining 64\% of empirical signature entropy and inflating declared equivalence by 12.5\%.  Operator-only projection retains more entropy but still leaves 191 colliding projected classes and 238 false equivalences.  Placement-only and state-only baselines demonstrate the opposite failure mode: a single field creates very large kernels.  The strengthened surface projection still has projected collisions at the signature-class level, but it does not produce any pairwise false equivalence over the engine-probe comparison set.  This is the empirical counterpart of the projection-kernel theorem: the kernel is finite, populated, and repairable.
+
+\input{tables/tab_information_profile}
+\input{figures/fig_projection_information_plot}
+
+\textbf{Resolution-lattice stress test.}  The information profile asks how much a named projection compresses exact signatures.  Table~\ref{tab:resolution-lattice} asks a stricter question: if a comparison is allowed to retain any subset of public optimizer fields, which retained-field vocabularies are safe?  The test enumerates all 256 subsets of the eight evidence-atom fields and evaluates them over the same 88,536 engine--probe comparisons.  The empty vocabulary fabricates 59,546 equivalences.  Every singleton semantic field is unsafe: operator alone leaves 238 false equivalences, kind alone leaves 252, layer alone leaves 449, and placement alone leaves 10,702.  Excluding action-variant identifiers, the semantic field lattice has 128 subsets, 44 unsafe regions, and minimum safe field count two; the two minimum safe no-variant vocabularies are operator+layer and kind+placement.  A compact set of ten concrete engine--probe witnesses covers all unsafe retained-field regions, so the frontier is not driven by one example row.  Deriving the frontier antichains gives 14 minimal safe no-variant vocabularies and eight maximal unsafe vocabularies; the monotone frontier certificate shows that every safe retained-field vocabulary contains one of the minimal safe elements and every unsafe vocabulary is contained in a maximal unsafe element.
+
+\input{tables/tab_resolution_lattice}
+
+The robustness view in Table~\ref{tab:robustness} checks that the headline result is not an effect of a single denominator.  The micro rate conditions on the baseline declaring equivalence; the pair-macro rate averages within engine pairs; and the leave-one-source range removes all rules supported by one public source.  Keyword and operator-only false portability remain visible across these views, including every leave-one-source ablation for those two projections.
+
+\input{tables/tab_robustness}
+
+The evidence side of the same claim is also cross-checked.  Every headline false-portability witness is supported by at least two distinct public source records; keyword and operator-only witnesses draw on 11 and 8 source records.  A side-balanced audit further shows that all 498 headline witnesses have public support on both compared signatures, with no left/right source reuse, so the kernel is not a one-sided evidence effect.
+
+A second overfitting check asks whether the false witnesses are concentrated in one hand-picked query shape.  Table~\ref{tab:witness-dispersion} shows the opposite.  The 498 headline false witnesses occupy 486 distinct query probes.  Keyword and operator-only witnesses are almost one-per-probe, touch every feature dimension, and cover 92 and 75 observed feature values respectively.  The witnesses are therefore a dispersed projection-kernel phenomenon rather than a duplicated-row effect.
+
+\input{tables/tab_witness_dispersion}
+
+Table~\ref{tab:scalability-family} adds stress views that are easy to miss in a small feature matrix.  The finite comparison audit executes all 88,536 engine--probe pair checks for each projection, so the reported kernel is not sampled.  A deterministic 8$\times$ lift reaches 708,288 signature comparisons per projection while preserving the same exact-contract evidence; all tested projections sustain above 70,000 comparisons per second, and prefix-scaling regressions have $R^2\geq0.965$.  A streaming maintenance audit inserts probes one at a time and independently recomputes each prefix; the  drift is zero for every projection, and the full prefix uses 88,536 comparison work units rather than the 186.7 million work units implied by recomputing every prefix from scratch.  The table also ties scaling to dispersion and family stratification: keyword false portability spans 254 probes, nine feature axes, and three of six pair-family regions; operator-only false portability spans 238 probes, eight feature axes, and two regions.  Removing one engine or one engine family never creates an unresolved witness after the layer+placement repair.  For public evidence refreshes, the largest source-local update touches one engine's probe map, and no source contributes more than 16.1\% of grounded rules.
+
+\input{tables/tab_scalability_family}
+
+The probe-subsample view in Table~\ref{tab:probe-subsample} checks that the false-portability result is not an effect of using the full generated benchmark.  At 10\% and 50\% probe subsamples, keyword and operator-only projections remain false in every trial, with median conditional rates close to the full benchmark.  The weaker yes/no projection is sparse at 10\%, but becomes nonzero in every trial by 50\%.
+
+The mutation-suite view is adversarial: it expands the comparison vocabulary around the headline baselines rather than only evaluating the three projections used in the abstract.  Exact signatures remain a zero-false negative control, one-field projections produce much larger kernels, and strengthened projections that restore operator, action kind, and the public semantic surface collapse to the exact-equivalence denominator.  The result is not that every abstraction is bad; it is that common portability abstractions omit query-processing fields that several independently weakened projections need and several strengthened projections restore.
+
+\input{tables/tab_probe_subsample}
+
+\textbf{Repair certificates identify the missing semantics.} A projection can be repaired by restoring semantic fields.  The repair column in Table~\ref{tab:false-portability} reports minimum-cardinality universal repairs and held-out-probe generalization.  Placement repairs every keyword false equivalence.  Layer repairs every operator-only false equivalence.  The learned repairs resolve all held-out false equivalences across probe folds.  A fixed semantic basis consisting of optimizer layer and execution placement repairs all observed false equivalences across keyword, yes/no, and operator-only projections, even when fine-grained action-variant labels are excluded.  The certificate is checked as a finite proof obligation: each counted witness is full-signature unequal, projection-equal, separated by the reported repair, and protected by a grounded counter-witness against every smaller universal repair.  The hitting-set view over all 498 false witnesses agrees exactly with direct repaired-signature enumeration.
+
+\input{tables/tab_field_repair}
+\input{tables/tab_projection_ladder}
+
+Table~\ref{tab:feature-holdout-repair} adds a stronger anti-overfitting test.  Each fold withholds a non-default query-feature family, learns repairs from the remaining false witnesses, and tests them on the held-out family.  A point minimum can choose an underspecified field when the training denominator is narrow; the fixed semantic basis layer+placement resolves every held-out false witness across all folds.  The repair is therefore not a post-hoc fit to one query slice, but a stable contract denominator.
+
+\input{tables/tab_feature_holdout_repair}
+
+The repair ladder in Table~\ref{tab:projection-ladder} gives a stepwise view of the same diagnosis.  Restoring operator alone nearly repairs keyword projection but leaves six false equivalences; restoring layer alone reduces but does not eliminate keyword false equivalence; restoring placement eliminates it.  For operator-only projection, restoring layer eliminates all false equivalences while placement alone leaves residual errors.  This ladder makes the repair claim auditable rather than merely descriptive.
+
+\input{tables/tab_semantic_frontier}
+\input{figures/fig_semantic_frontier_plot}
+
+Table~\ref{tab:semantic-frontier} reports the field-lattice frontier over the core semantic universe.  Safe subsets repair every false equivalence in the scope; unsafe subsets retain a grounded counter-witness.  The all-projection row is the strongest statement: over the core field subsets, unsafe regions retain grounded counter-witnesses, every singleton is insufficient for all projections, and layer+placement is a minimum safe basis for all 498 false witnesses.  Thus the repair is not a hand-picked explanation for one table row; it is the frontier of the finite projection kernel.
+
+Table~\ref{tab:field-repair} shows why the repair fields are query-processing fields.  Placement separates local execution, source delegation, distributed workers, and cloud-service execution.  Layer and decision time separate logical rewrite, physical planning, distributed planning, and runtime adaptation.  Operator and observability separate plan operators from plan evidence, preventing logical plans, physical estimates, and runtime profiles from being treated as interchangeable.  The attribution results agree with the repair certificates: the highest-attribution fields are the same fields that repair the false equivalences.  A fixed layer+placement semantic basis also resolves every false equivalence within each observed engine-pair hotspot, ruling out a repair that only works in the aggregate or only through fine-grained variant identifiers.
+
+\textbf{False portability has mechanisms and hotspots.} Table~\ref{tab:mechanism-hotspots} groups false-equivalence witnesses into optimizer mechanisms and lists the largest engine-pair hotspots.  The dominant mechanisms are action-variant, execution-placement, optimizer-layer, plan-evidence, and decision-time collisions.  The hotspots are not random; they occur where public contracts expose different query-processing surfaces, such as source delegation versus local planning, runtime adaptivity versus compile-time planning, and stage-graph observability versus estimated local plans.
+
+\input{tables/tab_mechanism_hotspots}
+
+\textbf{Optimizer contracts are workload-sensitive.} Table~\ref{tab:workload-sensitivity} reports controlled feature-toggle movements.  The largest movements involve CTE reuse, source boundary, statistics need, distribution triggers, and adaptivity triggers.  Optimizer-contract portability is therefore not an engine-level scalar; it is a relation between engine contracts and query structure.
+
+\input{tables/tab_workload_sensitivity}
+\FloatBarrier
+
+The evaluation closes the loop between theory and evidence.  The projection-kernel theorem says that false portability is the nontrivial kernel induced by a lossy comparison vocabulary, and the grounded evaluation shows that this kernel is populated by public optimizer evidence rather than synthetic examples.  The information profile quantifies distinguishability loss, the frontier analysis identifies the minimum fields that make the kernel trivial, and deterministic SQL validation checks that the generated denominator is executable and shape-consistent.  OptSem-C is therefore not a richer checklist; it is a semantics that makes optimizer-portability claims testable, diagnosable, and repairable.

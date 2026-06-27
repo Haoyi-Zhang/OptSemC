@@ -1,0 +1,13 @@
+feature,touched_values,total_values,coverage_fraction,missing_values
+adaptivity_trigger,4,4,1.000000,
+aggregation,5,5,1.000000,
+connector_capability,2,9,0.222222,supports_basic_pushdown;supports_join_pushdown;supports_limit_pushdown;supports_materialized_view_rewrite;supports_projection_pushdown;supports_search_optimization;supports_topn_pushdown
+control_surface,47,47,1.000000,
+distribution_trigger,4,4,1.000000,
+join_shape,5,6,0.833333,star
+join_type,5,5,1.000000,
+order_limit,5,5,1.000000,
+predicate_class,7,7,1.000000,
+reuse_structure,4,4,1.000000,
+source_boundary,3,3,1.000000,
+statistics_need,4,4,1.000000,

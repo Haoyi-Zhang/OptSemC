@@ -1,0 +1,719 @@
+{
+  "bundle_hash": "078fe43a8482edb92a5fe56a9869892cc07bbb9a4b9099f12892ef11edb5b7b9",
+  "certificate_count": 5,
+  "certificates": [
+    {
+      "header": {
+        "certificate_id": "OptSemC-proof-carrying-semantics",
+        "inputs": {
+          "contract_maps": "c55cbd68dee531651ee4b85e61d8be527ad10062f9c8d61a70c3bc2c4d78f2f1",
+          "generated_probes": "196ddeb5c5745e8e1ed45278ef2d21029a6fe4c676e979dbb5139d5ef72f661f",
+          "verified_rules": "a987cf364a9a1518d788e0004b678bb153ffddbbe8c0a02abe7add41e3119b57"
+        },
+        "produced_by": "build_proof_carrying_semantics.py",
+        "version": "OptSemC"
+      },
+      "projection": "keyword",
+      "witness_count_sampled": 25,
+      "witness_hash": "40cb48b735f5c76d87498504470d3e4fd50e0edd7244c3907354dfe7c94ca207",
+      "witnesses": [
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0009",
+          "left_signature_size": 9,
+          "probe_id": "P0009",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "Trino::P0009",
+          "right_signature_size": 5
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0038",
+          "left_signature_size": 6,
+          "probe_id": "P0038",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "ClickHouse::P0038",
+          "right_signature_size": 2
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0040",
+          "left_signature_size": 6,
+          "probe_id": "P0040",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "ClickHouse::P0040",
+          "right_signature_size": 3
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0041",
+          "left_signature_size": 6,
+          "probe_id": "P0041",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "ClickHouse::P0041",
+          "right_signature_size": 2
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0106",
+          "left_signature_size": 6,
+          "probe_id": "P0106",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "ClickHouse::P0106",
+          "right_signature_size": 2
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0135",
+          "left_signature_size": 9,
+          "probe_id": "P0135",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "Trino::P0135",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0141",
+          "left_signature_size": 9,
+          "probe_id": "P0141",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "Trino::P0141",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0146",
+          "left_signature_size": 9,
+          "probe_id": "P0146",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "Trino::P0146",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0164",
+          "left_signature_size": 9,
+          "probe_id": "P0164",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "Trino::P0164",
+          "right_signature_size": 5
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0167",
+          "left_signature_size": 9,
+          "probe_id": "P0167",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "Trino::P0167",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0170",
+          "left_signature_size": 10,
+          "probe_id": "P0170",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "Trino::P0170",
+          "right_signature_size": 5
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0172",
+          "left_signature_size": 10,
+          "probe_id": "P0172",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "Trino::P0172",
+          "right_signature_size": 5
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0190",
+          "left_signature_size": 9,
+          "probe_id": "P0190",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "Trino::P0190",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0199",
+          "left_signature_size": 9,
+          "probe_id": "P0199",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "Trino::P0199",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0200",
+          "left_signature_size": 9,
+          "probe_id": "P0200",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "Trino::P0200",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0202",
+          "left_signature_size": 9,
+          "probe_id": "P0202",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "Trino::P0202",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0203",
+          "left_signature_size": 9,
+          "probe_id": "P0203",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "Trino::P0203",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0204",
+          "left_signature_size": 9,
+          "probe_id": "P0204",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "Trino::P0204",
+          "right_signature_size": 6
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0205",
+          "left_signature_size": 9,
+          "probe_id": "P0205",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "Trino::P0205",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0206",
+          "left_signature_size": 9,
+          "probe_id": "P0206",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "Trino::P0206",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0207",
+          "left_signature_size": 9,
+          "probe_id": "P0207",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "Trino::P0207",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0212",
+          "left_signature_size": 9,
+          "probe_id": "P0212",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "Trino::P0212",
+          "right_signature_size": 5
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0213",
+          "left_signature_size": 9,
+          "probe_id": "P0213",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "Trino::P0213",
+          "right_signature_size": 5
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0214",
+          "left_signature_size": 10,
+          "probe_id": "P0214",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "Trino::P0214",
+          "right_signature_size": 5
+        },
+        {
+          "exact_unequal": true,
+          "left": "BigQuery::P0215",
+          "left_signature_size": 9,
+          "probe_id": "P0215",
+          "projected_equal": true,
+          "projection": "keyword",
+          "right": "Trino::P0215",
+          "right_signature_size": 5
+        }
+      ]
+    },
+    {
+      "header": {
+        "certificate_id": "OptSemC-proof-carrying-semantics",
+        "inputs": {
+          "contract_maps": "c55cbd68dee531651ee4b85e61d8be527ad10062f9c8d61a70c3bc2c4d78f2f1",
+          "generated_probes": "196ddeb5c5745e8e1ed45278ef2d21029a6fe4c676e979dbb5139d5ef72f661f",
+          "verified_rules": "a987cf364a9a1518d788e0004b678bb153ffddbbe8c0a02abe7add41e3119b57"
+        },
+        "produced_by": "build_proof_carrying_semantics.py",
+        "version": "OptSemC"
+      },
+      "projection": "yesno",
+      "witness_count_sampled": 6,
+      "witness_hash": "2261158ee8c89cf09472371c8ad15fbdb50ea3842130535575e243c12e514fe1",
+      "witnesses": [
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0456",
+          "left_signature_size": 1,
+          "probe_id": "P0456",
+          "projected_equal": true,
+          "projection": "yesno",
+          "right": "Trino::P0456",
+          "right_signature_size": 2
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P2415",
+          "left_signature_size": 1,
+          "probe_id": "P2415",
+          "projected_equal": true,
+          "projection": "yesno",
+          "right": "Trino::P2415",
+          "right_signature_size": 2
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P2416",
+          "left_signature_size": 1,
+          "probe_id": "P2416",
+          "projected_equal": true,
+          "projection": "yesno",
+          "right": "Trino::P2416",
+          "right_signature_size": 2
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P2435",
+          "left_signature_size": 1,
+          "probe_id": "P2435",
+          "projected_equal": true,
+          "projection": "yesno",
+          "right": "Trino::P2435",
+          "right_signature_size": 2
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P2438",
+          "left_signature_size": 1,
+          "probe_id": "P2438",
+          "projected_equal": true,
+          "projection": "yesno",
+          "right": "Trino::P2438",
+          "right_signature_size": 2
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P2439",
+          "left_signature_size": 1,
+          "probe_id": "P2439",
+          "projected_equal": true,
+          "projection": "yesno",
+          "right": "Trino::P2439",
+          "right_signature_size": 2
+        }
+      ]
+    },
+    {
+      "header": {
+        "certificate_id": "OptSemC-proof-carrying-semantics",
+        "inputs": {
+          "contract_maps": "c55cbd68dee531651ee4b85e61d8be527ad10062f9c8d61a70c3bc2c4d78f2f1",
+          "generated_probes": "196ddeb5c5745e8e1ed45278ef2d21029a6fe4c676e979dbb5139d5ef72f661f",
+          "verified_rules": "a987cf364a9a1518d788e0004b678bb153ffddbbe8c0a02abe7add41e3119b57"
+        },
+        "produced_by": "build_proof_carrying_semantics.py",
+        "version": "OptSemC"
+      },
+      "projection": "operator_only",
+      "witness_count_sampled": 25,
+      "witness_hash": "588bdf101725d58faef22323734f03201f7756ad591225b23c896880c64ab216",
+      "witnesses": [
+        {
+          "exact_unequal": true,
+          "left": "Spark SQL::P0022",
+          "left_signature_size": 1,
+          "probe_id": "P0022",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0022",
+          "right_signature_size": 1
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0104",
+          "left_signature_size": 1,
+          "probe_id": "P0104",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0104",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0129",
+          "left_signature_size": 1,
+          "probe_id": "P0129",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0129",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0139",
+          "left_signature_size": 1,
+          "probe_id": "P0139",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0139",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0181",
+          "left_signature_size": 1,
+          "probe_id": "P0181",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0181",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "Spark SQL::P0271",
+          "left_signature_size": 1,
+          "probe_id": "P0271",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0271",
+          "right_signature_size": 1
+        },
+        {
+          "exact_unequal": true,
+          "left": "Spark SQL::P0320",
+          "left_signature_size": 1,
+          "probe_id": "P0320",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0320",
+          "right_signature_size": 1
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0385",
+          "left_signature_size": 1,
+          "probe_id": "P0385",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0385",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0388",
+          "left_signature_size": 1,
+          "probe_id": "P0388",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0388",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0391",
+          "left_signature_size": 2,
+          "probe_id": "P0391",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0391",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0394",
+          "left_signature_size": 1,
+          "probe_id": "P0394",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0394",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0412",
+          "left_signature_size": 1,
+          "probe_id": "P0412",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0412",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0415",
+          "left_signature_size": 1,
+          "probe_id": "P0415",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0415",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0418",
+          "left_signature_size": 1,
+          "probe_id": "P0418",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0418",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0423",
+          "left_signature_size": 1,
+          "probe_id": "P0423",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0423",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0428",
+          "left_signature_size": 1,
+          "probe_id": "P0428",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0428",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0430",
+          "left_signature_size": 1,
+          "probe_id": "P0430",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0430",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0432",
+          "left_signature_size": 1,
+          "probe_id": "P0432",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0432",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0440",
+          "left_signature_size": 1,
+          "probe_id": "P0440",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0440",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0442",
+          "left_signature_size": 1,
+          "probe_id": "P0442",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0442",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0445",
+          "left_signature_size": 1,
+          "probe_id": "P0445",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0445",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0448",
+          "left_signature_size": 1,
+          "probe_id": "P0448",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0448",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0454",
+          "left_signature_size": 1,
+          "probe_id": "P0454",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0454",
+          "right_signature_size": 4
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0456",
+          "left_signature_size": 1,
+          "probe_id": "P0456",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0456",
+          "right_signature_size": 2
+        },
+        {
+          "exact_unequal": true,
+          "left": "ClickHouse::P0457",
+          "left_signature_size": 1,
+          "probe_id": "P0457",
+          "projected_equal": true,
+          "projection": "operator_only",
+          "right": "Trino::P0457",
+          "right_signature_size": 6
+        }
+      ]
+    },
+    {
+      "header": {
+        "certificate_id": "OptSemC-proof-carrying-semantics",
+        "inputs": {
+          "contract_maps": "c55cbd68dee531651ee4b85e61d8be527ad10062f9c8d61a70c3bc2c4d78f2f1",
+          "generated_probes": "196ddeb5c5745e8e1ed45278ef2d21029a6fe4c676e979dbb5139d5ef72f661f",
+          "verified_rules": "a987cf364a9a1518d788e0004b678bb153ffddbbe8c0a02abe7add41e3119b57"
+        },
+        "produced_by": "build_proof_carrying_semantics.py",
+        "version": "OptSemC"
+      },
+      "maximal_unsafe_sets": [
+        "layer",
+        "operator+placement",
+        "operator+decision_time+observability"
+      ],
+      "minimum_safe_sets": [
+        "operator+layer",
+        "layer+placement",
+        "layer+decision_time",
+        "layer+observability",
+        "placement+decision_time",
+        "placement+observability"
+      ],
+      "monotone": true,
+      "safe_sets": [
+        "operator+layer",
+        "layer+placement",
+        "layer+decision_time",
+        "layer+observability",
+        "placement+decision_time",
+        "placement+observability",
+        "operator+layer+placement",
+        "operator+layer+decision_time",
+        "operator+layer+observability",
+        "operator+placement+decision_time",
+        "operator+placement+observability",
+        "layer+placement+decision_time",
+        "layer+placement+observability",
+        "layer+decision_time+observability",
+        "placement+decision_time+observability",
+        "operator+layer+placement+decision_time",
+        "operator+layer+placement+observability",
+        "operator+layer+decision_time+observability",
+        "operator+placement+decision_time+observability",
+        "layer+placement+decision_time+observability",
+        "operator+layer+placement+decision_time+observability"
+      ],
+      "scope": "all_headline",
+      "universe": [
+        "operator",
+        "layer",
+        "placement",
+        "decision_time",
+        "observability"
+      ],
+      "unsafe_sets": [
+        "empty",
+        "operator",
+        "layer",
+        "placement",
+        "decision_time",
+        "observability",
+        "operator+placement",
+        "operator+decision_time",
+        "operator+observability",
+        "decision_time+observability",
+        "operator+decision_time+observability"
+      ],
+      "witness_count": 498
+    },
+    {
+      "empty_separator_count": 0,
+      "header": {
+        "certificate_id": "OptSemC-proof-carrying-semantics",
+        "inputs": {
+          "contract_maps": "c55cbd68dee531651ee4b85e61d8be527ad10062f9c8d61a70c3bc2c4d78f2f1",
+          "generated_probes": "196ddeb5c5745e8e1ed45278ef2d21029a6fe4c676e979dbb5139d5ef72f661f",
+          "verified_rules": "a987cf364a9a1518d788e0004b678bb153ffddbbe8c0a02abe7add41e3119b57"
+        },
+        "produced_by": "build_proof_carrying_semantics.py",
+        "version": "OptSemC"
+      },
+      "minimum_hitting_sets": [
+        "operator+layer",
+        "layer+placement",
+        "layer+decision_time",
+        "layer+observability",
+        "placement+decision_time",
+        "placement+observability"
+      ],
+      "scope": "all_headline",
+      "separator_hash": "ea9f467d5348c0d7c3b68cdd0c6409a7585250971dc51f0e49d09bf83f4f7e06",
+      "universe": [
+        "operator",
+        "layer",
+        "placement",
+        "decision_time",
+        "observability"
+      ],
+      "witness_count": 498
+    }
+  ]
+}

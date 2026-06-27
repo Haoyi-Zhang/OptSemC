@@ -1,0 +1,10 @@
+retained_fields,field_count,classes,entropy_retained,declared_equivalences,false_equivalences,status
+none,0,1,-0.000,61576,59546,unsafe
+operator,1,387,0.787,2268,238,unsafe
+kind,1,183,0.661,2282,252,unsafe
+layer,1,52,0.552,2479,449,unsafe
+placement,1,9,0.280,12732,10702,unsafe
+operator+\allowbreak layer,2,591,0.850,2030,0,safe
+kind+\allowbreak placement,2,214,0.680,2030,0,safe
+operator+\allowbreak kind+\allowbreak layer+\allowbreak placement+\allowbreak observability,5,820,0.904,2030,0,safe
+operator+\allowbreak kind+\allowbreak layer+\allowbreak placement+\allowbreak decision_time+\allowbreak observability+\allowbreak state,7,947,0.934,2030,0,safe

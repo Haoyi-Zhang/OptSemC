@@ -1,0 +1,8 @@
+method,comparisons,false_equivalence,false_difference,trap_rate
+keyword,88536,254,0,0.0029
+yesno,88536,6,0,0.0001
+operator_only,88536,238,0,0.0027
+no_placement,88536,0,0,0.0
+no_modality,88536,0,0,0.0
+no_decision_time,88536,0,0,0.0
+no_observability,88536,0,0,0.0

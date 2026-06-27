@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\caption{Projection-kernel information profile. Entropy is computed over observed engine-probe contract signatures; false equivalence is pairwise.}
+\label{tab:information-profile}
+\scriptsize
+\begin{tabular}{lrrrrr}
+\toprule
+Projection & Classes & Colliding & Ent. kept & Eq. & False \\
+\midrule
+Exact & 1,288 & 0 & 1.000 & 2,030 & 0 \\
+Keyword & 148 & 81 & 0.638 & 2,284 & 254 \\
+Operator & 387 & 191 & 0.787 & 2,268 & 238 \\
+Placement & 9 & 8 & 0.280 & 12,732 & 10,702 \\
+State & 7 & 5 & 0.217 & 25,623 & 23,593 \\
+Op+kind+surface & 820 & 206 & 0.904 & 2,030 & 0 \\
+\bottomrule
+\end{tabular}
+\Description{Information profile table showing projected signature classes, colliding classes, entropy retained, declared equivalences, and false equivalences.}
+\end{table}

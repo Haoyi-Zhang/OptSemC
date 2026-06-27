@@ -1,0 +1,18 @@
+\begin{table}[H]
+\centering
+\caption{Largest false-portability hotspots and dominant repair fields.}
+\label{tab:repair-hotspots}
+\small
+\begin{tabular}{llrr}
+\toprule
+Projection & Engine pair & False eq. & Dominant field \\
+\midrule
+Keyword & BigQuery--ClickHouse & 203 & operator \\
+Keyword & BigQuery--Trino & 45 & operator \\
+Keyword & ClickHouse--Trino & 6 & variant \\
+Yesno & ClickHouse--Trino & 6 & variant \\
+Operator-Only & ClickHouse--Trino & 123 & kind \\
+Operator-Only & Spark SQL--Trino & 115 & kind \\
+\bottomrule
+\end{tabular}
+\end{table}

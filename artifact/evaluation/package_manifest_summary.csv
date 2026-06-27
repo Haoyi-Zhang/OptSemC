@@ -1,0 +1,12 @@
+category,files,bytes,lines
+benchmark-data,54,5785542,39345
+configuration,6,19746,632
+documentation,4,4098,104
+generated-evaluation,282,119236008,352885
+grounded-data,8,460883,681
+library-code,53,303911,7429
+other,7,16711,345
+paper,74,931204,8884
+script-code,172,550942,11285
+test-code,35,354147,8791
+fingerprint,695,2ccc079120c116c2ff0ad89e025973b4fca7b7a88dc052704ab33ae01983907e,

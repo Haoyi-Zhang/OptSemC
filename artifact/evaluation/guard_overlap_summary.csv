@@ -1,0 +1,7 @@
+metric,value
+same_action_state_pairs,4
+disjoint_pairs,0
+partial_overlap_pairs,0
+support_containment_pairs,3
+identical_support_pairs,1
+guard_containment_pairs,3

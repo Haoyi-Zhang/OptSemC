@@ -1,0 +1,8 @@
+engine,accepted_rules,triggered_rules,dimensions
+BigQuery,37,37,5
+ClickHouse,26,26,8
+DuckDB,21,21,2
+PostgreSQL,80,80,8
+Snowflake,26,26,4
+Spark SQL,36,36,6
+Trino,61,61,9

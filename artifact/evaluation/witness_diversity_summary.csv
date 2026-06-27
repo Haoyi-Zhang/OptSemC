@@ -1,0 +1,6 @@
+projection,witnesses,distinct_probes,distinct_engine_pairs,feature_axes_with_multiple_values,max_feature_values,mean_normalized_entropy,max_single_value_share
+strict,0,0,0,0,0,0.000000,0.000000
+keyword,254,254,3,9,46,0.440045,0.948819
+yesno,6,6,1,2,3,0.222222,1.000000
+operator_only,238,238,2,8,40,0.569265,1.000000
+operator_kind_surface,0,0,0,0,0,0.000000,0.000000

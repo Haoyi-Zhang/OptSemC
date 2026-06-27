@@ -1,0 +1,7 @@
+variant,action_pairs,action_collisions,collision_rate
+keyword,6013060,775542,0.128976
+no_guard,0,0,0
+no_modality,6013060,0,0.0
+no_placement,6013060,0,0.0
+no_decision_time,6013060,0,0.0
+no_observability,6013060,0,0.0

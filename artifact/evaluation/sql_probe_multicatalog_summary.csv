@@ -1,0 +1,4 @@
+rows_per_table,probes,plan_successes,execution_successes,execution_failures,total_result_rows,distinct_plan_hashes,max_plan_steps
+1,4216,4216,4216,0,3802,89,12
+5,4216,4216,4216,0,16988,89,12
+17,4216,4216,4216,0,48969,89,12

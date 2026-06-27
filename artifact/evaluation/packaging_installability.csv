@@ -1,0 +1,8 @@
+check,passed,details
+project_version_is_stable,true,project=1.0.0
+package_dir_exists,true,optsemc
+optsemc_declared_package,true,{'optsemc'}
+readme_exists,true,README.md
+license_is_spdx_string,true,MIT
+console_script_declared,true,optsemc.cli:main
+console_script_target_imports,true,optsemc.cli:main

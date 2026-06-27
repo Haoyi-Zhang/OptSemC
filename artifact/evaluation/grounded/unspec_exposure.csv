@@ -1,0 +1,85 @@
+engine,dimension,cells,unspec_cells,unspec_exposure
+BigQuery,adaptivity,37944,37841,0.9973
+BigQuery,distributed_planning,84320,84320,1.0
+BigQuery,distribution,96968,94969,0.9794
+BigQuery,join_search,63240,63240,1.0
+BigQuery,logical_rewrite,4216,4216,1.0
+BigQuery,materialization,134912,134912,1.0
+BigQuery,observability,244528,220690,0.9025
+BigQuery,physical_planning,223448,223061,0.9983
+BigQuery,pushdown,143344,142328,0.9929
+BigQuery,runtime_adaptation,54808,54808,1.0
+BigQuery,statistics,92752,92752,1.0
+BigQuery,statistics_contract,4216,4216,1.0
+ClickHouse,adaptivity,37944,37784,0.9958
+ClickHouse,distributed_planning,84320,84320,1.0
+ClickHouse,distribution,96968,94978,0.9795
+ClickHouse,join_search,63240,61120,0.9665
+ClickHouse,logical_rewrite,4216,4216,1.0
+ClickHouse,materialization,134912,134912,1.0
+ClickHouse,observability,244528,242797,0.9929
+ClickHouse,physical_planning,223448,222766,0.9969
+ClickHouse,pushdown,143344,143169,0.9988
+ClickHouse,runtime_adaptation,54808,54385,0.9923
+ClickHouse,statistics,92752,92517,0.9975
+ClickHouse,statistics_contract,4216,4216,1.0
+DuckDB,adaptivity,37944,37944,1.0
+DuckDB,distributed_planning,84320,84320,1.0
+DuckDB,distribution,96968,96968,1.0
+DuckDB,join_search,63240,63240,1.0
+DuckDB,logical_rewrite,4216,4216,1.0
+DuckDB,materialization,134912,131440,0.9743
+DuckDB,observability,244528,244528,1.0
+DuckDB,physical_planning,223448,222796,0.9971
+DuckDB,pushdown,143344,143344,1.0
+DuckDB,runtime_adaptation,54808,54808,1.0
+DuckDB,statistics,92752,92752,1.0
+DuckDB,statistics_contract,4216,4216,1.0
+PostgreSQL,adaptivity,37944,37944,1.0
+PostgreSQL,distributed_planning,84320,84320,1.0
+PostgreSQL,distribution,96968,82589,0.8517
+PostgreSQL,join_search,63240,57741,0.913
+PostgreSQL,logical_rewrite,4216,3928,0.9317
+PostgreSQL,materialization,134912,127379,0.9442
+PostgreSQL,observability,244528,239917,0.9811
+PostgreSQL,physical_planning,223448,170518,0.7631
+PostgreSQL,pushdown,143344,143339,1.0
+PostgreSQL,runtime_adaptation,54808,54808,1.0
+PostgreSQL,statistics,92752,67607,0.7289
+PostgreSQL,statistics_contract,4216,4216,1.0
+Snowflake,adaptivity,37944,37944,1.0
+Snowflake,distributed_planning,84320,84320,1.0
+Snowflake,distribution,96968,96968,1.0
+Snowflake,join_search,63240,63240,1.0
+Snowflake,logical_rewrite,4216,4216,1.0
+Snowflake,materialization,134912,134912,1.0
+Snowflake,observability,244528,195855,0.801
+Snowflake,physical_planning,223448,219232,0.9811
+Snowflake,pushdown,143344,143344,1.0
+Snowflake,runtime_adaptation,54808,50592,0.9231
+Snowflake,statistics,92752,84320,0.9091
+Snowflake,statistics_contract,4216,4216,1.0
+Spark SQL,adaptivity,37944,37580,0.9904
+Spark SQL,distributed_planning,84320,77946,0.9244
+Spark SQL,distribution,96968,94856,0.9782
+Spark SQL,join_search,63240,63240,1.0
+Spark SQL,logical_rewrite,4216,4216,1.0
+Spark SQL,materialization,134912,134912,1.0
+Spark SQL,observability,244528,243799,0.997
+Spark SQL,physical_planning,223448,223448,1.0
+Spark SQL,pushdown,143344,143344,1.0
+Spark SQL,runtime_adaptation,54808,54712,0.9982
+Spark SQL,statistics,92752,92423,0.9965
+Spark SQL,statistics_contract,4216,4216,1.0
+Trino,adaptivity,37944,37636,0.9919
+Trino,distributed_planning,84320,81785,0.9699
+Trino,distribution,96968,96731,0.9976
+Trino,join_search,63240,62256,0.9844
+Trino,logical_rewrite,4216,4216,1.0
+Trino,materialization,134912,134912,1.0
+Trino,observability,244528,242133,0.9902
+Trino,physical_planning,223448,223448,1.0
+Trino,pushdown,143344,138976,0.9695
+Trino,runtime_adaptation,54808,54786,0.9996
+Trino,statistics,92752,89787,0.968
+Trino,statistics_contract,4216,4124,0.9782

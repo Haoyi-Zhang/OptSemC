@@ -1,0 +1,10 @@
+property,passed,counterexample
+totality_over_states_plus_conflict,true,
+commutativity,true,
+idempotence,true,
+unspec_identity,true,
+conflict_absorbing,true,
+associativity,true,
+documented_contradictions_conflict,true,
+must_dominates_may,true,
+state_tuple_definitions,true,

@@ -1,0 +1,10 @@
+subset_size,subsets,safe_subsets,unsafe_subsets,min_false_equivalences,median_false_equivalences,max_false_equivalences,best_fields,best_entropy_retained,worst_fields
+0,1,0,1,59546,59546,59546,none,-0.0,none
+1,8,1,7,0,3550.5,23593,variant,1.0,state
+2,28,9,19,0,60.0,7444,kind+variant,1.0,decision_time+state
+3,56,43,13,0,0.0,2444,kind+variant+decision_time,1.0,placement+decision_time+state
+4,70,66,4,0,0.0,890,kind+variant+decision_time+observability,1.0,placement+decision_time+observability+state
+5,56,56,0,0,0.0,0,kind+variant+decision_time+observability+state,1.0,layer+placement+decision_time+observability+state
+6,28,28,0,0,0.0,0,kind+variant+layer+decision_time+observability+state,1.0,kind+layer+placement+decision_time+observability+state
+7,8,8,0,0,0.0,0,kind+variant+layer+placement+decision_time+observability+state,1.0,operator+kind+layer+placement+decision_time+observability+state
+8,1,1,0,0,0,0,operator+kind+variant+layer+placement+decision_time+observability+state,1.0,operator+kind+variant+layer+placement+decision_time+observability+state

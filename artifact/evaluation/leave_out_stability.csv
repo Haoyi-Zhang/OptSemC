@@ -1,0 +1,56 @@
+scope_kind,omitted,projection,engines,engine_pairs,probes,comparisons,projected_equivalences,true_equivalences,false_equivalences,repaired_by_layer_placement,unresolved_after_layer_placement
+all,none,strict,7,21,4216,88536,2030,2030,0,0,0
+leave_engine,BigQuery,strict,6,15,4216,63240,2030,2030,0,0,0
+leave_engine,ClickHouse,strict,6,15,4216,63240,658,658,0,0,0
+leave_engine,DuckDB,strict,6,15,4216,63240,654,654,0,0,0
+leave_engine,PostgreSQL,strict,6,15,4216,63240,2030,2030,0,0,0
+leave_engine,Snowflake,strict,6,15,4216,63240,2030,2030,0,0,0
+leave_engine,Spark SQL,strict,6,15,4216,63240,2030,2030,0,0,0
+leave_engine,Trino,strict,6,15,4216,63240,718,718,0,0,0
+leave_family,cloud_service,strict,5,10,4216,42160,2030,2030,0,0,0
+leave_family,distributed_sql,strict,5,10,4216,42160,718,718,0,0,0
+leave_family,local_embedded,strict,4,6,4216,25296,0,0,0,0,0
+all,none,keyword,7,21,4216,88536,2284,2030,254,254,0
+leave_engine,BigQuery,keyword,6,15,4216,63240,2036,2030,6,6,0
+leave_engine,ClickHouse,keyword,6,15,4216,63240,703,658,45,45,0
+leave_engine,DuckDB,keyword,6,15,4216,63240,908,654,254,254,0
+leave_engine,PostgreSQL,keyword,6,15,4216,63240,2284,2030,254,254,0
+leave_engine,Snowflake,keyword,6,15,4216,63240,2284,2030,254,254,0
+leave_engine,Spark SQL,keyword,6,15,4216,63240,2284,2030,254,254,0
+leave_engine,Trino,keyword,6,15,4216,63240,921,718,203,203,0
+leave_family,cloud_service,keyword,5,10,4216,42160,2036,2030,6,6,0
+leave_family,distributed_sql,keyword,5,10,4216,42160,921,718,203,203,0
+leave_family,local_embedded,keyword,4,6,4216,25296,45,0,45,45,0
+all,none,yesno,7,21,4216,88536,2036,2030,6,6,0
+leave_engine,BigQuery,yesno,6,15,4216,63240,2036,2030,6,6,0
+leave_engine,ClickHouse,yesno,6,15,4216,63240,658,658,0,0,0
+leave_engine,DuckDB,yesno,6,15,4216,63240,660,654,6,6,0
+leave_engine,PostgreSQL,yesno,6,15,4216,63240,2036,2030,6,6,0
+leave_engine,Snowflake,yesno,6,15,4216,63240,2036,2030,6,6,0
+leave_engine,Spark SQL,yesno,6,15,4216,63240,2036,2030,6,6,0
+leave_engine,Trino,yesno,6,15,4216,63240,718,718,0,0,0
+leave_family,cloud_service,yesno,5,10,4216,42160,2036,2030,6,6,0
+leave_family,distributed_sql,yesno,5,10,4216,42160,718,718,0,0,0
+leave_family,local_embedded,yesno,4,6,4216,25296,0,0,0,0,0
+all,none,operator_only,7,21,4216,88536,2268,2030,238,238,0
+leave_engine,BigQuery,operator_only,6,15,4216,63240,2268,2030,238,238,0
+leave_engine,ClickHouse,operator_only,6,15,4216,63240,773,658,115,115,0
+leave_engine,DuckDB,operator_only,6,15,4216,63240,892,654,238,238,0
+leave_engine,PostgreSQL,operator_only,6,15,4216,63240,2268,2030,238,238,0
+leave_engine,Snowflake,operator_only,6,15,4216,63240,2268,2030,238,238,0
+leave_engine,Spark SQL,operator_only,6,15,4216,63240,2153,2030,123,123,0
+leave_engine,Trino,operator_only,6,15,4216,63240,718,718,0,0,0
+leave_family,cloud_service,operator_only,5,10,4216,42160,2268,2030,238,238,0
+leave_family,distributed_sql,operator_only,5,10,4216,42160,718,718,0,0,0
+leave_family,local_embedded,operator_only,4,6,4216,25296,115,0,115,115,0
+all,none,operator_kind_surface,7,21,4216,88536,2030,2030,0,0,0
+leave_engine,BigQuery,operator_kind_surface,6,15,4216,63240,2030,2030,0,0,0
+leave_engine,ClickHouse,operator_kind_surface,6,15,4216,63240,658,658,0,0,0
+leave_engine,DuckDB,operator_kind_surface,6,15,4216,63240,654,654,0,0,0
+leave_engine,PostgreSQL,operator_kind_surface,6,15,4216,63240,2030,2030,0,0,0
+leave_engine,Snowflake,operator_kind_surface,6,15,4216,63240,2030,2030,0,0,0
+leave_engine,Spark SQL,operator_kind_surface,6,15,4216,63240,2030,2030,0,0,0
+leave_engine,Trino,operator_kind_surface,6,15,4216,63240,718,718,0,0,0
+leave_family,cloud_service,operator_kind_surface,5,10,4216,42160,2030,2030,0,0,0
+leave_family,distributed_sql,operator_kind_surface,5,10,4216,42160,718,718,0,0,0
+leave_family,local_embedded,operator_kind_surface,4,6,4216,25296,0,0,0,0,0

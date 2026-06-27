@@ -1,0 +1,9 @@
+check,passed,details
+expected_source_count,true,"{'sources': '26', 'rules': '287', 'max_source_rules': '46', 'max_source_rule_share': '0.160279', 'median_affected_maps': '1072.0', 'max_affected_maps': '4216', 'max_affected_map_share': '0.142857', 'total_map_rows': '29512', 'total_applicable_actions': '241146'}"
+expected_rule_count,true,"{'sources': '26', 'rules': '287', 'max_source_rules': '46', 'max_source_rule_share': '0.160279', 'median_affected_maps': '1072.0', 'max_affected_maps': '4216', 'max_affected_map_share': '0.142857', 'total_map_rows': '29512', 'total_applicable_actions': '241146'}"
+all_sources_have_rules,true,
+source_updates_are_map_local,true,4216
+max_source_rule_share_bounded,true,0.160279
+incremental_share_bounded,true,0.142857
+paper_rows_present,true,rows=5
+applicability_nonzero,true,241146

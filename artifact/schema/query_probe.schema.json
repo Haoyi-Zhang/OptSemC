@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OptSemBench-C query probe",
+  "type": "object",
+  "required": [
+    "probe_id",
+    "feature_vector",
+    "sql_skeleton"
+  ],
+  "properties": {
+    "probe_id": {
+      "type": "string"
+    },
+    "feature_vector": {
+      "type": "object"
+    },
+    "sql_skeleton": {
+      "type": "string"
+    },
+    "covered_interactions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

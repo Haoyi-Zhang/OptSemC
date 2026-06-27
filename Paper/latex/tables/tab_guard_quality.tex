@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering
+\caption{Guard-quality audit for grounded public-contract rules. Probe support uses finite-disjunction guard semantics; non-global rules depend on at least one query feature.}
+\label{tab:guard-quality}
+\scriptsize
+\begin{tabular}{lrl}
+\toprule
+Audit & Value & Meaning \\
+\midrule
+Grounded rules & 287 & finite public-contract relation \\
+Rules with probe support & 287/287 & every admitted rule is triggerable \\
+Guarded non-global rules & 252 & query-conditional contracts \\
+Median probe support & 102 & narrow-to-global guard range \\
+Same-action containments & 3 & finite overlap explicitly audited \\
+Invalid guard dimensions & 0 & guards stay inside feature domain \\
+\bottomrule
+\end{tabular}
+\end{table}

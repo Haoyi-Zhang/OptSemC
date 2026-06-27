@@ -1,0 +1,8 @@
+method,comparisons,projected_equivalences,true_equivalences,false_equivalences,projected_differences,false_differences,unconditional_trap_rate,conditional_false_equivalence_rate,projected_equivalence_rate
+keyword,88536,2284,2030,254,86252,0,0.002869,0.111208,0.025797
+yesno,88536,2036,2030,6,86500,0,6.8e-05,0.002947,0.022996
+operator_only,88536,2268,2030,238,86268,0,0.002688,0.104938,0.025617
+no_placement,88536,2030,2030,0,86506,0,0.0,0.0,0.022929
+no_decision_time,88536,2030,2030,0,86506,0,0.0,0.0,0.022929
+no_observability,88536,2030,2030,0,86506,0,0.0,0.0,0.022929
+no_modality,88536,2030,2030,0,86506,0,0.0,0.0,0.022929

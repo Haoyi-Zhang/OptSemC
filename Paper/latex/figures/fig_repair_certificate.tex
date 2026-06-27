@@ -1,0 +1,19 @@
+\begin{figure}[t]
+\centering
+\scriptsize
+\begin{tikzpicture}[
+  box/.style={draw, rounded corners, align=center, inner sep=3pt, text width=0.78\columnwidth},
+  arrow/.style={-{Latex[length=2mm]}, thick}
+]
+\node[box] (full) {Full public contract: operator, layer, placement, time, state};
+\node[box, below=0.28cm of full] (proj) {Coarse projection: keyword or operator-only};
+\node[box, below=0.28cm of proj] (false) {False equivalence: keyword 254; operator-only 238};
+\node[box, below=0.28cm of false] (repair) {Minimum repair: placement for keyword, layer for operator-only};
+\draw[arrow] (full) -- (proj);
+\draw[arrow] (proj) -- (false);
+\draw[arrow] (false) -- (repair);
+\end{tikzpicture}
+\caption{Repair certificates. Coarse projections fabricate equivalence; restoring a semantic field eliminates the observed false equivalences in the grounded corpus.}
+\Description{A TikZ flowchart from full contracts to coarse projections, false equivalence, and semantic repair fields.}
+\label{fig:repair-certificate}
+\end{figure}

@@ -1,0 +1,221 @@
+# OptSem-C external benchmark-family coverage suite.
+# Each motif records optimizer-relevant feature requirements rather than copying
+# third-party SQL. The suite is denominator-based: every motif must match at
+# least one generated OptSemBench-C probe and an executable SQL skeleton.
+suites:
+  - suite_id: TPC-H
+    name: TPC-H decision-support optimizer motifs
+    motifs:
+      - motif_id: TPCH-filter-local
+        requirements: {predicate_class: simple, source_boundary: local}
+      - motif_id: TPCH-conjunctive-filter
+        requirements: {predicate_class: conjunctive, statistics_need: medium}
+      - motif_id: TPCH-binary-join
+        requirements: {join_shape: binary, join_type: inner}
+      - motif_id: TPCH-chain-join
+        requirements: {join_shape: chain, join_type: inner}
+      - motif_id: TPCH-star-join
+        requirements: {join_shape: star, join_type: inner}
+      - motif_id: TPCH-group-after-join
+        requirements: {aggregation: group_by_after_join, join_type: inner}
+      - motif_id: TPCH-topn
+        requirements: {order_limit: topn}
+      - motif_id: TPCH-high-stats
+        requirements: {statistics_need: high, join_type: inner}
+  - suite_id: TPC-DS
+    name: TPC-DS snowflake and nested analytics motifs
+    motifs:
+      - motif_id: TPCDS-snowflake-join
+        requirements: {join_shape: snowflake, join_type: inner}
+      - motif_id: TPCDS-outer-join
+        requirements: {join_type: outer}
+      - motif_id: TPCDS-window-order
+        requirements: {order_limit: window_order}
+      - motif_id: TPCDS-distinct
+        requirements: {aggregation: distinct}
+      - motif_id: TPCDS-expression-aggregate
+        requirements: {aggregation: expression_aggregate}
+      - motif_id: TPCDS-nested-view
+        requirements: {reuse_structure: nested_view}
+      - motif_id: TPCDS-disjunctive-predicate
+        requirements: {predicate_class: disjunctive}
+      - motif_id: TPCDS-correlated-subquery
+        requirements: {predicate_class: correlated}
+  - suite_id: JOB
+    name: Join Order Benchmark motifs
+    motifs:
+      - motif_id: JOB-chain-inner
+        requirements: {join_shape: chain, join_type: inner}
+      - motif_id: JOB-clique-inner
+        requirements: {join_shape: clique, join_type: inner}
+      - motif_id: JOB-star-inner
+        requirements: {join_shape: star, join_type: inner}
+      - motif_id: JOB-high-statistics
+        requirements: {statistics_need: high, join_type: inner}
+      - motif_id: JOB-reorder-disabled
+        requirements: {control_surface: no_reorder_setting}
+      - motif_id: JOB-pg-join-collapse
+        requirements: {control_surface: pg_join_collapse_1}
+      - motif_id: JOB-broadcast-candidate
+        requirements: {distribution_trigger: broadcast_candidate}
+      - motif_id: JOB-shuffle-required
+        requirements: {distribution_trigger: shuffle}
+  - suite_id: SSB
+    name: Star Schema Benchmark motifs
+    motifs:
+      - motif_id: SSB-star-local
+        requirements: {join_shape: star, source_boundary: local}
+      - motif_id: SSB-group-by
+        requirements: {aggregation: group_by}
+      - motif_id: SSB-simple-predicate
+        requirements: {predicate_class: simple}
+      - motif_id: SSB-conjunctive-predicate
+        requirements: {predicate_class: conjunctive}
+      - motif_id: SSB-order-by
+        requirements: {order_limit: order_by}
+      - motif_id: SSB-low-statistics
+        requirements: {statistics_need: low}
+  - suite_id: CEB-CardEst
+    name: Cardinality-estimation and plan-quality motifs
+    motifs:
+      - motif_id: CEB-high-stats
+        requirements: {statistics_need: high}
+      - motif_id: CEB-unavailable-stats
+        requirements: {statistics_need: unavailable}
+      - motif_id: CEB-correlated
+        requirements: {predicate_class: correlated}
+      - motif_id: CEB-udf
+        requirements: {predicate_class: udf}
+      - motif_id: CEB-anti-join
+        requirements: {join_type: anti}
+      - motif_id: CEB-semi-join
+        requirements: {join_type: semi}
+      - motif_id: CEB-disable-stats-prop
+        requirements: {control_surface: disable_statistics_propagation}
+  - suite_id: Adaptive-Distributed
+    name: Adaptive and distributed query processing motifs
+    motifs:
+      - motif_id: ADAPT-runtime-stats
+        requirements: {adaptivity_trigger: runtime_stats}
+      - motif_id: ADAPT-skew-trigger
+        requirements: {adaptivity_trigger: skew}
+      - motif_id: ADAPT-stage-boundary
+        requirements: {adaptivity_trigger: stage_boundary}
+      - motif_id: ADAPT-skewed-distribution
+        requirements: {distribution_trigger: skewed}
+      - motif_id: ADAPT-aqe-disabled
+        requirements: {control_surface: aqe_disabled}
+      - motif_id: ADAPT-dynamic-filter-off
+        requirements: {control_surface: dynamic_filtering_disabled}
+  - suite_id: Federated-Lakehouse
+    name: Federated and lakehouse pushdown motifs
+    motifs:
+      - motif_id: FED-same-connector
+        requirements: {source_boundary: same_connector}
+      - motif_id: FED-cross-connector
+        requirements: {source_boundary: cross_connector}
+      - motif_id: FED-basic-pushdown
+        requirements: {connector_capability: supports_basic_pushdown}
+      - motif_id: FED-join-pushdown
+        requirements: {connector_capability: supports_join_pushdown}
+      - motif_id: FED-aggregate-pushdown
+        requirements: {connector_capability: supports_aggregate_pushdown}
+      - motif_id: FED-topn-pushdown
+        requirements: {connector_capability: supports_topn_pushdown}
+      - motif_id: FED-search-optimization
+        requirements: {connector_capability: supports_search_optimization}
+      - motif_id: FED-filter-pushdown-off
+        requirements: {control_surface: disable_filter_pushdown}
+  - suite_id: Optimizer-Controls
+    name: User-visible optimizer-control motifs
+    motifs:
+      - motif_id: CTRL-disable-hashjoin
+        requirements: {control_surface: disable_hashjoin}
+      - motif_id: CTRL-disable-mergejoin
+        requirements: {control_surface: disable_mergejoin}
+      - motif_id: CTRL-disable-nestloop
+        requirements: {control_surface: disable_nestloop}
+      - motif_id: CTRL-disable-materialization
+        requirements: {control_surface: disable_materialization}
+      - motif_id: CTRL-broadcast-hint
+        requirements: {control_surface: broadcast_hint}
+      - motif_id: CTRL-merge-hint
+        requirements: {control_surface: merge_hint}
+      - motif_id: CTRL-explain-logical
+        requirements: {control_surface: explain_logical}
+      - motif_id: CTRL-explain-analyze
+        requirements: {control_surface: explain_analyze}
+  - suite_id: PostgreSQL-Controls
+    name: PostgreSQL optimizer GUC and planning-control motifs
+    motifs:
+      - motif_id: PG-hashjoin-off
+        requirements: {control_surface: pg_enable_hashjoin_off}
+      - motif_id: PG-mergejoin-off
+        requirements: {control_surface: pg_enable_mergejoin_off}
+      - motif_id: PG-nestloop-off
+        requirements: {control_surface: pg_enable_nestloop_off}
+      - motif_id: PG-hashagg-off
+        requirements: {control_surface: pg_enable_hashagg_off}
+      - motif_id: PG-indexscan-off
+        requirements: {control_surface: pg_enable_indexscan_off}
+      - motif_id: PG-indexonlyscan-off
+        requirements: {control_surface: pg_enable_indexonlyscan_off}
+      - motif_id: PG-incremental-sort-off
+        requirements: {control_surface: pg_enable_incremental_sort_off}
+      - motif_id: PG-memoize-off
+        requirements: {control_surface: pg_enable_memoize_off}
+  - suite_id: DuckDB-Controls
+    name: DuckDB optimizer-control and pushdown-disable motifs
+    motifs:
+      - motif_id: DUCK-disable-optimizer
+        requirements: {control_surface: duck_disable_optimizer}
+      - motif_id: DUCK-disable-filter-pushdown
+        requirements: {control_surface: duck_disable_filter_pushdown}
+      - motif_id: DUCK-disable-stats-prop
+        requirements: {control_surface: duck_disable_statistics_propagation}
+      - motif_id: DUCK-cte-materialized
+        requirements: {control_surface: materialized_hint}
+      - motif_id: DUCK-cte-not-materialized
+        requirements: {control_surface: not_materialized_hint}
+      - motif_id: DUCK-reused-cte
+        requirements: {reuse_structure: reused_cte}
+      - motif_id: DUCK-single-cte
+        requirements: {reuse_structure: single_cte}
+      - motif_id: DUCK-nested-view
+        requirements: {reuse_structure: nested_view}
+  - suite_id: ClickHouse-JoinAlgorithms
+    name: ClickHouse join-algorithm control motifs
+    motifs:
+      - motif_id: CH-hash
+        requirements: {control_surface: clickhouse_join_algorithm_hash}
+      - motif_id: CH-parallel-hash
+        requirements: {control_surface: clickhouse_join_algorithm_parallel_hash}
+      - motif_id: CH-grace-hash
+        requirements: {control_surface: clickhouse_join_algorithm_grace_hash}
+      - motif_id: CH-full-sort-merge
+        requirements: {control_surface: clickhouse_join_algorithm_full_sorting_merge}
+      - motif_id: CH-partial-merge
+        requirements: {control_surface: clickhouse_join_algorithm_partial_merge}
+      - motif_id: CH-direct
+        requirements: {control_surface: clickhouse_join_algorithm_direct}
+      - motif_id: CH-auto
+        requirements: {control_surface: clickhouse_join_algorithm_auto}
+  - suite_id: Spark-Trino-Distribution
+    name: Spark/Trino distribution, hint, and adaptive motifs
+    motifs:
+      - motif_id: DIST-spark-merge-hint
+        requirements: {control_surface: spark_merge_hint}
+      - motif_id: DIST-spark-shuffle-hash-hint
+        requirements: {control_surface: spark_shuffle_hash_hint}
+      - motif_id: DIST-spark-replicate-nl-hint
+        requirements: {control_surface: spark_shuffle_replicate_nl_hint}
+      - motif_id: DIST-spark-aqe-disabled
+        requirements: {control_surface: spark_aqe_disabled}
+      - motif_id: DIST-trino-partitioned
+        requirements: {control_surface: trino_join_distribution_partitioned}
+      - motif_id: DIST-join-broadcast
+        requirements: {control_surface: join_distribution_broadcast}
+      - motif_id: DIST-join-partitioned
+        requirements: {control_surface: join_distribution_partitioned}
+      - motif_id: DIST-shuffle-trigger
+        requirements: {distribution_trigger: shuffle}

@@ -1,0 +1,10 @@
+step_id,ready,missing_inputs,current_outputs
+refresh-summaries,true,,grounded/verified_core_summary.csv
+public-provenance,true,,evaluation/public_provenance_summary.csv
+baseline-portfolio,true,,evaluation/grounded/baseline_portfolio.csv
+external-suite,true,,evaluation/external_benchmark_suite.csv
+projection-mutations,true,,evaluation/projection_mutation_suite.csv
+semantic-frontier,true,,evaluation/grounded/semantic_frontier.csv
+proof-carrying,true,,evaluation/proof_carrying_semantics.json
+repository-audit,true,,evaluation/repository_audit.csv
+integrity-suite,true,,evaluation/integrity_suite.csv

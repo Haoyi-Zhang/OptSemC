@@ -1,0 +1,4 @@
+method,projected_equivalences,false_equivalences,conditional_rate,wilson_low,wilson_high,bootstrap_mean,bootstrap_low,bootstrap_high,bootstrap_clusters,bootstrap_replicates
+keyword,2284,254,0.111208,0.098962,0.124761,0.111030,0.098296,0.123606,4216,200
+yesno,2036,6,0.002947,0.001351,0.006415,0.003048,0.000968,0.005539,4216,200
+operator_only,2268,238,0.104938,0.092986,0.118227,0.105635,0.093709,0.121050,4216,200

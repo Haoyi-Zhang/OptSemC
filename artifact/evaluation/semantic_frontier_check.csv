@@ -1,0 +1,7 @@
+check,passed,details
+frontier_rows_cover_scopes_and_universes,true,rows=8
+core_all_projection_minimum_is_two,true,
+layer_placement_is_core_all_projection_basis,true,
+keyword_placement_singleton_is_safe,true,
+operator_layer_singleton_is_safe,true,
+unsafe_counterfrontier_nonempty,true,

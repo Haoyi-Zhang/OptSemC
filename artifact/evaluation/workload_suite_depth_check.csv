@@ -1,0 +1,4 @@
+check,passed,details
+motif_matrix_substantial,true,90
+all_motifs_covered,true,
+suite_depth_nonzero,true,

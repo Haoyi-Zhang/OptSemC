@@ -1,0 +1,4 @@
+check,passed,details
+all_probes_shaped,true,4216
+join_and_group_shapes_present,true,
+feature_shape_issues_bounded,true,"[{'probe_id': 'none', 'issue': 'no issues'}]"

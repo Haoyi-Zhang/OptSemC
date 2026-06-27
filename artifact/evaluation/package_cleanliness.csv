@@ -1,0 +1,6 @@
+check,passed,details
+no_transient_or_build_byproducts,true,
+no_stale_package_version_labels,true,
+two_folder_package_top_level,true,
+paper_body_avoids_engineering_package_terms,true,
+paper_body_not_written_as_artifact_report,true,

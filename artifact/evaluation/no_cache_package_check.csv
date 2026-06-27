@@ -1,0 +1,3 @@
+check,passed,details
+no_gzip_cache_payloads,true,
+required_raw_outputs_present,true,

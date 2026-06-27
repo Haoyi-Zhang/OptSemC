@@ -1,0 +1,6 @@
+check,passed,details
+makefile_present,true,
+no_nested_cd_artifact,true,
+expected_targets_present,true,
+referenced_scripts_exist,true,
+verify_uses_local_mainline,true,

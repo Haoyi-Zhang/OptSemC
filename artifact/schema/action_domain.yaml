@@ -1,0 +1,188 @@
+operators:
+- Plan
+- Scan
+- Filter
+- Project
+- Join
+- Aggregate
+- Sort
+- TopN
+- Exchange
+- Materialize
+- Window
+- UDF
+- RuntimeFilter
+- SourceDelegate
+- Statistics
+- HashJoin
+- MergeJoin
+- NestedLoopJoin
+- BroadcastHashJoin
+- SortMergeJoin
+- ShuffleHashJoin
+- ShuffleReplicateNLJoin
+- HashAggregate
+- IncrementalSort
+- IndexScan
+- IndexOnlyScan
+- Memoize
+- MaterializedView
+- SearchOptimization
+- QueryAcceleration
+- MicroPartitionPrune
+- HashJoinAlgorithm
+- ParallelHashJoinAlgorithm
+- GraceHashJoinAlgorithm
+- FullSortingMergeJoinAlgorithm
+- PartialMergeJoinAlgorithm
+- DirectJoinAlgorithm
+- ScanStatistics
+- Write
+- Read
+- Limit
+- AnalyticFunction
+- Projection
+- DataSkippingIndex
+- PrimaryIndex
+- SearchIndex
+- BIEngine
+- ResultCache
+- PartitionPrune
+- ColumnPrune
+- QueryProfile
+- Prewhere
+- SkipIndex
+- JoinFilter
+- RuntimeStatistics
+- SmartTuning
+- ProjectionRewrite
+- ClusterPrune
+- VectorizedPipeline
+- Spill
+- LocalShuffleReader
+- QueryPlanStage
+- TableScan
+- MetadataPrune
+action_kinds:
+- reorder
+- choose
+- pushdown
+- delegate
+- materialize
+- inline
+- adapt
+- observe
+- fallback
+- estimate
+- prune
+- rewrite
+- scan
+- profile
+- discourage
+- cache
+- propagate
+- accelerate
+- reuse
+- skip
+- partition
+- coalesce
+- convert
+- spill
+- route
+- threshold
+- stream
+- sample
+layers:
+- logical_rewrite
+- physical_planning
+- distributed_planning
+- runtime_adaptation
+- plan_observability
+- statistics_contract
+placements:
+- local_engine
+- connector_source
+- distributed_worker
+- coordinator
+- cloud_service
+- unknown
+decision_times:
+- compile_time
+- stage_boundary
+- runtime
+- profile_time
+- unknown
+observability_levels:
+- opaque
+- logical_plan
+- optimized_logical_plan
+- estimated_physical_plan
+- runtime_profile
+- stage_graph
+states:
+  MUST:
+    must: 1
+    allowed: 1
+    evidenced: 1
+  MAY:
+    must: 0
+    allowed: 1
+    evidenced: 1
+  MUST_NOT:
+    must: 0
+    allowed: 0
+    evidenced: 1
+  UNSPEC:
+    must: 0
+    allowed: 1
+    evidenced: 0
+state_join:
+  UNSPEC:
+    UNSPEC: UNSPEC
+    MAY: MAY
+    MUST: MUST
+    MUST_NOT: MUST_NOT
+  MAY:
+    UNSPEC: MAY
+    MAY: MAY
+    MUST: MUST
+    MUST_NOT: CONFLICT
+  MUST:
+    UNSPEC: MUST
+    MAY: MUST
+    MUST: MUST
+    MUST_NOT: CONFLICT
+  MUST_NOT:
+    UNSPEC: MUST_NOT
+    MAY: CONFLICT
+    MUST: CONFLICT
+    MUST_NOT: MUST_NOT
+variant_examples:
+  join_algorithm:
+  - hash
+  - merge
+  - nested_loop
+  - broadcast_hash
+  - sort_merge
+  - shuffle_hash
+  - shuffle_replicate_nl
+  - grace_hash
+  - parallel_hash
+  - full_sorting_merge
+  - partial_merge
+  - direct
+  pushdown_operator:
+  - predicate
+  - projection
+  - dereference
+  - aggregation
+  - join
+  - limit
+  - topn
+  - dynamic_filter
+  observability_mode:
+  - logical
+  - distributed
+  - runtime_profile
+  - stage_graph
+  - assigned_partitions

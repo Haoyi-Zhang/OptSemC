@@ -1,0 +1,11 @@
+theorem_or_claim,finite_obligation,support,passed,details
+T1 finite evaluation,finite rules/probes/maps exist and state-join properties hold,grounded/*.jsonl; benchmark/*.jsonl; state_join_properties.csv,true,rules=287;probes=4216;maps=24342
+T2 projection loss,lossy projections have grounded false-equivalence witnesses; exact projection has none,conditional_trap_rate.csv; baseline_portfolio.csv,true,keyword=254;operator=238;strict=0
+T3 conflict-aware merge,accepted grounded maps contain no silent conflicts,semantics_audit.csv; grounded_conflicts.jsonl,true,merge=0;states=0
+T4 projection-lattice monotonicity,lattice frontier enumeration and monotonicity checks pass,projection_lattice_check.csv,true,
+T5 projection proof obligations,"every counted witness is exact-unequal, projection-equal, and repair-separated",projection_proof_obligations.csv,true,
+T6 minimum repair certificates,"direct enumeration, lower-bound checks, and hitting-set certificates agree",repair_certificate_minimality.csv; repair_hitting_set_check.csv,true,
+T7 semantic repair basis,layer+placement repairs all projections in the core field universe,repair_basis_stability.csv; semantic_frontier_check.csv,true,
+T8 benchmark coverage,valid probes cover all target interactions and external motif requirements,probe_validity.csv; coverage_interactions.csv; external_benchmark_crosswalk.csv,true,probe_issues=0;motifs=5
+T9 public provenance,every grounded rule has public locator and clean provenance,public_provenance_summary.csv,true,"{'verified_segments': '287', 'segments_with_public_locator': '287', 'internal_construction_refs': '0', 'public_provenance_issues': '0'}"
+C1 adversarial baseline suite,coarse one-field baselines fail while high-information surface baseline is safe,baseline_portfolio.csv; baseline_portfolio_check.csv,true,placement_only=10702;surface=0

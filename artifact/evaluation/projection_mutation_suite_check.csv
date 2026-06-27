@@ -1,0 +1,5 @@
+check,passed,details
+projection_count_ge_40,true,41
+strict_negative_control_zero_false,true,0
+lossy_controls_have_false,true,
+known_singleton_repairs_present,true,

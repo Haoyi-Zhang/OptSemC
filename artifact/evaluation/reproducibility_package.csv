@@ -1,0 +1,5 @@
+check,passed,details
+required_reproducibility_files_present,true,
+makefile_has_verify_deep_paper_targets,true,
+pyproject_declares_optsemc_package,true,
+no_local_or_handoff_paths_in_text_package,true,

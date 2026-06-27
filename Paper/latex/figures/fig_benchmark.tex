@@ -1,0 +1,19 @@
+\begin{figure}[H]
+\centering
+\small
+\setlength{\fboxsep}{4pt}
+\begin{tabular}{@{}c@{}}
+\fbox{\begin{minipage}{0.72\columnwidth}\centering Optimizer-relevant feature domain\end{minipage}}\\[-0.1em]
+$\Downarrow$\\[-0.1em]
+\fbox{\begin{minipage}{0.72\columnwidth}\centering Validity constraints\end{minipage}}\\[-0.1em]
+$\Downarrow$\\[-0.1em]
+\fbox{\begin{minipage}{0.72\columnwidth}\centering Pairwise and selected three-way coverage\end{minipage}}\\[-0.1em]
+$\Downarrow$\\[-0.1em]
+\fbox{\begin{minipage}{0.72\columnwidth}\centering 4,216 query probes and 7,112 interactions\end{minipage}}\\[-0.1em]
+$\Downarrow$\\[-0.1em]
+\fbox{\begin{minipage}{0.72\columnwidth}\centering Rule triggering, projection traps, workload movement\end{minipage}}
+\end{tabular}
+\caption{OptSemBench-C generation. Query probes are generated from optimizer-relevant feature interactions rather than manually selected as examples.}
+\Description{A pipeline from feature domains and validity constraints to generated query probes and evaluation metrics.}
+\label{fig:benchmark}
+\end{figure}

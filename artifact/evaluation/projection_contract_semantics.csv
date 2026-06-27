@@ -1,0 +1,9 @@
+method,projected_equivalences,true_equivalences,false_equivalences,projected_differences,false_differences,lossy_projected_groups,projected_groups,atom_projection,state_collapsing
+keyword,2284,2030,254,86252,0,254,27615,true,true
+yesno,2036,2030,6,86500,0,6,27863,true,true
+operator_only,2268,2030,238,86268,0,238,27631,true,true
+strict,2030,2030,0,86506,0,0,27869,true,false
+no_placement,2030,2030,0,86506,0,0,27869,true,false
+no_decision_time,2030,2030,0,86506,0,0,27869,true,false
+no_observability,2030,2030,0,86506,0,0,27869,true,false
+no_modality,2030,2030,0,86506,0,0,27869,true,true

@@ -1,0 +1,8 @@
+key,count
+BigQuery,37
+ClickHouse,26
+DuckDB,21
+PostgreSQL,80
+Snowflake,26
+Spark SQL,36
+Trino,61

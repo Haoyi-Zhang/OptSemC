@@ -1,0 +1,8 @@
+metric,value
+executed_sql_probes,4216
+plan_successes,4216
+execution_successes,4216
+execution_failures,0
+total_result_rows,16988
+distinct_plan_hashes,89
+max_plan_steps,12

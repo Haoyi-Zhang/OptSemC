@@ -1,0 +1,12 @@
+category,files,bytes,text_files
+benchmark-data,54,5789759,5
+evaluation,297,119369569,297
+external-denominator,2,12884,2
+grounded-data,8,460990,8
+library,53,305123,53
+paper,75,927962,69
+root,17,28847,17
+scripts,181,664889,181
+tests,38,372646,38
+ALL,725,127932669,670
+FINGERPRINT,725,0d4f2fca748cce0176f3316bbe837c067cbf550909fa99c227a1a6ad89c81511,

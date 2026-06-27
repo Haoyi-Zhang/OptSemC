@@ -1,0 +1,91 @@
+suite_id,suite_name,motif_id,requirements,matching_probes,representative_probe,covered
+TPC-H,TPC-H decision-support optimizer motifs,TPCH-filter-local,predicate_class=simple;source_boundary=local,84,P0015,true
+TPC-H,TPC-H decision-support optimizer motifs,TPCH-conjunctive-filter,predicate_class=conjunctive;statistics_need=medium,1,P2575,true
+TPC-H,TPC-H decision-support optimizer motifs,TPCH-binary-join,join_shape=binary;join_type=inner,1384,P0010,true
+TPC-H,TPC-H decision-support optimizer motifs,TPCH-chain-join,join_shape=chain;join_type=inner,87,P0038,true
+TPC-H,TPC-H decision-support optimizer motifs,TPCH-star-join,join_shape=star;join_type=inner,87,P0064,true
+TPC-H,TPC-H decision-support optimizer motifs,TPCH-group-after-join,aggregation=group_by_after_join;join_type=inner,240,P0010,true
+TPC-H,TPC-H decision-support optimizer motifs,TPCH-topn,order_limit=topn,101,P0061,true
+TPC-H,TPC-H decision-support optimizer motifs,TPCH-high-stats,join_type=inner;statistics_need=high,55,P0029,true
+TPC-DS,TPC-DS snowflake and nested analytics motifs,TPCDS-snowflake-join,join_shape=snowflake;join_type=inner,86,P0106,true
+TPC-DS,TPC-DS snowflake and nested analytics motifs,TPCDS-outer-join,join_type=outer,229,P0037,true
+TPC-DS,TPC-DS snowflake and nested analytics motifs,TPCDS-window-order,order_limit=window_order,89,P0063,true
+TPC-DS,TPC-DS snowflake and nested analytics motifs,TPCDS-distinct,aggregation=distinct,243,P0001,true
+TPC-DS,TPC-DS snowflake and nested analytics motifs,TPCDS-expression-aggregate,aggregation=expression_aggregate,242,P0003,true
+TPC-DS,TPC-DS snowflake and nested analytics motifs,TPCDS-nested-view,reuse_structure=nested_view,287,P0101,true
+TPC-DS,TPC-DS snowflake and nested analytics motifs,TPCDS-disjunctive-predicate,predicate_class=disjunctive,100,P0045,true
+TPC-DS,TPC-DS snowflake and nested analytics motifs,TPCDS-correlated-subquery,predicate_class=correlated,99,P0105,true
+JOB,Join Order Benchmark motifs,JOB-chain-inner,join_shape=chain;join_type=inner,87,P0038,true
+JOB,Join Order Benchmark motifs,JOB-clique-inner,join_shape=clique;join_type=inner,87,P0040,true
+JOB,Join Order Benchmark motifs,JOB-star-inner,join_shape=star;join_type=inner,87,P0064,true
+JOB,Join Order Benchmark motifs,JOB-high-statistics,join_type=inner;statistics_need=high,55,P0029,true
+JOB,Join Order Benchmark motifs,JOB-reorder-disabled,control_surface=no_reorder_setting,70,P0028,true
+JOB,Join Order Benchmark motifs,JOB-pg-join-collapse,control_surface=pg_join_collapse_1,73,P0078,true
+JOB,Join Order Benchmark motifs,JOB-broadcast-candidate,distribution_trigger=broadcast_candidate,232,P0011,true
+JOB,Join Order Benchmark motifs,JOB-shuffle-required,distribution_trigger=shuffle,236,P0008,true
+SSB,Star Schema Benchmark motifs,SSB-star-local,join_shape=star;source_boundary=local,90,P0064,true
+SSB,Star Schema Benchmark motifs,SSB-group-by,aggregation=group_by,257,P0005,true
+SSB,Star Schema Benchmark motifs,SSB-simple-predicate,predicate_class=simple,102,P0015,true
+SSB,Star Schema Benchmark motifs,SSB-conjunctive-predicate,predicate_class=conjunctive,100,P0044,true
+SSB,Star Schema Benchmark motifs,SSB-order-by,order_limit=order_by,89,P0060,true
+SSB,Star Schema Benchmark motifs,SSB-low-statistics,statistics_need=low,3442,P0001,true
+CEB-CardEst,Cardinality-estimation and plan-quality motifs,CEB-high-stats,statistics_need=high,259,P0029,true
+CEB-CardEst,Cardinality-estimation and plan-quality motifs,CEB-unavailable-stats,statistics_need=unavailable,258,P0051,true
+CEB-CardEst,Cardinality-estimation and plan-quality motifs,CEB-correlated,predicate_class=correlated,99,P0105,true
+CEB-CardEst,Cardinality-estimation and plan-quality motifs,CEB-udf,predicate_class=udf,100,P0059,true
+CEB-CardEst,Cardinality-estimation and plan-quality motifs,CEB-anti-join,join_type=anti,228,P0100,true
+CEB-CardEst,Cardinality-estimation and plan-quality motifs,CEB-semi-join,join_type=semi,228,P0104,true
+CEB-CardEst,Cardinality-estimation and plan-quality motifs,CEB-disable-stats-prop,control_surface=disable_statistics_propagation,72,P0106,true
+Adaptive-Distributed,Adaptive and distributed query processing motifs,ADAPT-runtime-stats,adaptivity_trigger=runtime_stats,235,P0090,true
+Adaptive-Distributed,Adaptive and distributed query processing motifs,ADAPT-skew-trigger,adaptivity_trigger=skew,231,P0097,true
+Adaptive-Distributed,Adaptive and distributed query processing motifs,ADAPT-stage-boundary,adaptivity_trigger=stage_boundary,230,P0099,true
+Adaptive-Distributed,Adaptive and distributed query processing motifs,ADAPT-skewed-distribution,distribution_trigger=skewed,181,P0096,true
+Adaptive-Distributed,Adaptive and distributed query processing motifs,ADAPT-aqe-disabled,control_surface=aqe_disabled,72,P0100,true
+Adaptive-Distributed,Adaptive and distributed query processing motifs,ADAPT-dynamic-filter-off,control_surface=dynamic_filtering_disabled,73,P0023,true
+Federated-Lakehouse,Federated and lakehouse pushdown motifs,FED-same-connector,source_boundary=same_connector,633,P0002,true
+Federated-Lakehouse,Federated and lakehouse pushdown motifs,FED-cross-connector,source_boundary=cross_connector,185,P0032,true
+Federated-Lakehouse,Federated and lakehouse pushdown motifs,FED-basic-pushdown,connector_capability=supports_basic_pushdown,92,P0083,true
+Federated-Lakehouse,Federated and lakehouse pushdown motifs,FED-join-pushdown,connector_capability=supports_join_pushdown,92,P0085,true
+Federated-Lakehouse,Federated and lakehouse pushdown motifs,FED-aggregate-pushdown,connector_capability=supports_aggregate_pushdown,90,P0002,true
+Federated-Lakehouse,Federated and lakehouse pushdown motifs,FED-topn-pushdown,connector_capability=supports_topn_pushdown,84,P0089,true
+Federated-Lakehouse,Federated and lakehouse pushdown motifs,FED-search-optimization,connector_capability=supports_search_optimization,91,P0103,true
+Federated-Lakehouse,Federated and lakehouse pushdown motifs,FED-filter-pushdown-off,control_surface=disable_filter_pushdown,72,P0102,true
+Optimizer-Controls,User-visible optimizer-control motifs,CTRL-disable-hashjoin,control_surface=disable_hashjoin,72,P0103,true
+Optimizer-Controls,User-visible optimizer-control motifs,CTRL-disable-mergejoin,control_surface=disable_mergejoin,72,P0104,true
+Optimizer-Controls,User-visible optimizer-control motifs,CTRL-disable-nestloop,control_surface=disable_nestloop,72,P0105,true
+Optimizer-Controls,User-visible optimizer-control motifs,CTRL-disable-materialization,control_surface=disable_materialization,73,P0021,true
+Optimizer-Controls,User-visible optimizer-control motifs,CTRL-broadcast-hint,control_surface=broadcast_hint,70,P0011,true
+Optimizer-Controls,User-visible optimizer-control motifs,CTRL-merge-hint,control_surface=merge_hint,70,P0027,true
+Optimizer-Controls,User-visible optimizer-control motifs,CTRL-explain-logical,control_surface=explain_logical,73,P0025,true
+Optimizer-Controls,User-visible optimizer-control motifs,CTRL-explain-analyze,control_surface=explain_analyze,73,P0024,true
+PostgreSQL-Controls,PostgreSQL optimizer GUC and planning-control motifs,PG-hashjoin-off,control_surface=pg_enable_hashjoin_off,73,P0072,true
+PostgreSQL-Controls,PostgreSQL optimizer GUC and planning-control motifs,PG-mergejoin-off,control_surface=pg_enable_mergejoin_off,73,P0076,true
+PostgreSQL-Controls,PostgreSQL optimizer GUC and planning-control motifs,PG-nestloop-off,control_surface=pg_enable_nestloop_off,73,P0077,true
+PostgreSQL-Controls,PostgreSQL optimizer GUC and planning-control motifs,PG-hashagg-off,control_surface=pg_enable_hashagg_off,73,P0071,true
+PostgreSQL-Controls,PostgreSQL optimizer GUC and planning-control motifs,PG-indexscan-off,control_surface=pg_enable_indexscan_off,73,P0074,true
+PostgreSQL-Controls,PostgreSQL optimizer GUC and planning-control motifs,PG-indexonlyscan-off,control_surface=pg_enable_indexonlyscan_off,72,P0115,true
+PostgreSQL-Controls,PostgreSQL optimizer GUC and planning-control motifs,PG-incremental-sort-off,control_surface=pg_enable_incremental_sort_off,73,P0073,true
+PostgreSQL-Controls,PostgreSQL optimizer GUC and planning-control motifs,PG-memoize-off,control_surface=pg_enable_memoize_off,73,P0075,true
+DuckDB-Controls,DuckDB optimizer-control and pushdown-disable motifs,DUCK-disable-optimizer,control_surface=duck_disable_optimizer,72,P0111,true
+DuckDB-Controls,DuckDB optimizer-control and pushdown-disable motifs,DUCK-disable-filter-pushdown,control_surface=duck_disable_filter_pushdown,72,P0109,true
+DuckDB-Controls,DuckDB optimizer-control and pushdown-disable motifs,DUCK-disable-stats-prop,control_surface=duck_disable_statistics_propagation,72,P0112,true
+DuckDB-Controls,DuckDB optimizer-control and pushdown-disable motifs,DUCK-cte-materialized,control_surface=materialized_hint,68,P0026,true
+DuckDB-Controls,DuckDB optimizer-control and pushdown-disable motifs,DUCK-cte-not-materialized,control_surface=not_materialized_hint,68,P0069,true
+DuckDB-Controls,DuckDB optimizer-control and pushdown-disable motifs,DUCK-reused-cte,reuse_structure=reused_cte,288,P0047,true
+DuckDB-Controls,DuckDB optimizer-control and pushdown-disable motifs,DUCK-single-cte,reuse_structure=single_cte,364,P0007,true
+DuckDB-Controls,DuckDB optimizer-control and pushdown-disable motifs,DUCK-nested-view,reuse_structure=nested_view,287,P0101,true
+ClickHouse-JoinAlgorithms,ClickHouse join-algorithm control motifs,CH-hash,control_surface=clickhouse_join_algorithm_hash,70,P0018,true
+ClickHouse-JoinAlgorithms,ClickHouse join-algorithm control motifs,CH-parallel-hash,control_surface=clickhouse_join_algorithm_parallel_hash,70,P0019,true
+ClickHouse-JoinAlgorithms,ClickHouse join-algorithm control motifs,CH-grace-hash,control_surface=clickhouse_join_algorithm_grace_hash,70,P0017,true
+ClickHouse-JoinAlgorithms,ClickHouse join-algorithm control motifs,CH-full-sort-merge,control_surface=clickhouse_join_algorithm_full_sorting_merge,70,P0016,true
+ClickHouse-JoinAlgorithms,ClickHouse join-algorithm control motifs,CH-partial-merge,control_surface=clickhouse_join_algorithm_partial_merge,70,P0020,true
+ClickHouse-JoinAlgorithms,ClickHouse join-algorithm control motifs,CH-direct,control_surface=clickhouse_join_algorithm_direct,70,P0014,true
+ClickHouse-JoinAlgorithms,ClickHouse join-algorithm control motifs,CH-auto,control_surface=clickhouse_join_algorithm_auto,70,P0013,true
+Spark-Trino-Distribution,"Spark/Trino distribution, hint, and adaptive motifs",DIST-spark-merge-hint,control_surface=spark_merge_hint,70,P0080,true
+Spark-Trino-Distribution,"Spark/Trino distribution, hint, and adaptive motifs",DIST-spark-shuffle-hash-hint,control_surface=spark_shuffle_hash_hint,70,P0081,true
+Spark-Trino-Distribution,"Spark/Trino distribution, hint, and adaptive motifs",DIST-spark-replicate-nl-hint,control_surface=spark_shuffle_replicate_nl_hint,70,P0082,true
+Spark-Trino-Distribution,"Spark/Trino distribution, hint, and adaptive motifs",DIST-spark-aqe-disabled,control_surface=spark_aqe_disabled,73,P0079,true
+Spark-Trino-Distribution,"Spark/Trino distribution, hint, and adaptive motifs",DIST-trino-partitioned,control_surface=trino_join_distribution_partitioned,69,P0110,true
+Spark-Trino-Distribution,"Spark/Trino distribution, hint, and adaptive motifs",DIST-join-broadcast,control_surface=join_distribution_broadcast,69,P0101,true
+Spark-Trino-Distribution,"Spark/Trino distribution, hint, and adaptive motifs",DIST-join-partitioned,control_surface=join_distribution_partitioned,72,P0114,true
+Spark-Trino-Distribution,"Spark/Trino distribution, hint, and adaptive motifs",DIST-shuffle-trigger,distribution_trigger=shuffle,236,P0008,true

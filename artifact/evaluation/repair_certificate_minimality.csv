@@ -1,0 +1,4 @@
+method,computed_false_equivalences,reported_false_equivalences,reported_min_size,reported_sets_resolve_all,smaller_repair_exists,passed
+keyword,254,254,1,true,false,true
+yesno,6,6,1,true,false,true
+operator_only,238,238,1,true,false,true

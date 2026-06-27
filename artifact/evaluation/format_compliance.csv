@@ -1,0 +1,7 @@
+check,passed,details
+uses_acmart_sigconf_nonacm,true,documentclass
+single_blind_author_block_present,true,authors
+no_track_suffix_in_title,true,regular research
+abstract_nonplaceholder,true,abstract
+references_inline_section_present,true,bibliography
+pdf_pages_with_references,true,pages=13;refs=[13]

@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Finite-comparison scalability and dispersion. False probes and feature axes summarize where false witnesses occur; family regions are pair-family groups with at least one false witness. The 8$\times$ lift repeats the probe denominator without changing contracts. Drift compares streaming maintenance with full recomputation.}
+\label{tab:scalability-family}
+\begin{tabular}{lrrrrrr}
+\toprule
+Projection & False & Probes & Axes & Fam. & Min checks/s & Drift \\
+\midrule
+strict & 0 & -- & -- & 0/6 & 139,186 & 0 \\
+keyword & 254 & 254 & 9 & 3/6 & 207,729 & 0 \\
+operator-only & 238 & 238 & 8 & 2/6 & 242,540 & 0 \\
+surface & 0 & -- & -- & 0/6 & 131,314 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,56 @@
+selected_interactions:
+- name: source_pushdown_operator
+  features:
+  - source_boundary
+  - connector_capability
+  - aggregation
+- name: source_topn_operator
+  features:
+  - source_boundary
+  - connector_capability
+  - order_limit
+- name: stats_join_shape
+  features:
+  - statistics_need
+  - join_shape
+  - join_type
+- name: adaptivity_distribution_join
+  features:
+  - adaptivity_trigger
+  - distribution_trigger
+  - join_shape
+- name: materialization_predicate_reuse
+  features:
+  - reuse_structure
+  - predicate_class
+  - aggregation
+- name: v4_control_surface_join_type_statistics_need
+  features:
+  - control_surface
+  - join_type
+  - statistics_need
+- name: v4_control_surface_reuse_structure_aggregation
+  features:
+  - control_surface
+  - reuse_structure
+  - aggregation
+- name: v4_control_surface_distribution_trigger_adaptivity_trigger
+  features:
+  - control_surface
+  - distribution_trigger
+  - adaptivity_trigger
+- name: v4_connector_capability_order_limit_source_boundary
+  features:
+  - connector_capability
+  - order_limit
+  - source_boundary
+- name: v4_connector_capability_aggregation_source_boundary
+  features:
+  - connector_capability
+  - aggregation
+  - source_boundary
+- name: v4_predicate_class_connector_capability_source_boundary
+  features:
+  - predicate_class
+  - connector_capability
+  - source_boundary

@@ -1,0 +1,4 @@
+method,folds,train_false_equivalences_total,heldout_false_equivalences_total,folds_with_learned_minimum_failure,learned_minimum_unresolved_total,robust_basis,robust_basis_unresolved_total,max_heldout_false_equivalences
+keyword,12,2218,830,6,144,layer+placement,0,212
+operator_only,9,1573,569,2,12,layer+placement,0,129
+yesno,1,3,3,0,0,layer+placement,0,3

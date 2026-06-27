@@ -1,0 +1,4 @@
+check,passed,details
+probe_validity_detail_matches_summary,true,summary=0;detail_rows=0
+public_provenance_detail_matches_summary,true,summary=0;bad_rows=0
+grounded_rule_audit_detail_matches_summary,true,summary=0;bad_rows=0

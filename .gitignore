@@ -1,0 +1,30 @@
+# Python and test caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# LaTeX build byproducts
+Paper/latex/*.aux
+Paper/latex/*.bbl
+Paper/latex/*.blg
+Paper/latex/*.fdb_latexmk
+Paper/latex/*.fls
+Paper/latex/*.log
+Paper/latex/*.out
+Paper/latex/*.synctex.gz
+Paper/latex/*.toc
+Paper/latex/paper_build*
+
+# Local editor and OS files
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+*.backup
+
+# Local environment files
+.env
+.venv/
+venv/
+

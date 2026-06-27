@@ -1,0 +1,7 @@
+metric,value
+python_files,260
+syntax_ok_files,260
+functions,1952
+classes,81
+max_function_lines,247
+files_over_120_function_lines,1

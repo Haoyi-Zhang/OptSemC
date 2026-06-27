@@ -1,0 +1,6 @@
+projection,items,exact_classes,projected_classes,nontrivial_projected_classes,false_projected_classes,max_projected_class_size
+strict,24342,1288,1288,670,0,1717
+keyword,24342,1288,148,111,81,4216
+yesno,24342,1288,696,426,215,2027
+operator_only,24342,1288,387,254,191,2027
+operator_kind_surface,24342,1288,820,484,206,2027

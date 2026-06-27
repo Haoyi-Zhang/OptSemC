@@ -1,0 +1,8 @@
+metric,value
+engine_count,7
+probe_count,4216
+full_pairwise_comparisons_per_projection,88536
+full_rows,4
+full_elapsed_ms_total,5387.338
+full_min_comparisons_per_second,56436.7
+full_max_comparisons_per_second,75793.8

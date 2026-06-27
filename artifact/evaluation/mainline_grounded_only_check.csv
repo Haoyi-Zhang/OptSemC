@@ -1,0 +1,97 @@
+file,pattern,matches,pass
+Paper/latex/paper.tex,current corpus contains 746,0,yes
+Paper/latex/paper.tex,746 accepted contract rules,0,yes
+Paper/latex/paper.tex,112 public source records,0,yes
+Paper/latex/paper.tex,747 frozen evidence segments,0,yes
+Paper/latex/paper.tex,legacy 746-rule corpus is retained,0,yes
+Paper/latex/paper.tex,stress-test layer,0,yes
+Paper/latex/paper.tex,optsem_c_v2[0-6]_,0,yes
+Paper/latex/paper.tex,paper/latex/,0,yes
+Paper/latex/paper.tex,artifact/,0,yes
+Paper/latex/paper.tex,\.jsonl,0,yes
+Paper/latex/paper.tex,\.csv,0,yes
+Paper/latex/paper.tex,\.py,0,yes
+Paper/latex/sections/01_intro.tex,current corpus contains 746,0,yes
+Paper/latex/sections/01_intro.tex,746 accepted contract rules,0,yes
+Paper/latex/sections/01_intro.tex,112 public source records,0,yes
+Paper/latex/sections/01_intro.tex,747 frozen evidence segments,0,yes
+Paper/latex/sections/01_intro.tex,legacy 746-rule corpus is retained,0,yes
+Paper/latex/sections/01_intro.tex,stress-test layer,0,yes
+Paper/latex/sections/01_intro.tex,optsem_c_v2[0-6]_,0,yes
+Paper/latex/sections/01_intro.tex,paper/latex/,0,yes
+Paper/latex/sections/01_intro.tex,artifact/,0,yes
+Paper/latex/sections/01_intro.tex,\.jsonl,0,yes
+Paper/latex/sections/01_intro.tex,\.csv,0,yes
+Paper/latex/sections/01_intro.tex,\.py,0,yes
+Paper/latex/sections/02_problem.tex,current corpus contains 746,0,yes
+Paper/latex/sections/02_problem.tex,746 accepted contract rules,0,yes
+Paper/latex/sections/02_problem.tex,112 public source records,0,yes
+Paper/latex/sections/02_problem.tex,747 frozen evidence segments,0,yes
+Paper/latex/sections/02_problem.tex,legacy 746-rule corpus is retained,0,yes
+Paper/latex/sections/02_problem.tex,stress-test layer,0,yes
+Paper/latex/sections/02_problem.tex,optsem_c_v2[0-6]_,0,yes
+Paper/latex/sections/02_problem.tex,paper/latex/,0,yes
+Paper/latex/sections/02_problem.tex,artifact/,0,yes
+Paper/latex/sections/02_problem.tex,\.jsonl,0,yes
+Paper/latex/sections/02_problem.tex,\.csv,0,yes
+Paper/latex/sections/02_problem.tex,\.py,0,yes
+Paper/latex/sections/03_model.tex,current corpus contains 746,0,yes
+Paper/latex/sections/03_model.tex,746 accepted contract rules,0,yes
+Paper/latex/sections/03_model.tex,112 public source records,0,yes
+Paper/latex/sections/03_model.tex,747 frozen evidence segments,0,yes
+Paper/latex/sections/03_model.tex,legacy 746-rule corpus is retained,0,yes
+Paper/latex/sections/03_model.tex,stress-test layer,0,yes
+Paper/latex/sections/03_model.tex,optsem_c_v2[0-6]_,0,yes
+Paper/latex/sections/03_model.tex,paper/latex/,0,yes
+Paper/latex/sections/03_model.tex,artifact/,0,yes
+Paper/latex/sections/03_model.tex,\.jsonl,0,yes
+Paper/latex/sections/03_model.tex,\.csv,0,yes
+Paper/latex/sections/03_model.tex,\.py,0,yes
+Paper/latex/sections/04_benchmark_corpus.tex,current corpus contains 746,0,yes
+Paper/latex/sections/04_benchmark_corpus.tex,746 accepted contract rules,0,yes
+Paper/latex/sections/04_benchmark_corpus.tex,112 public source records,0,yes
+Paper/latex/sections/04_benchmark_corpus.tex,747 frozen evidence segments,0,yes
+Paper/latex/sections/04_benchmark_corpus.tex,legacy 746-rule corpus is retained,0,yes
+Paper/latex/sections/04_benchmark_corpus.tex,stress-test layer,0,yes
+Paper/latex/sections/04_benchmark_corpus.tex,optsem_c_v2[0-6]_,0,yes
+Paper/latex/sections/04_benchmark_corpus.tex,paper/latex/,0,yes
+Paper/latex/sections/04_benchmark_corpus.tex,artifact/,0,yes
+Paper/latex/sections/04_benchmark_corpus.tex,\.jsonl,0,yes
+Paper/latex/sections/04_benchmark_corpus.tex,\.csv,0,yes
+Paper/latex/sections/04_benchmark_corpus.tex,\.py,0,yes
+Paper/latex/sections/05_evaluation.tex,current corpus contains 746,0,yes
+Paper/latex/sections/05_evaluation.tex,746 accepted contract rules,0,yes
+Paper/latex/sections/05_evaluation.tex,112 public source records,0,yes
+Paper/latex/sections/05_evaluation.tex,747 frozen evidence segments,0,yes
+Paper/latex/sections/05_evaluation.tex,legacy 746-rule corpus is retained,0,yes
+Paper/latex/sections/05_evaluation.tex,stress-test layer,0,yes
+Paper/latex/sections/05_evaluation.tex,optsem_c_v2[0-6]_,0,yes
+Paper/latex/sections/05_evaluation.tex,paper/latex/,0,yes
+Paper/latex/sections/05_evaluation.tex,artifact/,0,yes
+Paper/latex/sections/05_evaluation.tex,\.jsonl,0,yes
+Paper/latex/sections/05_evaluation.tex,\.csv,0,yes
+Paper/latex/sections/05_evaluation.tex,\.py,0,yes
+Paper/latex/sections/06_cases.tex,current corpus contains 746,0,yes
+Paper/latex/sections/06_cases.tex,746 accepted contract rules,0,yes
+Paper/latex/sections/06_cases.tex,112 public source records,0,yes
+Paper/latex/sections/06_cases.tex,747 frozen evidence segments,0,yes
+Paper/latex/sections/06_cases.tex,legacy 746-rule corpus is retained,0,yes
+Paper/latex/sections/06_cases.tex,stress-test layer,0,yes
+Paper/latex/sections/06_cases.tex,optsem_c_v2[0-6]_,0,yes
+Paper/latex/sections/06_cases.tex,paper/latex/,0,yes
+Paper/latex/sections/06_cases.tex,artifact/,0,yes
+Paper/latex/sections/06_cases.tex,\.jsonl,0,yes
+Paper/latex/sections/06_cases.tex,\.csv,0,yes
+Paper/latex/sections/06_cases.tex,\.py,0,yes
+Paper/latex/sections/07_discussion_related.tex,current corpus contains 746,0,yes
+Paper/latex/sections/07_discussion_related.tex,746 accepted contract rules,0,yes
+Paper/latex/sections/07_discussion_related.tex,112 public source records,0,yes
+Paper/latex/sections/07_discussion_related.tex,747 frozen evidence segments,0,yes
+Paper/latex/sections/07_discussion_related.tex,legacy 746-rule corpus is retained,0,yes
+Paper/latex/sections/07_discussion_related.tex,stress-test layer,0,yes
+Paper/latex/sections/07_discussion_related.tex,optsem_c_v2[0-6]_,0,yes
+Paper/latex/sections/07_discussion_related.tex,paper/latex/,0,yes
+Paper/latex/sections/07_discussion_related.tex,artifact/,0,yes
+Paper/latex/sections/07_discussion_related.tex,\.jsonl,0,yes
+Paper/latex/sections/07_discussion_related.tex,\.csv,0,yes
+Paper/latex/sections/07_discussion_related.tex,\.py,0,yes

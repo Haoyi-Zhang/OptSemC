@@ -1,0 +1,12 @@
+check,passed,details
+library_compileall,true,artifact/optsemc
+legacy_six_field_action_keys_supported,true,
+current_seven_field_action_keys_supported,true,
+evidence_signature_excludes_unspec,true,
+strict_projection_is_identity_on_atoms,true,
+keyword_witness_count_via_library,true,computed=254;reported=254
+yesno_witness_count_via_library,true,computed=6;reported=6
+operator_only_witness_count_via_library,true,computed=238;reported=238
+adversarial_projection_methods_registered,true,"kind_only,layer_only,placement_only,decision_time_only,observability_only,state_only,operator_kind_layer,operator_kind_placement,operator_kind_surface"
+coarse_one_field_baseline_counts_via_library,true,
+strengthened_surface_projection_is_safe,true,

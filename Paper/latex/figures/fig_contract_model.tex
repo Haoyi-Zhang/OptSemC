@@ -1,0 +1,38 @@
+\begin{figure*}[t]
+\centering
+\scriptsize
+\resizebox{0.98\textwidth}{!}{%
+\begin{tikzpicture}[
+  box/.style={draw, rounded corners, align=center, inner sep=3pt, minimum height=0.55cm, text width=0.145\textwidth},
+  wide/.style={draw, rounded corners, align=center, inner sep=3pt, minimum height=0.55cm, text width=0.17\textwidth},
+  arrow/.style={-{Latex[length=2mm]}, thick},
+  lab/.style={align=center, font=\scriptsize}
+]
+
+\node[box] (evidence) {Public\ evidence};
+\node[box, right=0.45cm of evidence] (rule) {Guarded\ modal rule\ $r=(\gamma,a,s,\nu,\epsilon)$};
+\node[box, right=0.45cm of rule] (join) {State join\ over applicable\ rules};
+\node[box, right=0.45cm of join] (map) {Contract map\ $M_{e,q}$};
+\node[wide, right=0.45cm of map] (sig) {Exact signature\ $S(M)$};
+\node[wide, right=0.45cm of sig] (proj) {Projected signature\ $S_\pi(M)$};
+
+\draw[arrow] (evidence) -- (rule);
+\draw[arrow] (rule) -- (join);
+\draw[arrow] (join) -- (map);
+\draw[arrow] (map) -- (sig);
+\draw[arrow] (sig) -- node[above, lab] {declared\ vocabulary} (proj);
+
+\node[wide, below=0.55cm of sig] (kernel) {Projection kernel\ $\mathcal{K}_\pi$};
+\node[wide, below=0.55cm of proj] (repair) {Minimum repair\ frontier};
+\draw[arrow] (proj) -- (kernel);
+\draw[arrow] (kernel) -- node[below, lab] {separate\ false witnesses} (repair);
+\draw[arrow] (sig) -- (kernel);
+
+\node[draw, dashed, rounded corners, fit=(evidence)(rule)(join)(map), inner sep=5pt, label={[lab]below:contract construction}] {};
+\node[draw, dashed, rounded corners, fit=(sig)(proj)(kernel)(repair), inner sep=5pt, label={[lab]below:comparison and repair}] {};
+\end{tikzpicture}%
+}
+\caption{Contract-comparison pipeline. Public evidence becomes guarded modal rules, rules merge into per-engine/per-probe contract maps, exact signatures are projected into a declared comparison vocabulary, and nontrivial projection kernels yield false-portability witnesses and minimum repair frontiers.}
+\Description{A TikZ flowchart from public evidence to guarded rules, state join, contract map, exact signature, projected signature, projection kernel, and repair frontier.}
+\label{fig:contract-model}
+\end{figure*}

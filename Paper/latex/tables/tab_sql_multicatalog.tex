@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\caption{SQL validation across deterministic catalog densities. The check repeats the full generated probe corpus over three populations; it validates query construction and planability, not runtime performance.}
+\label{tab:sql-multicatalog}
+\small
+\begin{tabular}{rrrrr}
+\toprule
+Rows/table & Probes & Exec. & Fail & Rows \\
+\midrule
+1 & 4,216 & 4,216 & 0 & 3,802 \\
+5 & 4,216 & 4,216 & 0 & 16,988 \\
+17 & 4,216 & 4,216 & 0 & 48,969 \\
+\bottomrule
+\end{tabular}
+\Description{Multi-catalog SQL execution validation table with all generated probes executed over three deterministic catalog sizes.}
+\end{table}

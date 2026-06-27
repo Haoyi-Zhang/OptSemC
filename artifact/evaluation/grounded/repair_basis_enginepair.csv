@@ -1,0 +1,7 @@
+method,engine_pair,basis,false_equivalences,resolved,unresolved,resolution_rate
+keyword,BigQuery--ClickHouse,layer+placement,203,203,0,1.000000
+keyword,BigQuery--Trino,layer+placement,45,45,0,1.000000
+keyword,ClickHouse--Trino,layer+placement,6,6,0,1.000000
+yesno,ClickHouse--Trino,layer+placement,6,6,0,1.000000
+operator_only,ClickHouse--Trino,layer+placement,123,123,0,1.000000
+operator_only,Spark SQL--Trino,layer+placement,115,115,0,1.000000
