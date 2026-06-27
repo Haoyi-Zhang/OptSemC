@@ -1,4 +1,5 @@
 .PHONY: verify deep paper baselines external frontier claims tests repository coverage proofs replay manifest clean package-check
+export PYTHONPATH := $(CURDIR):$(CURDIR)/scripts$(if $(PYTHONPATH),:$(PYTHONPATH))
 
 verify:
 	./run_mainline_checks.sh

@@ -2,6 +2,7 @@
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
+export PYTHONPATH="$SCRIPT_DIR:$SCRIPT_DIR/scripts${PYTHONPATH:+:$PYTHONPATH}"
 python scripts/generate_probes.py --rules grounded/verified_rules.jsonl
 python scripts/verify_generated_probes.py
 python scripts/match_rules.py --rules grounded/verified_rules.jsonl --probes benchmark/generated_probes.jsonl --out evaluation/grounded_applicable_rules.jsonl
