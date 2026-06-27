@@ -17,6 +17,8 @@ package-dir = {"optsemc" = "optsemc"}
 packages = ["optsemc"]
 
 [tool.setuptools_scm]
+root = ".."
+relative_to = "pyproject.toml"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

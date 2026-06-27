@@ -20,6 +20,12 @@ try:
     add("project_version_not_hardcoded", "version" not in project and "version" in dynamic_fields, f"dynamic={sorted(dynamic_fields)}")
     build_requires = set(data.get("build-system", {}).get("requires", []))
     add("dynamic_version_backend_declared", any(req.startswith("setuptools-scm") for req in build_requires), str(sorted(build_requires)))
+    scm = data.get("tool", {}).get("setuptools_scm", {})
+    add(
+        "dynamic_version_git_root_declared",
+        scm.get("root") == ".." and scm.get("relative_to") == "pyproject.toml",
+        str(scm),
+    )
     tool = data.get("tool", {}).get("setuptools", {})
     pkg_dir = tool.get("package-dir", {}).get("optsemc", "")
     add("package_dir_exists", bool(pkg_dir) and (ROOT / pkg_dir).is_dir(), pkg_dir)
