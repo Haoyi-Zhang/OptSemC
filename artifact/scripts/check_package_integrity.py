@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import csv, re, sys
+import csv, re, shutil, sys
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT/'artifact'/'evaluation'/'package_integrity.csv'
@@ -32,6 +32,16 @@ for base in scan_paths:
         s=re.sub(r'\\begingroup\\small\\noindent\\raggedright\\textbf\{PVLDB Reference Format:.*?\\input\{sections/01_intro\}', r'\\input{sections/01_intro}', s, flags=re.S)
         if content_pat.search(s): bad_content.append(str(p.relative_to(ROOT)))
 add('no_iteration_or_state_terms_in_public_text', not bad_content, ';'.join(sorted(set(bad_content))[:20]))
+for cache in ROOT.rglob('__pycache__'):
+    shutil.rmtree(cache, ignore_errors=True)
+for cache in ROOT.rglob('.pytest_cache'):
+    shutil.rmtree(cache, ignore_errors=True)
+for p in ROOT.rglob('*'):
+    if p.is_file() and (p.suffix in {'.pyc','.pyo','.aux','.log','.out','.toc','.fls','.fdb_latexmk','.blg','.bbl'} or p.name.endswith('.backup')):
+        try:
+            p.unlink()
+        except OSError:
+            pass
 trans=[]
 for p in ROOT.rglob('*'):
     if p.is_dir() and p.name in {'__pycache__','.pytest_cache'}: trans.append(str(p.relative_to(ROOT)))
