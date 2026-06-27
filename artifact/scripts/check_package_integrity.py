@@ -36,6 +36,9 @@ for cache in ROOT.rglob('__pycache__'):
     shutil.rmtree(cache, ignore_errors=True)
 for cache in ROOT.rglob('.pytest_cache'):
     shutil.rmtree(cache, ignore_errors=True)
+for cache in ROOT.rglob('*.egg-info'):
+    if cache.is_dir():
+        shutil.rmtree(cache, ignore_errors=True)
 for p in ROOT.rglob('*'):
     if p.is_file() and (p.suffix in {'.pyc','.pyo','.aux','.log','.out','.toc','.fls','.fdb_latexmk','.blg','.bbl'} or p.name.endswith('.backup')):
         try:
@@ -44,7 +47,7 @@ for p in ROOT.rglob('*'):
             pass
 trans=[]
 for p in ROOT.rglob('*'):
-    if p.is_dir() and p.name in {'__pycache__','.pytest_cache'}: trans.append(str(p.relative_to(ROOT)))
+    if p.is_dir() and (p.name in {'__pycache__','.pytest_cache'} or p.name.endswith('.egg-info')): trans.append(str(p.relative_to(ROOT)))
     elif p.is_file() and (p.suffix in {'.pyc','.pyo','.aux','.log','.out','.toc','.fls','.fdb_latexmk','.blg','.bbl'} or p.name.endswith('.backup')): trans.append(str(p.relative_to(ROOT)))
 add('no_transient_build_files', not trans, ';'.join(trans[:20]))
 OUT.parent.mkdir(parents=True, exist_ok=True)

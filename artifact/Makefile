@@ -43,7 +43,7 @@ package-check:
 	python scripts/check_makefile_targets.py && python scripts/check_package_integrity.py && python scripts/check_source_witness_support.py && python scripts/check_side_balanced_witness_support.py
 
 clean:
-	find .. -type d \( -name __pycache__ -o -name .pytest_cache \) -prune -exec rm -rf {} +
+	find .. -type d \( -name __pycache__ -o -name .pytest_cache -o -name '*.egg-info' \) -prune -exec rm -rf {} +
 	find .. -type f \( -name '*.pyc' -o -name '*.pyo' \) -delete
 	find ../Paper/latex -maxdepth 1 -type f \( -name '*.aux' -o -name '*.log' -o -name '*.out' -o -name '*.toc' -o -name '*.bbl' -o -name '*.blg' -o -name '*.fls' -o -name '*.fdb_latexmk' \) -delete
 

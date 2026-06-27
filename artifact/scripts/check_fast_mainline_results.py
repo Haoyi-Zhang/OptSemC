@@ -8,7 +8,7 @@ ART = ROOT / 'artifact'
 EVAL = ART / 'evaluation'
 OUT = EVAL / 'fast_mainline_results.csv'
 TRANSIENT_SUFFIXES = ('.aux','.log','.out','.toc','.bbl','.blg','.fls','.fdb_latexmk','.pyc','.pyo','.backup')
-IGNORED_DIRS = {'.git','__pycache__','.pytest_cache','.mypy_cache'}
+IGNORED_DIRS = {'.git','__pycache__','.pytest_cache','.mypy_cache','build','dist'}
 SKIP = {
  'artifact/evaluation/package_manifest.csv','artifact/evaluation/package_manifest_summary.csv','artifact/evaluation/package_manifest_check.csv',
  'artifact/evaluation/package_snapshot_check.csv','artifact/evaluation/integrity_suite.csv','artifact/evaluation/fast_mainline_results.csv',
@@ -32,7 +32,7 @@ def sha256_file(path: Path) -> str:
 def skip_path(path: Path) -> bool:
     rel = path.relative_to(ROOT).as_posix()
     if rel in SKIP: return True
-    if any(part in IGNORED_DIRS for part in path.relative_to(ROOT).parts): return True
+    if any(part in IGNORED_DIRS or part.endswith('.egg-info') for part in path.relative_to(ROOT).parts): return True
     if path.name.startswith('paper_build'): return True
     if path.name.endswith(TRANSIENT_SUFFIXES): return True
     return False
@@ -53,6 +53,9 @@ def add(check, passed, details=''):
 # Remove interpreter caches created by this checker before auditing the tree.
 for cache in ROOT.rglob('__pycache__'):
     shutil.rmtree(cache, ignore_errors=True)
+for cache in ROOT.rglob('*.egg-info'):
+    if cache.is_dir():
+        shutil.rmtree(cache, ignore_errors=True)
 for pyc in ROOT.rglob('*.py[co]'):
     try: pyc.unlink()
     except OSError: pass
@@ -66,7 +69,7 @@ missing_raw = [p.relative_to(ROOT).as_posix() for p in required_raw if not p.exi
 add('raw_generated_outputs_present', not missing_raw, ';'.join(missing_raw))
 trans=[]
 for path in ROOT.rglob('*'):
-    if any(part in IGNORED_DIRS for part in path.relative_to(ROOT).parts): continue
+    if any(part in IGNORED_DIRS or part.endswith('.egg-info') for part in path.relative_to(ROOT).parts): continue
     if path.is_file() and (path.name.startswith('paper_build') or path.name.endswith(TRANSIENT_SUFFIXES)):
         trans.append(path.relative_to(ROOT).as_posix())
 add('no_transient_products', not trans, ';'.join(trans[:20]))

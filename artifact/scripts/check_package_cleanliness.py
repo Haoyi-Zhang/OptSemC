@@ -22,6 +22,9 @@ OUT = ROOT / 'evaluation' / 'package_cleanliness.csv'
 # the interpreter may have produced before scanning for package transients.
 for cache in PKG.rglob('__pycache__'):
     shutil.rmtree(cache, ignore_errors=True)
+for cache in PKG.rglob('*.egg-info'):
+    if cache.is_dir():
+        shutil.rmtree(cache, ignore_errors=True)
 for pyc in PKG.rglob('*.py[co]'):
     try:
         pyc.unlink()
@@ -33,7 +36,7 @@ def add(check: str, passed: bool, details: str = '') -> None:
     ROWS.append({'check': check, 'passed': str(bool(passed)).lower(), 'details': details})
 
 transient = transient_paths(PKG, suffixes=(
-    '.pyc', '.pyo', '.aux', '.log', '.out', '.toc', '.fls', '.fdb_latexmk', '.synctex.gz', '.backup',
+    '.pyc', '.pyo', '.aux', '.log', '.out', '.toc', '.fls', '.fdb_latexmk', '.synctex.gz', '.backup', '.egg-info',
 ), names={'__pycache__', '.DS_Store', '.pytest_cache'})
 add('no_transient_or_build_byproducts', not transient, '|'.join(transient[:20]))
 

@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, Sequence
 
-IGNORED_DIRS = frozenset({".git", "__pycache__", ".pytest_cache", ".mypy_cache"})
+IGNORED_DIRS = frozenset({".git", "__pycache__", ".pytest_cache", ".mypy_cache", "build", "dist"})
 TRANSIENT_SUFFIXES = (".aux", ".log", ".out", ".toc", ".bbl", ".blg", ".compile.stdout", ".backup")
 
 
@@ -53,7 +53,7 @@ def classify_path(path: Path) -> str:
 
 def should_skip(path: Path, root: Path) -> bool:
     rel = path.relative_to(root)
-    if any(part in IGNORED_DIRS for part in rel.parts):
+    if any(part in IGNORED_DIRS or part.endswith(".egg-info") for part in rel.parts):
         return True
     if path.name.startswith(".") and path.name not in {".gitignore"}:
         return False
@@ -115,4 +115,3 @@ def transient_files(root: Path) -> list[str]:
         if path.is_file() and (path.name.startswith("paper_build") or path.name.endswith(TRANSIENT_SUFFIXES)):
             offenders.append(path.relative_to(root).as_posix())
     return sorted(offenders)
-

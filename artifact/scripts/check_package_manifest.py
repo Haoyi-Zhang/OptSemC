@@ -17,6 +17,10 @@ for pattern in ["Paper/latex/paper_build*", "Paper/latex/*.aux", "Paper/latex/*.
 for cache in ROOT.rglob("__pycache__"):
     import shutil
     shutil.rmtree(cache, ignore_errors=True)
+for cache in ROOT.rglob("*.egg-info"):
+    import shutil
+    if cache.is_dir():
+        shutil.rmtree(cache, ignore_errors=True)
 for pyc in ROOT.rglob("*.py[co]"):
     try:
         pyc.unlink()
@@ -51,4 +55,3 @@ print(f"Package manifest check: {passed}/{len(rows)} passed")
 for r in rows:
     if r['passed']!='true': print('FAIL', r['check'], r['details'])
 if passed != len(rows): sys.exit(1)
-
