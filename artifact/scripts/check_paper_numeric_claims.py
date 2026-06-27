@@ -90,9 +90,15 @@ try:
     summary = {row["metric"]: row["value"] for row in read_csv(E / "scalability_regression_summary.csv")}
     alg = read_csv(E / "algorithmic_scaling_summary.csv")
     min_cps = min(float(row["min_checks_per_second"]) for row in alg)
-    required = [fmt_int(88536), fmt_int(708288), "70,000", summary["min_r_squared"][:5]]
+    min_r_squared = float(summary["min_r_squared"])
+    required = [fmt_int(88536), fmt_int(708288), "70,000", "0.96"]
     missing = [tok for tok in required if tok not in section]
-    add("evaluation_scaling_claims_match_outputs", not missing and min_cps >= 70000.0, "|".join(missing) + (f";min_cps={min_cps:.0f}" if min_cps < 70000.0 else ""))
+    detail = "|".join(missing)
+    if min_cps < 70000.0:
+        detail += f";min_cps={min_cps:.0f}"
+    if min_r_squared < 0.96:
+        detail += f";min_r_squared={min_r_squared:.6f}"
+    add("evaluation_scaling_claims_match_outputs", not missing and min_cps >= 70000.0 and min_r_squared >= 0.96, detail)
 except Exception as exc:
     add("evaluation_scaling_claims_match_outputs", False, type(exc).__name__ + ":" + str(exc))
 
