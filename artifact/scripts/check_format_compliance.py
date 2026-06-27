@@ -14,7 +14,12 @@ add('uses_acmart_sigconf_nonacm', r'\documentclass[sigconf,nonacm]{acmart}' in t
 add('single_blind_author_block_present', all(x in text for x in ['Haoyi Zhang','Huaijin Ran','\\affiliation','\\email']), 'authors')
 add('no_track_suffix_in_title', '[Vision]' not in text and '[Experiment' not in text and '[Scalable' not in text, 'regular research')
 add('abstract_nonplaceholder', len(re.search(r'\\begin\{abstract\}(.*?)\\end\{abstract\}', text, re.S).group(1).strip()) > 1000 if re.search(r'\\begin\{abstract\}(.*?)\\end\{abstract\}', text, re.S) else False, 'abstract')
-add('references_inline_section_present', '\\begin{thebibliography}' in text, 'bibliography')
+bibtex_configured = (
+    '\\bibliographystyle{ACM-Reference-Format}' in text
+    and '\\bibliography{refs}' in text
+    and (ROOT/'Paper'/'latex'/'refs.bib').exists()
+)
+add('references_acm_bibtex_configured', bibtex_configured or '\\begin{thebibliography}' in text, 'bibliography')
 try:
     from pypdf import PdfReader
     reader = PdfReader(str(PDF))
