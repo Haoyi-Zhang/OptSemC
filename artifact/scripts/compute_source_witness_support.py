@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compute source-support diagnostics for false-portability witnesses."""
+"""Compute source-support diagnostics for false-equivalence witnesses."""
 from __future__ import annotations
 from pathlib import Path
 import sys

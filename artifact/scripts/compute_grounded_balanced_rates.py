@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Balanced false-portability rates for grounded contract maps.
+"""Balanced false-equivalence rates for grounded contract maps.
 
 Micro conditional rates can be dominated by engine pairs or probes that produce
 many projected equivalences. This script reports macro-averaged rates over

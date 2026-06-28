@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Stratify false portability by engine-family pair type."""
+"""Stratify false equivalence by engine-family pair type."""
 from __future__ import annotations
 import sys
 from pathlib import Path

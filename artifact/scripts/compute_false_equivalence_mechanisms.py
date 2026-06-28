@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Classify false optimizer-portability witnesses by semantic mechanism.
+"""Classify contract-level false-equivalence witnesses by semantic mechanism.
 
 The projection-loss metric says that a lossy projection declared two contracts
 portable when their full contracts differ.  This script explains *why* each

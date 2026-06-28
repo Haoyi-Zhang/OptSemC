@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Engine-pair decomposition of grounded false portability."""
+"""Engine-pair decomposition of grounded false equivalence."""
 from __future__ import annotations
 import argparse, csv, itertools, json
 from collections import defaultdict

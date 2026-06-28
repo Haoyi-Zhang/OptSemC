@@ -8,11 +8,11 @@
 ]
 \node[box] (a) {\textbf{Distinct public contracts}\\ local Filter movement; source-side Join delegation; Top-N delegation};
 \node[smallbox, below=0.38cm of a] (b) {\texttt{pushdown=yes}};
-\node[box, below=0.38cm of b] (c) {\textbf{False portability}: non-equivalent contracts collapse into one comparison cell};
+\node[box, below=0.38cm of b] (c) {\textbf{False equivalence}: non-equivalent contracts collapse into one comparison cell};
 \draw[arrow] (a) -- (b);
 \draw[arrow] (b) -- (c);
 \end{tikzpicture}
 \caption{Projection loss in optimizer comparison. A feature-name matrix turns non-equivalent public optimizer contracts into the same apparent capability. OptSem-C preserves the semantic fields that distinguish them.}
-\Description{A TikZ flowchart showing three optimizer behaviors collapsed into pushdown=yes, creating false portability.}
+\Description{A TikZ flowchart showing three optimizer behaviors collapsed into pushdown=yes, creating false equivalence.}
 \label{fig:projection-trap}
 \end{figure}

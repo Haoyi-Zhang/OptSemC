@@ -1,4 +1,4 @@
-"""Severity metrics for false optimizer-portability witnesses.
+"""Severity metrics for contract-level false-equivalence witnesses.
 
 Counts tell how often a projected comparison fabricates equivalence.  Severity
 measures how far apart the exact public-contract signatures are when that

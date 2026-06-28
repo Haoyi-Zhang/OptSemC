@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compute false-portability witness dispersion and diagnostic cover tables."""
+"""Compute false-equivalence witness dispersion and diagnostic cover tables."""
 from __future__ import annotations
 import sys
 from pathlib import Path

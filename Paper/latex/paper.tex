@@ -16,6 +16,7 @@
 \setlength{\textfloatsep}{6pt plus 1pt minus 2pt}
 \setlength{\floatsep}{6pt plus 1pt minus 2pt}
 \setlength{\intextsep}{6pt plus 1pt minus 2pt}
+\setlength{\tabcolsep}{3.5pt}
 \setlength{\emergencystretch}{2em}
 \Urlmuskip=0mu plus 2mu
 
@@ -56,11 +57,11 @@
 
 \begin{document}
 \begin{abstract}
-SQL is portable at the language boundary, but optimizer behavior is not.  Query engines expose public contracts for pushdown, join ordering, statistics, materialization, distributed placement, runtime adaptation, and plan evidence.  Today these behaviors are often compared through coarse labels such as \texttt{pushdown}, \texttt{join}, or \texttt{cost-based}.  Such projections collapse local rewrites, source delegation, service-side stages, and runtime decisions into the same apparent capability; in short, coarse optimizer comparison fabricates portability by declaring two engine--query pairs portable even when their public optimizer contracts disagree.
+SQL is portable at the language boundary, but optimizer behavior is not.  Query engines expose public contracts for pushdown, join ordering, statistics, materialization, distributed placement, runtime adaptation, and plan evidence.  Today these behaviors are often compared through coarse labels such as \texttt{pushdown}, \texttt{join}, or \texttt{cost-based}.  Such projections collapse local rewrites, source delegation, service-side stages, and runtime decisions into the same apparent capability; in short, coarse optimizer comparison fabricates contract-level equivalence by declaring two engine--query pairs indistinguishable even when their public optimizer contracts disagree.
 
 This paper introduces OptSem-C, a formal semantics and benchmark methodology for public optimizer behavior contracts.  A contract rule is a guarded modal statement over query features with explicit operator, action variant, modality, optimizer layer, placement, decision time, observability, version, and public evidence.  The semantics separates behavioral worlds from evidential support, defines a conflict-aware state join, and characterizes lossy optimizer comparison as a projection kernel over exact contract signatures.  On top of this semantics, OptSem-C computes information profiles, exhaustive field-resolution lattices, antichain frontiers, and minimum repair certificates that identify which optimizer-semantic fields are necessary and sufficient for safe comparison.
 
-The grounded study contains 287 verified public-contract rules, 287 source-linked evidence spans, 26 public source records, and 4,216 executable SQL probes covering 7,112 valid optimizer-feature interactions.  Keyword projection declares 2,284 equivalences, 254 of which exact contracts refute; operator-only projection declares 2,268 equivalences, 238 of which are false.  Exhaustively evaluating all 256 retained-field vocabularies shows that 44 remain unsafe, and after action-variant identifiers are removed the minimum safe semantic vocabularies have size two.  Placement repairs keyword collisions, optimizer layer repairs operator-only collisions, and a layer+placement basis repairs all 498 headline witnesses.  OptSem-C turns optimizer portability from an informal feature checklist into a finite, auditable query-processing relation.
+The grounded study contains 287 verified public-contract rules, 287 source-linked evidence spans, 26 public source records, and 4,216 executable SQL probes covering 7,112 valid optimizer-feature interactions.  Keyword projection declares 2,284 equivalences, 254 of which exact contracts refute; operator-only projection declares 2,268 equivalences, 238 of which are false.  Exhaustively evaluating all 256 retained-field vocabularies shows that 44 remain unsafe, and after action-variant identifiers are removed the minimum safe semantic vocabularies have size two.  Placement repairs keyword collisions, optimizer layer repairs operator-only collisions, and a layer+placement basis repairs all 498 headline witnesses.  OptSem-C turns optimizer-contract comparison from an informal feature checklist into a finite, auditable query-processing relation.
 \end{abstract}
 
 \maketitle

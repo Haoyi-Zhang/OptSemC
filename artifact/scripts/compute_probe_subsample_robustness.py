@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Probe-subsample robustness for grounded false-portability measurements.
+"""Probe-subsample robustness for grounded false-equivalence measurements.
 
 The main false-equivalence results are reported on all generated probes. This
 analysis checks whether the conditional false-equivalence rate remains visible

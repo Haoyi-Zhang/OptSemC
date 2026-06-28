@@ -29,7 +29,7 @@ $\llbracket M\rrbracket=\{W\mid M(a)=\mathsf{MUST}\Rightarrow a\in W,\; M(a)=\ma
 The evidential support set is $\mathsf{Supp}(M)=\{a\in\mathcal{A}\mid M(a)\in\{\mathsf{MUST},\mathsf{MAY},\mathsf{MUST\_NOT}\}\}$.  Behavioral containment and evidential support are intentionally separate: two maps can allow the same worlds while differing on whether an action is publicly documented.
 
 \begin{definition}[Exact signatures, kernels, and projections]
-The exact evidence-supported signature of $M$ is $S(M)=\{(a,M(a))\mid a\in\mathsf{Supp}(M)\}$.  Exact equivalence is equality of signatures over full evidence atoms.  A projection is a declared map $\pi:\mathcal{A}\times\mathbb{S}\rightarrow\mathcal{B}$ from full evidence atoms to a comparison vocabulary such as keyword, yes/no, or operator-only labels.  The projected signature is the finite image $S_\pi(M)=\{\pi(a,M(a))\mid a\in\mathsf{Supp}(M)\}$.  The projection kernel is the equivalence relation $\mathcal{K}_\pi$ where $M_i\mathcal{K}_\pi M_j$ iff $S_\pi(M_i)=S_\pi(M_j)$.  A false portability witness is a pair in $\mathcal{K}_\pi$ whose exact signatures differ.
+The exact evidence-supported signature of $M$ is $S(M)=\{(a,M(a))\mid a\in\mathsf{Supp}(M)\}$.  Exact equivalence is equality of signatures over full evidence atoms.  A projection is a declared map $\pi:\mathcal{A}\times\mathbb{S}\rightarrow\mathcal{B}$ from full evidence atoms to a comparison vocabulary such as keyword, yes/no, or operator-only labels.  The projected signature is the finite image $S_\pi(M)=\{\pi(a,M(a))\mid a\in\mathsf{Supp}(M)\}$.  The projection kernel is the equivalence relation $\mathcal{K}_\pi$ where $M_i\mathcal{K}_\pi M_j$ iff $S_\pi(M_i)=S_\pi(M_j)$.  A contract-level false-equivalence witness is a pair in $\mathcal{K}_\pi$ whose exact signatures differ.
 \end{definition}
 
 For quantitative comparison, exact compatibility is the Jaccard overlap $|S(M_i)\cap S(M_j)|/|S(M_i)\cup S(M_j)|$, and projected compatibility applies the same formula to $S_\pi$.  The denominator is evidence-supported: undocumented actions do not count as evidence of either equality or inequality.
@@ -41,9 +41,9 @@ For finite feature and action domains, constructing $M_{e,q}$ from finite $C_e$ 
 Every guard is a finite Boolean formula over a finite feature vector.  The applicable rule set is finite, and every applicable rule performs one lookup in the finite state-join table.  Construction therefore terminates.
 \end{proof}
 
-\begin{theorem}[Projection-kernel loss]
+\begin{theorem}[Projection-kernel false equivalence]
 \label{thm:projection-kernel-loss}
-For any projection $\pi$, false portability is exactly the nontrivial part of the kernel $\mathcal{K}_\pi$: $M_i$ and $M_j$ are falsely portable iff $S(M_i)\ne S(M_j)$ and $M_i\mathcal{K}_\pi M_j$.  If $\pi$ is non-injective on evidence atoms, there exist contracts with a false-portability witness.
+For any projection $\pi$, contract-level false equivalence is exactly the nontrivial part of the kernel $\mathcal{K}_\pi$: $M_i$ and $M_j$ are falsely equivalent iff $S(M_i)\ne S(M_j)$ and $M_i\mathcal{K}_\pi M_j$.  If $\pi$ is non-injective on evidence atoms, there exist contracts with a false-equivalence witness.
 \end{theorem}
 \begin{proof}
 The first statement unfolds the definitions: $\mathcal{K}_\pi$ is equality after projection, while exact non-equivalence is $S(M_i)\ne S(M_j)$.  For existence, take distinct evidence atoms $(a_1,s_1)\ne(a_2,s_2)$ with $\pi(a_1,s_1)=\pi(a_2,s_2)$.  Let $M_1$ contain only $(a_1,s_1)$ and $M_2$ contain only $(a_2,s_2)$.  Their exact signatures differ, but their projected signatures are the same singleton.
@@ -57,7 +57,7 @@ For a finite set of observed maps $Y$, let $H(S)$ be the empirical Shannon entro
 If a projection has projected-equivalence count $E_\pi$ and exact-equivalence count $E$ over a fixed pair set, then $E_\pi/E$ is the pairwise inflation factor induced by the kernel.  Every false-equivalence witness contributes to this inflation, and a zero-false strengthened projection must have $E_\pi=E$.
 \end{lemma}
 \begin{proof}
-Exact equivalence implies projected equivalence only when the projection is a function of the exact atom payload, so $E_\pi\ge E$.  The additional pairs counted by $E_\pi$ are exactly the unequal exact signatures that collapse under $\pi$, which are false-portability witnesses.  If there are none, no additional pairs are counted and the two denominators agree.
+Exact equivalence implies projected equivalence only when the projection is a function of the exact atom payload, so $E_\pi\ge E$.  The additional pairs counted by $E_\pi$ are exactly the unequal exact signatures that collapse under $\pi$, which are false-equivalence witnesses.  If there are none, no additional pairs are counted and the two denominators agree.
 \end{proof}
 
 \begin{theorem}[Evidence refinement]

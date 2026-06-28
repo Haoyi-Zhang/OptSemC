@@ -34,7 +34,9 @@ try:
     text = proc.stdout if proc.returncode == 0 else ''
     add('pdf_text_extractable', proc.returncode == 0 and len(text) > 1000, len(text), '>1000 chars')
     add('title_present', 'Public Optimizer Contracts' in text, 'yes' if 'Public Optimizer Contracts' in text else 'no', 'yes')
-    add('core_claim_present', 'fabricates portability' in text, 'yes' if 'fabricates portability' in text else 'no', 'yes')
+    normalized = ' '.join(text.split()).lower()
+    core_claim = 'contract-level equivalence' in normalized and 'projection kernel' in normalized
+    add('core_claim_present', core_claim, 'yes' if core_claim else 'no', 'yes')
 except Exception as e:
     add('pdf_text_extractable', False, type(e).__name__, 'extractable')
 

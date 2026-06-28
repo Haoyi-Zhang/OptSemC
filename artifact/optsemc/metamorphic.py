@@ -1,6 +1,6 @@
 """Metamorphic tests for projection and repair semantics.
 
-The same false-portability claim should survive multiple independent ways of
+The same false-equivalence claim should survive multiple independent ways of
 checking it: deterministic recomputation, projection idempotence, monotonicity
 under refinement, negative-control strictness, and repair-separator soundness.
 These tests are intentionally finite and executable over the grounded corpus.

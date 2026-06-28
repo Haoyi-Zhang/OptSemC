@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compute engine-pair false-portability matrices for headline projections."""
+"""Compute engine-pair false-equivalence matrices for headline projections."""
 from __future__ import annotations
 import sys
 from pathlib import Path
@@ -15,4 +15,3 @@ for method in ('keyword','yesno','operator_only'):
     rows.extend(engine_pair_matrix(cm.maps, cm.engines, cm.probes, method))
 write_csv(ART/'evaluation'/'engine_pair_false_portability_matrix.csv', rows, ['projection','engine_left','engine_right','comparisons','true_equivalences','projected_equivalences','false_equivalences','false_differences','conditional_false_equivalence_rate'])
 print(f"Engine-pair matrix: {len(rows)} rows")
-

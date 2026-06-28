@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check engine-pair false-portability matrix consistency."""
+"""Check engine-pair false-equivalence matrix consistency."""
 from __future__ import annotations
 import csv, sys
 from pathlib import Path
@@ -27,4 +27,3 @@ print(f"Engine-pair matrix check: {passed}/{len(rows)} passed")
 for r in rows:
     if r['passed']!='true': print('FAIL', r['check'], r['details'])
 if passed != len(rows): sys.exit(1)
-

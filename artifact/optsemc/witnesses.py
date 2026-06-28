@@ -20,7 +20,7 @@ ProbeFeatures = Mapping[str, Mapping[str, str]]
 
 @dataclass(frozen=True)
 class WitnessRecord:
-    """One false-portability witness after a lossy projection."""
+    """One false-equivalence witness after a lossy projection."""
 
     projection: str
     probe_id: str

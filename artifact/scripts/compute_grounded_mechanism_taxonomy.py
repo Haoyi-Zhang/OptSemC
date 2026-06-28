@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Classify false optimizer-portability witnesses into query-processing mechanisms.
+"""Classify contract-level false-equivalence witnesses into query-processing mechanisms.
 
 This diagnostic complements field-level repair counts. It groups the semantic
 fields that repair false equivalences into database-mechanism labels that are

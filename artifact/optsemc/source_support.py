@@ -1,4 +1,4 @@
-"""Evidence-source support diagnostics for false optimizer-portability witnesses."""
+"""Evidence-source support diagnostics for contract-level false-equivalence witnesses."""
 from __future__ import annotations
 
 from dataclasses import dataclass

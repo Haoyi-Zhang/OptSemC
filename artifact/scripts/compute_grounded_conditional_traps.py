@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compute conditional false-portability rates for grounded contract maps.
+"""Compute conditional false-equivalence rates for grounded contract maps.
 
 The ordinary trap rate divides false equivalences by all engine-pair/probe
 comparisons. This script adds the precision-style denominator that strict

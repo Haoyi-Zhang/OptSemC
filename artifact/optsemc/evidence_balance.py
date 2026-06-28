@@ -1,4 +1,4 @@
-"""Side-balanced evidence support for false optimizer-portability witnesses.
+"""Side-balanced evidence support for contract-level false-equivalence witnesses.
 
 A false-equivalence witness is only convincing if both sides of the comparison
 are grounded by public evidence.  The source-support module checks the union of

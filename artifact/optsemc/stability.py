@@ -1,6 +1,6 @@
 """Stability diagnostics for projection and repair claims.
 
-Strict readers often ask whether a false-portability result is caused by a
+Strict readers often ask whether a false-equivalence result is caused by a
 single engine, a single deployment family, or a post-hoc repair field.  This
 module evaluates the same public-contract comparison after removing each engine
 or family, while checking that the repair vocabulary still separates every false

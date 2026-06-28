@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check false-portability witness dispersion outputs."""
+"""Check false-equivalence witness dispersion outputs."""
 from __future__ import annotations
 import csv
 import sys

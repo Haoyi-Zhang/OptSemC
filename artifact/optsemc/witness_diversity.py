@@ -1,4 +1,4 @@
-"""Diversity diagnostics for false-portability witnesses.
+"""Diversity diagnostics for false-equivalence witnesses.
 
 A projection can look convincing if all of its false equivalences come from one
 query shape or one engine pair.  These helpers summarize false-equivalence

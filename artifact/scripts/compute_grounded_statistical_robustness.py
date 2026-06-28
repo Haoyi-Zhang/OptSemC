@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Statistical robustness for grounded false-portability measurements.
+"""Statistical robustness for grounded false-equivalence measurements.
 
 The main trap metric is conditional: among equivalences declared by a lossy
 projection, how many are false under full contracts? This script adds two

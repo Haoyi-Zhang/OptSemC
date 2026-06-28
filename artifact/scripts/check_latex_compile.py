@@ -30,10 +30,20 @@ if PDF.exists():
 
 notes: list[str] = []
 compile_failed = False
-for pass_no in (1, 2, 3):
+commands = [
+    ("pdflatex1", ["pdflatex", "-interaction=nonstopmode", "-halt-on-error", TEX.name]),
+    ("bibtex", ["bibtex", NAME]),
+    ("pdflatex2", ["pdflatex", "-interaction=nonstopmode", "-halt-on-error", TEX.name]),
+    ("pdflatex3", ["pdflatex", "-interaction=nonstopmode", "-halt-on-error", TEX.name]),
+]
+for label, command in commands:
+    if label == "bibtex" and not (LATEX / f"{NAME}.aux").exists():
+        compile_failed = True
+        notes.append("bibtex:missing_aux")
+        break
     try:
         proc = subprocess.run(
-            ["pdflatex", "-interaction=nonstopmode", "-halt-on-error", TEX.name],
+            command,
             cwd=LATEX,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
@@ -41,10 +51,10 @@ for pass_no in (1, 2, 3):
             check=False,
         )
         if proc.returncode != 0:
-            notes.append(f"pass{pass_no}:returncode={proc.returncode}")
+            notes.append(f"{label}:returncode={proc.returncode}")
     except subprocess.TimeoutExpired:
         compile_failed = True
-        notes.append(f"pass{pass_no}:timeout")
+        notes.append(f"{label}:timeout")
         break
 
 log_text = LOG.read_text(errors="ignore") if LOG.exists() else ""

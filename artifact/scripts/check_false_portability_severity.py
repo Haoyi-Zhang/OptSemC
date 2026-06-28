@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate false-portability severity outputs used by the paper."""
+"""Validate false-equivalence severity outputs used by the paper."""
 from __future__ import annotations
 import csv, sys
 from pathlib import Path
