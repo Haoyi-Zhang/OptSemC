@@ -19,7 +19,11 @@ try:
     add('pdf_readable_by_pypdf', True, 'readable', 'readable')
     add('total_pages_with_references', pages in {13, 14}, pages, '13 or 14 total pages')
     page_texts = [page.extract_text() or '' for page in reader.pages]
-    ref_pages = [i + 1 for i, t in enumerate(page_texts) if 'References' in t]
+    ref_pages = [
+        i + 1
+        for i, text in enumerate(page_texts)
+        if any(line.strip().upper() == 'REFERENCES' for line in text.splitlines())
+    ]
     add('body_pages_12_references_start_13', ref_pages and ref_pages[0] == 13, ref_pages, 'references start on page 13')
 except Exception as e:
     add('pdf_readable_by_pypdf', False, type(e).__name__, 'readable')
