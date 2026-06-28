@@ -4,11 +4,11 @@ The evaluation asks four questions.  First, when a coarse optimizer comparison d
 
 \textbf{Coarse comparison fabricates equivalence.} Table~\ref{tab:false-equivalence} reports the main measurement.  The keyword projection declares 2,284 equivalences, including 254 false ones.  The operator-only projection declares 2,268 equivalences, including 238 false ones.  These errors are conditional on the baseline declaring equivalence, which is the decision faced by a user of a feature matrix.  The results are stable under binomial and probe-cluster uncertainty estimates, and false equivalence remains nonzero for keyword and operator-only projections after removing any single public source.  A strict-projection negative control yields zero false equivalences.
 
-\input{tables/tab_false_portability}
+\input{tables/tab_false_equivalence}
 
 Counts alone understate the failure.  Table~\ref{tab:false-severity} measures how far apart the exact contracts are after a projection has declared them equal.  For the headline projections, every false-equivalent pair has exact-signature Jaccard distance 1.0: the projected comparison has equated disjoint public contract signatures rather than near duplicates.  Keyword false equivalences differ by 9.09 evidence atoms on average, and operator-only false equivalences differ by 5.84 atoms.  The strengthened surface projection is the control: it returns to the exact-equivalence denominator and has zero fabricated equivalence.
 
-\input{tables/tab_false_portability_severity}
+\input{tables/tab_false_equivalence_severity}
 
 Table~\ref{tab:baseline-portfolio} makes the baseline portfolio explicit.  The baseline portfolio evaluates exact negative controls, common matrices, one-field adversarial baselines, and strengthened high-information baselines.  The exact-contract baseline produces no false equivalence.  Keyword, kind-only, and operator-only comparisons fabricate false equivalence at similar rates, so the result is not tied to one synonym list.  One-field baselines such as placement-only, decision-time-only, and state-only are much worse, showing that comparing a single optimizer dimension is not a safe substitute for contract semantics.  By contrast, the strengthened operator/action/layer/placement/observability baseline has zero false equivalence, which localizes the missing semantics rather than merely declaring all coarse comparisons bad.
 

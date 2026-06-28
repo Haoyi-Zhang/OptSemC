@@ -9,7 +9,7 @@ OUT=ART/'evaluation'/'engine_pair_matrix_check.csv'
 rows=[]
 def add(check, ok, details=''):
     rows.append({'check':check,'passed':str(bool(ok)).lower(),'details':str(details)})
-path=ART/'evaluation'/'engine_pair_false_portability_matrix.csv'
+path=ART/'evaluation'/'engine_pair_false_equivalence_matrix.csv'
 if path.exists():
     data=list(csv.DictReader(path.open(newline='', encoding='utf-8')))
     add('matrix_rows_present', len(data) >= 60, str(len(data)))

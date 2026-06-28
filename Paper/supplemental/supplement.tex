@@ -34,7 +34,7 @@ Generated SQL probes & 4,216 & Executable query probes generated from the optimi
 Valid feature interactions & 7,112 & Renderable optimizer-feature interactions covered by the probe generator. \\
 External optimizer motifs & 90/90 & External workload and optimizer motifs covered and executed by representative probes. \\
 Projection-resolution subsets & 256 & Exhaustive retained-field vocabularies evaluated over the grounded comparison denominator. \\
-Headline false witnesses & 498 & False portability witnesses across keyword, yes/no, and operator-only projections. \\
+Headline false witnesses & 498 & False equivalence witnesses across keyword, yes/no, and operator-only projections. \\
 Side-balanced witnesses & 498 & False witnesses whose left and right signatures are both supported by public source records. \\
 \bottomrule
 \end{tabular}
@@ -75,7 +75,7 @@ Repair certificates & Minimum separator fields, hitting-set certificates, held-o
 Benchmark probes & Feature-domain validity, interaction coverage, SQL rendering, SQL execution, and multi-catalog SQL validation. \\
 External motifs & Coverage and execution of optimizer/workload motifs drawn from recognized benchmark and query-processing families. \\
 Paper alignment & Numeric claims, table sources, references, PDF integrity, manuscript style, and package consistency. \\
-Evidence balance & Source breadth and left/right source support for each headline false-portability witness. \\
+Evidence balance & Source breadth and left/right source support for each headline false-equivalence witness. \\
 Repository quality & Architecture boundaries, package installability, cleanliness, manifest coherence, and unit tests. \\
 \bottomrule
 \end{tabular}
@@ -85,5 +85,5 @@ Repository quality & Architecture boundaries, package installability, cleanlines
 The key numbers are: keyword projection declares 2,284 equivalences and 254 false equivalences; operator-only projection declares 2,268 equivalences and 238 false equivalences; yes/no projection declares 2,036 equivalences and 6 false equivalences; a strict exact-contract negative control declares 2,030 equivalences and zero false equivalences.  The exhaustive field-resolution lattice evaluates all 256 retained-field subsets; 44 are unsafe, and after removing action-variant identifiers the minimum safe semantic vocabularies have size two.  The layer+placement basis resolves all 498 headline witnesses.  SQL validation executes 12,648 probe-catalog pairs with zero failures across three deterministic catalog densities.
 
 \section*{Interpretation boundary}
-OptSem-C evaluates public optimizer contracts rather than hidden implementation behavior.  The corpus therefore proves what public evidence commits an engine to, not what an unobservable optimizer happens to do on a private build.  The SQL validation checks that the generated probe corpus is executable and feature-realizing; it is not a latency benchmark.  External workload motifs are used as optimizer-feature denominators rather than copied as third-party benchmark scores.  These distinctions keep the artifact aligned with the paper's central claim: coarse optimizer comparison fabricates portability when it drops query-processing fields, and the finite repair frontier identifies the missing semantics.
+OptSem-C evaluates public optimizer contracts rather than hidden implementation behavior.  The corpus therefore proves what public evidence commits an engine to, not what an unobservable optimizer happens to do on a private build.  The SQL validation checks that the generated probe corpus is executable and feature-realizing; it is not a latency benchmark.  External workload motifs are used as optimizer-feature denominators rather than copied as third-party benchmark scores.  These distinctions keep the artifact aligned with the paper's central claim: coarse optimizer comparison fabricates equivalence when it drops query-processing fields, and the finite repair frontier identifies the missing semantics.
 \end{document}

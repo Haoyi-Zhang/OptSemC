@@ -83,7 +83,7 @@ artifact/scripts/check_engine_family_stress.py,2,0,3,3,true
 artifact/scripts/check_engine_pair_matrix.py,1,0,3,2,true
 artifact/scripts/check_external_benchmark_suite.py,1,0,3,2,true
 artifact/scripts/check_external_motif_execution.py,1,0,3,2,true
-artifact/scripts/check_false_portability_severity.py,2,0,3,3,true
+artifact/scripts/check_false_equivalence_severity.py,2,0,3,3,true
 artifact/scripts/check_fast_mainline_results.py,5,0,3,7,true
 artifact/scripts/check_feature_holdout_repair.py,2,0,3,2,true
 artifact/scripts/check_formal_obligations.py,1,0,3,2,true
@@ -163,7 +163,7 @@ artifact/scripts/compute_enginepair_repair_generalization.py,10,0,3,28,true
 artifact/scripts/compute_external_benchmark_crosswalk.py,2,0,6,20,true
 artifact/scripts/compute_external_benchmark_suite.py,0,0,6,0,true
 artifact/scripts/compute_false_equivalence_mechanisms.py,8,0,3,39,true
-artifact/scripts/compute_false_portability_severity.py,0,0,6,0,true
+artifact/scripts/compute_false_equivalence_severity.py,0,0,6,0,true
 artifact/scripts/compute_feature_holdout_repair.py,1,0,7,4,true
 artifact/scripts/compute_formal_obligations.py,0,0,8,0,true
 artifact/scripts/compute_grounded_balanced_rates.py,7,0,3,63,true

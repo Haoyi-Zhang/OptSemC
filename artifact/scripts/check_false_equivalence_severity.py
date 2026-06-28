@@ -5,7 +5,7 @@ import csv, sys
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 E = ROOT / 'evaluation'
-OUT = E / 'false_portability_severity_check.csv'
+OUT = E / 'false_equivalence_severity_check.csv'
 rows: list[dict[str,str]] = []
 
 def add(check: str, passed: bool, details: str = '') -> None:
@@ -15,7 +15,7 @@ def read_csv(path: Path):
     with path.open(newline='', encoding='utf-8') as f:
         return list(csv.DictReader(f))
 try:
-    severity = {r['projection']: r for r in read_csv(E/'false_portability_severity.csv')}
+    severity = {r['projection']: r for r in read_csv(E/'false_equivalence_severity.csv')}
     add('severity_file_present', bool(severity), f'rows={len(severity)}')
     add('headline_false_counts_match', int(severity['keyword']['false_equivalences']) == 254 and int(severity['operator_only']['false_equivalences']) == 238 and int(severity['yesno']['false_equivalences']) == 6, '')
     add('strict_repair_control_zero', int(severity['operator_kind_surface']['false_equivalences']) == 0, severity['operator_kind_surface'])
@@ -29,7 +29,7 @@ with OUT.open('w', newline='', encoding='utf-8') as f:
     w=csv.DictWriter(f, fieldnames=['check','passed','details'])
     w.writeheader(); w.writerows(rows)
 passed=sum(r['passed']=='true' for r in rows)
-print(f'False-portability severity check: {passed}/{len(rows)} passed')
+print(f'False-equivalence severity check: {passed}/{len(rows)} passed')
 for r in rows:
     if r['passed'] != 'true':
         print('FAIL', r['check'], r['details'])

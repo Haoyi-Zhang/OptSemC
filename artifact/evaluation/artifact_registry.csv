@@ -21,7 +21,7 @@ evaluation/repository_audit.csv,csv,1,true
 evaluation/repository_quality.csv,csv,1,true
 evaluation/package_manifest.csv,csv,1,true
 evaluation/package_manifest_summary.csv,csv,1,true
-evaluation/engine_pair_false_portability_matrix.csv,csv,1,true
+evaluation/engine_pair_false_equivalence_matrix.csv,csv,1,true
 evaluation/claim_ledger_check.csv,csv,1,true
 evaluation/theorem_ledger.csv,csv,1,true
 evaluation/package_snapshot_check.csv,csv,1,true
@@ -79,7 +79,7 @@ evaluation/grounded/diagnostic_probe_order.csv,csv,1,true
 evaluation/grounded/repair_generalization_summary.csv,csv,1,true
 evaluation/grounded/trap_rate.csv,csv,1,true
 evaluation/grounded/conditional_trap_rate.csv,csv,1,true
-evaluation/grounded/pair_false_portability.csv,csv,1,true
+evaluation/grounded/pair_false_equivalence.csv,csv,1,true
 evaluation/grounded/mechanism_taxonomy.csv,csv,1,true
 evaluation/grounded/projection_false_equivalence_analysis.csv,csv,1,true
 external/workload_motifs.yaml,yaml,1,true

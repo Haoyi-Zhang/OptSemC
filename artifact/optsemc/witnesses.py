@@ -1,4 +1,4 @@
-"""False-portability witness dispersion utilities.
+"""False-equivalence witness dispersion utilities.
 
 The core evaluation counts false equivalences.  These helpers ask a different
 reader question: are the witnesses concentrated in one hand-picked query, or

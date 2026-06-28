@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 MAPS = ROOT / 'artifact/evaluation/grounded_contract_maps.jsonl'
-OUT = ROOT / 'artifact/evaluation/grounded/balanced_false_portability.csv'
+OUT = ROOT / 'artifact/evaluation/grounded/balanced_false_equivalence.csv'
 METHODS = ['keyword','yesno','operator_only']
 
 def read_jsonl(path):

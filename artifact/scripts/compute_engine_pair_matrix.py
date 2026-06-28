@@ -13,5 +13,5 @@ cm=load_contract_maps(ART)
 rows=[]
 for method in ('keyword','yesno','operator_only'):
     rows.extend(engine_pair_matrix(cm.maps, cm.engines, cm.probes, method))
-write_csv(ART/'evaluation'/'engine_pair_false_portability_matrix.csv', rows, ['projection','engine_left','engine_right','comparisons','true_equivalences','projected_equivalences','false_equivalences','false_differences','conditional_false_equivalence_rate'])
+write_csv(ART/'evaluation'/'engine_pair_false_equivalence_matrix.csv', rows, ['projection','engine_left','engine_right','comparisons','true_equivalences','projected_equivalences','false_equivalences','false_differences','conditional_false_equivalence_rate'])
 print(f"Engine-pair matrix: {len(rows)} rows")

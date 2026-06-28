@@ -27,7 +27,7 @@ BASELINES: tuple[BaselineSpec, ...] = (
         "keyword",
         "Feature-name checklist such as pushdown=yes or adaptivity=yes",
         "Operator, variant, layer, placement, decision time, observability, and modality",
-        "Fabricates portability between local rewrite, source delegation, pruning, and runtime behavior",
+        "Fabricates equivalence between local rewrite, source delegation, pruning, and runtime behavior",
     ),
     BaselineSpec(
         "B2-yes-no-operator-kind",

@@ -2,7 +2,7 @@ from pathlib import Path
 import csv
 
 from optsemc.corpus import load_contract_maps, load_probes
-from optsemc.severity import false_portability_severity, jaccard_distance, symmetric_atom_delta
+from optsemc.severity import false_equivalence_severity, jaccard_distance, symmetric_atom_delta
 from optsemc.sql_multicatalog import execute_probe_suite_multicatalog, multicatalog_totals
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -18,11 +18,11 @@ def test_jaccard_distance_and_atom_delta_on_empty_and_disjoint_sets():
     assert symmetric_atom_delta(left, right) == len(left ^ right)
 
 
-def test_false_portability_severity_headline_counts_and_distance():
+def test_false_equivalence_severity_headline_counts_and_distance():
     cm = load_contract_maps(ROOT)
-    keyword = false_portability_severity(cm.maps, cm.engines, cm.probes, "keyword")
-    operator = false_portability_severity(cm.maps, cm.engines, cm.probes, "operator_only")
-    repaired = false_portability_severity(cm.maps, cm.engines, cm.probes, "operator_kind_surface")
+    keyword = false_equivalence_severity(cm.maps, cm.engines, cm.probes, "keyword")
+    operator = false_equivalence_severity(cm.maps, cm.engines, cm.probes, "operator_only")
+    repaired = false_equivalence_severity(cm.maps, cm.engines, cm.probes, "operator_kind_surface")
     assert keyword.false_equivalences == 254
     assert operator.false_equivalences == 238
     assert repaired.false_equivalences == 0

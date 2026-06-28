@@ -87,7 +87,7 @@ def _p90(values: Sequence[float]) -> float:
     return ordered[index]
 
 
-def false_portability_severity(
+def false_equivalence_severity(
     maps: Mapping[tuple[str, str], ContractSignature],
     engines: Sequence[str],
     probes: Sequence[str],

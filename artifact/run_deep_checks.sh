@@ -14,8 +14,8 @@ run_py_latex() { echo "[deep] python $*"; timeout "$LATEX_TIMEOUT" python -u "$@
 run_py scripts/hydrate_large_outputs.py
 run_py scripts/compute_projection_information_profile.py
 run_py scripts/check_projection_information_profile.py
-run_py scripts/compute_false_portability_severity.py
-run_py scripts/check_false_portability_severity.py
+run_py scripts/compute_false_equivalence_severity.py
+run_py scripts/check_false_equivalence_severity.py
 run_py scripts/compute_projection_resolution_lattice.py
 run_py scripts/check_projection_resolution_lattice.py
 run_py scripts/compute_projection_frontier_antichains.py

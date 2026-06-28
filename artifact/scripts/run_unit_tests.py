@@ -20,7 +20,7 @@ if str(ROOT) not in sys.path:
 TEST_DIR = ROOT / "tests"
 OUT = ROOT / "evaluation" / "unit_test_results.csv"
 DELEGATED_INTEGRATION_TESTS = {
-    "test_false_severity_multicatalog.py": "false_portability_severity_check;sql_probe_multicatalog_check",
+    "test_false_severity_multicatalog.py": "false_equivalence_severity_check;sql_probe_multicatalog_check",
     "test_stability_leave_out.py": "leave_out_stability_check;engine_family_stress_check",
     "test_incremental_audit.py": "incremental_audit_check",
     "test_information_sql_bundle.py": "projection_information_profile_check;sql_probe_bundle_check",

@@ -1,4 +1,4 @@
-variant,comparisons,false_portability,false_difference,ablation_failure_rate
+variant,comparisons,false_equivalence,false_difference,ablation_failure_rate
 keyword,128835,385,0,0.003
 no_guard,128835,0,3321,0.0258
 no_modality,128835,0,0,0.0

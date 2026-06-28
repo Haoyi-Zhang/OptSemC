@@ -48,7 +48,7 @@ def project_sig(sig, method):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--maps", type=Path, default=Path("artifact/evaluation/grounded_contract_maps.jsonl"))
-    ap.add_argument("--out", type=Path, default=Path("artifact/evaluation/grounded/pair_false_portability.csv"))
+    ap.add_argument("--out", type=Path, default=Path("artifact/evaluation/grounded/pair_false_equivalence.csv"))
     args = ap.parse_args()
     maps = {}; engines = set(); probes = set()
     for r in read_jsonl(args.maps):

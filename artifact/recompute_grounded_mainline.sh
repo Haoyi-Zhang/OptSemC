@@ -13,7 +13,7 @@ python scripts/analyze_grounded_projection_loss.py --maps evaluation/grounded_co
 python scripts/compute_grounded_repair_certificates.py
 python scripts/compute_grounded_semantic_repair_basis.py
 python scripts/compute_grounded_repair_curve.py --maps evaluation/grounded_contract_maps.jsonl --out evaluation/grounded/semantic_repair_curve.csv
-python scripts/compute_grounded_pair_failures.py --maps evaluation/grounded_contract_maps.jsonl --out evaluation/grounded/pair_false_portability.csv
+python scripts/compute_grounded_pair_failures.py --maps evaluation/grounded_contract_maps.jsonl --out evaluation/grounded/pair_false_equivalence.csv
 python scripts/compute_workload_sensitivity.py --probes benchmark/generated_probes.jsonl --maps evaluation/grounded_contract_maps.jsonl --out evaluation/grounded/workload_sensitivity.csv
 python scripts/compute_benchmark_efficiency.py
 (cd .. && python artifact/scripts/generate_grounded_case_studies.py)
