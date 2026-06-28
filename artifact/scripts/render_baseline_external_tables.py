@@ -59,16 +59,17 @@ def baseline_table() -> None:
         "layer_only": "Layer-only",
         "placement_only": "Place-only",
         "state_only": "State-only",
-        "operator_kind_surface": "Op+kind+surface",
+        "operator_kind_surface": "Surface",
     }
     by_projection = {r["projection"]: r for r in rows(ART / "evaluation" / "grounded" / "baseline_portfolio.csv")}
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Executable projection baselines. False equivalence is conditional on the baseline declaring equivalence; the full baseline portfolio contains 17 projections.}",
+        r"\caption{Executable projection baselines. Projection-induced collision is conditional on the baseline declaring equivalence; the full baseline portfolio contains 17 projections.}",
         r"\label{tab:baseline-portfolio}",
-        r"\scriptsize",
-        r"\begin{tabular}{@{}p{0.78in}rrr@{}}",
+        r"\footnotesize",
+        r"\setlength{\tabcolsep}{3pt}",
+        r"\begin{tabular}{@{}lrrr@{}}",
         r"\toprule",
         "Baseline & Eq. & False & Rate" + ROW_END,
         r"\midrule",
@@ -86,26 +87,37 @@ def baseline_table() -> None:
 def external_table() -> None:
     data = rows(ART / "evaluation" / "grounded" / "external_benchmark_crosswalk.csv")
     labels = {
-        "JOB-join-order-sensitivity": "Join-order sensitivity",
-        "ExactCardinality-optimizer-testing": "Exact-cardinality testing",
-        "CardEst-plan-quality": "CardEst plan quality",
-        "AdaptiveJoin-runtime-replanning": "Adaptive replanning",
-        "LakeCrossSource-joinability": "Cross-source joinability",
+        "JOB-join-order-sensitivity": "JOB",
+        "ExactCardinality-optimizer-testing": "Exact-card.",
+        "CardEst-plan-quality": "CardEst",
+        "AdaptiveJoin-runtime-replanning": "Adaptive",
+        "LakeCrossSource-joinability": "Lake",
+    }
+    surfaces = {
+        "JOB-join-order-sensitivity": "join-order search",
+        "ExactCardinality-optimizer-testing": "exact-cardinality testing",
+        "CardEst-plan-quality": "plan-quality sensitivity",
+        "AdaptiveJoin-runtime-replanning": "runtime replanning",
+        "LakeCrossSource-joinability": "cross-source joinability",
     }
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Crosswalk from published optimizer/benchmark motifs to OptSemBench-C feature requirements.}",
+        r"\caption{External vocabulary stress test. Rows are literature/workload motif families, not copied SQL or performance claims; every declared optimizer-surface requirement has executable probe support.}",
         r"\label{tab:external-crosswalk}",
-        r"\small",
-        r"\begin{tabular}{lrr}",
+        r"\footnotesize",
+        r"\setlength{\tabcolsep}{2.5pt}",
+        r"\begin{tabular}{@{}p{0.60in}p{1.28in}rr@{}}",
         r"\toprule",
-        "Motif & Requirements & Covered" + ROW_END,
+        "Anchor & Surface & Req. & Cov." + ROW_END,
         r"\midrule",
     ]
     for r in data:
         label = labels.get(r["motif_id"], r["motif_id"])
-        lines.append(f"{esc(label)} & {fmt_int(r['total_requirements'])} & {fmt_int(r['covered_requirements'])}" + ROW_END)
+        surface = surfaces.get(r["motif_id"], r["optimizer_surface"])
+        lines.append(
+            f"{esc(label)} & {esc(surface)} & {fmt_int(r['total_requirements'])} & {fmt_int(r['covered_requirements'])}" + ROW_END
+        )
     lines += [r"\bottomrule", r"\end{tabular}", r"\end{table}"]
     write(PAPER_TABLES / "tab_external_crosswalk.tex", lines)
 

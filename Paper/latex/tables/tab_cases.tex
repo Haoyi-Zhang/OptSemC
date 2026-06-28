@@ -1,16 +1,17 @@
-\begin{table}[H]
+\begin{table}[t]
 \centering
-\caption{Grounded case studies used to interpret the false-equivalence results.}
+\caption{Worked public-contract cases. C1 is expanded in text with probe shape, source labels, projection equality, exact inequality, and repair obligations; C2--C4 name additional witness families.}
 \label{tab:cases}
-\scriptsize
-\begin{tabular}{p{0.33\columnwidth}rrp{0.34\columnwidth}}
+\footnotesize
+\setlength{\tabcolsep}{2.0pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.38in}>{\raggedright\arraybackslash}p{1.36in}>{\raggedright\arraybackslash}p{0.98in}@{}}
 \toprule
-Case & Rules & Engines & Main lesson \\
+Case & Contract pair hidden by a coarse label & Separating fields \\
 \midrule
-Pushdown family & 16 & 2 & operator class matters \\
-Plan evidence & 16 & 4 & observability is non-isomorphic \\
-Decision time & 16 & 3 & runtime is not compile-time \\
-Materialization & 16 & 2 & guards control equivalence \\
+C1 & BigQuery federated filter/source delegation vs. Trino aggregate and expression pushdown & operator, variant, placement \\
+C2 & PostgreSQL EXPLAIN estimates vs. BigQuery stage/shuffle evidence vs. Snowflake logical plans & observability, placement \\
+C3 & compile-time planning vs. BigQuery/Spark/ClickHouse runtime adaptation & layer, decision time \\
+C4 & DuckDB and PostgreSQL CTE inline, materialize, reuse, and disable guards & variant, guard state \\
 \bottomrule
 \end{tabular}
 \end{table}

@@ -39,7 +39,7 @@ def python_loc(root: Path) -> int:
         try:
             total += sum(1 for line in path.read_text(encoding="utf-8", errors="ignore").splitlines() if line.strip() and not line.lstrip().startswith("#"))
         except OSError:
-            pass
+            continue
     return total
 
 

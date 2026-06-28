@@ -122,10 +122,12 @@ run_py scripts/check_replay_plan.py
 run_py scripts/check_cli_smoke.py
 run_py scripts/check_schema_coverage.py
 run_py scripts/run_unit_tests.py
+run_py scripts/render_paper_tables.py
 run_py scripts/check_paper_table_sources.py
 run_py scripts/check_paper_quality.py
 run_py scripts/check_pdf_integrity.py
 run_py scripts/check_format_compliance.py
+run_py scripts/check_visual_latex_style.py
 run_py scripts/check_reference_quality.py
 run_py scripts/check_shapley_attribution.py
 run_py scripts/check_repair_certificate_minimality.py

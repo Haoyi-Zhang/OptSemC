@@ -14,11 +14,11 @@ SKIP = {
  'artifact/evaluation/package_snapshot_check.csv','artifact/evaluation/integrity_suite.csv','artifact/evaluation/fast_mainline_results.csv',
 }
 CERT_FILES = [
- 'package_cleanliness.csv','package_manifest_check.csv','package_integrity.csv','manuscript_style.csv','format_compliance.csv',
+ 'package_cleanliness.csv','package_manifest_check.csv','package_integrity.csv','manuscript_style.csv','format_compliance.csv','visual_latex_style.csv',
  'projection_resolution_check.csv','projection_frontier_antichain_check.csv','architecture_contract.csv','packaging_installability.csv',
  'scalability_stress_check.csv','algorithmic_scaling_check.csv','guard_quality_check.csv','feature_holdout_repair_check.csv','scalability_regression_check.csv','incremental_audit_check.csv','incremental_update_check.csv',
  'leave_out_stability_check.csv','engine_family_stress_check.csv','witness_diversity_check.csv','witness_dispersion_check.csv','paper_numeric_claims.csv',
- 'latex_compile_check.csv','pdf_integrity.csv','reference_quality.csv','paper_quality.csv','paper_table_source_check.csv','repository_quality_check.csv',
+ 'latex_compile_check.csv','pdf_integrity.csv','reference_quality.csv','paper_quality.csv','paper_table_renderers.csv','paper_table_source_check.csv','repository_quality_check.csv',
  'package_snapshot_check.csv','integrity_suite.csv','source_witness_support_check.csv','side_balanced_witness_support_check.csv','claim_evidence_graph_check.csv'
 ]
 
@@ -58,7 +58,7 @@ for cache in ROOT.rglob('*.egg-info'):
         shutil.rmtree(cache, ignore_errors=True)
 for pyc in ROOT.rglob('*.py[co]'):
     try: pyc.unlink()
-    except OSError: pass
+    except OSError: continue
 
 allowed_top_level = {'.git', '.github', '.gitattributes', '.gitignore', 'Paper', 'README.md', 'artifact'}
 top = sorted(p.name for p in ROOT.iterdir())

@@ -1,15 +1,16 @@
 \begin{table}[t]
 \centering
-\caption{False-equivalence robustness. Micro rates condition on the projection declaring equivalence; pair macro averages within engine pairs. Leave-one-source ranges remove all rules supported by one public source.}
+\caption{Projection-induced collision robustness. Micro rates condition on the projection declaring equivalence; pair macro averages within engine pairs. Leave-one-source ranges remove all rules supported by one public source.}
 \label{tab:robustness}
-\small
-\begin{tabular}{lrrrrr}
+\footnotesize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}lrrrrr@{}}
 \toprule
-Projection & Decl. & False & Micro & Pair macro & LOO range \\
+Proj. & Decl. & False & Micro & Pair & LOO \\
 \midrule
 Keyword & 2284 & 254 & 0.111 & 0.402 & [0.017,0.144] \\
 Yes/No & 2036 & 6 & 0.003 & 0.003 & [0.000,0.052] \\
-Operator-only & 2268 & 238 & 0.105 & 0.290 & [0.032,0.148] \\
+Operator & 2268 & 238 & 0.105 & 0.290 & [0.032,0.148] \\
 \bottomrule
 \end{tabular}
 \end{table}

@@ -1,4 +1,4 @@
 metric,value
 projection_regressions,4
-min_r_squared,0.997981
-max_slope_ms_per_comparison,0.015648136
+min_r_squared,0.999335
+max_slope_ms_per_comparison,0.015871863

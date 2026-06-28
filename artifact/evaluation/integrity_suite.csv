@@ -2,12 +2,14 @@ check,passed,details
 package_cleanliness,true,5/5
 package_manifest_check,true,6/6
 package_integrity,true,5/5
-format_compliance,true,6/6
+format_compliance,true,8/8
+visual_latex_style,true,7/7
 manuscript_style,true,7/7
 latex_compile_check,true,10/10
 pdf_integrity,true,6/6
 reference_quality,true,80/80
 paper_quality,true,7/7
+paper_table_renderers,true,27/27
 paper_table_source_check,true,27/27
 data_contracts_check,true,3/3
 claim_evidence_graph_check,true,4/4

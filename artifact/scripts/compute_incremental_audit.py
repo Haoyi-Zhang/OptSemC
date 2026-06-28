@@ -58,7 +58,7 @@ lines = [
     r"\caption{Incremental comparison audit. Each row maintains pairwise projection counts by streaming probes one at a time, then independently recomputes the full prefix. Drift is the absolute count mismatch; work factor is the reduction against recomputing every prefix from scratch.}",
     r"\label{tab:incremental-audit}",
     r"\centering",
-    r"\scriptsize",
+    r"\footnotesize",
     r"\begin{tabular}{lrrrr}",
     r"\toprule",
     r"Projection & Checks & False eq. & Drift & Work factor \\",

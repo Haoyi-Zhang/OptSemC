@@ -5,7 +5,7 @@ probe_count,true,4216
 baseline_headline_counts,true,
 side_balanced_witness_support,true,18/18
 certificate:package_integrity,true,5/5
-certificate:format_compliance,true,6/6
+certificate:format_compliance,true,8/8
 certificate:manuscript_style,true,7/7
 certificate:latex_compile_check,true,10/10
 certificate:pdf_integrity,true,6/6

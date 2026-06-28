@@ -1,7 +1,40 @@
 \begin{figure}[t]
 \centering
-\includegraphics[width=\columnwidth]{figures/fig_semantic_frontier.pdf}
-\caption{Semantic frontier over the core field lattice. Safe subsets repair all false equivalences in a scope; unsafe subsets retain a grounded counter-witness.}
-\Description{A grouped bar chart comparing safe and unsafe field subsets for keyword, yes-no, operator-only, and all projections.}
+\footnotesize
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[vtitle, anchor=west, align=left] at (0,0.35)
+    {Semantic repair frontier};
+  \node[vsmall, anchor=west, align=left, text width=7.8cm] at (0,-0.10)
+    {Core field subsets are safe when they eliminate every grounded collision for the projection scope.};
+
+  \node[vpanel, draw=vldbTeal!70!black, fill=vldbMint,
+        minimum width=3.70cm, minimum height=1.15cm, anchor=north west] (kw) at (0,-0.55) {};
+  \node[vhead, anchor=west] at (0.18,-0.82) {keyword};
+  \node[vbody, anchor=west, align=left] at (0.18,-1.15)
+    {min: placement\\safe/unsafe: 23 / 9};
+
+  \node[vpanel, draw=vldbBlue!70!black, fill=vldbMist,
+        minimum width=3.70cm, minimum height=1.15cm, anchor=north west] (yn) at (4.05,-0.55) {};
+  \node[vhead, anchor=west] at (4.23,-0.82) {yes/no};
+  \node[vbody, anchor=west, align=left] at (4.23,-1.15)
+    {min: layer or placement\\safe/unsafe: 24 / 8};
+
+  \node[vpanel, draw=vldbGold!75!black, fill=vldbWarm,
+        minimum width=3.70cm, minimum height=1.15cm, anchor=north west] (op) at (0,-2.05) {};
+  \node[vhead, anchor=west] at (0.18,-2.32) {operator-only};
+  \node[vbody, anchor=west, align=left] at (0.18,-2.65)
+    {min: layer\\safe/unsafe: 22 / 10};
+
+  \node[vpanel, draw=vldbViolet!70!black, fill=vldbSoft,
+        minimum width=3.70cm, minimum height=1.15cm, anchor=north west] (all) at (4.05,-2.05) {};
+  \node[vhead, anchor=west] at (4.23,-2.32) {all projections};
+  \node[vbody, anchor=west, align=left] at (4.23,-2.65)
+    {min: layer + placement\\safe/unsafe: 21 / 11};
+
+  \draw[vflow, draw=vldbTeal!70!black] (kw.east) -- (yn.west);
+  \draw[vflow, draw=vldbGold!70!black] (op.east) -- (all.west);
+\end{tikzpicture}
+\caption{Semantic frontier over the core field lattice. Single fields repair the headline one-projection scopes, while the joint scope requires a layer+placement basis.}
+\Description{Four panels summarize minimum repair fields and safe versus unsafe core field subsets for keyword, yes-no, operator-only, and all-projection scopes.}
 \label{fig:semantic-frontier}
 \end{figure}

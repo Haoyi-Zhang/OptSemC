@@ -60,12 +60,13 @@ def main() -> int:
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\scriptsize",
-        r"\caption{Finite-comparison scalability and dispersion. False probes and feature axes summarize where false witnesses occur; family regions are pair-family groups with at least one false witness. The 8$\times$ lift repeats the probe denominator without changing contracts. Drift compares streaming maintenance with full recomputation.}",
+        r"\footnotesize",
+        r"\caption{Finite-comparison scalability and dispersion. False is witness count; Probes/Axes count distinct probes and feature axes; Fam. is pair-family regions with witnesses out of six; Checks/s is minimum throughput in the 8$\times$ lift; Drift is mismatch against full recomputation.}",
         r"\label{tab:scalability-family}",
-        r"\begin{tabular}{lrrrrrr}",
+        r"\setlength{\tabcolsep}{2.5pt}",
+        r"\begin{tabular}{@{}lrrrrrr@{}}",
         r"\toprule",
-        "Projection & False & Probes & Axes & Fam. & Min checks/s & Drift" + ROW,
+        "Proj. & False & Probes & Axes & Fam. & Checks/s & Drift" + ROW,
         r"\midrule",
     ]
     for r in paper_rows:

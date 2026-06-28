@@ -6,7 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 E = ROOT/'evaluation'
 OUT = E/'integrity_suite.csv'
 checks = [
- 'package_cleanliness','package_manifest_check','package_integrity','format_compliance','manuscript_style','latex_compile_check','pdf_integrity','reference_quality','paper_quality','paper_table_source_check',
+ 'package_cleanliness','package_manifest_check','package_integrity','format_compliance','visual_latex_style','manuscript_style','latex_compile_check','pdf_integrity','reference_quality','paper_quality','paper_table_renderers','paper_table_source_check',
  'data_contracts_check','claim_evidence_graph_check','projection_resolution_check','projection_frontier_antichain_check','projection_information_profile_check','proof_carrying_semantics_check','formal_obligations_check',
  'side_balanced_witness_support_check','source_witness_support_check','guard_quality_check','feature_holdout_repair_check','scalability_stress_check','engine_family_stress_check','artifact_registry_check','repository_quality_check','package_snapshot_check'
 ]

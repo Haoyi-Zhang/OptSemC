@@ -24,7 +24,7 @@ motifs:
       control_surface: [pg_enable_hashjoin_off, pg_enable_mergejoin_off, pg_enable_nestloop_off]
   - motif_id: CardEst-plan-quality
     benchmark_family: cardinality-estimation benchmark evaluation
-    literature_anchor: han2022cardest
+    literature_anchor: han2021cardest
     optimizer_surface: statistics need, unavailable statistics, and join-plan sensitivity
     feature_requirements:
       join_shape: [chain, snowflake]
@@ -33,7 +33,7 @@ motifs:
       predicate_class: [conjunctive, correlated]
   - motif_id: AdaptiveJoin-runtime-replanning
     benchmark_family: adaptive query processing
-    literature_anchor: polar2024
+    literature_anchor: justen2024polar
     optimizer_surface: runtime or stage-boundary adaptation of join/distribution choices
     feature_requirements:
       join_shape: [binary, chain]

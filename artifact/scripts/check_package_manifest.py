@@ -25,7 +25,7 @@ for pyc in ROOT.rglob("*.py[co]"):
     try:
         pyc.unlink()
     except OSError:
-        pass
+        continue
 rows=[]
 def add(check, passed, details=""):
     rows.append({"check": check, "passed": str(bool(passed)).lower(), "details": str(details)})

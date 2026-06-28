@@ -1,6 +1,8 @@
 check,passed,details
 uses_acmart_sigconf_nonacm,true,documentclass
 single_blind_author_block_present,true,authors
+pvl_db_reference_block_present,true,pvl_db_block
+author_two_affiliation_correct,true,ntu_singapore
 no_track_suffix_in_title,true,regular research
 abstract_nonplaceholder,true,abstract
 references_acm_bibtex_configured,true,bibliography

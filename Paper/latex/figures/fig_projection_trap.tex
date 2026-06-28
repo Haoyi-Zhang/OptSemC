@@ -1,18 +1,26 @@
 \begin{figure}[t]
 \centering
-\scriptsize
 \begin{tikzpicture}[
-  box/.style={draw, rounded corners, align=center, inner sep=3pt, text width=0.84\columnwidth},
-  smallbox/.style={draw, rounded corners, align=center, inner sep=3pt, text width=0.55\columnwidth},
-  arrow/.style={-{Latex[length=2mm]}, thick}
+  chip/.style={vpanel, draw=vldbBlue!65, fill=vldbMist, text width=.78\columnwidth,
+    minimum height=.38cm, vbody},
+  cell/.style={vpanel, draw=vldbGold!70, fill=vldbWarm, text width=.58\columnwidth,
+    minimum height=.40cm, vhead},
+  bad/.style={vpanel, draw=vldbRose!72, fill=vldbRose!8, text width=.78\columnwidth,
+    minimum height=.44cm, vbody},
+  flow/.style={vflow}
 ]
-\node[box] (a) {\textbf{Distinct public contracts}\\ local Filter movement; source-side Join delegation; Top-N delegation};
-\node[smallbox, below=0.38cm of a] (b) {\texttt{pushdown=yes}};
-\node[box, below=0.38cm of b] (c) {\textbf{False equivalence}: non-equivalent contracts collapse into one comparison cell};
-\draw[arrow] (a) -- (b);
-\draw[arrow] (b) -- (c);
+\node[chip] (c1) at (0,1.25) {local predicate movement};
+\node[chip, below=0.18cm of c1] (c2) {source-side join delegation};
+\node[chip, below=0.18cm of c2] (c3) {Top-N delegation};
+\node[cell, below=0.34cm of c3] (label) {\texttt{pushdown=yes}};
+\node[bad, below=0.34cm of label] (false) {\textbf{contract collision}: distinct public contracts collapse into one comparison cell};
+
+\draw[flow] (c1.south) -- ([xshift=-1.0cm]label.north);
+\draw[flow] (c2.south) -- (label.north);
+\draw[flow] (c3.south) -- ([xshift=1.0cm]label.north);
+\draw[flow] (label) -- (false);
 \end{tikzpicture}
 \caption{Projection loss in optimizer comparison. A feature-name matrix turns non-equivalent public optimizer contracts into the same apparent capability. OptSem-C preserves the semantic fields that distinguish them.}
-\Description{A TikZ flowchart showing three optimizer behaviors collapsed into pushdown=yes, creating false equivalence.}
+\Description{Three distinct optimizer behaviors flow into the same pushdown=yes feature cell, which creates a contract-collision comparison.}
 \label{fig:projection-trap}
 \end{figure}

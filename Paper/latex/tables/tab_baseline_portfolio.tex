@@ -1,9 +1,10 @@
 \begin{table}[t]
 \centering
-\caption{Executable projection baselines. False equivalence is conditional on the baseline declaring equivalence; the full baseline portfolio contains 17 projections.}
+\caption{Executable projection baselines. Projection-induced collision is conditional on the baseline declaring equivalence; the full baseline portfolio contains 17 projections.}
 \label{tab:baseline-portfolio}
-\scriptsize
-\begin{tabular}{@{}p{0.78in}rrr@{}}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrr@{}}
 \toprule
 Baseline & Eq. & False & Rate \\
 \midrule
@@ -15,7 +16,7 @@ Kind-only & 2,282 & 252 & 11.0\% \\
 Layer-only & 2,479 & 449 & 18.1\% \\
 Place-only & 12,732 & 10,702 & 84.1\% \\
 State-only & 25,623 & 23,593 & 92.1\% \\
-Op+kind+surface & 2,030 & 0 & 0.0\% \\
+Surface & 2,030 & 0 & 0.0\% \\
 \bottomrule
 \end{tabular}
 \end{table}

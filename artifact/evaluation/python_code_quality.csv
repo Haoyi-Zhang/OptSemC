@@ -57,7 +57,7 @@ artifact/scripts/annotate_public_provenance.py,0,0,3,0,true
 artifact/scripts/audit_grounded_core.py,0,0,3,0,true
 artifact/scripts/build_claim_evidence_graph.py,0,0,5,0,true
 artifact/scripts/build_claim_ledger.py,5,0,3,39,true
-artifact/scripts/build_claim_metric_summary.py,4,0,3,125,true
+artifact/scripts/build_claim_metric_summary.py,12,0,3,27,true
 artifact/scripts/build_data_contracts.py,0,0,5,0,true
 artifact/scripts/build_package_fingerprint.py,0,0,5,0,true
 artifact/scripts/build_package_manifest.py,0,0,5,0,true
@@ -146,6 +146,7 @@ artifact/scripts/check_sql_shape_diagnostics.py,1,0,3,2,true
 artifact/scripts/check_stale_diagnostic_outputs.py,3,0,3,5,true
 artifact/scripts/check_statistical_robustness.py,0,0,3,0,true
 artifact/scripts/check_theorem_ledger.py,6,0,5,80,true
+artifact/scripts/check_visual_latex_style.py,1,0,6,2,true
 artifact/scripts/check_witness_dispersion.py,2,0,4,3,true
 artifact/scripts/check_witness_diversity.py,2,0,3,3,true
 artifact/scripts/check_workload_suite_depth.py,1,0,3,2,true
@@ -160,7 +161,7 @@ artifact/scripts/compute_differential_reproducibility.py,0,0,5,0,true
 artifact/scripts/compute_engine_family_stress.py,0,0,6,0,true
 artifact/scripts/compute_engine_pair_matrix.py,0,0,6,0,true
 artifact/scripts/compute_enginepair_repair_generalization.py,10,0,3,28,true
-artifact/scripts/compute_external_benchmark_crosswalk.py,2,0,6,20,true
+artifact/scripts/compute_external_benchmark_crosswalk.py,3,0,7,23,true
 artifact/scripts/compute_external_benchmark_suite.py,0,0,6,0,true
 artifact/scripts/compute_false_equivalence_mechanisms.py,8,0,3,39,true
 artifact/scripts/compute_false_equivalence_severity.py,0,0,6,0,true
@@ -190,14 +191,14 @@ artifact/scripts/compute_projection_information_profile.py,1,0,6,9,true
 artifact/scripts/compute_projection_ladder.py,9,0,3,25,true
 artifact/scripts/compute_projection_lattice.py,12,0,3,16,true
 artifact/scripts/compute_projection_mutation_suite.py,0,0,7,0,true
-artifact/scripts/compute_projection_resolution_lattice.py,2,0,6,247,true
+artifact/scripts/compute_projection_resolution_lattice.py,12,0,7,52,true
 artifact/scripts/compute_relation_diagnostics.py,0,0,7,0,true
 artifact/scripts/compute_repair_basis_stability.py,10,0,4,44,true
 artifact/scripts/compute_repair_generalization.py,11,0,3,43,true
 artifact/scripts/compute_repair_hitting_sets.py,14,0,6,50,true
 artifact/scripts/compute_scalability_regression.py,3,0,4,13,true
 artifact/scripts/compute_scalability_stress.py,0,0,6,0,true
-artifact/scripts/compute_semantic_frontier.py,6,0,4,58,true
+artifact/scripts/compute_semantic_frontier.py,6,0,4,59,true
 artifact/scripts/compute_side_balanced_witness_support.py,0,0,5,0,true
 artifact/scripts/compute_source_witness_support.py,0,0,5,0,true
 artifact/scripts/compute_sql_shape_diagnostics.py,0,0,6,0,true
@@ -206,7 +207,7 @@ artifact/scripts/compute_witness_diversity.py,1,0,7,20,true
 artifact/scripts/compute_workload_sensitivity.py,4,0,4,45,true
 artifact/scripts/compute_workload_suite_depth.py,0,0,6,0,true
 artifact/scripts/execute_external_motif_suite.py,0,0,6,0,true
-artifact/scripts/execute_sql_probe_suite.py,0,0,6,0,true
+artifact/scripts/execute_sql_probe_suite.py,2,0,6,71,true
 artifact/scripts/execute_sql_probe_suite_multicatalog.py,0,0,6,0,true
 artifact/scripts/export_sql_probe_bundle.py,1,0,6,16,true
 artifact/scripts/generate_grounded_case_studies.py,4,0,2,18,true
@@ -216,9 +217,9 @@ artifact/scripts/hydrate_large_outputs.py,0,0,2,0,true
 artifact/scripts/match_rules.py,5,0,4,23,true
 artifact/scripts/merge_contracts.py,2,0,3,30,true
 artifact/scripts/refresh_grounded_summaries.py,3,0,4,64,true
-artifact/scripts/render_baseline_external_tables.py,7,0,3,43,true
-artifact/scripts/render_paper_tables.py,5,0,2,6,true
-artifact/scripts/render_scaling_and_incremental_tables.py,4,0,3,43,true
+artifact/scripts/render_baseline_external_tables.py,7,0,3,44,true
+artifact/scripts/render_paper_tables.py,3,0,3,54,true
+artifact/scripts/render_scaling_and_incremental_tables.py,4,0,3,44,true
 artifact/scripts/run_integrity_suite.py,3,0,3,7,true
 artifact/scripts/run_real_engine_validation.py,22,3,15,30,true
 artifact/scripts/run_repository_audit.py,0,0,4,0,true

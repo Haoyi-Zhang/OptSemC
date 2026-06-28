@@ -1,37 +1,55 @@
-\documentclass[sigconf,nonacm]{acmart}
+\documentclass[sigconf, nonacm]{acmart}
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning,fit,shapes.geometric}
+\usetikzlibrary{arrows.meta,positioning,fit,shapes.geometric,calc,backgrounds}
 \usepackage{placeins}
 \usepackage{amsmath,amsthm}
 \usepackage{stmaryrd}
 \usepackage{enumitem}
-\settopmatter{printacmref=false}
-\renewcommand\footnotetextcopyrightpermission[1]{}
-\pagestyle{plain}
-\flushbottom
-\setlength{\textfloatsep}{6pt plus 1pt minus 2pt}
-\setlength{\floatsep}{6pt plus 1pt minus 2pt}
-\setlength{\intextsep}{6pt plus 1pt minus 2pt}
-\setlength{\tabcolsep}{3.5pt}
-\setlength{\emergencystretch}{2em}
 \Urlmuskip=0mu plus 2mu
+
+\definecolor{vldbInk}{RGB}{28,31,35}
+\definecolor{vldbBlue}{RGB}{38,86,132}
+\definecolor{vldbTeal}{RGB}{37,124,116}
+\definecolor{vldbGold}{RGB}{154,111,43}
+\definecolor{vldbRose}{RGB}{151,73,82}
+\definecolor{vldbViolet}{RGB}{87,82,141}
+\definecolor{vldbMist}{RGB}{239,245,248}
+\definecolor{vldbMint}{RGB}{237,247,244}
+\definecolor{vldbWarm}{RGB}{248,244,235}
+\definecolor{vldbRule}{RGB}{190,197,201}
+\definecolor{vldbGray}{RGB}{96,105,113}
+\definecolor{vldbSoft}{RGB}{246,248,250}
+
+\tikzset{
+  vtitle/.style={font=\rmfamily\bfseries\fontsize{8.8}{9.6}\selectfont,
+    text=vldbInk, align=center, inner sep=.4pt},
+  vhead/.style={font=\rmfamily\bfseries\fontsize{7.4}{8.2}\selectfont,
+    text=vldbInk, align=center, inner sep=.5pt},
+  vbody/.style={font=\rmfamily\fontsize{6.9}{7.6}\selectfont,
+    text=black!68, align=center, inner xsep=2.0pt, inner ysep=1.0pt},
+  vsmall/.style={font=\rmfamily\fontsize{6.5}{7.1}\selectfont,
+    text=black!60, align=center, inner sep=.4pt},
+  vpanel/.style={rounded corners=2.5pt, line width=.52pt},
+  vflow/.style={-{Latex[length=1.8mm]}, line width=.74pt,
+    draw=black!52, line cap=round, line join=round}
+}
 
 \newtheorem{definition}{Definition}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 
 
-\newcommand\vldbdoi{}
-\newcommand\vldbpages{}
+\newcommand\vldbdoi{XX.XX/XXX.XX}
+\newcommand\vldbpages{XXX-XXX}
 \newcommand\vldbvolume{20}
 \newcommand\vldbissue{1}
 \newcommand\vldbyear{2027}
-\newcommand\vldbauthors{Zhang and Ran}
-\newcommand\vldbtitle{OptSem-C: Public Optimizer Contracts for Query Engine Portability}
+\newcommand\vldbauthors{\authors}
+\newcommand\vldbtitle{\shorttitle}
 \newcommand\vldbavailabilityurl{}
 \newcommand\vldbpagestyle{plain}
 
@@ -50,22 +68,47 @@
 \orcid{0009-0009-2482-2344}
 \affiliation{%
   \institution{Nanyang Technological University}
-  \city{Suzhou}
-  \country{China}
+  \city{Singapore}
+  \country{Singapore}
 }
 \email{huaijin003@e.ntu.edu.sg}
 
 \begin{document}
 \begin{abstract}
-SQL is portable at the language boundary, but optimizer behavior is not.  Query engines expose public contracts for pushdown, join ordering, statistics, materialization, distributed placement, runtime adaptation, and plan evidence.  Today these behaviors are often compared through coarse labels such as \texttt{pushdown}, \texttt{join}, or \texttt{cost-based}.  Such projections collapse local rewrites, source delegation, service-side stages, and runtime decisions into the same apparent capability; in short, coarse optimizer comparison fabricates contract-level equivalence by declaring two engine--query pairs indistinguishable even when their public optimizer contracts disagree.
+Optimizer-behavior comparisons can fail before a performance number is measured: the comparison denominator is often a coarse vocabulary rather than an exact public contract.  Query engines expose public contracts for pushdown, join ordering, statistics, materialization, distributed placement, runtime adaptation, and plan evidence.  Today these behaviors are often compared through labels such as \texttt{pushdown}, \texttt{join}, or \texttt{cost-based}.  Such projections collapse local rewrites, source delegation, service-side stages, and runtime decisions into the same apparent capability; in short, a coarse optimizer vocabulary can declare two engine--query pairs indistinguishable even when their public optimizer contracts disagree.
 
-This paper introduces OptSem-C, a formal semantics and benchmark methodology for public optimizer behavior contracts.  A contract rule is a guarded modal statement over query features with explicit operator, action variant, modality, optimizer layer, placement, decision time, observability, version, and public evidence.  The semantics separates behavioral worlds from evidential support, defines a conflict-aware state join, and characterizes lossy optimizer comparison as a projection kernel over exact contract signatures.  On top of this semantics, OptSem-C computes information profiles, exhaustive field-resolution lattices, antichain frontiers, and minimum repair certificates that identify which optimizer-semantic fields are necessary and sufficient for safe comparison.
+This paper presents OptSem-C, a benchmark methodology for public optimizer behavior contracts with a formal semantics that makes comparison denominators auditable.  A contract rule is a guarded modal statement over query features with explicit operator, action variant, modality, optimizer layer, placement, decision time, observability, version, and public evidence.  The semantics separates behavioral worlds from evidential support, defines a conflict-aware state join, and treats lossy optimizer comparison as a projection kernel over exact contract signatures.  OptSem-C then computes information profiles, exhaustive field-resolution lattices, antichain frontiers, empirical minimum semantic bases, and checkable repair certificates that identify which optimizer-semantic fields must be retained before a comparison is safe.
 
-The grounded study contains 287 verified public-contract rules, 287 source-linked evidence spans, 26 public source records, and 4,216 executable SQL probes covering 7,112 valid optimizer-feature interactions.  Keyword projection declares 2,284 equivalences, 254 of which exact contracts refute; operator-only projection declares 2,268 equivalences, 238 of which are false.  Exhaustively evaluating all 256 retained-field vocabularies shows that 44 remain unsafe, and after action-variant identifiers are removed the minimum safe semantic vocabularies have size two.  Placement repairs keyword collisions, optimizer layer repairs operator-only collisions, and a layer+placement basis repairs all 498 headline witnesses.  OptSem-C turns optimizer-contract comparison from an informal feature checklist into a finite, auditable query-processing relation.
+The grounded study contains 287 verified public-contract rules, 287 source-linked evidence spans, 26 public source records, and 4,216 executable SQL probes covering 7,112 valid optimizer-feature interactions.  Keyword projection declares 2,284 equivalences, 254 of which exact contracts refute; operator-only projection declares 2,268 equivalences, 238 of which are projection-induced contract collisions.  An external motif coverage audit maps published optimizer and workload families to 90 executable requirements, while real-engine checks run the generated probes on DuckDB and PostgreSQL as SQL and visible-plan sanity layers.  Exhaustively evaluating all 256 retained-field vocabularies shows that 44 remain unsafe, and after action-variant identifiers are removed the minimum safe semantic vocabularies have size two.  Placement repairs keyword collisions, optimizer layer repairs operator-only collisions, and a layer+placement basis repairs all 498 headline witnesses.  OptSem-C turns optimizer-contract comparison from an informal feature checklist into a finite, auditable query-processing relation.
 \end{abstract}
 
 \maketitle
 
+%%% do not modify the following VLDB block %%
+%%% VLDB block start %%%
+\pagestyle{\vldbpagestyle}
+\begingroup\small\noindent\raggedright\textbf{PVLDB Reference Format:}\\
+\vldbauthors. \vldbtitle. PVLDB, \vldbvolume(\vldbissue): \vldbpages, \vldbyear.\\
+\href{https://doi.org/\vldbdoi}{doi:\vldbdoi}
+\endgroup
+\begingroup
+\renewcommand\thefootnote{}\footnote{\noindent
+This work is licensed under the Creative Commons BY-NC-ND 4.0 International License. Visit \url{https://creativecommons.org/licenses/by-nc-nd/4.0/} to view a copy of this license. For any use beyond those covered by this license, obtain permission by emailing \href{mailto:info@vldb.org}{info@vldb.org}. Copyright is held by the owner/author(s). Publication rights licensed to the VLDB Endowment. \\
+\raggedright Proceedings of the VLDB Endowment, Vol. \vldbvolume, No. \vldbissue\ %
+ISSN 2150-8097. \\
+\href{https://doi.org/\vldbdoi}{doi:\vldbdoi} \\
+}\addtocounter{footnote}{-1}\endgroup
+%%% VLDB block end %%%
+
+%%% do not modify the following VLDB block %%
+%%% VLDB block start %%%
+\ifdefempty{\vldbavailabilityurl}{}{
+\vspace{.3cm}
+\begingroup\small\noindent\raggedright\textbf{PVLDB Availability Statement:}\\
+The source code, data, and/or other artifacts have been made available at \url{\vldbavailabilityurl}.
+\endgroup
+}
+%%% VLDB block end %%%
 
 \input{sections/01_intro}
 \input{sections/02_problem}

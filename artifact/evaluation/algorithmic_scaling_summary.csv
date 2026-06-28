@@ -1,5 +1,5 @@
 projection,max_scale_factor,max_pairwise_checks,min_checks_per_second,false_equivalences_at_1x,false_equivalences_at_max_scale
-strict,8,708288,258599.65,0,0
-keyword,8,708288,322006.13,254,2032
-operator_only,8,708288,345490.46,238,1904
-operator_kind_surface,8,708288,269355.78,0,0
+strict,8,708288,255350.89,0,0
+keyword,8,708288,322014.80,254,2032
+operator_only,8,708288,344172.97,238,1904
+operator_kind_surface,8,708288,267158.18,0,0

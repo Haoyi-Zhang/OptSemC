@@ -1,0 +1,8 @@
+check,passed,details
+no_banned_visual_scaling_macros,true,
+official_template_files_present,true,
+acmart_template_identifiable,true,60c23734771f
+documentclass_matches_pvldb_template,true,"sigconf, nonacm"
+pvl_db_metadata_block_present,true,reference/copyright metadata
+author_two_affiliation_is_ntu_singapore,true,"Nanyang Technological University, Singapore"
+no_global_template_or_spacing_suppression,true,

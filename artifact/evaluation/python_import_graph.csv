@@ -356,7 +356,6 @@ artifact/scripts/build_claim_ledger.py,csv,import
 artifact/scripts/build_claim_ledger.py,pathlib,from
 artifact/scripts/build_claim_metric_summary.py,__future__,from
 artifact/scripts/build_claim_metric_summary.py,csv,import
-artifact/scripts/build_claim_metric_summary.py,json,import
 artifact/scripts/build_claim_metric_summary.py,pathlib,from
 artifact/scripts/build_data_contracts.py,__future__,from
 artifact/scripts/build_data_contracts.py,sys,import
@@ -768,6 +767,12 @@ artifact/scripts/check_theorem_ledger.py,csv,import
 artifact/scripts/check_theorem_ledger.py,json,import
 artifact/scripts/check_theorem_ledger.py,sys,import
 artifact/scripts/check_theorem_ledger.py,pathlib,from
+artifact/scripts/check_visual_latex_style.py,__future__,from
+artifact/scripts/check_visual_latex_style.py,csv,import
+artifact/scripts/check_visual_latex_style.py,hashlib,import
+artifact/scripts/check_visual_latex_style.py,re,import
+artifact/scripts/check_visual_latex_style.py,sys,import
+artifact/scripts/check_visual_latex_style.py,pathlib,from
 artifact/scripts/check_witness_dispersion.py,__future__,from
 artifact/scripts/check_witness_dispersion.py,csv,import
 artifact/scripts/check_witness_dispersion.py,sys,import
@@ -850,6 +855,7 @@ artifact/scripts/compute_enginepair_repair_generalization.py,json,import
 artifact/scripts/compute_enginepair_repair_generalization.py,pathlib,from
 artifact/scripts/compute_external_benchmark_crosswalk.py,__future__,from
 artifact/scripts/compute_external_benchmark_crosswalk.py,sys,import
+artifact/scripts/compute_external_benchmark_crosswalk.py,re,import
 artifact/scripts/compute_external_benchmark_crosswalk.py,pathlib,from
 artifact/scripts/compute_external_benchmark_crosswalk.py,optsemc.corpus,from
 artifact/scripts/compute_external_benchmark_crosswalk.py,optsemc.external,from
@@ -1045,6 +1051,7 @@ artifact/scripts/compute_projection_resolution_lattice.py,__future__,from
 artifact/scripts/compute_projection_resolution_lattice.py,csv,import
 artifact/scripts/compute_projection_resolution_lattice.py,sys,import
 artifact/scripts/compute_projection_resolution_lattice.py,pathlib,from
+artifact/scripts/compute_projection_resolution_lattice.py,typing,from
 artifact/scripts/compute_projection_resolution_lattice.py,optsemc.corpus,from
 artifact/scripts/compute_projection_resolution_lattice.py,optsemc.lattice,from
 artifact/scripts/compute_relation_diagnostics.py,__future__,from
@@ -1191,8 +1198,9 @@ artifact/scripts/refresh_grounded_summaries.py,pathlib,from
 artifact/scripts/render_baseline_external_tables.py,__future__,from
 artifact/scripts/render_baseline_external_tables.py,csv,import
 artifact/scripts/render_baseline_external_tables.py,pathlib,from
-artifact/scripts/render_paper_tables.py,pathlib,from
+artifact/scripts/render_paper_tables.py,__future__,from
 artifact/scripts/render_paper_tables.py,csv,import
+artifact/scripts/render_paper_tables.py,pathlib,from
 artifact/scripts/render_scaling_and_incremental_tables.py,__future__,from
 artifact/scripts/render_scaling_and_incremental_tables.py,csv,import
 artifact/scripts/render_scaling_and_incremental_tables.py,pathlib,from

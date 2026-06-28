@@ -44,7 +44,7 @@ for p in ROOT.rglob('*'):
         try:
             p.unlink()
         except OSError:
-            pass
+            continue
 trans=[]
 for p in ROOT.rglob('*'):
     if p.is_dir() and (p.name in {'__pycache__','.pytest_cache'} or p.name.endswith('.egg-info')): trans.append(str(p.relative_to(ROOT)))

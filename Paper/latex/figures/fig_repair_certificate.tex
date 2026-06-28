@@ -1,19 +1,24 @@
 \begin{figure}[t]
 \centering
-\scriptsize
+\footnotesize
 \begin{tikzpicture}[
-  box/.style={draw, rounded corners, align=center, inner sep=3pt, text width=0.78\columnwidth},
-  arrow/.style={-{Latex[length=2mm]}, thick}
+  cert/.style={vpanel, text width=.78\columnwidth, minimum height=.46cm, vbody},
+  flow/.style={vflow}
 ]
-\node[box] (full) {Full public contract: operator, layer, placement, time, state};
-\node[box, below=0.28cm of full] (proj) {Coarse projection: keyword or operator-only};
-\node[box, below=0.28cm of proj] (false) {False equivalence: keyword 254; operator-only 238};
-\node[box, below=0.28cm of false] (repair) {Minimum repair: placement for keyword, layer for operator-only};
-\draw[arrow] (full) -- (proj);
-\draw[arrow] (proj) -- (false);
-\draw[arrow] (false) -- (repair);
+\node[cert, draw=vldbBlue!68, fill=vldbMist] (full) at (0,1.35)
+  {\textbf{full public contract}: operator, layer, placement, time, state};
+\node[cert, draw=vldbGold!70, fill=vldbWarm, below=0.26cm of full] (proj)
+  {\textbf{coarse projection}: keyword or operator-only vocabulary};
+\node[cert, draw=vldbRose!72, fill=vldbRose!8, below=0.26cm of proj] (false)
+  {\textbf{collisions}: keyword 254; operator-only 238};
+\node[cert, draw=vldbTeal!75, fill=vldbMint, below=0.26cm of false] (repair)
+  {\textbf{minimum repair}: placement for keyword; layer for operator-only};
+
+\draw[flow] (full) -- (proj);
+\draw[flow] (proj) -- (false);
+\draw[flow] (false) -- (repair);
 \end{tikzpicture}
-\caption{Repair certificates. Coarse projections fabricate equivalence; restoring a semantic field eliminates the observed false equivalences in the grounded corpus.}
-\Description{A TikZ flowchart from full contracts to coarse projections, false equivalence, and semantic repair fields.}
+\caption{Repair certificates. Coarse projections collapse unequal public contracts; restoring a semantic field eliminates the observed collision witnesses in the grounded corpus.}
+\Description{A styled flowchart from full contracts to coarse projections, collision counts, and minimum semantic repair fields.}
 \label{fig:repair-certificate}
 \end{figure}

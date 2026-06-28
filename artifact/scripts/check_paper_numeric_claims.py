@@ -87,18 +87,24 @@ except Exception as exc:
 
 try:
     section = text(PKG / "Paper" / "latex" / "sections" / "05_evaluation.tex")
+    stress = {row["metric"]: row["value"] for row in read_csv(E / "scalability_stress_summary.csv")}
     summary = {row["metric"]: row["value"] for row in read_csv(E / "scalability_regression_summary.csv")}
     alg = read_csv(E / "algorithmic_scaling_summary.csv")
     min_cps = min(float(row["min_checks_per_second"]) for row in alg)
     min_r_squared = float(summary["min_r_squared"])
-    required = [fmt_int(88536), fmt_int(708288), "70,000", "0.96"]
+    full_checks = fmt_int(stress["full_pairwise_comparisons_per_projection"])
+    lifted_checks = fmt_int(max(int(row["max_pairwise_checks"]) for row in alg))
+    full_min_cps = float(stress["full_min_comparisons_per_second"])
+    required = [full_checks, lifted_checks, "50,000", "200,000", "0.98"]
     missing = [tok for tok in required if tok not in section]
     detail = "|".join(missing)
-    if min_cps < 70000.0:
+    if full_min_cps < 50000.0:
+        detail += f";full_min_cps={full_min_cps:.0f}"
+    if min_cps < 200000.0:
         detail += f";min_cps={min_cps:.0f}"
-    if min_r_squared < 0.96:
+    if min_r_squared < 0.98:
         detail += f";min_r_squared={min_r_squared:.6f}"
-    add("evaluation_scaling_claims_match_outputs", not missing and min_cps >= 70000.0 and min_r_squared >= 0.96, detail)
+    add("evaluation_scaling_claims_match_outputs", not missing and full_min_cps >= 50000.0 and min_cps >= 200000.0 and min_r_squared >= 0.98, detail)
 except Exception as exc:
     add("evaluation_scaling_claims_match_outputs", False, type(exc).__name__ + ":" + str(exc))
 

@@ -1,6 +1,7 @@
 check,passed,details
 motif_catalog_nonempty,true,motifs=5
 every_motif_has_literature_anchor,true,
+every_literature_anchor_resolves,true,
 every_motif_has_optimizer_surface,true,
 every_motif_has_feature_requirements,true,
 all_declared_motif_requirements_covered,true,

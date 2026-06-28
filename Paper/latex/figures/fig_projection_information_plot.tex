@@ -1,7 +1,35 @@
 \begin{figure}[t]
 \centering
-\includegraphics[width=\columnwidth]{figures/fig_projection_information.pdf}
-\caption{Projection information profile. Bars show false equivalences induced by representative projections; the line shows empirical signature entropy retained by the projection.}
-\Description{A bar and line chart comparing representative projections. Strict has zero false equivalences and entropy one; coarse projections lose entropy and introduce false equivalences.}
+\footnotesize
+\newcommand{\inforow}[6]{%
+  \node[anchor=east, font=\rmfamily\fontsize{6.8}{7.4}\selectfont, text=vldbInk]
+        at (1.45,#1) {#2};
+  \path[draw=vldbRose!70!black, fill=vldbRose!28, rounded corners=.7pt]
+        (1.72,{#1-.13}) rectangle ({1.72+#3},{#1+.13});
+  \node[anchor=west, font=\rmfamily\fontsize{6.8}{7.4}\selectfont, text=vldbGray]
+        at (2.94,#1) {#4};
+  \path[draw=vldbBlue!72!black, fill=vldbBlue!28, rounded corners=.7pt]
+        (4.70,{#1-.13}) rectangle ({4.70+#5},{#1+.13});
+  \node[anchor=west, font=\rmfamily\fontsize{6.8}{7.4}\selectfont, text=vldbGray]
+        at (6.05,#1) {#6};
+}
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[vtitle, anchor=west, align=left] at (0,0.40)
+    {Projection information profile};
+  \node[vsmall, anchor=west] at (1.72,-0.08) {contract collisions};
+  \node[vsmall, anchor=west] at (4.70,-0.08) {entropy retained};
+
+  \draw[vldbRule, line width=.28pt] (1.72,-0.32) -- (2.87,-0.32);
+  \draw[vldbRule, line width=.28pt] (4.70,-0.32) -- (5.90,-0.32);
+
+  \inforow{-0.82}{strict}{0.00}{0}{1.20}{1.000}
+  \inforow{-1.42}{keyword}{0.01}{254}{0.77}{0.638}
+  \inforow{-2.02}{operator}{0.01}{238}{0.94}{0.787}
+  \inforow{-2.62}{placement}{0.52}{10,702}{0.34}{0.280}
+  \inforow{-3.22}{state}{1.15}{23,593}{0.26}{0.217}
+  \inforow{-3.82}{op+kind}{0.00}{0}{1.09}{0.904}
+\end{tikzpicture}
+\caption{Projection information profile. Coarse projections induce contract collisions and lose signature entropy; strict comparison and the operator-kind surface are negative controls with zero pairwise collisions.}
+\Description{A compact horizontal chart comparing contract collisions and retained entropy for six representative projections.}
 \label{fig:projection-information}
 \end{figure}

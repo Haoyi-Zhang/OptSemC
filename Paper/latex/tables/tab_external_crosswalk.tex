@@ -1,17 +1,18 @@
 \begin{table}[t]
 \centering
-\caption{Crosswalk from published optimizer/benchmark motifs to OptSemBench-C feature requirements.}
+\caption{External vocabulary stress test. Rows are literature/workload motif families, not copied SQL or performance claims; every declared optimizer-surface requirement has executable probe support.}
 \label{tab:external-crosswalk}
-\small
-\begin{tabular}{lrr}
+\footnotesize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}p{0.60in}p{1.28in}rr@{}}
 \toprule
-Motif & Requirements & Covered \\
+Anchor & Surface & Req. & Cov. \\
 \midrule
-Join-order sensitivity & 8 & 8 \\
-Exact-cardinality testing & 9 & 9 \\
-CardEst plan quality & 8 & 8 \\
-Adaptive replanning & 9 & 9 \\
-Cross-source joinability & 7 & 7 \\
+JOB & join-order search & 8 & 8 \\
+Exact-card. & exact-cardinality testing & 9 & 9 \\
+CardEst & plan-quality sensitivity & 8 & 8 \\
+Adaptive & runtime replanning & 9 & 9 \\
+Lake & cross-source joinability & 7 & 7 \\
 \bottomrule
 \end{tabular}
 \end{table}

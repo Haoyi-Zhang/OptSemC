@@ -1,16 +1,17 @@
 \begin{table}[t]
 \centering
-\scriptsize
-\caption{Finite-comparison scalability and dispersion. False probes and feature axes summarize where false witnesses occur; family regions are pair-family groups with at least one false witness. The 8$\times$ lift repeats the probe denominator without changing contracts. Drift compares streaming maintenance with full recomputation.}
+\footnotesize
+\caption{Finite-comparison scalability and dispersion. False is witness count; Probes/Axes count distinct probes and feature axes; Fam. is pair-family regions with witnesses out of six; Checks/s is minimum throughput in the 8$\times$ lift; Drift is mismatch against full recomputation.}
 \label{tab:scalability-family}
-\begin{tabular}{lrrrrrr}
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}lrrrrrr@{}}
 \toprule
-Projection & False & Probes & Axes & Fam. & Min checks/s & Drift \\
+Proj. & False & Probes & Axes & Fam. & Checks/s & Drift \\
 \midrule
-strict & 0 & -- & -- & 0/6 & 258,600 & 0 \\
-keyword & 254 & 254 & 9 & 3/6 & 322,006 & 0 \\
-operator-only & 238 & 238 & 8 & 2/6 & 345,490 & 0 \\
-surface & 0 & -- & -- & 0/6 & 269,356 & 0 \\
+strict & 0 & -- & -- & 0/6 & 255,351 & 0 \\
+keyword & 254 & 254 & 9 & 3/6 & 322,015 & 0 \\
+operator-only & 238 & 238 & 8 & 2/6 & 344,173 & 0 \\
+surface & 0 & -- & -- & 0/6 & 267,158 & 0 \\
 \bottomrule
 \end{tabular}
 \end{table}

@@ -10,8 +10,16 @@ text = TEX.read_text(encoding='utf-8', errors='ignore') if TEX.exists() else ''
 rows=[]
 def add(check, ok, detail=''):
     rows.append({'check':check,'passed':str(bool(ok)).lower(),'details':str(detail)})
-add('uses_acmart_sigconf_nonacm', r'\documentclass[sigconf,nonacm]{acmart}' in text, 'documentclass')
+add(
+    'uses_acmart_sigconf_nonacm',
+    bool(re.search(r'\\documentclass\[\s*sigconf\s*,\s*nonacm\s*\]\{acmart\}', text)),
+    'documentclass',
+)
 add('single_blind_author_block_present', all(x in text for x in ['Haoyi Zhang','Huaijin Ran','\\affiliation','\\email']), 'authors')
+add('pvl_db_reference_block_present', all(x in text for x in ['PVLDB Reference Format', 'PVLDB, \\vldbvolume', 'Proceedings of the VLDB Endowment', '\\vldbdoi', '\\vldbpages']), 'pvl_db_block')
+author_two = re.search(r'\\author\{Huaijin Ran\}(.*?)(?=\\author\{|\\begin\{document\})', text, re.S)
+author_two_text = author_two.group(1) if author_two else ''
+add('author_two_affiliation_correct', all(x in author_two_text for x in ['Nanyang Technological University', '\\city{Singapore}', '\\country{Singapore}']) and 'Suzhou' not in author_two_text, 'ntu_singapore')
 add('no_track_suffix_in_title', '[Vision]' not in text and '[Experiment' not in text and '[Scalable' not in text, 'regular research')
 add('abstract_nonplaceholder', len(re.search(r'\\begin\{abstract\}(.*?)\\end\{abstract\}', text, re.S).group(1).strip()) > 1000 if re.search(r'\\begin\{abstract\}(.*?)\\end\{abstract\}', text, re.S) else False, 'abstract')
 bibtex_configured = (

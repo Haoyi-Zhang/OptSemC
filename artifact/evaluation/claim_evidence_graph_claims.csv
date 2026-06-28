@@ -4,13 +4,13 @@ claim:C11_real_engine_validation,The generated probes execute on DuckDB and Post
 claim:C12_theorem_ledger,Every finite theorem obligation asserted in the paper is checked by the artifact.,1,1,1,true
 claim:C1_grounded_corpus,"The grounded mainline contains 287 verified rules, 287 evidence spans, and 26 sources.",3,3,1,true
 claim:C2_probe_coverage,"OptSemBench-C generates 4,216 probes covering 7,112 renderable feature interactions.",3,3,1,true
-claim:C3_keyword_false_equivalence,"Keyword projection fabricates 254 false equivalences among 2,284 declared equivalences.",2,2,1,true
-claim:C4_operator_false_equivalence,"Operator-only projection fabricates 238 false equivalences among 2,268 declared equivalences.",2,2,1,true
-claim:C5_exact_negative_control,Exact contract comparison produces zero false equivalences.,2,2,1,true
+claim:C3_keyword_false_equivalence,"Keyword projection induces 254 contract-collision witnesses among 2,284 declared equivalences.",2,2,1,true
+claim:C4_operator_false_equivalence,"Operator-only projection induces 238 contract-collision witnesses among 2,268 declared equivalences.",2,2,1,true
+claim:C5_exact_negative_control,Exact contract comparison produces zero projection-induced collisions.,2,2,1,true
 claim:C6_adversarial_baselines,"The baseline suite contains 17 executable projections, including one-field adversarial baselines and strengthened matrix baselines.",2,2,1,true
-claim:C7_repair_basis,The layer+placement semantic basis repairs all 498 false equivalences across headline projections.,3,3,1,true
+claim:C7_repair_basis,The layer+placement semantic basis repairs all 498 projection-induced collisions across headline projections.,3,3,1,true
 claim:C8_minimality,Repair certificates are sufficient and minimal under finite enumeration and hitting-set checks.,3,3,1,true
-claim:C9_source_robustness,Keyword and operator-only false equivalence remain nonzero after removing any single public source.,1,1,1,true
+claim:C9_source_robustness,Keyword and operator-only projection-induced collisions remain nonzero after removing any single public source.,1,1,1,true
 claim:theorem_C1_adversarial_baseline_suite,C1 adversarial baseline suite,2,2,1,true
 claim:theorem_T1_finite_evaluation,T1 finite evaluation,4,4,1,true
 claim:theorem_T2_projection_loss,T2 projection loss,2,2,1,true

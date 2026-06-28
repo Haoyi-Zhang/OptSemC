@@ -8,7 +8,7 @@ deep:
 	./run_deep_checks.sh
 
 paper:
-	python scripts/check_latex_compile.py && python scripts/check_pdf_integrity.py && python scripts/check_format_compliance.py
+	python scripts/check_latex_compile.py && python scripts/check_pdf_integrity.py && python scripts/check_format_compliance.py && python scripts/check_visual_latex_style.py
 
 baselines:
 	python scripts/compute_baseline_portfolio.py && python scripts/compute_projection_mutation_suite.py && python scripts/check_projection_mutation_suite.py

@@ -29,7 +29,7 @@ for pyc in PKG.rglob('*.py[co]'):
     try:
         pyc.unlink()
     except OSError:
-        pass
+        continue
 ROWS: list[dict[str,str]] = []
 
 def add(check: str, passed: bool, details: str = '') -> None:

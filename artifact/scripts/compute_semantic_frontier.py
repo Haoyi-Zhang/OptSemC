@@ -81,12 +81,13 @@ def main() -> None:
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Semantic repair frontier over the core field universe. Safe subsets repair all false equivalences for the projection scope; unsafe subsets leave at least one grounded counter-witness.}",
+        r"\caption{Semantic repair frontier over the core field universe. Safe subsets repair all projection-induced collisions for the projection scope; unsafe subsets leave at least one grounded counter-witness.}",
         r"\label{tab:semantic-frontier}",
-        r"\scriptsize",
-        r"\begin{tabular}{lrrrrl}",
+        r"\footnotesize",
+        r"\setlength{\tabcolsep}{3pt}",
+        r"\begin{tabular}{@{}lrrrrl@{}}",
         r"\toprule",
-        "Scope & False & Safe & Unsafe & Min. & Example minimum" + ROW_END,
+        "Scope & False & Safe & Unsafe & Min. & Example" + ROW_END,
         r"\midrule",
     ]
     order = {"keyword": 0, "yesno": 1, "operator_only": 2, "all_projections": 3}

@@ -35,7 +35,12 @@ try:
     add('pdf_text_extractable', proc.returncode == 0 and len(text) > 1000, len(text), '>1000 chars')
     add('title_present', 'Public Optimizer Contracts' in text, 'yes' if 'Public Optimizer Contracts' in text else 'no', 'yes')
     normalized = ' '.join(text.split()).lower()
-    core_claim = 'contract-level equivalence' in normalized and 'projection kernel' in normalized
+    collision_claim = (
+        'contract collision' in normalized
+        or 'collision witnesses' in normalized
+        or 'public contracts disagree' in normalized
+    )
+    core_claim = 'projection kernel' in normalized and collision_claim
     add('core_claim_present', core_claim, 'yes' if core_claim else 'no', 'yes')
 except Exception as e:
     add('pdf_text_extractable', False, type(e).__name__, 'extractable')

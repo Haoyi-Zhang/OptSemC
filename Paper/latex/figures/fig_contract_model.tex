@@ -1,38 +1,49 @@
 \begin{figure*}[t]
 \centering
-\scriptsize
-\resizebox{0.98\textwidth}{!}{%
 \begin{tikzpicture}[
-  box/.style={draw, rounded corners, align=center, inner sep=3pt, minimum height=0.55cm, text width=0.145\textwidth},
-  wide/.style={draw, rounded corners, align=center, inner sep=3pt, minimum height=0.55cm, text width=0.17\textwidth},
-  arrow/.style={-{Latex[length=2mm]}, thick},
-  lab/.style={align=center, font=\scriptsize}
+  node distance=0.36cm,
+  stage/.style={vpanel, draw=vldbBlue!65, fill=vldbMist, text width=2.35cm,
+    minimum height=0.72cm, vbody},
+  wide/.style={vpanel, draw=vldbViolet!70, fill=vldbSoft, text width=2.45cm,
+    minimum height=0.72cm, vbody},
+  risk/.style={vpanel, draw=vldbRose!70, fill=vldbWarm, text width=2.35cm,
+    minimum height=0.68cm, vbody},
+  repair/.style={vpanel, draw=vldbTeal!75, fill=vldbMint, text width=2.35cm,
+    minimum height=0.68cm, vbody},
+  phase/.style={vsmall, text=vldbGray},
+  flow/.style={vflow}
 ]
+\path[use as bounding box] (-0.15,-0.25) rectangle (17.65,3.75);
 
-\node[box] (evidence) {Public\ evidence};
-\node[box, right=0.45cm of evidence] (rule) {Guarded\ modal rule\ $r=(\gamma,a,s,\nu,\epsilon)$};
-\node[box, right=0.45cm of rule] (join) {State join\ over applicable\ rules};
-\node[box, right=0.45cm of join] (map) {Contract map\ $M_{e,q}$};
-\node[wide, right=0.45cm of map] (sig) {Exact signature\ $S(M)$};
-\node[wide, right=0.45cm of sig] (proj) {Projected signature\ $S_\pi(M)$};
+\node[stage] (evidence) at (1.20,2.42) {\textbf{Public evidence}\\docs, plans, manuals};
+\node[stage] (rule) at (3.95,2.42) {\textbf{Guarded rule}\\$(\gamma,a,s,\nu,\epsilon)$};
+\node[stage] (join) at (6.70,2.42) {\textbf{State join}\\applicable rules};
+\node[stage] (map) at (9.45,2.42) {\textbf{Contract map}\\$M_{e,q}$};
 
-\draw[arrow] (evidence) -- (rule);
-\draw[arrow] (rule) -- (join);
-\draw[arrow] (join) -- (map);
-\draw[arrow] (map) -- (sig);
-\draw[arrow] (sig) -- node[above, lab] {declared\ vocabulary} (proj);
+\node[wide] (sig) at (12.25,2.42) {\textbf{Exact signature}\\$S(M)$};
+\node[wide] (proj) at (15.15,2.42) {\textbf{Projected signature}\\$S_\pi(M)$};
+\node[risk] (kernel) at (12.25,0.88) {\textbf{Projection kernel}\\$\mathcal{K}_\pi$};
+\node[repair] (frontier) at (15.15,0.88) {\textbf{Repair frontier}\\minimum fields};
 
-\node[wide, below=0.55cm of sig] (kernel) {Projection kernel\ $\mathcal{K}_\pi$};
-\node[wide, below=0.55cm of proj] (repair) {Minimum repair\ frontier};
-\draw[arrow] (proj) -- (kernel);
-\draw[arrow] (kernel) -- node[below, lab] {separate\ false witnesses} (repair);
-\draw[arrow] (sig) -- (kernel);
+\draw[flow] (evidence) -- (rule);
+\draw[flow] (rule) -- (join);
+\draw[flow] (join) -- (map);
+\draw[flow] (map) -- (sig);
+\draw[flow] (sig) -- (proj);
+\draw[flow] (proj.south) |- (kernel.east);
+\draw[flow] (sig.south) -- (kernel.north);
+\draw[flow] (kernel) -- (frontier);
 
-\node[draw, dashed, rounded corners, fit=(evidence)(rule)(join)(map), inner sep=5pt, label={[lab]below:contract construction}] {};
-\node[draw, dashed, rounded corners, fit=(sig)(proj)(kernel)(repair), inner sep=5pt, label={[lab]below:comparison and repair}] {};
-\end{tikzpicture}%
-}
-\caption{Contract-comparison pipeline. Public evidence becomes guarded modal rules, rules merge into per-engine/per-probe contract maps, exact signatures are projected into a declared comparison vocabulary, and nontrivial projection kernels yield false-equivalence witnesses and minimum repair frontiers.}
-\Description{A TikZ flowchart from public evidence to guarded rules, state join, contract map, exact signature, projected signature, projection kernel, and repair frontier.}
+\begin{scope}[on background layer]
+  \node[vpanel, draw=vldbRule, fill=white, inner xsep=5pt, inner ysep=6pt,
+    fit=(evidence)(rule)(join)(map)] (construct) {};
+  \node[vpanel, draw=vldbRule, fill=white, inner xsep=5pt, inner ysep=6pt,
+    fit=(sig)(proj)(kernel)(frontier)] (compare) {};
+\end{scope}
+\node[phase, below=0.05cm of construct] {contract construction};
+\node[phase, below=0.05cm of compare] {comparison and repair};
+\end{tikzpicture}
+\caption{Contract-comparison pipeline. Public evidence becomes guarded modal rules, rules merge into per-engine/per-probe contract maps, exact signatures are projected into a declared comparison vocabulary, and nontrivial projection kernels yield contract-collision witnesses and minimum repair frontiers.}
+\Description{A two-lane TikZ flowchart: public evidence is transformed into guarded rules, state joins, and contract maps; exact signatures are then projected into comparison vocabularies, producing projection kernels and repair frontiers.}
 \label{fig:contract-model}
 \end{figure*}
