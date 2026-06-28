@@ -6,7 +6,7 @@ format_compliance,true,6/6
 manuscript_style,true,7/7
 latex_compile_check,true,10/10
 pdf_integrity,true,6/6
-reference_quality,true,81/81
+reference_quality,true,80/80
 paper_quality,true,7/7
 paper_table_source_check,true,27/27
 data_contracts_check,true,3/3
