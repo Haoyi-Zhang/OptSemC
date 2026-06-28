@@ -28,7 +28,7 @@ certificate_pass:witness_dispersion_check.csv,true,9/9
 certificate_pass:paper_numeric_claims.csv,true,5/5
 certificate_pass:latex_compile_check.csv,true,10/10
 certificate_pass:pdf_integrity.csv,true,6/6
-certificate_pass:reference_quality.csv,true,81/81
+certificate_pass:reference_quality.csv,true,80/80
 certificate_pass:paper_quality.csv,true,7/7
 certificate_pass:paper_table_source_check.csv,true,27/27
 certificate_pass:repository_quality_check.csv,true,4/4
