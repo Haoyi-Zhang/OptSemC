@@ -25,7 +25,11 @@ try:
     reader = PdfReader(str(PDF))
     pages = len(reader.pages)
     page_texts=[p.extract_text() or '' for p in reader.pages]
-    refs=[i+1 for i,t in enumerate(page_texts) if 'References' in t]
+    refs=[
+        i+1
+        for i,t in enumerate(page_texts)
+        if any(line.strip().upper() == 'REFERENCES' for line in t.splitlines())
+    ]
     add('pdf_pages_with_references', pages >= 13 and refs and refs[0] == 13, f'pages={pages};refs={refs[:3]}')
 except Exception as e:
     add('pdf_pages_with_references', False, type(e).__name__)
