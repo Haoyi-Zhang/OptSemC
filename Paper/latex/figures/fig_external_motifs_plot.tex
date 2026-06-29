@@ -1,6 +1,5 @@
 \begin{figure}[t]
 \centering
-\footnotesize
 \newcommand{\motifrow}[5]{%
   \node[anchor=east, align=right, text width=1.78cm,
         font=\rmfamily\fontsize{6.7}{7.3}\selectfont, text=vldbInk]
@@ -12,10 +11,9 @@
         at ({#1+3.38},#2) {#5};
 }
 \begin{tikzpicture}[x=1cm,y=1cm]
-  \node[vtitle, anchor=west, align=left] at (0,0.25)
-    {External motif coverage: 90 / 90};
-  \node[vsmall, anchor=west, align=left, text width=7.8cm] at (0,-0.18)
-    {All public optimizer-motif families are mapped to executable probes; bar length shows covered motifs.};
+\path[use as bounding box] (-.02,-4.82) rectangle (7.95,.18);
+  \node[vsmall, anchor=west, align=left, text=vldbGray] at (0,0.05)
+    {published optimizer/workload motifs mapped to executable probes};
 
   \motifrow{0.00}{-0.85}{TPC-H}{8}{8/8}
   \motifrow{0.00}{-1.50}{TPC-DS}{8}{8/8}
@@ -30,6 +28,13 @@
   \motifrow{4.05}{-2.80}{DuckDB}{8}{8/8}
   \motifrow{4.05}{-3.45}{ClickHouse}{7}{7/7}
   \motifrow{4.05}{-4.10}{Spark/Trino}{8}{8/8}
+
+  \node[vpanel, draw=vldbTeal!72!black, fill=vldbMint,
+        text width=6.85cm, minimum height=.38cm,
+        font=\rmfamily\fontsize{6.4}{7.0}\selectfont, text=black!70,
+        align=center, text height=1.40ex, text depth=.22ex]
+        at (3.98,-4.58)
+        {validation check: 90 / 90 motif requirements covered and executable};
 \end{tikzpicture}
 \caption{External optimizer-motif denominator. The generated probe space covers 90 motifs across 12 recognizable optimizer and benchmark families, with every motif mapped to executable validation probes.}
 \Description{A two-column bar summary showing full motif coverage for twelve optimizer and benchmark families.}

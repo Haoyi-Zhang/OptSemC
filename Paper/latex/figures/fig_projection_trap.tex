@@ -1,26 +1,52 @@
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[
-  chip/.style={vpanel, draw=vldbBlue!65, fill=vldbMist, text width=.78\columnwidth,
-    minimum height=.38cm, vbody},
-  cell/.style={vpanel, draw=vldbGold!70, fill=vldbWarm, text width=.58\columnwidth,
-    minimum height=.40cm, vhead},
-  bad/.style={vpanel, draw=vldbRose!72, fill=vldbRose!8, text width=.78\columnwidth,
-    minimum height=.44cm, vbody},
+  sig/.style={vpanel, draw=vldbBlue!68, fill=vldbMist, text width=1.72cm,
+    minimum height=.70cm, font=\rmfamily\fontsize{6.7}{7.3}\selectfont,
+    text=black!72, align=center, text height=1.48ex, text depth=.25ex},
+  field/.style={vpanel, draw=vldbRule, fill=white, minimum width=.86cm,
+    minimum height=.23cm, font=\rmfamily\fontsize{6.15}{6.75}\selectfont,
+    text=vldbGray, align=center, inner xsep=.8pt, inner ysep=.4pt,
+    text height=1.32ex, text depth=.20ex},
+  band/.style={vpanel, draw=vldbGold!75!black, fill=vldbWarm, text width=4.90cm,
+    minimum height=.58cm, font=\rmfamily\bfseries\fontsize{7.0}{7.8}\selectfont,
+    text=vldbInk, align=center, text height=1.50ex, text depth=.28ex},
+  bad/.style={vpanel, draw=vldbRose!76!black, fill=vldbRose!8, text width=6.46cm,
+    minimum height=.58cm, font=\rmfamily\fontsize{6.75}{7.4}\selectfont,
+    text=black!72, align=center, text height=1.48ex, text depth=.25ex},
+  repair/.style={vpanel, draw=vldbTeal!75!black, fill=vldbMint, text width=6.46cm,
+    minimum height=.52cm, font=\rmfamily\fontsize{6.75}{7.4}\selectfont,
+    text=black!72, align=center, text height=1.48ex, text depth=.25ex},
   flow/.style={vflow}
 ]
-\node[chip] (c1) at (0,1.25) {local predicate movement};
-\node[chip, below=0.18cm of c1] (c2) {source-side join delegation};
-\node[chip, below=0.18cm of c2] (c3) {Top-N delegation};
-\node[cell, below=0.34cm of c3] (label) {\texttt{pushdown=yes}};
-\node[bad, below=0.34cm of label] (false) {\textbf{contract collision}: distinct public contracts collapse into one comparison cell};
+\path[use as bounding box] (-.04,-3.92) rectangle (7.22,.50);
 
-\draw[flow] (c1.south) -- ([xshift=-1.0cm]label.north);
-\draw[flow] (c2.south) -- (label.north);
-\draw[flow] (c3.south) -- ([xshift=1.0cm]label.north);
-\draw[flow] (label) -- (false);
+\node[vsmall, anchor=west, text=vldbGray] at (.04,.27)
+  {exact public contracts};
+\node[sig] (s1) at (1.05,-.40) {\textbf{Filter}\\local rewrite};
+\node[sig] (s2) at (3.60,-.40) {\textbf{Join}\\source delegate};
+\node[sig] (s3) at (6.15,-.40) {\textbf{Top-N}\\service stage};
+
+\node[field] at (1.05,-.94) {layer};
+\node[field] at (2.20,-.94) {operator};
+\node[field] at (3.60,-.94) {placement};
+\node[field] at (5.00,-.94) {evidence};
+\node[field] at (6.15,-.94) {time};
+
+\node[field, fill=vldbRose!6, draw=vldbRose!55, minimum width=3.18cm]
+  at (3.60,-1.35) {semantic fields hidden by keyword vocabulary};
+\node[band] (label) at (3.60,-1.94)
+  {projection collapse: \texttt{pushdown=yes}};
+\node[bad] (false) at (3.60,-2.70)
+  {\textbf{collision witness}: exact signatures differ; projected label agrees};
+\node[repair] (rep) at (3.60,-3.42)
+  {\textbf{repair basis}: retain operator + layer + placement};
+
+\draw[flow, draw=vldbGold!72!black] (3.60,-1.54) -- (label.north);
+\draw[flow, draw=vldbRose!72!black] (label) -- (false);
+\draw[flow, draw=vldbTeal!72!black] (false) -- (rep);
 \end{tikzpicture}
-\caption{Projection loss in optimizer comparison. A feature-name matrix turns non-equivalent public optimizer contracts into the same apparent capability. OptSem-C preserves the semantic fields that distinguish them.}
-\Description{Three distinct optimizer behaviors flow into the same pushdown=yes feature cell, which creates a contract-collision comparison.}
+\caption{Projection loss in optimizer comparison. A feature-name matrix turns non-equivalent public optimizer contracts into the same apparent capability; OptSem-C records the hidden semantic fields that split the false comparison cell.}
+\Description{Three exact public-contract signatures with different operators, placements, and evidence surfaces are projected into the same pushdown=yes cell. A repair row shows that retaining semantic fields separates the collision.}
 \label{fig:projection-trap}
 \end{figure}

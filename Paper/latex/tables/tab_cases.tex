@@ -8,10 +8,10 @@
 \toprule
 Case & Contract pair hidden by a coarse label & Separating fields \\
 \midrule
-C1 & BigQuery federated filter/source delegation vs. Trino aggregate and expression pushdown & operator, variant, placement \\
-C2 & PostgreSQL EXPLAIN estimates vs. BigQuery stage/shuffle evidence vs. Snowflake logical plans & observability, placement \\
-C3 & compile-time planning vs. BigQuery/Spark/ClickHouse runtime adaptation & layer, decision time \\
-C4 & DuckDB and PostgreSQL CTE inline, materialize, reuse, and disable guards & variant, guard state \\
+C1 & BigQuery federated filter delegation vs. Trino aggregate/expression pushdown & operator, variant, placement \\
+C2 & PostgreSQL EXPLAIN estimates vs. BigQuery stage/shuffle evidence and Snowflake logical plans & observability, placement \\
+C3 & Compile-time planning vs. BigQuery/Spark/ClickHouse runtime adaptation & layer, decision time \\
+C4 & DuckDB/PostgreSQL CTE inline, materialize, reuse, and disable guards & variant, guard state \\
 \bottomrule
 \end{tabular}
 \end{table}

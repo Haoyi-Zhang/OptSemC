@@ -26,13 +26,17 @@
 
 \tikzset{
   vtitle/.style={font=\rmfamily\bfseries\fontsize{8.8}{9.6}\selectfont,
-    text=vldbInk, align=center, inner sep=.4pt},
+    text=vldbInk, align=center, inner sep=.4pt, text height=1.65ex,
+    text depth=.30ex},
   vhead/.style={font=\rmfamily\bfseries\fontsize{7.4}{8.2}\selectfont,
-    text=vldbInk, align=center, inner sep=.5pt},
+    text=vldbInk, align=center, inner sep=.5pt, text height=1.55ex,
+    text depth=.30ex},
   vbody/.style={font=\rmfamily\fontsize{6.9}{7.6}\selectfont,
-    text=black!68, align=center, inner xsep=2.0pt, inner ysep=1.0pt},
+    text=black!68, align=center, inner xsep=2.0pt, inner ysep=1.0pt,
+    text height=1.50ex, text depth=.28ex},
   vsmall/.style={font=\rmfamily\fontsize{6.5}{7.1}\selectfont,
-    text=black!60, align=center, inner sep=.4pt},
+    text=black!60, align=center, inner sep=.4pt, text height=1.45ex,
+    text depth=.25ex},
   vpanel/.style={rounded corners=2.5pt, line width=.52pt},
   vflow/.style={-{Latex[length=1.8mm]}, line width=.74pt,
     draw=black!52, line cap=round, line join=round}
@@ -50,7 +54,7 @@
 \newcommand\vldbyear{2027}
 \newcommand\vldbauthors{\authors}
 \newcommand\vldbtitle{\shorttitle}
-\newcommand\vldbavailabilityurl{}
+\newcommand\vldbavailabilityurl{https://github.com/Haoyi-Zhang/OptSemC}
 \newcommand\vldbpagestyle{plain}
 
 \title{OptSem-C: Public Optimizer Contracts for Query Engine Portability}
@@ -75,11 +79,11 @@
 
 \begin{document}
 \begin{abstract}
-Optimizer-behavior comparisons can fail before a performance number is measured: the comparison denominator is often a coarse vocabulary rather than an exact public contract.  Query engines expose public contracts for pushdown, join ordering, statistics, materialization, distributed placement, runtime adaptation, and plan evidence.  Today these behaviors are often compared through labels such as \texttt{pushdown}, \texttt{join}, or \texttt{cost-based}.  Such projections collapse local rewrites, source delegation, service-side stages, and runtime decisions into the same apparent capability; in short, a coarse optimizer vocabulary can declare two engine--query pairs indistinguishable even when their public optimizer contracts disagree.
+Optimizer-behavior comparisons can fail before a performance number is measured: the comparison denominator is often a coarse vocabulary rather than an exact public contract.  Engine-selection, migration, and performance-debugging studies routinely compare labels such as \texttt{pushdown}, \texttt{join}, or \texttt{cost-based}.  Such labels can collapse local rewrites, source delegation, service-side stages, and runtime decisions into the same apparent capability, causing a study to compare different query-processing phenomena.
 
-This paper presents OptSem-C, a benchmark methodology for public optimizer behavior contracts with a formal semantics that makes comparison denominators auditable.  A contract rule is a guarded modal statement over query features with explicit operator, action variant, modality, optimizer layer, placement, decision time, observability, version, and public evidence.  The semantics separates behavioral worlds from evidential support, defines a conflict-aware state join, and treats lossy optimizer comparison as a projection kernel over exact contract signatures.  OptSem-C then computes information profiles, exhaustive field-resolution lattices, antichain frontiers, empirical minimum semantic bases, and checkable repair certificates that identify which optimizer-semantic fields must be retained before a comparison is safe.
+This paper presents OptSem-C, a benchmark methodology for public optimizer behavior contracts.  A contract rule is a guarded modal statement over query features with explicit operator, action variant, optimizer layer, execution placement, decision time, observability, version, and public evidence.  The semantics separates behavioral worlds from evidential support, defines a conflict-aware state join, and treats lossy comparison as a projection kernel over exact contract signatures.  OptSem-C therefore lets a study publish the vocabulary it preserves, the equivalences it assumes, and the repair fields needed to make those assumptions safe.
 
-The grounded study contains 287 verified public-contract rules, 287 source-linked evidence spans, 26 public source records, and 4,216 executable SQL probes covering 7,112 valid optimizer-feature interactions.  Keyword projection declares 2,284 equivalences, 254 of which exact contracts refute; operator-only projection declares 2,268 equivalences, 238 of which are projection-induced contract collisions.  An external motif coverage audit maps published optimizer and workload families to 90 executable requirements, while real-engine checks run the generated probes on DuckDB and PostgreSQL as SQL and visible-plan sanity layers.  Exhaustively evaluating all 256 retained-field vocabularies shows that 44 remain unsafe, and after action-variant identifiers are removed the minimum safe semantic vocabularies have size two.  Placement repairs keyword collisions, optimizer layer repairs operator-only collisions, and a layer+placement basis repairs all 498 headline witnesses.  OptSem-C turns optimizer-contract comparison from an informal feature checklist into a finite, auditable query-processing relation.
+The grounded study contains 287 source-linked rules and 4,216 SQL probes over 7,112 valid optimizer-feature interactions.  Keyword projection declares 2,284 engine--probe equivalences; 254 are false under exact public contracts, while the remaining 2,030 agree under the exact signature schema.  Operator-only projection declares 2,268 equivalences, including 238 projection-induced contract collisions.  External motif coverage maps published optimizer and workload families to 90 executable requirements; two-engine checks validate the generated SQL and visible-plan layers.  Exhaustively evaluating all 256 retained-field vocabularies shows that 44 remain unsafe; after action-variant identifiers are removed, the minimum safe semantic vocabularies have size two.  Across the three headline projections, layer+placement separates all 498 finite-corpus witnesses.  OptSem-C turns optimizer-contract comparison from an informal feature checklist into a finite, auditable query-processing relation.
 \end{abstract}
 
 \maketitle

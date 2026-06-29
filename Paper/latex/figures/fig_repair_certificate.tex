@@ -1,24 +1,35 @@
 \begin{figure}[t]
 \centering
-\footnotesize
 \begin{tikzpicture}[
-  cert/.style={vpanel, text width=.78\columnwidth, minimum height=.46cm, vbody},
+  cert/.style={vpanel, text width=5.75cm, minimum height=.48cm,
+    font=\rmfamily\fontsize{6.8}{7.5}\selectfont, text=black!72,
+    align=center, text height=1.50ex, text depth=.28ex},
+  badge/.style={vpanel, minimum width=1.42cm, minimum height=.30cm,
+    font=\rmfamily\bfseries\fontsize{6.4}{7.0}\selectfont, text=vldbInk,
+    align=center, inner xsep=1pt, inner ysep=.4pt,
+    text height=1.38ex, text depth=.20ex},
   flow/.style={vflow}
 ]
-\node[cert, draw=vldbBlue!68, fill=vldbMist] (full) at (0,1.35)
-  {\textbf{full public contract}: operator, layer, placement, time, state};
-\node[cert, draw=vldbGold!70, fill=vldbWarm, below=0.26cm of full] (proj)
-  {\textbf{coarse projection}: keyword or operator-only vocabulary};
-\node[cert, draw=vldbRose!72, fill=vldbRose!8, below=0.26cm of proj] (false)
-  {\textbf{collisions}: keyword 254; operator-only 238};
-\node[cert, draw=vldbTeal!75, fill=vldbMint, below=0.26cm of false] (repair)
-  {\textbf{minimum repair}: placement for keyword; layer for operator-only};
+\path[use as bounding box] (-3.05,-2.04) rectangle (3.05,1.92);
+\node[cert, draw=vldbBlue!68, fill=vldbMist] (full) at (0,1.45)
+  {\textbf{exact public contract}: operator, layer, placement, time, state};
+\node[cert, draw=vldbGold!70, fill=vldbWarm] (proj) at (0,.55)
+  {\textbf{projection}: declared comparison vocabulary};
+\node[cert, draw=vldbRose!72!black, fill=vldbRose!8] (false) at (0,-.35)
+  {\textbf{witness test}: exact-unequal, projection-equal, source-supported};
+\node[cert, draw=vldbTeal!75!black, fill=vldbMint] (repair) at (0,-1.25)
+  {\textbf{repair certificate}: every witness separated by retained fields};
+
+\node[badge, draw=vldbTeal!70!black, fill=vldbMint] at (-1.40,-1.78)
+  {keyword: place};
+\node[badge, draw=vldbTeal!70!black, fill=vldbMint] at (1.40,-1.78)
+  {operator: layer};
 
 \draw[flow] (full) -- (proj);
-\draw[flow] (proj) -- (false);
-\draw[flow] (false) -- (repair);
+\draw[flow, draw=vldbRose!72!black] (proj) -- (false);
+\draw[flow, draw=vldbTeal!72!black] (false) -- (repair);
 \end{tikzpicture}
 \caption{Repair certificates. Coarse projections collapse unequal public contracts; restoring a semantic field eliminates the observed collision witnesses in the grounded corpus.}
-\Description{A styled flowchart from full contracts to coarse projections, collision counts, and minimum semantic repair fields.}
+\Description{A certificate panel showing exact public contracts, projection vocabularies, a witness test, and retained repair fields for keyword and operator-only projections.}
 \label{fig:repair-certificate}
 \end{figure}

@@ -29,7 +29,12 @@ add('has_at_least_3_figures', figure_inputs >= 3, figure_inputs, '>=3')
 add('has_at_least_8_result_tables', table_inputs >= 8, table_inputs, '>=8')
 add('word_count_at_least_4500', words >= 4500, words, '>=4500')
 add('no_repository_implementation_terms_in_paper', not violations, ';'.join(violations), 'none')
-add('uses_grounded_mainline_not_legacy', '287 verified' in text and '746 accepted' not in text, 'grounded only', 'grounded only')
+mainline_marker = bool(re.search(r'287\s+source-linked\s+(?:grounded\s+)?rules', text, re.I))
+legacy_markers = ['746 accepted', 'legacy corpus', 'stress-test corpus']
+legacy_hits = [marker for marker in legacy_markers if marker.lower() in text.lower()]
+add('uses_grounded_mainline_not_legacy', mainline_marker and not legacy_hits,
+    'source-linked grounded rules' if mainline_marker else 'missing source-linked rule count',
+    '287 source-linked rules; no legacy corpus markers')
 add('all_figures_have_descriptions', not missing_desc, ';'.join(missing_desc), 'none')
 OUT.parent.mkdir(parents=True, exist_ok=True)
 with OUT.open('w', newline='', encoding='utf-8') as f:

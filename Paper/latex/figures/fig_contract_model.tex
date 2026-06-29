@@ -1,49 +1,73 @@
 \begin{figure*}[t]
 \centering
 \begin{tikzpicture}[
-  node distance=0.36cm,
-  stage/.style={vpanel, draw=vldbBlue!65, fill=vldbMist, text width=2.35cm,
-    minimum height=0.72cm, vbody},
-  wide/.style={vpanel, draw=vldbViolet!70, fill=vldbSoft, text width=2.45cm,
-    minimum height=0.72cm, vbody},
-  risk/.style={vpanel, draw=vldbRose!70, fill=vldbWarm, text width=2.35cm,
-    minimum height=0.68cm, vbody},
-  repair/.style={vpanel, draw=vldbTeal!75, fill=vldbMint, text width=2.35cm,
-    minimum height=0.68cm, vbody},
-  phase/.style={vsmall, text=vldbGray},
+  lane/.style={vpanel, draw=vldbRule, fill=white},
+  stage/.style={vpanel, draw=vldbBlue!68, fill=vldbMist, text width=2.28cm,
+    minimum height=.76cm, font=\rmfamily\fontsize{6.9}{7.6}\selectfont,
+    text=black!70, align=center, text height=1.50ex, text depth=.28ex},
+  sig/.style={vpanel, draw=vldbViolet!70, fill=vldbSoft, text width=2.36cm,
+    minimum height=.76cm, font=\rmfamily\fontsize{6.9}{7.6}\selectfont,
+    text=black!70, align=center, text height=1.50ex, text depth=.28ex},
+  witness/.style={vpanel, draw=vldbRose!74!black, fill=vldbRose!8, text width=2.82cm,
+    minimum height=.76cm, font=\rmfamily\fontsize{6.7}{7.4}\selectfont,
+    text=black!72, align=center, text height=1.50ex, text depth=.28ex},
+  repair/.style={vpanel, draw=vldbTeal!75!black, fill=vldbMint, text width=2.82cm,
+    minimum height=.76cm, font=\rmfamily\fontsize{6.7}{7.4}\selectfont,
+    text=black!72, align=center, text height=1.50ex, text depth=.28ex},
+  chip/.style={vpanel, draw=vldbRule, fill=white, minimum width=.70cm,
+    minimum height=.26cm, font=\rmfamily\fontsize{6.2}{6.8}\selectfont,
+    text=vldbGray, align=center, inner xsep=1pt, inner ysep=.5pt,
+    text height=1.35ex, text depth=.20ex},
+  phase/.style={font=\rmfamily\fontsize{6.4}{7.0}\selectfont,
+    text=vldbGray, align=center, text height=1.38ex, text depth=.22ex},
   flow/.style={vflow}
 ]
-\path[use as bounding box] (-0.15,-0.25) rectangle (17.65,3.75);
+\path[use as bounding box] (-0.06,0.02) rectangle (17.72,3.52);
 
-\node[stage] (evidence) at (1.20,2.42) {\textbf{Public evidence}\\docs, plans, manuals};
-\node[stage] (rule) at (3.95,2.42) {\textbf{Guarded rule}\\$(\gamma,a,s,\nu,\epsilon)$};
-\node[stage] (join) at (6.70,2.42) {\textbf{State join}\\applicable rules};
-\node[stage] (map) at (9.45,2.42) {\textbf{Contract map}\\$M_{e,q}$};
+\begin{scope}[on background layer]
+  \node[lane, minimum width=10.30cm, minimum height=2.46cm] at (5.26,1.84) {};
+  \node[lane, minimum width=6.22cm, minimum height=2.46cm] at (13.82,1.84) {};
+\end{scope}
 
-\node[wide] (sig) at (12.25,2.42) {\textbf{Exact signature}\\$S(M)$};
-\node[wide] (proj) at (15.15,2.42) {\textbf{Projected signature}\\$S_\pi(M)$};
-\node[risk] (kernel) at (12.25,0.88) {\textbf{Projection kernel}\\$\mathcal{K}_\pi$};
-\node[repair] (frontier) at (15.15,0.88) {\textbf{Repair frontier}\\minimum fields};
+\node[phase, anchor=west] at (.36,3.14) {evidence-to-contract construction};
+\node[phase, anchor=west] at (10.84,3.14) {projection-kernel audit};
+
+\node[stage] (evidence) at (1.34,2.45) {\textbf{Public evidence}\\287 spans\\26 sources};
+\node[stage] (rule) at (3.92,2.45) {\textbf{Guarded rules}\\guard, action\\support state};
+\node[stage] (join) at (6.50,2.45) {\textbf{State join}\\compatible support\\conflict exposed};
+\node[stage] (map) at (9.08,2.45) {\textbf{Contract maps}\\7 engines\\4,216 probes};
+
+\node[sig] (sig) at (11.84,2.45) {\textbf{Exact signature}\\1,288 observed\\classes};
+\node[sig] (proj) at (14.90,2.45) {\textbf{Projected view}\\keyword: 148\\classes};
+\node[witness] (kernel) at (11.84,.86)
+  {\textbf{Witness test}\\exact differs\\projection agrees};
+\node[repair] (frontier) at (14.90,.86)
+  {\textbf{Repair frontier}\\layer+placement\\basis};
+
+\node[chip] at (.78,1.34) {line};
+\node[chip] at (1.38,1.34) {hash};
+\node[chip] at (1.98,1.34) {source};
+\node[chip] at (2.58,1.34) {scope};
+
+\node[chip, draw=vldbBlue!55, fill=vldbMist] at (3.66,1.34) {guard};
+\node[chip, draw=vldbBlue!55, fill=vldbMist] at (4.40,1.34) {action};
+\node[chip, draw=vldbBlue!55, fill=vldbMist] at (5.14,1.34) {state};
+
+\node[chip, draw=vldbViolet!55, fill=vldbSoft] at (7.34,1.34) {operator};
+\node[chip, draw=vldbViolet!55, fill=vldbSoft] at (8.20,1.34) {layer};
+\node[chip, draw=vldbViolet!55, fill=vldbSoft] at (9.04,1.34) {place};
+\node[chip, draw=vldbViolet!55, fill=vldbSoft] at (9.96,1.34) {evidence};
 
 \draw[flow] (evidence) -- (rule);
 \draw[flow] (rule) -- (join);
 \draw[flow] (join) -- (map);
 \draw[flow] (map) -- (sig);
 \draw[flow] (sig) -- (proj);
-\draw[flow] (proj.south) |- (kernel.east);
-\draw[flow] (sig.south) -- (kernel.north);
-\draw[flow] (kernel) -- (frontier);
-
-\begin{scope}[on background layer]
-  \node[vpanel, draw=vldbRule, fill=white, inner xsep=5pt, inner ysep=6pt,
-    fit=(evidence)(rule)(join)(map)] (construct) {};
-  \node[vpanel, draw=vldbRule, fill=white, inner xsep=5pt, inner ysep=6pt,
-    fit=(sig)(proj)(kernel)(frontier)] (compare) {};
-\end{scope}
-\node[phase, below=0.05cm of construct] {contract construction};
-\node[phase, below=0.05cm of compare] {comparison and repair};
+\draw[flow, draw=vldbRose!70!black] (sig.south) -- (kernel.north);
+\draw[flow, draw=vldbGold!72!black] (proj.south) -- (frontier.north);
+\draw[flow, draw=vldbTeal!72!black] (kernel) -- (frontier);
 \end{tikzpicture}
-\caption{Contract-comparison pipeline. Public evidence becomes guarded modal rules, rules merge into per-engine/per-probe contract maps, exact signatures are projected into a declared comparison vocabulary, and nontrivial projection kernels yield contract-collision witnesses and minimum repair frontiers.}
-\Description{A two-lane TikZ flowchart: public evidence is transformed into guarded rules, state joins, and contract maps; exact signatures are then projected into comparison vocabularies, producing projection kernels and repair frontiers.}
+\caption{Contract-comparison pipeline. Public evidence becomes guarded modal rules and exact per-engine/per-probe signatures; a projected comparison is audited by a finite witness test, and nontrivial kernels produce minimum semantic repair frontiers.}
+\Description{A two-lane pipeline showing evidence spans, guarded rules, state joins, contract maps, exact signatures, projected signatures, a witness test, and a repair frontier. Small chips list the public evidence and semantic fields carried through the pipeline.}
 \label{fig:contract-model}
 \end{figure*}

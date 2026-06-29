@@ -1,6 +1,5 @@
 \begin{figure}[t]
 \centering
-\footnotesize
 \newcommand{\execrow}[5]{%
   \node[anchor=east, font=\rmfamily\fontsize{6.8}{7.4}\selectfont, text=vldbInk]
         at (1.55,#1) {#2};
@@ -10,17 +9,20 @@
         at (3.22,#1) {#4};
 }
 \begin{tikzpicture}[x=1cm,y=1cm]
-  \node[vtitle, anchor=west, align=left] at (0,0.25)
-    {SQL validation: all probes execute};
-  \node[vsmall, anchor=west, align=left, text width=6.7cm] at (0,-0.20)
-    {Bars are normalized to the generated-probe denominator; failures remain at zero.};
-  \execrow{-0.86}{planned}{1.20}{4,216}{vldbBlue}
-  \execrow{-1.48}{executed}{1.20}{4,216}{vldbTeal}
-  \execrow{-2.10}{failures}{0.00}{0}{vldbRose}
-  \node[vsmall, anchor=west] at (0,-2.76)
-    {distinct plans: 91; returned rows: 18,448};
+\path[use as bounding box] (-.04,-3.66) rectangle (6.88,.16);
+  \node[vsmall, anchor=west, align=left, text=vldbGray] at (0,0.02)
+    {validation layers; bars normalized to the largest execution count};
+  \execrow{-0.66}{planned}{0.40}{4,216}{vldbBlue}
+  \execrow{-1.24}{catalog}{0.40}{4,216}{vldbTeal}
+  \execrow{-1.82}{multi-cat.}{1.20}{12,648}{vldbTeal}
+  \execrow{-2.40}{real engines}{0.81}{8,432 + 142}{vldbBlue}
+  \execrow{-2.98}{failures}{0.00}{0}{vldbRose}
+  \node[vpanel, draw=vldbRule, fill=white, minimum width=2.95cm,
+        minimum height=.30cm, font=\rmfamily\fontsize{6.4}{7.0}\selectfont,
+        text=vldbGray, align=center, text height=1.36ex, text depth=.20ex]
+        at (2.94,-3.45) {91 distinct plans; 18,448 returned rows};
 \end{tikzpicture}
-\caption{Executable SQL-probe validation. Every generated probe plans and executes on the deterministic validation catalog; failures are zero.}
-\Description{A compact horizontal bar chart showing planned probes, executed probes, zero failures, distinct validation plans, and returned rows.}
+\caption{Executable SQL-probe validation. Every generated probe plans and executes on the deterministic validation catalog, repeats across three catalog populations, and passes DuckDB/PostgreSQL sanity executions; failures are zero.}
+\Description{A compact horizontal bar chart showing planned probes, deterministic catalog executions, multi-catalog executions, production-engine validation executions, zero failures, distinct validation plans, and returned rows.}
 \label{fig:sql-execution}
 \end{figure}
