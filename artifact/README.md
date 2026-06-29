@@ -17,7 +17,7 @@ The active paper source is `Paper/latex/paper.tex`.
 - OptSemBench-C: 4,216 generated SQL probes covering 7,112 renderable valid feature interactions.
 - SQL validation: 12,648 probe-catalog executions across three deterministic validation catalogs, with zero failures.
 - Real-engine validation: 8,432 DuckDB/PostgreSQL full-corpus executions and 142 motif-representative executions, with zero failures.
-- External motif denominator: 90/90 motifs across 12 optimizer/workload families are covered; each motif has a generated SQL representative validated on the deterministic catalog.
+- Published-motif denominator: 90/90 motifs across 12 optimizer/workload families are covered; each motif has a generated SQL representative validated on the deterministic catalog.
 - Projection-kernel evaluation: exact, lossy, ablation, mutation, strengthened, and exhaustive field-resolution projections.
 - Repair certificates: finite separator and field-lattice certificates for semantic repair.
 - Claim-evidence graph: paper claims linked to generated outputs and integrity gates.
@@ -38,6 +38,10 @@ Package integrity check: passed
 Fast mainline checks: passed
 ```
 
+## Execution environment
+
+The artifact is designed for standard Linux systems with Python 3 and the dependencies in `requirements.txt`. Development edits were made on Windows, while the full replay and integrity gates were validated on Linux. The public replay does not require project-specific cloud credentials; the cloud path used by the authors is only an execution location for regenerating the reported artifacts.
+
 ## Full no-cache replay
 
 Run from `artifact/`:
@@ -46,4 +50,4 @@ Run from `artifact/`:
 PYTHONDONTWRITEBYTECODE=1 ./run_from_scratch_no_cache.sh
 ```
 
-The replay removes derived generated outputs, regenerates probes and contract maps from grounded evidence, rebuilds the SQL bundle, validates generated SQL probes and external motif representatives on deterministic catalogs, runs the real-engine validation script when cloud dependencies are available, recompiles the paper when enabled, and runs integrity suites.
+The replay removes derived generated outputs, regenerates probes and contract maps from grounded evidence, rebuilds the SQL bundle, validates generated SQL probes and published-motif representatives on deterministic catalogs, runs the real-engine validation script when cloud dependencies are available, recompiles the paper when enabled, and runs integrity suites.

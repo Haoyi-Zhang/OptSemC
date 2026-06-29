@@ -1,6 +1,6 @@
 \begin{figure}[t]
 \centering
-\newcommand{\inforow}[7]{%
+\newcommand{\inforow}[8]{%
   \node[anchor=east, font=\rmfamily\fontsize{6.7}{7.3}\selectfont,
         text=vldbInk, text height=1.45ex, text depth=.24ex]
         at (1.44,#1) {#2};
@@ -16,9 +16,11 @@
   \node[anchor=west, font=\rmfamily\fontsize{6.4}{7.0}\selectfont,
         text=vldbGray, text height=1.38ex, text depth=.22ex]
         at (6.06,#1) {#6};
-  \node[anchor=west, font=\rmfamily\fontsize{6.2}{6.8}\selectfont,
-        text=#7, text height=1.32ex, text depth=.20ex]
-        at (6.58,#1) {$\bullet$};
+  \node[vpanel, draw=#7!70!black, fill=#7!12,
+        font=\rmfamily\fontsize{5.95}{6.55}\selectfont, text=black!66,
+        minimum width=.62cm, minimum height=.25cm,
+        inner xsep=.7pt, inner ysep=.3pt,
+        text height=1.25ex, text depth=.18ex] at (6.74,#1) {#8};
 }
 \begin{tikzpicture}[x=1cm,y=1cm]
   \path[use as bounding box] (-.04,-4.22) rectangle (7.22,.22);
@@ -27,22 +29,17 @@
   \node[vsmall, anchor=west, text=vldbGray] at (4.60,.04)
     {entropy retained};
 
-  \inforow{-.50}{strict}{0.00}{0 / .000}{1.30}{1.000}{vldbTeal}
-  \inforow{-1.12}{keyword}{0.15}{254 / .111}{0.83}{.638}{vldbRose}
-  \inforow{-1.74}{operator}{0.14}{238 / .105}{1.02}{.787}{vldbRose}
-  \inforow{-2.36}{placement}{1.09}{10,702 / .841}{0.36}{.280}{vldbRose}
-  \inforow{-2.98}{state}{1.20}{23,593 / .921}{0.28}{.217}{vldbRose}
-  \inforow{-3.60}{op+kind}{0.00}{0 / .000}{1.18}{.904}{vldbTeal}
+  \inforow{-.50}{strict}{0.00}{0 / .000}{1.30}{1.000}{vldbTeal}{ctrl}
+  \inforow{-1.12}{keyword}{0.15}{254 / .111}{0.83}{.638}{vldbRose}{risk}
+  \inforow{-1.74}{operator}{0.14}{238 / .105}{1.02}{.787}{vldbRose}{risk}
+  \inforow{-2.36}{placement}{1.09}{10,702 / .841}{0.36}{.280}{vldbRose}{risk}
+  \inforow{-2.98}{state}{1.20}{23,593 / .921}{0.28}{.217}{vldbRose}{risk}
+  \inforow{-3.60}{op+kind}{0.00}{0 / .000}{1.18}{.904}{vldbTeal}{ctrl}
 
-  \node[vpanel, draw=vldbTeal!70!black, fill=vldbMint,
-        font=\rmfamily\fontsize{6.4}{7.0}\selectfont, text=black!68,
-        minimum width=1.18cm, minimum height=.30cm,
-        text height=1.36ex, text depth=.20ex] at (6.68,-3.60)
-        {control};
   \node[vsmall, anchor=west, text=vldbGray] at (1.70,-4.04)
-    {rose mark: unsafe projection kernel; teal mark: negative control};
+    {risk = nonzero projection kernel; ctrl = zero-false negative control};
 \end{tikzpicture}
-\caption{Projection information profile. Coarse projections induce contract collisions and lose signature entropy; strict comparison and the operator-kind surface are negative controls with zero pairwise collisions, while single-field vocabularies create large kernels.}
+\caption{Projection information profile. Coarse projections induce contract collisions and lose signature entropy; controls retain zero pairwise collisions.}
 \Description{A compact profile plot showing false pair counts and conditional false rates beside retained entropy for six projection vocabularies.}
 \label{fig:projection-information}
 \end{figure}

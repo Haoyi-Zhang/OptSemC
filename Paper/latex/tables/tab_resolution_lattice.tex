@@ -1,6 +1,6 @@
 \begin{table}[t]
 \centering
-\caption{Exhaustive field-resolution lattice. Rows retain only the listed public optimizer fields. $|R|$ is retained fields; Classes is projected signature classes; Ent. is normalized entropy; Eq. is declared-equivalent pairs; False is unequal exact pairs still collapsed. Good rows drive False to zero with small $|R|$.}
+\caption{Exhaustive field-resolution lattice. Bold zero-false rows are safe retained-field vocabularies; underlining marks the maximally unsafe vocabulary.}
 \label{tab:resolution-lattice}
 \footnotesize
 \setlength{\tabcolsep}{2.5pt}
@@ -8,15 +8,15 @@
 \toprule
 Fields & $|R|$ & Classes & Ent. & Eq. & False \\
 \midrule
-None & 0 & 1 & -0.000 & 61,576 & 59,546 \\
+None & 0 & 1 & -0.000 & 61,576 & \underline{59,546} \\
 Operator & 1 & 387 & 0.787 & 2,268 & 238 \\
 Action kind & 1 & 183 & 0.661 & 2,282 & 252 \\
 Layer & 1 & 52 & 0.552 & 2,479 & 449 \\
 Placement & 1 & 9 & 0.280 & 12,732 & 10,702 \\
-Operator+layer & 2 & 591 & 0.850 & 2,030 & 0 \\
-Kind+placement & 2 & 214 & 0.680 & 2,030 & 0 \\
-Surface & 5 & 820 & 0.904 & 2,030 & 0 \\
-All sem. & 7 & 947 & 0.934 & 2,030 & 0 \\
+Operator+layer & 2 & 591 & 0.850 & 2,030 & \textbf{0} \\
+Kind+placement & 2 & 214 & 0.680 & 2,030 & \textbf{0} \\
+Surface & 5 & 820 & 0.904 & 2,030 & \textbf{0} \\
+All sem. & 7 & 947 & 0.934 & 2,030 & \textbf{0} \\
 \bottomrule
 \end{tabular}
 \Description{Exhaustive field-resolution lattice table showing field count, projected classes, entropy retained, declared equivalences, and collision witnesses.}

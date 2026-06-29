@@ -1,12 +1,12 @@
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[
-  metric/.style={vpanel, draw=vldbBlue!66, fill=vldbMist, minimum width=1.58cm,
-    minimum height=.78cm, font=\rmfamily\fontsize{6.7}{7.3}\selectfont,
+  stage/.style={vpanel, draw=vldbBlue!66, fill=vldbMist, text width=1.50cm,
+    minimum height=.72cm, font=\rmfamily\fontsize{6.45}{7.05}\selectfont,
     text=black!70, align=center, inner xsep=1pt, inner ysep=1pt,
     text height=1.48ex, text depth=.25ex},
-  criterion/.style={vpanel, draw=vldbTeal!74!black, fill=vldbMint,
-    minimum width=1.56cm, minimum height=.46cm,
+  check/.style={vpanel, draw=vldbTeal!74!black, fill=vldbMint,
+    minimum width=1.36cm, minimum height=.42cm,
     font=\rmfamily\bfseries\fontsize{6.5}{7.1}\selectfont, text=vldbInk,
     align=center, inner xsep=1pt, inner ysep=.8pt,
     text height=1.42ex, text depth=.22ex},
@@ -14,46 +14,49 @@
     minimum height=.32cm, font=\rmfamily\fontsize{6.2}{6.8}\selectfont,
     text=vldbGray, align=center, inner xsep=.8pt, inner ysep=.5pt,
     text height=1.35ex, text depth=.20ex},
-  warn/.style={vpanel, draw=vldbGold!75!black, fill=vldbWarm,
-    minimum width=1.56cm, minimum height=.46cm,
-    font=\rmfamily\fontsize{6.3}{6.9}\selectfont, text=black!70,
+  zero/.style={vpanel, draw=vldbGold!75!black, fill=vldbWarm,
+    minimum width=1.22cm, minimum height=.36cm,
+    font=\rmfamily\fontsize{6.25}{6.85}\selectfont, text=black!70,
     align=center, inner xsep=1pt, inner ysep=.8pt,
     text height=1.40ex, text depth=.22ex}
 ]
-\path[use as bounding box] (-.06,-3.66) rectangle (7.25,.34);
+\path[use as bounding box] (-.06,-4.10) rectangle (7.25,.34);
 
 \node[vsmall, anchor=west, text=vldbGray] at (.02,.13)
-  {grounded denominator};
-\node[metric] at (.86,-.45) {\textbf{287}\\rules};
-\node[metric] at (2.70,-.45) {\textbf{287 / 26}\\spans / sources};
-\node[metric] at (4.54,-.45) {\textbf{4,216}\\SQL probes};
-\node[metric] at (6.38,-.45) {\textbf{90 / 90}\\motifs};
+  {denominator construction, not a latency benchmark};
+\node[stage] (ev) at (.86,-.56) {\textbf{287}\\evidence\\spans};
+\node[stage] (rules) at (2.70,-.56) {\textbf{287}\\admitted\\rules};
+\node[stage] (sql) at (4.54,-.56) {\textbf{4,216}\\executable\\SQL probes};
+\node[stage] (motif) at (6.38,-.56) {\textbf{90/90}\\published\\motifs};
+\draw[vflow] (ev) -- (rules);
+\draw[vflow] (rules) -- (sql);
+\draw[vflow] (sql) -- (motif);
 
-\node[vsmall, anchor=west, text=vldbGray] at (.02,-1.18)
+\node[vsmall, anchor=west, text=vldbGray] at (.02,-1.48)
   {admission checks};
-\node[criterion] at (.86,-1.70) {support};
-\node[criterion] at (2.70,-1.70) {guards};
-\node[criterion] at (4.54,-1.70) {SQL};
-\node[criterion] at (6.38,-1.70) {motifs};
-\node[warn] at (.86,-2.26) {0 audit};
-\node[warn] at (2.70,-2.26) {0 merge};
-\node[warn] at (4.54,-2.26) {0 shape};
-\node[warn] at (6.38,-2.26) {0 exec};
+\node[check] at (.86,-1.95) {support};
+\node[check] at (2.70,-1.95) {guards};
+\node[check] at (4.54,-1.95) {SQL};
+\node[check] at (6.38,-1.95) {motifs};
+\node[zero] at (.86,-2.44) {0 invalid};
+\node[zero] at (2.70,-2.44) {0 conflict};
+\node[zero] at (4.54,-2.44) {0 shape};
+\node[zero] at (6.38,-2.44) {0 exec};
 
-\node[vsmall, anchor=west, text=vldbGray] at (.02,-2.83)
+\node[vsmall, anchor=west, text=vldbGray] at (.02,-3.02)
   {covered query-feature axes};
-\node[axis] at (1.02,-3.12) {source};
-\node[axis] at (2.30,-3.12) {connector};
-\node[axis] at (3.58,-3.12) {join};
-\node[axis] at (4.86,-3.12) {predicate};
-\node[axis] at (6.14,-3.12) {adapt};
-\node[axis] at (1.02,-3.48) {agg.};
-\node[axis] at (2.30,-3.48) {stats};
-\node[axis] at (3.58,-3.48) {reuse};
-\node[axis] at (4.86,-3.48) {dist.};
-\node[axis] at (6.14,-3.48) {control};
+\node[axis] at (1.02,-3.32) {source};
+\node[axis] at (2.30,-3.32) {connector};
+\node[axis] at (3.58,-3.32) {join};
+\node[axis] at (4.86,-3.32) {predicate};
+\node[axis] at (6.14,-3.32) {adapt};
+\node[axis] at (1.02,-3.72) {agg.};
+\node[axis] at (2.30,-3.72) {stats};
+\node[axis] at (3.58,-3.72) {reuse};
+\node[axis] at (4.86,-3.72) {dist.};
+\node[axis] at (6.14,-3.72) {control};
 \end{tikzpicture}
-\caption{Corpus, benchmark, and execution denominators. Every mainline rule is public-evidence grounded, every generated SQL probe executes in the validation catalog, and every external optimizer motif has executable probe support.}
-\Description{A compact evidence panel with four denominator counts, four admission checks, zero audit or execution issues, and representative covered query-feature axes.}
+\caption{Corpus, benchmark, and execution denominators. The same grounded denominator carries source evidence, generated probes, admission checks, and published-motif coverage.}
+\Description{A compact evidence panel with four denominator counts, four admission checks, observed zero audit or execution issues, and representative covered query-feature axes.}
 \label{fig:benchmark-snapshot}
 \end{figure}

@@ -24,5 +24,5 @@ false_equivalence_severity,Paper/latex/tables/tab_false_equivalence_severity.tex
 sql_multicatalog_execution,Paper/latex/tables/tab_sql_multicatalog.tex,3,0,,true
 projection_resolution_lattice,Paper/latex/tables/tab_resolution_lattice.tex,4,0,,true
 scalability_family,Paper/latex/tables/tab_scalability_family.tex,10,0,,true
-guard_quality,Paper/latex/tables/tab_guard_quality.tex,3,0,,true
+guard_quality,Paper/latex/tables/tab_guard_quality.tex,12,0,,true
 feature_holdout_repair,Paper/latex/tables/tab_feature_holdout_repair.tex,3,0,,true

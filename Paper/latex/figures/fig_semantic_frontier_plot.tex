@@ -1,6 +1,6 @@
 \begin{figure}[t]
 \centering
-\newcommand{\frontrow}[6]{%
+\newcommand{\frontrow}[7]{%
   \node[anchor=east, font=\rmfamily\bfseries\fontsize{6.8}{7.4}\selectfont,
         text=vldbInk, text height=1.48ex, text depth=.24ex]
         at (1.35,#1) {#2};
@@ -8,29 +8,46 @@
         minimum height=.32cm, font=\rmfamily\fontsize{6.4}{7.0}\selectfont,
         text=black!70, align=center, inner xsep=1pt, inner ysep=.4pt,
         text height=1.38ex, text depth=.22ex] at (2.65,#1) {#3};
+  \draw[vldbRule, line width=.30pt] (3.62,#1) -- (5.18,#1);
+  \node[vpanel, draw=vldbRule, fill=white, minimum width=.28cm,
+        minimum height=.24cm, inner sep=0pt] at (3.76,#1) {};
+  \node[vpanel, draw=vldbRule, fill=white, minimum width=.28cm,
+        minimum height=.24cm, inner sep=0pt] at (4.44,#1) {};
+  \node[vpanel, draw=vldbRule, fill=white, minimum width=.28cm,
+        minimum height=.24cm, inner sep=0pt] at (5.12,#1) {};
+  \node[vpanel, draw=vldbTeal!72!black, fill=vldbTeal!35,
+        minimum width=.34cm, minimum height=.30cm,
+        inner sep=0pt] at (#4,#1) {};
   \path[draw=vldbTeal!72!black, fill=vldbTeal!35, rounded corners=.7pt]
-        (3.78,{#1-.13}) rectangle ({3.78+#4},{#1+.13});
+        (5.56,{#1-.12}) rectangle ({5.56+#5},{#1+.12});
   \path[draw=vldbRose!72!black, fill=vldbRose!24, rounded corners=.7pt]
-        ({3.78+#4},{#1-.13}) rectangle ({3.78+#4+#5},{#1+.13});
+        ({5.56+#5},{#1-.12}) rectangle ({5.56+#5+#6},{#1+.12});
   \node[anchor=west, font=\rmfamily\fontsize{6.4}{7.0}\selectfont,
         text=vldbGray, text height=1.38ex, text depth=.22ex]
-        at (5.72,#1) {#6};
+        at (6.86,#1) {#7};
 }
 \begin{tikzpicture}[x=1cm,y=1cm]
-\path[use as bounding box] (-.04,-2.84) rectangle (7.20,.30);
-\node[vsmall, anchor=west, text=vldbGray] at (1.55,.06)
-  {minimum repair basis};
-\node[vsmall, anchor=west, text=vldbGray] at (3.78,.06)
-  {core subsets: safe / unsafe};
+\path[use as bounding box] (-.04,-3.22) rectangle (7.20,.34);
+\node[vsmall, anchor=west, text=vldbGray] at (1.78,.06)
+  {basis};
+\node[vsmall, anchor=west, text=vldbGray] at (3.58,.06)
+  {frontier depth};
+\node[vsmall, anchor=west, text=vldbGray] at (5.56,.06)
+  {safe / residual};
+\node[vsmall, text=vldbGray] at (3.76,-.25) {0};
+\node[vsmall, text=vldbGray] at (4.44,-.25) {1};
+\node[vsmall, text=vldbGray] at (5.12,-.25) {2+};
 
-  \frontrow{-.52}{keyword}{placement}{1.29}{.51}{23 / 9}
-  \frontrow{-1.12}{yes/no}{layer or placement}{1.35}{.45}{24 / 8}
-  \frontrow{-1.72}{operator-only}{layer}{1.24}{.56}{22 / 10}
-  \frontrow{-2.32}{all}{layer + placement}{1.18}{.62}{21 / 11}
-  \node[vsmall, anchor=west, text=vldbGray] at (3.78,-2.70)
-    {teal=repaired; rose=residual};
+  \frontrow{-.72}{keyword}{placement}{4.44}{1.29}{.51}{23 / 9}
+  \frontrow{-1.32}{yes/no}{layer or placement}{4.44}{1.35}{.45}{24 / 8}
+  \frontrow{-1.92}{operator-only}{layer}{4.44}{1.24}{.56}{22 / 10}
+  \frontrow{-2.52}{all}{layer + placement}{5.12}{1.18}{.62}{21 / 11}
+  \node[vsmall, anchor=west, text=vldbGray] at (3.52,-2.88)
+    {teal = first safe retained-field depth};
+  \node[vsmall, anchor=west, text=vldbGray] at (3.52,-3.12)
+    {rose = residual unsafe subsets};
 \end{tikzpicture}
-\caption{Semantic frontier over the core field lattice. Single fields repair the headline one-projection scopes, but the joint scope requires a layer+placement basis; safe and unsafe core subsets are counted by exhaustive finite enumeration.}
+\caption{Semantic frontier over the core field lattice. Single projections cross the frontier at one field; the joint scope first becomes safe at layer+placement.}
 \Description{A frontier profile lists each projection scope, its minimum repair basis, and a stacked safe versus unsafe subset bar over the core field lattice.}
 \label{fig:semantic-frontier}
 \end{figure}

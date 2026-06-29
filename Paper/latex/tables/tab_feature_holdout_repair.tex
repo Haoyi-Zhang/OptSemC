@@ -1,6 +1,6 @@
 \begin{table}[t]
 \centering
-\caption{Feature-family held-out repair stability. Each fold withholds a non-default query-feature family, learns repairs on the remaining collision witnesses, and evaluates held-out witnesses. The robust semantic basis is fixed before testing.}
+\caption{Feature-family held-out repair stability. Point minima can leave held-out residuals; the fixed basis has zero held-out failures in every projection.}
 \label{tab:feature-holdout-repair}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -8,9 +8,9 @@
 \toprule
 Projection & Folds & Held-out & Point & Basis \\
 \midrule
-Keyword & 12 & 830 & 144 & 0 \\
-Operator & 9 & 569 & 12 & 0 \\
-Yes/No & 1 & 3 & 0 & 0 \\
+Keyword & 12 & 830 & \underline{144} & \textbf{0} \\
+Operator & 9 & 569 & \underline{12} & \textbf{0} \\
+Yes/No & 1 & 3 & \textbf{0} & \textbf{0} \\
 \bottomrule
 \end{tabular}
 \end{table}

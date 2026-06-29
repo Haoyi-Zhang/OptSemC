@@ -1,17 +1,17 @@
-\begin{table}[t]
+\begin{table*}[t]
 \centering
-\caption{Worked public-contract cases. C1 is expanded in text with probe shape, source labels, projection equality, exact inequality, and repair obligations; C2--C4 name additional witness families.}
+\caption{Worked public-contract cases. Each row names the coarse label, the hidden contract pair, and the repair fields that make the comparison auditable.}
 \label{tab:cases}
 \footnotesize
-\setlength{\tabcolsep}{2.0pt}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.38in}>{\raggedright\arraybackslash}p{1.36in}>{\raggedright\arraybackslash}p{0.98in}@{}}
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.32in}>{\raggedright\arraybackslash}p{0.86in}>{\raggedright\arraybackslash}p{2.55in}>{\raggedright\arraybackslash}p{1.12in}>{\raggedright\arraybackslash}p{1.36in}@{}}
 \toprule
-Case & Contract pair hidden by a coarse label & Separating fields \\
+Case & Coarse label & Contract pair hidden by the label & Separating fields & Risk closed \\
 \midrule
-C1 & BigQuery federated filter delegation vs. Trino aggregate/expression pushdown & operator, variant, placement \\
-C2 & PostgreSQL EXPLAIN estimates vs. BigQuery stage/shuffle evidence and Snowflake logical plans & observability, placement \\
-C3 & Compile-time planning vs. BigQuery/Spark/ClickHouse runtime adaptation & layer, decision time \\
-C4 & DuckDB/PostgreSQL CTE inline, materialize, reuse, and disable guards & variant, guard state \\
+C1 & pushdown=yes & BigQuery federated filter delegation vs. Trino aggregate/expression pushdown & \textbf{operator, variant, placement} & delegation is not local rewrite \\
+C2 & plan evidence & PostgreSQL EXPLAIN estimates vs. BigQuery stage/shuffle evidence and Snowflake logical plans & \textbf{observability, placement} & plan surface is not execution semantics \\
+C3 & adaptive=yes & Compile-time planning vs. BigQuery/Spark/ClickHouse runtime adaptation & \textbf{layer, decision time} & runtime adaptation is not compile-time planning \\
+C4 & CTE support & DuckDB/PostgreSQL CTE inline, materialize, reuse, and disable guards & \textbf{variant, guard state} & feature support depends on guard obligations \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}

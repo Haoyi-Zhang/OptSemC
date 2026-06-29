@@ -1,18 +1,18 @@
 \begin{table}[t]
 \centering
-\caption{Largest workload-feature-induced contract movements.}
+\caption{Largest workload-feature-induced contract movements. Bold marks the largest mean movement; underlining marks the highest nonzero coverage among shown rows.}
 \label{tab:workload-sensitivity}
 \small
 \begin{tabular}{llrr}
 \toprule
 Engine & Feature & Mean dist. & Nonzero \\
 \midrule
-DuckDB & reuse\_structure & 0.827 & 0.854 \\
+DuckDB & reuse\_structure & \textbf{0.827} & 0.854 \\
 Trino & statistics\_need & 0.742 & 0.853 \\
 DuckDB & source\_boundary & 0.590 & 0.623 \\
 Trino & distribution\_trigger & 0.519 & 0.861 \\
 Spark SQL & adaptivity\_trigger & 0.442 & 0.858 \\
-BigQuery & distribution\_trigger & 0.373 & 0.891 \\
+BigQuery & distribution\_trigger & 0.373 & \underline{0.891} \\
 Spark SQL & join\_type & 0.369 & 0.810 \\
 ClickHouse & order\_limit & 0.351 & 0.511 \\
 \bottomrule

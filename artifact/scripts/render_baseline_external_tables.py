@@ -34,6 +34,14 @@ def fmt_int(value: object) -> str:
     return f"{int(value):,}"
 
 
+def latex_bold(value: str) -> str:
+    return rf"\textbf{{{value}}}"
+
+
+def latex_underline(value: str) -> str:
+    return rf"\underline{{{value}}}"
+
+
 def write(path: Path, lines: list[str]) -> None:
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
@@ -62,10 +70,13 @@ def baseline_table() -> None:
         "operator_kind_surface": "Surface",
     }
     by_projection = {r["projection"]: r for r in rows(ART / "evaluation" / "grounded" / "baseline_portfolio.csv")}
+    shown = [by_projection[projection] for projection in ordered]
+    worst_false = max(int(r["false_equivalences"]) for r in shown)
+    worst_rate = max(float(r["conditional_false_equivalence_rate"]) for r in shown)
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Executable projection baselines. Projection-induced collision is conditional on the baseline declaring equivalence; the full baseline portfolio contains 17 projections.}",
+        r"\caption{Executable projection baselines. Bold zeros are exact or strengthened controls; underlining marks the worst one-field projection, exposing the shown range.}",
         r"\label{tab:baseline-portfolio}",
         r"\footnotesize",
         r"\setlength{\tabcolsep}{3pt}",
@@ -76,9 +87,18 @@ def baseline_table() -> None:
     ]
     for projection in ordered:
         r = by_projection[projection]
+        false_count = int(r["false_equivalences"])
         pct = 100.0 * float(r["conditional_false_equivalence_rate"])
+        false_text = fmt_int(false_count)
+        rate_text = f"{pct:.1f}\\%"
+        if false_count == 0:
+            false_text = latex_bold(false_text)
+            rate_text = latex_bold(rate_text)
+        elif false_count == worst_false:
+            false_text = latex_underline(false_text)
+            rate_text = latex_underline(rate_text)
         lines.append(
-            f"{esc(labels[projection])} & {fmt_int(r['projected_equivalences'])} & {fmt_int(r['false_equivalences'])} & {pct:.1f}\\%" + ROW_END
+            f"{esc(labels[projection])} & {fmt_int(r['projected_equivalences'])} & {false_text} & {rate_text}" + ROW_END
         )
     lines += [r"\bottomrule", r"\end{tabular}", r"\end{table}"]
     write(PAPER_TABLES / "tab_baseline_portfolio.tex", lines)

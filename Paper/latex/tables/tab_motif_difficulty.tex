@@ -1,16 +1,16 @@
 \begin{table}[t]
 \centering
-\caption{External motif difficulty. Matching probes are generated OptSemBench-C probes satisfying each benchmark-family motif requirement.}
+\caption{Published motif difficulty. Underlining marks the sparsest and densest matching-probe extremes; medians show coverage redundancy.}
 \label{tab:motif-difficulty}
 \footnotesize
 \begin{tabular}{lrrrr}
 \toprule
 Suite & Motifs & Min & Median & Max  \\
 \midrule
-TPC-H & 8 & 1 & 87.0 & 1384  \\
+TPC-H & 8 & \underline{1} & 87.0 & 1384  \\
 TPC-DS & 8 & 86 & 164.5 & 287  \\
 JOB & 8 & 55 & 87.0 & 236  \\
-SSB & 6 & 89 & 101.0 & 3442  \\
+SSB & 6 & 89 & 101.0 & \underline{3442}  \\
 CardEst & 7 & 72 & 228.0 & 259  \\
 Adaptive & 6 & 72 & 205.5 & 235  \\
 Federated & 8 & 72 & 91.5 & 633  \\
@@ -21,5 +21,5 @@ ClickHouse & 7 & 70 & 70.0 & 70  \\
 Spark/Trino & 8 & 69 & 70.0 & 236  \\
 \bottomrule
 \end{tabular}
-\Description{Motif difficulty table showing how many probes cover each external benchmark suite motif.}
+\Description{Motif difficulty table showing how many probes cover each published benchmark-suite motif.}
 \end{table}

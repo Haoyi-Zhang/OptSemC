@@ -1,52 +1,43 @@
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[
-  sig/.style={vpanel, draw=vldbBlue!68, fill=vldbMist, text width=1.72cm,
-    minimum height=.70cm, font=\rmfamily\fontsize{6.7}{7.3}\selectfont,
+  contract/.style={vpanel, draw=vldbBlue!68, fill=vldbMist, text width=1.52cm,
+    minimum height=.82cm, font=\rmfamily\fontsize{6.55}{7.15}\selectfont,
     text=black!72, align=center, text height=1.48ex, text depth=.25ex},
-  field/.style={vpanel, draw=vldbRule, fill=white, minimum width=.86cm,
-    minimum height=.23cm, font=\rmfamily\fontsize{6.15}{6.75}\selectfont,
-    text=vldbGray, align=center, inner xsep=.8pt, inner ysep=.4pt,
-    text height=1.32ex, text depth=.20ex},
-  band/.style={vpanel, draw=vldbGold!75!black, fill=vldbWarm, text width=4.90cm,
-    minimum height=.58cm, font=\rmfamily\bfseries\fontsize{7.0}{7.8}\selectfont,
-    text=vldbInk, align=center, text height=1.50ex, text depth=.28ex},
-  bad/.style={vpanel, draw=vldbRose!76!black, fill=vldbRose!8, text width=6.46cm,
-    minimum height=.58cm, font=\rmfamily\fontsize{6.75}{7.4}\selectfont,
-    text=black!72, align=center, text height=1.48ex, text depth=.25ex},
-  repair/.style={vpanel, draw=vldbTeal!75!black, fill=vldbMint, text width=6.46cm,
-    minimum height=.52cm, font=\rmfamily\fontsize{6.75}{7.4}\selectfont,
-    text=black!72, align=center, text height=1.48ex, text depth=.25ex},
+  cell/.style={vpanel, draw=vldbRose!76!black, fill=vldbRose!8,
+    text width=2.28cm, minimum height=.82cm,
+    font=\rmfamily\bfseries\fontsize{6.85}{7.55}\selectfont,
+    text=vldbInk, align=center, text height=1.48ex, text depth=.25ex},
+  sig/.style={vpanel, draw=vldbTeal!75!black, fill=vldbMint,
+    text width=1.52cm, minimum height=.70cm,
+    font=\rmfamily\fontsize{6.25}{6.85}\selectfont,
+    text=black!70, align=center, text height=1.35ex, text depth=.22ex},
+  tag/.style={font=\rmfamily\fontsize{6.1}{6.7}\selectfont,
+    text=vldbGray, align=center, text height=1.32ex, text depth=.20ex},
   flow/.style={vflow}
 ]
-\path[use as bounding box] (-.04,-3.92) rectangle (7.22,.50);
+\path[use as bounding box] (-.04,-3.28) rectangle (7.22,.34);
 
-\node[vsmall, anchor=west, text=vldbGray] at (.04,.27)
-  {exact public contracts};
-\node[sig] (s1) at (1.05,-.40) {\textbf{Filter}\\local rewrite};
-\node[sig] (s2) at (3.60,-.40) {\textbf{Join}\\source delegate};
-\node[sig] (s3) at (6.15,-.40) {\textbf{Top-N}\\service stage};
+\node[contract] (s1) at (1.02,-.42) {\textbf{Filter}\\logical local};
+\node[contract] (s2) at (3.60,-.42) {\textbf{Agg.}\\source exec};
+\node[contract] (s3) at (6.18,-.42) {\textbf{Top-N}\\cloud stage};
 
-\node[field] at (1.05,-.94) {layer};
-\node[field] at (2.20,-.94) {operator};
-\node[field] at (3.60,-.94) {placement};
-\node[field] at (5.00,-.94) {evidence};
-\node[field] at (6.15,-.94) {time};
+\coordinate (merge) at (3.60,-1.18);
+\node[cell] (matrix) at (3.60,-1.68) {feature cell\\\texttt{pushdown=yes}};
 
-\node[field, fill=vldbRose!6, draw=vldbRose!55, minimum width=3.18cm]
-  at (3.60,-1.35) {semantic fields hidden by keyword vocabulary};
-\node[band] (label) at (3.60,-1.94)
-  {projection collapse: \texttt{pushdown=yes}};
-\node[bad] (false) at (3.60,-2.70)
-  {\textbf{collision witness}: exact signatures differ; projected label agrees};
-\node[repair] (rep) at (3.60,-3.42)
-  {\textbf{repair basis}: retain operator + layer + placement};
+\node[sig] (r1) at (1.12,-2.90) {filter\\logical/local};
+\node[sig] (r2) at (3.60,-2.90) {agg.\\exec/source};
+\node[sig] (r3) at (6.08,-2.90) {top-n\\stage/cloud};
 
-\draw[flow, draw=vldbGold!72!black] (3.60,-1.54) -- (label.north);
-\draw[flow, draw=vldbRose!72!black] (label) -- (false);
-\draw[flow, draw=vldbTeal!72!black] (false) -- (rep);
+\draw[flow, draw=vldbRose!72!black] (s1.south) |- (merge);
+\draw[flow, draw=vldbRose!72!black] (s2.south) -- (merge);
+\draw[flow, draw=vldbRose!72!black] (s3.south) |- (merge);
+\draw[flow, draw=vldbRose!72!black] (merge) -- (matrix.north);
+\draw[flow, draw=vldbTeal!72!black] (matrix.south) -- (r2.north);
+\draw[vldbTeal!72!black, line width=.60pt] (r2.west) -- (r1.east);
+\draw[vldbTeal!72!black, line width=.60pt] (r2.east) -- (r3.west);
 \end{tikzpicture}
-\caption{Projection loss in optimizer comparison. A feature-name matrix turns non-equivalent public optimizer contracts into the same apparent capability; OptSem-C records the hidden semantic fields that split the false comparison cell.}
+\caption{Projection loss in optimizer comparison. Distinct public contracts collapse to the same feature cell; treating that cell as equality creates a false comparison, while OptSem-C preserves the fields that separate it.}
 \Description{Three exact public-contract signatures with different operators, placements, and evidence surfaces are projected into the same pushdown=yes cell. A repair row shows that retaining semantic fields separates the collision.}
 \label{fig:projection-trap}
 \end{figure}

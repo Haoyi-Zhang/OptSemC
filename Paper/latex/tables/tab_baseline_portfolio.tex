@@ -1,6 +1,6 @@
 \begin{table}[t]
 \centering
-\caption{Executable projection baselines. Projection-induced collision is conditional on the baseline declaring equivalence; the full baseline portfolio contains 17 projections.}
+\caption{Executable projection baselines. Bold zeros are exact or strengthened controls; underlining marks the worst one-field projection, exposing the shown range.}
 \label{tab:baseline-portfolio}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -8,15 +8,15 @@
 \toprule
 Baseline & Eq. & False & Rate \\
 \midrule
-Exact & 2,030 & 0 & 0.0\% \\
+Exact & 2,030 & \textbf{0} & \textbf{0.0\%} \\
 Keyword & 2,284 & 254 & 11.1\% \\
 Op/action & 2,036 & 6 & 0.3\% \\
 Operator & 2,268 & 238 & 10.5\% \\
 Kind-only & 2,282 & 252 & 11.0\% \\
 Layer-only & 2,479 & 449 & 18.1\% \\
 Place-only & 12,732 & 10,702 & 84.1\% \\
-State-only & 25,623 & 23,593 & 92.1\% \\
-Surface & 2,030 & 0 & 0.0\% \\
+State-only & 25,623 & \underline{23,593} & \underline{92.1\%} \\
+Surface & 2,030 & \textbf{0} & \textbf{0.0\%} \\
 \bottomrule
 \end{tabular}
 \end{table}

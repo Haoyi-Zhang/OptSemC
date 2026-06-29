@@ -3,6 +3,6 @@ engine_count,7
 probe_count,4216
 full_pairwise_comparisons_per_projection,88536
 full_rows,4
-full_elapsed_ms_total,4693.250
-full_min_comparisons_per_second,63048.4
-full_max_comparisons_per_second,89365.8
+full_elapsed_ms_total,4416.017
+full_min_comparisons_per_second,69567.2
+full_max_comparisons_per_second,89183.6

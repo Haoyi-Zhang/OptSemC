@@ -217,7 +217,7 @@ artifact/scripts/hydrate_large_outputs.py,0,0,2,0,true
 artifact/scripts/match_rules.py,5,0,4,23,true
 artifact/scripts/merge_contracts.py,2,0,3,30,true
 artifact/scripts/refresh_grounded_summaries.py,3,0,4,64,true
-artifact/scripts/render_baseline_external_tables.py,7,0,3,44,true
+artifact/scripts/render_baseline_external_tables.py,9,0,3,56,true
 artifact/scripts/render_paper_tables.py,3,0,3,54,true
 artifact/scripts/render_scaling_and_incremental_tables.py,4,0,3,44,true
 artifact/scripts/run_integrity_suite.py,3,0,3,7,true
