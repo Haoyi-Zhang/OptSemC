@@ -1,5 +1,5 @@
 projection,points,slope_ms_per_comparison,intercept_ms,r_squared,comparisons_per_ms_from_slope
-keyword,6,0.012652677,3.928,0.999905,79.035
-operator_kind_surface,6,0.014357912,5.630,0.999875,69.648
-operator_only,6,0.011209707,3.219,0.999858,89.208
-strict,6,0.011589854,5.804,0.999865,86.282
+keyword,6,0.012528252,2.689,0.999722,79.820
+operator_kind_surface,6,0.014455186,2.473,0.999727,69.179
+operator_only,6,0.011166073,1.745,0.999778,89.557
+strict,6,0.011597630,2.208,0.999891,86.225

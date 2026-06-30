@@ -1,43 +1,49 @@
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[
-  contract/.style={vpanel, draw=vldbBlue!68, fill=vldbMist, text width=1.52cm,
-    minimum height=.82cm, font=\rmfamily\fontsize{6.55}{7.15}\selectfont,
+  contract/.style={vpanel, draw=vldbBlue!68, fill=vldbMist, text width=1.64cm,
+    minimum height=.72cm, font=\rmfamily\fontsize{6.45}{7.05}\selectfont,
     text=black!72, align=center, text height=1.48ex, text depth=.25ex},
   cell/.style={vpanel, draw=vldbRose!76!black, fill=vldbRose!8,
-    text width=2.28cm, minimum height=.82cm,
+    text width=2.46cm, minimum height=.78cm,
     font=\rmfamily\bfseries\fontsize{6.85}{7.55}\selectfont,
     text=vldbInk, align=center, text height=1.48ex, text depth=.25ex},
   sig/.style={vpanel, draw=vldbTeal!75!black, fill=vldbMint,
-    text width=1.52cm, minimum height=.70cm,
+    text width=1.64cm, minimum height=.58cm,
     font=\rmfamily\fontsize{6.25}{6.85}\selectfont,
     text=black!70, align=center, text height=1.35ex, text depth=.22ex},
   tag/.style={font=\rmfamily\fontsize{6.1}{6.7}\selectfont,
     text=vldbGray, align=center, text height=1.32ex, text depth=.20ex},
   flow/.style={vflow}
 ]
-\path[use as bounding box] (-.04,-3.28) rectangle (7.22,.34);
+\path[use as bounding box] (-.04,-3.34) rectangle (7.22,.36);
 
-\node[contract] (s1) at (1.02,-.42) {\textbf{Filter}\\logical local};
-\node[contract] (s2) at (3.60,-.42) {\textbf{Agg.}\\source exec};
-\node[contract] (s3) at (6.18,-.42) {\textbf{Top-N}\\cloud stage};
+\node[vsmall, anchor=west, text=vldbGray] at (.10,.10)
+  {exact public contracts};
+\node[contract] (s1) at (1.02,-.48) {\textbf{Filter}\\logical local};
+\node[contract] (s2) at (3.60,-.48) {\textbf{Aggregate}\\source exec};
+\node[contract] (s3) at (6.18,-.48) {\textbf{Top-N}\\cloud stage};
 
-\coordinate (merge) at (3.60,-1.18);
-\node[cell] (matrix) at (3.60,-1.68) {feature cell\\\texttt{pushdown=yes}};
+\coordinate (merge) at (3.60,-1.20);
+\node[cell] (matrix) at (3.60,-1.70) {\texttt{pushdown=yes}\\declares equality};
+\node[tag, anchor=west, text=vldbRose!85!black, text width=1.10cm]
+  at (5.92,-1.70) {false when exact fields differ};
 
-\node[sig] (r1) at (1.12,-2.90) {filter\\logical/local};
-\node[sig] (r2) at (3.60,-2.90) {agg.\\exec/source};
-\node[sig] (r3) at (6.08,-2.90) {top-n\\stage/cloud};
+\node[vsmall, anchor=west, text=vldbGray] at (.10,-2.48)
+  {repair by retaining operator and placement};
+\node[sig] (r1) at (1.12,-2.92) {filter\\local};
+\node[sig] (r2) at (3.60,-2.92) {aggregate\\source};
+\node[sig] (r3) at (6.08,-2.92) {top-n\\cloud};
 
 \draw[flow, draw=vldbRose!72!black] (s1.south) |- (merge);
 \draw[flow, draw=vldbRose!72!black] (s2.south) -- (merge);
 \draw[flow, draw=vldbRose!72!black] (s3.south) |- (merge);
 \draw[flow, draw=vldbRose!72!black] (merge) -- (matrix.north);
 \draw[flow, draw=vldbTeal!72!black] (matrix.south) -- (r2.north);
-\draw[vldbTeal!72!black, line width=.60pt] (r2.west) -- (r1.east);
-\draw[vldbTeal!72!black, line width=.60pt] (r2.east) -- (r3.west);
+\draw[vldbTeal!72!black, line width=.58pt] (r2.west) -- (r1.east);
+\draw[vldbTeal!72!black, line width=.58pt] (r2.east) -- (r3.west);
 \end{tikzpicture}
-\caption{Projection loss in optimizer comparison. Distinct public contracts collapse to the same feature cell; treating that cell as equality creates a false comparison, while OptSem-C preserves the fields that separate it.}
+\caption{Projection loss in optimizer comparison. Exact contracts collapse into one coarse \texttt{pushdown=yes} cell; retaining operator and placement separates the false equality.}
 \Description{Three exact public-contract signatures with different operators, placements, and evidence surfaces are projected into the same pushdown=yes cell. A repair row shows that retaining semantic fields separates the collision.}
 \label{fig:projection-trap}
 \end{figure}

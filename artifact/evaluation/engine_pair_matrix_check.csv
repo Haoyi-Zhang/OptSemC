@@ -1,4 +1,4 @@
 check,passed,details
 matrix_rows_present,true,63
-headline_methods_present,true,"{'operator_only', 'yesno', 'keyword'}"
-headline_false_counts_match,true,"{'operator_only': 238, 'yesno': 6, 'keyword': 254}"
+headline_methods_present,true,"{'yesno', 'keyword', 'operator_only'}"
+headline_false_counts_match,true,"{'yesno': 6, 'keyword': 254, 'operator_only': 238}"
