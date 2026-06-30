@@ -1,63 +1,67 @@
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[
-  stage/.style={vpanel, draw=vldbBlue!66, fill=vldbMist, text width=1.48cm,
-    minimum height=.62cm, font=\rmfamily\fontsize{6.45}{7.05}\selectfont,
-    text=black!70, align=center, inner xsep=1pt, inner ysep=1pt,
-    text height=1.48ex, text depth=.25ex},
-  check/.style={draw=none, fill=none,
-    minimum width=1.22cm, minimum height=.30cm,
-    font=\rmfamily\bfseries\fontsize{6.5}{7.1}\selectfont, text=vldbInk,
+  stage/.style={vpanel, draw=vldbBlue!68, fill=vldbMist, text width=1.54cm,
+    minimum height=.82cm, font=\rmfamily\fontsize{6.65}{7.25}\selectfont,
+    text=black!70, align=center, inner xsep=1.5pt, inner ysep=1.1pt,
+    text height=1.40ex, text depth=.24ex},
+  count/.style={font=\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont,
+    text=vldbBlue!88!black, align=center, text height=1.48ex,
+    text depth=.26ex},
+  check/.style={vpanel, draw=vldbTeal!72!black, fill=vldbMint,
+    text width=1.30cm, minimum height=.32cm,
+    font=\rmfamily\bfseries\fontsize{6.62}{7.22}\selectfont, text=vldbInk,
     align=center, inner xsep=1pt, inner ysep=.8pt,
-    text height=1.42ex, text depth=.22ex},
-  axis/.style={draw=none, fill=none, minimum width=1.22cm,
-    minimum height=.28cm, font=\rmfamily\fontsize{6.2}{6.8}\selectfont,
-    text=vldbGray, align=center, inner xsep=.8pt, inner ysep=.5pt,
-    text height=1.35ex, text depth=.20ex},
-  zero/.style={vpanel, draw=vldbTeal!72!black, fill=vldbMint,
-    minimum width=1.18cm, minimum height=.32cm,
-    font=\rmfamily\fontsize{6.25}{6.85}\selectfont, text=black!70,
-    align=center, inner xsep=1pt, inner ysep=.8pt,
-    text height=1.40ex, text depth=.22ex}
+    text height=1.34ex, text depth=.22ex},
+  axis/.style={rounded corners=1.5pt, draw=black!14, fill=white,
+    minimum width=1.05cm, minimum height=.32cm,
+    font=\rmfamily\fontsize{6.62}{7.22}\selectfont,
+    text=vldbGray, align=center, inner xsep=1.1pt, inner ysep=.7pt,
+    text height=1.25ex, text depth=.18ex},
+  band/.style={vpanel, draw=vldbGold!55!black, fill=vldbWarm,
+    font=\rmfamily\bfseries\fontsize{6.62}{7.22}\selectfont,
+    text=vldbInk, align=center, inner xsep=2.5pt, inner ysep=1.0pt,
+    text height=1.30ex, text depth=.20ex}
 ]
-\path[use as bounding box] (-.06,-3.72) rectangle (7.25,.34);
+\path[use as bounding box] (-.06,-3.78) rectangle (7.25,.30);
 
-\node[vsmall, anchor=west, text=vldbGray] at (.02,.13)
-  {denominator construction, not a latency benchmark};
-\node[stage] (ev) at (.86,-.56) {\textbf{287}\\evidence\\spans};
-\node[stage] (rules) at (2.70,-.56) {\textbf{287}\\admitted\\rules};
-\node[stage] (sql) at (4.54,-.56) {\textbf{4,216}\\executable\\SQL probes};
-\node[stage] (motif) at (6.38,-.56) {\textbf{90/90}\\published\\motifs};
+\node[vhead, anchor=west] at (.02,.08) {Denominator before outcome measurement};
+\node[band, anchor=east] at (7.08,.08) {not latency};
+\node[stage] (ev) at (.88,-.62) {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 287}\\evidence spans};
+\node[stage] (rules) at (2.70,-.62) {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 287}\\admitted rules};
+\node[stage] (sql) at (4.54,-.62) {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 4,216}\\SQL probes};
+\node[stage] (motif) at (6.36,-.62) {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 90/90}\\motifs};
 \draw[vflow] (ev) -- (rules);
 \draw[vflow] (rules) -- (sql);
 \draw[vflow] (sql) -- (motif);
 
-\draw[vldbRule, line width=.34pt] (.20,-1.50) -- (7.05,-1.50);
-\node[vsmall, anchor=west, text=vldbGray] at (.02,-1.28)
-  {admission checks};
-\node[check] at (.86,-1.78) {support};
-\node[check] at (2.70,-1.78) {guards};
-\node[check] at (4.54,-1.78) {SQL};
-\node[check] at (6.38,-1.78) {motifs};
-\node[zero] at (.86,-2.18) {0 invalid};
-\node[zero] at (2.70,-2.18) {0 conflict};
-\node[zero] at (4.54,-2.18) {0 shape};
-\node[zero] at (6.38,-2.18) {0 exec};
+\draw[vldbRule, line width=.34pt] (.20,-1.42) -- (7.05,-1.42);
+\node[vsmall, anchor=west, text=vldbGray] at (.02,-1.24)
+  {admission gates: all pass before collision counting};
+\node[vsmall, text=vldbInk] at (.88,-1.64) {support};
+\node[vsmall, text=vldbInk] at (2.70,-1.64) {guards};
+\node[vsmall, text=vldbInk] at (4.54,-1.64) {SQL};
+\node[vsmall, text=vldbInk] at (6.36,-1.64) {motifs};
+\node[check] at (.88,-2.00) {0 invalid};
+\node[check] at (2.70,-2.00) {0 conflict};
+\node[check] at (4.54,-2.00) {0 shape};
+\node[check] at (6.36,-2.00) {0 exec};
 
-\node[vsmall, anchor=west, text=vldbGray] at (.02,-2.76)
+\node[vsmall, anchor=west, text=vldbGray] at (.02,-2.50)
   {covered query-feature axes};
-\node[axis] at (1.02,-3.06) {source};
-\node[axis] at (2.30,-3.06) {connector};
-\node[axis] at (3.58,-3.06) {join};
-\node[axis] at (4.86,-3.06) {predicate};
-\node[axis] at (6.14,-3.06) {adapt};
-\node[axis] at (1.02,-3.40) {agg.};
-\node[axis] at (2.30,-3.40) {stats};
-\node[axis] at (3.58,-3.40) {reuse};
-\node[axis] at (4.86,-3.40) {dist.};
-\node[axis] at (6.14,-3.40) {control};
+\node[axis] at (.74,-2.86) {src.};
+\node[axis] at (1.92,-2.86) {conn.};
+\node[axis] at (3.10,-2.86) {join};
+\node[axis] at (4.28,-2.86) {pred.};
+\node[axis] at (5.46,-2.86) {adapt};
+\node[axis] at (6.64,-2.86) {ctrl};
+\node[axis] at (1.34,-3.24) {agg.};
+\node[axis] at (2.52,-3.24) {stats};
+\node[axis] at (3.70,-3.24) {reuse};
+\node[axis] at (4.88,-3.24) {dist.};
+\node[axis] at (6.06,-3.24) {bound.};
 \end{tikzpicture}
-\caption{Corpus, benchmark, and execution denominators. The spine links countable source evidence, generated SQL probes, admission checks, and published-motif coverage.}
-\Description{A compact evidence panel with four denominator counts, four admission checks, observed zero audit or execution issues, and representative covered query-feature axes.}
+\caption{Corpus, benchmark, and execution denominators. The dashboard fixes evidence, SQL probes, admission gates, and motif coverage before collision rates are reported.}
+\Description{A compact evidence panel with four denominator counts, four admission checks, observed zero audit or execution issues, and representative covered query-feature axes: source, connector, join, predicate, adaptivity, control, aggregation, statistics, reuse, distribution, and boundary.}
 \label{fig:benchmark-snapshot}
 \end{figure}

@@ -3,48 +3,69 @@
 \newcommand{\frontrow}[8]{%
   \node[anchor=east, font=\rmfamily\bfseries\fontsize{6.7}{7.35}\selectfont,
         text=vldbInk, text height=1.42ex, text depth=.24ex]
-        at (1.28,#1) {#2};
-  \node[anchor=east, font=\rmfamily\fontsize{6.35}{6.95}\selectfont,
+        at (1.18,#1) {#2};
+  \node[anchor=east, font=\rmfamily\fontsize{6.62}{7.22}\selectfont,
         text=vldbGray, text height=1.30ex, text depth=.20ex]
-        at (2.26,#1) {#3};
-  \draw[vldbRule, line width=.28pt] (2.86,#1) -- (4.22,#1);
-  \node[circle, draw=vldbRose!78!black, fill=white, line width=.45pt,
-        minimum size=4.2pt, inner sep=0pt] at (2.86,#1) {};
+        at (2.00,#1) {#3};
   #4
-  \node[circle, draw=vldbTeal!78!black, fill=vldbTeal!32, line width=.45pt,
-        minimum size=4.8pt, inner sep=0pt] at (#5,#1) {};
-  \node[anchor=west, font=\rmfamily\fontsize{6.2}{6.8}\selectfont,
+  #5
+  #6
+  \node[anchor=west, font=\rmfamily\fontsize{6.62}{7.22}\selectfont,
         text=vldbInk, text height=1.30ex, text depth=.20ex]
-        at (4.42,#1) {#6};
-  \node[anchor=west, font=\rmfamily\fontsize{6.35}{6.95}\selectfont,
+        at (4.46,#1) {#7};
+  \node[anchor=west, font=\rmfamily\fontsize{6.62}{7.22}\selectfont,
         text=vldbGray, text height=1.30ex, text depth=.20ex]
-        at (6.56,#1) {#7/#8};
+        at (6.62,#1) {#8};
 }
 \begin{tikzpicture}[x=1cm,y=1cm]
-\path[use as bounding box] (-.04,-3.34) rectangle (7.20,.34);
-\node[vsmall, anchor=east, text=vldbGray] at (1.28,.06) {scope};
-\node[vsmall, anchor=east, text=vldbGray] at (2.26,.06) {false};
-\node[vsmall, anchor=west, text=vldbGray] at (2.62,.06) {first safe depth};
-\node[vsmall, anchor=west, text=vldbGray] at (4.42,.06) {minimum basis};
-\node[vsmall, anchor=west, text=vldbGray] at (6.40,.06) {safe/unsafe};
-\node[vsmall, text=vldbGray] at (2.86,-.25) {0};
-\node[vsmall, text=vldbGray] at (3.54,-.25) {1};
-\node[vsmall, text=vldbGray] at (4.22,-.25) {2+};
+\path[use as bounding box] (-.04,-3.34) rectangle (7.20,.30);
+\node[vhead, anchor=west] at (.02,.08) {Repair frontier over retained fields};
+\node[vsmall, anchor=east, text=vldbGray] at (1.18,-.34) {scope};
+\node[vsmall, anchor=east, text=vldbGray] at (2.00,-.34) {false};
+\node[vsmall, anchor=west, text=vldbGray] at (2.34,-.34) {depth};
+\node[vsmall, anchor=west, text=vldbGray] at (4.46,-.34) {minimum basis};
+\node[vsmall, anchor=west, text=vldbGray] at (6.42,-.34) {safe/unsafe};
+\node[vsmall, text=vldbGray] at (2.58,-.64) {0};
+\node[vsmall, text=vldbGray] at (3.16,-.64) {1};
+\node[vsmall, text=vldbGray] at (3.74,-.64) {2+};
 
-  \frontrow{-.72}{keyword}{254}{}{3.54}{placement}{23}{9}
-  \frontrow{-1.32}{yes/no}{6}{}{3.54}{layer/placement}{24}{8}
-  \frontrow{-1.92}{operator-only}{238}{}{3.54}{layer}{22}{10}
-  \frontrow{-2.52}{all}{498}{\node[circle, draw=vldbRose!78!black, fill=white, line width=.45pt, minimum size=4.2pt, inner sep=0pt] at (3.54,-2.52) {};}{4.22}{layer + placement}{21}{11}
-  \node[circle, draw=vldbRose!78!black, fill=white, line width=.45pt,
-        minimum size=4.2pt, inner sep=0pt] at (2.80,-3.04) {};
-  \node[vsmall, anchor=west, text=vldbGray] at (2.92,-3.04)
+\tikzset{
+  unsafe/.style={rounded corners=1.3pt, draw=vldbRose!76!black, fill=vldbRose!10,
+    minimum width=.42cm, minimum height=.30cm, inner sep=0pt},
+  safe/.style={rounded corners=1.3pt, draw=vldbTeal!76!black, fill=vldbTeal!30,
+    minimum width=.42cm, minimum height=.30cm, inner sep=0pt},
+  emptycell/.style={rounded corners=1.3pt, draw=vldbRule, fill=white,
+    minimum width=.42cm, minimum height=.30cm, inner sep=0pt}
+}
+
+  \frontrow{-.96}{keyword}{254}
+    {\node[unsafe] at (2.58,-.96) {};}
+    {\node[safe] at (3.16,-.96) {};}
+    {\node[emptycell] at (3.74,-.96) {};}
+    {placement}{23/9}
+  \frontrow{-1.46}{yes/no}{6}
+    {\node[unsafe] at (2.58,-1.46) {};}
+    {\node[safe] at (3.16,-1.46) {};}
+    {\node[emptycell] at (3.74,-1.46) {};}
+    {layer or placement}{24/8}
+  \frontrow{-1.96}{operator-only}{238}
+    {\node[unsafe] at (2.58,-1.96) {};}
+    {\node[safe] at (3.16,-1.96) {};}
+    {\node[emptycell] at (3.74,-1.96) {};}
+    {layer}{22/10}
+  \frontrow{-2.46}{all}{498}
+    {\node[unsafe] at (2.58,-2.46) {};}
+    {\node[unsafe] at (3.16,-2.46) {};}
+    {\node[safe] at (3.74,-2.46) {};}
+    {layer + placement}{21/11}
+  \node[unsafe] at (2.54,-3.06) {};
+  \node[vsmall, anchor=west, text=vldbGray] at (2.84,-3.06)
     {unsafe};
-  \node[circle, draw=vldbTeal!78!black, fill=vldbTeal!32, line width=.45pt,
-        minimum size=4.8pt, inner sep=0pt] at (4.06,-3.04) {};
-  \node[vsmall, anchor=west, text=vldbGray] at (4.18,-3.04)
+  \node[safe] at (4.02,-3.06) {};
+  \node[vsmall, anchor=west, text=vldbGray] at (4.32,-3.06)
     {first safe};
 \end{tikzpicture}
-\caption{Semantic frontier over retained fields. Rows are projection scopes; the depth axis marks the first collision-free retained-field set, with layer+placement required for the joint scope.}
+\caption{Semantic frontier over retained fields. Rose cells leave counter-witnesses; teal cells mark first safe retained-field sets, with layer+placement required jointly.}
 \Description{A compact lattice-depth diagram listing projection scopes, false witnesses, first safe retained-field depth, minimum basis, and safe versus unsafe subset counts.}
 \label{fig:semantic-frontier}
 \end{figure}

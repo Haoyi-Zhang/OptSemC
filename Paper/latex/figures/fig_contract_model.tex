@@ -1,48 +1,69 @@
 \begin{figure*}[t]
 \centering
 \begin{tikzpicture}[
-  lane/.style={vpanel, draw=vldbRule, fill=white},
-  stage/.style={vpanel, draw=vldbBlue!68, fill=vldbMist, text width=2.36cm,
-    minimum height=.76cm, font=\rmfamily\fontsize{6.9}{7.6}\selectfont,
-    text=black!70, align=center, text height=1.50ex, text depth=.28ex},
-  sig/.style={vpanel, draw=vldbViolet!70, fill=vldbSoft, text width=2.36cm,
-    minimum height=.76cm, font=\rmfamily\fontsize{6.9}{7.6}\selectfont,
-    text=black!70, align=center, text height=1.50ex, text depth=.28ex},
-  witness/.style={vpanel, draw=vldbRose!74!black, fill=vldbRose!8, text width=2.82cm,
-    minimum height=.76cm, font=\rmfamily\fontsize{6.7}{7.4}\selectfont,
-    text=black!72, align=center, text height=1.50ex, text depth=.28ex},
-  repair/.style={vpanel, draw=vldbTeal!75!black, fill=vldbMint, text width=2.82cm,
-    minimum height=.76cm, font=\rmfamily\fontsize{6.7}{7.4}\selectfont,
-    text=black!72, align=center, text height=1.50ex, text depth=.28ex},
-  phase/.style={font=\rmfamily\fontsize{6.4}{7.0}\selectfont,
-    text=vldbGray, align=center, text height=1.38ex, text depth=.22ex},
-  carried/.style={font=\rmfamily\fontsize{6.35}{6.95}\selectfont,
-    text=vldbGray, align=center, text height=1.34ex, text depth=.20ex},
+  lane/.style={vpanel, draw=vldbRule, fill=vldbSoft},
+  stage/.style={vpanel, draw=vldbBlue!68, fill=vldbMist, text width=2.42cm,
+    minimum height=.82cm, font=\rmfamily\fontsize{6.95}{7.60}\selectfont,
+    text=black!70, align=center, inner xsep=2pt, inner ysep=1pt,
+    text height=1.46ex, text depth=.26ex},
+  sig/.style={vpanel, draw=vldbViolet!72, fill=white, text width=2.46cm,
+    minimum height=.82cm, font=\rmfamily\fontsize{6.95}{7.60}\selectfont,
+    text=black!70, align=center, inner xsep=2pt, inner ysep=1pt,
+    text height=1.46ex, text depth=.26ex},
+  witness/.style={vpanel, draw=vldbRose!76!black, fill=vldbRose!8, text width=2.72cm,
+    minimum height=1.02cm, font=\rmfamily\fontsize{6.9}{7.55}\selectfont,
+    text=black!72, align=center, inner xsep=2pt, inner ysep=1pt,
+    text height=1.46ex, text depth=.26ex},
+  repair/.style={vpanel, draw=vldbTeal!76!black, fill=vldbMint, text width=2.72cm,
+    minimum height=.82cm, font=\rmfamily\fontsize{6.9}{7.55}\selectfont,
+    text=black!72, align=center, inner xsep=2pt, inner ysep=1pt,
+    text height=1.46ex, text depth=.26ex},
+  num/.style={circle, draw=white, fill=vldbBlue!86, text=white,
+    font=\rmfamily\bfseries\fontsize{6.7}{7.2}\selectfont,
+    minimum size=.40cm, inner sep=0pt},
+  chip/.style={rounded corners=1.5pt, draw=black!14, fill=white,
+    font=\rmfamily\fontsize{6.62}{7.22}\selectfont, text=vldbGray,
+    inner xsep=2.1pt, inner ysep=.8pt, text height=1.28ex, text depth=.20ex},
+  phase/.style={font=\rmfamily\bfseries\fontsize{6.72}{7.28}\selectfont,
+    text=vldbGray, align=center, text height=1.34ex, text depth=.22ex},
+  carried/.style={font=\rmfamily\fontsize{6.62}{7.22}\selectfont,
+    text=vldbGray, align=center, text height=1.28ex, text depth=.20ex},
   flow/.style={vflow}
 ]
-\path[use as bounding box] (-0.06,0.02) rectangle (17.72,3.34);
+\path[use as bounding box] (-0.06,.02) rectangle (17.72,3.36);
 
 \begin{scope}[on background layer]
-  \node[lane, minimum width=9.46cm, minimum height=2.36cm] at (4.88,1.76) {};
-  \node[lane, minimum width=7.18cm, minimum height=2.36cm] at (13.92,1.76) {};
+  \node[lane, minimum width=9.36cm, minimum height=2.28cm] at (4.82,1.68) {};
+  \node[lane, minimum width=7.42cm, minimum height=2.28cm] at (13.84,1.68) {};
 \end{scope}
 
-\node[phase, anchor=west] at (.36,2.98) {evidence-to-contract construction};
-\node[phase, anchor=west] at (10.52,2.98) {projection-kernel audit};
+\node[phase, anchor=west] at (.36,2.94) {construct exact contracts};
+\node[phase, anchor=west] at (10.36,2.94) {audit the projected comparison};
 
-\node[stage] (evidence) at (1.38,2.22) {\textbf{Public evidence}\\287 spans\\26 sources};
-\node[stage] (rule) at (4.00,2.22) {\textbf{Guarded rules}\\guarded action\\support state};
-\node[stage] (map) at (6.62,2.22) {\textbf{Contract maps}\\7 engines\\4,216 probes};
+\node[stage] (evidence) at (1.46,2.18) {\textbf{Public evidence}\\287 spans};
+\node[num] at (.54,2.56) {1};
+\node[stage] (rule) at (4.04,2.18) {\textbf{Guarded rules}\\287 admitted};
+\node[num] at (3.12,2.56) {2};
+\node[stage] (map) at (6.62,2.18) {\textbf{Engine--probe maps}\\4,216 probes};
+\node[num] at (5.70,2.56) {3};
 
-\node[sig] (sig) at (9.52,2.22) {\textbf{Exact signature}\\1,288 observed\\classes};
-\node[sig] (proj) at (12.54,2.22) {\textbf{Projected view}\\keyword: 148\\classes};
-\node[witness] (kernel) at (12.54,.86)
-  {\textbf{Witness test}\\exact differs\\projection agrees};
-\node[repair] (frontier) at (15.60,.86)
-  {\textbf{Repair frontier}\\layer+placement\\basis};
+\node[sig] (sig) at (9.48,2.18) {\textbf{Exact signatures}\\1,288 classes};
+\node[num, fill=vldbViolet!86] at (8.56,2.56) {4};
+\node[sig] (proj) at (12.36,2.18) {\textbf{Projected view}\\keyword: 148 classes};
+\node[num, fill=vldbViolet!86] at (11.44,2.56) {5};
+\node[witness] (kernel) at (12.36,.90)
+  {\textbf{Counter-witness}\\exact $\ne$; projected $=$};
+\node[repair] (frontier) at (15.50,.90)
+  {\textbf{Repair certificate}\\layer+placement};
 
-\node[carried, text width=8.70cm] at (4.42,.76)
-  {schema carries guard, canonical action, support state, version, and provenance};
+\node[carried, anchor=west] at (.56,.30) {fields};
+\node[chip] at (1.78,.30) {guard};
+\node[chip] at (2.62,.30) {action};
+\node[chip] at (3.54,.30) {layer};
+\node[chip] at (4.55,.30) {place};
+\node[chip] at (5.76,.30) {timing};
+\node[chip] at (7.06,.30) {obs.};
+\node[chip] at (8.27,.30) {prov.};
 
 \draw[flow] (evidence) -- (rule);
 \draw[flow] (rule) -- (map);
@@ -52,7 +73,7 @@
 \draw[flow, draw=vldbRose!70!black] (proj.south) -- (kernel.north);
 \draw[flow, draw=vldbTeal!72!black] (kernel) -- (frontier);
 \end{tikzpicture}
-\caption{Contract-comparison pipeline. OptSem-C converts public evidence into exact engine-probe signatures, tests projected equality with witnesses, and reports repair fields for collision kernels.}
+\caption{Contract-comparison pipeline. OptSem-C turns public evidence into exact signatures, exposes projection counter-witnesses, and reports finite repair certificates.}
 \Description{A two-lane pipeline showing evidence spans, guarded rules, contract maps, exact signatures, projected views, a witness test, and a repair frontier. A carried-field note lists the semantic fields preserved before projection.}
 \label{fig:contract-model}
 \end{figure*}

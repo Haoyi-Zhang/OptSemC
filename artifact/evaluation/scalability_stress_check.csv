@@ -8,4 +8,4 @@ full_operator_only_count,true,238
 strict_negative_control,true,
 surface_positive_control,true,0
 measured_runtime_positive,true,
-summary_full_denominator,true,"{'engine_count': '7', 'probe_count': '4216', 'full_pairwise_comparisons_per_projection': '88536', 'full_rows': '4', 'full_elapsed_ms_total': '4393.145', 'full_min_comparisons_per_second': '69399.2', 'full_max_comparisons_per_second': '89824.3'}"
+summary_full_denominator,true,"{'engine_count': '7', 'probe_count': '4216', 'full_pairwise_comparisons_per_projection': '88536', 'full_rows': '4', 'full_elapsed_ms_total': '4619.620', 'full_min_comparisons_per_second': '66449.6', 'full_max_comparisons_per_second': '86026.8'}"

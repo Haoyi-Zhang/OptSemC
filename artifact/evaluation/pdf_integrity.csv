@@ -2,6 +2,6 @@ check,passed,value,target
 pdf_readable_by_pypdf,true,readable,readable
 total_pages_with_references,true,14,13 or 14 total pages
 body_pages_12_references_start_13,true,[13],references start on page 13
-pdf_text_extractable,true,85465,>1000 chars
+pdf_text_extractable,true,85444,>1000 chars
 title_present,true,yes,yes
 core_claim_present,true,yes,yes
