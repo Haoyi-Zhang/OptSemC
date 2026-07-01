@@ -9,5 +9,4 @@ The project has two primary directories:
 
 The active manuscript source is `Paper/latex/paper.tex`. The artifact entry point is `artifact/README.md`.
 
-All experiment replay and paper compilation for this project should be run on the configured cloud server. Local work should be limited to source inspection, editing, static checks, and packaging preparation.
-
+Full experiment replay and paper compilation for the submission workflow are validated on a Linux execution host. Local work should be limited to source inspection, editing, static checks, and packaging preparation.

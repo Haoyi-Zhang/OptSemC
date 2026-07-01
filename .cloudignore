@@ -1,0 +1,38 @@
+# Local-only paper and build products
+Paper/
+*.pdf
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+
+# Secrets, credentials, and local environments
+.env
+.venv/
+venv/
+*.pem
+*.key
+id_rsa
+id_ed25519
+
+# Local audits and generated archives
+quality_audits/
+OptSemC_quality_audits/
+zenodo_*/
+*.zip
+*.tar
+*.tar.gz
+
+# Tool caches and scratch
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+build/
+dist/
+scratch/

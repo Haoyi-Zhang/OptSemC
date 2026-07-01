@@ -1,15 +1,8 @@
 # OptSemC Artifact
 
-OptSemC is the companion artifact for *OptSem-C: Public Optimizer Contracts for Query Engine Portability*. It evaluates public query-optimizer behavior contracts, not hidden implementation behavior or runtime latency.
+OptSemC evaluates public query-optimizer behavior contracts, not hidden implementation behavior or runtime latency. This directory is the public replay package: it contains the grounded corpus, benchmark probe generator, generated probes, reusable Python package, checks, tests, and reproducibility outputs needed to inspect the claims.
 
-## Package layout
-
-The package has two top-level folders:
-
-- `Paper/`: PVLDB-style LaTeX source, generated figures/tables, bibliography, compiled paper, and supplemental material.
-- `artifact/`: grounded corpus, generated benchmark probes, executable SQL bundle, reusable Python package, checks, tests, and reproducibility outputs.
-
-The active paper source is `Paper/latex/paper.tex`.
+The manuscript source is intentionally outside the anonymous replay archive. The replay package is sufficient to rebuild the corpus, derived tables, SQL bundles, and integrity reports; manuscript compilation is a separate paper-build gate in the development repository.
 
 ## Main research objects
 
@@ -25,7 +18,7 @@ The active paper source is `Paper/latex/paper.tex`.
 
 ## Fast check
 
-Run from the `artifact/` directory:
+Run from this directory:
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 ./run_mainline_checks.sh
@@ -40,14 +33,14 @@ Fast mainline checks: passed
 
 ## Execution environment
 
-The artifact is designed for standard Linux systems with Python 3 and the dependencies in `requirements.txt`. Development edits were made on Windows, while the full replay and integrity gates were validated on Linux. The public replay does not require project-specific cloud credentials; the cloud path used by the authors is only an execution location for regenerating the reported artifacts.
+The artifact is designed for standard Linux systems with Python 3 and the dependencies in `requirements.txt`. Development edits were made on Windows, while the full replay and integrity gates were validated on Linux. The public replay does not require project-specific credentials or private infrastructure.
 
 ## Full no-cache replay
 
-Run from `artifact/`:
+Run from this directory:
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 ./run_from_scratch_no_cache.sh
 ```
 
-The replay removes derived generated outputs, regenerates probes and contract maps from grounded evidence, rebuilds the SQL bundle, validates generated SQL probes and published-motif representatives on deterministic catalogs, runs the real-engine validation script when cloud dependencies are available, recompiles the paper when enabled, and runs integrity suites.
+The replay removes derived generated outputs, regenerates probes and contract maps from grounded evidence, rebuilds the SQL bundle, validates generated SQL probes and published-motif representatives on deterministic catalogs, runs optional DuckDB/PostgreSQL validation when `RUN_REAL_ENGINE_VALIDATION=1`, and runs integrity suites. Paper-build checks are kept out of the anonymous replay archive.

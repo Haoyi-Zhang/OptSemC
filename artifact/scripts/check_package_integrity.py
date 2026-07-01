@@ -8,7 +8,7 @@ rows=[]
 def add(check, ok, detail=''):
     rows.append({'check':check,'passed':str(bool(ok)).lower(),'details':str(detail)})
 root_items=sorted(p.name for p in ROOT.iterdir())
-allowed_top_level={'.git','.github','.gitattributes','.gitignore','Paper','README.md','artifact'}
+allowed_top_level={'.git','.github','.gitattributes','.gitignore','.cloudignore','Paper','README.md','artifact'}
 unexpected=[item for item in root_items if item not in allowed_top_level]
 add('clean_top_level_entries', not unexpected and {'Paper','artifact'}.issubset(root_items), ','.join(root_items))
 required=[ROOT/'Paper'/'latex'/'paper.tex', ROOT/'Paper'/'latex'/'paper.pdf', ROOT/'Paper'/'supplemental'/'supplement.tex', ROOT/'Paper'/'supplemental'/'supplement.pdf', ROOT/'artifact'/'README.md', ROOT/'artifact'/'REPRODUCIBILITY.md', ROOT/'artifact'/'run_mainline_checks.sh']

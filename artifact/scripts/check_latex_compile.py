@@ -100,8 +100,12 @@ try:
             break
 except Exception as exc:  # pragma: no cover - external tool failure path
     pages = type(exc).__name__
-rows.append({"check": "expected_total_pages", "passed": str(pages in {"13", "14"}).lower(), "count": pages, "examples": "body_12_references_start_page_13"})
-failed = failed or pages not in {"13", "14"}
+try:
+    page_count = int(pages)
+except ValueError:
+    page_count = 0
+rows.append({"check": "expected_total_pages", "passed": str(page_count >= 13).lower(), "count": pages, "examples": "body_12_references_start_page_13_references_unlimited"})
+failed = failed or page_count < 13
 
 if failed and BACKUP.exists():
     shutil.copy2(BACKUP, PDF)

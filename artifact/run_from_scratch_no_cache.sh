@@ -14,8 +14,17 @@ rm -f benchmark/generated_probes.jsonl \
       evaluation/grounded_contract_support.jsonl \
       evaluation/grounded_conflicts.jsonl
 rm -rf benchmark/sql_bundle/representative
-find . -type f -name '*.gz' -delete
+find evaluation benchmark/sql_bundle -type f -name '*.gz' -delete
 ./recompute_grounded_mainline.sh
-PYTHON="${PYTHON:-python}" ./run_cloud_real_engine_validation.sh
-RUN_EXPENSIVE_RECOMPUTE=1 RUN_LATEX_COMPILE=1 ./run_deep_checks.sh
+if [[ "${RUN_REAL_ENGINE_VALIDATION:-0}" == "1" ]]; then
+  PYTHON="${PYTHON:-python}" ./run_cloud_real_engine_validation.sh
+else
+  echo "Skipping optional DuckDB/PostgreSQL validation; set RUN_REAL_ENGINE_VALIDATION=1 to rerun it."
+fi
+if [[ ! -d ../Paper || "${ANONYMOUS_ARTIFACT_ONLY:-0}" == "1" ]]; then
+  echo "Paper tree not present; running artifact-only replay checks."
+  ./run_mainline_checks.sh
+else
+  RUN_EXPENSIVE_RECOMPUTE=1 RUN_LATEX_COMPILE=1 ./run_deep_checks.sh
+fi
 ./run_mainline_checks.sh

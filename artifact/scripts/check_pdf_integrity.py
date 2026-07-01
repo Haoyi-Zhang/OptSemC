@@ -17,7 +17,7 @@ try:
     reader = PdfReader(str(PDF))
     pages = len(reader.pages)
     add('pdf_readable_by_pypdf', True, 'readable', 'readable')
-    add('total_pages_with_references', pages in {13, 14}, pages, '13 or 14 total pages')
+    add('total_pages_with_references', pages >= 13, pages, 'body pages plus unlimited references')
     page_texts = [page.extract_text() or '' for page in reader.pages]
     ref_pages = [
         i + 1

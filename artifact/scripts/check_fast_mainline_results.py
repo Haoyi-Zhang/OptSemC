@@ -8,7 +8,7 @@ ART = ROOT / 'artifact'
 EVAL = ART / 'evaluation'
 OUT = EVAL / 'fast_mainline_results.csv'
 TRANSIENT_SUFFIXES = ('.aux','.log','.out','.toc','.bbl','.blg','.fls','.fdb_latexmk','.pyc','.pyo','.backup')
-IGNORED_DIRS = {'.git','__pycache__','.pytest_cache','.mypy_cache','build','dist'}
+IGNORED_DIRS = {'.git','__pycache__','.pytest_cache','.mypy_cache','build','dist','zenodo_artifact'}
 SKIP = {
  'artifact/evaluation/package_manifest.csv','artifact/evaluation/package_manifest_summary.csv','artifact/evaluation/package_manifest_check.csv',
  'artifact/evaluation/package_snapshot_check.csv','artifact/evaluation/integrity_suite.csv','artifact/evaluation/fast_mainline_results.csv',
@@ -21,6 +21,11 @@ CERT_FILES = [
  'latex_compile_check.csv','pdf_integrity.csv','reference_quality.csv','paper_quality.csv','paper_table_renderers.csv','paper_table_source_check.csv','repository_quality_check.csv',
  'package_snapshot_check.csv','integrity_suite.csv','source_witness_support_check.csv','side_balanced_witness_support_check.csv','claim_evidence_graph_check.csv'
 ]
+PAPER_CERT_FILES = {
+ 'manuscript_style.csv','format_compliance.csv','visual_latex_style.csv','paper_numeric_claims.csv',
+ 'latex_compile_check.csv','pdf_integrity.csv','reference_quality.csv','paper_quality.csv',
+ 'paper_table_renderers.csv','paper_table_source_check.csv'
+}
 
 def sha256_file(path: Path) -> str:
     h=hashlib.sha256()
@@ -60,10 +65,12 @@ for pyc in ROOT.rglob('*.py[co]'):
     try: pyc.unlink()
     except OSError: continue
 
-allowed_top_level = {'.git', '.github', '.gitattributes', '.gitignore', 'Paper', 'README.md', 'artifact'}
+paper_present = (ROOT / 'Paper').exists()
+allowed_top_level = {'.git', '.github', '.gitattributes', '.gitignore', '.cloudignore', 'Paper', 'README.md', 'artifact', 'zenodo_artifact'}
 top = sorted(p.name for p in ROOT.iterdir())
 unexpected_top = [name for name in top if name not in allowed_top_level]
-add('clean_top_level', not unexpected_top and {'Paper', 'artifact'}.issubset(set(top)), ','.join(unexpected_top))
+required_top = {'artifact'} if not paper_present else {'Paper', 'artifact'}
+add('clean_top_level', not unexpected_top and required_top.issubset(set(top)), ','.join(unexpected_top))
 required_raw = [ROOT/'artifact/benchmark/generated_probes.jsonl', ROOT/'artifact/evaluation/grounded_applicable_rules.jsonl', ROOT/'artifact/evaluation/grounded_contract_maps.jsonl', ROOT/'artifact/evaluation/grounded_contract_support.jsonl']
 missing_raw = [p.relative_to(ROOT).as_posix() for p in required_raw if not p.exists()]
 add('raw_generated_outputs_present', not missing_raw, ';'.join(missing_raw))
@@ -86,6 +93,8 @@ else:
     add('manifest_complete', False, 'missing'); add('manifest_no_stale', False, 'missing'); add('manifest_hashes_current', False, 'missing')
 
 for name in CERT_FILES:
+    if not paper_present and name in PAPER_CERT_FILES:
+        continue
     path=EVAL/name
     if not path.exists():
         add(f'certificate_present:{name}', False, 'missing'); continue

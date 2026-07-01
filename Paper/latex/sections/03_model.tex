@@ -8,13 +8,13 @@ Let $\mathcal{A}$ be the finite domain of canonical optimizer actions.  An actio
 
 The state domain has two components that feature matrices usually conflate.  Behaviorally, $\mathsf{MUST}$ requires an action, $\mathsf{MUST\_NOT}$ forbids it, and both $\mathsf{MAY}$ and $\mathsf{UNSPEC}$ leave it possible.  Evidentially, $\mathsf{MAY}$ is public support for optional behavior, while $\mathsf{UNSPEC}$ is lack of public support.  Equivalently, a state is interpreted as $(m,u,e)$: required behavior, allowed behavior, and evidence support.  This is why documented optional pushdown and undocumented implementation possibility are different public contracts.
 
-For each engine-probe pair, OptSem-C constructs a contract map $M_{e,q}:\mathcal{A}\rightarrow\mathbb{S}$, defaulting every action to $\mathsf{UNSPEC}$.  Applicable rules update the map with a conflict-aware state join $\sqcup$.  The join strengthens unspecified actions when public evidence is found, preserves compatible stronger evidence, and reports contradictions instead of averaging them.  The evidence component follows database-provenance practice: support is explicit, inspectable, and attached to the object it justifies \cite{green2007provenance,buneman2001why,cheney2009provenance,green2011containment}.
+For each engine-probe pair, OptSem-C constructs a contract map $M_{e,q}:\mathcal{A}\rightarrow\mathbb{S}$, defaulting every action to $\mathsf{UNSPEC}$.  Applicable rules update the map with a conflict-aware state join $\sqcup$.  The join strengthens unspecified actions when public evidence is found, preserves compatible stronger evidence, and reports contradictions instead of averaging them.  The evidence component follows database-provenance practice: semiring provenance attaches support to derived facts~\cite{green2007provenance}, why/where provenance distinguishes explanation locations~\cite{buneman2001why}, provenance surveys separate data from explanation~\cite{cheney2009provenance}, and annotated containment keeps evidence annotations visible in reasoning~\cite{green2011containment}.  That separation motivates our refusal to turn missing public evidence into negative evidence.
 
 \input{figures/fig_contract_model}
 \input{tables/tab_state_join}
 
 \begin{definition}[State-join algebra]
-The binary operator $\sqcup$ is the partial join shown in Table~\ref{tab:state-join}.  It is total over non-conflicting pairs and returns $\mathsf{CONFLICT}$ for pairs that simultaneously require and forbid, or support and forbid, the same canonical action.  Let $x\preceq y$ denote that $x\sqcup y=y$ for non-conflicting states.  Then $\mathsf{UNSPEC}$ is the least informative state, while $\mathsf{MUST}$ and $\mathsf{MUST\_NOT}$ are incomparable incompatible commitments.
+The binary operator $\sqcup$ is the complete $4\times4$ partial join shown in Table~\ref{tab:state-join}.  It is total over non-conflicting pairs and returns $\mathsf{CONFLICT}$ for pairs that simultaneously require and forbid, or support and forbid, the same canonical action.  Let $x\preceq y$ denote that $x\sqcup y=y$ for non-conflicting states.  Then $\mathsf{UNSPEC}$ is the least informative state, while $\mathsf{MUST}$ and $\mathsf{MUST\_NOT}$ are incomparable incompatible commitments.
 \end{definition}
 
 \begin{lemma}[Merge invariants]
@@ -26,13 +26,21 @@ The properties follow by inspection of the finite table.  Idempotence holds beca
 
 Let $W\subseteq\mathcal{A}$ be an abstract optimizer-behavior world.  A map $M$ denotes the world set
 $\llbracket M\rrbracket=\{W\mid M(a)=\mathsf{MUST}\Rightarrow a\in W,\; M(a)=\mathsf{MUST\_NOT}\Rightarrow a\notin W\}$.
-The evidential support set is $\mathsf{Supp}(M)=\{a\in\mathcal{A}\mid M(a)\in\{\mathsf{MUST},\mathsf{MAY},\mathsf{MUST\_NOT}\}\}$.  Behavioral containment and evidential support are intentionally separate: two maps can allow the same worlds while differing on whether an action is publicly documented.
+The evidential support set is $\mathsf{Supp}(M)=\{a\in\mathcal{A}\mid M(a)\in\{\mathsf{MUST},\mathsf{MAY},\mathsf{MUST\_NOT}\}\}$, equivalently the actions where $M(a)\ne\mathsf{UNSPEC}$.  Since maps default to $\mathsf{UNSPEC}$, every supported non-default entry arises from an admitted public rule.  Behavioral containment and evidential support are intentionally separate: two maps can allow the same worlds while differing on whether an action is publicly documented.
 
 \begin{definition}[Exact signatures, kernels, and projections]
-The exact evidence-supported signature of $M$ is $S(M)=\{(a,M(a))\mid a\in\mathsf{Supp}(M)\}$.  Exact equivalence is equality of signatures over full evidence atoms.  A projection is a declared map $\pi:\mathcal{A}\times\mathbb{S}\rightarrow\mathcal{B}$ from full evidence atoms to a comparison vocabulary such as keyword, yes/no, or operator-only labels.  The projected signature is the finite image $S_\pi(M)=\{\pi(a,M(a))\mid a\in\mathsf{Supp}(M)\}$.  The projection kernel is the equivalence relation $\mathcal{K}_\pi$ where $M_i\mathcal{K}_\pi M_j$ iff $S_\pi(M_i)=S_\pi(M_j)$.  A projection-induced contract collision is a pair in $\mathcal{K}_\pi$ whose exact signatures differ.
+The exact evidence-supported signature of $M$ is $S(M)=\{(a,M(a))\mid a\in\mathsf{Supp}(M)\}$.  Exact equivalence is equality of signatures over full evidence atoms.  A projection is a declared map $\pi:\mathcal{A}\times\mathbb{S}\rightarrow\mathcal{B}$ from full evidence atoms to an arbitrary comparison vocabulary $\mathcal{B}$, such as keyword, yes/no, or operator-only labels.  The projected signature is the finite image $S_\pi(M)=\{\pi(a,M(a))\mid a\in\mathsf{Supp}(M)\}$.  The projection kernel is the equivalence relation $\mathcal{K}_\pi$ where $M_i\mathcal{K}_\pi M_j$ iff $S_\pi(M_i)=S_\pi(M_j)$.  A projection-induced contract collision is a pair in $\mathcal{K}_\pi$ whose exact signatures differ.
 \end{definition}
 
 For quantitative comparison, exact compatibility is the Jaccard overlap $|S(M_i)\cap S(M_j)|/|S(M_i)\cup S(M_j)|$, and projected compatibility applies the same formula to $S_\pi$.  The denominator is evidence-supported: undocumented actions do not count as evidence of either equality or inequality.
+
+\begin{theorem}[Public-contract separation]
+\label{thm:public-contract-separation}
+If $S(M_i)\ne S(M_j)$, then the maps differ in public-contract denotation: either $\llbracket M_i\rrbracket\ne\llbracket M_j\rrbracket$, or their evidence-supported action states differ for at least one action in $\mathsf{Supp}(M_i)\cup\mathsf{Supp}(M_j)$.
+\end{theorem}
+\begin{proof}
+If exact signatures differ, some supported action has a state in one map that is absent or different in the other.  If the difference changes a $\mathsf{MUST}$ or $\mathsf{MUST\_NOT}$ requirement, the world-set constraints differ.  Otherwise the behavioral world set may remain equal, but the public evidence state differs, for example $\mathsf{MAY}$ versus $\mathsf{UNSPEC}$.  In both cases the denotation differs because an OptSem-C contract is the pair of behavioral worlds and evidence-supported states.
+\end{proof}
 
 \begin{theorem}[Finite evaluation]
 For finite feature and action domains, constructing $M_{e,q}$ from finite $C_e$ and $q$ is decidable.
@@ -46,7 +54,7 @@ Every guard is a finite Boolean formula over a finite feature vector.  The appli
 For any projection $\pi$, a projection-induced contract collision is exactly the nontrivial part of the kernel $\mathcal{K}_\pi$: $M_i$ and $M_j$ collide iff $S(M_i)\ne S(M_j)$ and $M_i\mathcal{K}_\pi M_j$.  If $\pi$ is non-injective on evidence atoms, there exist contracts with such a collision witness.
 \end{theorem}
 \begin{proof}
-The first statement unfolds the definitions: $\mathcal{K}_\pi$ is equality after projection, while exact non-equivalence is $S(M_i)\ne S(M_j)$.  For existence, take distinct evidence atoms $(a_1,s_1)\ne(a_2,s_2)$ with $\pi(a_1,s_1)=\pi(a_2,s_2)$.  Let $M_1$ contain only $(a_1,s_1)$ and $M_2$ contain only $(a_2,s_2)$.  Their exact signatures differ, but their projected signatures are the same singleton.
+The first statement unfolds the definitions: $\mathcal{K}_\pi$ is equality after projection, while exact non-equivalence is $S(M_i)\ne S(M_j)$.  For the non-injective case, take distinct evidence atoms $(a_1,s_1)\ne(a_2,s_2)$ with $\pi(a_1,s_1)=\pi(a_2,s_2)$.  Construct $M_1$ so that $S(M_1)=\{(a_1,s_1)\}$ and $M_2$ so that $S(M_2)=\{(a_2,s_2)\}$, with all other actions $\mathsf{UNSPEC}$.  These minimal contracts are well formed because action states are assigned independently.  Then $S(M_1)\ne S(M_2)$, but $S_\pi(M_1)=S_\pi(M_2)$ is the same singleton, so $(M_1,M_2)$ is a collision witness.
 \end{proof}
 
 \begin{definition}[Projection information profile]
@@ -67,7 +75,7 @@ Adding a non-conflicting evidence-backed rule cannot silently weaken a public co
 A $\mathsf{MUST}$ or $\mathsf{MUST\_NOT}$ rule removes worlds from $\llbracket M\rrbracket$.  A $\mathsf{MAY}$ rule may leave worlds unchanged, but changes an action from $\mathsf{UNSPEC}$ to evidence-supported.  Because the rule is non-conflicting, the state join does not erase existing support or replace a compatible stronger state with a weaker one.
 \end{proof}
 
-The remaining formal statements are a projection calculus for finite comparison audits.  They are not meant to make information loss surprising; they make the certificate obligations explicit, so Section~\ref{sec:eval} can measure which query-processing fields are empirically sufficient.  Let $F$ be the semantic-field universe and let $\pi_R$ be the repaired projection that appends the field values in $R\subseteq F$ to $\pi(a,s)$ for each evidence atom $(a,s)$.  For a finite grounded comparison set $X$, define $X_{\pi_R}=\{(M_i,M_j)\in X\mid S(M_i)\ne S(M_j)\land M_i\mathcal{K}_{\pi_R}M_j\}$.  A field set $R$ is safe, or universal, for $\pi$ on $X$ when $X_{\pi_R}=\emptyset$; otherwise it is unsafe and has a grounded counter-witness.
+The remaining formal statements are a projection calculus for finite comparison audits.  They are not meant to make information loss surprising; they make the certificate obligations explicit.  Each reported repair records the projected equality that failed, the exact signatures that disagree, and the smaller field sets that still have counter-witnesses.  Section~\ref{sec:eval} then measures which query-processing fields are empirically sufficient.  Let $F$ be the semantic-field universe and let $\pi_R$ be the repaired projection that appends the field values in $R\subseteq F$ to $\pi(a,s)$ for each evidence atom $(a,s)$.  For a finite grounded comparison set $X$, define $X_{\pi_R}=\{(M_i,M_j)\in X\mid S(M_i)\ne S(M_j)\land M_i\mathcal{K}_{\pi_R}M_j\}$.  A field set $R$ is safe, or universal, for $\pi$ on $X$ when $X_{\pi_R}=\emptyset$; otherwise it is unsafe and has a grounded counter-witness.
 
 \begin{theorem}[Projection-lattice frontier]
 \label{thm:projection-lattice}

@@ -31,41 +31,45 @@
 
 \tikzset{
   unsafe/.style={rounded corners=1.3pt, draw=vldbRose!76!black, fill=vldbRose!10,
-    minimum width=.42cm, minimum height=.30cm, inner sep=0pt},
+    minimum width=.42cm, minimum height=.34cm, inner sep=0pt,
+    font=\rmfamily\bfseries\fontsize{6.45}{6.95}\selectfont,
+    text=vldbRose!76!black},
   safe/.style={rounded corners=1.3pt, draw=vldbTeal!76!black, fill=vldbTeal!30,
-    minimum width=.42cm, minimum height=.30cm, inner sep=0pt},
+    minimum width=.42cm, minimum height=.34cm, inner sep=0pt,
+    font=\rmfamily\bfseries\fontsize{6.45}{6.95}\selectfont,
+    text=vldbTeal!58!black},
   emptycell/.style={rounded corners=1.3pt, draw=vldbRule, fill=white,
     minimum width=.42cm, minimum height=.30cm, inner sep=0pt}
 }
 
   \frontrow{-.96}{keyword}{254}
-    {\node[unsafe] at (2.58,-.96) {};}
-    {\node[safe] at (3.16,-.96) {};}
+    {\node[unsafe] at (2.58,-.96) {U};}
+    {\node[safe] at (3.16,-.96) {S};}
     {\node[emptycell] at (3.74,-.96) {};}
     {placement}{23/9}
   \frontrow{-1.46}{yes/no}{6}
-    {\node[unsafe] at (2.58,-1.46) {};}
-    {\node[safe] at (3.16,-1.46) {};}
+    {\node[unsafe] at (2.58,-1.46) {U};}
+    {\node[safe] at (3.16,-1.46) {S};}
     {\node[emptycell] at (3.74,-1.46) {};}
     {layer or placement}{24/8}
   \frontrow{-1.96}{operator-only}{238}
-    {\node[unsafe] at (2.58,-1.96) {};}
-    {\node[safe] at (3.16,-1.96) {};}
+    {\node[unsafe] at (2.58,-1.96) {U};}
+    {\node[safe] at (3.16,-1.96) {S};}
     {\node[emptycell] at (3.74,-1.96) {};}
     {layer}{22/10}
   \frontrow{-2.46}{all}{498}
-    {\node[unsafe] at (2.58,-2.46) {};}
-    {\node[unsafe] at (3.16,-2.46) {};}
-    {\node[safe] at (3.74,-2.46) {};}
+    {\node[unsafe] at (2.58,-2.46) {U};}
+    {\node[unsafe] at (3.16,-2.46) {U};}
+    {\node[safe] at (3.74,-2.46) {S};}
     {layer + placement}{21/11}
-  \node[unsafe] at (2.54,-3.06) {};
+  \node[unsafe] at (2.54,-3.06) {U};
   \node[vsmall, anchor=west, text=vldbGray] at (2.84,-3.06)
     {unsafe};
-  \node[safe] at (4.02,-3.06) {};
+  \node[safe] at (4.02,-3.06) {S};
   \node[vsmall, anchor=west, text=vldbGray] at (4.32,-3.06)
     {first safe};
 \end{tikzpicture}
-\caption{Semantic frontier over retained fields. Rose cells leave counter-witnesses; teal cells mark first safe retained-field sets, with layer+placement required jointly.}
+\caption{Semantic frontier over retained fields. Rose U cells leave unsafe counter-witnesses; teal S cells mark first safe retained-field sets, with layer+placement required jointly.}
 \Description{A compact lattice-depth diagram listing projection scopes, false witnesses, first safe retained-field depth, minimum basis, and safe versus unsafe subset counts.}
 \label{fig:semantic-frontier}
 \end{figure}

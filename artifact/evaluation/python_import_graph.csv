@@ -346,6 +346,17 @@ artifact/scripts/audit_grounded_core.py,json,import
 artifact/scripts/audit_grounded_core.py,yaml,import
 artifact/scripts/audit_grounded_core.py,pathlib,from
 artifact/scripts/audit_grounded_core.py,collections,from
+artifact/scripts/build_anonymous_archive.py,__future__,from
+artifact/scripts/build_anonymous_archive.py,argparse,import
+artifact/scripts/build_anonymous_archive.py,csv,import
+artifact/scripts/build_anonymous_archive.py,hashlib,import
+artifact/scripts/build_anonymous_archive.py,os,import
+artifact/scripts/build_anonymous_archive.py,re,import
+artifact/scripts/build_anonymous_archive.py,shutil,import
+artifact/scripts/build_anonymous_archive.py,subprocess,import
+artifact/scripts/build_anonymous_archive.py,sys,import
+artifact/scripts/build_anonymous_archive.py,zipfile,import
+artifact/scripts/build_anonymous_archive.py,pathlib,from
 artifact/scripts/build_claim_evidence_graph.py,__future__,from
 artifact/scripts/build_claim_evidence_graph.py,sys,import
 artifact/scripts/build_claim_evidence_graph.py,pathlib,from

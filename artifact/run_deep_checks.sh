@@ -10,6 +10,24 @@ PY_TIMEOUT=${PY_TIMEOUT:-600}
 LATEX_TIMEOUT=${LATEX_TIMEOUT:-1200}
 run_py() { echo "[deep] python $*"; timeout "$PY_TIMEOUT" python -u "$@"; }
 run_py_latex() { echo "[deep] python $*"; timeout "$LATEX_TIMEOUT" python -u "$@"; }
+ARTIFACT_ONLY=0
+if [[ ! -d ../Paper || "${ANONYMOUS_ARTIFACT_ONLY:-0}" == "1" ]]; then
+  ARTIFACT_ONLY=1
+fi
+run_paper_py() {
+  if [[ "$ARTIFACT_ONLY" == "1" ]]; then
+    echo "[deep] skip paper-only python $*"
+  else
+    run_py "$@"
+  fi
+}
+run_paper_py_latex() {
+  if [[ "$ARTIFACT_ONLY" == "1" ]]; then
+    echo "[deep] skip paper-only python $*"
+  else
+    run_py_latex "$@"
+  fi
+}
 
 run_py scripts/hydrate_large_outputs.py
 run_py scripts/compute_projection_information_profile.py
@@ -43,7 +61,7 @@ run_py scripts/check_guard_quality.py
 run_py scripts/compute_feature_holdout_repair.py
 run_py scripts/check_feature_holdout_repair.py
 run_py scripts/render_scaling_and_incremental_tables.py
-run_py scripts/check_paper_numeric_claims.py
+run_paper_py scripts/check_paper_numeric_claims.py
 run_py scripts/check_architecture_contract.py
 run_py scripts/check_packaging_installability.py
 run_py scripts/export_sql_probe_bundle.py
@@ -82,12 +100,12 @@ run_py scripts/check_benchmark_compiler.py
 run_py scripts/compute_differential_reproducibility.py
 run_py scripts/check_differential_reproducibility.py
 run_py scripts/check_reproducibility_package.py
-run_py scripts/check_package_integrity.py
-run_py scripts/check_package_coherence.py
+run_paper_py scripts/check_package_integrity.py
+run_paper_py scripts/check_package_coherence.py
 if [[ "${RUN_LATEX_COMPILE:-0}" == "1" ]]; then
-  run_py_latex scripts/check_latex_compile.py
+  run_paper_py_latex scripts/check_latex_compile.py
 else
-  run_py scripts/check_latex_certificate.py
+  run_paper_py scripts/check_latex_certificate.py
 fi
 run_py scripts/verify_generated_probes.py
 run_py scripts/compute_sql_shape_diagnostics.py
@@ -122,13 +140,13 @@ run_py scripts/check_replay_plan.py
 run_py scripts/check_cli_smoke.py
 run_py scripts/check_schema_coverage.py
 run_py scripts/run_unit_tests.py
-run_py scripts/render_paper_tables.py
-run_py scripts/check_paper_table_sources.py
-run_py scripts/check_paper_quality.py
-run_py scripts/check_pdf_integrity.py
-run_py scripts/check_format_compliance.py
-run_py scripts/check_visual_latex_style.py
-run_py scripts/check_reference_quality.py
+run_paper_py scripts/render_paper_tables.py
+run_paper_py scripts/check_paper_table_sources.py
+run_paper_py scripts/check_paper_quality.py
+run_paper_py scripts/check_pdf_integrity.py
+run_paper_py scripts/check_format_compliance.py
+run_paper_py scripts/check_visual_latex_style.py
+run_paper_py scripts/check_reference_quality.py
 run_py scripts/check_shapley_attribution.py
 run_py scripts/check_repair_certificate_minimality.py
 run_py scripts/compute_repair_hitting_sets.py
@@ -138,7 +156,7 @@ run_py scripts/check_theorem_ledger.py
 run_py scripts/build_claim_metric_summary.py
 run_py scripts/build_claim_ledger.py
 run_py scripts/check_artifact_hygiene.py
-run_py scripts/check_manuscript_style.py
+run_paper_py scripts/check_manuscript_style.py
 run_py scripts/check_package_cleanliness.py
 run_py scripts/run_repository_audit.py
 run_py scripts/check_repository_quality.py

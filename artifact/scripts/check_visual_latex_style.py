@@ -73,8 +73,8 @@ pvl_db_block = all(
 )
 add("pvl_db_metadata_block_present", pvl_db_block, "reference/copyright metadata")
 
-author_two = re.search(r"\\author\{Huaijin Ran\}(.*?)(?=\\author\{|\\begin\{document\})", paper_text, re.S)
-author_two_text = author_two.group(1) if author_two else ""
+author_blocks = re.findall(r"\\author\{[^}]+\}(.*?)(?=\\author\{|\\begin\{document\})", paper_text, re.S)
+author_two_text = author_blocks[1] if len(author_blocks) >= 2 else ""
 author_two_ok = (
     "Nanyang Technological University" in author_two_text
     and "\\city{Singapore}" in author_two_text

@@ -1,6 +1,6 @@
 \begin{table*}[t]
 \centering
-\caption{Benchmark denominator and validation checks across corpus, SQL, execution, and motif layers.}
+\caption{Benchmark denominator and validation checks across corpus, SQL, execution, and motif layers. Bold marks complete coverage or zero-failure checks.}
 \label{tab:denominator-dashboard}
 \footnotesize
 \setlength{\tabcolsep}{4pt}
@@ -13,7 +13,7 @@ Corpus & probe-supported rules & \textbf{287/287} & median support 102 & every a
 Corpus & non-global guards & 252 & 3 containments & query-conditional, audited overlaps \\
 Guard schema & invalid dimensions & \textbf{0} & fixed feature domain & no out-of-domain guard values \\
 SQL corpus & generated probes & \textbf{4,216} & digest \texttt{df107f018e37} & full executable denominator \\
-SQL corpus & motif-cover prefix & \underline{48} & human inspection & compact replay slice, not cherry-picking \\
+SQL corpus & motif-cover prefix & 48 & human inspection & compact replay slice, not cherry-picking \\
 Execution & planned/executed probes & \textbf{4,216/4,216} & 91 distinct plans & every generated probe plans and runs \\
 Execution & shape/exec failures & \textbf{0/0} & 18,448 rows & validation checks find no SQL-shape or runtime failures \\
 Published motifs & covered requirements & \textbf{90/90} & 12 families & every declared motif has executable probe support \\

@@ -3,11 +3,5 @@ title: "OptSem-C: Public Optimizer Contracts for Query Engine Portability"
 message: "If you use this artifact, cite the accompanying PVLDB paper."
 type: software
 authors:
-  - family-names: "Zhang"
-    given-names: "Haoyi"
-    orcid: "https://orcid.org/0009-0009-3693-786X"
-  - family-names: "Ran"
-    given-names: "Huaijin"
-    orcid: "https://orcid.org/0009-0009-2482-2344"
+  - name: "Anonymous Authors"
 license: MIT
-repository-code: "https://github.com/Haoyi-Zhang/OptSemC"

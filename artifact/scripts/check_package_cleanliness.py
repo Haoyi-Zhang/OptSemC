@@ -54,7 +54,7 @@ for p in iter_text_files(ROOT):
         version_hits.append(rel)
 add('no_stale_package_version_labels', not version_hits, '|'.join(version_hits[:30]))
 
-allowed_root_files = {'.gitattributes', '.gitignore', 'README.md'}
+allowed_root_files = {'.gitattributes', '.gitignore', '.cloudignore', 'README.md'}
 root_files = sorted(p.name for p in PKG.iterdir() if p.is_file())
 unexpected_root_files = [name for name in root_files if name not in allowed_root_files]
 add('clean_project_top_level_files', not unexpected_root_files, ','.join(unexpected_root_files))

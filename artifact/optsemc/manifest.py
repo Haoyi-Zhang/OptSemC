@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, Sequence
 
-IGNORED_DIRS = frozenset({".git", "__pycache__", ".pytest_cache", ".mypy_cache", "build", "dist"})
+IGNORED_DIRS = frozenset({".git", ".reference_guard_cache", "__pycache__", ".pytest_cache", ".mypy_cache", "build", "dist", "zenodo_artifact"})
 TRANSIENT_SUFFIXES = (".aux", ".log", ".out", ".toc", ".bbl", ".blg", ".compile.stdout", ".backup")
 
 
@@ -112,6 +112,9 @@ def manifest_summary(rows: Sequence[ManifestRow]) -> list[dict[str, str]]:
 def transient_files(root: Path) -> list[str]:
     offenders = []
     for path in root.rglob("*"):
+        rel = path.relative_to(root)
+        if any(part in IGNORED_DIRS or part.endswith(".egg-info") for part in rel.parts):
+            continue
         if path.is_file() and (path.name.startswith("paper_build") or path.name.endswith(TRANSIENT_SUFFIXES)):
-            offenders.append(path.relative_to(root).as_posix())
+            offenders.append(rel.as_posix())
     return sorted(offenders)

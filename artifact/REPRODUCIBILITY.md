@@ -33,7 +33,7 @@ The deep replay rebuilds derived measurements from the grounded corpus and bench
 
 ```bash
 cd artifact
-PYTHON=/path/to/python OPTSEMC_POSTGRES_DSN="dbname=optsemc user=root" ./run_cloud_real_engine_validation.sh
+PYTHON=/path/to/python OPTSEMC_POSTGRES_DSN="dbname=optsemc user=optsemc" ./run_cloud_real_engine_validation.sh
 ```
 
 This replay runs the generated probes on DuckDB and PostgreSQL and then checks the saved certificates. It is intended for a cloud machine with PostgreSQL available; the deterministic-catalog checks remain the portable baseline.

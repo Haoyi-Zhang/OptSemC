@@ -5,4 +5,4 @@ package_never_imports_scripts,true,
 package_no_sys_path_mutation,true,
 all_package_modules_documented,true,
 no_todo_fixme_markers,true,
-scripts_reuse_package_library,true,scripts=57
+scripts_reuse_package_library,true,scripts=58

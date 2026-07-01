@@ -55,6 +55,7 @@ artifact/optsemc/workloads.py,10,2,7,8,true
 artifact/scripts/analyze_grounded_projection_loss.py,10,0,3,69,true
 artifact/scripts/annotate_public_provenance.py,0,0,3,0,true
 artifact/scripts/audit_grounded_core.py,0,0,3,0,true
+artifact/scripts/build_anonymous_archive.py,8,0,11,29,true
 artifact/scripts/build_claim_evidence_graph.py,0,0,5,0,true
 artifact/scripts/build_claim_ledger.py,5,0,3,39,true
 artifact/scripts/build_claim_metric_summary.py,12,0,3,27,true
