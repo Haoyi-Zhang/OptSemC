@@ -2,64 +2,67 @@
 \centering
 \begin{tikzpicture}[
   exact/.style={vpanel, draw=vldbBlue!68, fill=vldbMist, text width=1.78cm,
-    minimum height=.84cm, font=\rmfamily\fontsize{6.65}{7.30}\selectfont,
+    minimum height=.84cm, font=\rmfamily\fontsize{6.7}{7.35}\selectfont,
     text=black!72, align=center, inner xsep=2pt, inner ysep=1.3pt,
     text height=1.46ex, text depth=.25ex},
   chip/.style={rounded corners=1.4pt, draw=black!16, fill=white,
-    font=\rmfamily\fontsize{6.62}{7.22}\selectfont, text=vldbGray,
+    font=\rmfamily\fontsize{6.7}{7.35}\selectfont, text=vldbGray,
     align=center, inner xsep=1.7pt, inner ysep=.8pt,
     text height=1.28ex, text depth=.20ex},
   kernel/.style={vpanel, draw=vldbRose!78!black, fill=vldbRose!8,
-    text width=3.05cm, minimum height=.68cm,
+    text width=2.66cm, minimum height=.68cm,
     font=\rmfamily\bfseries\fontsize{6.95}{7.65}\selectfont,
     text=vldbInk, align=center, inner xsep=2pt, inner ysep=1pt,
     text height=1.45ex, text depth=.25ex},
   repair/.style={vpanel, draw=vldbTeal!75!black, fill=vldbMint,
-    text width=1.52cm, minimum height=.64cm,
-    font=\rmfamily\fontsize{6.62}{7.22}\selectfont,
-    text=black!70, align=center, inner xsep=2pt, inner ysep=1pt,
-    text height=1.34ex, text depth=.22ex},
+    text width=1.60cm, minimum height=.82cm,
+    font=\rmfamily\fontsize{6.7}{7.35}\selectfont,
+    text=black!70, align=center, inner xsep=2pt, inner ysep=2.0pt},
   badge/.style={vpanel, draw=vldbGold!72!black, fill=vldbWarm,
-    font=\rmfamily\bfseries\fontsize{6.62}{7.22}\selectfont, text=vldbInk,
+    font=\rmfamily\bfseries\fontsize{6.7}{7.35}\selectfont, text=vldbInk,
     align=center, inner xsep=3.0pt, inner ysep=1.0pt,
     text height=1.30ex, text depth=.20ex},
   flow/.style={vflow}
 ]
-\path[use as bounding box] (-.06,-3.58) rectangle (7.22,.30);
+\path[use as bounding box] (-.06,-3.74) rectangle (7.22,.30);
 
 \node[vhead, anchor=west] at (.02,.08) {Projection collapses unequal contracts};
 \node[vsmall, anchor=west, text=vldbGray] at (.02,-.26)
-  {exact signatures keep operator and placement};
+  {reference signatures keep operator and placement};
 
 \node[exact] (s1) at (.98,-.80) {\textbf{Filter}\\logical local};
 \node[exact] (s2) at (3.60,-.80) {\textbf{Aggregate}\\source exec};
 \node[exact] (s3) at (6.22,-.80) {\textbf{Top-N}\\cloud stage};
 
-\coordinate (merge) at (3.60,-1.42);
-\node[kernel] (matrix) at (3.60,-1.84)
-  {projected as one cell\\\texttt{pushdown=yes}};
-\node[badge, anchor=west] at (5.36,-1.84)
+\coordinate (mergeL) at (3.38,-1.38);
+\coordinate (mergeM) at (3.60,-1.44);
+\coordinate (mergeR) at (3.82,-1.38);
+\coordinate (mergeOut) at (3.60,-1.54);
+\node[kernel] (matrix) at (3.46,-1.84)
+  {coarse cell\\\texttt{pushdown=yes}};
+\node[badge, anchor=west] at (5.18,-1.84)
   {declared\\equal};
 
 \node[vsmall, anchor=west, text=vldbGray] at (.02,-2.42)
   {repair};
-\node[repair] (r1) at (.98,-3.08) {filter\\local};
-\node[repair] (r2) at (3.60,-3.08) {aggregate\\source};
-\node[repair] (r3) at (6.22,-3.08) {top-n\\cloud};
+\node[repair] (r1) at (.98,-3.14) {filter / local};
+\node[repair] (r2) at (3.60,-3.14) {aggregate / source};
+\node[repair] (r3) at (6.22,-3.14) {top-n / cloud};
 \node[chip, draw=vldbTeal!32, fill=white, anchor=west] at (.92,-2.42)
   {operator + placement};
 
-\draw[flow, draw=vldbRose!72!black] (s1.south) |- (merge);
-\draw[flow, draw=vldbRose!72!black] (s2.south) -- (merge);
-\draw[flow, draw=vldbRose!72!black] (s3.south) |- (merge);
-\draw[flow, draw=vldbRose!72!black] (merge) -- (matrix.north);
-\draw[flow, draw=vldbTeal!72!black] (matrix.south) -- (3.60,-2.64);
+\draw[flow, draw=vldbRose!72!black] (s1.south) |- (mergeL);
+\draw[flow, draw=vldbRose!72!black] (s2.south) -- (mergeM);
+\draw[flow, draw=vldbRose!72!black] (s3.south) |- (mergeR);
+\draw[vldbRose!72!black, line width=.54pt, line cap=round] (mergeL) -- (mergeR);
+\draw[flow, draw=vldbRose!72!black] (mergeOut) -- (matrix.north);
+\draw[flow, draw=vldbTeal!72!black] (matrix.south) -- (3.46,-2.64);
 \draw[vldbTeal!72!black, line width=.58pt] (.98,-2.64) -- (6.22,-2.64);
 \draw[vldbTeal!72!black, line width=.58pt] (r1.north) -- (.98,-2.64);
 \draw[vldbTeal!72!black, line width=.58pt] (r2.north) -- (3.60,-2.64);
 \draw[vldbTeal!72!black, line width=.58pt] (r3.north) -- (6.22,-2.64);
 \end{tikzpicture}
-\caption{Projection loss in optimizer comparison. A coarse \texttt{pushdown=yes} label collapses unequal exact contracts; retaining operator and placement separates them.}
-\Description{Three exact public-contract signatures with different operators, placements, and evidence surfaces are projected into the same pushdown=yes cell. A repair row shows that retaining semantic fields separates the collision.}
+\caption{Projection loss in optimizer comparison. A coarse \texttt{pushdown=yes} label collapses unequal reference contracts; retaining operator and placement separates them.}
+\Description{Three reference public-contract signatures with different operators, placements, and evidence surfaces are projected into the same pushdown=yes cell. A repair row shows that retaining semantic fields separates the collision.}
 \label{fig:projection-trap}
 \end{figure}

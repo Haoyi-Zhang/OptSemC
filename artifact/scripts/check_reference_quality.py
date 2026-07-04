@@ -2,6 +2,7 @@
 """Check bibliography count, anchors, and citation consistency."""
 from __future__ import annotations
 import csv
+import json
 import re
 import sys
 from pathlib import Path
@@ -10,6 +11,8 @@ LATEX = ROOT / 'Paper' / 'latex'
 BIB = LATEX / 'refs.bib'
 MAIN = LATEX / 'paper.tex'
 OUT = ROOT / 'artifact' / 'evaluation' / 'reference_quality.csv'
+ADJUDICATION = ROOT / 'artifact' / 'evaluation' / 'reference_primary_adjudication.csv'
+GUARD = ROOT / 'artifact' / 'evaluation' / 'reference_guard_audit_latest.json'
 
 tex_files = [
     MAIN,
@@ -56,6 +59,79 @@ global_checks = [
 ]
 for key,value,ok,details in global_checks:
     add(key, 'global', value, True, True, True, ok, details)
+
+def load_adjudication() -> dict[str, dict[str, str]]:
+    if not ADJUDICATION.exists():
+        return {}
+    with ADJUDICATION.open(newline='', encoding='utf-8') as f:
+        return {
+            row.get('key', '').strip(): row
+            for row in csv.DictReader(f)
+            if row.get('key', '').strip()
+        }
+
+def guard_key(entry: dict) -> str:
+    ref = entry.get('reference') or {}
+    return str(ref.get('key') or '').strip()
+
+adjudication = load_adjudication()
+adjudication_keys = set(adjudication)
+bib_key_set = set(bib_keys)
+extra_adjudication = sorted(adjudication_keys - bib_key_set)
+missing_adjudication = sorted(bib_key_set - adjudication_keys)
+add('__adjudication_keys_match_bibtex__', 'global', len(adjudication_keys),
+    True, True, True, not extra_adjudication and not missing_adjudication,
+    f"extra={extra_adjudication[:10]};missing={missing_adjudication[:10]}")
+
+if GUARD.exists():
+    guard_entries = json.loads(GUARD.read_text(encoding='utf-8'))
+    guard_keys = [guard_key(entry) for entry in guard_entries]
+    guard_key_set = {key for key in guard_keys if key}
+    extra_guard = sorted(guard_key_set - bib_key_set)
+    missing_guard = sorted(bib_key_set - guard_key_set)
+    add('__guard_keys_match_bibtex__', 'global', len(guard_key_set),
+        True, True, True, not extra_guard and not missing_guard,
+        f"extra={extra_guard[:10]};missing={missing_guard[:10]}")
+    guard_counts: dict[str, int] = {}
+    open_guard = []
+    for entry in guard_entries:
+        key = guard_key(entry)
+        status = str(entry.get('status') or '').upper()
+        guard_counts[status] = guard_counts.get(status, 0) + 1
+        adj = adjudication.get(key, {})
+        adj_status = str(adj.get('status') or '').upper()
+        primary_source = bool(adj.get('source') and adj.get('identifier'))
+        reason = adj.get('note', '')
+        source_text = adj.get('source', '')
+        source_and_reason = f'{source_text} {reason}'.lower()
+        source_reason = (
+            'exact_doi_record' in reason
+            or 'http=' in reason
+            or 'arxiv_url' in reason
+            or 'official page' in source_and_reason
+            or 'official pdf' in source_and_reason
+            or 'project page' in source_and_reason
+        )
+        closed = (
+            status == 'PASS'
+            or (
+                adj_status in {'PASS', 'ADJUDICATED_PASS'}
+                and primary_source
+                and source_reason
+            )
+        )
+        if not closed:
+            open_guard.append(key)
+        add(f'guard_adjudicated:{key}', adj.get('source', 'guard'), status,
+            primary_source, key in cited, key in bib_key_set, closed,
+            f"guard={status};adjudication={adj_status};identifier={adj.get('identifier','')};note={reason[:160]}")
+    add('__guard_review_fail_closed_by_primary_sources__', 'global',
+        ';'.join(f'{k}={v}' for k, v in sorted(guard_counts.items())),
+        True, True, True, not open_guard, '|'.join(open_guard[:20]))
+else:
+    add('__reference_guard_json_present__', 'global', 'missing',
+        True, True, True, False, str(GUARD.relative_to(ROOT)))
+
 OUT.parent.mkdir(parents=True, exist_ok=True)
 with OUT.open('w', newline='', encoding='utf-8') as f:
     w=csv.DictWriter(f, fieldnames=['key','venue_or_type','year','has_stable_anchor','cited','bibtex_metadata','passed','details'])

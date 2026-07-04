@@ -1,0 +1,27 @@
+source_id,engine,title,url,keyword_surface,yesno_surface,operator_surface,reference_signature_payload,observed_surface
+BIGQUERY-FEDERATED-001,BigQuery,BigQuery Federated query pushdowns,https://docs.cloud.google.com/bigquery/docs/federated-query-intro,true,false,true,false,federated query pushdowns expose pushdown and delegated operators
+BIGQUERY-PARTITION-001,BigQuery,BigQuery Query partitioned tables,https://cloud.google.com/bigquery/docs/querying-partitioned-tables,true,false,true,false,partition pruning exposes pruning and filter-related labels
+BIGQUERY-PLAN-001,BigQuery,BigQuery Query plan and timeline,https://docs.cloud.google.com/bigquery/docs/query-plan-explanation,true,false,true,false,query plan stages expose plan and operator labels
+BIGQUERY-SEARCH-001,BigQuery,BigQuery Search indexes,https://cloud.google.com/bigquery/docs/search,true,false,true,false,search indexes expose index-search optimizer labels
+CLICKHOUSE-JOIN-SETTINGS-001,ClickHouse,ClickHouse Settings,https://clickhouse.com/docs/operations/settings/settings,true,true,true,false,join settings expose enablement and algorithm labels
+CLICKHOUSE-JOINING-001,ClickHouse,ClickHouse Using JOINs,https://clickhouse.com/docs/guides/joining-tables,true,false,true,false,join guidance exposes join algorithms and placement guidance
+DUCK-WITH-001,DuckDB,DuckDB WITH Clause,https://duckdb.org/docs/lts/sql/query_syntax/with,true,true,true,false,CTE materialization exposes materialized and not-materialized controls
+PG-EXPLAIN-001,PostgreSQL,PostgreSQL Using EXPLAIN,https://www.postgresql.org/docs/current/using-explain.html,true,false,true,false,EXPLAIN exposes scan join and cost-plan labels
+PG-EXPLICIT-JOINS-001,PostgreSQL,PostgreSQL Explicit JOIN clauses,https://www.postgresql.org/docs/current/explicit-joins.html,true,false,true,false,explicit join controls expose join-order labels
+PG-RUNTIME-QUERY-001,PostgreSQL,PostgreSQL query planning configuration,https://www.postgresql.org/docs/current/runtime-config-query.html,true,true,true,false,planner configuration exposes enablement controls and operator families
+PG-WITH-001,PostgreSQL,PostgreSQL WITH queries,https://www.postgresql.org/docs/current/queries-with.html,true,true,true,false,WITH queries expose CTE materialization labels and controls
+SNOWFLAKE-EXPLAIN-001,Snowflake,Snowflake EXPLAIN,https://docs.snowflake.com/en/sql-reference/sql/explain,true,false,true,false,EXPLAIN exposes logical plan and operator labels
+SNOWFLAKE-OPSTATS-001,Snowflake,Snowflake GET_QUERY_OPERATOR_STATS,https://docs.snowflake.com/en/sql-reference/functions/get_query_operator_stats,true,false,true,false,operator statistics expose operator labels and plan evidence
+SPARK-HINTS-001,Spark SQL,Spark SQL Hints,https://spark.apache.org/docs/latest/sql-ref-syntax-qry-select-hints.html,true,true,true,false,hints expose join partitioning and enablement-style controls
+SPARK-PERF-001,Spark SQL,Spark SQL Performance Tuning,https://spark.apache.org/docs/latest/sql-performance-tuning.html,true,true,true,false,performance tuning exposes adaptive execution and join/shuffle controls
+TRINO-ADAPT-001,Trino,Trino Adaptive plan optimizations,https://trino.io/docs/current/optimizer/adaptive-plan-optimizations.html,true,true,true,false,adaptive optimization docs expose adaptive labels and controls
+TRINO-CBO-001,Trino,Trino Cost-based optimizations,https://trino.io/docs/current/optimizer/cost-based-optimizations.html,true,true,true,false,cost-based optimization docs expose join and enablement controls
+TRINO-DYNAMIC-001,Trino,Trino Dynamic filtering,https://trino.io/docs/current/admin/dynamic-filtering.html,true,true,true,false,dynamic filtering exposes filter labels and enablement controls
+TRINO-PUSH-001,Trino,Trino Pushdown,https://trino.io/docs/current/optimizer/pushdown.html,true,false,true,false,pushdown docs expose aggregation projection and filter pushdown labels
+TRINO-OPT-PROPS-001,Trino,Trino optimizer properties,https://trino.io/docs/current/admin/properties-optimizer.html,true,true,true,false,optimizer properties expose enablement controls and operator labels
+TRINO-DYNFILTER-DEEP-001,Trino,Trino dynamic filtering details,https://trino.io/docs/current/admin/dynamic-filtering.html,true,true,true,false,dynamic filtering details expose filter labels and enablement controls
+SPARK-HINTS-LATEST-001,Spark SQL,Spark SQL hints,https://spark.apache.org/docs/latest/sql-ref-syntax-qry-select-hints.html,true,true,true,false,hints expose join partitioning and enablement-style controls
+SPARK-STORAGE-PARTITION-JOIN-001,Spark SQL,Spark SQL storage partition join,https://spark.apache.org/docs/latest/sql-performance-tuning.html,true,false,true,false,storage-partition join exposes join and distribution labels
+SNOWFLAKE-PROFILE-001,Snowflake,Snowflake query profile operators,https://docs.snowflake.com/en/user-guide/ui-query-profile,true,false,true,false,query profile exposes operator labels and runtime evidence
+CLICKHOUSE-PREWHERE-001,ClickHouse,ClickHouse PREWHERE optimization,https://clickhouse.com/docs/optimize/prewhere,true,false,true,false,PREWHERE optimization exposes filter-placement labels
+CLICKHOUSE-SKIP-INDEX-001,ClickHouse,ClickHouse data skipping indexes,https://clickhouse.com/docs/optimize/skipping-indexes,true,false,true,false,data skipping indexes expose index and pruning labels

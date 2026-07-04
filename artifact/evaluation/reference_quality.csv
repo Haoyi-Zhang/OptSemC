@@ -17,7 +17,7 @@ deshpande2007adaptive,Foundations and Trends in Databases,2007,true,true,true,tr
 avnur2000eddies,SIGMOD,2000,true,true,true,true,
 ives1999tukwila,ACM SIGMOD Record,1999,true,true,true,true,
 cole1994optimization,SIGMOD,1994,true,true,true,true,
-galindo1992outerjoin,ACM Transactions on Database Systems,1997,true,true,true,true,
+galindo1997outerjoin,ACM Transactions on Database Systems,1997,true,true,true,true,
 neumann2011efficient,PVLDB,2011,true,true,true,true,
 armbrust2015spark,SIGMOD,2015,true,true,true,true,
 begoli2018calcite,SIGMOD,2018,true,true,true,true,
@@ -33,6 +33,9 @@ chu2017cosette,CIDR,2017,true,true,true,true,
 chu2018usemiring,PVLDB,2018,true,true,true,true,
 wang2024qed,PVLDB,2024,true,true,true,true,
 rigger2020norec,ESEC/FSE,2020,true,true,true,true,
+rigger2020sqlancer,OSDI,2020,true,true,true,true,
+slutz1998massive,VLDB,1998,true,true,true,true,
+sqlsmith,misc,2015,true,true,true,true,
 chandra1977optimal,STOC,1977,true,true,true,true,
 aho1979equivalences,SIAM Journal on Computing,1979,true,true,true,true,
 green2007provenance,PODS,2007,true,true,true,true,
@@ -41,27 +44,29 @@ cheney2009provenance,Foundations and Trends in Databases,2009,true,true,true,tru
 green2011containment,Theory of Computing Systems,2011,true,true,true,true,
 han2021cardest,PVLDB,2021,true,true,true,true,
 kipf2019learned,CIDR,2019,true,true,true,true,
-yang2020neurocard,PVLDB,2019,true,true,true,true,
+yang2019neurocard,PVLDB,2019,true,true,true,true,
 hilprecht2020deepdb,PVLDB,2020,true,true,true,true,
 wu2023factorjoin,Proceedings of the ACM on Management of Data,2023,true,true,true,true,
 chronis2024cardbench,misc,2024,true,true,true,true,
 marcus2019neo,PVLDB,2019,true,true,true,true,
 marcus2021bao,SIGMOD,2021,true,true,true,true,
-zhu2023lero,PVLDB,2023,true,true,true,true,
 justen2024polar,PVLDB,2024,true,true,true,true,
 tpcds,misc,2024,true,true,true,true,
 tpch,misc,2024,true,true,true,true,
-oneil2009ssb,TPCTC,2009,true,true,true,true,
+oneil2009ssb,{TPCTC},2009,true,true,true,true,
 erling2015ldbc,SIGMOD,2015,true,true,true,true,
 bitton1983wisconsin,VLDB,1983,true,true,true,true,
-turbyfill1989as3ap,The Benchmark Handbook for Database and Transaction Processing Systems,1993,true,true,true,true,
+turbyfill1993as3ap,The Benchmark Handbook for Database and Transaction Processing Systems,1993,true,true,true,true,
 deng2024lakebench,PVLDB,2024,true,true,true,true,
 clickbench,misc,2024,true,true,true,true,
 carey1995garlic,RIDE-DOM,1995,true,true,true,true,
 stonebraker2015bigdawg,SIGMOD Record,2015,true,true,true,true,
 postgresql_docs,misc,2026,true,true,true,true,
 trino_docs,misc,2026,true,true,true,true,
+trino_pushdown_docs,misc,2026,true,true,true,true,
+trino_dynamic_filtering_docs,misc,2026,true,true,true,true,
 bigquery_docs,misc,2026,true,true,true,true,
+bigquery_federated_docs,misc,2026,true,true,true,true,
 spark_docs,misc,2026,true,true,true,true,
 snowflake_docs,misc,2026,true,true,true,true,
 duckdb_docs,misc,2026,true,true,true,true,
@@ -69,8 +74,86 @@ clickhouse_docs,misc,2026,true,true,true,true,
 calcite_docs,misc,2026,true,true,true,true,
 datafusion_docs,misc,2026,true,true,true,true,
 presto_docs,misc,2026,true,true,true,true,
-__count_70_to_80__,global,70,true,true,true,true,
+__count_70_to_80__,global,75,true,true,true,true,
 __all_cites_resolve__,global,0,true,true,true,true,
 __no_uncited_bibtex_entries__,global,0,true,true,true,true,
 __no_duplicate_bibtex_keys__,global,0,true,true,true,true,
-__bibtex_entries_parse__,global,70,true,true,true,true,
+__bibtex_entries_parse__,global,75,true,true,true,true,
+__adjudication_keys_match_bibtex__,global,75,true,true,true,true,extra=[];missing=[]
+__guard_keys_match_bibtex__,global,75,true,true,true,true,extra=[];missing=[]
+guard_adjudicated:codd1970relational,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/362384.362685;note=exact_doi_record; title_similarity=1.000; container=Communications of the ACM; page=377-387
+guard_adjudicated:selinger1979access,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/582095.582099;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the 1979 ACM SIGMOD international conference on Management of data  - SIGMOD '79; page=23
+guard_adjudicated:graefe1990volcano,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/93597.98720;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the 1990 ACM SIGMOD international conference on Management of data; page=102-111
+guard_adjudicated:graefe1993volcano,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1109/ICDE.1993.344061;note=exact_doi_record; title_similarity=1.000; container=Proceedings of IEEE 9th International Conference on Data Engineering; page=209-218
+guard_adjudicated:graefe1995cascades,Official URL,REVIEW,true,true,true,true,guard=REVIEW;adjudication=ADJUDICATED_PASS;identifier=https://www.sigmod.org/publications/dblp/db/journals/debu/Graefe95a.html;note=http=200; content_type=text/html; title_similarity=0.152; final=https://www.sigmod.org/publications/dblp/db/journals/debu/Graefe95a.html
+guard_adjudicated:chaudhuri1998overview,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/275487.275492;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the seventeenth ACM SIGACT-SIGMOD-SIGART symposium on Principles of database systems; page=34
+guard_adjudicated:ioannidis1996query,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/234313.234367;note=exact_doi_record; title_similarity=1.000; container=ACM Computing Surveys; page=121-123
+guard_adjudicated:steinbrunn1997heuristic,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1007/s007780050040;note=exact_doi_record; title_similarity=1.000; container=The VLDB Journal The International Journal on Very Large Data Bases; page=191-208
+guard_adjudicated:moerkotte2006dpccp,Official URL,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=https://dblp.org/rec/conf/vldb/MoerkotteN06.html;note=http=200; content_type=text/html; charset=utf-8; title_similarity=0.982; final=https://dblp.org/rec/conf/vldb/MoerkotteN06.html
+guard_adjudicated:leis2015good,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.14778/2850583.2850594;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the VLDB Endowment; page=204-215
+guard_adjudicated:leis2018looking,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1007/s00778-017-0480-7;note=exact_doi_record; title_similarity=1.000; container=The VLDB Journal; page=643-668
+guard_adjudicated:chaudhuri2009exact,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.14778/1687627.1687739;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the VLDB Endowment; page=994-1005
+guard_adjudicated:markl2004progressive,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/1007568.1007642;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the 2004 ACM SIGMOD international conference on Management of data; page=659-670
+guard_adjudicated:kabra1998reoptimization,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/276304.276315;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the 1998 ACM SIGMOD international conference on Management of data; page=106-117
+guard_adjudicated:deshpande2007adaptive,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1561/1900000001;note=exact_doi_record; title_similarity=1.000; container=Foundations and Trends in Databases; page=1-140
+guard_adjudicated:avnur2000eddies,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=ADJUDICATED_PASS;identifier=10.1145/342009.335420;note=exact_doi_record; title_similarity=0.235; container=Proceedings of the 2000 ACM SIGMOD international conference on Management of data; page=261-272
+guard_adjudicated:ives1999tukwila,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/304181.304209;note=exact_doi_record; title_similarity=1.000; container=ACM SIGMOD Record; page=299-310
+guard_adjudicated:cole1994optimization,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/191839.191872;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the 1994 ACM SIGMOD international conference on Management of data; page=150-160
+guard_adjudicated:galindo1997outerjoin,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/244810.244812;note=exact_doi_record; title_similarity=1.000; container=ACM Transactions on Database Systems; page=43-74
+guard_adjudicated:neumann2011efficient,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.14778/2002938.2002940;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the VLDB Endowment; page=539-550
+guard_adjudicated:armbrust2015spark,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=ADJUDICATED_PASS;identifier=10.1145/2723372.2742797;note=exact_doi_record; title_similarity=0.333; container=Proceedings of the 2015 ACM SIGMOD International Conference on Management of Data; page=1383-1394
+guard_adjudicated:begoli2018calcite,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=ADJUDICATED_PASS;identifier=10.1145/3183713.3190662;note=exact_doi_record; title_similarity=0.241; container=Proceedings of the 2018 International Conference on Management of Data; page=221-230
+guard_adjudicated:soliman2014orca,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=ADJUDICATED_PASS;identifier=10.1145/2588555.2595637;note=exact_doi_record; title_similarity=0.133; container=Proceedings of the 2014 ACM SIGMOD International Conference on Management of Data; page=337-348
+guard_adjudicated:melnik2010dremel,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=ADJUDICATED_PASS;identifier=10.14778/1920841.1920886;note=exact_doi_record; title_similarity=0.218; container=Proceedings of the VLDB Endowment; page=330-339
+guard_adjudicated:dageville2016snowflake,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/2882903.2903741;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the 2016 International Conference on Management of Data; page=215-226
+guard_adjudicated:raasveldt2019duckdb,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=ADJUDICATED_PASS;identifier=10.1145/3299869.3320212;note=exact_doi_record; title_similarity=0.261; container=Proceedings of the 2019 International Conference on Management of Data; page=1981-1984
+guard_adjudicated:boncz2005monetdb,Official URL,REVIEW,true,true,true,true,guard=REVIEW;adjudication=ADJUDICATED_PASS;identifier=https://www.cidrdb.org/cidr2005/papers/P19.pdf;note=http=200; content_type=application/pdf; title_similarity=0.292; final=https://www.cidrdb.org/cidr2005/papers/P19.pdf
+guard_adjudicated:gupta2015redshift,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/2723372.2742795;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the 2015 ACM SIGMOD International Conference on Management of Data; page=1917-1923
+guard_adjudicated:shute2013f1,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=ADJUDICATED_PASS;identifier=10.14778/2536222.2536232;note=exact_doi_record; title_similarity=0.093; container=Proceedings of the VLDB Endowment; page=1068-1079
+guard_adjudicated:zaharia2012resilient,Official URL,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=https://www.usenix.org/conference/nsdi12/technical-sessions/presentation/zaharia;note=http=200; content_type=text/html; charset=utf-8; title_similarity=0.963; final=https://www.usenix.org/conference/nsdi12/technical-sessions/presentation/zaharia
+guard_adjudicated:chu2017cosette,Official URL,REVIEW,true,true,true,true,guard=REVIEW;adjudication=ADJUDICATED_PASS;identifier=https://www.cidrdb.org/cidr2017/papers/p51-chu-cidr17.pdf;note=http=200; content_type=application/pdf; title_similarity=0.267; final=https://www.cidrdb.org/cidr2017/papers/p51-chu-cidr17.pdf
+guard_adjudicated:chu2018usemiring,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.14778/3236187.3236200;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the VLDB Endowment; page=1482-1495
+guard_adjudicated:wang2024qed,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.14778/3681954.3682024;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the VLDB Endowment; page=3602-3614
+guard_adjudicated:rigger2020norec,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/3368089.3409710;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the 28th ACM Joint Meeting on European Software Engineering Conference and Symposium on the F
+guard_adjudicated:rigger2020sqlancer,USENIX official page,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=https://www.usenix.org/conference/osdi20/presentation/rigger;note=OSDI 2020; pages 667--682; authors Manuel Rigger and Zhendong Su
+guard_adjudicated:slutz1998massive,VLDB official PDF,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=https://www.vldb.org/conf/1998/p618.pdf;note=VLDB 1998; pages 618--622; author Donald R. Slutz
+guard_adjudicated:sqlsmith,Official project repository,FAIL,true,true,true,true,guard=FAIL;adjudication=PASS;identifier=https://github.com/anse1/sqlsmith;note=project page; author Andreas Seltenreich; accessed 2026-07-04
+guard_adjudicated:chandra1977optimal,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/800105.803397;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the ninth annual ACM symposium on Theory of computing  - STOC '77; page=77-90
+guard_adjudicated:aho1979equivalences,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1137/0208017;note=exact_doi_record; title_similarity=1.000; container=SIAM Journal on Computing; page=218-246
+guard_adjudicated:green2007provenance,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/1265530.1265535;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the twenty-sixth ACM SIGMOD-SIGACT-SIGART symposium on Principles of database systems; page=3
+guard_adjudicated:buneman2001why,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1007/3-540-44503-X_20;note=exact_doi_record; title_similarity=1.000; container=Lecture Notes in Computer Science; page=316-330
+guard_adjudicated:cheney2009provenance,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1561/1900000006;note=exact_doi_record; title_similarity=1.000; container=Foundations and Trends in Databases; page=379-474
+guard_adjudicated:green2011containment,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1007/s00224-011-9327-6;note=exact_doi_record; title_similarity=1.000; container=Theory of Computing Systems; page=429-459
+guard_adjudicated:han2021cardest,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=ADJUDICATED_PASS;identifier=10.14778/3503585.3503586;note=exact_doi_record; title_similarity=0.619; container=Proceedings of the VLDB Endowment; page=752-765
+guard_adjudicated:kipf2019learned,Official URL,REVIEW,true,true,true,true,guard=REVIEW;adjudication=ADJUDICATED_PASS;identifier=https://www.cidrdb.org/cidr2019/papers/p101-kipf-cidr19.pdf;note=http=200; content_type=application/pdf; title_similarity=0.256; final=https://www.cidrdb.org/cidr2019/papers/p101-kipf-cidr19.pdf
+guard_adjudicated:yang2019neurocard,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.14778/3368289.3368294;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the VLDB Endowment; page=279-292
+guard_adjudicated:hilprecht2020deepdb,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=ADJUDICATED_PASS;identifier=10.14778/3384345.3384349;note=exact_doi_record; title_similarity=0.267; container=Proceedings of the VLDB Endowment; page=992-1005
+guard_adjudicated:wu2023factorjoin,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/3588721;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the ACM on Management of Data; page=1-27
+guard_adjudicated:chronis2024cardbench,arXiv URL,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=2408.16170;note=arxiv_url; http=200; title_similarity=0.936; final=https://arxiv.org/abs/2408.16170
+guard_adjudicated:marcus2019neo,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=ADJUDICATED_PASS;identifier=10.14778/3342263.3342644;note=exact_doi_record; title_similarity=0.188; container=Proceedings of the VLDB Endowment; page=1705-1718
+guard_adjudicated:marcus2021bao,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/3448016.3452838;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the 2021 International Conference on Management of Data; page=1275-1288
+guard_adjudicated:justen2024polar,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.14778/3648160.3648175;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the VLDB Endowment; page=1350-1363
+guard_adjudicated:tpcds,Official URL,FAIL,true,true,true,true,guard=FAIL;adjudication=ADJUDICATED_PASS;identifier=https://www.tpc.org/tpcds/;note=http=200; content_type=text/html; title_similarity=0.333; final=https://www.tpc.org/tpcds/
+guard_adjudicated:tpch,Official URL,FAIL,true,true,true,true,guard=FAIL;adjudication=ADJUDICATED_PASS;identifier=https://www.tpc.org/tpch/;note=http=200; content_type=text/html; title_similarity=0.346; final=https://www.tpc.org/tpch/
+guard_adjudicated:oneil2009ssb,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1007/978-3-642-10424-4_17;note=exact_doi_record; title_similarity=1.000; container=Lecture Notes in Computer Science; page=237-252
+guard_adjudicated:erling2015ldbc,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=ADJUDICATED_PASS;identifier=10.1145/2723372.2742786;note=exact_doi_record; title_similarity=0.759; container=Proceedings of the 2015 ACM SIGMOD International Conference on Management of Data; page=619-630
+guard_adjudicated:bitton1983wisconsin,Official URL,REVIEW,true,true,true,true,guard=REVIEW;adjudication=ADJUDICATED_PASS;identifier=https://www.vldb.org/conf/1983/P008.PDF;note=http=200; content_type=application/pdf; title_similarity=0.114; final=https://www.vldb.org/conf/1983/P008.PDF
+guard_adjudicated:turbyfill1993as3ap,Official URL,REVIEW,true,true,true,true,guard=REVIEW;adjudication=ADJUDICATED_PASS;identifier=https://www.odbms.org/2014/03/benchmark-handbook-1993/;note=http=200; content_type=text/html; charset=UTF-8; title_similarity=0.234; final=https://www.odbms.org/2014/03/benchmark-handbook-1993/
+guard_adjudicated:deng2024lakebench,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.14778/3659437.3659448;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the VLDB Endowment; page=1925-1938
+guard_adjudicated:clickbench,Official URL,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=https://benchmark.clickhouse.com/;note=http=200; content_type=text/html; charset=utf-8; title_similarity=1.000; final=https://benchmark.clickhouse.com/
+guard_adjudicated:carey1995garlic,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1109/RIDE.1995.378736;note=exact_doi_record; title_similarity=1.000; container=Proceedings RIDE-DOM'95. Fifth International Workshop on Research Issues in Data Engineering-Distributed Obj
+guard_adjudicated:stonebraker2015bigdawg,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/2814710.2814713;note=exact_doi_record; title_similarity=1.000; container=ACM SIGMOD Record; page=11-16
+guard_adjudicated:postgresql_docs,Official URL,FAIL,true,true,true,true,guard=FAIL;adjudication=PASS;identifier=https://www.postgresql.org/docs/18/using-explain.html;note=http=200; content_type=text/html; charset=utf-8; title_similarity=1.000; final=https://www.postgresql.org/docs/18/using-explain.html
+guard_adjudicated:trino_docs,Official URL,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=https://trino.io/docs/482/optimizer/cost-based-optimizations.html;note=http=200; content_type=text/html; charset=utf-8; title_similarity=1.000; final=https://trino.io/docs/482/optimizer/cost-based-optimizations.html
+guard_adjudicated:bigquery_docs,Official URL,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=https://cloud.google.com/bigquery/docs/query-plan-explanation;note=http=200; content_type=text/html; charset=utf-8; title_similarity=0.561; final=https://docs.cloud.google.com/bigquery/docs/query-plan-explanation
+guard_adjudicated:spark_docs,Official URL,FAIL,true,true,true,true,guard=FAIL;adjudication=PASS;identifier=https://spark.apache.org/docs/4.1.2/sql-performance-tuning.html;note=http=200; content_type=text/html; title_similarity=1.000; final=https://spark.apache.org/docs/4.1.2/sql-performance-tuning.html
+guard_adjudicated:snowflake_docs,Official URL,FAIL,true,true,true,true,guard=FAIL;adjudication=PASS;identifier=https://docs.snowflake.com/en/sql-reference/sql/explain;note=http=200; content_type=text/html; charset=utf-8; title_similarity=1.000; final=https://docs.snowflake.com/en/sql-reference/sql/explain
+guard_adjudicated:duckdb_docs,Official URL,FAIL,true,true,true,true,guard=FAIL;adjudication=ADJUDICATED_PASS;identifier=https://duckdb.org/docs/stable/sql/query_syntax/with.html;note=http=200; content_type=text/html; charset=utf-8; title_similarity=0.149; final=https://duckdb.org/docs/stable/sql/query_syntax/with
+guard_adjudicated:clickhouse_docs,Official URL,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=https://clickhouse.com/docs/guides/joining-tables;note=http=200; content_type=text/html; charset=utf-8; title_similarity=0.758; final=https://clickhouse.com/docs/guides/joining-tables
+guard_adjudicated:calcite_docs,Official URL,FAIL,true,true,true,true,guard=FAIL;adjudication=ADJUDICATED_PASS;identifier=https://calcite.apache.org/docs/;note=http=200; content_type=text/html; title_similarity=0.158; final=https://calcite.apache.org/docs/
+guard_adjudicated:datafusion_docs,Official URL,FAIL,true,true,true,true,guard=FAIL;adjudication=PASS;identifier=https://datafusion.apache.org/user-guide/explain-usage.html;note=http=200; content_type=text/html; title_similarity=0.568; final=https://datafusion.apache.org/user-guide/explain-usage.html
+guard_adjudicated:presto_docs,Official URL,FAIL,true,true,true,true,guard=FAIL;adjudication=PASS;identifier=https://prestodb.github.io/docs/current/optimizer/cost-based-optimizations.html;note=http=200; content_type=text/html; charset=utf-8; title_similarity=1.000; final=https://prestodb.github.io/docs/current/optimizer/cost-based-optimizations.html
+guard_adjudicated:trino_pushdown_docs,Official URL,PASS,true,true,true,true,guard=PASS;adjudication=PASS;identifier=https://trino.io/docs/current/optimizer/pushdown.html;note=http=200; official page; content_type=text/html; final=https://trino.io/docs/current/optimizer/pushdown.html
+guard_adjudicated:trino_dynamic_filtering_docs,Official URL,PASS,true,true,true,true,guard=PASS;adjudication=PASS;identifier=https://trino.io/docs/current/admin/dynamic-filtering.html;note=http=200; official page; content_type=text/html; final=https://trino.io/docs/current/admin/dynamic-filtering.html
+guard_adjudicated:bigquery_federated_docs,Official URL,PASS,true,true,true,true,guard=PASS;adjudication=PASS;identifier=https://docs.cloud.google.com/bigquery/docs/federated-queries-intro;note=http=200; official page; content_type=text/html; final=https://docs.cloud.google.com/bigquery/docs/federated-queries-intro
+__guard_review_fail_closed_by_primary_sources__,global,FAIL=10;PASS=3;REVIEW=62,true,true,true,true,

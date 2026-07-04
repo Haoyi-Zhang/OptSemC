@@ -37,6 +37,13 @@ for p in DOCS + PAPER:
         legacy.append(str(p.relative_to(PKG)))
 add('no_legacy_corpus_mainline_text', not legacy, '|'.join(legacy[:10]))
 add('projection_contract_semantics_check_present', (E/'projection_contract_semantics_check.csv').exists(), '')
+internal_version_hits=[]
+for p in [ROOT/'benchmark'/'selected_3wise.yaml', ROOT/'grounded'/'verified_rules.jsonl']:
+    s = text(p)
+    s = re.sub(r'"variant"\s*:\s*"[^"]*"', '"variant": ""', s)
+    if re.search(r'\bv[0-9]+[_ ]', s, re.I):
+        internal_version_hits.append(str(p.relative_to(PKG)))
+add('no_internal_iteration_markers_in_public_data', not internal_version_hits, '|'.join(internal_version_hits))
 OUT.parent.mkdir(parents=True, exist_ok=True)
 with OUT.open('w', newline='', encoding='utf-8') as f:
     w=csv.DictWriter(f, fieldnames=['check','passed','details']); w.writeheader(); w.writerows(rows)

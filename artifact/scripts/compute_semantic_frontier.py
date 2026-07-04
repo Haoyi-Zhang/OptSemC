@@ -16,7 +16,8 @@ ROOT = Path(__file__).resolve().parents[1]
 G = ROOT / "evaluation" / "grounded"
 OUT = G / "semantic_frontier.csv"
 CHECK = ROOT / "evaluation" / "semantic_frontier_check.csv"
-PAPER_TABLE = ROOT.parent / "Paper" / "latex" / "tables" / "tab_semantic_frontier.tex"
+PAPER_ROOT = ROOT.parent / "Paper"
+PAPER_TABLE = PAPER_ROOT / "latex" / "tables" / "tab_semantic_frontier.tex"
 ROW_END = r" \\" 
 
 
@@ -94,7 +95,8 @@ def main() -> None:
     for r in sorted(core, key=lambda x: order[x["scope"]]):
         lines.append(f"{labels[r['scope']]} & {int(r['false_equivalences']):,} & {int(r['safe_subsets']):,} & {int(r['unsafe_subsets']):,} & {r['minimum_safe_size']} & {esc(r['representative_minimum_safe_set'])}" + ROW_END)
     lines += [r"\bottomrule", r"\end{tabular}", r"\end{table}"]
-    PAPER_TABLE.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    if PAPER_ROOT.exists():
+        PAPER_TABLE.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
     checks = []
     def add(check: str, ok: bool, details: str = "") -> None:

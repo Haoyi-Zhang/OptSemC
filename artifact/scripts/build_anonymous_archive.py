@@ -55,6 +55,10 @@ EXCLUDED_FILE_NAMES = {
     "pdf_integrity.csv",
     "reference_quality.csv",
     "visual_latex_style.csv",
+    "optsemc-artifact.sha256",
+    "reference_guard_audit_latest.json",
+    "reference_guard_audit_latest.md",
+    "git_tree_status.txt",
 }
 EXCLUDED_SUFFIXES = {
     ".aux",
@@ -76,7 +80,12 @@ MANIFEST_SKIP = {
     "artifact/evaluation/package_snapshot_check.csv",
     "artifact/evaluation/integrity_suite.csv",
     "artifact/evaluation/fast_mainline_results.csv",
+    "artifact/evaluation/optsemc-artifact.sha256",
+    "artifact/evaluation/reference_guard_audit_latest.json",
+    "artifact/evaluation/reference_guard_audit_latest.md",
+    "artifact/evaluation/git_tree_status.txt",
 }
+SOURCE_STATE_FILE = "artifact/evaluation/source_tree_state.csv"
 TEXT_SUFFIXES = {
     ".bib",
     ".cff",
@@ -130,6 +139,49 @@ def sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 
+def sha256_text(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8", errors="replace")).hexdigest()
+
+
+def git(args: list[str]) -> tuple[int, str]:
+    try:
+        proc = subprocess.run(
+            ["git", "-C", str(ROOT), *args],
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            timeout=30,
+        )
+    except Exception as exc:
+        return 127, f"unavailable:{type(exc).__name__}"
+    return proc.returncode, proc.stdout
+
+
+def collect_source_tree_state(allow_dirty: bool) -> list[dict[str, str]]:
+    head_code, head = git(["rev-parse", "--short=12", "HEAD"])
+    status_code, status = git(["status", "--porcelain=v1", "--untracked-files=all"])
+    diff_code, diff = git(["diff", "--no-ext-diff", "--binary"])
+    cached_code, cached = git(["diff", "--cached", "--no-ext-diff", "--binary"])
+    if head_code != 0 or status_code != 0 or diff_code != 0 or cached_code != 0:
+        raise RuntimeError("git state unavailable; refusing to build release archive")
+    tracked_or_untracked = [line for line in status.splitlines() if line.strip() and not line.startswith("!! ")]
+    if tracked_or_untracked and not allow_dirty:
+        preview = "\n".join(tracked_or_untracked[:40])
+        raise RuntimeError(
+            "source tree is dirty; commit or clean before building the release archive\n"
+            + preview
+        )
+    return [
+        {"key": "git_head", "value": head.strip()},
+        {"key": "source_tree_clean", "value": str(not tracked_or_untracked).lower()},
+        {"key": "tracked_or_untracked_count", "value": str(len(tracked_or_untracked))},
+        {"key": "allow_dirty_source", "value": str(bool(allow_dirty)).lower()},
+        {"key": "status_sha256", "value": sha256_text(status)},
+        {"key": "diff_sha256", "value": sha256_text(diff)},
+        {"key": "cached_diff_sha256", "value": sha256_text(cached)},
+    ]
+
+
 def copy_tree(stage: Path) -> None:
     if stage.exists():
         shutil.rmtree(stage)
@@ -179,18 +231,88 @@ def write_manifest(stage: Path) -> None:
             writer.writerow({"category": category, "files": str(summary[category])})
 
 
+def write_source_tree_state(stage: Path, rows: list[dict[str, str]]) -> None:
+    out = stage / SOURCE_STATE_FILE
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with out.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=["key", "value"])
+        writer.writeheader()
+        writer.writerows(rows)
+
+
 def prime_stage_checks(stage: Path) -> None:
     env = os.environ.copy()
     artifact = stage / "artifact"
     env["PYTHONDONTWRITEBYTECODE"] = "1"
     env["PYTHONPATH"] = str(artifact) + os.pathsep + str(artifact / "scripts")
-    subprocess.run(
-        [sys.executable, str(artifact / "scripts" / "check_package_cleanliness.py")],
-        cwd=str(artifact),
-        env=env,
-        check=True,
-        stdout=subprocess.DEVNULL,
-    )
+    commands = [
+        "check_package_cleanliness.py",
+        "check_package_integrity.py",
+        "compute_practice_projection_surfaces.py",
+        "check_practice_projection_surfaces.py",
+        "build_environment_report.py",
+        "check_environment_report.py",
+        "check_real_engine_validation.py",
+        "compute_repair_generalization.py",
+        "check_repair_generalization.py",
+        "build_claim_metric_summary.py",
+        "build_claim_ledger.py",
+        "build_claim_evidence_graph.py",
+        "check_claim_evidence_graph.py",
+        "run_repository_audit.py",
+        "check_repository_quality.py",
+        "check_git_tree_state.py",
+        "check_artifact_registry.py",
+        "build_package_fingerprint.py",
+        "build_package_manifest.py",
+        "check_package_manifest.py",
+        "check_certificate_freshness.py",
+        "build_package_fingerprint.py",
+        "build_package_manifest.py",
+        "check_package_manifest.py",
+        "check_package_snapshot.py",
+        "run_integrity_suite.py",
+    ]
+    for script in commands:
+        subprocess.run(
+            [sys.executable, str(artifact / "scripts" / script)],
+            cwd=str(artifact),
+            env=env,
+            check=True,
+            stdout=subprocess.DEVNULL,
+        )
+
+
+def verify_stage_fingerprint(stage: Path) -> list[str]:
+    eval_dir = stage / "artifact" / "evaluation"
+    files_csv = eval_dir / "package_files.csv"
+    summary_csv = eval_dir / "package_fingerprint_summary.csv"
+    errors: list[str] = []
+    if not files_csv.exists():
+        return ["missing package_files.csv"]
+    if not summary_csv.exists():
+        return ["missing package_fingerprint_summary.csv"]
+    with files_csv.open(newline="", encoding="utf-8") as handle:
+        file_rows = list(csv.DictReader(handle))
+    with summary_csv.open(newline="", encoding="utf-8") as handle:
+        summary_rows = list(csv.DictReader(handle))
+    if len(file_rows) < 100:
+        errors.append(f"package_files_too_small:{len(file_rows)}")
+    missing_paths = [
+        row.get("path", "")
+        for row in file_rows
+        if row.get("path") and not (stage / row["path"]).is_file()
+    ]
+    if missing_paths:
+        errors.append("listed_paths_missing:" + ",".join(missing_paths[:10]))
+    by_category = {row.get("category", ""): row for row in summary_rows}
+    all_row = by_category.get("ALL")
+    fp_row = by_category.get("FINGERPRINT")
+    if not all_row or int(all_row.get("files", "0") or 0) != len(file_rows):
+        errors.append(f"summary_all_mismatch:{all_row}")
+    if not fp_row or not re.fullmatch(r"[0-9a-f]{64}", fp_row.get("bytes", "")):
+        errors.append(f"fingerprint_missing_or_invalid:{fp_row}")
+    return errors
 
 
 def scan_stage(stage: Path) -> list[str]:
@@ -220,6 +342,9 @@ def make_zip(stage: Path, output: Path) -> str:
             info = zipfile.ZipInfo(rel)
             info.date_time = (2026, 1, 1, 0, 0, 0)
             info.compress_type = zipfile.ZIP_DEFLATED
+            info.create_system = 3
+            mode = 0o755 if path.suffix == ".sh" else 0o644
+            info.external_attr = mode << 16
             with path.open("rb") as handle:
                 zf.writestr(info, handle.read())
     return sha256_file(output)
@@ -229,10 +354,20 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, default=ROOT / "zenodo_artifact" / "optsemc-artifact.zip")
     parser.add_argument("--stage", type=Path, default=ROOT / "zenodo_artifact" / "stage")
+    parser.add_argument("--digest-output", type=Path, default=ROOT / "artifact" / "evaluation" / "optsemc-artifact.sha256")
+    parser.add_argument("--keep-stage", action="store_true")
+    parser.add_argument("--allow-dirty-source", action="store_true",
+                        help="Development-only override. Release/Zenodo archives must leave this off.")
     args = parser.parse_args()
+    source_state = collect_source_tree_state(args.allow_dirty_source)
     copy_tree(args.stage)
+    write_source_tree_state(args.stage, source_state)
     prime_stage_checks(args.stage)
-    write_manifest(args.stage)
+    fingerprint_errors = verify_stage_fingerprint(args.stage)
+    if fingerprint_errors:
+        for error in fingerprint_errors[:20]:
+            print(f"FINGERPRINT {error}", file=sys.stderr)
+        raise SystemExit(1)
     offenders = scan_stage(args.stage)
     if offenders:
         for offender in offenders[:50]:
@@ -240,6 +375,10 @@ def main() -> None:
         raise SystemExit(1)
     digest = make_zip(args.stage, args.output)
     size = args.output.stat().st_size
+    args.digest_output.parent.mkdir(parents=True, exist_ok=True)
+    args.digest_output.write_text(f"{digest}  {args.output.name}\n", encoding="utf-8")
+    if not args.keep_stage:
+        shutil.rmtree(args.stage, ignore_errors=True)
     print(f"anonymous_archive={args.output}")
     print(f"anonymous_archive_sha256={digest}")
     print(f"anonymous_archive_bytes={size}")

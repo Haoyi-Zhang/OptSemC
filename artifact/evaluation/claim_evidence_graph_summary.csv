@@ -1,8 +1,8 @@
 metric,value
-nodes,179
-edges,78
-claims,22
-claim_rows_passed,22
-files,130
-existing_files,130
-gates,22
+nodes,223
+edges,159
+claims,48
+claim_rows_passed,48
+files,146
+existing_files,146
+gates,24

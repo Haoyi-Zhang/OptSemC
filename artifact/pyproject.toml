@@ -7,7 +7,7 @@ name = "optsemc"
 dynamic = ["version"]
 description = "OptSem-C: public optimizer-contract semantics, covering probes, baseline repair certificates, and reproducibility checks."
 requires-python = ">=3.10"
-dependencies = ["PyYAML>=6.0", "pypdf>=4.0", "tomli>=2.0; python_version<'3.11'"]
+dependencies = ["PyYAML>=6.0", "tomli>=2.0; python_version<'3.11'"]
 readme = "README.md"
 license = "MIT"
 keywords = ["query optimization", "database systems", "optimizer contracts", "benchmarking", "PVLDB"]
@@ -19,6 +19,11 @@ packages = ["optsemc"]
 [tool.setuptools_scm]
 root = ".."
 relative_to = "pyproject.toml"
+fallback_version = "0.0.0"
+
+[project.optional-dependencies]
+paper = ["pypdf>=4.0"]
+realengines = ["duckdb>=1.0.0", "psycopg[binary]>=3.1"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -1,24 +1,31 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import csv, re, shutil, sys
+import csv, re, sys
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT/'artifact'/'evaluation'/'package_integrity.csv'
+IGNORED_DIRS = {'.git', '.reference_guard_cache', '__pycache__', '.pytest_cache', '.mypy_cache', 'build', 'dist', 'tmp', 'zenodo_artifact'}
 rows=[]
 def add(check, ok, detail=''):
     rows.append({'check':check,'passed':str(bool(ok)).lower(),'details':str(detail)})
 root_items=sorted(p.name for p in ROOT.iterdir())
-allowed_top_level={'.git','.github','.gitattributes','.gitignore','.cloudignore','Paper','README.md','artifact'}
+allowed_top_level={'.git','.github','.gitattributes','.gitignore','.cloudignore','Paper','README.md','artifact','zenodo_artifact'}
 unexpected=[item for item in root_items if item not in allowed_top_level]
-add('clean_top_level_entries', not unexpected and {'Paper','artifact'}.issubset(root_items), ','.join(root_items))
-required=[ROOT/'Paper'/'latex'/'paper.tex', ROOT/'Paper'/'latex'/'paper.pdf', ROOT/'Paper'/'supplemental'/'supplement.tex', ROOT/'Paper'/'supplemental'/'supplement.pdf', ROOT/'artifact'/'README.md', ROOT/'artifact'/'REPRODUCIBILITY.md', ROOT/'artifact'/'run_mainline_checks.sh']
+paper_present=(ROOT/'Paper').exists()
+required_top={'Paper','artifact'} if paper_present else {'artifact'}
+add('clean_top_level_entries', not unexpected and required_top.issubset(root_items), ','.join(root_items))
+required=[ROOT/'artifact'/'README.md', ROOT/'artifact'/'REPRODUCIBILITY.md', ROOT/'artifact'/'run_mainline_checks.sh']
+if paper_present:
+    required += [ROOT/'Paper'/'latex'/'paper.tex', ROOT/'Paper'/'latex'/'paper.pdf', ROOT/'Paper'/'supplemental'/'supplement.tex', ROOT/'Paper'/'supplemental'/'supplement.pdf']
 missing=[str(p.relative_to(ROOT)) for p in required if not p.exists()]
 add('required_entrypoints_present', not missing, ';'.join(missing))
 blocked_words = ['v\\d{2}', 'fi'+'nal', 'sub'+'mission', 'ready'+'ness', 'sta'+'tus', 're'+'lease', 'ver'+'sion', 'strong[-_ ]?accept', 'best[-_ ]?paper']
 pat=re.compile('(' + '|'.join(blocked_words) + ')', re.I)
 bad_names=[str(p.relative_to(ROOT)) for p in ROOT.rglob('*') if pat.search(p.name)]
 add('no_iteration_or_state_terms_in_filenames', not bad_names, ';'.join(bad_names[:20]))
-scan_paths=[ROOT/'Paper', ROOT/'artifact'/'README.md', ROOT/'artifact'/'REPRODUCIBILITY.md', ROOT/'artifact'/'CITATION.cff', ROOT/'artifact'/'Makefile']
+scan_paths=[ROOT/'artifact'/'README.md', ROOT/'artifact'/'REPRODUCIBILITY.md', ROOT/'artifact'/'CITATION.cff', ROOT/'artifact'/'Makefile']
+if paper_present:
+    scan_paths.insert(0, ROOT/'Paper')
 bad_content=[]
 content_words=['v\\d{2}', 'fi'+'nal', 'sub'+'mission', 're'+'viewer', 're'+'lease', 'strong '+'accept', 'best '+'paper']
 content_pat=re.compile('(' + '|'.join(content_words) + ')', re.I)
@@ -32,23 +39,15 @@ for base in scan_paths:
         s=re.sub(r'\\begingroup\\small\\noindent\\raggedright\\textbf\{PVLDB Reference Format:.*?\\input\{sections/01_intro\}', r'\\input{sections/01_intro}', s, flags=re.S)
         if content_pat.search(s): bad_content.append(str(p.relative_to(ROOT)))
 add('no_iteration_or_state_terms_in_public_text', not bad_content, ';'.join(sorted(set(bad_content))[:20]))
-for cache in ROOT.rglob('__pycache__'):
-    shutil.rmtree(cache, ignore_errors=True)
-for cache in ROOT.rglob('.pytest_cache'):
-    shutil.rmtree(cache, ignore_errors=True)
-for cache in ROOT.rglob('*.egg-info'):
-    if cache.is_dir():
-        shutil.rmtree(cache, ignore_errors=True)
-for p in ROOT.rglob('*'):
-    if p.is_file() and (p.suffix in {'.pyc','.pyo','.aux','.log','.out','.toc','.fls','.fdb_latexmk','.blg','.bbl'} or p.name.endswith('.backup')):
-        try:
-            p.unlink()
-        except OSError:
-            continue
 trans=[]
 for p in ROOT.rglob('*'):
-    if p.is_dir() and (p.name in {'__pycache__','.pytest_cache'} or p.name.endswith('.egg-info')): trans.append(str(p.relative_to(ROOT)))
-    elif p.is_file() and (p.suffix in {'.pyc','.pyo','.aux','.log','.out','.toc','.fls','.fdb_latexmk','.blg','.bbl'} or p.name.endswith('.backup')): trans.append(str(p.relative_to(ROOT)))
+    rel = p.relative_to(ROOT)
+    if any(part in IGNORED_DIRS or part.endswith('.egg-info') for part in rel.parts):
+        continue
+    if p.is_dir() and (p.name in {'__pycache__','.pytest_cache'} or p.name.endswith('.egg-info')):
+        trans.append(str(rel))
+    elif p.is_file() and (p.suffix in {'.pyc','.pyo','.aux','.log','.out','.toc','.fls','.fdb_latexmk','.blg','.bbl'} or p.name.endswith('.backup')):
+        trans.append(str(rel))
 add('no_transient_build_files', not trans, ';'.join(trans[:20]))
 OUT.parent.mkdir(parents=True, exist_ok=True)
 with OUT.open('w',newline='',encoding='utf-8') as f:

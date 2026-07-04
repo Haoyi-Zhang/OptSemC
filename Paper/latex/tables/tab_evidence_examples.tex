@@ -1,21 +1,23 @@
 \begin{table*}[t]
 \centering
-\caption{Representative source-grounded contract rules with evidence-line spans and paraphrases.}
+\caption{Source-to-rule traceability for representative contracts. Each row binds a rule state/action to a public source span, digest prefix, and paraphrase used by the replay manifest.}
 \label{tab:evidence-examples}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}llp{0.17\textwidth}lp{0.43\textwidth}@{}}
+\begin{tabular}{@{}llp{0.15\textwidth}p{0.18\textwidth}p{0.42\textwidth}@{}}
 \toprule
-Engine & State & Action & Lines & Evidence paraphrase \\
+\multicolumn{3}{@{}l}{Contract rule} & \multicolumn{2}{l@{}}{Auditable evidence} \\
+\cmidrule(r){1-3}\cmidrule(l){4-5}
+Engine & State & Action & Span/digest & Source-supported paraphrase \\
 \midrule
-PostgreSQL & MAY & Plan/observe/local & L46--L56 & EXPLAIN exposes estimated startup and total cost, output rows, row width, and planner-cost units. \\
-BigQuery & MAY & Exchange/adapt/cloud & L990--L992 & The query plan may be modified during execution by adding repartition stages. \\
-Snowflake & MAY & Plan/observe/cloud & L150--L154 & EXPLAIN compiles a statement and returns a logical execution plan rather than executing it. \\
-ClickHouse & MAY & Join/adapt/local & L313 & With automatic join-algorithm selection, execution can switch from hash join to partial merge join. \\
-DuckDB & MAY & Materialize/inline/local & L482--L487 & CTE inlining is guarded by single use, absence of volatility, no grouped aggregation, and inlining hints. \\
-Spark SQL & MAY & Plan/adapt/distributed & L129--L133 & Adaptive query execution uses runtime statistics and can re-optimize a query while it is running. \\
-Trino & MUST\_NOT & Agg./pushdown/source & L168--L176 & Aggregation pushdown does not support aggregate calls containing expressions. \\
+PostgreSQL~\cite{postgresql_docs} & MAY & Plan/observe/local & PG-EXPLAIN-001 bfb47e66 L46--L56 & EXPLAIN exposes estimated startup and total cost, output rows, row width, and planner-cost units. \\
+BigQuery~\cite{bigquery_docs} & MAY & Exchange/adapt/cloud & BIGQUERY-PLAN-001 cc7b206a L990--L992 & The query plan may be modified during execution by adding repartition stages. \\
+Snowflake~\cite{snowflake_docs} & MAY & Plan/observe/cloud & SNOWFLAKE-EXPLAIN-001 93a61359 L150--L154 & EXPLAIN compiles a statement and returns a logical execution plan rather than executing it. \\
+ClickHouse~\cite{clickhouse_docs} & MAY & Join/adapt/local & CLICKHOUSE-JOINING-001 a1f757e2 L313 & With automatic join-algorithm selection, execution can switch from hash join to partial merge join. \\
+DuckDB~\cite{duckdb_docs} & MAY & Materialize/inline/local & DUCK-WITH-001 2a60c8ab L482--L487 & CTE inlining is guarded by single use, absence of volatility, no grouped aggregation, and inlining hints. \\
+Spark SQL~\cite{spark_docs} & MAY & Plan/adapt/distributed & SPARK-PERF-001 7e5e2b00 L129--L133 & Adaptive query execution uses runtime statistics and can re-optimize a query while it is running. \\
+Trino~\cite{trino_pushdown_docs} & MUST\_NOT & Agg./pushdown/source & TRINO-PUSH-001 cc177219 L168--L176 & Aggregation pushdown does not support aggregate calls containing expressions. \\
 \bottomrule
 \end{tabular}
-\Description{Examples of source-grounded contract rules across seven engines, including state, action, line range, and paraphrased evidence.}
+\Description{Examples of source-to-rule traceability across seven engines, including state, action, source identifier, digest prefix, line range, and paraphrased evidence.}
 \end{table*}

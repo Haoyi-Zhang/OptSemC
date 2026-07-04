@@ -1,0 +1,7 @@
+check,passed,details
+all_public_sources_audited,true,26/26
+keyword_baseline_observed,true,26
+yesno_baseline_observed,true,12
+operator_baseline_observed,true,26
+reference_signature_payload_not_public_surface,true,0
+stable_public_urls,true,checked

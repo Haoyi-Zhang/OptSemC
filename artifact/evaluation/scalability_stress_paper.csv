@@ -1,5 +1,5 @@
 projection,comparisons,false_equivalences,elapsed_ms,comparisons_per_second
-strict,88536,0,1029.6,85992
-keyword,88536,254,1119.4,79095
-operator_only,88536,238,991.4,89306
-operator_kind_surface,88536,0,1278.2,69265
+strict,88536,0,1274.0,69493
+keyword,88536,254,1366.3,64798
+operator_only,88536,238,1212.8,73002
+operator_kind_surface,88536,0,1587.6,55767

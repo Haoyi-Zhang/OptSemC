@@ -21,6 +21,9 @@ def fmt(value: str | int) -> str:
 
 
 def render_paper_outputs() -> None:
+    paper_root = ROOT.parent / "Paper"
+    if not paper_root.exists():
+        return
     summary = {row["metric"]: row["value"] for row in summary_rows}
     probes_n = int(summary["executed_sql_probes"])
     plan_n = int(summary["plan_successes"])
@@ -29,8 +32,8 @@ def render_paper_outputs() -> None:
     plan_w = 1.20 * plan_n / max(probes_n, 1)
     exec_w = 1.20 * exec_n / max(probes_n, 1)
     fail_w = 1.20 * fail_n / max(probes_n, 1)
-    tables = ROOT.parent / "Paper" / "latex" / "tables"
-    figures = ROOT.parent / "Paper" / "latex" / "figures"
+    tables = paper_root / "latex" / "tables"
+    figures = paper_root / "latex" / "figures"
     tables.mkdir(parents=True, exist_ok=True)
     figures.mkdir(parents=True, exist_ok=True)
 

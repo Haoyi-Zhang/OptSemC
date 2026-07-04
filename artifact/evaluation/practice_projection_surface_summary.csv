@@ -1,0 +1,6 @@
+metric,value,detail
+public_sources,26,public source surfaces audited
+keyword_surfaces,26,sources exposing keyword or feature-name labels
+yesno_surfaces,12,sources exposing enablement or yes/no controls
+operator_surfaces,26,sources exposing operator-family labels
+reference_signature_payload_surfaces,0,sources exposing the full reference-signature field set used by OptSem-C

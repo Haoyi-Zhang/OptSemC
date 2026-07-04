@@ -143,6 +143,9 @@ def external_table() -> None:
 
 
 def main() -> None:
+    if not (ROOT / "Paper").exists():
+        print("Rendered baseline/external tables: skipped (artifact-only package)")
+        return
     PAPER_TABLES.mkdir(parents=True, exist_ok=True)
     baseline_table()
     external_table()

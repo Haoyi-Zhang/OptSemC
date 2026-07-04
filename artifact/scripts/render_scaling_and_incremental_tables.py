@@ -32,6 +32,10 @@ def label(projection: str) -> str:
     }.get(projection, projection)
 
 
+def bold_if(text: str, condition: bool) -> str:
+    return rf"\textbf{{{text}}}" if condition else text
+
+
 def main() -> int:
     alg = {r["projection"]: r for r in rows(E / "algorithmic_scaling_summary.csv")}
     disp = {r["projection"]: r for r in rows(E / "witness_diversity_summary.csv")}
@@ -57,11 +61,20 @@ def main() -> int:
         })
     fields = ["projection", "false_at_1x", "false_probes", "feature_axes", "family_regions", "checks_at_8x", "min_checks_per_second", "incremental_drift"]
     write_csv(E / "scaling_diversity_paper.csv", paper_rows, fields)
+    if not (PKG / "Paper").exists():
+        print("Rendered scalability/family table: skipped TeX output (artifact-only package)")
+        return 0
+    false_values = [int(row["false_at_1x"]) for row in paper_rows]
+    checks_values = [float(row["min_checks_per_second"].replace(",", "")) for row in paper_rows]
+    drift_values = [float(row["incremental_drift"]) for row in paper_rows]
+    best_false = min(false_values)
+    best_checks = max(checks_values)
+    best_drift = min(drift_values)
     lines = [
         r"\begin{table}[t]",
         r"\centering",
         r"\footnotesize",
-        r"\caption{Finite-comparison scalability and dispersion. False is witness count; Probes/Axes count distinct probes and feature axes; Fam. is pair-family regions with witnesses out of six; Checks/s is minimum throughput in the 8$\times$ lift; Drift is mismatch against full recomputation.}",
+        r"\caption{Finite-comparison scalability and dispersion. False and Drift are lower-better; Checks/s is higher-better. Bold marks per-column best values for directional columns. Probes/Axes/Fam. describe where witnesses appear.}",
         r"\label{tab:scalability-family}",
         r"\setlength{\tabcolsep}{2.5pt}",
         r"\begin{tabular}{@{}lrrrrrr@{}}",
@@ -70,8 +83,15 @@ def main() -> int:
         r"\midrule",
     ]
     for r in paper_rows:
+        false_text = f"{int(r['false_at_1x']):,}"
+        checks_text = r["min_checks_per_second"]
+        drift_text = r["incremental_drift"]
         lines.append(
-            f"{r['projection']} & {int(r['false_at_1x']):,} & {r['false_probes']} & {r['feature_axes']} & {r['family_regions']} & {r['min_checks_per_second']} & {r['incremental_drift']}" + ROW
+            f"{r['projection']} & "
+            f"{bold_if(false_text, int(r['false_at_1x']) == best_false)} & "
+            f"{r['false_probes']} & {r['feature_axes']} & {r['family_regions']} & "
+            f"{bold_if(checks_text, float(checks_text.replace(',', '')) == best_checks)} & "
+            f"{bold_if(drift_text, float(drift_text) == best_drift)}" + ROW
         )
     lines += [r"\bottomrule", r"\end{tabular}", r"\end{table}"]
     (TABLES / "tab_scalability_family.tex").write_text("\n".join(lines) + "\n", encoding="utf-8")

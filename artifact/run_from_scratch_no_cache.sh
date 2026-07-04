@@ -22,8 +22,8 @@ else
   echo "Skipping optional DuckDB/PostgreSQL validation; set RUN_REAL_ENGINE_VALIDATION=1 to rerun it."
 fi
 if [[ ! -d ../Paper || "${ANONYMOUS_ARTIFACT_ONLY:-0}" == "1" ]]; then
-  echo "Paper tree not present; running artifact-only replay checks."
-  ./run_mainline_checks.sh
+  echo "Paper tree not present; running full artifact-only replay checks."
+  ANONYMOUS_ARTIFACT_ONLY=1 RUN_EXPENSIVE_RECOMPUTE=1 ./run_deep_checks.sh
 else
   RUN_EXPENSIVE_RECOMPUTE=1 RUN_LATEX_COMPILE=1 ./run_deep_checks.sh
 fi

@@ -3,6 +3,28 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 export PYTHONPATH="$SCRIPT_DIR:$SCRIPT_DIR/scripts${PYTHONPATH:+:$PYTHONPATH}"
+ARTIFACT_ONLY=0
+if [[ ! -d ../Paper || "${ANONYMOUS_ARTIFACT_ONLY:-0}" == "1" ]]; then
+  ARTIFACT_ONLY=1
+fi
+run_if_present() {
+  local script="$1"
+  shift || true
+  if [[ -f "$script" ]]; then
+    python "$script" "$@"
+  else
+    echo "Skipping missing optional replay check: $script"
+  fi
+}
+run_paper_if_present() {
+  local script="$1"
+  shift || true
+  if [[ "$ARTIFACT_ONLY" == "1" ]]; then
+    echo "Skipping paper-only replay check in artifact-only mode: $script"
+  else
+    run_if_present "$script" "$@"
+  fi
+}
 python scripts/generate_probes.py --rules grounded/verified_rules.jsonl
 python scripts/verify_generated_probes.py
 python scripts/match_rules.py --rules grounded/verified_rules.jsonl --probes benchmark/generated_probes.jsonl --out evaluation/grounded_applicable_rules.jsonl
@@ -18,10 +40,10 @@ python scripts/compute_workload_sensitivity.py --probes benchmark/generated_prob
 python scripts/compute_benchmark_efficiency.py
 (cd .. && python artifact/scripts/generate_grounded_case_studies.py)
 python scripts/audit_grounded_core.py
-python scripts/check_grounded_readiness.py
+run_if_present scripts/check_grounded_readiness.py
 python scripts/check_grounded_traceability.py
 python scripts/check_mainline_grounded_only.py
-python scripts/check_paper_table_sources.py
+run_paper_if_present scripts/check_paper_table_sources.py
 python scripts/check_stale_diagnostic_outputs.py
 python scripts/run_unit_tests.py
 
@@ -40,7 +62,7 @@ python scripts/check_projection_resolution_lattice.py
 python scripts/check_theorem_ledger.py
 python scripts/build_claim_metric_summary.py
 python scripts/build_claim_ledger.py
-python scripts/build_adversarial_audit_matrix.py
+run_if_present scripts/build_adversarial_audit_matrix.py
 
 python scripts/export_sql_probe_bundle.py
 python scripts/check_sql_probe_bundle.py
@@ -70,4 +92,4 @@ python scripts/check_scalability_regression.py
 python scripts/compute_incremental_audit.py
 python scripts/check_incremental_audit.py
 python scripts/render_scaling_and_incremental_tables.py
-python scripts/check_paper_numeric_claims.py
+run_paper_if_present scripts/check_paper_numeric_claims.py

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Validate that the artifact is a clean installable Python package."""
 from __future__ import annotations
-import csv, importlib, sys
+import csv, importlib, subprocess, sys, tempfile
 from pathlib import Path
 
 try:
@@ -26,6 +26,10 @@ try:
         scm.get("root") == ".." and scm.get("relative_to") == "pyproject.toml",
         str(scm),
     )
+    add("archive_fallback_version_declared", bool(scm.get("fallback_version")), str(scm.get("fallback_version", "")))
+    optional = project.get("optional-dependencies", {})
+    add("paper_extra_declared", "paper" in optional and any("pypdf" in dep.lower() for dep in optional.get("paper", [])), str(optional.get("paper", [])))
+    add("realengines_extra_declared", "realengines" in optional and any("duckdb" in dep.lower() for dep in optional.get("realengines", [])) and any("psycopg" in dep.lower() for dep in optional.get("realengines", [])), str(optional.get("realengines", [])))
     tool = data.get("tool", {}).get("setuptools", {})
     pkg_dir = tool.get("package-dir", {}).get("optsemc", "")
     add("package_dir_exists", bool(pkg_dir) and (ROOT / pkg_dir).is_dir(), pkg_dir)
@@ -40,6 +44,21 @@ try:
         sys.path.insert(0, str(ROOT))
     module = importlib.import_module("optsemc.cli")
     add("console_script_target_imports", hasattr(module, "main"), "optsemc.cli:main")
+    with tempfile.TemporaryDirectory(prefix="optsemc-wheel-") as tmp:
+        cmd = [
+            sys.executable,
+            "-m",
+            "pip",
+            "wheel",
+            str(ROOT),
+            "--no-deps",
+            "--no-build-isolation",
+            "-w",
+            tmp,
+        ]
+        proc = subprocess.run(cmd, cwd=str(ROOT), text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=180)
+        wheels = sorted(Path(tmp).glob("optsemc-*.whl"))
+        add("wheel_builds_without_git_metadata", proc.returncode == 0 and bool(wheels), (wheels[0].name if wheels else proc.stdout[-500:]).strip())
 except Exception as exc:
     add("packaging_exception", False, type(exc).__name__ + ":" + str(exc))
 OUT.parent.mkdir(parents=True, exist_ok=True)

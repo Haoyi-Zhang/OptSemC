@@ -8,8 +8,44 @@ from pathlib import Path
 from typing import Sequence
 
 TEXT_SUFFIXES = {".py", ".md", ".txt", ".tex", ".bib", ".csv", ".json", ".jsonl", ".yaml", ".yml", ".toml", ".sh", ".cff", ""}
-EXCLUDE_DIRS = {".git", "__pycache__"}
-TRANSIENT_SUFFIXES = {".aux", ".log", ".out", ".toc", ".bbl", ".blg", ".pyc", ".pyo"}
+EXCLUDE_DIRS = {
+    ".git",
+    ".reference_guard_cache",
+    "__pycache__",
+    ".pytest_cache",
+    ".mypy_cache",
+    "build",
+    "dist",
+    "tmp",
+    "zenodo_artifact",
+}
+TRANSIENT_SUFFIXES = {
+    ".aux",
+    ".log",
+    ".out",
+    ".toc",
+    ".bbl",
+    ".blg",
+    ".fls",
+    ".fdb_latexmk",
+    ".synctex.gz",
+    ".pyc",
+    ".pyo",
+}
+GENERATED_SELF_CHECKS = {
+    "artifact/evaluation/package_files.csv",
+    "artifact/evaluation/package_fingerprint_summary.csv",
+    "artifact/evaluation/package_manifest.csv",
+    "artifact/evaluation/package_manifest_summary.csv",
+    "artifact/evaluation/package_manifest_check.csv",
+    "artifact/evaluation/package_snapshot_check.csv",
+    "artifact/evaluation/integrity_suite.csv",
+    "artifact/evaluation/fast_mainline_results.csv",
+    "artifact/evaluation/optsemc-artifact.sha256",
+    "artifact/evaluation/reference_guard_audit_latest.json",
+    "artifact/evaluation/reference_guard_audit_latest.md",
+    "artifact/evaluation/git_tree_status.txt",
+}
 CHUNK_SIZE = 1024 * 1024
 TEXT_PROBE_BYTES = 16 * 1024
 
@@ -26,9 +62,12 @@ class PackageFile:
         return {"path": self.path, "size": str(self.size), "sha256": self.sha256, "text": str(self.text).lower(), "category": self.category}
 
 
-def should_include(path: Path) -> bool:
-    parts = set(path.parts)
+def should_include(rel: Path, path: Path) -> bool:
+    parts = set(rel.parts)
     if parts & EXCLUDE_DIRS:
+        return False
+    rel_posix = rel.as_posix()
+    if rel_posix in GENERATED_SELF_CHECKS:
         return False
     if path.suffix in TRANSIENT_SUFFIXES:
         return False
@@ -87,9 +126,9 @@ def package_files(root: Path) -> tuple[PackageFile, ...]:
     """
     rows: list[PackageFile] = []
     for path in sorted(root.rglob("*")):
-        if not should_include(path):
-            continue
         rel = path.relative_to(root)
+        if not should_include(rel, path):
+            continue
         rows.append(PackageFile(rel.as_posix(), path.stat().st_size, file_sha256(path), is_text_file(path), categorize(rel)))
     return tuple(rows)
 

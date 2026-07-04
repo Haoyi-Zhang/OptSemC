@@ -1,7 +1,13 @@
 cff-version: 1.2.0
-title: "OptSem-C: Public Optimizer Contracts for Query Engine Portability"
+title: "OptSem-C: Benchmarking Projection Precision in Public Query-Optimizer Contracts"
 message: "If you use this artifact, cite the accompanying PVLDB paper."
 type: software
 authors:
   - name: "Anonymous Authors"
 license: MIT
+abstract: "OptSem-C is an anonymous artifact for auditing precision loss in public optimizer-contract comparisons. It packages the benchmark generator, grounded evidence certificates, validation gates, and reproduction scripts used by the accompanying PVLDB paper."
+keywords:
+  - query optimization
+  - benchmark
+  - reproducibility
+  - database systems

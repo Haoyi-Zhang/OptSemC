@@ -12,8 +12,21 @@ jobs:
       - name: Install package
         run: |
           python3 -m pip install --upgrade pip
-          python3 -m pip install -e artifact
+          python3 -m pip install -e "artifact[realengines]"
       - name: Run mainline checks
         run: |
           cd artifact
           ./run_mainline_checks.sh
+  package-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install package
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -e "artifact[realengines]"
+      - name: Run artifact-only deep checks
+        run: |
+          cd artifact
+          OPTSEMC_REQUIRE_CLEAN_GIT=1 python scripts/check_git_tree_state.py
+          ANONYMOUS_ARTIFACT_ONLY=1 ./run_deep_checks.sh

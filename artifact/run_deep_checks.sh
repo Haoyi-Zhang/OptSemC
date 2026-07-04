@@ -4,12 +4,32 @@ export PYTHONDONTWRITEBYTECODE=1
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 export PYTHONPATH="$SCRIPT_DIR:$SCRIPT_DIR/scripts${PYTHONPATH:+:$PYTHONPATH}"
-find .. -type d \( -name "__pycache__" -o -name ".pytest_cache" -o -name "*.egg-info" \) -prune -exec rm -rf {} +
-find .. -type f \( -name "*.pyc" -o -name "*.pyo" -o -name "*.aux" -o -name "*.log" -o -name "*.out" -o -name "*.toc" -o -name "*.fls" -o -name "*.fdb_latexmk" -o -name "*.bbl" -o -name "*.blg" -o -name "*.backup" \) -delete
+clean_transients() {
+  find .. -type d \( -name "__pycache__" -o -name ".pytest_cache" -o -name "*.egg-info" \) -prune -exec rm -rf {} +
+  find .. -type f \( -name "*.pyc" -o -name "*.pyo" -o -name "*.aux" -o -name "*.log" -o -name "*.out" -o -name "*.toc" -o -name "*.fls" -o -name "*.fdb_latexmk" -o -name "*.bbl" -o -name "*.blg" -o -name "*.backup" \) -delete
+  find .. -type f -name "git_tree_status.txt" -delete
+}
+clean_transients
 PY_TIMEOUT=${PY_TIMEOUT:-600}
 LATEX_TIMEOUT=${LATEX_TIMEOUT:-1200}
 run_py() { echo "[deep] python $*"; timeout "$PY_TIMEOUT" python -u "$@"; }
 run_py_latex() { echo "[deep] python $*"; timeout "$LATEX_TIMEOUT" python -u "$@"; }
+run_real_engine_check() {
+  if [[ "${RUN_LATEX_COMPILE:-0}" == "1" || "${OPTSEMC_REQUIRE_FRESH_REAL_ENGINE:-0}" == "1" ]]; then
+    echo "[deep] OPTSEMC_REQUIRE_FRESH_REAL_ENGINE=1 python $*"
+    OPTSEMC_REQUIRE_FRESH_REAL_ENGINE=1 timeout "$PY_TIMEOUT" python -u "$@"
+  else
+    run_py "$@"
+  fi
+}
+run_real_engine_validation_gate() {
+  if [[ "${RUN_LATEX_COMPILE:-0}" == "1" || "${OPTSEMC_REQUIRE_FRESH_REAL_ENGINE:-0}" == "1" ]]; then
+    echo "[deep] bash run_cloud_real_engine_validation.sh"
+    timeout "$PY_TIMEOUT" bash run_cloud_real_engine_validation.sh
+  else
+    run_py scripts/check_real_engine_validation.py
+  fi
+}
 ARTIFACT_ONLY=0
 if [[ ! -d ../Paper || "${ANONYMOUS_ARTIFACT_ONLY:-0}" == "1" ]]; then
   ARTIFACT_ONLY=1
@@ -52,6 +72,8 @@ run_py scripts/compute_incremental_audit.py
 run_py scripts/check_incremental_audit.py
 run_py scripts/compute_incremental_update_stress.py
 run_py scripts/check_incremental_update_stress.py
+run_py scripts/compute_grounded_statistical_robustness.py --boot 200
+run_py scripts/check_statistical_robustness.py
 run_py scripts/compute_leave_out_stability.py
 run_py scripts/check_leave_out_stability.py
 run_py scripts/compute_engine_family_stress.py
@@ -60,6 +82,8 @@ run_py scripts/compute_guard_quality.py
 run_py scripts/check_guard_quality.py
 run_py scripts/compute_feature_holdout_repair.py
 run_py scripts/check_feature_holdout_repair.py
+run_py scripts/compute_repair_generalization.py
+run_py scripts/check_repair_generalization.py
 run_py scripts/render_scaling_and_incremental_tables.py
 run_paper_py scripts/check_paper_numeric_claims.py
 run_py scripts/check_architecture_contract.py
@@ -74,13 +98,15 @@ run_py scripts/compute_benchmark_motif_difficulty.py
 run_py scripts/check_benchmark_motif_difficulty.py
 run_py scripts/execute_external_motif_suite.py
 run_py scripts/check_external_motif_execution.py
-run_py scripts/check_real_engine_validation.py
+run_real_engine_validation_gate
 run_py scripts/check_no_cache_package.py
 run_py scripts/refresh_grounded_summaries.py
 run_py scripts/check_grounded_summary_consistency.py
 run_py scripts/annotate_public_provenance.py
 run_py scripts/check_public_provenance.py
 run_py scripts/compute_baseline_portfolio.py
+run_py scripts/compute_practice_projection_surfaces.py
+run_py scripts/check_practice_projection_surfaces.py
 run_py scripts/compute_external_benchmark_crosswalk.py
 run_py scripts/compute_external_benchmark_suite.py
 run_py scripts/check_external_benchmark_suite.py
@@ -100,7 +126,7 @@ run_py scripts/check_benchmark_compiler.py
 run_py scripts/compute_differential_reproducibility.py
 run_py scripts/check_differential_reproducibility.py
 run_py scripts/check_reproducibility_package.py
-run_paper_py scripts/check_package_integrity.py
+run_py scripts/check_package_integrity.py
 run_paper_py scripts/check_package_coherence.py
 if [[ "${RUN_LATEX_COMPILE:-0}" == "1" ]]; then
   run_paper_py_latex scripts/check_latex_compile.py
@@ -157,12 +183,27 @@ run_py scripts/build_claim_metric_summary.py
 run_py scripts/build_claim_ledger.py
 run_py scripts/check_artifact_hygiene.py
 run_paper_py scripts/check_manuscript_style.py
+clean_transients
 run_py scripts/check_package_cleanliness.py
 run_py scripts/run_repository_audit.py
 run_py scripts/check_repository_quality.py
 run_py scripts/check_codebase_scale.py
 run_py scripts/check_artifact_registry.py
+run_py scripts/build_environment_report.py
+run_py scripts/check_environment_report.py
+run_real_engine_check scripts/check_real_engine_validation.py
+run_py scripts/build_claim_metric_summary.py
+run_py scripts/build_claim_ledger.py
+run_py scripts/build_claim_evidence_graph.py
+run_py scripts/check_claim_evidence_graph.py
+run_py scripts/check_git_tree_state.py
 run_py scripts/build_package_fingerprint.py
+clean_transients
+run_py scripts/build_package_manifest.py
+run_py scripts/check_package_manifest.py
+run_py scripts/check_certificate_freshness.py
+run_py scripts/build_package_fingerprint.py
+clean_transients
 run_py scripts/build_package_manifest.py
 run_py scripts/check_package_manifest.py
 run_py scripts/check_package_snapshot.py

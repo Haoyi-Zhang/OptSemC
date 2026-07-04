@@ -32,7 +32,7 @@ def write_csv(path: Path, rows: list[dict[str, object]], fieldnames: list[str]) 
 
 
 def compress_signatures(maps: dict[tuple[str, str], object]) -> tuple[list[object], dict[tuple[str, str], int], dict[int, int]]:
-    """Compress duplicate exact signatures before evaluating the finite lattice."""
+    """Compress duplicate reference signatures before evaluating the finite lattice."""
     signature_to_id: dict[object, int] = {}
     signatures: list[object] = []
     key_to_sig_id: dict[tuple[str, str], int] = {}

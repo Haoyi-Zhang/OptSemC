@@ -33,6 +33,7 @@ Thumbs.db
 .venv/
 quality_audits/
 OptSemC_quality_audits/
+tmp/
 zenodo_*/
 *.zip
 *.tar

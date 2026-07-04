@@ -1,10 +1,10 @@
 """Severity metrics for contract-level false-equivalence witnesses.
 
 Counts tell how often a projected comparison fabricates equivalence.  Severity
-measures how far apart the exact public-contract signatures are when that
-happens.  The metric is intentionally finite and deterministic: signatures are
-sets of evidence-supported atoms, so the exact distance is the Jaccard distance
-on those sets, and the atom delta is the size of the symmetric difference.
+measures how far apart the reference signatures are when that happens.  The
+metric is intentionally finite and deterministic: signatures are sets of
+admitted public-evidence atoms, so the distance is the Jaccard distance on
+those sets, and the atom delta is the size of the symmetric difference.
 """
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ from .semantics import ActionAtom, ContractSignature, FIELDS
 
 
 def jaccard_distance(left: ContractSignature, right: ContractSignature) -> float:
-    """Return set Jaccard distance between exact contract signatures."""
+    """Return set Jaccard distance between reference signatures."""
     union = left | right
     if not union:
         return 0.0
@@ -50,7 +50,7 @@ def field_value_delta(left: ContractSignature, right: ContractSignature, fields:
 
 
 @dataclass(frozen=True)
-class FalsePortabilitySeverity:
+class FalseEquivalenceSeverity:
     projection: str
     false_equivalences: int
     mean_exact_distance: float
@@ -92,7 +92,7 @@ def false_equivalence_severity(
     engines: Sequence[str],
     probes: Sequence[str],
     projection: str,
-) -> FalsePortabilitySeverity:
+) -> FalseEquivalenceSeverity:
     """Summarize severity among pairs falsely equated by a projection."""
     projected_cache = {key: project_signature(sig, projection) for key, sig in maps.items()}
     empty: ContractSignature = frozenset()
@@ -113,9 +113,9 @@ def false_equivalence_severity(
             deltas.append(delta)
             fields.update(field_value_delta(left_sig, right_sig))
     if not distances:
-        return FalsePortabilitySeverity(projection, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0, "none")
+        return FalseEquivalenceSeverity(projection, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0, "none")
     dominant = fields.most_common(1)[0][0] if fields else "none"
-    return FalsePortabilitySeverity(
+    return FalseEquivalenceSeverity(
         projection=projection,
         false_equivalences=len(distances),
         mean_exact_distance=mean(distances),

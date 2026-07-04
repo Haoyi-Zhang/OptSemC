@@ -16,7 +16,7 @@ T = TypeVar("T", bound=Mapping[str, object])
 
 def read_jsonl(path: Path) -> Iterator[dict]:
     """Yield JSON objects from a JSONL file with line-aware errors."""
-    with path.open(encoding="utf-8") as handle:
+    with path.open(encoding="utf-8-sig") as handle:
         for line_no, line in enumerate(handle, 1):
             if not line.strip():
                 continue
@@ -38,7 +38,7 @@ def write_jsonl(path: Path, rows: Iterable[Mapping[str, object]], *, sort_keys: 
 
 
 def read_csv(path: Path) -> List[dict]:
-    with path.open(newline="", encoding="utf-8") as handle:
+    with path.open(newline="", encoding="utf-8-sig") as handle:
         return list(csv.DictReader(handle))
 
 
@@ -59,7 +59,7 @@ def write_csv(path: Path, rows: Sequence[Mapping[str, object]], fieldnames: Sequ
 def read_yaml(path: Path) -> object:
     if yaml is None:
         raise RuntimeError("PyYAML is required to read YAML artifacts")
-    with path.open(encoding="utf-8") as handle:
+    with path.open(encoding="utf-8-sig") as handle:
         return yaml.safe_load(handle)
 
 

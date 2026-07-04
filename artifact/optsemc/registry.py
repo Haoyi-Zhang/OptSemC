@@ -7,6 +7,15 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable, Iterable, Sequence
 
+ARTIFACT_ONLY_OMIT = {
+    'evaluation/paper_table_source_check_summary.csv',
+    'evaluation/paper_quality.csv',
+    'evaluation/pdf_integrity.csv',
+    'evaluation/reference_quality.csv',
+    'evaluation/latex_compile_check.csv',
+    'evaluation/package_files.csv',
+}
+
 @dataclass(frozen=True)
 class ArtifactSpec:
     path: str
@@ -57,6 +66,7 @@ def default_artifact_registry() -> tuple[ArtifactSpec, ...]:
         ArtifactSpec('grounded/verified_rules.jsonl', 'jsonl', 1),
         ArtifactSpec('grounded/verified_segments.jsonl', 'jsonl', 1),
         ArtifactSpec('grounded/verified_sources.csv', 'csv', 1),
+        ArtifactSpec('config/practice_projection_surfaces.csv', 'csv', 1),
         ArtifactSpec('benchmark/generated_probes.jsonl', 'jsonl', 1),
         ArtifactSpec('evaluation/grounded_contract_maps.jsonl', 'jsonl', 1),
         ArtifactSpec('evaluation/grounded_conflicts.jsonl', 'jsonl', 0),
@@ -74,13 +84,27 @@ def default_artifact_registry() -> tuple[ArtifactSpec, ...]:
         ArtifactSpec('evaluation/proof_carrying_semantics.json', 'json', 1),
         ArtifactSpec('evaluation/repository_audit.csv', 'csv', 1),
         ArtifactSpec('evaluation/repository_quality.csv', 'csv', 1),
+        ArtifactSpec('evaluation/repository_quality_check.csv', 'csv', 1),
         ArtifactSpec('evaluation/package_manifest.csv', 'csv', 1),
         ArtifactSpec('evaluation/package_manifest_summary.csv', 'csv', 1),
+        ArtifactSpec('evaluation/package_manifest_check.csv', 'csv', 1),
         ArtifactSpec('evaluation/engine_pair_false_equivalence_matrix.csv', 'csv', 1),
         ArtifactSpec('evaluation/claim_ledger_check.csv', 'csv', 1),
         ArtifactSpec('evaluation/theorem_ledger.csv', 'csv', 1),
         ArtifactSpec('evaluation/package_snapshot_check.csv', 'csv', 1),
         ArtifactSpec('evaluation/integrity_suite.csv', 'csv', 1),
+        ArtifactSpec('evaluation/practice_projection_surfaces.csv', 'csv', 1),
+        ArtifactSpec('evaluation/practice_projection_surface_summary.csv', 'csv', 1),
+        ArtifactSpec('evaluation/practice_projection_surfaces_check.csv', 'csv', 1),
+        ArtifactSpec('evaluation/real_engine_validation_check.csv', 'csv', 1),
+        ArtifactSpec('evaluation/real_engine_validation_environment.csv', 'csv', 1),
+        ArtifactSpec('evaluation/real_engine_fresh_run.csv', 'csv', 1, required=False),
+        ArtifactSpec('evaluation/environment.csv', 'csv', 1),
+        ArtifactSpec('evaluation/environment_check.csv', 'csv', 1),
+        ArtifactSpec('evaluation/git_tree_state.csv', 'csv', 1),
+        ArtifactSpec('evaluation/git_tree_porcelain.txt', 'text', 1),
+        ArtifactSpec('evaluation/git_tree_state_check.csv', 'csv', 1),
+        ArtifactSpec('evaluation/certificate_freshness_check.csv', 'csv', 1),
         ArtifactSpec('evaluation/core_library_contract.csv', 'csv', 1),
         ArtifactSpec('evaluation/reproducibility_package.csv', 'csv', 1),
         ArtifactSpec('evaluation/schema_coverage_check.csv', 'csv', 1),
@@ -132,6 +156,7 @@ def default_artifact_registry() -> tuple[ArtifactSpec, ...]:
         ArtifactSpec('evaluation/grounded/semantic_field_shapley.csv', 'csv', 1),
         ArtifactSpec('evaluation/grounded/diagnostic_probe_order.csv', 'csv', 1),
         ArtifactSpec('evaluation/grounded/repair_generalization_summary.csv', 'csv', 1),
+        ArtifactSpec('evaluation/repair_generalization_check.csv', 'csv', 1),
         ArtifactSpec('evaluation/grounded/trap_rate.csv', 'csv', 1),
         ArtifactSpec('evaluation/grounded/conditional_trap_rate.csv', 'csv', 1),
         ArtifactSpec('evaluation/grounded/pair_false_equivalence.csv', 'csv', 1),
@@ -174,10 +199,17 @@ def default_artifact_registry() -> tuple[ArtifactSpec, ...]:
     return tuple(specs)
 
 def validate_registry(root: Path, specs: Sequence[ArtifactSpec] | None = None) -> tuple[ArtifactValidation, ...]:
-    return tuple(validate_spec(root, spec) for spec in (specs or default_artifact_registry()))
+    return tuple(validate_spec(root, spec) for spec in (specs or registry_for_root(root)))
 
 def registry_rows(specs: Sequence[ArtifactSpec] | None = None) -> list[dict[str, str]]:
     return [spec.as_row() for spec in (specs or default_artifact_registry())]
+
+def registry_for_root(root: Path) -> tuple[ArtifactSpec, ...]:
+    specs = default_artifact_registry()
+    artifact_only = not (root.parent / "Paper").exists()
+    if not artifact_only:
+        return specs
+    return tuple(spec for spec in specs if spec.path not in ARTIFACT_ONLY_OMIT)
 
 def registry_summary(validations: Sequence[ArtifactValidation]) -> list[dict[str, str]]:
     total = len(validations)

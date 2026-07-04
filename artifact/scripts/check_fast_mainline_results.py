@@ -1,25 +1,30 @@
 #!/usr/bin/env python3
 """Fast package verification over frozen OptSem-C certificates."""
 from __future__ import annotations
-import csv, hashlib, shutil, sys
+import csv, hashlib, sys
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 ART = ROOT / 'artifact'
 EVAL = ART / 'evaluation'
 OUT = EVAL / 'fast_mainline_results.csv'
 TRANSIENT_SUFFIXES = ('.aux','.log','.out','.toc','.bbl','.blg','.fls','.fdb_latexmk','.pyc','.pyo','.backup')
-IGNORED_DIRS = {'.git','__pycache__','.pytest_cache','.mypy_cache','build','dist','zenodo_artifact'}
+IGNORED_DIRS = {'.git','.reference_guard_cache','__pycache__','.pytest_cache','.mypy_cache','build','dist','tmp','zenodo_artifact'}
 SKIP = {
  'artifact/evaluation/package_manifest.csv','artifact/evaluation/package_manifest_summary.csv','artifact/evaluation/package_manifest_check.csv',
+ 'artifact/evaluation/package_files.csv','artifact/evaluation/package_fingerprint_summary.csv',
  'artifact/evaluation/package_snapshot_check.csv','artifact/evaluation/integrity_suite.csv','artifact/evaluation/fast_mainline_results.csv',
+ 'artifact/evaluation/optsemc-artifact.sha256','artifact/evaluation/reference_guard_audit_latest.json','artifact/evaluation/reference_guard_audit_latest.md',
+ 'artifact/evaluation/git_tree_status.txt',
 }
 CERT_FILES = [
  'package_cleanliness.csv','package_manifest_check.csv','package_integrity.csv','manuscript_style.csv','format_compliance.csv','visual_latex_style.csv',
  'projection_resolution_check.csv','projection_frontier_antichain_check.csv','architecture_contract.csv','packaging_installability.csv',
- 'scalability_stress_check.csv','algorithmic_scaling_check.csv','guard_quality_check.csv','feature_holdout_repair_check.csv','scalability_regression_check.csv','incremental_audit_check.csv','incremental_update_check.csv',
+ 'practice_projection_surfaces_check.csv',
+ 'scalability_stress_check.csv','algorithmic_scaling_check.csv','guard_quality_check.csv','feature_holdout_repair_check.csv','repair_generalization_check.csv','scalability_regression_check.csv','incremental_audit_check.csv','incremental_update_check.csv',
  'leave_out_stability_check.csv','engine_family_stress_check.csv','witness_diversity_check.csv','witness_dispersion_check.csv','paper_numeric_claims.csv',
  'latex_compile_check.csv','pdf_integrity.csv','reference_quality.csv','paper_quality.csv','paper_table_renderers.csv','paper_table_source_check.csv','repository_quality_check.csv',
  'package_snapshot_check.csv','integrity_suite.csv','source_witness_support_check.csv','side_balanced_witness_support_check.csv','claim_evidence_graph_check.csv'
+ ,'real_engine_validation_check.csv','environment_check.csv','git_tree_state_check.csv','claim_ledger_check.csv','certificate_freshness_check.csv'
 ]
 PAPER_CERT_FILES = {
  'manuscript_style.csv','format_compliance.csv','visual_latex_style.csv','paper_numeric_claims.csv',
@@ -54,16 +59,6 @@ def row_ok(row: dict[str,str]) -> bool:
 rows=[]
 def add(check, passed, details=''):
     rows.append({'check':check,'passed':str(bool(passed)).lower(),'details':str(details)})
-
-# Remove interpreter caches created by this checker before auditing the tree.
-for cache in ROOT.rglob('__pycache__'):
-    shutil.rmtree(cache, ignore_errors=True)
-for cache in ROOT.rglob('*.egg-info'):
-    if cache.is_dir():
-        shutil.rmtree(cache, ignore_errors=True)
-for pyc in ROOT.rglob('*.py[co]'):
-    try: pyc.unlink()
-    except OSError: continue
 
 paper_present = (ROOT / 'Paper').exists()
 allowed_top_level = {'.git', '.github', '.gitattributes', '.gitignore', '.cloudignore', 'Paper', 'README.md', 'artifact', 'zenodo_artifact'}

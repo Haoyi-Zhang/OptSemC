@@ -22,11 +22,11 @@
     font=\rmfamily\bfseries\fontsize{6.7}{7.2}\selectfont,
     minimum size=.40cm, inner sep=0pt},
   chip/.style={rounded corners=1.5pt, draw=black!14, fill=white,
-    font=\rmfamily\fontsize{6.62}{7.22}\selectfont, text=vldbGray,
+    font=\rmfamily\fontsize{6.7}{7.35}\selectfont, text=vldbGray,
     inner xsep=2.1pt, inner ysep=.8pt, text height=1.28ex, text depth=.20ex},
   phase/.style={font=\rmfamily\bfseries\fontsize{6.72}{7.28}\selectfont,
     text=vldbGray, align=center, text height=1.34ex, text depth=.22ex},
-  carried/.style={font=\rmfamily\fontsize{6.62}{7.22}\selectfont,
+  carried/.style={font=\rmfamily\fontsize{6.7}{7.35}\selectfont,
     text=vldbGray, align=center, text height=1.28ex, text depth=.20ex},
   flow/.style={vflow}
 ]
@@ -37,7 +37,7 @@
   \node[lane, minimum width=7.42cm, minimum height=2.28cm] at (13.84,1.68) {};
 \end{scope}
 
-\node[phase, anchor=west] at (.36,2.94) {construct exact contracts};
+\node[phase, anchor=west] at (.36,2.94) {construct reference contracts};
 \node[phase, anchor=west] at (10.36,2.94) {audit the projected comparison};
 
 \node[stage] (evidence) at (1.46,2.18) {\textbf{Public evidence}\\287 spans};
@@ -47,12 +47,12 @@
 \node[stage] (map) at (6.62,2.18) {\textbf{Engine--probe maps}\\4,216 probes};
 \node[num] at (5.70,2.56) {3};
 
-\node[sig] (sig) at (9.48,2.18) {\textbf{Exact signatures}\\1,288 classes};
+\node[sig] (sig) at (9.48,2.18) {\textbf{Reference signatures}\\1,288 classes};
 \node[num, fill=vldbViolet!86] at (8.56,2.56) {4};
 \node[sig] (proj) at (12.36,2.18) {\textbf{Projected view}\\keyword: 148 classes};
 \node[num, fill=vldbViolet!86] at (11.44,2.56) {5};
 \node[witness] (kernel) at (12.36,.90)
-  {\textbf{Counter-witness}\\exact $\ne$; projected $=$};
+  {\textbf{Counter-witness}\\reference $\ne$; projected $=$};
 \node[repair] (frontier) at (15.50,.90)
   {\textbf{Repair certificate}\\layer+placement};
 
@@ -73,7 +73,7 @@
 \draw[flow, draw=vldbRose!70!black] (proj.south) -- (kernel.north);
 \draw[flow, draw=vldbTeal!72!black] (kernel) -- (frontier);
 \end{tikzpicture}
-\caption{Contract-comparison pipeline. OptSem-C turns public evidence into exact signatures, exposes projection counter-witnesses, and reports finite repair certificates.}
-\Description{A two-lane pipeline showing evidence spans, guarded rules, contract maps, exact signatures, projected views, a witness test, and a repair frontier. A carried-field note lists the semantic fields preserved before projection.}
+\caption{Contract-comparison pipeline. OptSem-C turns public evidence into reference signatures, exposes projection counter-witnesses, and reports finite repair certificates.}
+\Description{A two-lane pipeline showing evidence spans, guarded rules, contract maps, reference signatures, projected views, a witness test, and a repair frontier. A carried-field note lists the semantic fields preserved before projection.}
 \label{fig:contract-model}
 \end{figure*}

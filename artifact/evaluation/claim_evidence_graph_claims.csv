@@ -1,23 +1,49 @@
 claim_id,claim,supporting_files,existing_supporting_files,checking_gates,passed
-claim:C10_external_suite,The external benchmark-family suite covers 90/90 declared optimizer motifs across 12 families; each motif has a deterministic-catalog validation representative.,4,4,1,true
-claim:C11_real_engine_validation,The generated probes execute on DuckDB and PostgreSQL with zero failures for the full corpus and the motif representatives.,5,5,1,true
-claim:C12_theorem_ledger,Every finite theorem obligation asserted in the paper is checked by the artifact.,1,1,1,true
-claim:C1_grounded_corpus,"The grounded mainline contains 287 verified rules, 287 evidence spans, and 26 sources.",3,3,1,true
+claim:C10_source_robustness,Keyword and operator-only projection-induced collisions remain nonzero after removing any single public source.,1,1,1,true
+claim:C11_external_suite,The external benchmark-family suite covers 90/90 declared optimizer motifs across 12 families; each motif has a deterministic-catalog validation representative.,4,4,1,true
+claim:C12_real_engine_validation,The generated probes execute on DuckDB and PostgreSQL with zero failures for the full corpus and the motif representatives.,7,7,1,true
+claim:C13_formal_obligations,Every finite formal obligation asserted in the paper is checked by the replay package.,1,1,1,true
+claim:C1_grounded_corpus,"The grounded mainline contains 287 admitted source-linked rules, 287 evidence spans, and 26 sources.",3,3,1,true
 claim:C2_probe_coverage,"OptSemBench-C generates 4,216 probes covering 7,112 renderable feature interactions.",3,3,1,true
 claim:C3_keyword_false_equivalence,"Keyword projection induces 254 contract-collision witnesses among 2,284 declared equivalences.",2,2,1,true
 claim:C4_operator_false_equivalence,"Operator-only projection induces 238 contract-collision witnesses among 2,268 declared equivalences.",2,2,1,true
-claim:C5_exact_negative_control,Exact contract comparison produces zero projection-induced collisions.,2,2,1,true
+claim:C5_reference_negative_control,Reference-signature comparison over admitted public evidence produces zero projection-induced collisions.,2,2,1,true
 claim:C6_adversarial_baselines,"The baseline suite contains 17 executable projections, including one-field adversarial baselines and strengthened matrix baselines.",2,2,1,true
-claim:C7_repair_basis,The layer+placement semantic basis repairs all 498 projection-induced collisions across headline projections.,3,3,1,true
-claim:C8_minimality,Repair certificates are sufficient and minimal under finite enumeration and hitting-set checks.,3,3,1,true
-claim:C9_source_robustness,Keyword and operator-only projection-induced collisions remain nonzero after removing any single public source.,1,1,1,true
-claim:theorem_C1_adversarial_baseline_suite,C1 adversarial baseline suite,2,2,1,true
-claim:theorem_T1_finite_evaluation,T1 finite evaluation,4,4,1,true
-claim:theorem_T2_projection_loss,T2 projection loss,2,2,1,true
-claim:theorem_T3_conflict_aware_merge,T3 conflict-aware merge,2,2,1,true
-claim:theorem_T4_projection_lattice_monotonicity,T4 projection-lattice monotonicity,1,1,1,true
-claim:theorem_T5_projection_proof_obligations,T5 projection proof obligations,1,1,1,true
-claim:theorem_T6_minimum_repair_certificates,T6 minimum repair certificates,2,2,1,true
-claim:theorem_T7_semantic_repair_basis,T7 semantic repair basis,2,2,1,true
-claim:theorem_T8_benchmark_coverage,T8 benchmark coverage,3,3,1,true
-claim:theorem_T9_public_provenance,T9 public provenance,1,1,1,true
+claim:C7_practice_projection_surfaces,"The public source-surface audit observes keyword labels in all 26 sources, yes/no controls in 12 sources, operator-family labels in all 26 sources, and no source exposes the full reference-signature payload.",3,3,1,true
+claim:C8_repair_basis,The layer+placement semantic basis repairs all 498 projection-induced collisions across headline projections.,3,3,1,true
+claim:C9_minimality,Repair certificates are sufficient and minimal under finite enumeration and hitting-set checks.,3,3,1,true
+claim:formal_C1_adversarial_baseline_suite,C1 adversarial baseline suite,2,2,1,true
+claim:formal_F1_finite_evaluation,F1 finite evaluation,4,4,1,true
+claim:formal_F2_projection_loss,F2 projection loss,2,2,1,true
+claim:formal_F3_conflict_aware_merge,F3 conflict-aware merge,2,2,1,true
+claim:formal_F4_projection_lattice_monotonicity,F4 projection-lattice monotonicity,1,1,1,true
+claim:formal_F5_projection_proof_obligations,F5 projection proof obligations,1,1,1,true
+claim:formal_F6_minimum_repair_certificates,F6 minimum repair certificates,2,2,1,true
+claim:formal_F7_semantic_repair_basis,F7 semantic repair basis,2,2,1,true
+claim:formal_F8_benchmark_coverage,F8 benchmark coverage,3,3,1,true
+claim:formal_F9_public_provenance,F9 public provenance,1,1,1,true
+claim:obligation_field_lattice_finite_cardinality,field_lattice:finite_cardinality,2,2,1,true
+claim:obligation_field_lattice_subset_order_well_formed,field_lattice:subset_order_well_formed,2,2,1,true
+claim:obligation_projection_determinism_decision_time_only,projection_determinism:decision_time_only,2,2,1,true
+claim:obligation_projection_determinism_keyword,projection_determinism:keyword,2,2,1,true
+claim:obligation_projection_determinism_kind_only,projection_determinism:kind_only,2,2,1,true
+claim:obligation_projection_determinism_layer_only,projection_determinism:layer_only,2,2,1,true
+claim:obligation_projection_determinism_no_decision_time,projection_determinism:no_decision_time,2,2,1,true
+claim:obligation_projection_determinism_no_modality,projection_determinism:no_modality,2,2,1,true
+claim:obligation_projection_determinism_no_observability,projection_determinism:no_observability,2,2,1,true
+claim:obligation_projection_determinism_no_placement,projection_determinism:no_placement,2,2,1,true
+claim:obligation_projection_determinism_observability_only,projection_determinism:observability_only,2,2,1,true
+claim:obligation_projection_determinism_operator_kind_layer,projection_determinism:operator_kind_layer,2,2,1,true
+claim:obligation_projection_determinism_operator_kind_placement,projection_determinism:operator_kind_placement,2,2,1,true
+claim:obligation_projection_determinism_operator_kind_surface,projection_determinism:operator_kind_surface,2,2,1,true
+claim:obligation_projection_determinism_operator_only,projection_determinism:operator_only,2,2,1,true
+claim:obligation_projection_determinism_placement_only,projection_determinism:placement_only,2,2,1,true
+claim:obligation_projection_determinism_state_only,projection_determinism:state_only,2,2,1,true
+claim:obligation_projection_determinism_strict,projection_determinism:strict,2,2,1,true
+claim:obligation_projection_determinism_yesno,projection_determinism:yesno,2,2,1,true
+claim:obligation_state_join_semilattice_associative,state_join_semilattice:associative,2,2,1,true
+claim:obligation_state_join_semilattice_commutative,state_join_semilattice:commutative,2,2,1,true
+claim:obligation_state_join_semilattice_conflict_absorbing,state_join_semilattice:conflict_absorbing,2,2,1,true
+claim:obligation_state_join_semilattice_idempotent,state_join_semilattice:idempotent,2,2,1,true
+claim:obligation_state_join_semilattice_unspec_identity,state_join_semilattice:unspec_identity,2,2,1,true
+claim:obligation_strict_projection_identity_cardinality_preserved,strict_projection_identity:cardinality_preserved,2,2,1,true

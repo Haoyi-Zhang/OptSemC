@@ -1,6 +1,6 @@
 # Reproducibility Guide
 
-This artifact reproduces the numerical claims in *OptSem-C: Public Optimizer Contracts for Query Engine Portability*.
+This artifact reproduces the numerical claims in *OptSem-C: Benchmarking Projection Precision in Public Query-Optimizer Contracts*.
 
 ## Fast verification
 
@@ -9,7 +9,9 @@ cd artifact
 PYTHONDONTWRITEBYTECODE=1 ./run_mainline_checks.sh
 ```
 
-This command checks package hygiene, manifest coherence, core frozen certificates, paper/table alignment, source-witness support, and key numerical targets.
+This command runs package unit tests, checks package hygiene, verifies manifest coherence, and then checks core frozen certificates, paper/table alignment, source-witness support, and key numerical targets.
+
+On the Linux validation machine used for replay, the fast path completes in minutes and the deep path regenerates derived corpus, projection, SQL, and integrity outputs. Exact package, Python, dependency, and platform details are written to `evaluation/environment.csv`.
 
 ## Unit tests
 
@@ -27,7 +29,7 @@ cd artifact
 PYTHONDONTWRITEBYTECODE=1 ./run_deep_checks.sh
 ```
 
-The deep replay rebuilds derived measurements from the grounded corpus and benchmark specifications. It is more expensive than the fast check because it regenerates contract maps, probe coverage, SQL validation, projection diagnostics, repair certificates, and paper-alignment tables.
+The deep replay rebuilds derived measurements from the grounded corpus and benchmark specifications. It is more expensive than the fast check because it regenerates contract maps, probe coverage, SQL validation, projection diagnostics, repair certificates, and paper-alignment tables. In an anonymous artifact-only archive, paper-build checks are skipped automatically and the package snapshot is checked against the replay package scope.
 
 ## Cloud real-engine validation
 
@@ -36,11 +38,11 @@ cd artifact
 PYTHON=/path/to/python OPTSEMC_POSTGRES_DSN="dbname=optsemc user=optsemc" ./run_cloud_real_engine_validation.sh
 ```
 
-This replay runs the generated probes on DuckDB and PostgreSQL and then checks the saved certificates. It is intended for a cloud machine with PostgreSQL available; the deterministic-catalog checks remain the portable baseline.
+This replay runs the generated probes on DuckDB and PostgreSQL and then checks the newly written certificates in fresh mode. It is intended for a cloud machine with PostgreSQL available; the deterministic-catalog checks remain the portable baseline. The saved CSVs in the package are certificate evidence until this command is rerun.
 
 ## Key targets
 
-- 287 verified public-contract rules.
+- 287 admitted source-linked public-contract rules.
 - 287 public evidence spans.
 - 4,216 executable SQL probes.
 - 7,112 valid optimizer-feature interactions.

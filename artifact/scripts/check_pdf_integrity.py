@@ -25,6 +25,25 @@ try:
         if any(line.strip().upper() == 'REFERENCES' for line in text.splitlines())
     ]
     add('body_pages_12_references_start_13', ref_pages and ref_pages[0] == 13, ref_pages, 'references start on page 13')
+    if ref_pages:
+        first_ref_lines = [line.strip() for line in page_texts[ref_pages[0] - 1].splitlines() if line.strip()]
+        add(
+            'reference_page_has_no_body_prefix',
+            bool(first_ref_lines) and first_ref_lines[0].upper() == 'REFERENCES',
+            first_ref_lines[:3],
+            'first substantive line is REFERENCES',
+        )
+    else:
+        add('reference_page_has_no_body_prefix', False, 'no reference page', 'first substantive line is REFERENCES')
+    if len(page_texts) >= 12:
+        add(
+            'body_page_12_has_no_references_heading',
+            not any(line.strip().upper() == 'REFERENCES' for line in page_texts[11].splitlines()),
+            'checked',
+            'no REFERENCES heading on body page 12',
+        )
+    else:
+        add('body_page_12_has_no_references_heading', False, f'pages={len(page_texts)}', '12 body pages')
 except Exception as e:
     add('pdf_readable_by_pypdf', False, type(e).__name__, 'readable')
     pages = 0
@@ -33,7 +52,8 @@ try:
     proc = subprocess.run(['pdftotext', str(PDF), '-'], text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=30)
     text = proc.stdout if proc.returncode == 0 else ''
     add('pdf_text_extractable', proc.returncode == 0 and len(text) > 1000, len(text), '>1000 chars')
-    add('title_present', 'Public Optimizer Contracts' in text, 'yes' if 'Public Optimizer Contracts' in text else 'no', 'yes')
+    title_seen = 'Benchmarking Projection Precision' in text and 'Public Query-Optimizer Contracts' in text
+    add('title_present', title_seen, 'yes' if title_seen else 'no', 'yes')
     normalized = ' '.join(text.split()).lower()
     collision_claim = (
         'contract collision' in normalized

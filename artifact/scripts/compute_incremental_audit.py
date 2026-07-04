@@ -51,22 +51,24 @@ for projection in ("strict", "keyword", "operator_only", "operator_kind_surface"
         "work_factor": f"{r.work_reduction_factor:.1f}x",
     })
 write_csv(E / "incremental_audit_paper.csv", paper_rows, ["projection", "checks", "false", "drift", "work_factor"])
-# Render a compact LaTeX table used by the paper.
-table_path = ROOT.parent / "Paper" / "latex" / "tables" / "tab_incremental_audit.tex"
-lines = [
-    r"\begin{table}[t]",
-    r"\caption{Incremental comparison audit. Each row maintains pairwise projection counts by streaming probes one at a time, then independently recomputes the full prefix. Drift is the absolute count mismatch; work factor is the reduction against recomputing every prefix from scratch.}",
-    r"\label{tab:incremental-audit}",
-    r"\centering",
-    r"\footnotesize",
-    r"\begin{tabular}{lrrrr}",
-    r"\toprule",
-    r"Projection & Checks & False eq. & Drift & Work factor \\",
-    r"\midrule",
-]
-for r in paper_rows:
-    row_end = r"\\"
-    lines.append(f"{r['projection']} & {int(r['checks']):,} & {int(r['false']):,} & {r['drift']} & {r['work_factor']} {row_end}")
-lines += [r"\bottomrule", r"\end{tabular}", r"\end{table}"]
-table_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+paper_root = ROOT.parent / "Paper"
+if paper_root.exists():
+    # Render a compact LaTeX table used by the full manuscript checkout.
+    table_path = paper_root / "latex" / "tables" / "tab_incremental_audit.tex"
+    lines = [
+        r"\begin{table}[t]",
+        r"\caption{Incremental comparison audit. Each row maintains pairwise projection counts by streaming probes one at a time, then independently recomputes the full prefix. Drift is the absolute count mismatch; work factor is the reduction against recomputing every prefix from scratch.}",
+        r"\label{tab:incremental-audit}",
+        r"\centering",
+        r"\footnotesize",
+        r"\begin{tabular}{lrrrr}",
+        r"\toprule",
+        r"Projection & Checks & False eq. & Drift & Work factor \\",
+        r"\midrule",
+    ]
+    for r in paper_rows:
+        row_end = r"\\"
+        lines.append(f"{r['projection']} & {int(r['checks']):,} & {int(r['false']):,} & {r['drift']} & {r['work_factor']} {row_end}")
+    lines += [r"\bottomrule", r"\end{tabular}", r"\end{table}"]
+    table_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 print(f"Incremental audit: {len(rows)} budget rows, max_drift={summary[5]['value']}")

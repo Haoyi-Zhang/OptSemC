@@ -9,23 +9,6 @@ from optsemc.manifest import build_manifest, manifest_fingerprint, transient_fil
 from optsemc.io import write_csv
 OUT = ROOT / "artifact" / "evaluation" / "package_manifest_check.csv"
 manifest = ROOT / "artifact" / "evaluation" / "package_manifest.csv"
-# Normalize harmless LaTeX/bytecode byproducts before comparing the tree.
-for pattern in ["Paper/latex/paper_build*", "Paper/latex/*.aux", "Paper/latex/*.log", "Paper/latex/*.out", "Paper/latex/*.toc", "Paper/latex/*.fls", "Paper/latex/*.fdb_latexmk", "Paper/latex/*.bbl", "Paper/latex/*.blg", "Paper/latex/*.backup"]:
-    for transient in ROOT.glob(pattern):
-        if transient.is_file():
-            transient.unlink()
-for cache in ROOT.rglob("__pycache__"):
-    import shutil
-    shutil.rmtree(cache, ignore_errors=True)
-for cache in ROOT.rglob("*.egg-info"):
-    import shutil
-    if cache.is_dir():
-        shutil.rmtree(cache, ignore_errors=True)
-for pyc in ROOT.rglob("*.py[co]"):
-    try:
-        pyc.unlink()
-    except OSError:
-        continue
 rows=[]
 def add(check, passed, details=""):
     rows.append({"check": check, "passed": str(bool(passed)).lower(), "details": str(details)})

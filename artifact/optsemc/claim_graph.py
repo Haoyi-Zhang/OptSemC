@@ -118,6 +118,7 @@ def _read_if_exists(path: Path) -> list[dict[str, str]]:
 
 def build_claim_graph(root: Path) -> ClaimGraph:
     evaluation = root / "artifact" / "evaluation"
+    artifact_only = not (root / "Paper").exists()
     nodes: dict[str, GraphNode] = {}
     edges: list[GraphEdge] = []
 
@@ -192,15 +193,26 @@ def build_claim_graph(root: Path) -> ClaimGraph:
                 add_support_edges(cid, row[key])
         edges.append(GraphEdge(cid, add_gate(f"claim_row_{i}_checked", "artifact/evaluation/claim_ledger_check.csv"), "checked_by"))
 
-    # Theorem ledger: formal claims with executable evidence files.
+    # Formal-obligation ledger: finite claims with executable evidence files.
     for i, row in enumerate(_read_if_exists(evaluation / "theorem_ledger.csv"), 1):
-        label = row.get("theorem_or_claim", "") or row.get("theorem", "") or row.get("obligation", "") or f"theorem_{i}"
-        cid = _node_id("claim", f"theorem:{label}")
+        label = row.get("theorem_or_claim", "") or row.get("theorem", "") or row.get("obligation", "") or f"formal_{i}"
+        cid = _node_id("claim", f"formal:{label}")
         add_node(GraphNode(cid, "claim", label))
         for key in ("support", "evidence", "checker", "artifact"):
             if row.get(key):
                 add_support_edges(cid, row[key])
-        edges.append(GraphEdge(cid, add_gate(f"theorem_row_{i}_checked", "artifact/evaluation/theorem_ledger.csv"), "checked_by"))
+        edges.append(GraphEdge(cid, add_gate(f"formal_row_{i}_checked", "artifact/evaluation/theorem_ledger.csv"), "checked_by"))
+
+    # Finite algebra/projection obligations are generated independently of the
+    # manuscript and keep the artifact-only package reviewable without Paper/.
+    for i, row in enumerate(_read_if_exists(evaluation / "formal_obligations.csv"), 1):
+        theorem = row.get("theorem", "") or f"formal_obligation_{i}"
+        obligation = row.get("obligation", "")
+        label = f"{theorem}:{obligation}" if obligation else theorem
+        cid = _node_id("claim", f"obligation:{label}")
+        add_node(GraphNode(cid, "claim", label))
+        add_support_edges(cid, "artifact/evaluation/formal_obligations.csv;artifact/evaluation/formal_obligations_check.csv")
+        edges.append(GraphEdge(cid, add_gate("formal_obligations_checked", "artifact/evaluation/formal_obligations_check.csv"), "checked_by"))
 
     # Registry: every registered artifact should be produced by at least one gate.
     registry = _read_if_exists(evaluation / "artifact_registry.csv")
@@ -210,6 +222,8 @@ def build_claim_graph(root: Path) -> ClaimGraph:
         if not path:
             continue
         for resolved in resolve_support_path(path):
+            if artifact_only and not (root / resolved).exists():
+                continue
             fid = add_file(resolved)
             if check:
                 gid = add_gate(check, resolved)

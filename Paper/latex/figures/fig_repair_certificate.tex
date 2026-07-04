@@ -12,11 +12,11 @@
 ]
 \path[use as bounding box] (-3.05,-2.04) rectangle (3.05,1.92);
 \node[cert, draw=vldbBlue!68, fill=vldbMist] (full) at (0,1.45)
-  {\textbf{exact public contract}: operator, layer, placement, time, state};
+  {\textbf{reference public contract}: operator, layer, placement, time, state};
 \node[cert, draw=vldbGold!70, fill=vldbWarm] (proj) at (0,.55)
   {\textbf{projection}: declared comparison vocabulary};
 \node[cert, draw=vldbRose!72!black, fill=vldbRose!8] (false) at (0,-.35)
-  {\textbf{witness test}: exact-unequal, projection-equal, source-supported};
+  {\textbf{witness test}: reference-unequal, projection-equal, source-supported};
 \node[cert, draw=vldbTeal!75!black, fill=vldbMint] (repair) at (0,-1.25)
   {\textbf{repair certificate}: every witness separated by retained fields};
 
@@ -30,6 +30,6 @@
 \draw[flow, draw=vldbTeal!72!black] (false) -- (repair);
 \end{tikzpicture}
 \caption{Repair certificates. Coarse projections collapse unequal public contracts; restoring a semantic field eliminates the observed collision witnesses in the grounded corpus.}
-\Description{A certificate panel showing exact public contracts, projection vocabularies, a witness test, and retained repair fields for keyword and operator-only projections.}
+\Description{A certificate panel showing reference public contracts, projection vocabularies, a witness test, and retained repair fields for keyword and operator-only projections.}
 \label{fig:repair-certificate}
 \end{figure}

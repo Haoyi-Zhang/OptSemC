@@ -1,0 +1,12 @@
+check,passed,details
+exists:conditional_trap_confidence.csv,true,evaluation/grounded/conditional_trap_confidence.csv
+exists:negative_control.csv,true,evaluation/grounded/negative_control.csv
+exists:leave_one_engine_summary.csv,true,evaluation/grounded/leave_one_engine_summary.csv
+projection_rows_ge_3,true,3
+bootstrap_covers_rate:keyword,true,"rate=0.111208; bootstrap=[0.098256,0.124763]"
+projected_equivalences_positive:keyword,true,2284
+bootstrap_covers_rate:yesno,true,"rate=0.002947; bootstrap=[0.000960,0.005739]"
+projected_equivalences_positive:yesno,true,2036
+bootstrap_covers_rate:operator_only,true,"rate=0.104938; bootstrap=[0.091823,0.119091]"
+projected_equivalences_positive:operator_only,true,2268
+strict_negative_control_passed,true,false=0

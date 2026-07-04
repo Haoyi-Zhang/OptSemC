@@ -18,10 +18,11 @@ from pathlib import Path
 
 METHODS = ["keyword", "yesno", "operator_only"]
 NEGATIVE_METHOD = "strict"
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def read_jsonl(path: Path):
-    with path.open(encoding="utf-8") as f:
+    with path.open(encoding="utf-8-sig") as f:
         for line in f:
             if line.strip():
                 yield json.loads(line)
@@ -173,8 +174,8 @@ def write_csv(path: Path, rows, fields):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--maps", type=Path, default=Path("artifact/evaluation/grounded_contract_maps.jsonl"))
-    ap.add_argument("--out-dir", type=Path, default=Path("artifact/evaluation/grounded"))
+    ap.add_argument("--maps", type=Path, default=ROOT / "evaluation" / "grounded_contract_maps.jsonl")
+    ap.add_argument("--out-dir", type=Path, default=ROOT / "evaluation" / "grounded")
     ap.add_argument("--boot", type=int, default=1000)
     args = ap.parse_args()
     maps, engines, probes = load_maps(args.maps)

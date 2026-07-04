@@ -34,7 +34,7 @@
   vbody/.style={font=\rmfamily\fontsize{6.9}{7.6}\selectfont,
     text=black!68, align=center, inner xsep=2.0pt, inner ysep=1.0pt,
     text height=1.50ex, text depth=.28ex},
-  vsmall/.style={font=\rmfamily\fontsize{6.5}{7.1}\selectfont,
+  vsmall/.style={font=\rmfamily\fontsize{6.7}{7.35}\selectfont,
     text=black!60, align=center, inner sep=.4pt, text height=1.45ex,
     text depth=.25ex},
   vpanel/.style={rounded corners=2.5pt, line width=.52pt},
@@ -45,6 +45,8 @@
 \newtheorem{definition}{Definition}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem*{observation}{Observation}
 
 
 \newcommand\vldbdoi{XX.XX/XXX.XX}
@@ -54,10 +56,10 @@
 \newcommand\vldbyear{2027}
 \newcommand\vldbauthors{\authors}
 \newcommand\vldbtitle{\shorttitle}
-\newcommand\vldbavailabilityurl{https://doi.org/10.5281/zenodo.21092812}
+\newcommand\vldbavailabilityurl{}
 \newcommand\vldbpagestyle{plain}
 
-\title{OptSem-C: Public Optimizer Contracts for Query Engine Portability}
+\title{OptSem-C: Benchmarking Projection Precision in Public Query-Optimizer Contracts}
 
 \author{Haoyi Zhang}
 \orcid{0009-0009-3693-786X}
@@ -79,11 +81,11 @@
 
 \begin{document}
 \begin{abstract}
-Optimizer-behavior comparisons can fail before a performance number is measured: the comparison denominator is often a coarse vocabulary rather than an exact public contract.  Engine-selection, migration, and performance-debugging studies often compare labels such as \texttt{pushdown}, \texttt{join}, or \texttt{cost-based}.  Such labels can collapse local rewrites, source delegation, service-side stages, and runtime decisions into the same apparent capability, causing a study to compare different query-processing phenomena.
+Comparisons of analytical SQL optimizers can lose contract distinctions before any runtime metric is meaningful: the denominator is often a coarse public vocabulary rather than a declared public-contract relation.  Engine-selection, migration, and performance-debugging studies compare labels such as pushdown, join, or cost based.  Such labels can merge local rewrites, connector delegation, service stages, and runtime decisions into one apparent capability; a study can then compare different query-processing phenomena while believing the systems have been normalized.
 
-This paper presents OptSem-C, an executable benchmark and projection calculus for public optimizer behavior contracts.  A contract rule is a guarded statement over query features with explicit public modality, operator, action variant, optimizer layer, execution placement, decision time, observability, version, and public evidence.  The semantics separates behavioral worlds from evidential support, defines a conflict-aware state join, and treats lossy comparison as a projection kernel over exact contract signatures.  OptSem-C lets a study publish the vocabulary it preserves, the equivalences it assumes, and the repair fields needed to make those assumptions safe.
+This paper presents OptSem-C, an executable benchmark for optimizer-contract comparison with projection counter-witnesses and finite repair certificates.  A contract rule is a guarded statement over query features with explicit public modality, operator, action variant, optimizer layer, execution placement, decision time, observability, version, and public evidence.  The semantics separates behavioral worlds from evidential support, defines a conflict-aware state join, and treats lossy comparison as a projection kernel over reference public-contract signatures.  OptSem-C lets a study publish the vocabulary it preserves, the equivalences it assumes, and the repair fields needed to make those assumptions safe.
 
-On a source-linked corpus spanning seven analytical SQL engines, OptSem-C shows that the failure is common and repairable.  Keyword and operator-only vocabularies declare thousands of engine--probe equivalences; 254 and 238 of those equivalences, respectively, are contradicted by exact public contracts.  The witnesses are not a formatting effect: they survive source removal, probe-family holdouts, engine-family stress, and visible-plan validation on executable SQL probes.  The missing distinctions are small and interpretable.  Placement repairs keyword collisions, optimizer layer repairs operator-only collisions, and the layer+placement basis separates all 498 headline witnesses across keyword, operator-only, and yes/no projections.  OptSem-C turns optimizer-contract comparison from an informal feature checklist into a finite, auditable query-processing relation.
+On a source-linked corpus spanning seven analytical SQL engines, 287 admitted rules, and 4,216 executable probes, OptSem-C shows that denominator-level precision loss is common and repairable.  Keyword and operator-only vocabularies declare thousands of engine--probe equivalences; 254 and 238 of those equivalences, respectively, are separated by source-supported reference signatures.  These witnesses are not private optimizer bug claims.  They are comparison-denominator errors that survive source removal, probe-family holdouts, engine-family stress, SQL executability, and two-engine visible-plan sanity checks.  The missing distinctions are small and interpretable: placement repairs keyword collisions, optimizer layer repairs operator-only collisions, and the layer+placement basis separates all 498 headline witnesses across keyword, operator-only, and yes/no projections.  OptSem-C turns coarse optimizer feature labels into replayable contract-denominator claims: each reported collision has public evidence, a reference-signature separation, and a retained-field repair.
 \end{abstract}
 
 \maketitle
@@ -93,24 +95,24 @@ On a source-linked corpus spanning seven analytical SQL engines, OptSem-C shows 
 \pagestyle{\vldbpagestyle}
 \begingroup\small\noindent\raggedright\textbf{PVLDB Reference Format:}\\
 \vldbauthors. \vldbtitle. PVLDB, \vldbvolume(\vldbissue): \vldbpages, \vldbyear.\\
-\href{https://doi.org/\vldbdoi}{doi:\vldbdoi}
+\href{https://doi.org/\vldbdoi}{doi:\vldbdoi}\par
 \endgroup
 \begingroup
-\renewcommand\thefootnote{}\footnote{\noindent
+\renewcommand\thefootnote{}\footnote{\noindent\raggedright\sloppy
 This work is licensed under the Creative Commons BY-NC-ND 4.0 International License. Visit \url{https://creativecommons.org/licenses/by-nc-nd/4.0/} to view a copy of this license. For any use beyond those covered by this license, obtain permission by emailing \href{mailto:info@vldb.org}{info@vldb.org}. Copyright is held by the owner/author(s). Publication rights licensed to the VLDB Endowment. \\
 \raggedright Proceedings of the VLDB Endowment, Vol. \vldbvolume, No. \vldbissue\ %
 ISSN 2150-8097. \\
 \href{https://doi.org/\vldbdoi}{doi:\vldbdoi} \\
-}\addtocounter{footnote}{-1}\endgroup
+}\addtocounter{footnote}{-1}\endgroup\par
 %%% VLDB block end %%%
-
 %%% do not modify the following VLDB block %%
 %%% VLDB block start %%%
-\ifdefempty{\vldbavailabilityurl}{}{
+\ifdefempty{\vldbavailabilityurl}{}{%
 \vspace{.3cm}
-\begingroup\small\noindent\raggedright\textbf{PVLDB Availability Statement:}\\
+\noindent\begin{minipage}{\columnwidth}
+\small\raggedright\textbf{PVLDB Artifact Availability:}\\
 The source code, data, and/or other artifacts have been made available at \url{\vldbavailabilityurl}.
-\endgroup
+\end{minipage}\par
 }
 %%% VLDB block end %%%
 
@@ -123,7 +125,6 @@ The source code, data, and/or other artifacts have been made available at \url{\
 \input{sections/07_discussion_related}
 
 
-\clearpage
 \begingroup
 \clubpenalty=10000
 \widowpenalty=10000

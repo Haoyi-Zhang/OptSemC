@@ -2,7 +2,7 @@
 """Evaluate stable semantic repair bases across probes and engine pairs.
 
 The universal repair certificate says a field set repairs all observed false
-portability. This script checks a stricter reader-facing property: a fixed,
+comparison validity. This script checks a stricter reader-facing property: a fixed,
 interpretable semantic basis resolves false equivalences under both probe-level
 and engine-pair-level partitions. The basis deliberately excludes action
 variants and uses query-processing fields only.

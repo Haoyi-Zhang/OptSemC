@@ -1,4 +1,4 @@
-\section{Contract Semantics}
+\section{Contract Formalization and Notation}
 \label{sec:model}
 A query probe is a SQL skeleton paired with a finite feature vector and validity constraints.  Features describe optimizer-relevant structure: join shape and type, predicate class, aggregation, order/limit behavior, source boundary, connector capability, statistics need, reuse structure, distribution trigger, adaptivity trigger, and optimizer control surface.  They are not workload-frequency estimates; they are coordinates on the public optimizer decision surface.
 
@@ -28,94 +28,53 @@ Let $W\subseteq\mathcal{A}$ be an abstract optimizer-behavior world.  A map $M$ 
 $\llbracket M\rrbracket=\{W\mid M(a)=\mathsf{MUST}\Rightarrow a\in W,\; M(a)=\mathsf{MUST\_NOT}\Rightarrow a\notin W\}$.
 The evidential support set is $\mathsf{Supp}(M)=\{a\in\mathcal{A}\mid M(a)\in\{\mathsf{MUST},\mathsf{MAY},\mathsf{MUST\_NOT}\}\}$, equivalently the actions where $M(a)\ne\mathsf{UNSPEC}$.  Since maps default to $\mathsf{UNSPEC}$, every supported non-default entry arises from an admitted public rule.  Behavioral containment and evidential support are intentionally separate: two maps can allow the same worlds while differing on whether an action is publicly documented.
 
-\begin{definition}[Exact signatures, kernels, and projections]
-The exact evidence-supported signature of $M$ is $S(M)=\{(a,M(a))\mid a\in\mathsf{Supp}(M)\}$.  Exact equivalence is equality of signatures over full evidence atoms.  A projection is a declared map $\pi:\mathcal{A}\times\mathbb{S}\rightarrow\mathcal{B}$ from full evidence atoms to an arbitrary comparison vocabulary $\mathcal{B}$, such as keyword, yes/no, or operator-only labels.  The projected signature is the finite image $S_\pi(M)=\{\pi(a,M(a))\mid a\in\mathsf{Supp}(M)\}$.  The projection kernel is the equivalence relation $\mathcal{K}_\pi$ where $M_i\mathcal{K}_\pi M_j$ iff $S_\pi(M_i)=S_\pi(M_j)$.  A projection-induced contract collision is a pair in $\mathcal{K}_\pi$ whose exact signatures differ.
+\begin{definition}[Reference signatures, kernels, and projections]
+The reference evidence-supported signature of $M$ is $S(M)=\{(a,M(a))\mid a\in\mathsf{Supp}(M)\}$.  Reference equivalence is equality of signatures over the full public evidence atom schema.  This reference is exact only relative to the admitted public evidence and declared atom fields; it is not a complete private optimizer trace.  A projection is a declared map $\pi:\mathcal{A}\times\mathbb{S}\rightarrow\mathcal{B}$ from full evidence atoms to an arbitrary comparison vocabulary $\mathcal{B}$, such as keyword, yes/no, or operator-only labels.  The projected signature is the finite image $S_\pi(M)=\{\pi(a,M(a))\mid a\in\mathsf{Supp}(M)\}$.  The projection kernel is the equivalence relation $\mathcal{K}_\pi$ where $M_i\mathcal{K}_\pi M_j$ iff $S_\pi(M_i)=S_\pi(M_j)$.  A projection-induced contract collision is a pair in $\mathcal{K}_\pi$ whose reference signatures differ.
 \end{definition}
 
 For quantitative comparison, exact compatibility is the Jaccard overlap $|S(M_i)\cap S(M_j)|/|S(M_i)\cup S(M_j)|$, and projected compatibility applies the same formula to $S_\pi$.  The denominator is evidence-supported: undocumented actions do not count as evidence of either equality or inequality.
 
-\begin{theorem}[Public-contract separation]
+\begin{lemma}[Public-contract separation]
 \label{thm:public-contract-separation}
 If $S(M_i)\ne S(M_j)$, then the maps differ in public-contract denotation: either $\llbracket M_i\rrbracket\ne\llbracket M_j\rrbracket$, or their evidence-supported action states differ for at least one action in $\mathsf{Supp}(M_i)\cup\mathsf{Supp}(M_j)$.
-\end{theorem}
+\end{lemma}
 \begin{proof}
-If exact signatures differ, some supported action has a state in one map that is absent or different in the other.  If the difference changes a $\mathsf{MUST}$ or $\mathsf{MUST\_NOT}$ requirement, the world-set constraints differ.  Otherwise the behavioral world set may remain equal, but the public evidence state differs, for example $\mathsf{MAY}$ versus $\mathsf{UNSPEC}$.  In both cases the denotation differs because an OptSem-C contract is the pair of behavioral worlds and evidence-supported states.
+If reference signatures differ, some supported action has a state in one map that is absent or different in the other.  If the difference changes a $\mathsf{MUST}$ or $\mathsf{MUST\_NOT}$ requirement, the world-set constraints differ.  Otherwise the behavioral world set may remain equal, but the public evidence state differs, for example $\mathsf{MAY}$ versus $\mathsf{UNSPEC}$.  In both cases the denotation differs because an OptSem-C contract is the pair of behavioral worlds and evidence-supported states.
 \end{proof}
 
-\begin{theorem}[Finite evaluation]
-For finite feature and action domains, constructing $M_{e,q}$ from finite $C_e$ and $q$ is decidable.
-\end{theorem}
-\begin{proof}
-Every guard is a finite Boolean formula over a finite feature vector.  The applicable rule set is finite, and every applicable rule performs one lookup in the finite state-join table.  Construction therefore terminates.
-\end{proof}
+For finite feature and action domains, constructing $M_{e,q}$ from finite $C_e$ and $q$ is a direct finite evaluation: each guard is a Boolean formula over the probe feature vector, and each applicable rule performs one lookup in the state-join table.
 
-\begin{theorem}[Projection-kernel collision]
+\begin{observation}[Projection-kernel collision]
 \label{thm:projection-kernel-loss}
 For any projection $\pi$, a projection-induced contract collision is exactly the nontrivial part of the kernel $\mathcal{K}_\pi$: $M_i$ and $M_j$ collide iff $S(M_i)\ne S(M_j)$ and $M_i\mathcal{K}_\pi M_j$.  If $\pi$ is non-injective on evidence atoms, there exist contracts with such a collision witness.
-\end{theorem}
+\end{observation}
 \begin{proof}
 The first statement unfolds the definitions: $\mathcal{K}_\pi$ is equality after projection, while exact non-equivalence is $S(M_i)\ne S(M_j)$.  For the non-injective case, take distinct evidence atoms $(a_1,s_1)\ne(a_2,s_2)$ with $\pi(a_1,s_1)=\pi(a_2,s_2)$.  Construct $M_1$ so that $S(M_1)=\{(a_1,s_1)\}$ and $M_2$ so that $S(M_2)=\{(a_2,s_2)\}$, with all other actions $\mathsf{UNSPEC}$.  These minimal contracts are well formed because action states are assigned independently.  Then $S(M_1)\ne S(M_2)$, but $S_\pi(M_1)=S_\pi(M_2)$ is the same singleton, so $(M_1,M_2)$ is a collision witness.
 \end{proof}
 
 \begin{definition}[Projection information profile]
-For a finite set of observed maps $Y$, let $H(S)$ be the empirical Shannon entropy of exact signatures and $H(S_\pi)$ the entropy of projected signatures.  The entropy-retention ratio $\rho_\pi=H(S_\pi)/H(S)$ measures distinguishability retained by the comparison vocabulary.  The projected collision count is the number of projected-signature classes containing more than one exact signature class.
+For a finite set of observed maps $Y$, let $H(S)$ be the empirical Shannon entropy of reference signatures and $H(S_\pi)$ the entropy of projected signatures.  The entropy-retention ratio $\rho_\pi=H(S_\pi)/H(S)$ measures distinguishability retained by the comparison vocabulary.  The projected collision count is the number of projected-signature classes containing more than one reference signature class.
 \end{definition}
 
 \begin{lemma}[Kernel inflation]
-If a projection declares $E_\pi$ equivalent pairs and exact comparison declares $E$ over the same pair set, then $E_\pi/E$ is the pairwise inflation factor induced by the kernel.  Every collision witness contributes to this inflation, and a zero-collision strengthened projection must have $E_\pi=E$.
+If a projection declares $E_\pi$ equivalent pairs and reference comparison declares $E$ over the same pair set, then $E_\pi/E$ is the pairwise inflation factor induced by the kernel.  Every collision witness contributes to this inflation, and a zero-collision strengthened projection must have $E_\pi=E$.
 \end{lemma}
 \begin{proof}
-Exact equivalence implies projected equivalence only when the projection is a function of the exact atom payload, so $E_\pi\ge E$.  The additional pairs counted by $E_\pi$ are exactly the unequal exact signatures that collapse under $\pi$, which are collision witnesses.  If there are none, no additional pairs are counted and the two denominators agree.
+Reference equivalence implies projected equivalence only when the projection is a function of the full atom payload, so $E_\pi\ge E$.  The additional pairs counted by $E_\pi$ are exactly the unequal reference signatures that collapse under $\pi$, which are collision witnesses.  If there are none, no additional pairs are counted and the two denominators agree.
 \end{proof}
 
-\begin{theorem}[Evidence refinement]
+\begin{observation}[Evidence refinement]
 Adding a non-conflicting evidence-backed rule cannot silently weaken a public contract: it behaviorally refines possible worlds, evidentially refines support, or both.
-\end{theorem}
-\begin{proof}
-A $\mathsf{MUST}$ or $\mathsf{MUST\_NOT}$ rule removes worlds from $\llbracket M\rrbracket$.  A $\mathsf{MAY}$ rule may leave worlds unchanged, but changes an action from $\mathsf{UNSPEC}$ to evidence-supported.  Because the rule is non-conflicting, the state join does not erase existing support or replace a compatible stronger state with a weaker one.
-\end{proof}
+\end{observation}
 
-The remaining formal statements are a projection calculus for finite comparison audits.  They are not meant to make information loss surprising; they make the certificate obligations explicit.  Each reported repair records the projected equality that failed, the exact signatures that disagree, and the smaller field sets that still have counter-witnesses.  Section~\ref{sec:eval} then measures which query-processing fields are empirically sufficient.  Let $F$ be the semantic-field universe and let $\pi_R$ be the repaired projection that appends the field values in $R\subseteq F$ to $\pi(a,s)$ for each evidence atom $(a,s)$.  For a finite grounded comparison set $X$, define $X_{\pi_R}=\{(M_i,M_j)\in X\mid S(M_i)\ne S(M_j)\land M_i\mathcal{K}_{\pi_R}M_j\}$.  A field set $R$ is safe, or universal, for $\pi$ on $X$ when $X_{\pi_R}=\emptyset$; otherwise it is unsafe and has a grounded counter-witness.
+The remaining notation is the payoff of the model: it turns an informal vocabulary dispute into a finite certificate check.  Let $F$ be the semantic-field universe and let $\pi_R$ append field values in $R\subseteq F$ to the baseline projection.  For a finite comparison set $X$, define $X_{\pi_R}=\{(M_i,M_j)\in X\mid S(M_i)\ne S(M_j)\land M_i\mathcal{K}_{\pi_R}M_j\}$.  A repair $R$ is safe for $\pi$ on $X$ when $X_{\pi_R}=\emptyset$; otherwise any pair in $X_{\pi_R}$ is a counter-witness.  Since adding retained fields can split projected classes but cannot merge already separated classes, safe sets are upward closed and unsafe sets are downward closed.  For each witness $w$, the separator family $\mathcal{D}_w=\{R\subseteq F\mid M_i\not\mathcal{K}_{\pi_R}M_j\}$ is upward closed, so universal repair is the finite intersection problem $R\in\bigcap_{w\in X_\pi}\mathcal{D}_w$.  The reported certificates therefore consist of all repaired witnesses plus counter-witnesses for smaller field sets; exhaustive enumeration over $2^{|F|}$ retained-field subsets is complete for the declared field universe.
 
-\begin{theorem}[Projection-lattice frontier]
-\label{thm:projection-lattice}
-If $R\subseteq R'\subseteq F$, then $X_{\pi_{R'}}\subseteq X_{\pi_R}$.  Consequently the safe field sets are upward closed, the unsafe field sets are downward closed, and the minimum universal repairs form an antichain frontier in the finite field lattice.
-\end{theorem}
-\begin{proof}
-Projection $\pi_{R'}$ emits every component emitted by $\pi_R$ plus additional field values.  Adding fields can split projected equivalence classes, but cannot merge classes already separated.  Therefore any unequal pair still collapsed after adding $R'$ was also collapsed after adding $R$.  Upward closure of safe sets and downward closure of unsafe sets follow immediately, and minimal safe sets are incomparable by set inclusion.
-\end{proof}
-
-For a witness $w=(M_i,M_j)$, define its separator family $\mathcal{D}_w=\{R\subseteq F\mid M_i\not\mathcal{K}_{\pi_R} M_j\}$.  By Theorem~\ref{thm:projection-lattice}, each $\mathcal{D}_w$ is upward closed in the field lattice, and universal repair is the finite intersection problem $R\in\bigcap_{w\in X_\pi}\mathcal{D}_w$.
-
-\begin{theorem}[Repair certificate]
-\label{thm:repair-certificate}
-Fix a projection $\pi$ and finite comparison set $X$.  A field set $R$ eliminates all observed collisions iff $R$ belongs to every witness separator family $\mathcal{D}_w$ for $w\in X_\pi$.
-\end{theorem}
-\begin{proof}
-If $R\in\mathcal{D}_w$ for every witness, every pair collapsed by $\pi$ becomes separated under $\pi_R$, so $X_{\pi_R}=\emptyset$.  Conversely, if $X_{\pi_R}=\emptyset$, every original witness is separated under $\pi_R$, which is exactly membership in each separator family.
-\end{proof}
-
-\begin{theorem}[Resolution-lattice certificate]
-\label{thm:resolution-lattice-certificate}
-For a finite comparison set $X$ and finite field universe $F$, exhaustive enumeration of all retained-field projections over $2^{|F|}$ subsets is a complete certificate of which public optimizer fields are sufficient for safe comparison on $X$.  If a subset $R$ is unsafe, a single pair $(M_i,M_j)\in X$ with $S(M_i)\ne S(M_j)$ and $S_R(M_i)=S_R(M_j)$ is a checkable counter-certificate.  If $R$ is safe, direct equality testing over all pairs in $X$ is a checkable certificate of safety.
-\end{theorem}
-\begin{proof}
-For each subset $R\subseteq F$, the retained-field signature $S_R$ is a deterministic projection of the exact signature.  The comparison set $X$ is finite, so checking all pairs in $X$ terminates.  Unsafety is existential and is witnessed by one collapsed unequal pair.  Safety is universal over the same finite set and is witnessed by the absence of such a pair after exhaustive enumeration.  Since every subset of $F$ is enumerated, the resulting safe and unsafe regions are complete for the chosen field universe.
-\end{proof}
-
-\begin{theorem}[Minimum repair as hitting set]
+\begin{proposition}[Minimum repair as hitting set]
 \label{thm:min-repair-complexity}
-For finite semantic fields $F$ and collision witnesses $X_\pi$, deciding whether there is a universal repair of size at most $k$ is NP-complete in $|F|+|X_\pi|$.  For the fixed OptSem-C field universe, every minimum repair is exactly computable, and a certificate consists of the repaired witnesses plus counter-witnesses for every smaller field set.
-\end{theorem}
+For finite semantic fields $F$ and collision witnesses $X_\pi$, deciding whether there is a universal repair of size at most $k$ is NP-complete in $|F|+|X_\pi|$.  For OptSem-C's fixed field universe, minimum repairs are exactly enumerable.
+\end{proposition}
 \begin{proof}
-Membership in NP follows by checking a candidate field set against every finite witness.  For hardness, reduce \textsc{Hitting Set}.  Given sets $H_1,\ldots,H_m\subseteq F$, create one collision witness per $H_i$ whose two contracts agree under the baseline projection and differ exactly on the fields in $H_i$.  A field set repairs that witness iff it intersects $H_i$; hence a universal repair of size $k$ exists iff the hitting-set instance has a hitting set of size $k$.  Since OptSem-C fixes a finite field universe, enumerating field subsets in increasing cardinality returns all minimum repairs.  Exhausting all smaller subsets gives the lower-bound part of the certificate.
-\end{proof}
-
-\begin{theorem}[Semantic repair basis]
-Fix a finite comparison set $X$, projections $\Pi$, and a semantic field set $F$ that excludes action identifiers such as fine-grained variants.  If $R\subseteq F$ is universal for every $\pi\in\Pi$, then augmenting each projection with $R$ eliminates all observed collisions without relying on action-identifier labels.
-\end{theorem}
-\begin{proof}
-Apply Theorem~\ref{thm:repair-certificate} to each projection independently.  Because $X$ and $\Pi$ are finite, the union of their witness sets is finite; a common $R$ that lies in every corresponding separator family leaves no collapsed unequal pair.  Excluding action identifiers restricts the admissible field universe but does not change the certificate condition.
+Membership is finite checking.  Hardness reduces \textsc{Hitting Set}: create one witness per set $H_i\subseteq F$ whose two contracts differ exactly on $H_i$; a repair separates that witness iff it intersects $H_i$.
 \end{proof}
 
 The semantics makes the comparison payload explicit.  A user comparing only operator names chooses a projection that drops placement, decision time, variant, and observability.  A feature checklist chooses an even coarser projection that can drop operator class itself.  OptSem-C does not forbid those projections; it computes exactly which kernel collisions they induce, which grounded counter-witnesses remain, and which query-processing fields repair the comparison.

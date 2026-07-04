@@ -6,10 +6,10 @@ The manuscript source is intentionally outside the anonymous replay archive. The
 
 ## Main research objects
 
-- Grounded public-contract corpus: 287 verified rules, 287 source-linked evidence spans, 26 public source records.
+- Grounded public-contract corpus: 287 admitted source-linked rules, 287 evidence spans, 26 public source records.
 - OptSemBench-C: 4,216 generated SQL probes covering 7,112 renderable valid feature interactions.
 - SQL validation: 12,648 probe-catalog executions across three deterministic validation catalogs, with zero failures.
-- Real-engine validation: 8,432 DuckDB/PostgreSQL full-corpus executions and 142 motif-representative executions, with zero failures.
+- Real-engine SQL validation: 8,432 DuckDB/PostgreSQL full-corpus executions and 142 motif-representative executions, with zero failures.
 - Published-motif denominator: 90/90 motifs across 12 optimizer/workload families are covered; each motif has a generated SQL representative validated on the deterministic catalog.
 - Projection-kernel evaluation: exact, lossy, ablation, mutation, strengthened, and exhaustive field-resolution projections.
 - Repair certificates: finite separator and field-lattice certificates for semantic repair.
@@ -27,13 +27,15 @@ PYTHONDONTWRITEBYTECODE=1 ./run_mainline_checks.sh
 Expected result:
 
 ```text
-Package integrity check: passed
+Unit tests passed: ...
+Package cleanliness check: passed
+Package manifest check: passed
 Fast mainline checks: passed
 ```
 
 ## Execution environment
 
-The artifact is designed for standard Linux systems with Python 3 and the dependencies in `requirements.txt`. Development edits were made on Windows, while the full replay and integrity gates were validated on Linux. The public replay does not require project-specific credentials or private infrastructure.
+The artifact is designed for standard Linux systems with Python 3 and the dependencies in `requirements.txt`. Development edits were made on Windows, while the full replay and integrity gates were validated on Linux. The tested environment is recorded in `evaluation/environment.csv` after a replay. The public replay does not require project-specific credentials or private infrastructure.
 
 ## Full no-cache replay
 
@@ -44,3 +46,9 @@ PYTHONDONTWRITEBYTECODE=1 ./run_from_scratch_no_cache.sh
 ```
 
 The replay removes derived generated outputs, regenerates probes and contract maps from grounded evidence, rebuilds the SQL bundle, validates generated SQL probes and published-motif representatives on deterministic catalogs, runs optional DuckDB/PostgreSQL validation when `RUN_REAL_ENGINE_VALIDATION=1`, and runs integrity suites. Paper-build checks are kept out of the anonymous replay archive.
+
+The saved real-engine CSV files are replay certificates. A fresh DuckDB/PostgreSQL rerun must use `run_cloud_real_engine_validation.sh`, which writes `evaluation/real_engine_fresh_run.csv` and changes the validation mode from saved-certificate replay to fresh-engine rerun.
+
+## Scope notes
+
+The corpus is a public-contract denominator, not a private optimizer oracle. Source-linked rules are admitted from public evidence spans with digests, line ranges, guards, and observability fields. DuckDB and PostgreSQL real-engine runs validate that the generated SQL denominator is executable on two open systems; they do not admit rules for other engines or turn documentation into private implementation truth. Testing tools such as SQLsmith and SQLancer are complementary implementation bug finders, while this artifact audits whether an optimizer comparison vocabulary collapses distinct public contracts.

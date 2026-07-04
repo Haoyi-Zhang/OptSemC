@@ -1,0 +1,7 @@
+check,passed,details
+git_head_available,true,0baacf85751b
+tree_state_recorded,true,tracked=161;untracked=24;require_clean=False;release_gate=False
+no_ignored_boundary_files,true,
+release_gate_requires_clean_tree,true,release_gate=False;require_clean=False
+clean_tree_when_required,true, M .github/workflows/ci.yml; M .gitignore; M Paper/latex/figures/fig_benchmark_snapshot.tex; M Paper/latex/figures/fig_contract_model.tex; M Paper/latex/figures/fig_external_motifs_plot.tex; M Paper/latex/figures/fig_projection_trap.tex; M Paper/latex/figures/fig_repair_certificate.tex; M Paper/latex/figures/fig_semantic_frontier_plot.tex; M Paper/latex/paper.pdf; M Paper/latex/paper.tex; M Paper/latex/refs.bib; M Paper/latex/sections/01_intro.tex; M Paper/latex/sections/02_problem.tex; M Paper/latex/sections/03_model.tex; M Paper/latex/sections/04_benchmark_corpus.tex; M Paper/latex/sections/05_evaluation.tex; M Paper/latex/sections/06_cases.tex; M Paper/latex/sections/07_discussion_related.tex; M Paper/latex/tables/tab_cases.tex; M Paper/latex/tables/tab_engine_coverage.tex
+tree_state_hashes_recorded,true,status=66510f3ed2c8;diff=4374763e717d;cached=e3b0c44298fc

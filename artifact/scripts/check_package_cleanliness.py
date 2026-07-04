@@ -8,7 +8,6 @@ files are tens of megabytes.
 from __future__ import annotations
 import csv
 import re
-import shutil
 import sys
 sys.dont_write_bytecode = True
 from pathlib import Path
@@ -18,18 +17,6 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from optsemc.streaming import contains_pattern, iter_text_files, transient_paths
 OUT = ROOT / 'evaluation' / 'package_cleanliness.csv'
-# The checker imports the package it audits; remove any bytecode caches that
-# the interpreter may have produced before scanning for package transients.
-for cache in PKG.rglob('__pycache__'):
-    shutil.rmtree(cache, ignore_errors=True)
-for cache in PKG.rglob('*.egg-info'):
-    if cache.is_dir():
-        shutil.rmtree(cache, ignore_errors=True)
-for pyc in PKG.rglob('*.py[co]'):
-    try:
-        pyc.unlink()
-    except OSError:
-        continue
 ROWS: list[dict[str,str]] = []
 
 def add(check: str, passed: bool, details: str = '') -> None:

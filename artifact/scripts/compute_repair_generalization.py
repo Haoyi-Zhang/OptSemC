@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Probe-cluster generalization check for OptSem-C repair certificates.
 
-The repair-certificate theorem is finite-corpus. This script adds an
+The repair certificate is finite-corpus. This script adds an
 out-of-probe check: learn a minimal semantic repair field set on 9 folds of
 false-equivalence witnesses and test whether that repair resolves the held-out
 probe fold. Folds are by probe id, not by individual engine pair, so correlated

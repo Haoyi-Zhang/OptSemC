@@ -16,11 +16,11 @@ class BaselineSpec:
 
 BASELINES: tuple[BaselineSpec, ...] = (
     BaselineSpec(
-        "B0-exact-contract",
+        "B0-reference-signature",
         "strict",
-        "Full evidence atom: operator, kind, variant, layer, placement, decision time, observability, modality",
+        "Reference signature over admitted public evidence atoms: operator, kind, variant, layer, placement, decision time, observability, modality",
         "None",
-        "Negative control; no false equivalence when exact signatures match the semantics",
+        "Negative control; no false equivalence when reference signatures match the admitted evidence relation",
     ),
     BaselineSpec(
         "B1-keyword-matrix",
@@ -46,28 +46,28 @@ BASELINES: tuple[BaselineSpec, ...] = (
     BaselineSpec(
         "B4-placement-ablated",
         "no_placement",
-        "Full contract without execution placement",
+        "Reference signature without execution placement",
         "Placement",
         "Ablation control for source delegation versus local or distributed execution",
     ),
     BaselineSpec(
         "B5-decision-time-ablated",
         "no_decision_time",
-        "Full contract without decision time",
+        "Reference signature without decision time",
         "Decision time",
         "Ablation control for compile-time, stage-boundary, runtime, and profile-time evidence",
     ),
     BaselineSpec(
         "B6-observability-ablated",
         "no_observability",
-        "Full contract without plan-observability surface",
+        "Reference signature without plan-observability surface",
         "Observability",
         "Ablation control for logical, physical, runtime-profile, and stage-graph evidence",
     ),
     BaselineSpec(
         "B7-modality-ablated",
         "no_modality",
-        "Full contract with supported states collapsed to evidenced=yes",
+        "Reference signature with supported states collapsed to evidenced=yes",
         "MUST/MAY/MUST_NOT distinction",
         "Ablation control for modal public commitments",
     ),

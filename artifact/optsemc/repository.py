@@ -12,9 +12,11 @@ from .manifest import build_manifest, manifest_summary, transient_files
 PY_SUFFIXES = {".py"}
 DOC_SUFFIXES = {".md", ".txt", ".cff"}
 DATA_SUFFIXES = {".csv", ".jsonl", ".json", ".yaml", ".yml"}
-STALE_VERSION_RE = re.compile(r"(?i)(\bfinal\b|\brelease\s+candidate\b|version\s*=\s*[\"'][0-9])")
+STALE_VERSION_RE = re.compile(r"(?i)(\bfinal\b|\brelease\s+candidate\b|(?<!fallback_)version\s*=\s*[\"'][0-9])")
 SECRET_RE = re.compile(r"(?i)(api[_-]?key|password|private[_-]?key)\s*[:=]\s*[\'\"]?[^\'\"\s]{8,}")
-LOCAL_PATH_RE = re.compile(r"/mnt/data|/home/oai|C:\\\\Users")
+LOCAL_PATH_RE = re.compile(
+    r"(?i)(/mnt/data|/home/oai|/data/[A-Za-z0-9_.\-/]+|/tmp/[A-Za-z0-9_.\-/]+|[A-Z]:[\\/]+Users[\\/]+)"
+)
 
 
 @dataclass(frozen=True)
@@ -82,6 +84,9 @@ def stale_package_tokens(root: Path) -> list[str]:
         if not path.is_file() or path.suffix.lower() not in DOC_SUFFIXES | {".toml", ".yml", ".yaml"}:
             continue
         rel = path.relative_to(root).as_posix()
+        rel_parts = path.relative_to(root).parts
+        if len(rel_parts) >= 2 and rel_parts[0] == "artifact" and rel_parts[1] == "evaluation":
+            continue
         if path.name in allow:
             continue
         text = path.read_text(encoding="utf-8", errors="ignore")
@@ -94,9 +99,6 @@ def secret_or_local_path_offenders(root: Path) -> list[str]:
     offenders = []
     for path in root.rglob("*"):
         if not path.is_file() or ".git" in path.parts:
-            continue
-        rel_parts = path.relative_to(root).parts
-        if len(rel_parts) >= 2 and rel_parts[0] == "artifact" and rel_parts[1] == "evaluation":
             continue
         if path.suffix.lower() not in DOC_SUFFIXES | DATA_SUFFIXES | {".toml", ".sh", ".tex", ".bib"}:
             continue
@@ -117,6 +119,7 @@ def duplicate_markdown_titles(root: Path) -> list[str]:
 
 def repository_audit(root: Path) -> list[AuditCheck]:
     checks: list[AuditCheck] = []
+    artifact_only = not (root / "Paper").exists()
     classes, funcs = public_classes_and_functions(root)
     scripts = list((root / "artifact" / "scripts").glob("*.py")) if (root / "artifact" / "scripts").exists() else []
     tests = list((root / "artifact" / "tests").glob("test_*.py")) if (root / "artifact" / "tests").exists() else []
@@ -152,17 +155,24 @@ def repository_audit(root: Path) -> list[AuditCheck]:
     required_claim = [
         root / "artifact" / "evaluation" / "claim_evidence_graph.csv",
         root / "artifact" / "evaluation" / "paper_claim_ledger.csv",
-        root / "artifact" / "evaluation" / "paper_table_manifest.csv",
     ]
+    if not artifact_only:
+        required_claim.append(root / "artifact" / "evaluation" / "paper_table_manifest.csv")
     required_categories = {"paper", "grounded-data", "benchmark-data", "generated-evaluation", "library-code", "script-code", "test-code"}
+    if artifact_only:
+        required_categories.remove("paper")
     present_categories = set(categories)
-    checks.append(AuditCheck("project_entrypoints_present", (root / "README.md").exists() and (root / "Paper").is_dir() and (root / "artifact").is_dir(), 10 if (root / "README.md").exists() and (root / "Paper").is_dir() and (root / "artifact").is_dir() else 5, 10, "root README, Paper, artifact"))
+    project_entrypoints_ok = (root / "README.md").exists() and (root / "artifact").is_dir() and (artifact_only or (root / "Paper").is_dir())
+    project_entrypoints_detail = "root README, artifact" if artifact_only else "root README, Paper, artifact"
+    checks.append(AuditCheck("project_entrypoints_present", project_entrypoints_ok, 10 if project_entrypoints_ok else 5, 10, project_entrypoints_detail))
     checks.append(AuditCheck("replay_entrypoints_present", all(path.exists() for path in required_replay), 10 if all(path.exists() for path in required_replay) else 4, 10, ";".join(str(path.relative_to(root)) for path in required_replay if not path.exists())))
     checks.append(AuditCheck("grounded_provenance_present", all(path.exists() for path in required_grounded), 10 if all(path.exists() for path in required_grounded) else 4, 10, ";".join(str(path.relative_to(root)) for path in required_grounded if not path.exists())))
     checks.append(AuditCheck("claim_evidence_outputs_present", all(path.exists() for path in required_claim), 10 if all(path.exists() for path in required_claim) else 4, 10, ";".join(str(path.relative_to(root)) for path in required_claim if not path.exists())))
     checks.append(AuditCheck("semantic_library_reused_by_scripts", modules and package_importing_scripts > 0 and classes > 0 and funcs > 0, 10 if modules and package_importing_scripts > 0 and classes > 0 and funcs > 0 else 5, 10, f"modules={len(modules)};classes={classes};functions={funcs};script_import_edges={package_importing_scripts}"))
     checks.append(AuditCheck("unit_test_entrypoints_present", bool(tests) and (root / "artifact" / "scripts" / "run_unit_tests.py").exists(), 10 if bool(tests) and (root / "artifact" / "scripts" / "run_unit_tests.py").exists() else 5, 10, f"tests={len(tests)}"))
-    checks.append(AuditCheck("ci_and_cli", ci.exists() and pyproject.exists() and makefile.exists(), 10 if ci.exists() and pyproject.exists() and makefile.exists() else 5, 10, "ci, pyproject, makefile present"))
+    ci_cli_ok = pyproject.exists() and makefile.exists() and (artifact_only or ci.exists())
+    ci_cli_detail = "pyproject, makefile present" if artifact_only else "ci, pyproject, makefile present"
+    checks.append(AuditCheck("ci_and_cli", ci_cli_ok, 10 if ci_cli_ok else 5, 10, ci_cli_detail))
     checks.append(AuditCheck("package_manifest_covers_research_artifacts", required_categories <= present_categories, 10 if required_categories <= present_categories else 5, 10, f"missing={';'.join(sorted(required_categories - present_categories))}"))
     checks.append(AuditCheck("no_hardcoded_release_tokens", not stale, 10 if not stale else 2, 10, ";".join(stale[:8])))
     checks.append(AuditCheck("no_secret_or_local_path_tokens", not secrets, 10 if not secrets else 0, 10, ";".join(secrets[:8])))

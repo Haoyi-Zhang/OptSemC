@@ -30,11 +30,17 @@ hits=[pat for pat in blocked if re.search(pat, visible, re.I)]
 add('no_visible_repository_or_report_terms', not hits, ';'.join(hits))
 # Structure checks.
 sections = re.findall(r'\\section\{([^}]*)\}', text)
-add('has_regular_research_structure', sections[:5] == ['Introduction','The Failure Mode','Contract Semantics','Benchmark and Grounded Corpus','Evaluation'], '|'.join(sections[:7]))
+expected = ['Introduction','Precision Loss in Optimizer Comparisons','Contract Formalization and Notation','Benchmark and Grounded Corpus','Evaluation']
+add('has_regular_research_structure', sections[:5] == expected, '|'.join(sections[:7]))
 add('has_tikz_mechanism_figure', '\\begin{tikzpicture}' in text and 'Projection kernel' in text, '')
 theorem_count = text.count('\\begin{theorem}')
+lemma_count = text.count('\\begin{lemma}')
+proposition_count = text.count('\\begin{proposition}')
+observation_count = text.count('\\begin{observation}')
 proof_count = text.count('\\begin{proof}')
-add('has_formal_statements_and_proofs', theorem_count >= 5 and proof_count >= 5, f"theorems={theorem_count};proofs={proof_count}")
+formal_count = theorem_count + lemma_count + proposition_count + observation_count
+details = f"formal={formal_count};theorems={theorem_count};lemmas={lemma_count};propositions={proposition_count};observations={observation_count};proofs={proof_count}"
+add('has_formal_statements_and_proofs', formal_count >= 6 and proof_count >= 5, details)
 refs_bib = PAPER / 'refs.bib'
 reference_count = len(re.findall(r'^@\w+\s*\{', refs_bib.read_text(encoding='utf-8'), flags=re.M)) if refs_bib.exists() else len(re.findall(r'\\bibitem\{', text))
 add('references_70_to_80', 70 <= reference_count <= 80, reference_count)

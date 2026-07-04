@@ -1,6 +1,6 @@
 \begin{table*}[t]
 \centering
-\caption{Benchmark denominator and validation checks across corpus, SQL, execution, and motif layers. Bold marks complete coverage or zero-failure checks.}
+\caption{Benchmark denominator and validation checks across corpus, SQL, real-engine SQL execution, and motif layers. Bold marks complete coverage or zero-failure checks; execution rows validate query construction, not contract truth.}
 \label{tab:denominator-dashboard}
 \footnotesize
 \setlength{\tabcolsep}{4pt}
@@ -14,8 +14,10 @@ Corpus & non-global guards & 252 & 3 containments & query-conditional, audited o
 Guard schema & invalid dimensions & \textbf{0} & fixed feature domain & no out-of-domain guard values \\
 SQL corpus & generated probes & \textbf{4,216} & digest \texttt{df107f018e37} & full executable denominator \\
 SQL corpus & motif-cover prefix & 48 & human inspection & compact replay slice, not cherry-picking \\
-Execution & planned/executed probes & \textbf{4,216/4,216} & 91 distinct plans & every generated probe plans and runs \\
-Execution & shape/exec failures & \textbf{0/0} & 18,448 rows & validation checks find no SQL-shape or runtime failures \\
+SQL execution & planned/executed probes & \textbf{4,216/4,216} & 91 distinct plans & every generated probe plans and runs \\
+SQL execution & shape/exec failures & \textbf{0/0} & 18,448 rows & no SQL-shape or runtime failures \\
+Real engines & full DuckDB/PostgreSQL & \textbf{8,432/8,432} & tags .705/.796 & SQL validation, not source truth \\
+Real engines & motif DuckDB/PostgreSQL & \textbf{142/142} & tags .756/.819 & budgeted open-engine sanity \\
 Published motifs & covered requirements & \textbf{90/90} & 12 families & every declared motif has executable probe support \\
 \bottomrule
 \end{tabular}

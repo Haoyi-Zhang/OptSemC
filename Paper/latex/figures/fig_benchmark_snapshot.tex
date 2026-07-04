@@ -2,7 +2,7 @@
 \centering
 \begin{tikzpicture}[
   stage/.style={vpanel, draw=vldbBlue!68, fill=vldbMist, text width=1.54cm,
-    minimum height=.82cm, font=\rmfamily\fontsize{6.65}{7.25}\selectfont,
+    minimum height=.82cm, font=\rmfamily\fontsize{6.7}{7.35}\selectfont,
     text=black!70, align=center, inner xsep=1.5pt, inner ysep=1.1pt,
     text height=1.40ex, text depth=.24ex},
   count/.style={font=\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont,
@@ -10,16 +10,16 @@
     text depth=.26ex},
   check/.style={vpanel, draw=vldbTeal!72!black, fill=vldbMint,
     text width=1.30cm, minimum height=.32cm,
-    font=\rmfamily\bfseries\fontsize{6.62}{7.22}\selectfont, text=vldbInk,
+    font=\rmfamily\bfseries\fontsize{6.7}{7.35}\selectfont, text=vldbInk,
     align=center, inner xsep=1pt, inner ysep=.8pt,
     text height=1.34ex, text depth=.22ex},
   axis/.style={rounded corners=1.5pt, draw=black!14, fill=white,
     minimum width=1.05cm, minimum height=.32cm,
-    font=\rmfamily\fontsize{6.62}{7.22}\selectfont,
+    font=\rmfamily\fontsize{6.7}{7.35}\selectfont,
     text=vldbGray, align=center, inner xsep=1.1pt, inner ysep=.7pt,
     text height=1.25ex, text depth=.18ex},
   band/.style={vpanel, draw=vldbGold!55!black, fill=vldbWarm,
-    font=\rmfamily\bfseries\fontsize{6.62}{7.22}\selectfont,
+    font=\rmfamily\bfseries\fontsize{6.7}{7.35}\selectfont,
     text=vldbInk, align=center, inner xsep=2.5pt, inner ysep=1.0pt,
     text height=1.30ex, text depth=.20ex}
 ]
@@ -37,7 +37,7 @@
 
 \draw[vldbRule, line width=.34pt] (.20,-1.42) -- (7.05,-1.42);
 \node[vsmall, anchor=west, text=vldbGray] at (.02,-1.24)
-  {admission gates: all pass before collision counting};
+  {admission checks: all pass before collision counting};
 \node[vsmall, text=vldbInk] at (.88,-1.64) {support};
 \node[vsmall, text=vldbInk] at (2.70,-1.64) {guards};
 \node[vsmall, text=vldbInk] at (4.54,-1.64) {SQL};
@@ -61,7 +61,7 @@
 \node[axis] at (4.88,-3.24) {dist.};
 \node[axis] at (6.06,-3.24) {bound.};
 \end{tikzpicture}
-\caption{Corpus, benchmark, and execution denominators. The dashboard fixes evidence, SQL probes, admission gates, and motif coverage before collision rates are reported.}
+\caption{Corpus, benchmark, and execution denominators. The dashboard fixes evidence, SQL probes, admission checks, and motif coverage before collision rates are reported.}
 \Description{A compact evidence panel with four denominator counts, four admission checks, observed zero audit or execution issues, and representative covered query-feature axes: source, connector, join, predicate, adaptivity, control, aggregation, statistics, reuse, distribution, and boundary.}
 \label{fig:benchmark-snapshot}
 \end{figure}

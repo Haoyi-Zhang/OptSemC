@@ -1,17 +1,18 @@
-\begin{table*}[t]
+\begin{table}[t]
 \centering
-\caption{Worked public-contract cases linking coarse labels to hidden contract pairs and protected downstream decisions.}
+\caption{Concrete collision audits linking coarse labels to hidden contract pairs. C1 binds BigQuery federated pushdown~\cite{bigquery_federated_docs} and plan-stage evidence~\cite{bigquery_docs} to Trino pushdown~\cite{trino_pushdown_docs} and dynamic-filtering evidence~\cite{trino_dynamic_filtering_docs}.}
 \label{tab:cases}
 \footnotesize
-\setlength{\tabcolsep}{2.5pt}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.32in}>{\raggedright\arraybackslash}p{0.86in}>{\raggedright\arraybackslash}p{2.55in}>{\raggedright\arraybackslash}p{1.12in}>{\raggedright\arraybackslash}p{1.36in}@{}}
+\setlength{\tabcolsep}{1.6pt}
+\renewcommand{\arraystretch}{1.05}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.24in}>{\raggedright\arraybackslash}p{1.82in}>{\raggedright\arraybackslash}p{0.74in}@{}}
 \toprule
-Case & Coarse label & Contract pair hidden by the label & Separating fields & Decision protected \\
+Case & Hidden contract contrast & Separating fields \\
 \midrule
-C1 & pushdown=yes & BigQuery federated filter delegation vs. Trino aggregate/expression pushdown & \textbf{operator, variant, placement} & do not port local rewrite expectations to delegated execution \\
-C2 & plan evidence & PostgreSQL EXPLAIN estimates vs. BigQuery stage/shuffle evidence and Snowflake logical plans & \textbf{observability, placement} & do not compare estimates, stages, and profiles as one evidence layer \\
-C3 & adaptive=yes & Compile-time planning vs. BigQuery/Spark/ClickHouse runtime adaptation & \textbf{layer, decision time} & do not benchmark runtime adaptation as compile-time search \\
-C4 & CTE support & DuckDB/PostgreSQL CTE inline, materialize, reuse, and disable guards & \textbf{variant, guard state} & do not treat guarded reuse as unconditional feature parity \\
+C1 & pushdown/explain: BigQuery delegation+stage evidence vs. Trino pushdown+dynamic filtering & \textbf{variant, placement, decision time} \\
+C2 & plan evidence: PostgreSQL estimates vs. BigQuery/Snowflake stages & \textbf{observability, placement} \\
+C3 & adaptive: compile-time planning vs. runtime repartition/AQE/conversion & \textbf{layer, decision time} \\
+C4 & CTE: DuckDB/PostgreSQL inline, materialize, reuse, and disable guards & \textbf{variant, guard state} \\
 \bottomrule
 \end{tabular}
-\end{table*}
+\end{table}

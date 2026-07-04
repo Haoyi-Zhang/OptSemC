@@ -100,7 +100,7 @@ class ActionRecord:
 
 @dataclass(frozen=True)
 class EvidenceRef:
-    """Reference from a rule to a verified public evidence segment."""
+    """Reference from a rule to an admitted public evidence segment."""
 
     source_id: str
     segment_id: str
@@ -384,4 +384,3 @@ def duplicate_keys(values: Iterable[Any]) -> tuple[Any, ...]:
             dup.append(value)
         seen.add(value)
     return tuple(dup)
-

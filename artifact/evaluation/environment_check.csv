@@ -1,0 +1,6 @@
+check,passed,details
+environment_report_present,true,evaluation/environment.csv
+required_environment_fields,true,
+python_version_recorded,true,"3.10.12 (main, Mar  3 2026, 11:56:32) [GCC 11.4.0]"
+scope_is_known,true,full-repository
+environment_values_are_redacted,true,

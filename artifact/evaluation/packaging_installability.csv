@@ -1,10 +1,14 @@
 check,passed,details
 project_version_not_hardcoded,true,dynamic=['version']
 dynamic_version_backend_declared,true,"['setuptools-scm>=8', 'setuptools>=68']"
-dynamic_version_git_root_declared,true,"{'root': '..', 'relative_to': 'pyproject.toml'}"
+dynamic_version_git_root_declared,true,"{'root': '..', 'relative_to': 'pyproject.toml', 'fallback_version': '0.0.0'}"
+archive_fallback_version_declared,true,0.0.0
+paper_extra_declared,true,['pypdf>=4.0']
+realengines_extra_declared,true,"['duckdb>=1.0.0', 'psycopg[binary]>=3.1']"
 package_dir_exists,true,optsemc
 optsemc_declared_package,true,{'optsemc'}
 readme_exists,true,README.md
 license_is_spdx_string,true,MIT
 console_script_declared,true,optsemc.cli:main
 console_script_target_imports,true,optsemc.cli:main
+wheel_builds_without_git_metadata,true,optsemc-0.0.0-py3-none-any.whl

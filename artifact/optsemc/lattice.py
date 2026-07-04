@@ -242,7 +242,7 @@ def summarize_by_size(counts: Iterable[ProjectionCounts]) -> list[dict[str, obje
 
 # Backwards-compatible finite field-lattice helpers used by proof-carrying
 # certificate builders.  They operate on repair witnesses, where each witness
-# carries the baseline projection method and two exact signatures.
+# carries the baseline projection method and two reference signatures.
 @dataclass(frozen=True)
 class LatticePoint:
     fields: tuple[str, ...]

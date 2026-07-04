@@ -1,0 +1,4 @@
+check,passed,details
+repair_generalization_summary_present,true,rows=3
+repair_generalization_methods_present,true,keyword;operator_only;yesno
+repair_generalization_resolves_heldout,true,
