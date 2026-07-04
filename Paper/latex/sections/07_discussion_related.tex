@@ -10,7 +10,7 @@
 \section{Related Work}
 \label{sec:related}
 
-Optimizer architecture supplies fields for access paths, rule search, adapter boundaries, placement, and plan evidence \cite{selinger1979access,graefe1990volcano,graefe1995cascades,begoli2018calcite,soliman2014orca,carey1995garlic,stonebraker2015bigdawg,dageville2016snowflake,melnik2010dremel}.  Benchmarks standardize workloads or estimates \cite{tpch,tpcds,leis2015good,chronis2024cardbench}, while equivalence and testing tools check SQL semantics or bugs \cite{chu2017cosette,wang2024qed,rigger2020sqlancer,rigger2020norec}.  OptSem-C instead audits whether public contract labels may be compared as the same denominator.
+Optimizer architecture supplies fields for access paths, rule search, adapters, placement, and plan evidence \cite{selinger1979access,graefe1990volcano,graefe1995cascades,begoli2018calcite,soliman2014orca,carey1995garlic,stonebraker2015bigdawg,dageville2016snowflake,melnik2010dremel}.  Benchmarks standardize workloads or estimates, while equivalence and testing tools check SQL semantics or bugs \cite{tpch,tpcds,leis2015good,chronis2024cardbench,chu2017cosette,wang2024qed,rigger2020sqlancer,rigger2020norec}; neither defines equality for public optimizer-contract denominators.
 
 \section{Conclusion}
 OptSem-C shows that denominator validity must precede cross-system optimizer ranking.
