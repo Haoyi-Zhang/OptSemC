@@ -1,0 +1,27 @@
+\begin{table}[t]
+\centering
+\caption{Repair certificate summary for three public vocabularies. Base shows the residual collision-pair count before repair; one-field trials add one disambiguating field; holdout contexts compare fold-best repairs with the fixed layer-and-placement basis. Bold zeros mark complete repair.}
+\label{tab:repair-certificate-summary}
+\footnotesize
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.54in}
+                >{\raggedleft\arraybackslash}p{0.30in}
+                >{\raggedright\arraybackslash}p{1.10in}
+                >{\raggedright\arraybackslash}p{1.08in}@{}}
+\toprule
+Vocab. & Base & One-field trials & Holdout contexts \\
+\midrule
+Keyword & 254 & op. leaves 6; layer leaves 42; placement leaves \textbf{0} & 830 contexts: fold-best leaves 144; basis leaves \textbf{0} \\
+\addlinespace[1pt]
+Yes/no & 6 & layer leaves \textbf{0}; placement leaves \textbf{0} & 3 contexts: fold-best leaves \textbf{0}; basis leaves \textbf{0} \\
+\addlinespace[1pt]
+Operator & 238 & kind leaves 6; placement leaves 32; layer leaves \textbf{0} & 569 contexts: fold-best leaves 12; basis leaves \textbf{0} \\
+\bottomrule
+\end{tabular}
+\vspace{2pt}
+\begin{minipage}{0.98\columnwidth}
+\footnotesize\raggedright
+\emph{Note.} Records in base collisions share the tested projection but differ under reference contracts.  Row counts are deterministic residuals; context counts vary with vocabulary coverage.  Basis is fixed layer and placement.
+\end{minipage}
+\Description{Repair certificate summary combining universal repairs, stepwise residual false-pair counts, and held-out residuals for keyword, yes/no, and operator-only projections.}
+\end{table}

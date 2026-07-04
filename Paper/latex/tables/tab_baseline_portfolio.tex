@@ -1,22 +1,23 @@
-\begin{table}[t]
+\begin{table*}[t]
 \centering
-\caption{Executable projection baselines. Bold zeros are exact or strengthened controls; underlining marks the worst one-field projection, exposing the shown range.}
+\caption{Projection-family synthesis over the fixed comparison set.  The table groups the audited vocabularies by the role they play in the claim, reports the worst collision load in each family, and states the reviewer-facing implication.  Bold marks the zero-collision controls and repaired families.}
 \label{tab:baseline-portfolio}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}lrrr@{}}
+\begin{tabular}{@{}p{2.55cm}p{3.15cm}rp{3.10cm}p{5.95cm}@{}}
 \toprule
-Baseline & Eq. & False & Rate \\
+Family & Rows represented & Worst false pairs & Strongest check & Takeaway \\
 \midrule
-Exact & 2,030 & \textbf{0} & \textbf{0.0\%} \\
-Keyword & 2,284 & 254 & 11.1\% \\
-Op/action & 2,036 & 6 & 0.3\% \\
-Operator & 2,268 & 238 & 10.5\% \\
-Kind-only & 2,282 & 252 & 11.0\% \\
-Layer-only & 2,479 & 449 & 18.1\% \\
-Place-only & 12,732 & 10,702 & 84.1\% \\
-State-only & 25,623 & \underline{23,593} & \underline{92.1\%} \\
-Surface & 2,030 & \textbf{0} & \textbf{0.0\%} \\
+Reference controls & Exact; strengthened semantic surface & \textbf{0} & Same 88,536 engine--probe comparisons & The checker does not force collisions; exact public-contract equality and the repaired surface preserve the denominator. \\
+\addlinespace[1pt]
+Public-label vocabularies & Keyword; yes/no; operator-only & 254 & Wilson, bootstrap, leave-one-source, held-out probe families & Common public comparison labels are too coarse: the denominator can be wrong before any runtime metric is interpreted. \\
+\addlinespace[1pt]
+One-field stress tests & Placement-only; state-only & 23,593 & Full finite audit, no sampling & Retaining a single optimizer dimension is not a conservative fallback; it can create a much larger projection kernel. \\
+\addlinespace[1pt]
+Repair basis & Placement for keyword; layer for operator-only; layer and placement for all headline witnesses & \textbf{0} & Smaller-field counter-witnesses plus held-out repair tests & The missing semantics are local and query-processing specific, not an unrestricted post-hoc label expansion. \\
+\addlinespace[1pt]
+Resolution frontier & 256 retained-field subsets; 128 no-variant subsets & 59,546 & 14 minimal safe and eight maximal unsafe no-variant vocabularies & Safe comparison vocabularies form a finite frontier that can be published and replayed rather than asserted informally. \\
 \bottomrule
 \end{tabular}
-\end{table}
+\Description{Synthesis table grouping the projection audit into reference controls, public-label vocabularies, one-field stress tests, repair basis checks, and retained-field frontier checks.}
+\end{table*}

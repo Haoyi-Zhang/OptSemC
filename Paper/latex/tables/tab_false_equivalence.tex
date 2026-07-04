@@ -1,16 +1,24 @@
 \begin{table}[t]
 \centering
-\caption{Projection-induced contract collisions and minimum repair fields for headline vocabularies. Bold marks certified repair fields; underlining marks the two headline unsafe baselines emphasized in the text.}
+\caption{Main projection audit, combining collision rate, witness severity, and repair diagnosis. Bold zeros mark exact or strengthened controls; underlining marks the largest unrepaired one-field stress row.}
 \label{tab:contract-collision}
-\small
-\begin{tabular}{lrrrl}
+\footnotesize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}lrrrrrl@{}}
 \toprule
-Projection & Eq. & False & Cond. & Repair field(s) \\
+Projection & Eq. & False & Rate & Mean $\Delta$ & Max $\Delta$ & Repair/diagnosis \\
 \midrule
-Keyword & 2,284 & \underline{254} & \underline{11.1\%} & \textbf{placement} \\
-Yes/No & 2,036 & 6 & 0.3\% & layer \\
-Operator-only & 2,268 & \underline{238} & \underline{10.5\%} & \textbf{layer} \\
+Exact & 2,030 & \textbf{0} & \textbf{0.0\%} & \textbf{0.00} & \textbf{0} & control \\
+\addlinespace[1pt]
+Keyword & 2,284 & 254 & 11.1\% & 9.09 & 17 & \textbf{placement} \\
+Yes/No & 2,036 & 6 & 0.3\% & 3.00 & 3 & layer \\
+Operator-only & 2,268 & 238 & 10.5\% & 5.84 & 14 & \textbf{layer} \\
+\addlinespace[1pt]
+Placement-only & 12,732 & 10,702 & 84.1\% & 21.29 & 53 & unsafe stress \\
+State-only & 25,623 & \underline{23,593} & \underline{92.1\%} & 13.06 & \underline{64} & unsafe stress \\
+\addlinespace[1pt]
+Surface & 2,030 & \textbf{0} & \textbf{0.0\%} & \textbf{0.00} & \textbf{0} & strengthened control \\
 \bottomrule
 \end{tabular}
-\Description{Summary table of projection-induced contract-collision counts and repair fields for keyword, yes/no, and operator-only projections.}
+\Description{Combined projection audit table showing equivalence counts, false collision counts, conditional rates, evidence gap severity, and repair diagnoses for controls, headline projections, one-field stress rows, and the strengthened surface control.}
 \end{table}
