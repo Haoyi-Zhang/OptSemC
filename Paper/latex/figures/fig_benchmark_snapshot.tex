@@ -5,7 +5,7 @@
     text width=1.42cm, minimum height=.76cm,
     font=\rmfamily\fontsize{6.85}{7.45}\selectfont, text=black!72,
     align=center, inner xsep=1.3pt, inner ysep=1pt},
-  gate/.style={vpanel, draw=vldbTeal!74!black, fill=vldbMint,
+  checknode/.style={vpanel, draw=vldbTeal!74!black, fill=vldbMint,
     text width=1.42cm, minimum height=.42cm,
     font=\rmfamily\bfseries\fontsize{6.75}{7.35}\selectfont,
     text=vldbInk, align=center, inner xsep=1.1pt, inner ysep=.8pt},
@@ -34,11 +34,11 @@
 
 \draw[vldbRule, line width=.36pt] (.15,-1.42) -- (7.03,-1.42);
 \node[vsmall, anchor=west, text=vldbGray] at (.02,-1.24)
-  {admission gates checked before collision counting};
-\node[gate] at (.82,-1.84) {0 invalid};
-\node[gate] at (2.62,-1.84) {0 conflict};
-\node[gate] at (4.42,-1.84) {0 SQL fail};
-\node[gate] at (6.22,-1.84) {0 motif fail};
+  {admission checks before collision counting};
+\node[checknode] at (.82,-1.84) {0 invalid};
+\node[checknode] at (2.62,-1.84) {0 conflict};
+\node[checknode] at (4.42,-1.84) {0 SQL fail};
+\node[checknode] at (6.22,-1.84) {0 motif fail};
 
 \node[vsmall, anchor=west, text=vldbGray] at (.02,-2.42)
   {query-feature axes covered by generated probes};
@@ -56,7 +56,7 @@
 \node[axis] at (5.10,-3.22) {order};
 \node[axis] at (6.10,-3.22) {bound.};
 \end{tikzpicture}
-\caption{Corpus, benchmark, and execution denominators. Source rules, probes, motifs, and sources are frozen before outcome measurement; admission gates verify support, consistency, SQL execution, and motif coverage before collision rates are reported.}
-\Description{A compact validation-gate diagram showing fixed evidence counts, zero-failure admission gates, and covered query-feature axes before collision counting.}
+\caption{Corpus, benchmark, and execution denominators. Source rules, probes, motifs, and sources are frozen before outcome measurement; admission checks verify support, consistency, SQL execution, and motif coverage before collision rates are reported.}
+\Description{A compact validation-check diagram showing fixed evidence counts, zero-failure admission checks, and covered query-feature axes before collision counting.}
 \label{fig:benchmark-snapshot}
 \end{figure}
