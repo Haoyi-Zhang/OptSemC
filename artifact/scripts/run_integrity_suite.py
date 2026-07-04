@@ -37,7 +37,7 @@ def run_refresh(script: str) -> None:
     env = os.environ.copy()
     env['PYTHONDONTWRITEBYTECODE'] = '1'
     env['PYTHONPATH'] = str(ROOT) + os.pathsep + str(ROOT / 'scripts') + (os.pathsep + env['PYTHONPATH'] if env.get('PYTHONPATH') else '')
-    if script == 'check_real_engine_validation.py' and (
+    if script == 'check_real_engine_validation.py' and not ARTIFACT_ONLY and (
         env.get('RUN_LATEX_COMPILE') == '1'
         or env.get('OPTSEMC_REQUIRE_FRESH_REAL_ENGINE') == '1'
         or (E / 'real_engine_fresh_run.csv').exists()
