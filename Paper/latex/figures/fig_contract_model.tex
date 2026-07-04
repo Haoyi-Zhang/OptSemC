@@ -12,14 +12,14 @@
     text height=1.42ex, text depth=.25ex},
   gate/.style={diamond, aspect=1.65, draw=vldbRose!76!black, fill=vldbRose!8,
     line width=.58pt, text width=1.68cm, inner sep=.8pt,
-    font=\rmfamily\bfseries\fontsize{6.55}{7.10}\selectfont,
+    font=\rmfamily\bfseries\fontsize{6.75}{7.25}\selectfont,
     text=vldbRose!75!black, align=center},
   certbox/.style={vpanel, draw=vldbTeal!76!black, fill=vldbMint, text width=2.36cm,
     minimum height=.82cm, font=\rmfamily\fontsize{6.85}{7.48}\selectfont,
     text=black!72, align=center, inner xsep=2.2pt, inner ysep=1.2pt,
     text height=1.42ex, text depth=.25ex},
   chip/.style={rounded corners=1.4pt, draw=black!14, fill=white,
-    font=\rmfamily\fontsize{6.55}{7.15}\selectfont, text=vldbGray,
+    font=\rmfamily\fontsize{6.75}{7.25}\selectfont, text=vldbGray,
     inner xsep=1.8pt, inner ysep=.65pt, text height=1.22ex,
     text depth=.20ex},
   ztitle/.style={font=\rmfamily\bfseries\fontsize{6.65}{7.22}\selectfont,
@@ -69,8 +69,8 @@
 \node[chip] (layer) at (6.36,.42) {layer};
 \node[chip] (place) at (7.70,.42) {placement};
 \node[chip] (time) at (9.20,.42) {evidence};
-\draw[vldbTeal!62!black, dashed, line width=.44pt] (layer.north) .. controls (7.28,1.06) and (10.60,.80) .. (gate.south);
-\draw[vldbTeal!62!black, dashed, line width=.44pt] (place.north) .. controls (8.12,1.02) and (11.20,.80) .. (gate.south);
+\draw[vldbTeal!72!black, dashed, line width=.52pt] (layer.north) .. controls (7.28,1.06) and (10.60,.80) .. (gate.south);
+\draw[vldbTeal!72!black, dashed, line width=.52pt] (place.north) .. controls (8.12,1.02) and (11.20,.80) .. (gate.south);
 \end{tikzpicture}
 \caption{OptSem-C's contract-comparison dataflow. Public evidence and executable probes are admitted into reference signatures before any projected vocabulary is trusted; the rose semantic gate compares projected equality against reference inequality. The output is a finite repair certificate and a claim ledger, so each reported collision is tied to public evidence, a counter-witness, and a retained-field repair.}
 \Description{A four-zone pipeline from public evidence and SQL probes through rule admission, engine-probe maps, reference signatures, projection audit, counter-witness gate, repair certificate, and claim ledger. Semantic-field chips connect to the gate to show which fields are retained for repair.}

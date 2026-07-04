@@ -1,66 +1,67 @@
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[
-  card/.style={vpanel, draw=vldbBlue!68, fill=vldbMist, text width=2.72cm,
-    minimum height=1.02cm, font=\rmfamily\fontsize{6.65}{7.25}\selectfont,
-    text=black!72, align=left, inner xsep=3.0pt, inner ysep=2.2pt},
-  lost/.style={vpanel, draw=vldbRose!78!black, fill=vldbRose!8, text width=3.10cm,
-    minimum height=.86cm, font=\rmfamily\fontsize{6.65}{7.25}\selectfont,
-    text=black!72, align=center, inner xsep=2.5pt, inner ysep=1.8pt},
-  repaired/.style={vpanel, draw=vldbTeal!75!black, fill=vldbMint, text width=2.55cm,
-    minimum height=.74cm, font=\rmfamily\fontsize{6.65}{7.25}\selectfont,
-    text=black!72, align=center, inner xsep=2.2pt, inner ysep=1.6pt},
-  tag/.style={rounded corners=1.3pt, draw=black!14, fill=white,
-    font=\rmfamily\bfseries\fontsize{6.35}{6.95}\selectfont,
-    text=vldbGray, inner xsep=2.1pt, inner ysep=.7pt},
-  miss/.style={rounded corners=1.2pt, draw=vldbRose!42, fill=white,
-    font=\rmfamily\fontsize{6.25}{6.85}\selectfont, text=vldbRose!70!black,
-    inner xsep=1.7pt, inner ysep=.55pt},
-  keep/.style={rounded corners=1.2pt, draw=vldbTeal!42, fill=white,
-    font=\rmfamily\fontsize{6.25}{6.85}\selectfont, text=vldbTeal!58!black,
-    inner xsep=1.7pt, inner ysep=.55pt},
-  flow/.style={vflow}
+  band/.style={vpanel, draw=vldbRule, fill=vldbSoft, minimum width=7.12cm,
+    minimum height=.92cm},
+  card/.style={vpanel, draw=vldbBlue!68, fill=vldbMist, text width=2.42cm,
+    minimum height=.86cm, font=\rmfamily\fontsize{6.8}{7.45}\selectfont,
+    text=black!72, align=center, inner xsep=2.7pt, inner ysep=1.8pt,
+    text height=1.45ex, text depth=.28ex},
+  collide/.style={vpanel, draw=vldbRose!76!black, fill=vldbRose!8,
+    text width=2.72cm, minimum height=.72cm,
+    font=\rmfamily\bfseries\fontsize{6.95}{7.55}\selectfont,
+    text=vldbRose!78!black, align=center, inner xsep=2.2pt, inner ysep=1.5pt,
+    text height=1.45ex, text depth=.28ex},
+  repair/.style={vpanel, draw=vldbTeal!72!black, fill=vldbMint,
+    text width=2.42cm, minimum height=.74cm,
+    font=\rmfamily\fontsize{6.8}{7.45}\selectfont, text=black!70,
+    align=center, inner xsep=2.5pt, inner ysep=1.6pt,
+    text height=1.45ex, text depth=.28ex},
+  label/.style={font=\rmfamily\bfseries\fontsize{7.15}{7.85}\selectfont,
+    text=vldbInk, align=left, inner sep=.3pt, text height=1.45ex,
+    text depth=.28ex},
+  chip/.style={rounded corners=1.3pt, draw=black!14, fill=white,
+    font=\rmfamily\fontsize{6.65}{7.25}\selectfont, text=vldbGray,
+    inner xsep=1.9pt, inner ysep=.55pt, text height=1.32ex,
+    text depth=.25ex},
+  flow/.style={-{Latex[length=1.6mm]}, line width=.70pt,
+    draw=black!48, line cap=round, line join=round}
 ]
-\path[use as bounding box] (-.05,-4.36) rectangle (7.24,.32);
+\path[use as bounding box] (-.05,-4.25) rectangle (7.32,.24);
 
-\node[vhead, anchor=west] at (.00,.10)
-  {Projection collision as a contract witness};
-\node[tag, anchor=west] at (.00,-.32) {A reference signatures};
-\node[tag, anchor=west] at (.00,-1.92) {B projected comparison};
-\node[tag, anchor=west] at (.00,-3.18) {C finite repair};
+\begin{scope}[on background layer]
+  \node[band] at (3.60,-.70) {};
+  \node[band, fill=vldbWarm] at (3.60,-2.05) {};
+  \node[band, fill=vldbMint] at (3.60,-3.38) {};
+\end{scope}
 
-\node[card] (c1) at (2.02,-.96) {%
-  \textbf{Contract $M_1$}\\[-1pt]
-  operator: filter\\
-  placement: local\\
-  public support: documented};
-\node[card] (c2) at (5.30,-.96) {%
-  \textbf{Contract $M_2$}\\[-1pt]
-  operator: aggregate\\
-  placement: source\\
-  public support: documented};
+\node[label, anchor=west] at (.12,-.19) {A. Reference contracts keep public semantics};
+\node[label, anchor=west] at (.12,-1.54) {B. Coarse denominator collapses them};
+\node[label, anchor=west] at (.12,-2.87) {C. Certificate names the missing fields};
 
-\node[lost] (proj) at (3.66,-2.26) {%
-  \textbf{\texttt{pushdown=yes}}\\[-1pt]
-  projected equal although $S(M_1)\ne S(M_2)$};
-\node[miss] at (2.02,-2.86) {lost operator};
-\node[miss] at (3.66,-2.86) {lost placement};
-\node[miss] at (5.30,-2.86) {lost evidence split};
+\node[card] (m1) at (1.86,-.84) {\textbf{$M_1$}\\filter\\local engine};
+\node[card] (m2) at (5.34,-.84) {\textbf{$M_2$}\\aggregate\\remote source};
+\node[chip, draw=vldbRose!35, text=vldbRose!70!black] at (3.60,-.84)
+  {$S(M_1)\neq S(M_2)$};
 
-\node[repaired] (r1) at (2.16,-3.80)
-  {filter + local\\separate key};
-\node[repaired] (r2) at (5.16,-3.80)
-  {aggregate + source\\separate key};
-\node[keep] at (3.66,-3.30) {retain operator + placement};
+\node[collide] (p) at (3.60,-2.15) {\texttt{pushdown=yes}\\declares equal};
+\node[chip, draw=vldbRose!35, text=vldbRose!70!black] at (1.72,-2.15)
+  {operator lost};
+\node[chip, draw=vldbRose!35, text=vldbRose!70!black] at (5.48,-2.15)
+  {placement lost};
 
-\draw[flow, draw=vldbRose!72!black] (c1.south) -- (proj.north west);
-\draw[flow, draw=vldbRose!72!black] (c2.south) -- (proj.north east);
-\draw[flow, draw=vldbTeal!72!black] (proj.south) -- (3.66,-3.30);
-\draw[vldbTeal!72!black, line width=.56pt, line cap=round] (3.66,-3.42) -- (2.16,-3.42) -- (r1.north);
-\draw[vldbTeal!72!black, line width=.56pt, line cap=round] (3.66,-3.42) -- (5.16,-3.42) -- (r2.north);
-\draw[vldbRose!72!black, line width=.48pt, dashed] (c1.east) -- node[above, vsmall, text=vldbRose!70!black] {$\ne$} (c2.west);
+\node[repair] (r1) at (1.86,-3.54) {filter\\+ local};
+\node[repair] (r2) at (5.34,-3.54) {aggregate\\+ source};
+\node[chip, draw=vldbTeal!45, text=vldbTeal!58!black] at (3.60,-3.54)
+  {retain operator + placement};
+
+\draw[flow, draw=vldbRose!72!black] (m1.south) |- (p.west);
+\draw[flow, draw=vldbRose!72!black] (m2.south) |- (p.east);
+\draw[flow, draw=vldbTeal!72!black] (p.south) -- (3.60,-3.12);
+\draw[flow, draw=vldbTeal!72!black] (3.15,-3.54) -- (r1.east);
+\draw[flow, draw=vldbTeal!72!black] (4.05,-3.54) -- (r2.west);
 \end{tikzpicture}
-\caption{Projection loss as a finite contract witness. Panel A shows two public optimizer contracts that differ in operator and execution placement; Panel B shows how a coarse \texttt{pushdown=yes} vocabulary collapses them into one declared-equal cell. Panel C shows the repair certificate used by OptSem-C: retaining operator and placement separates the witness without changing the public evidence base.}
+\caption{Projection loss as a finite contract witness. Two source-backed contracts become equal under a coarse \texttt{pushdown=yes} denominator; retaining operator and placement separates the witness without adding private optimizer facts.}
 \Description{Two reference contracts with different operator and placement fields collapse into a single pushdown=yes projection. Restoring operator and placement separates the contracts into distinct repaired keys.}
 \label{fig:projection-trap}
 \end{figure}

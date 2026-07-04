@@ -1,18 +1,19 @@
 \begin{table}[t]
 \centering
-\caption{Concrete collision audits linking coarse labels to hidden contract pairs. C1 binds BigQuery federated pushdown~\cite{bigquery_federated_docs} and plan-stage evidence~\cite{bigquery_docs} to Trino pushdown~\cite{trino_pushdown_docs} and dynamic-filtering evidence~\cite{trino_dynamic_filtering_docs}.}
+\caption{Concrete collision audits linking coarse labels to hidden contract pairs.  Each row gives the public label, the hidden contrast, and the retained fields that make the comparison safe.}
 \label{tab:cases}
 \footnotesize
-\setlength{\tabcolsep}{1.6pt}
-\renewcommand{\arraystretch}{1.05}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.24in}>{\raggedright\arraybackslash}p{1.82in}>{\raggedright\arraybackslash}p{0.74in}@{}}
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.10}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.30in}
+                >{\raggedright\arraybackslash}p{2.86in}@{}}
 \toprule
-Case & Hidden contract contrast & Separating fields \\
+Case & Audit \\
 \midrule
-C1 & pushdown/explain: BigQuery delegation+stage evidence vs. Trino pushdown+dynamic filtering & \textbf{variant, placement, decision time} \\
-C2 & plan evidence: PostgreSQL estimates vs. BigQuery/Snowflake stages & \textbf{observability, placement} \\
-C3 & adaptive: compile-time planning vs. runtime repartition/AQE/conversion & \textbf{layer, decision time} \\
-C4 & CTE: DuckDB/PostgreSQL inline, materialize, reuse, and disable guards & \textbf{variant, guard state} \\
+C1 & \textbf{Label:} \texttt{pushdown}+\texttt{explain}. \textbf{Contrast:} BigQuery source delegation and stage evidence vs. Trino connector pushdown and runtime dynamic filtering. \textbf{Fields:} variant, placement, decision time. \\
+C2 & \textbf{Label:} plan evidence. \textbf{Contrast:} PostgreSQL local estimates vs. BigQuery/Snowflake service-stage evidence. \textbf{Fields:} observability, placement. \\
+C3 & \textbf{Label:} adaptive execution. \textbf{Contrast:} compile-time planning vs. runtime repartition, AQE, and conversion. \textbf{Fields:} layer, decision time. \\
+C4 & \textbf{Label:} CTE materialization. \textbf{Contrast:} DuckDB/PostgreSQL inline, materialize, reuse, and disable guards. \textbf{Fields:} variant, guard state. \\
 \bottomrule
 \end{tabular}
 \end{table}

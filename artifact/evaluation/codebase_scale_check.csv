@@ -1,5 +1,5 @@
 check,passed,details
-python_loc_substantial,true,loc=31496
-public_api_substantial,true,classes=167;functions=2378
-python_file_surface_substantial,true,files=326
+python_loc_substantial,true,loc=25175
+public_api_substantial,true,classes=86;functions=1919
+python_file_surface_substantial,true,files=273
 no_transient_bloat,true,

@@ -1,12 +1,12 @@
 \begin{table}[t]
 \centering
-\caption{Main projection audit, combining collision rate, witness severity, and repair diagnosis. Bold zeros mark exact or strengthened controls; underlining marks the largest unrepaired one-field stress row.}
+\caption{Main projection audit, combining collision rate, witness severity, and repair diagnosis.  Eq. is the declared denominator size, not a quality score; false/rate are lower-better, while $\Delta$ columns measure severity when a collision exists.}
 \label{tab:contract-collision}
 \footnotesize
 \setlength{\tabcolsep}{2.5pt}
 \begin{tabular}{@{}lrrrrrl@{}}
 \toprule
-Projection & Eq. & False & Rate & Mean $\Delta$ & Max $\Delta$ & Repair/diagnosis \\
+Projection & Eq. & False$\downarrow$ & Rate$\downarrow$ & Mean $\Delta$ & Max $\Delta$ & Repair/diagnosis \\
 \midrule
 Exact & 2,030 & \textbf{0} & \textbf{0.0\%} & \textbf{0.00} & \textbf{0} & control \\
 \addlinespace[1pt]

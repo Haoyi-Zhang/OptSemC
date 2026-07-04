@@ -1,12 +1,12 @@
 \begin{table}[t]
 \centering
-\caption{Retained-field lattice for projection repair. Bold marks safe zero-collision vocabularies; underlining marks the largest unsafe collision count.}
+\caption{Retained-field lattice for projection repair.  Ent. kept is higher-better, Eq. is denominator size, and False is lower-better.  Bold zeros mark safe vocabularies; underlining marks the largest unsafe collision count.}
 \label{tab:resolution-lattice}
 \footnotesize
 \setlength{\tabcolsep}{2.5pt}
 \begin{tabular}{@{}lrrrrr@{}}
 \toprule
-Fields & $|R|$ & Classes & Ent. & Eq. & False \\
+Fields & $|R|$ & Classes & Ent. kept$\uparrow$ & Eq. & False$\downarrow$ \\
 \midrule
 None & 0 & 1 & 0.000 & 61,576 & \underline{59,546} \\
 Operator & 1 & 387 & 0.787 & 2,268 & 238 \\

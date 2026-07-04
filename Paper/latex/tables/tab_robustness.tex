@@ -1,16 +1,18 @@
 \begin{table}[t]
 \centering
-\caption{Statistical and source-removal robustness of projection collisions. Wilson and Boot. are 95\% intervals for the conditional false-equivalence rate; LOO removes one public source at a time.}
+\caption{Statistical and source-removal robustness of projection collisions.  Down arrows mark lower-better risk columns; bold zeros are controls, not large collision counts.  Wilson and Boot. are 95\% intervals for the conditional false-equivalence rate.}
 \label{tab:robustness}
 \footnotesize
-\setlength{\tabcolsep}{1.6pt}
-\begin{tabular}{@{}lrrrrrr@{}}
+\setlength{\tabcolsep}{1.4pt}
+\begin{tabular}{@{}llrrrrrr@{}}
 \toprule
-Proj. & False & Micro & Wilson & Boot. & Pair & LOO \\
+Proj. & Type & False$\downarrow$ & Micro$\downarrow$ & Wilson & Boot. & Pair$\downarrow$ & LOO$\downarrow$ \\
 \midrule
-Keyword & \textbf{254} & \textbf{0.111} & \textbf{[.099,.125]} & \textbf{[.098,.124]} & \textbf{0.402} & \textbf{[.017,.144]} \\
-Yes/No & 6 & 0.003 & [.001,.006] & [.001,.006] & 0.003 & [.000,.052] \\
-Operator & \textbf{238} & \textbf{0.105} & \textbf{[.093,.118]} & \textbf{[.094,.121]} & \textbf{0.290} & \textbf{[.032,.148]} \\
+Strict & control & \textbf{0} & 0.000 & -- & -- & 0.000 & -- \\
+Keyword & public label & 254 & 0.111 & [.099,.125] & [.098,.124] & 0.402 & [.017,.144] \\
+Yes/No & public label & 6 & 0.003 & [.001,.006] & [.001,.006] & 0.003 & [.000,.052] \\
+Operator & public label & 238 & 0.105 & [.093,.118] & [.094,.121] & 0.290 & [.032,.148] \\
+Surface & repaired & \textbf{0} & 0.000 & -- & -- & 0.000 & -- \\
 \bottomrule
 \end{tabular}
 \end{table}
