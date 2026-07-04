@@ -77,7 +77,7 @@ def anti_overfit_table() -> None:
         r"\setlength{\tabcolsep}{2.0pt}",
         r"\begin{tabular}{@{}p{0.67in}p{0.73in}p{0.64in}p{1.12in}@{}}",
         r"\toprule",
-        "Gate & Scope & Evidence & Boundary" + ROW,
+        "Check & Scope & Evidence & Boundary" + ROW,
         r"\midrule",
     ]
     for row in selected:
