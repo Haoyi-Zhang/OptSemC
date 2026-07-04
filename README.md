@@ -9,4 +9,16 @@ The project has two primary directories:
 
 The active manuscript source is `Paper/latex/paper.tex`. The artifact entry point is `artifact/README.md`.
 
-Full experiment replay and paper compilation for the reproducibility workflow are validated on a Linux execution host. Local work should be limited to source inspection, editing, static checks, and packaging preparation.
+## Artifact archive
+
+The public anonymous replay package is archived at https://doi.org/10.5281/zenodo.21185236. The expected SHA-256 for `optsemc-artifact.zip` is:
+
+```text
+1e37facddf0c051fcf2e778389a86fe2208485f337c833378f4f09afa4bf3b6e
+```
+
+The archived replay package was built from Git commit `3a095bd`. Later public repository commits update the paper availability block, compiled PDF, archive digest, and regenerated certificate summaries; they do not change the replay code, grounded corpus, generated probes, or validation scripts used by the archived package.
+
+## Execution environment
+
+The artifact is designed for standard Linux systems with Python 3 and the dependencies listed in `artifact/requirements.txt`. Cloud execution was used as the validation host for full replay and paper compilation; it is not a private service dependency for inspecting or replaying the public artifact. Local work in this repository should be limited to source inspection, editing, static checks, and packaging preparation unless a reviewer intentionally runs the artifact replay.

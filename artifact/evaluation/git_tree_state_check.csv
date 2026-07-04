@@ -1,7 +1,7 @@
 check,passed,details
-git_head_available,true,0baacf85751b
-tree_state_recorded,true,tracked=161;untracked=24;require_clean=False;release_gate=False
+git_head_available,true,385c11a822b0
+tree_state_recorded,true,tracked=24;untracked=0;require_clean=False;release_gate=False
 no_ignored_boundary_files,true,
 release_gate_requires_clean_tree,true,release_gate=False;require_clean=False
-clean_tree_when_required,true, M .github/workflows/ci.yml; M .gitignore; M Paper/latex/figures/fig_benchmark_snapshot.tex; M Paper/latex/figures/fig_contract_model.tex; M Paper/latex/figures/fig_external_motifs_plot.tex; M Paper/latex/figures/fig_projection_trap.tex; M Paper/latex/figures/fig_repair_certificate.tex; M Paper/latex/figures/fig_semantic_frontier_plot.tex; M Paper/latex/paper.pdf; M Paper/latex/paper.tex; M Paper/latex/refs.bib; M Paper/latex/sections/01_intro.tex; M Paper/latex/sections/02_problem.tex; M Paper/latex/sections/03_model.tex; M Paper/latex/sections/04_benchmark_corpus.tex; M Paper/latex/sections/05_evaluation.tex; M Paper/latex/sections/06_cases.tex; M Paper/latex/sections/07_discussion_related.tex; M Paper/latex/tables/tab_cases.tex; M Paper/latex/tables/tab_engine_coverage.tex
-tree_state_hashes_recorded,true,status=66510f3ed2c8;diff=4374763e717d;cached=e3b0c44298fc
+clean_tree_when_required,true, M Paper/latex/paper.pdf; M Paper/latex/paper.tex; M README.md; M artifact/README.md; M artifact/evaluation/artifact_registry_check.csv; M artifact/evaluation/certificate_freshness_check.csv; M artifact/evaluation/environment.csv; M artifact/evaluation/git_tree_porcelain.txt; M artifact/evaluation/git_tree_state.csv; M artifact/evaluation/git_tree_state_check.csv; M artifact/evaluation/integrity_suite.csv; M artifact/evaluation/latex_compile_check.csv; M artifact/evaluation/package_files.csv; M artifact/evaluation/package_fingerprint_summary.csv; M artifact/evaluation/package_integrity.csv; M artifact/evaluation/package_manifest.csv; M artifact/evaluation/package_manifest_check.csv; M artifact/evaluation/package_manifest_summary.csv; M artifact/evaluation/paper_quality.csv; M artifact/evaluation/paper_table_source_check.csv
+tree_state_hashes_recorded,true,status=b6a01ce94671;diff=844fddec3728;cached=e3b0c44298fc

@@ -4,6 +4,22 @@ OptSemC evaluates public query-optimizer behavior contracts, not hidden implemen
 
 The manuscript source is intentionally outside the anonymous replay archive. The replay package is sufficient to rebuild the corpus, derived tables, SQL bundles, and integrity reports; manuscript compilation is a separate paper-build gate in the development repository.
 
+## Archive verification
+
+The public anonymous replay package is archived at https://doi.org/10.5281/zenodo.21185236. The expected SHA-256 for `optsemc-artifact.zip` is:
+
+```text
+1e37facddf0c051fcf2e778389a86fe2208485f337c833378f4f09afa4bf3b6e
+```
+
+Verify after download with:
+
+```bash
+sha256sum optsemc-artifact.zip
+```
+
+The archived replay package was built from Git commit `3a095bd`. Later public repository commits update the paper availability block, compiled PDF, archive digest, and regenerated certificate summaries; they do not change the replay code, grounded corpus, generated probes, or validation scripts used by the archived package.
+
 ## Main research objects
 
 - Grounded public-contract corpus: 287 admitted source-linked rules, 287 evidence spans, 26 public source records.
@@ -35,7 +51,7 @@ Fast mainline checks: passed
 
 ## Execution environment
 
-The artifact is designed for standard Linux systems with Python 3 and the dependencies in `requirements.txt`. Development edits were made on Windows, while the full replay and integrity gates were validated on Linux. The tested environment is recorded in `evaluation/environment.csv` after a replay. The public replay does not require project-specific credentials or private infrastructure.
+The artifact is designed for standard Linux systems with Python 3 and the dependencies in `requirements.txt`. Development edits were made on Windows, while the full replay and integrity gates were validated on Linux. Cloud execution was used as the validation host, not as a private service dependency. The tested environment is recorded in `evaluation/environment.csv` after a replay. The public replay does not require project-specific credentials or private infrastructure.
 
 ## Full no-cache replay
 

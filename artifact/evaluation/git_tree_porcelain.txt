@@ -1,185 +1,24 @@
- M .github/workflows/ci.yml
- M .gitignore
- M Paper/latex/figures/fig_benchmark_snapshot.tex
- M Paper/latex/figures/fig_contract_model.tex
- M Paper/latex/figures/fig_external_motifs_plot.tex
- M Paper/latex/figures/fig_projection_trap.tex
- M Paper/latex/figures/fig_repair_certificate.tex
- M Paper/latex/figures/fig_semantic_frontier_plot.tex
  M Paper/latex/paper.pdf
  M Paper/latex/paper.tex
- M Paper/latex/refs.bib
- M Paper/latex/sections/01_intro.tex
- M Paper/latex/sections/02_problem.tex
- M Paper/latex/sections/03_model.tex
- M Paper/latex/sections/04_benchmark_corpus.tex
- M Paper/latex/sections/05_evaluation.tex
- M Paper/latex/sections/06_cases.tex
- M Paper/latex/sections/07_discussion_related.tex
- M Paper/latex/tables/tab_cases.tex
- M Paper/latex/tables/tab_engine_coverage.tex
- M Paper/latex/tables/tab_evidence_examples.tex
- M Paper/latex/tables/tab_false_equivalence.tex
- M Paper/latex/tables/tab_false_equivalence_severity.tex
- M Paper/latex/tables/tab_field_repair.tex
- M Paper/latex/tables/tab_guard_quality.tex
- M Paper/latex/tables/tab_mainline.tex
- M Paper/latex/tables/tab_mechanism_hotspots.tex
- M Paper/latex/tables/tab_motif_difficulty.tex
- M Paper/latex/tables/tab_real_engine_validation.tex
- M Paper/latex/tables/tab_resolution_lattice.tex
- M Paper/latex/tables/tab_robustness.tex
- M Paper/latex/tables/tab_scalability_family.tex
- M Paper/latex/tables/tab_snapshot.tex
- M Paper/latex/tables/tab_state_join.tex
- M Paper/latex/tables/tab_witness_dispersion.tex
- M Paper/supplemental/supplement.tex
  M README.md
- M artifact/CITATION.cff
- M artifact/Makefile
  M artifact/README.md
- M artifact/REPRODUCIBILITY.md
- M artifact/benchmark/selected_3wise.yaml
- M artifact/evaluation/algorithmic_scaling.csv
- M artifact/evaluation/algorithmic_scaling_check.csv
- M artifact/evaluation/algorithmic_scaling_summary.csv
- M artifact/evaluation/architecture_contract.csv
- M artifact/evaluation/artifact_hygiene.csv
- M artifact/evaluation/artifact_registry.csv
  M artifact/evaluation/artifact_registry_check.csv
- M artifact/evaluation/artifact_registry_summary.csv
- M artifact/evaluation/claim_evidence_gate_cover.csv
- M artifact/evaluation/claim_evidence_graph.csv
- M artifact/evaluation/claim_evidence_graph_check.csv
- M artifact/evaluation/claim_evidence_graph_claims.csv
- M artifact/evaluation/claim_evidence_graph_nodes.csv
- M artifact/evaluation/claim_evidence_graph_summary.csv
- M artifact/evaluation/claim_ledger_check.csv
- M artifact/evaluation/claim_metric_summary.csv
- M artifact/evaluation/codebase_scale_check.csv
- M artifact/evaluation/engine_pair_matrix_check.csv
- M artifact/evaluation/fast_mainline_results.csv
- M artifact/evaluation/formal_obligations_check.csv
- M artifact/evaluation/grounded/baseline_portfolio.csv
- M artifact/evaluation/grounded/conditional_trap_confidence.csv
- M artifact/evaluation/incremental_audit.csv
+ M artifact/evaluation/certificate_freshness_check.csv
+ M artifact/evaluation/environment.csv
+ M artifact/evaluation/git_tree_porcelain.txt
+ M artifact/evaluation/git_tree_state.csv
+ M artifact/evaluation/git_tree_state_check.csv
  M artifact/evaluation/integrity_suite.csv
  M artifact/evaluation/latex_compile_check.csv
- M artifact/evaluation/manuscript_style.csv
- M artifact/evaluation/package_cleanliness.csv
  M artifact/evaluation/package_files.csv
  M artifact/evaluation/package_fingerprint_summary.csv
  M artifact/evaluation/package_integrity.csv
  M artifact/evaluation/package_manifest.csv
  M artifact/evaluation/package_manifest_check.csv
  M artifact/evaluation/package_manifest_summary.csv
- M artifact/evaluation/package_snapshot_check.csv
- M artifact/evaluation/packaging_installability.csv
- M artifact/evaluation/paper_claim_ledger.csv
  M artifact/evaluation/paper_quality.csv
  M artifact/evaluation/paper_table_source_check.csv
  M artifact/evaluation/pdf_integrity.csv
- M artifact/evaluation/probe_greedy_cover_prefix.csv
- M artifact/evaluation/proof_carrying_semantics.json
- M artifact/evaluation/python_code_quality.csv
- M artifact/evaluation/python_code_quality_check.csv
- M artifact/evaluation/python_code_quality_summary.csv
- M artifact/evaluation/python_import_graph.csv
- M artifact/evaluation/real_engine_probe_validation_full.csv
- M artifact/evaluation/real_engine_probe_validation_full_summary.csv
- M artifact/evaluation/real_engine_probe_validation_motif.csv
- M artifact/evaluation/real_engine_probe_validation_motif_summary.csv
+ M artifact/evaluation/real_engine_fresh_run.csv
  M artifact/evaluation/real_engine_validation_check.csv
- M artifact/evaluation/reference_primary_adjudication.csv
- M artifact/evaluation/reference_quality.csv
  M artifact/evaluation/repository_audit.csv
- M artifact/evaluation/repository_quality_check.csv
- M artifact/evaluation/scalability_regression.csv
- M artifact/evaluation/scalability_regression_check.csv
- M artifact/evaluation/scalability_regression_summary.csv
- M artifact/evaluation/scalability_stress.csv
- M artifact/evaluation/scalability_stress_check.csv
- M artifact/evaluation/scalability_stress_paper.csv
- M artifact/evaluation/scalability_stress_summary.csv
- M artifact/evaluation/scaling_diversity_paper.csv
- M artifact/evaluation/theorem_ledger.csv
- M artifact/evaluation/unit_test_results.csv
- M artifact/grounded/verified_rules.jsonl
- M artifact/optsemc/adversarial.py
- M artifact/optsemc/baselines.py
- M artifact/optsemc/claim_graph.py
- M artifact/optsemc/domain.py
- M artifact/optsemc/io.py
- M artifact/optsemc/lattice.py
- M artifact/optsemc/manifest.py
- M artifact/optsemc/package_builder.py
- M artifact/optsemc/registry.py
- M artifact/optsemc/repository.py
- M artifact/optsemc/severity.py
- M artifact/pyproject.toml
- M artifact/recompute_grounded_mainline.sh
- M artifact/requirements.txt
- M artifact/run_cloud_real_engine_validation.sh
- M artifact/run_deep_checks.sh
- M artifact/run_from_scratch_no_cache.sh
- M artifact/run_mainline_checks.sh
- M artifact/scripts/build_anonymous_archive.py
- M artifact/scripts/build_claim_ledger.py
- M artifact/scripts/check_artifact_hygiene.py
- M artifact/scripts/check_artifact_registry.py
- M artifact/scripts/check_claim_evidence_graph.py
- M artifact/scripts/check_fast_mainline_results.py
- M artifact/scripts/check_formal_obligations.py
- M artifact/scripts/check_manuscript_style.py
- M artifact/scripts/check_package_cleanliness.py
- M artifact/scripts/check_package_integrity.py
- M artifact/scripts/check_package_manifest.py
- M artifact/scripts/check_package_snapshot.py
- M artifact/scripts/check_packaging_installability.py
- M artifact/scripts/check_paper_table_sources.py
- M artifact/scripts/check_pdf_integrity.py
- M artifact/scripts/check_real_engine_validation.py
- M artifact/scripts/check_reference_quality.py
- M artifact/scripts/check_repair_generalization.py
- M artifact/scripts/check_repository_quality.py
- M artifact/scripts/check_statistical_robustness.py
- M artifact/scripts/check_theorem_ledger.py
- M artifact/scripts/compute_external_benchmark_crosswalk.py
- M artifact/scripts/compute_grounded_statistical_robustness.py
- M artifact/scripts/compute_incremental_audit.py
- M artifact/scripts/compute_projection_resolution_lattice.py
- M artifact/scripts/compute_repair_basis_stability.py
- M artifact/scripts/compute_repair_generalization.py
- M artifact/scripts/compute_semantic_frontier.py
- M artifact/scripts/execute_sql_probe_suite.py
- M artifact/scripts/render_baseline_external_tables.py
- M artifact/scripts/render_scaling_and_incremental_tables.py
- M artifact/scripts/run_integrity_suite.py
- M artifact/scripts/run_unit_tests.py
- M artifact/tests/test_sql_rendering_shapes.py
- M artifact/tests/test_workload_replay_cover_order.py
- M artifact/tests/test_workload_replay_diagnostic_order.py
-?? artifact/config/practice_projection_surfaces.csv
-?? artifact/evaluation/certificate_freshness_check.csv
-?? artifact/evaluation/environment.csv
-?? artifact/evaluation/environment_check.csv
-?? artifact/evaluation/git_tree_porcelain.txt
-?? artifact/evaluation/git_tree_state.csv
-?? artifact/evaluation/git_tree_state_check.csv
-?? artifact/evaluation/optsemc-artifact.sha256
-?? artifact/evaluation/practice_projection_surface_summary.csv
-?? artifact/evaluation/practice_projection_surfaces.csv
-?? artifact/evaluation/practice_projection_surfaces_check.csv
-?? artifact/evaluation/real_engine_fresh_run.csv
-?? artifact/evaluation/real_engine_validation_environment.csv
-?? artifact/evaluation/reference_guard_audit_latest.json
-?? artifact/evaluation/reference_guard_audit_latest.md
-?? artifact/evaluation/repair_generalization_check.csv
-?? artifact/evaluation/statistical_robustness_check.csv
-?? artifact/scripts/build_environment_report.py
-?? artifact/scripts/check_certificate_freshness.py
-?? artifact/scripts/check_environment_report.py
-?? artifact/scripts/check_git_tree_state.py
-?? artifact/scripts/check_practice_projection_surfaces.py
-?? artifact/scripts/compute_practice_projection_surfaces.py
-?? artifact/setup.py
