@@ -1,0 +1,7 @@
+check,passed,detail
+required_stages,true,"SQL catalog validation,fixed-basis repair,load contract maps,load probes,projection audit"
+positive_elapsed,true,all rows
+positive_peak_rss,true,all rows
+scale_points,true,"1x,2x,4x,8x"
+sql_validation_nonzero,true,sql output rows
+scale_throughput_nonzero,true,projection replay lift

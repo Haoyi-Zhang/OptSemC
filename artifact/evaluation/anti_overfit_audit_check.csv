@@ -1,0 +1,6 @@
+check,passed,detail
+audit_rows,true,8
+has_source_sensitive_yesno,true,yes/no boundary recorded
+has_stress_fail_boundary,true,"pass,source-sensitive,stress-fails"
+fixed_basis_keywords_present,true,"fixed layer+placement,keyword,keyword/operator 10%,operator-only,point-learned minima,strict reference,yes/no"
+claim_boundaries_nonempty,true,all rows

@@ -1,4 +1,4 @@
 check,passed,details
-all_syntax_ok,true,"{'python_files': '273', 'syntax_ok_files': '273', 'functions': '1957', 'classes': '86', 'max_function_lines': '136', 'files_over_120_function_lines': '2'}"
-function_surface_large,true,1957
-class_surface_large,true,86
+all_syntax_ok,true,"{'python_files': '333', 'syntax_ok_files': '333', 'functions': '2481', 'classes': '168', 'max_function_lines': '136', 'files_over_120_function_lines': '4'}"
+function_surface_large,true,2481
+class_surface_large,true,168

@@ -9,6 +9,6 @@ git_tree_state_outputs_current,true,outputs=3;inputs=1
 package_manifest_outputs_current,true,outputs=3;inputs=2
 package_fingerprint_outputs_current,true,outputs=2;inputs=2
 repository_quality_outputs_current,true,outputs=3;inputs=3
-pdf_certificate_current,true,outputs=2;inputs=70
-paper_table_source_check_current,true,outputs=2;inputs=115
-real_engine_evidence_hashes_bound,true,"digests=50d3447e2ee3,bee4216e30ff,b4c87f4c192b,98673c625dc3,1c3c97505bd6,79580126d8fa,83b9c1e0261d;rows=8432/142"
+pdf_certificate_current,true,outputs=2;inputs=73
+paper_table_source_check_current,true,outputs=2;inputs=124
+real_engine_evidence_hashes_bound,true,"digests=50d3447e2ee3,bee4216e30ff,b4c87f4c192b,98673c625dc3,31fcdd079160,79580126d8fa,83b9c1e0261d;rows=8432/142"

@@ -1,17 +1,17 @@
 \begin{table}[t]
 \centering
 \footnotesize
-\caption{Finite-comparison scalability and witness dispersion.  False and drift are lower-better; checks/s and $R^2$ are higher-better; 8$\times$ repeats the 88,536-check set for linear scaling.}
+\caption{Finite-comparison scalability and dispersion. False and Drift are lower-better; Checks/s is higher-better. Bold marks per-column best values for directional columns. Probes/Axes/Fam. describe where witnesses appear.}
 \label{tab:scalability-family}
-\setlength{\tabcolsep}{1.8pt}
-\begin{tabular}{@{}lrrrrrrrr@{}}
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}lrrrrrr@{}}
 \toprule
-Proj. & False$\downarrow$ & Probes & Axes & Fam. & 8$\times$ checks & Checks/s$\uparrow$ & $R^2{\uparrow}$ & Drift$\downarrow$ \\
+Proj. & False & Probes & Axes & Fam. & Checks/s & Drift \\
 \midrule
-strict & \textbf{0} & -- & -- & 0/6 & 708,288 & 221,440 & 0.999 & \textbf{0} \\
-keyword & 254 & 254 & 9 & 3/6 & 708,288 & 279,920 & 0.999 & \textbf{0} \\
-operator-only & 238 & 238 & 8 & 2/6 & 708,288 & \textbf{313,012} & 0.999 & \textbf{0} \\
-surface & \textbf{0} & -- & -- & 0/6 & 708,288 & 240,801 & 0.999 & \textbf{0} \\
+strict & \textbf{0} & -- & -- & 0/6 & 222,559 & \textbf{0} \\
+keyword & 254 & 254 & 9 & 3/6 & 264,029 & \textbf{0} \\
+operator-only & 238 & 238 & 8 & 2/6 & \textbf{289,223} & \textbf{0} \\
+surface & \textbf{0} & -- & -- & 0/6 & 236,648 & \textbf{0} \\
 \bottomrule
 \end{tabular}
 \end{table}

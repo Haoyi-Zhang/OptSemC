@@ -1,0 +1,21 @@
+\begin{table}[t]
+\centering
+\caption{Anti-overfitting audit.  The table separates passes from boundary cases: yes/no is source-sensitive, and point-learned engine-pair repairs are reported as a failed stress rather than as a claim.}
+\label{tab:anti-overfit-audit}
+\footnotesize
+\setlength{\tabcolsep}{2.0pt}
+\begin{tabular}{@{}p{0.67in}p{0.73in}p{0.64in}p{1.12in}@{}}
+\toprule
+Check & Scope & Evidence & Boundary \\
+\midrule
+Reference ctrl. & strict reference & false=0 & pass \\
+Source LOO & keyword & nonzero=26/26 & pass \\
+Source LOO & operator-only & nonzero=26/26 & pass \\
+Source LOO & yes/no & nonzero=25/26 & sparse; not all LOO nonzero \\
+Probe 10\% & keyword/operator 10\% & 30/30; 30/30 & pass \\
+Feature stress & fixed layer+placement & keyword:0; operator-only:0; yes/no:0 & overlapping folds \\
+Engine stress & fixed layer+placement & keyword:0; operator-only:0; yes/no:0 & pass \\
+Learned split & point-learned minima & keyword:48; operator-only:120; yes/no:6 & stress exposes non-transfer \\
+\bottomrule
+\end{tabular}
+\end{table}

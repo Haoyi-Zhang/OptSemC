@@ -1,24 +1,22 @@
-\begin{table*}[t]
+\begin{table}[t]
 \centering
-\caption{Projection-family synthesis over the fixed comparison set.  False-pair counts are lower-better: bold marks zero-collision controls or repairs, and underlining marks the largest unsafe family.}
+\caption{Executable projection baselines. Bold zeros are exact or strengthened controls; underlining marks the worst one-field projection, exposing the shown range.}
 \label{tab:baseline-portfolio}
 \footnotesize
-\setlength{\tabcolsep}{3.2pt}
-\renewcommand{\arraystretch}{1.05}
-\begin{tabular}{@{}p{2.25cm}p{2.95cm}rp{3.05cm}p{5.50cm}@{}}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrr@{}}
 \toprule
-Audit role & Rows represented & Worst false pairs$\downarrow$ & Validation & Claim-level implication \\
+Baseline & Eq. & False & Rate \\
 \midrule
-\textbf{Controls} & Exact; semantic surface & \textbf{0} & Same 88,536 comparisons & Exact equality preserves the denominator. \\
-\addlinespace[1pt]
-\textbf{Public labels} & Keyword; yes/no; op-only & 254 & Wilson, bootstrap, leave-one-source & Public labels can be semantically unsafe. \\
-\addlinespace[1pt]
-\textbf{One-field stress} & Placement-only; state-only & 23,593 & Exhaustive finite audit & Single fields are not conservative. \\
-\addlinespace[1pt]
-\textbf{Repair basis} & Keyword: placement; op-only: layer; all: layer+placement & \textbf{0} & Counter-witnesses; held-out repairs & Layer and placement resolve headline witnesses. \\
-\addlinespace[1pt]
-\textbf{Resolution frontier} & 256 subsets; 128 no-variant & \underline{59,546} & 14 minimal safe; 8 maximal unsafe & Safety is a finite frontier, not an informal label choice. \\
+Exact & 2,030 & \textbf{0} & \textbf{0.0\%} \\
+Keyword & 2,284 & 254 & 11.1\% \\
+Op/action & 2,036 & 6 & 0.3\% \\
+Operator & 2,268 & 238 & 10.5\% \\
+Kind-only & 2,282 & 252 & 11.0\% \\
+Layer-only & 2,479 & 449 & 18.1\% \\
+Place-only & 12,732 & 10,702 & 84.1\% \\
+State-only & 25,623 & \underline{23,593} & \underline{92.1\%} \\
+Surface & 2,030 & \textbf{0} & \textbf{0.0\%} \\
 \bottomrule
 \end{tabular}
-\Description{Synthesis table grouping the projection audit into reference controls, public-label vocabularies, one-field stress tests, repair basis checks, and retained-field frontier checks.}
-\end{table*}
+\end{table}

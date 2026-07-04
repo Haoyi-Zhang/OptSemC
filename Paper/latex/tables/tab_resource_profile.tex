@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\caption{Replay cost and resource profile.  Times and peak RSS come from the cloud replay worker; the 8$\times$ row is a deterministic replay lift of the same finite comparison relation, not a new corpus.}
+\label{tab:resource-profile}
+\footnotesize
+\setlength{\tabcolsep}{2.4pt}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Stage & Input & Output & Time(s) & RSS(MB) \\
+\midrule
+Projection audit & 442,680 & 498 & 1.68 & 275.5 \\
+Repair check & 498 & 0 & 0.01 & 275.5 \\
+SQL validation & 12,648 & 12,648 & 0.57 & 275.5 \\
+8$\times$ audit lift & 2,833,152 & 3,936 & 2.42 & 277.0 \\
+\bottomrule
+\end{tabular}
+\end{table}

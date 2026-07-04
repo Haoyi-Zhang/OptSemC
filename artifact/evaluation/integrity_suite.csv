@@ -42,8 +42,8 @@ latex_compile_check,true,10/10
 pdf_integrity,true,8/8
 reference_quality,true,158/158
 paper_quality,true,7/7
-paper_table_renderers,true,27/27
-paper_table_source_check,true,27/27
+paper_table_renderers,true,29/29
+paper_table_source_check,true,29/29
 data_contracts_check,true,3/3
 claim_evidence_graph_check,true,5/5
 projection_resolution_check,true,12/12

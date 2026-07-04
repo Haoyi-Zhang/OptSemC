@@ -22,7 +22,7 @@
   flow/.style={-{Latex[length=1.65mm]}, line width=.66pt,
     draw=black!48, line cap=round, line join=round}
 ]
-\path[use as bounding box] (-.05,-4.02) rectangle (7.22,.32);
+\path[use as bounding box] (-.05,-4.12) rectangle (7.22,.32);
 
 \node[hlabel, anchor=west] at (.04,.08) {Projection loss in one witness};
 
@@ -35,21 +35,22 @@
 
 \node[kernel] (k) at (3.60,-2.04)
   {\texttt{pushdown=yes}\\declares equality};
-\node[chip, draw=vldbRose!35, text=vldbRose!72!black] at (3.60,-2.64)
+\node[chip, draw=vldbRose!35, text=vldbRose!72!black] (drop) at (3.60,-2.66)
   {projection drops layer and placement};
 
-\node[repair] (r1) at (1.35,-3.42)
+\node[repair] (r1) at (1.35,-3.54)
   {source-side\\planning contract};
-\node[repair] (r2) at (5.85,-3.42)
+\node[repair] (r2) at (5.85,-3.54)
   {engine-side\\runtime contract};
-\node[chip, draw=vldbTeal!45, text=vldbTeal!58!black] at (3.60,-3.42)
+\node[chip, draw=vldbTeal!45, text=vldbTeal!58!black] (keep) at (3.60,-3.12)
   {retain layer + placement};
 
 \draw[flow, draw=vldbRose!72!black] (c1.south) -- ++(0,-.24) -| (k.west);
 \draw[flow, draw=vldbRose!72!black] (c2.south) -- ++(0,-.24) -| (k.east);
-\draw[flow, draw=vldbTeal!72!black] (k.south) -- ++(0,-.34);
-\draw[flow, draw=vldbTeal!72!black] (3.18,-3.42) -- (r1.east);
-\draw[flow, draw=vldbTeal!72!black] (4.02,-3.42) -- (r2.west);
+\draw[flow, draw=vldbTeal!72!black] (k.south) -- (drop.north);
+\draw[flow, draw=vldbTeal!72!black] (drop.south) -- (keep.north);
+\draw[flow, draw=vldbTeal!72!black] (keep.south west) -- ++(-.28,-.16) -| (r1.north);
+\draw[flow, draw=vldbTeal!72!black] (keep.south east) -- ++(.28,-.16) -| (r2.north);
 \end{tikzpicture}
 \caption{Projection loss as a finite contract witness. Two source-backed contracts are different under the reference signature, collapse under a coarse \texttt{pushdown=yes} denominator, and separate again when the comparison retains layer and placement.}
 \Description{Two distinct public optimizer contracts collapse into a pushdown=yes projection and are separated by retaining layer and placement.}
