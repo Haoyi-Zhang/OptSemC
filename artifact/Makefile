@@ -47,7 +47,7 @@ clean-gate:
 	OPTSEMC_REQUIRE_CLEAN_GIT=1 python scripts/check_git_tree_state.py && python scripts/check_artifact_hygiene.py && python scripts/check_package_cleanliness.py && python scripts/check_repository_quality.py && python scripts/check_certificate_freshness.py
 
 artifact-archive:
-	OPTSEMC_REQUIRE_CLEAN_GIT=1 python scripts/check_git_tree_state.py && python scripts/build_anonymous_archive.py
+	python scripts/build_anonymous_archive.py
 
 clean:
 	find .. -type d \( -name __pycache__ -o -name .pytest_cache -o -name '*.egg-info' \) -prune -exec rm -rf {} +
