@@ -1,78 +1,84 @@
 \begin{figure*}[t]
 \centering
 \begin{tikzpicture}[
-  zone/.style={vpanel, draw=vldbRule, fill=vldbSoft, minimum height=2.44cm},
-  doc/.style={vpanel, draw=vldbBlue!68, fill=vldbMist, text width=2.10cm,
-    minimum height=.78cm, font=\rmfamily\fontsize{6.85}{7.48}\selectfont,
-    text=black!70, align=center, inner xsep=2.2pt, inner ysep=1.2pt,
+  zone/.style={vpanel, draw=vldbRule, fill=vldbSoft, minimum height=3.18cm},
+  ztitle/.style={font=\rmfamily\bfseries\fontsize{7.15}{7.80}\selectfont,
+    text=vldbGray, align=center, text height=1.34ex, text depth=.24ex},
+  card/.style={vpanel, draw=vldbBlue!70, fill=vldbMist, text width=2.22cm,
+    minimum height=.72cm, font=\rmfamily\fontsize{6.95}{7.55}\selectfont,
+    text=black!72, align=center, inner xsep=2.1pt, inner ysep=1.1pt,
     text height=1.42ex, text depth=.25ex},
-  stage/.style={vpanel, draw=vldbViolet!70, fill=white, text width=2.42cm,
-    minimum height=.82cm, font=\rmfamily\fontsize{6.85}{7.48}\selectfont,
-    text=black!72, align=center, inner xsep=2.2pt, inner ysep=1.2pt,
-    text height=1.42ex, text depth=.25ex},
-  gate/.style={diamond, aspect=1.65, draw=vldbRose!76!black, fill=vldbRose!8,
-    line width=.58pt, text width=1.68cm, inner sep=.8pt,
-    font=\rmfamily\bfseries\fontsize{6.75}{7.25}\selectfont,
+  cardviolet/.style={card, draw=vldbViolet!70, fill=white},
+  cardwarm/.style={card, draw=vldbGold!72!black, fill=vldbWarm},
+  cardteal/.style={card, draw=vldbTeal!76!black, fill=vldbMint},
+  relation/.style={vpanel, draw=vldbRose!76!black, fill=vldbRose!8,
+    text width=2.18cm, minimum height=.66cm,
+    font=\rmfamily\bfseries\fontsize{6.85}{7.45}\selectfont,
+    text=vldbRose!76!black, align=center, inner xsep=1.6pt,
+    text height=1.34ex, text depth=.24ex},
+  gate/.style={diamond, aspect=1.78, draw=vldbRose!78!black,
+    fill=white, line width=.62pt, text width=1.88cm, inner sep=.9pt,
+    font=\rmfamily\bfseries\fontsize{6.90}{7.45}\selectfont,
     text=vldbRose!75!black, align=center},
-  certbox/.style={vpanel, draw=vldbTeal!76!black, fill=vldbMint, text width=2.36cm,
-    minimum height=.82cm, font=\rmfamily\fontsize{6.85}{7.48}\selectfont,
-    text=black!72, align=center, inner xsep=2.2pt, inner ysep=1.2pt,
-    text height=1.42ex, text depth=.25ex},
   chip/.style={rounded corners=1.4pt, draw=black!14, fill=white,
     font=\rmfamily\fontsize{6.75}{7.25}\selectfont, text=vldbGray,
     inner xsep=1.8pt, inner ysep=.65pt, text height=1.22ex,
     text depth=.20ex},
-  ztitle/.style={font=\rmfamily\bfseries\fontsize{6.65}{7.22}\selectfont,
-    text=vldbGray, align=center, text height=1.28ex, text depth=.22ex},
-  flow/.style={vflow}
+  flow/.style={vflow, line width=.78pt},
+  softflow/.style={-{Latex[length=1.55mm]}, line width=.50pt,
+    draw=black!38, line cap=round, line join=round}
 ]
-\path[use as bounding box] (-.05,.00) rectangle (17.76,3.58);
+\path[use as bounding box] (-.04,-.12) rectangle (17.54,3.96);
 
 \begin{scope}[on background layer]
-  \node[zone, minimum width=3.18cm] at (1.72,1.76) {};
-  \node[zone, minimum width=5.10cm] at (6.02,1.76) {};
-  \node[zone, minimum width=4.34cm] at (11.14,1.76) {};
-  \node[zone, minimum width=3.46cm] at (15.84,1.76) {};
+  \node[zone, minimum width=3.30cm] at (1.74,1.92) {};
+  \node[zone, minimum width=4.95cm] at (5.96,1.92) {};
+  \node[zone, minimum width=4.18cm] at (10.92,1.92) {};
+  \node[zone, minimum width=3.22cm] at (15.66,1.92) {};
 \end{scope}
 
-\node[ztitle] at (1.72,3.08) {input evidence};
-\node[ztitle] at (6.02,3.08) {reference contract construction};
-\node[ztitle] at (11.14,3.08) {projection audit};
-\node[ztitle] at (15.84,3.08) {certified output};
+\node[ztitle] at (1.74,3.43) {admit public evidence};
+\node[ztitle] at (5.96,3.43) {construct reference contracts};
+\node[ztitle] at (10.92,3.43) {test a projected denominator};
+\node[ztitle] at (15.66,3.43) {publish repair evidence};
 
-\node[doc] (pub) at (1.72,2.28) {\textbf{Public sources}\\287 spans};
-\node[doc, fill=white] (probe) at (1.72,1.18) {\textbf{SQL probes}\\4,216 executable};
+\node[card] (pub) at (1.28,2.67) {\textbf{Public sources}\\{\rmfamily\bfseries\fontsize{8.15}{8.80}\selectfont 287} spans};
+\node[card, fill=white] (probe) at (2.08,1.62) {\textbf{SQL probes}\\{\rmfamily\bfseries\fontsize{8.15}{8.80}\selectfont 4,216} executable};
+\node[chip] (admit) at (1.74,.61) {source spans + executable probes};
 
-\node[stage] (rules) at (4.38,2.28) {\textbf{Guard admission}\\287 rules};
-\node[stage] (maps) at (6.50,1.38) {\textbf{Engine--probe maps}\\state join};
-\node[stage] (sigs) at (8.42,2.28) {\textbf{Reference signatures}\\1,288 classes};
+\node[cardviolet] (rules) at (4.42,2.67) {\textbf{Guard admission}\\{\rmfamily\bfseries\fontsize{8.15}{8.80}\selectfont 287} rules};
+\node[cardviolet] (maps) at (5.92,1.62) {\textbf{Engine--probe maps}\\state join};
+\node[cardviolet] (sigs) at (7.46,2.67) {\textbf{Reference signatures}\\{\rmfamily\bfseries\fontsize{8.15}{8.80}\selectfont 1,288} classes};
+\node[chip] (refineq) at (6.02,.61) {reference inequality is retained};
 
-\node[stage, fill=vldbWarm, draw=vldbGold!70!black] (proj) at (10.96,2.28)
-  {\textbf{Projection}\\keyword: 148 classes};
-\node[gate] (gate) at (12.80,1.42) {counter\\witness?};
+\node[cardwarm] (proj) at (10.28,2.67) {\textbf{Projection}\\keyword};
+\node[relation] (eq) at (10.28,1.62) {projected equality\\{\rmfamily\bfseries\fontsize{8.15}{8.80}\selectfont 148} classes};
+\node[gate] (gate) at (12.63,2.02) {reference\\counter-witness?};
+\node[chip] (missing) at (10.92,.61) {missing fields identify the repair};
 
-\node[certbox] (repair) at (15.22,2.28) {\textbf{Repair certificate}\\layer + placement};
-\node[certbox, fill=white] (ledger) at (15.96,1.18) {\textbf{Claim ledger}\\10/10 checks};
+\node[cardteal] (repair) at (15.08,2.67) {\textbf{Repair certificate}\\layer + placement};
+\node[cardteal, fill=white] (ledger) at (15.96,1.62) {\textbf{Claim ledger}\\{\rmfamily\bfseries\fontsize{8.15}{8.80}\selectfont 10/10} checks};
+\node[chip] (audit) at (15.66,.61) {public audit trail};
 
 \draw[flow] (pub) -- (rules);
-\draw[flow] (probe.east) -- ++(.50,0) |- (maps.west);
+\draw[flow] (probe.east) -- ++(.54,0) |- (maps.west);
 \draw[flow] (rules) -- (sigs);
 \draw[flow] (maps.east) -- ++(.34,0) |- (sigs.south);
 \draw[flow] (sigs) -- (proj);
-\draw[flow, draw=vldbRose!72!black] (proj.east) -- ++(.28,0) |- (gate.north);
-\draw[flow, draw=vldbRose!72!black] (sigs.south east) -- ++(.40,-.34) -| (gate.west);
-\draw[flow, draw=vldbTeal!72!black] (gate) -- (repair);
-\draw[flow, draw=vldbTeal!72!black] (repair) -- (ledger);
+\draw[flow, draw=vldbRose!72!black] (proj) -- (gate);
+\draw[flow, draw=vldbRose!72!black] (eq.east) -- ++(.42,0) |- (gate.south);
+\draw[flow, draw=vldbTeal!74!black] (gate) -- (repair);
+\draw[flow, draw=vldbTeal!74!black] (repair) -- (ledger);
+\draw[softflow] (admit) -- (refineq);
+\draw[softflow] (refineq) -- (missing);
+\draw[softflow, draw=vldbTeal!66!black] (missing) -- (audit);
 
-\node[chip] (guard) at (3.96,.42) {guard};
-\node[chip] (action) at (5.16,.42) {action};
-\node[chip] (layer) at (6.36,.42) {layer};
-\node[chip] (place) at (7.70,.42) {placement};
-\node[chip] (time) at (9.20,.42) {evidence};
-\draw[vldbTeal!72!black, dashed, line width=.52pt] (layer.north) .. controls (7.28,1.06) and (10.60,.80) .. (gate.south);
-\draw[vldbTeal!72!black, dashed, line width=.52pt] (place.north) .. controls (8.12,1.02) and (11.20,.80) .. (gate.south);
+\node[chip, draw=vldbTeal!45, text=vldbTeal!58!black]
+  at (6.02,.08) {reference fields stay explicit};
+\node[chip, draw=vldbTeal!45, text=vldbTeal!58!black]
+  at (10.92,.08) {repair basis: layer + placement};
 \end{tikzpicture}
-\caption{OptSem-C's contract-comparison dataflow. Public evidence and executable probes are admitted into reference signatures before any projected vocabulary is trusted; the rose semantic gate compares projected equality against reference inequality. The output is a finite repair certificate and a claim ledger, so each reported collision is tied to public evidence, a counter-witness, and a retained-field repair.}
-\Description{A four-zone pipeline from public evidence and SQL probes through rule admission, engine-probe maps, reference signatures, projection audit, counter-witness gate, repair certificate, and claim ledger. Semantic-field chips connect to the gate to show which fields are retained for repair.}
+\caption{OptSem-C's contract-comparison dataflow. Public sources and executable probes are admitted into reference signatures before a projected vocabulary is trusted; the rose gate exposes projected equality that contradicts reference inequality. The 148 keyword classes include 81 multi-reference classes and 254 false pairs (Table~\ref{tab:contract-collision}); each collision is tied to evidence, a counter-witness, and retained fields.}
+\Description{A four-zone pipeline from public evidence through reference contract construction and projection auditing to repair evidence. Counts show 287 source spans, 4,216 executable probes, 287 admitted rules, 1,288 reference classes, 148 projected keyword classes, and a 10/10 claim ledger.}
 \label{fig:contract-model}
 \end{figure*}

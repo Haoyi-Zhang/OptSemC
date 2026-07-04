@@ -3,20 +3,37 @@
 \caption{Mechanisms and largest engine-pair hotspots.  Panel A ranks why contracts separate; Panel B ranks where false pairs concentrate.  The two rankings are intentionally separate rather than row-aligned.}
 \label{tab:mechanism-hotspots}
 \footnotesize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}lr@{\hspace{10pt}}lr@{}}
+\setlength{\tabcolsep}{2.8pt}
+\begin{tabular}{@{}c@{\hspace{9pt}}c@{}}
+\begin{tabular}{@{}lr@{}}
 \toprule
-\multicolumn{2}{c}{A. mechanism witnesses} & \multicolumn{2}{c}{B. pair hotspots} \\
-\cmidrule(lr){1-2}\cmidrule(l){3-4}
-Mechanism & W. & Hotspot & False$\downarrow$ \\
+\multicolumn{2}{c}{A. mechanism witnesses}\\
+\cmidrule(lr){1-2}
+Mechanism & W.\\
 \midrule
-Action variant & 498 & Keyword BQ--CH & 203 \\
-Placement & 466 & Keyword BQ--Trino & 45 \\
-Optimizer layer & 430 & Keyword CH--Trino & 6 \\
-Plan evidence & 366 & Yes/No CH--Trino & 6 \\
-Decision time & 362 & Operator CH--Trino & 123 \\
-Operator family & 281 & Operator Spark--Trino & 115 \\
+Action variant & \textbf{498}\\
+Placement & 466\\
+Optimizer layer & 430\\
+Plan evidence & 366\\
+Decision time & 362\\
+Operator family & 281\\
 \bottomrule
+\end{tabular}
+&
+\begin{tabular}{@{}lr@{}}
+\toprule
+\multicolumn{2}{c}{B. pair hotspots}\\
+\cmidrule(lr){1-2}
+Hotspot & False$\downarrow$\\
+\midrule
+Keyword BQ--CH & \textbf{203}\\
+Keyword BQ--Trino & 45\\
+Keyword CH--Trino & 6\\
+Yes/No CH--Trino & 6\\
+Operator CH--Trino & 123\\
+Operator Spark--Trino & 115\\
+\bottomrule
+\end{tabular}
 \end{tabular}
 \Description{Mechanism taxonomy and contract-collision hotspot table.}
 \end{table}

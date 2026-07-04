@@ -1,23 +1,23 @@
 \begin{table}[t]
 \centering
-\caption{Main projection audit, combining collision rate, witness severity, and repair diagnosis.  Eq. is the declared denominator size, not a quality score; false/rate are lower-better, while $\Delta$ columns measure severity when a collision exists.}
+\caption{Main projection audit, combining collision rate, witness severity, and repair diagnosis.  Mean/Max $\Delta$ count differing public atom fields inside collapsed reference signatures.  Starred rows are headline public vocabularies; bold zeros mark controls or repairs, and underlining marks the largest unsafe stress row.}
 \label{tab:contract-collision}
 \footnotesize
-\setlength{\tabcolsep}{2.5pt}
+\setlength{\tabcolsep}{1.6pt}
 \begin{tabular}{@{}lrrrrrl@{}}
 \toprule
-Projection & Eq. & False$\downarrow$ & Rate$\downarrow$ & Mean $\Delta$ & Max $\Delta$ & Repair/diagnosis \\
+Projection & Eq. & False$\downarrow$ & Rate$\downarrow$ & Mean $\Delta$ & Max $\Delta$ & Diag. \\
 \midrule
-Exact & 2,030 & \textbf{0} & \textbf{0.0\%} & \textbf{0.00} & \textbf{0} & control \\
+Exact & 2,030 & \textbf{0} & \textbf{0.0\%} & \textbf{0.00} & \textbf{0} & ctrl \\
 \addlinespace[1pt]
-Keyword & 2,284 & 254 & 11.1\% & 9.09 & 17 & \textbf{placement} \\
+\textbf{Keyword}$^\star$ & 2,284 & \textbf{254} & \textbf{11.1\%} & \textbf{9.09} & 17 & \textbf{placement} \\
 Yes/No & 2,036 & 6 & 0.3\% & 3.00 & 3 & layer \\
-Operator-only & 2,268 & 238 & 10.5\% & 5.84 & 14 & \textbf{layer} \\
+\textbf{Operator-only}$^\star$ & 2,268 & \textbf{238} & \textbf{10.5\%} & \textbf{5.84} & 14 & \textbf{layer} \\
 \addlinespace[1pt]
-Placement-only & 12,732 & 10,702 & 84.1\% & 21.29 & 53 & unsafe stress \\
-State-only & 25,623 & \underline{23,593} & \underline{92.1\%} & 13.06 & \underline{64} & unsafe stress \\
+Placement-only & 12,732 & 10,702 & 84.1\% & 21.29 & 53 & stress \\
+State-only & 25,623 & \underline{23,593} & \underline{92.1\%} & 13.06 & \underline{64} & stress \\
 \addlinespace[1pt]
-Surface & 2,030 & \textbf{0} & \textbf{0.0\%} & \textbf{0.00} & \textbf{0} & strengthened control \\
+Surface & 2,030 & \textbf{0} & \textbf{0.0\%} & \textbf{0.00} & \textbf{0} & repair \\
 \bottomrule
 \end{tabular}
 \Description{Combined projection audit table showing equivalence counts, false collision counts, conditional rates, evidence gap severity, and repair diagnoses for controls, headline projections, one-field stress rows, and the strengthened surface control.}

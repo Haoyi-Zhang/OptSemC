@@ -1,6 +1,6 @@
 \section{Precision Loss in Optimizer Comparisons}
 \label{sec:problem}
-Figure~\ref{fig:projection-trap} gives the smallest example.  A feature matrix maps several public optimizer contracts into the same label.  After the mapping, behaviors with different placement, action kind, and evidence layer become indistinguishable, so a study that treats the label as equality can compare non-equivalent public optimizer behavior.
+Figure~\ref{fig:projection-trap} gives the smallest example.  A feature matrix maps several public optimizer contracts into the same label.  After the mapping, behaviors with different placement, action kind, and evidence layer become indistinguishable, so a study that treats the label as equality can compare non-equivalent public optimizer behavior.  The issue is prior to workload choice: JOB or TPC-H can standardize queries, but they do not say whether two engines expose the same public pushdown, adaptation, or plan-evidence contract.
 
 \input{figures/fig_projection_trap}
 

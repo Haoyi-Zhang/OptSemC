@@ -1,21 +1,22 @@
 \begin{table}[t]
 \centering
-\caption{Workload-feature contract movements under controlled toggles.  Mean distance and nonzero fraction are higher when a feature changes more public contracts; values are rounded to two decimals because they summarize finite toggle neighborhoods.}
+\caption{Workload-feature contract movements under controlled toggles.  Groups and pairs give the finite support behind each row; mean distance and nonzero fraction are higher when a feature changes more public contracts.  Rows are the largest movements by mean distance over the frozen toggle neighborhoods.}
 \label{tab:workload-sensitivity}
 \footnotesize
-\begin{tabular}{llrr}
+\setlength{\tabcolsep}{2.4pt}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{0.92in}rrrr@{}}
 \toprule
-Engine & Feature & Mean dist.$\uparrow$ & Nonzero frac.$\uparrow$ \\
+Engine & Feature & Groups & Pairs & Mean$\uparrow$ & Nonzero$\uparrow$ \\
 \midrule
-DuckDB & reuse\_structure & \textbf{0.83} & 0.85 \\
-Trino & statistics\_need & 0.74 & 0.85 \\
-DuckDB & source\_boundary & 0.59 & 0.62 \\
-Trino & distribution\_trigger & 0.52 & 0.86 \\
-Spark SQL & adaptivity\_trigger & 0.44 & 0.86 \\
-BigQuery & distribution\_trigger & 0.37 & \underline{0.89} \\
-Spark SQL & join\_type & 0.37 & 0.81 \\
-ClickHouse & order\_limit & 0.35 & 0.51 \\
+DuckDB & reuse structure & 289 & 1,380 & \textbf{0.83} & 0.85 \\
+Trino & statistics need & 260 & 1,382 & 0.74 & 0.85 \\
+DuckDB & source boundary & 57 & 61 & 0.59 & 0.62 \\
+Trino & distribution trigger & 237 & 1,097 & 0.52 & 0.86 \\
+Spark SQL & adaptivity trigger & 235 & 1,075 & 0.44 & 0.86 \\
+BigQuery & distribution trigger & 237 & 1,097 & 0.37 & \underline{0.89} \\
+Spark SQL & join type & 229 & 1,201 & 0.37 & 0.81 \\
+ClickHouse & order/limit & 89 & 487 & 0.35 & 0.51 \\
 \bottomrule
 \end{tabular}
-\Description{Top workload features by contract-signature movement.}
+\Description{Top workload features by contract-signature movement, with finite group and pair support, mean distance, and nonzero fraction.}
 \end{table}

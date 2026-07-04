@@ -16,6 +16,7 @@ For each engine-probe pair, OptSem-C constructs a contract map $M_{e,q}:\mathcal
 \begin{definition}[State-join algebra]
 The binary operator $\sqcup$ is the complete $4\times4$ partial join shown in Table~\ref{tab:state-join}.  It is total over non-conflicting pairs and returns $\mathsf{CONFLICT}$ for pairs that simultaneously require and forbid, or support and forbid, the same canonical action.  Let $x\preceq y$ denote that $x\sqcup y=y$ for non-conflicting states.  Then $\mathsf{UNSPEC}$ is the least informative state, while $\mathsf{MUST}$ and $\mathsf{MUST\_NOT}$ are incomparable incompatible commitments.
 \end{definition}
+Here $\mathsf{CONFLICT}$ is a merge-failure signal, not a fifth valid contract state; an admitted corpus must resolve it by revising the conflicting evidence record.
 
 \begin{lemma}[Merge invariants]
 On non-conflicting states, $\sqcup$ is commutative, associative, idempotent, and monotone with respect to $\preceq$.  Therefore a contract map obtained by joining applicable rules is independent of rule order.

@@ -1,25 +1,29 @@
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[
-  band/.style={vpanel, draw=vldbRule, fill=vldbSoft, minimum width=7.12cm,
-    minimum height=.92cm},
-  card/.style={vpanel, draw=vldbBlue!68, fill=vldbMist, text width=2.42cm,
-    minimum height=.86cm, font=\rmfamily\fontsize{6.8}{7.45}\selectfont,
-    text=black!72, align=center, inner xsep=2.7pt, inner ysep=1.8pt,
-    text height=1.45ex, text depth=.28ex},
+  band/.style={vpanel, draw=vldbRule, fill=vldbSoft, minimum width=7.14cm,
+    minimum height=1.06cm},
+  card/.style={vpanel, draw=vldbBlue!68, fill=vldbMist, text width=2.10cm,
+    minimum height=.92cm, font=\rmfamily\fontsize{6.75}{7.35}\selectfont,
+    text=black!72, align=center, inner xsep=2.3pt, inner ysep=1.6pt,
+    text height=1.38ex, text depth=.24ex},
   collide/.style={vpanel, draw=vldbRose!76!black, fill=vldbRose!8,
-    text width=2.72cm, minimum height=.72cm,
+    text width=2.76cm, minimum height=.74cm,
     font=\rmfamily\bfseries\fontsize{6.95}{7.55}\selectfont,
     text=vldbRose!78!black, align=center, inner xsep=2.2pt, inner ysep=1.5pt,
     text height=1.45ex, text depth=.28ex},
   repair/.style={vpanel, draw=vldbTeal!72!black, fill=vldbMint,
-    text width=2.42cm, minimum height=.74cm,
-    font=\rmfamily\fontsize{6.8}{7.45}\selectfont, text=black!70,
+    text width=2.10cm, minimum height=.78cm,
+    font=\rmfamily\fontsize{6.75}{7.35}\selectfont, text=black!70,
     align=center, inner xsep=2.5pt, inner ysep=1.6pt,
-    text height=1.45ex, text depth=.28ex},
+    text height=1.38ex, text depth=.24ex},
   label/.style={font=\rmfamily\bfseries\fontsize{7.15}{7.85}\selectfont,
     text=vldbInk, align=left, inner sep=.3pt, text height=1.45ex,
     text depth=.28ex},
+  lost/.style={vpanel, draw=vldbRose!68!black, fill=white, text width=1.18cm,
+    minimum height=.72cm, font=\rmfamily\fontsize{6.60}{7.20}\selectfont,
+    text=vldbRose!76!black, align=center, inner xsep=1.2pt, inner ysep=1.2pt,
+    text height=1.24ex, text depth=.18ex},
   chip/.style={rounded corners=1.3pt, draw=black!14, fill=white,
     font=\rmfamily\fontsize{6.65}{7.25}\selectfont, text=vldbGray,
     inner xsep=1.9pt, inner ysep=.55pt, text height=1.32ex,
@@ -27,39 +31,40 @@
   flow/.style={-{Latex[length=1.6mm]}, line width=.70pt,
     draw=black!48, line cap=round, line join=round}
 ]
-\path[use as bounding box] (-.05,-4.25) rectangle (7.32,.24);
+\path[use as bounding box] (-.05,-4.30) rectangle (7.32,.24);
 
 \begin{scope}[on background layer]
-  \node[band] at (3.60,-.70) {};
-  \node[band, fill=vldbWarm] at (3.60,-2.05) {};
-  \node[band, fill=vldbMint] at (3.60,-3.38) {};
+  \node[band] at (3.60,-.72) {};
+  \node[band, fill=vldbWarm] at (3.60,-2.08) {};
+  \node[band, fill=vldbMint] at (3.60,-3.44) {};
 \end{scope}
 
-\node[label, anchor=west] at (.12,-.19) {A. Reference contracts keep public semantics};
-\node[label, anchor=west] at (.12,-1.54) {B. Coarse denominator collapses them};
-\node[label, anchor=west] at (.12,-2.87) {C. Certificate names the missing fields};
+\node[label, anchor=west] at (.12,-.19) {A. Reference contracts};
+\node[label, anchor=west] at (.12,-1.56) {B. Coarse projection};
+\node[label, anchor=west] at (.12,-2.92) {C. Repaired keys};
 
-\node[card] (m1) at (1.86,-.84) {\textbf{$M_1$}\\filter\\local engine};
-\node[card] (m2) at (5.34,-.84) {\textbf{$M_2$}\\aggregate\\remote source};
-\node[chip, draw=vldbRose!35, text=vldbRose!70!black] at (3.60,-.84)
+\node[card] (m1) at (1.58,-.86) {\textbf{$M_1$}\\filter\\local plan};
+\node[card] (m2) at (5.62,-.86) {\textbf{$M_2$}\\aggregate\\source stage};
+\node[lost] (diff) at (3.60,-.86) {different\\operator\\placement};
+\node[chip, draw=vldbRose!35, text=vldbRose!70!black] at (3.60,-.30)
   {$S(M_1)\neq S(M_2)$};
 
-\node[collide] (p) at (3.60,-2.15) {\texttt{pushdown=yes}\\declares equal};
-\node[chip, draw=vldbRose!35, text=vldbRose!70!black] at (1.72,-2.15)
-  {operator lost};
-\node[chip, draw=vldbRose!35, text=vldbRose!70!black] at (5.48,-2.15)
-  {placement lost};
+\node[collide] (p) at (3.60,-2.12) {\texttt{pushdown=yes}\\declares equal};
+\node[chip, draw=vldbRose!35, text=vldbRose!70!black] at (1.56,-2.58)
+  {operator dropped};
+\node[chip, draw=vldbRose!35, text=vldbRose!70!black] at (5.64,-2.58)
+  {placement dropped};
 
-\node[repair] (r1) at (1.86,-3.54) {filter\\+ local};
-\node[repair] (r2) at (5.34,-3.54) {aggregate\\+ source};
-\node[chip, draw=vldbTeal!45, text=vldbTeal!58!black] at (3.60,-3.54)
-  {retain operator + placement};
+\node[repair] (r1) at (1.58,-3.62) {filter\\+ local};
+\node[repair] (r2) at (5.62,-3.62) {aggregate\\+ source};
+\node[chip, draw=vldbTeal!45, text=vldbTeal!58!black] (key) at (3.60,-3.22)
+  {operator + placement};
 
-\draw[flow, draw=vldbRose!72!black] (m1.south) |- (p.west);
-\draw[flow, draw=vldbRose!72!black] (m2.south) |- (p.east);
-\draw[flow, draw=vldbTeal!72!black] (p.south) -- (3.60,-3.12);
-\draw[flow, draw=vldbTeal!72!black] (3.15,-3.54) -- (r1.east);
-\draw[flow, draw=vldbTeal!72!black] (4.05,-3.54) -- (r2.west);
+\draw[flow, draw=vldbRose!72!black] (m1.south) -- ++(0,-.28) -| (p.north west);
+\draw[flow, draw=vldbRose!72!black] (m2.south) -- ++(0,-.28) -| (p.north east);
+\draw[flow, draw=vldbTeal!72!black] (p.south) -- (key.north);
+\draw[flow, draw=vldbTeal!72!black] (key.west) -- (r1.east);
+\draw[flow, draw=vldbTeal!72!black] (key.east) -- (r2.west);
 \end{tikzpicture}
 \caption{Projection loss as a finite contract witness. Two source-backed contracts become equal under a coarse \texttt{pushdown=yes} denominator; retaining operator and placement separates the witness without adding private optimizer facts.}
 \Description{Two reference contracts with different operator and placement fields collapse into a single pushdown=yes projection. Restoring operator and placement separates the contracts into distinct repaired keys.}

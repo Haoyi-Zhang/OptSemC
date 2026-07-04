@@ -1,19 +1,21 @@
 \begin{table}[t]
 \centering
-\caption{Concrete collision audits linking coarse labels to hidden contract pairs.  Each row gives the public label, the hidden contrast, and the retained fields that make the comparison safe.}
+\caption{Concrete collision audits linking coarse labels to hidden contract pairs.  Repair keys are case-local separators; the universal layer+placement basis covers all headline records.}
 \label{tab:cases}
 \footnotesize
-\setlength{\tabcolsep}{3pt}
+\setlength{\tabcolsep}{1.8pt}
 \renewcommand{\arraystretch}{1.10}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.30in}
-                >{\raggedright\arraybackslash}p{2.86in}@{}}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.23in}
+                >{\raggedright\arraybackslash}p{0.49in}
+                >{\raggedright\arraybackslash}p{0.68in}
+                >{\raggedright\arraybackslash}p{1.51in}@{}}
 \toprule
-Case & Audit \\
+Case & Trace & Repair key & Audit \\
 \midrule
-C1 & \textbf{Label:} \texttt{pushdown}+\texttt{explain}. \textbf{Contrast:} BigQuery source delegation and stage evidence vs. Trino connector pushdown and runtime dynamic filtering. \textbf{Fields:} variant, placement, decision time. \\
-C2 & \textbf{Label:} plan evidence. \textbf{Contrast:} PostgreSQL local estimates vs. BigQuery/Snowflake service-stage evidence. \textbf{Fields:} observability, placement. \\
-C3 & \textbf{Label:} adaptive execution. \textbf{Contrast:} compile-time planning vs. runtime repartition, AQE, and conversion. \textbf{Fields:} layer, decision time. \\
-C4 & \textbf{Label:} CTE materialization. \textbf{Contrast:} DuckDB/PostgreSQL inline, materialize, reuse, and disable guards. \textbf{Fields:} variant, guard state. \\
+C1 & P0009; 4 sources & operator; placement; decision time & \texttt{pushdown}+\texttt{explain} hides BigQuery source delegation and stage evidence versus Trino connector pushdown and dynamic filtering. \\
+C2 & C2; 16 rules & observability; placement & Plan evidence hides local estimates versus cloud-service stages and distributed-worker evidence. \\
+C3 & C3; 16 rules & layer; decision time & Adaptive execution hides compile-time planning versus runtime repartition, AQE, and conversion. \\
+C4 & C4; 16 rules & variant; guard state & CTE materialization hides inline, materialize, reuse, and disable-guard contracts. \\
 \bottomrule
 \end{tabular}
 \end{table}

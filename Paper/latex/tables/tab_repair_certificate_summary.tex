@@ -1,12 +1,12 @@
 \begin{table}[t]
 \centering
-\caption{Repair certificate summary for three public vocabularies.  Residual columns are lower-better; bold zeros mark complete repair by the fixed layer-and-placement basis.  Op./kind is operator for keyword and action-kind for operator-only.}
+\caption{Repair certificate summary for three public vocabularies.  Residual columns are lower-better; bold zeros mark complete repair by the fixed layer-and-placement basis.  Op./kind is operator for keyword and action-kind for operator-only; fold-local is the held-out residual after choosing the best repair within each fold.}
 \label{tab:repair-certificate-summary}
 \footnotesize
 \setlength{\tabcolsep}{2.6pt}
 \begin{tabular}{@{}lrrrrrr@{}}
 \toprule
-Vocab. & Base$\downarrow$ & Op./kind$\downarrow$ & Layer$\downarrow$ & Place$\downarrow$ & Fold-best$\downarrow$ & Basis$\downarrow$ \\
+Vocab. & Base$\downarrow$ & Op./kind$\downarrow$ & Layer$\downarrow$ & Place$\downarrow$ & Fold-local$\downarrow$ & Basis$\downarrow$ \\
 \midrule
 Keyword & 254 & 6 & 42 & \textbf{0} & 144 & \textbf{0} \\
 Yes/no & 6 & -- & \textbf{0} & \textbf{0} & \textbf{0} & \textbf{0} \\
@@ -16,7 +16,7 @@ Operator & 238 & 6 & \textbf{0} & 32 & 12 & \textbf{0} \\
 \vspace{2pt}
 \begin{minipage}{0.98\columnwidth}
 \footnotesize\raggedright
-\emph{Note.} Base rows share the tested projection but differ under reference contracts.  Fold-best is learned per held-out context; basis is the fixed layer-and-placement repair.
+\emph{Note.} Base rows share the tested projection but differ under reference contracts.  Fold-local repairs can underfit a global denominator; basis is the fixed layer-and-placement repair.
 \end{minipage}
 \Description{Repair certificate summary combining universal repairs, stepwise residual false-pair counts, and held-out residuals for keyword, yes/no, and operator-only projections.}
 \end{table}

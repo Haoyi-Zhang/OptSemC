@@ -3,20 +3,21 @@
 \caption{Projection-family synthesis over the fixed comparison set.  False-pair counts are lower-better: bold marks zero-collision controls or repairs, and underlining marks the largest unsafe family.}
 \label{tab:baseline-portfolio}
 \footnotesize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}p{2.45cm}p{3.00cm}rp{3.00cm}p{5.35cm}@{}}
+\setlength{\tabcolsep}{3.2pt}
+\renewcommand{\arraystretch}{1.05}
+\begin{tabular}{@{}p{2.25cm}p{2.95cm}rp{3.05cm}p{5.50cm}@{}}
 \toprule
-Family & Rows represented & Worst false pairs$\downarrow$ & Strongest check & Takeaway \\
+Audit role & Rows represented & Worst false pairs$\downarrow$ & Validation & Claim-level implication \\
 \midrule
-Reference controls & Exact; semantic surface & \textbf{0} & Same 88,536 comparisons & Exact equality preserves the denominator. \\
+\textbf{Controls} & Exact; semantic surface & \textbf{0} & Same 88,536 comparisons & Exact equality preserves the denominator. \\
 \addlinespace[1pt]
-Public-label vocabularies & Keyword; yes/no; op-only & 254 & Wilson, bootstrap, leave-one-source & Public labels can be semantically unsafe. \\
+\textbf{Public labels} & Keyword; yes/no; op-only & 254 & Wilson, bootstrap, leave-one-source & Public labels can be semantically unsafe. \\
 \addlinespace[1pt]
-One-field stress tests & Placement-only; state-only & 23,593 & Exhaustive finite audit & Single fields are not conservative. \\
+\textbf{One-field stress} & Placement-only; state-only & 23,593 & Exhaustive finite audit & Single fields are not conservative. \\
 \addlinespace[1pt]
-Repair basis & Keyword: placement; op-only: layer; all: layer+placement & \textbf{0} & Counter-witnesses plus held-out repairs & Layer and placement resolve headline witnesses. \\
+\textbf{Repair basis} & Keyword: placement; op-only: layer; all: layer+placement & \textbf{0} & Counter-witnesses; held-out repairs & Layer and placement resolve headline witnesses. \\
 \addlinespace[1pt]
-Resolution frontier & 256 subsets; 128 no-variant & \underline{59,546} & 14 minimal safe; 8 maximal unsafe & Safety is a finite frontier. \\
+\textbf{Resolution frontier} & 256 subsets; 128 no-variant & \underline{59,546} & 14 minimal safe; 8 maximal unsafe & Safety is a finite frontier, not an informal label choice. \\
 \bottomrule
 \end{tabular}
 \Description{Synthesis table grouping the projection audit into reference controls, public-label vocabularies, one-field stress tests, repair basis checks, and retained-field frontier checks.}
