@@ -6,19 +6,13 @@ The manuscript source is intentionally outside the anonymous replay archive. The
 
 ## Archive verification
 
-The public anonymous replay package is archived at https://doi.org/10.5281/zenodo.21185236. The expected SHA-256 for `optsemc-artifact.zip` is:
-
-```text
-1e37facddf0c051fcf2e778389a86fe2208485f337c833378f4f09afa4bf3b6e
-```
-
-Verify after download with:
+The public anonymous replay package is archived at https://doi.org/10.5281/zenodo.21194523. The repository README and the PVLDB availability block record the exact SHA-256 for the uploaded `optsemc-artifact.zip`. Verify a downloaded archive with:
 
 ```bash
 sha256sum optsemc-artifact.zip
 ```
 
-The archived replay package was built from Git commit `3a095bd`. Later public repository commits update the paper availability block, compiled PDF, archive digest, and regenerated certificate summaries; they do not change the replay code, grounded corpus, generated probes, or validation scripts used by the archived package.
+The archive records its source Git commit and clean-tree status in `artifact/evaluation/source_tree_state.csv`. Later repository commits may update the paper availability block, compiled PDF, or archive digest; they do not change the replay code, grounded corpus, generated probes, or validation scripts already stored in a published archive.
 
 ## Main research objects
 

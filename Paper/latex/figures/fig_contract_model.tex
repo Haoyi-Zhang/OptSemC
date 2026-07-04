@@ -44,23 +44,23 @@
 \node[doc, fill=white] (probe) at (1.72,1.18) {\textbf{SQL probes}\\4,216 executable};
 
 \node[stage] (rules) at (4.38,2.28) {\textbf{Guard admission}\\287 rules};
-\node[stage] (maps) at (6.64,1.92) {\textbf{Engine--probe maps}\\state join};
+\node[stage] (maps) at (6.50,1.38) {\textbf{Engine--probe maps}\\state join};
 \node[stage] (sigs) at (8.42,2.28) {\textbf{Reference signatures}\\1,288 classes};
 
-\node[stage, fill=vldbWarm, draw=vldbGold!70!black] (proj) at (10.72,2.28)
+\node[stage, fill=vldbWarm, draw=vldbGold!70!black] (proj) at (10.96,2.28)
   {\textbf{Projection}\\keyword: 148 classes};
-\node[gate] (gate) at (12.32,1.42) {counter\\witness?};
+\node[gate] (gate) at (12.80,1.42) {counter\\witness?};
 
 \node[certbox] (repair) at (15.22,2.28) {\textbf{Repair certificate}\\layer + placement};
 \node[certbox, fill=white] (ledger) at (15.96,1.18) {\textbf{Claim ledger}\\10/10 checks};
 
 \draw[flow] (pub) -- (rules);
-\draw[flow] (probe) -- (maps);
+\draw[flow] (probe.east) -- ++(.50,0) |- (maps.west);
 \draw[flow] (rules) -- (sigs);
-\draw[flow] (maps) -- (sigs);
+\draw[flow] (maps.east) -- ++(.34,0) |- (sigs.south);
 \draw[flow] (sigs) -- (proj);
-\draw[flow, draw=vldbRose!72!black] (proj.south) |- (gate.west);
-\draw[flow, draw=vldbRose!72!black] (sigs.south) |- (gate.north west);
+\draw[flow, draw=vldbRose!72!black] (proj.east) -- ++(.28,0) |- (gate.north);
+\draw[flow, draw=vldbRose!72!black] (sigs.south east) -- ++(.40,-.34) -| (gate.west);
 \draw[flow, draw=vldbTeal!72!black] (gate) -- (repair);
 \draw[flow, draw=vldbTeal!72!black] (repair) -- (ledger);
 
@@ -69,8 +69,8 @@
 \node[chip] (layer) at (6.36,.42) {layer};
 \node[chip] (place) at (7.70,.42) {placement};
 \node[chip] (time) at (9.20,.42) {evidence};
-\draw[vldbTeal!62!black, dashed, line width=.44pt] (layer.north) .. controls (7.28,1.06) and (10.30,.74) .. (gate.south);
-\draw[vldbTeal!62!black, dashed, line width=.44pt] (place.north) .. controls (8.12,1.02) and (10.94,.74) .. (gate.south);
+\draw[vldbTeal!62!black, dashed, line width=.44pt] (layer.north) .. controls (7.28,1.06) and (10.60,.80) .. (gate.south);
+\draw[vldbTeal!62!black, dashed, line width=.44pt] (place.north) .. controls (8.12,1.02) and (11.20,.80) .. (gate.south);
 \end{tikzpicture}
 \caption{OptSem-C's contract-comparison dataflow. Public evidence and executable probes are admitted into reference signatures before any projected vocabulary is trusted; the rose semantic gate compares projected equality against reference inequality. The output is a finite repair certificate and a claim ledger, so each reported collision is tied to public evidence, a counter-witness, and a retained-field repair.}
 \Description{A four-zone pipeline from public evidence and SQL probes through rule admission, engine-probe maps, reference signatures, projection audit, counter-witness gate, repair certificate, and claim ledger. Semantic-field chips connect to the gate to show which fields are retained for repair.}

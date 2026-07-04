@@ -4,6 +4,6 @@ total_pages_with_references,true,14,body pages plus unlimited references
 body_pages_12_references_start_13,true,[13],references start on page 13
 reference_page_has_no_body_prefix,true,"['REFERENCES', '[1] A. V. Aho, Y. Sagiv, and J. D. Ullman. 1979. Equivalences among Relational', 'Expressions. SIAM J. Comput. 8, 2 (1979), 218–246. https://doi.org/10.1137/']",first substantive line is REFERENCES
 body_page_12_has_no_references_heading,true,checked,no REFERENCES heading on body page 12
-pdf_text_extractable,true,87147,>1000 chars
+pdf_text_extractable,true,87088,>1000 chars
 title_present,true,yes,yes
 core_claim_present,true,yes,yes
