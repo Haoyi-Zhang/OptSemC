@@ -1,12 +1,12 @@
 category,files,bytes,lines
 benchmark-data,54,5785230,39346
 configuration,7,20598,664
-documentation,5,9646,165
+documentation,5,9653,159
 generated-evaluation,301,120346908,361833
 grounded-data,8,459773,683
 library-code,53,310267,7541
 other,14,28421,662
-paper,78,1145769,13752
+paper,78,1145883,13784
 script-code,183,651653,13713
 test-code,35,299656,7669
-fingerprint,738,cabb741d86b72583e20cd1c6ebcbc5fa40d5554fbd023b6baa72e4556f7fd40e,
+fingerprint,738,05e2713bb67d3acf635ff50b66059449bcf5e1f889f8e9715e79df2d08791d96,

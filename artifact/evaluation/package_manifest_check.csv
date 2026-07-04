@@ -3,5 +3,5 @@ manifest_file_present,true,artifact/evaluation/package_manifest.csv
 manifest_complete,true,
 manifest_no_stale_entries,true,
 manifest_hashes_current,true,
-manifest_fingerprint_nonempty,true,cabb741d86b7
+manifest_fingerprint_nonempty,true,05e2713bb67d
 no_transient_build_artifacts,true,
