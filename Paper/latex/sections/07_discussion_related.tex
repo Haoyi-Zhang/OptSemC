@@ -10,7 +10,7 @@
 \section{Related Work}
 \label{sec:related}
 
-OptSem-C sits between optimizer architecture, benchmarks, and DBMS testing.  System R, Volcano, Cascades, Calcite, and Orca explain access paths, rule search, adapter boundaries, and optimizer modularity \cite{selinger1979access,graefe1990volcano,graefe1995cascades,begoli2018calcite,soliman2014orca}; federation, polystores, and cloud engines explain placement and evidence surfaces \cite{carey1995garlic,stonebraker2015bigdawg,dageville2016snowflake,melnik2010dremel}.  Benchmarks such as TPC-H, TPC-DS, JOB, and CardBench standardize workloads or estimation stress \cite{tpch,tpcds,leis2015good,chronis2024cardbench}; equivalence and testing tools check SQL semantics or DBMS bugs \cite{chu2017cosette,wang2024qed,rigger2020sqlancer,rigger2020norec}.  OptSem-C audits the public contract denominator before those results are compared across systems.
+Optimizer architecture supplies fields for access paths, rule search, adapter boundaries, placement, and plan evidence \cite{selinger1979access,graefe1990volcano,graefe1995cascades,begoli2018calcite,soliman2014orca,carey1995garlic,stonebraker2015bigdawg,dageville2016snowflake,melnik2010dremel}.  Benchmarks standardize workloads or estimates \cite{tpch,tpcds,leis2015good,chronis2024cardbench}, while equivalence and testing tools check SQL semantics or bugs \cite{chu2017cosette,wang2024qed,rigger2020sqlancer,rigger2020norec}.  OptSem-C instead audits whether public contract labels may be compared as the same denominator.
 
 \section{Conclusion}
-OptSem-C shows that coarse optimizer labels can equate different public contracts, so denominator validity must precede performance ranking.
+OptSem-C shows that denominator validity must precede cross-system optimizer ranking.
