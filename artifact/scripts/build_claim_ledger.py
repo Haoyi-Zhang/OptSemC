@@ -76,8 +76,23 @@ def main() -> None:
     add("real_engine_validation_current", by_id["C12-real-engine-validation"]["value"] == "engines=2;full=8432/8432;failures=0;motif=142/142", by_id["C12-real-engine-validation"]["value"])
     real_env = keyed_csv(E / "real_engine_validation_environment.csv")
     real_check = keyed_csv(E / "real_engine_validation_check.csv")
-    add("real_engine_evidence_is_fresh_rerun", real_env.get("validation_mode") == "fresh-engine-rerun", real_env.get("validation_mode", "missing"))
-    add("real_engine_fresh_marker_checked", real_check.get("fresh_run_marker_present") == "true" and real_check.get("fresh_marker_after_engine_outputs") == "true", str({k: real_check.get(k, "missing") for k in ("fresh_run_marker_present", "fresh_marker_after_engine_outputs")}))
+    validation_mode = real_env.get("validation_mode", "missing")
+    artifact_only = not (PKG / "Paper").exists()
+    if artifact_only:
+        add("real_engine_evidence_mode_supported", validation_mode in {"fresh-engine-rerun", "saved-engine-certificate-replay"}, validation_mode)
+        add(
+            "real_engine_replay_scope_recorded",
+            real_check.get("saved_evidence_environment_bound") == "true"
+            and real_check.get("current_sql_replay_chain_bound") == "true",
+            str({k: real_check.get(k, "missing") for k in ("saved_evidence_environment_bound", "current_sql_replay_chain_bound")}),
+        )
+    else:
+        add("real_engine_evidence_is_fresh_rerun", validation_mode == "fresh-engine-rerun", validation_mode)
+        add(
+            "real_engine_fresh_marker_checked",
+            real_check.get("fresh_run_marker_present") == "true" and real_check.get("fresh_marker_after_engine_outputs") == "true",
+            str({k: real_check.get(k, "missing") for k in ("fresh_run_marker_present", "fresh_marker_after_engine_outputs")}),
+        )
     add("ledger_has_benchmark_theory_artifact_rows", len(rows) >= 13, f"rows={len(rows)}")
     with CHECK.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=["check", "passed", "details"])
