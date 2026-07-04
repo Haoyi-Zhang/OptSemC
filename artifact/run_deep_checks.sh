@@ -50,6 +50,8 @@ run_paper_py_latex() {
 }
 
 run_py scripts/hydrate_large_outputs.py
+run_py scripts/build_evidence_freeze_manifest.py
+run_py scripts/check_evidence_freeze_manifest.py
 run_py scripts/compute_projection_information_profile.py
 run_py scripts/check_projection_information_profile.py
 run_py scripts/compute_false_equivalence_severity.py
@@ -84,6 +86,8 @@ run_py scripts/compute_feature_holdout_repair.py
 run_py scripts/check_feature_holdout_repair.py
 run_py scripts/compute_repair_generalization.py
 run_py scripts/check_repair_generalization.py
+run_py scripts/compute_anti_overfit_audit.py
+run_py scripts/check_anti_overfit_audit.py
 run_py scripts/render_scaling_and_incremental_tables.py
 run_paper_py scripts/check_paper_numeric_claims.py
 run_py scripts/check_architecture_contract.py
@@ -94,6 +98,9 @@ run_py scripts/execute_sql_probe_suite.py
 run_py scripts/check_sql_probe_execution.py
 run_py scripts/execute_sql_probe_suite_multicatalog.py
 run_py scripts/check_sql_probe_multicatalog_execution.py
+run_py scripts/compute_resource_profile.py
+run_py scripts/check_resource_profile.py
+run_paper_py scripts/render_validity_resource_tables.py
 run_py scripts/compute_benchmark_motif_difficulty.py
 run_py scripts/check_benchmark_motif_difficulty.py
 run_py scripts/execute_external_motif_suite.py

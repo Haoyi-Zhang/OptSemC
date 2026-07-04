@@ -6,13 +6,13 @@ The manuscript source is intentionally outside the anonymous replay archive. The
 
 ## Archive verification
 
-The public anonymous replay package is archived at https://doi.org/10.5281/zenodo.21194523. The repository README and the PVLDB availability block record the exact SHA-256 for the uploaded `optsemc-artifact.zip`. Verify a downloaded archive with:
+The public anonymous replay package is archived at https://doi.org/10.5281/zenodo.21198009. The repository README and the PVLDB availability block record the exact SHA-256 for the uploaded `optsemc-artifact.zip`. Verify a downloaded archive with:
 
 ```bash
 sha256sum optsemc-artifact.zip
 ```
 
-The archive records its source Git commit and clean-tree status in `artifact/evaluation/source_tree_state.csv`. Later repository commits may update the paper availability block, compiled PDF, or archive digest; they do not change the replay code, grounded corpus, generated probes, or validation scripts already stored in a published archive.
+The archive records its source Git commit and clean-tree status in `artifact/evaluation/git_tree_state.csv`. Later repository commits may update the paper availability block, compiled PDF, or archive digest; they do not change the replay code, grounded corpus, generated probes, or validation scripts already stored in a published archive.
 
 ## Main research objects
 
@@ -55,7 +55,7 @@ Run from this directory:
 PYTHONDONTWRITEBYTECODE=1 ./run_from_scratch_no_cache.sh
 ```
 
-The replay removes derived generated outputs, regenerates probes and contract maps from grounded evidence, rebuilds the SQL bundle, validates generated SQL probes and published-motif representatives on deterministic catalogs, runs optional DuckDB/PostgreSQL validation when `RUN_REAL_ENGINE_VALIDATION=1`, and runs integrity suites. Paper-build checks are kept out of the anonymous replay archive.
+The replay removes derived generated outputs, regenerates probes and contract maps from grounded evidence, rebuilds the SQL bundle, validates generated SQL probes and published-motif representatives on deterministic catalogs, records replay resource profiles in `evaluation/resource_profile.csv`, runs optional DuckDB/PostgreSQL validation when `RUN_REAL_ENGINE_VALIDATION=1`, and runs integrity suites. Paper-build checks are kept out of the anonymous replay archive.
 
 The saved real-engine CSV files are replay certificates. A fresh DuckDB/PostgreSQL rerun must use `run_cloud_real_engine_validation.sh`, which writes `evaluation/real_engine_fresh_run.csv` and changes the validation mode from saved-certificate replay to fresh-engine rerun.
 

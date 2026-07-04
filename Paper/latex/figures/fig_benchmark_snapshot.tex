@@ -1,67 +1,62 @@
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[
-  stage/.style={vpanel, draw=vldbBlue!68, fill=vldbMist, text width=1.54cm,
-    minimum height=.82cm, font=\rmfamily\fontsize{6.7}{7.35}\selectfont,
-    text=black!70, align=center, inner xsep=1.5pt, inner ysep=1.1pt,
-    text height=1.40ex, text depth=.24ex},
-  count/.style={font=\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont,
-    text=vldbBlue!88!black, align=center, text height=1.48ex,
-    text depth=.26ex},
-  check/.style={vpanel, draw=vldbTeal!72!black, fill=vldbMint,
-    text width=1.30cm, minimum height=.32cm,
-    font=\rmfamily\bfseries\fontsize{6.7}{7.35}\selectfont, text=vldbInk,
-    align=center, inner xsep=1pt, inner ysep=.8pt,
-    text height=1.34ex, text depth=.22ex},
-  axis/.style={rounded corners=1.5pt, draw=black!14, fill=white,
-    minimum width=1.05cm, minimum height=.32cm,
-    font=\rmfamily\fontsize{6.7}{7.35}\selectfont,
-    text=vldbGray, align=center, inner xsep=1.1pt, inner ysep=.7pt,
-    text height=1.25ex, text depth=.18ex},
-  band/.style={vpanel, draw=vldbGold!55!black, fill=vldbWarm,
-    font=\rmfamily\bfseries\fontsize{6.7}{7.35}\selectfont,
-    text=vldbInk, align=center, inner xsep=2.5pt, inner ysep=1.0pt,
-    text height=1.30ex, text depth=.20ex}
+  tile/.style={vpanel, draw=vldbBlue!66, fill=vldbMist,
+    text width=1.42cm, minimum height=.76cm,
+    font=\rmfamily\fontsize{6.85}{7.45}\selectfont, text=black!72,
+    align=center, inner xsep=1.3pt, inner ysep=1pt},
+  gate/.style={vpanel, draw=vldbTeal!74!black, fill=vldbMint,
+    text width=1.42cm, minimum height=.42cm,
+    font=\rmfamily\bfseries\fontsize{6.75}{7.35}\selectfont,
+    text=vldbInk, align=center, inner xsep=1.1pt, inner ysep=.8pt},
+  axis/.style={rounded corners=1.4pt, draw=black!14, fill=white,
+    minimum width=.86cm, minimum height=.30cm,
+    font=\rmfamily\fontsize{6.55}{7.15}\selectfont, text=vldbGray,
+    align=center, inner xsep=1pt, inner ysep=.55pt},
+  band/.style={vpanel, draw=vldbGold!58!black, fill=vldbWarm,
+    font=\rmfamily\bfseries\fontsize{6.75}{7.35}\selectfont,
+    text=vldbInk, align=center, inner xsep=2pt, inner ysep=.9pt},
+  flow/.style={-{Latex[length=1.45mm]}, line width=.58pt,
+    draw=black!45, line cap=round, line join=round}
 ]
-\path[use as bounding box] (-.06,-3.78) rectangle (7.25,.30);
+\path[use as bounding box] (-.05,-3.88) rectangle (7.22,.28);
 
-\node[vhead, anchor=west] at (.02,.08) {Denominator before outcome measurement};
-\node[band, anchor=east] at (7.08,.08) {not latency};
-\node[stage] (ev) at (.88,-.62) {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 287}\\evidence spans};
-\node[stage] (rules) at (2.70,-.62) {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 287}\\admitted rules};
-\node[stage] (sql) at (4.54,-.62) {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 4,216}\\SQL probes};
-\node[stage] (motif) at (6.36,-.62) {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 90/90}\\motifs};
-\draw[vflow] (ev) -- (rules);
-\draw[vflow] (rules) -- (sql);
-\draw[vflow] (sql) -- (motif);
+\node[vhead, anchor=west] at (.02,.08) {Frozen denominator before outcomes};
+\node[band, anchor=east] at (7.05,.08) {no tuning from results};
 
-\draw[vldbRule, line width=.34pt] (.20,-1.42) -- (7.05,-1.42);
+\node[tile] (a) at (.82,-.70) {{\rmfamily\bfseries\fontsize{8.7}{9.3}\selectfont 287}\\source rules};
+\node[tile] (b) at (2.62,-.70) {{\rmfamily\bfseries\fontsize{8.7}{9.3}\selectfont 4,216}\\SQL probes};
+\node[tile] (c) at (4.42,-.70) {{\rmfamily\bfseries\fontsize{8.7}{9.3}\selectfont 90/90}\\motifs};
+\node[tile] (d) at (6.22,-.70) {{\rmfamily\bfseries\fontsize{8.7}{9.3}\selectfont 26}\\sources};
+\draw[flow] (a) -- (b);
+\draw[flow] (b) -- (c);
+\draw[flow] (c) -- (d);
+
+\draw[vldbRule, line width=.36pt] (.15,-1.42) -- (7.03,-1.42);
 \node[vsmall, anchor=west, text=vldbGray] at (.02,-1.24)
-  {admission checks: all pass before collision counting};
-\node[vsmall, text=vldbInk] at (.88,-1.64) {support};
-\node[vsmall, text=vldbInk] at (2.70,-1.64) {guards};
-\node[vsmall, text=vldbInk] at (4.54,-1.64) {SQL};
-\node[vsmall, text=vldbInk] at (6.36,-1.64) {motifs};
-\node[check] at (.88,-2.00) {0 invalid};
-\node[check] at (2.70,-2.00) {0 conflict};
-\node[check] at (4.54,-2.00) {0 shape};
-\node[check] at (6.36,-2.00) {0 exec};
+  {admission gates checked before collision counting};
+\node[gate] at (.82,-1.84) {0 invalid};
+\node[gate] at (2.62,-1.84) {0 conflict};
+\node[gate] at (4.42,-1.84) {0 SQL fail};
+\node[gate] at (6.22,-1.84) {0 motif fail};
 
-\node[vsmall, anchor=west, text=vldbGray] at (.02,-2.50)
-  {covered query-feature axes};
-\node[axis] at (.74,-2.86) {src.};
-\node[axis] at (1.92,-2.86) {conn.};
-\node[axis] at (3.10,-2.86) {join};
-\node[axis] at (4.28,-2.86) {pred.};
-\node[axis] at (5.46,-2.86) {adapt};
-\node[axis] at (6.64,-2.86) {ctrl};
-\node[axis] at (1.34,-3.24) {agg.};
-\node[axis] at (2.52,-3.24) {stats};
-\node[axis] at (3.70,-3.24) {reuse};
-\node[axis] at (4.88,-3.24) {dist.};
-\node[axis] at (6.06,-3.24) {bound.};
+\node[vsmall, anchor=west, text=vldbGray] at (.02,-2.42)
+  {query-feature axes covered by generated probes};
+\node[axis] at (.62,-2.76) {source};
+\node[axis] at (1.62,-2.76) {conn.};
+\node[axis] at (2.62,-2.76) {join};
+\node[axis] at (3.62,-2.76) {pred.};
+\node[axis] at (4.62,-2.76) {adapt};
+\node[axis] at (5.62,-2.76) {ctrl};
+\node[axis] at (6.62,-2.76) {dist.};
+\node[axis] at (1.10,-3.22) {agg.};
+\node[axis] at (2.10,-3.22) {stats};
+\node[axis] at (3.10,-3.22) {reuse};
+\node[axis] at (4.10,-3.22) {limit};
+\node[axis] at (5.10,-3.22) {order};
+\node[axis] at (6.10,-3.22) {bound.};
 \end{tikzpicture}
-\caption{Corpus, benchmark, and execution denominators. The dashboard fixes evidence, SQL probes, admission checks, and motif coverage before collision rates are reported.}
-\Description{A compact evidence panel with four denominator counts, four admission checks, observed zero audit or execution issues, and representative covered query-feature axes: source, connector, join, predicate, adaptivity, control, aggregation, statistics, reuse, distribution, and boundary.}
+\caption{Corpus, benchmark, and execution denominators. Source rules, probes, motifs, and sources are frozen before outcome measurement; admission gates verify support, consistency, SQL execution, and motif coverage before collision rates are reported.}
+\Description{A compact validation-gate diagram showing fixed evidence counts, zero-failure admission gates, and covered query-feature axes before collision counting.}
 \label{fig:benchmark-snapshot}
 \end{figure}

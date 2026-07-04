@@ -85,7 +85,7 @@ MANIFEST_SKIP = {
     "artifact/evaluation/reference_guard_audit_latest.md",
     "artifact/evaluation/git_tree_status.txt",
 }
-SOURCE_STATE_FILE = "artifact/evaluation/source_tree_state.csv"
+SOURCE_STATE_FILE = "artifact/evaluation/git_tree_state.csv"
 TEXT_SUFFIXES = {
     ".bib",
     ".cff",
