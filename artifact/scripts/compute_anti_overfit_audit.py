@@ -41,6 +41,9 @@ def main() -> int:
                 return f"{row['nonzero_trials']}/{row['trials']}"
         return "--"
 
+    def label(method: str) -> str:
+        return {"operator_only": "operator-only", "yesno": "yes/no"}.get(method, method)
+
     audit: list[dict[str, str]] = [
         {
             "gate": "negative control",
@@ -81,7 +84,7 @@ def main() -> int:
             "gate": "feature-family stress",
             "scope": "fixed layer+placement",
             "evidence": "; ".join(
-                f"{m}:{feature[m]['robust_basis_unresolved_total']}" for m in ("keyword", "operator_only", "yesno")
+                f"{label(m)}:{feature[m]['robust_basis_unresolved_total']}" for m in ("keyword", "operator_only", "yesno")
             ),
             "verdict": "pass",
             "claim_boundary": "overlapping feature-family stress, not a disjoint held-out test",
@@ -90,7 +93,7 @@ def main() -> int:
             "gate": "engine-family stress",
             "scope": "fixed layer+placement",
             "evidence": "; ".join(
-                f"{m}:{engine[m]['max_unresolved_after_layer_placement']}" for m in ("keyword", "operator_only", "yesno")
+                f"{label(m)}:{engine[m]['unresolved_after_layer_placement']}" for m in ("keyword", "operator_only", "yesno")
             ),
             "verdict": "pass",
             "claim_boundary": "fixed predeclared basis stress, not learned repair transfer",
@@ -99,7 +102,7 @@ def main() -> int:
             "gate": "learned engine-pair repair",
             "scope": "point-learned minima",
             "evidence": "; ".join(
-                f"{m}:{engine_learned[m]['heldout_unresolved']}" for m in ("keyword", "operator_only", "yesno")
+                f"{label(m)}:{engine_learned[m]['heldout_unresolved']}" for m in ("keyword", "operator_only", "yesno")
             ),
             "verdict": "stress-fails",
             "claim_boundary": "do not claim point-learned repairs generalize across held-out engine pairs",
