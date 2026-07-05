@@ -640,42 +640,6 @@
 | Crossref | 0.740 | 0.500 | 2023 | n/a | [Testing Database Engines via Query Plan Guidance](https://doi.org/10.1109/icse48619.2023.00174) |
 | Crossref | 0.705 | 1.000 | 2023 | n/a | [Testing Graph Database Engines via Query Partitioning](https://doi.org/10.1145/3597926.3598044) |
 
-### 36. REVIEW - slutz1998massive
-
-- Verdict: Single-source strong match
-- Supplied title: Massive Stochastic Testing of SQL
-- Supplied authors: Donald R. Slutz
-- Supplied year: 1998
-- Supplied URL: https://www.vldb.org/conf/1998/p618.pdf
-- Issues: Only one source produced a strict match; EMNLP-style audit should manually verify this item.
-- Source errors: OpenAlex: HTTPError: HTTP Error 429: Too Many Requests; Semantic Scholar: HTTPError: HTTP Error 429: 
-
-| Source | Title similarity | Author overlap | Year | Identifier | Candidate |
-| --- | ---: | ---: | --- | --- | --- |
-| DBLP | 1.000 | 1.000 | 1998 | n/a | [Massive Stochastic Testing of SQL](https://dblp.org/rec/conf/vldb/Slutz98) |
-| Crossref | 0.448 | 0.000 | 2009 | n/a | [Testing for SQL Injection](https://doi.org/10.1016/b978-1-59749-424-3.00002-5) |
-| Crossref | 0.448 | 0.000 | 2012 | n/a | [Testing for SQL Injection](https://doi.org/10.1016/b978-1-59-749963-7.00002-5) |
-| Crossref | 0.423 | 0.000 | 2011 | n/a | [PL/SQL Unit Testing](https://doi.org/10.1007/978-1-4302-3486-9_5) |
-| Crossref | 0.350 | 0.000 | 2020 | n/a | [Testing](https://doi.org/10.1007/978-1-4842-5590-2_11) |
-
-### 37. FAIL - sqlsmith
-
-- Verdict: Unverifiable under fail-closed policy
-- Supplied title: SQLsmith: Randomized SQL Testing
-- Supplied authors: Andreas Seltenreich
-- Supplied year: 2015
-- Supplied URL: https://github.com/anse1/sqlsmith
-- Issues: Candidates exist but none match the supplied title/authors/year closely enough.
-- Source errors: OpenAlex: HTTPError: HTTP Error 429: Too Many Requests; Semantic Scholar: HTTPError: HTTP Error 429: 
-
-| Source | Title similarity | Author overlap | Year | Identifier | Candidate |
-| --- | ---: | ---: | --- | --- | --- |
-| URL metadata | 0.568 | 0.000 | 2015 | n/a | [anse1/sqlsmith: A random SQL query generator](https://github.com/anse1/sqlsmith) |
-| Crossref | 0.520 | 0.000 | 2011 | n/a | [PL/SQL Unit Testing](https://doi.org/10.1007/978-1-4302-3486-9_5) |
-| Crossref | 0.368 | 0.000 | 2020 | n/a | [Testing](https://doi.org/10.1007/978-1-4842-5590-2_11) |
-| Crossref | 0.368 | 0.000 | 2023 | n/a | [Testing](https://doi.org/10.1007/978-1-4842-9256-3_11) |
-| Crossref | 0.250 | 0.000 | 2009 | n/a | [Testing for SQL Injection](https://doi.org/10.1016/b978-1-59749-424-3.00002-5) |
-
 ### 38. REVIEW - chandra1977optimal
 
 - Verdict: Passed available evidence, but source/API failures remain
