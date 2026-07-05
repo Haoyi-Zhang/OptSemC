@@ -73,8 +73,8 @@
 \draw[flow, draw=vldbRose!72!black] ($(c1.south)+(0,-.03)$) -- ++(0,-.24) -| ($(k.north)+(-.70,0)$);
 \draw[flow, draw=vldbRose!72!black] ($(c2.south)+(0,-.03)$) -- ++(0,-.24) -| ($(k.north)+(.70,0)$);
 \draw[flow, draw=vldbTeal!72!black] (k.south) -- (keep.north);
-\draw[flow, draw=vldbTeal!72!black] ($(keep.south)+(-.36,0)$) -- ++(0,-.24) -| (r1.north);
-\draw[flow, draw=vldbTeal!72!black] ($(keep.south)+(.36,0)$) -- ++(0,-.24) -| (r2.north);
+\draw[flow, draw=vldbTeal!72!black] ($(keep.south)+(-.36,-.05)$) -- ++(0,-.19) -| (r1.north);
+\draw[flow, draw=vldbTeal!72!black] ($(keep.south)+(.36,-.05)$) -- ++(0,-.19) -| (r2.north);
 \end{tikzpicture}
 \caption{Projection loss as a finite contract witness. Two source-backed contracts differ under the reference signature, collapse under a coarse \texttt{pushdown=yes} denominator, and separate after retaining layer and placement.}
 \Description{Two distinct public optimizer contracts collapse into a pushdown=yes projection and are separated by retaining layer and placement.}
