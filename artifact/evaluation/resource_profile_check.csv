@@ -5,3 +5,7 @@ positive_peak_rss,true,all rows
 scale_points,true,"1x,2x,4x,8x"
 sql_validation_nonzero,true,sql output rows
 scale_throughput_nonzero,true,projection replay lift
+eight_x_lift_rows_current,true,2833152
+eight_x_lift_throughput_floor,true,1164857.712
+scale_notes_disallow_new_corpus_reading,true,"deterministic replay lift, not new corpus;deterministic replay lift, not new corpus;deterministic replay lift, not new corpus;deterministic replay lift, not new corpus"
+scale_peak_rss_bounded,true,min=276.746;max=276.805

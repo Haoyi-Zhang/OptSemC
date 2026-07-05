@@ -19,7 +19,12 @@ rank,gate_id,gate,path,claims_covered
 18,gate:claim_row_3_checked,claim_row_3_checked,artifact/evaluation/claim_ledger_check.csv,1
 19,gate:claim_row_2_checked,claim_row_2_checked,artifact/evaluation/claim_ledger_check.csv,1
 20,gate:claim_row_1_checked,claim_row_1_checked,artifact/evaluation/claim_ledger_check.csv,1
-21,gate:claim_row_13_checked,claim_row_13_checked,artifact/evaluation/claim_ledger_check.csv,1
-22,gate:claim_row_12_checked,claim_row_12_checked,artifact/evaluation/claim_ledger_check.csv,1
-23,gate:claim_row_11_checked,claim_row_11_checked,artifact/evaluation/claim_ledger_check.csv,1
-24,gate:claim_row_10_checked,claim_row_10_checked,artifact/evaluation/claim_ledger_check.csv,1
+21,gate:claim_row_18_checked,claim_row_18_checked,artifact/evaluation/claim_ledger_check.csv,1
+22,gate:claim_row_17_checked,claim_row_17_checked,artifact/evaluation/claim_ledger_check.csv,1
+23,gate:claim_row_16_checked,claim_row_16_checked,artifact/evaluation/claim_ledger_check.csv,1
+24,gate:claim_row_15_checked,claim_row_15_checked,artifact/evaluation/claim_ledger_check.csv,1
+25,gate:claim_row_14_checked,claim_row_14_checked,artifact/evaluation/claim_ledger_check.csv,1
+26,gate:claim_row_13_checked,claim_row_13_checked,artifact/evaluation/claim_ledger_check.csv,1
+27,gate:claim_row_12_checked,claim_row_12_checked,artifact/evaluation/claim_ledger_check.csv,1
+28,gate:claim_row_11_checked,claim_row_11_checked,artifact/evaluation/claim_ledger_check.csv,1
+29,gate:claim_row_10_checked,claim_row_10_checked,artifact/evaluation/claim_ledger_check.csv,1

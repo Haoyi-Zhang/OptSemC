@@ -1,4 +1,5 @@
 check,passed,details
-repair_generalization_summary_present,true,rows=3
-repair_generalization_methods_present,true,keyword;operator_only;yesno
-repair_generalization_resolves_heldout,true,
+probe_fold_repair_stability_summary_present,true,rows=3
+root_repair_stability_summary_mirrors_canonical,true,rows=3
+probe_fold_repair_stability_methods_present,true,keyword;operator_only;yesno
+probe_fold_repair_stability_resolves_heldout,true,

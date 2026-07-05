@@ -92,6 +92,7 @@ evaluation/grounded/repair_basis_stability.csv,csv,1,true
 evaluation/grounded/semantic_field_shapley.csv,csv,1,true
 evaluation/grounded/diagnostic_probe_order.csv,csv,1,true
 evaluation/grounded/repair_generalization_summary.csv,csv,1,true
+evaluation/repair_generalization_summary.csv,csv,1,true
 evaluation/repair_generalization_check.csv,csv,1,true
 evaluation/grounded/trap_rate.csv,csv,1,true
 evaluation/grounded/conditional_trap_rate.csv,csv,1,true

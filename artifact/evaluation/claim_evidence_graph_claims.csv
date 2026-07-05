@@ -3,6 +3,11 @@ claim:C10_source_robustness,Keyword and operator-only projection-induced collisi
 claim:C11_external_suite,The external benchmark-family suite covers 90/90 declared optimizer motifs across 12 families; each motif has a deterministic-catalog validation representative.,4,4,1,true
 claim:C12_real_engine_validation,The generated probes execute on DuckDB and PostgreSQL with zero failures for the full corpus and the motif representatives.,7,7,1,true
 claim:C13_formal_obligations,Every finite formal obligation asserted in the paper is checked by the replay package.,1,1,1,true
+claim:C14_rule_aware_probe_denominator,The probe denominator is a rule-aware coverage benchmark rather than an independent held-out generalization set.,4,4,1,true
+claim:C15_evidence_freeze_protocol,"The freeze manifest hashes schema, source inputs, projection/baseline specifications, result-determining code, compute/check scripts, and replay entrypoints.",6,6,1,true
+claim:C16_anti_overfit_boundaries,"The anti-overfit audit separates controls and finite-denominator stress from source-sensitive, overlapping-fold, and failed learned-transfer boundaries.",4,4,1,true
+claim:C17_resource_profile,"The resource profile reports the finite-audit replay cost and labels the 8x row as a deterministic inner-loop lift, not a new corpus, source set, or engine set.",5,5,1,true
+claim:C18_clean_archive_gate,The long-term anonymous archive builder refuses a dirty source tree for release construction and records the source-tree state inside the package.,4,4,1,true
 claim:C1_grounded_corpus,"The grounded mainline contains 287 admitted source-linked rules, 287 evidence spans, and 26 sources.",3,3,1,true
 claim:C2_probe_coverage,"OptSemBench-C generates 4,216 probes covering 7,112 renderable feature interactions.",3,3,1,true
 claim:C3_keyword_false_equivalence,"Keyword projection induces 254 contract-collision witnesses among 2,284 declared equivalences.",2,2,1,true

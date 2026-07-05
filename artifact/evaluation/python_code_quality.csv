@@ -30,7 +30,7 @@ artifact/build/lib/optsemc/package_builder.py,8,1,6,21,true
 artifact/build/lib/optsemc/projections.py,5,0,5,39,true
 artifact/build/lib/optsemc/provenance.py,5,1,5,38,true
 artifact/build/lib/optsemc/quality.py,5,1,5,17,true
-artifact/build/lib/optsemc/registry.py,9,2,6,136,true
+artifact/build/lib/optsemc/registry.py,9,2,6,137,true
 artifact/build/lib/optsemc/relations.py,25,1,5,22,true
 artifact/build/lib/optsemc/repair.py,5,0,5,15,true
 artifact/build/lib/optsemc/repair_stability.py,5,1,8,29,true
@@ -83,7 +83,7 @@ artifact/optsemc/package_builder.py,8,1,6,21,true
 artifact/optsemc/projections.py,5,0,5,39,true
 artifact/optsemc/provenance.py,5,1,5,38,true
 artifact/optsemc/quality.py,5,1,5,17,true
-artifact/optsemc/registry.py,9,2,6,136,true
+artifact/optsemc/registry.py,9,2,6,137,true
 artifact/optsemc/relations.py,25,1,5,22,true
 artifact/optsemc/repair.py,5,0,5,15,true
 artifact/optsemc/repair_stability.py,5,1,8,29,true
@@ -108,12 +108,12 @@ artifact/optsemc/workloads.py,10,2,7,8,true
 artifact/scripts/analyze_grounded_projection_loss.py,10,0,3,69,true
 artifact/scripts/annotate_public_provenance.py,0,0,3,0,true
 artifact/scripts/audit_grounded_core.py,0,0,3,0,true
-artifact/scripts/build_anonymous_archive.py,13,0,11,41,true
+artifact/scripts/build_anonymous_archive.py,13,0,11,47,true
 artifact/scripts/build_claim_evidence_graph.py,0,0,5,0,true
-artifact/scripts/build_claim_ledger.py,7,0,3,63,true
+artifact/scripts/build_claim_ledger.py,8,0,3,79,true
 artifact/scripts/build_claim_metric_summary.py,12,0,3,27,true
 artifact/scripts/build_data_contracts.py,0,0,5,0,true
-artifact/scripts/build_environment_report.py,6,0,10,14,true
+artifact/scripts/build_environment_report.py,5,0,10,13,true
 artifact/scripts/build_evidence_freeze_manifest.py,3,0,4,35,true
 artifact/scripts/build_package_fingerprint.py,0,0,5,0,true
 artifact/scripts/build_package_manifest.py,0,0,5,0,true
@@ -121,7 +121,7 @@ artifact/scripts/build_proof_carrying_semantics.py,0,0,7,0,true
 artifact/scripts/build_provenance_deep_audit.py,0,0,6,0,true
 artifact/scripts/build_replay_plan.py,0,0,5,0,true
 artifact/scripts/check_algorithmic_scaling.py,2,0,3,3,true
-artifact/scripts/check_anti_overfit_audit.py,2,0,3,22,true
+artifact/scripts/check_anti_overfit_audit.py,5,0,4,57,true
 artifact/scripts/check_architecture_contract.py,1,0,5,2,true
 artifact/scripts/check_artifact_hygiene.py,2,0,3,4,true
 artifact/scripts/check_artifact_registry.py,0,0,5,0,true
@@ -140,7 +140,7 @@ artifact/scripts/check_differential_reproducibility.py,0,0,3,0,true
 artifact/scripts/check_engine_family_stress.py,2,0,3,3,true
 artifact/scripts/check_engine_pair_matrix.py,1,0,3,2,true
 artifact/scripts/check_environment_report.py,1,0,5,2,true
-artifact/scripts/check_evidence_freeze_manifest.py,3,0,4,34,true
+artifact/scripts/check_evidence_freeze_manifest.py,3,0,4,59,true
 artifact/scripts/check_external_benchmark_suite.py,1,0,3,2,true
 artifact/scripts/check_external_motif_execution.py,1,0,3,2,true
 artifact/scripts/check_false_equivalence_severity.py,2,0,3,3,true
@@ -166,7 +166,7 @@ artifact/scripts/check_package_cleanliness.py,1,0,6,2,true
 artifact/scripts/check_package_coherence.py,1,0,3,2,true
 artifact/scripts/check_package_integrity.py,1,0,3,2,true
 artifact/scripts/check_package_manifest.py,1,0,5,2,true
-artifact/scripts/check_package_snapshot.py,4,0,3,12,true
+artifact/scripts/check_package_snapshot.py,5,0,3,12,true
 artifact/scripts/check_packaging_installability.py,1,0,5,2,true
 artifact/scripts/check_paper_numeric_claims.py,5,0,3,4,true
 artifact/scripts/check_paper_quality.py,1,0,3,2,true
@@ -193,7 +193,7 @@ artifact/scripts/check_repair_generalization.py,1,0,3,2,true
 artifact/scripts/check_replay_plan.py,1,0,3,2,true
 artifact/scripts/check_repository_quality.py,1,0,4,2,true
 artifact/scripts/check_reproducibility_package.py,3,0,5,17,true
-artifact/scripts/check_resource_profile.py,3,0,3,23,true
+artifact/scripts/check_resource_profile.py,3,0,3,33,true
 artifact/scripts/check_scalability_regression.py,2,0,4,3,true
 artifact/scripts/check_scalability_stress.py,2,0,3,3,true
 artifact/scripts/check_schema_coverage.py,0,0,5,0,true
@@ -259,7 +259,7 @@ artifact/scripts/compute_projection_mutation_suite.py,0,0,7,0,true
 artifact/scripts/compute_projection_resolution_lattice.py,12,0,7,52,true
 artifact/scripts/compute_relation_diagnostics.py,0,0,7,0,true
 artifact/scripts/compute_repair_basis_stability.py,10,0,4,44,true
-artifact/scripts/compute_repair_generalization.py,11,0,3,43,true
+artifact/scripts/compute_repair_generalization.py,11,0,3,50,true
 artifact/scripts/compute_repair_hitting_sets.py,14,0,6,50,true
 artifact/scripts/compute_resource_profile.py,10,1,13,99,true
 artifact/scripts/compute_scalability_regression.py,3,0,4,13,true
@@ -286,8 +286,8 @@ artifact/scripts/refresh_grounded_summaries.py,3,0,4,64,true
 artifact/scripts/render_baseline_external_tables.py,9,0,3,56,true
 artifact/scripts/render_paper_tables.py,3,0,3,54,true
 artifact/scripts/render_scaling_and_incremental_tables.py,5,0,3,60,true
-artifact/scripts/render_validity_resource_tables.py,9,0,3,48,true
-artifact/scripts/run_integrity_suite.py,4,0,3,17,true
+artifact/scripts/render_validity_resource_tables.py,9,0,3,56,true
+artifact/scripts/run_integrity_suite.py,4,0,3,19,true
 artifact/scripts/run_real_engine_validation.py,22,3,15,30,true
 artifact/scripts/run_repository_audit.py,0,0,4,0,true
 artifact/scripts/run_unit_tests.py,6,0,7,18,true

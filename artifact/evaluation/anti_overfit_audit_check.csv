@@ -1,6 +1,14 @@
 check,passed,detail
 audit_rows,true,8
 has_source_sensitive_yesno,true,yes/no boundary recorded
-has_stress_fail_boundary,true,"pass,source-sensitive,stress-fails"
-fixed_basis_keywords_present,true,"fixed layer+placement,keyword,keyword/operator 10%,operator-only,point-learned minima,strict reference,yes/no"
+has_stress_fail_boundary,true,"pass,source-sensitive,stress-fails,within-denominator"
+has_within_denominator_boundary,true,"pass,source-sensitive,stress-fails,within-denominator"
+reported_basis_keywords_present,true,"keyword,keyword/operator 10%,operator-only,point-learned pair minima,reported layer+placement,strict reference,yes/no"
 claim_boundaries_nonempty,true,all rows
+keyword_source_loo_exact,true,keyword source removal
+operator_source_loo_exact,true,operator source removal
+probe_subsample_exact,true,probe subsample
+yesno_source_sensitive_exact,true,yes/no source boundary
+fixed_basis_feature_stress_zero,true,keyword:0; operator-only:0; yes/no:0
+fixed_basis_engine_stress_zero,true,keyword:0; operator-only:0; yes/no:0
+learned_pair_transfer_fails_nonzero,true,keyword:48; operator-only:120; yes/no:6

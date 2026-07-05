@@ -750,6 +750,7 @@ artifact/scripts/check_algorithmic_scaling.py,pathlib,from
 artifact/scripts/check_anti_overfit_audit.py,__future__,from
 artifact/scripts/check_anti_overfit_audit.py,csv,import
 artifact/scripts/check_anti_overfit_audit.py,pathlib,from
+artifact/scripts/check_anti_overfit_audit.py,re,import
 artifact/scripts/check_architecture_contract.py,__future__,from
 artifact/scripts/check_architecture_contract.py,csv,import
 artifact/scripts/check_architecture_contract.py,re,import
@@ -960,6 +961,7 @@ artifact/scripts/check_package_manifest.py,optsemc.manifest,from
 artifact/scripts/check_package_manifest.py,optsemc.io,from
 artifact/scripts/check_package_snapshot.py,__future__,from
 artifact/scripts/check_package_snapshot.py,csv,import
+artifact/scripts/check_package_snapshot.py,os,import
 artifact/scripts/check_package_snapshot.py,sys,import
 artifact/scripts/check_package_snapshot.py,pathlib,from
 artifact/scripts/check_packaging_installability.py,__future__,from

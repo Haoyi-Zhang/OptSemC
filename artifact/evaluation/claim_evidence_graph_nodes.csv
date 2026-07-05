@@ -3,6 +3,11 @@ claim:C10_source_robustness,claim,Keyword and operator-only projection-induced c
 claim:C11_external_suite,claim,The external benchmark-family suite covers 90/90 declared optimizer motifs across 12 families; each motif has a deterministic-catalog validation representative.,
 claim:C12_real_engine_validation,claim,The generated probes execute on DuckDB and PostgreSQL with zero failures for the full corpus and the motif representatives.,
 claim:C13_formal_obligations,claim,Every finite formal obligation asserted in the paper is checked by the replay package.,
+claim:C14_rule_aware_probe_denominator,claim,The probe denominator is a rule-aware coverage benchmark rather than an independent held-out generalization set.,
+claim:C15_evidence_freeze_protocol,claim,"The freeze manifest hashes schema, source inputs, projection/baseline specifications, result-determining code, compute/check scripts, and replay entrypoints.",
+claim:C16_anti_overfit_boundaries,claim,"The anti-overfit audit separates controls and finite-denominator stress from source-sensitive, overlapping-fold, and failed learned-transfer boundaries.",
+claim:C17_resource_profile,claim,"The resource profile reports the finite-audit replay cost and labels the 8x row as a deterministic inner-loop lift, not a new corpus, source set, or engine set.",
+claim:C18_clean_archive_gate,claim,The long-term anonymous archive builder refuses a dirty source tree for release construction and records the source-tree state inside the package.,
 claim:C1_grounded_corpus,claim,"The grounded mainline contains 287 admitted source-linked rules, 287 evidence spans, and 26 sources.",
 claim:C2_probe_coverage,claim,"OptSemBench-C generates 4,216 probes covering 7,112 renderable feature interactions.",
 claim:C3_keyword_false_equivalence,claim,"Keyword projection induces 254 contract-collision witnesses among 2,284 declared equivalences.",
@@ -50,6 +55,8 @@ claim:obligation_strict_projection_identity_cardinality_preserved,claim,strict_p
 file:artifact_baselines_baseline_catalog_yaml,file,artifact/baselines/baseline_catalog.yaml,artifact/baselines/baseline_catalog.yaml
 file:artifact_benchmark_generated_probes_jsonl,file,artifact/benchmark/generated_probes.jsonl,artifact/benchmark/generated_probes.jsonl
 file:artifact_config_practice_projection_surfaces_csv,file,artifact/config/practice_projection_surfaces.csv,artifact/config/practice_projection_surfaces.csv
+file:artifact_evaluation_anti_overfit_audit_check_csv,file,artifact/evaluation/anti_overfit_audit_check.csv,artifact/evaluation/anti_overfit_audit_check.csv
+file:artifact_evaluation_anti_overfit_audit_csv,file,artifact/evaluation/anti_overfit_audit.csv,artifact/evaluation/anti_overfit_audit.csv
 file:artifact_evaluation_artifact_hygiene_csv,file,artifact/evaluation/artifact_hygiene.csv,artifact/evaluation/artifact_hygiene.csv
 file:artifact_evaluation_baseline_portfolio_check_csv,file,artifact/evaluation/baseline_portfolio_check.csv,artifact/evaluation/baseline_portfolio_check.csv
 file:artifact_evaluation_benchmark_compiler_check_csv,file,artifact/evaluation/benchmark_compiler_check.csv,artifact/evaluation/benchmark_compiler_check.csv
@@ -78,6 +85,8 @@ file:artifact_evaluation_differential_reproducibility_csv,file,artifact/evaluati
 file:artifact_evaluation_engine_pair_false_equivalence_matrix_csv,file,artifact/evaluation/engine_pair_false_equivalence_matrix.csv,artifact/evaluation/engine_pair_false_equivalence_matrix.csv
 file:artifact_evaluation_environment_check_csv,file,artifact/evaluation/environment_check.csv,artifact/evaluation/environment_check.csv
 file:artifact_evaluation_environment_csv,file,artifact/evaluation/environment.csv,artifact/evaluation/environment.csv
+file:artifact_evaluation_evidence_freeze_manifest_check_csv,file,artifact/evaluation/evidence_freeze_manifest_check.csv,artifact/evaluation/evidence_freeze_manifest_check.csv
+file:artifact_evaluation_evidence_freeze_manifest_csv,file,artifact/evaluation/evidence_freeze_manifest.csv,artifact/evaluation/evidence_freeze_manifest.csv
 file:artifact_evaluation_external_benchmark_crosswalk_check_csv,file,artifact/evaluation/external_benchmark_crosswalk_check.csv,artifact/evaluation/external_benchmark_crosswalk_check.csv
 file:artifact_evaluation_external_benchmark_suite_check_csv,file,artifact/evaluation/external_benchmark_suite_check.csv,artifact/evaluation/external_benchmark_suite_check.csv
 file:artifact_evaluation_external_benchmark_suite_csv,file,artifact/evaluation/external_benchmark_suite.csv,artifact/evaluation/external_benchmark_suite.csv
@@ -144,11 +153,15 @@ file:artifact_evaluation_real_engine_validation_environment_csv,file,artifact/ev
 file:artifact_evaluation_reference_quality_csv,file,artifact/evaluation/reference_quality.csv,artifact/evaluation/reference_quality.csv
 file:artifact_evaluation_repair_certificate_minimality_csv,file,artifact/evaluation/repair_certificate_minimality.csv,artifact/evaluation/repair_certificate_minimality.csv
 file:artifact_evaluation_repair_generalization_check_csv,file,artifact/evaluation/repair_generalization_check.csv,artifact/evaluation/repair_generalization_check.csv
+file:artifact_evaluation_repair_generalization_summary_csv,file,artifact/evaluation/repair_generalization_summary.csv,artifact/evaluation/repair_generalization_summary.csv
 file:artifact_evaluation_repair_hitting_set_check_csv,file,artifact/evaluation/repair_hitting_set_check.csv,artifact/evaluation/repair_hitting_set_check.csv
 file:artifact_evaluation_repository_audit_csv,file,artifact/evaluation/repository_audit.csv,artifact/evaluation/repository_audit.csv
 file:artifact_evaluation_repository_quality_check_csv,file,artifact/evaluation/repository_quality_check.csv,artifact/evaluation/repository_quality_check.csv
 file:artifact_evaluation_repository_quality_csv,file,artifact/evaluation/repository_quality.csv,artifact/evaluation/repository_quality.csv
 file:artifact_evaluation_reproducibility_package_csv,file,artifact/evaluation/reproducibility_package.csv,artifact/evaluation/reproducibility_package.csv
+file:artifact_evaluation_resource_profile_check_csv,file,artifact/evaluation/resource_profile_check.csv,artifact/evaluation/resource_profile_check.csv
+file:artifact_evaluation_resource_profile_csv,file,artifact/evaluation/resource_profile.csv,artifact/evaluation/resource_profile.csv
+file:artifact_evaluation_resource_profile_scale_csv,file,artifact/evaluation/resource_profile_scale.csv,artifact/evaluation/resource_profile_scale.csv
 file:artifact_evaluation_schema_coverage_check_csv,file,artifact/evaluation/schema_coverage_check.csv,artifact/evaluation/schema_coverage_check.csv
 file:artifact_evaluation_semantic_field_attribution_check_csv,file,artifact/evaluation/semantic_field_attribution_check.csv,artifact/evaluation/semantic_field_attribution_check.csv
 file:artifact_evaluation_semantic_frontier_check_csv,file,artifact/evaluation/semantic_frontier_check.csv,artifact/evaluation/semantic_frontier_check.csv
@@ -163,6 +176,7 @@ file:artifact_external_workload_motifs_yaml,file,artifact/external/workload_moti
 file:artifact_grounded_verified_rules_jsonl,file,artifact/grounded/verified_rules.jsonl,artifact/grounded/verified_rules.jsonl
 file:artifact_grounded_verified_segments_jsonl,file,artifact/grounded/verified_segments.jsonl,artifact/grounded/verified_segments.jsonl
 file:artifact_grounded_verified_sources_csv,file,artifact/grounded/verified_sources.csv,artifact/grounded/verified_sources.csv
+file:artifact_optsemc_baselines_py,file,artifact/optsemc/baselines.py,artifact/optsemc/baselines.py
 file:artifact_optsemc_benchmark_compiler_py,file,artifact/optsemc/benchmark_compiler.py,artifact/optsemc/benchmark_compiler.py
 file:artifact_optsemc_certificates_py,file,artifact/optsemc/certificates.py,artifact/optsemc/certificates.py
 file:artifact_optsemc_claim_graph_py,file,artifact/optsemc/claim_graph.py,artifact/optsemc/claim_graph.py
@@ -190,13 +204,28 @@ file:artifact_optsemc_semantics_py,file,artifact/optsemc/semantics.py,artifact/o
 file:artifact_optsemc_sql_render_py,file,artifact/optsemc/sql_render.py,artifact/optsemc/sql_render.py
 file:artifact_optsemc_statistics_py,file,artifact/optsemc/statistics.py,artifact/optsemc/statistics.py
 file:artifact_optsemc_workloads_py,file,artifact/optsemc/workloads.py,artifact/optsemc/workloads.py
+file:artifact_recompute_grounded_mainline_sh,file,artifact/recompute_grounded_mainline.sh,artifact/recompute_grounded_mainline.sh
 file:artifact_schema_action_domain_yaml,file,artifact/schema/action_domain.yaml,artifact/schema/action_domain.yaml
 file:artifact_schema_contract_rule_schema_json,file,artifact/schema/contract_rule.schema.json,artifact/schema/contract_rule.schema.json
 file:artifact_schema_query_probe_schema_json,file,artifact/schema/query_probe.schema.json,artifact/schema/query_probe.schema.json
+file:artifact_scripts_build_anonymous_archive_py,file,artifact/scripts/build_anonymous_archive.py,artifact/scripts/build_anonymous_archive.py
+file:artifact_scripts_build_evidence_freeze_manifest_py,file,artifact/scripts/build_evidence_freeze_manifest.py,artifact/scripts/build_evidence_freeze_manifest.py
+file:artifact_scripts_check_anti_overfit_audit_py,file,artifact/scripts/check_anti_overfit_audit.py,artifact/scripts/check_anti_overfit_audit.py
+file:artifact_scripts_check_evidence_freeze_manifest_py,file,artifact/scripts/check_evidence_freeze_manifest.py,artifact/scripts/check_evidence_freeze_manifest.py
+file:artifact_scripts_check_git_tree_state_py,file,artifact/scripts/check_git_tree_state.py,artifact/scripts/check_git_tree_state.py
+file:artifact_scripts_check_resource_profile_py,file,artifact/scripts/check_resource_profile.py,artifact/scripts/check_resource_profile.py
+file:artifact_scripts_compute_anti_overfit_audit_py,file,artifact/scripts/compute_anti_overfit_audit.py,artifact/scripts/compute_anti_overfit_audit.py
+file:artifact_scripts_compute_resource_profile_py,file,artifact/scripts/compute_resource_profile.py,artifact/scripts/compute_resource_profile.py
+file:artifact_scripts_generate_probes_py,file,artifact/scripts/generate_probes.py,artifact/scripts/generate_probes.py
 gate:claim_row_10_checked,gate,claim_row_10_checked,artifact/evaluation/claim_ledger_check.csv
 gate:claim_row_11_checked,gate,claim_row_11_checked,artifact/evaluation/claim_ledger_check.csv
 gate:claim_row_12_checked,gate,claim_row_12_checked,artifact/evaluation/claim_ledger_check.csv
 gate:claim_row_13_checked,gate,claim_row_13_checked,artifact/evaluation/claim_ledger_check.csv
+gate:claim_row_14_checked,gate,claim_row_14_checked,artifact/evaluation/claim_ledger_check.csv
+gate:claim_row_15_checked,gate,claim_row_15_checked,artifact/evaluation/claim_ledger_check.csv
+gate:claim_row_16_checked,gate,claim_row_16_checked,artifact/evaluation/claim_ledger_check.csv
+gate:claim_row_17_checked,gate,claim_row_17_checked,artifact/evaluation/claim_ledger_check.csv
+gate:claim_row_18_checked,gate,claim_row_18_checked,artifact/evaluation/claim_ledger_check.csv
 gate:claim_row_1_checked,gate,claim_row_1_checked,artifact/evaluation/claim_ledger_check.csv
 gate:claim_row_2_checked,gate,claim_row_2_checked,artifact/evaluation/claim_ledger_check.csv
 gate:claim_row_3_checked,gate,claim_row_3_checked,artifact/evaluation/claim_ledger_check.csv

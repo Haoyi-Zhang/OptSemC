@@ -34,8 +34,6 @@ chu2018usemiring,PVLDB,2018,true,true,true,true,
 wang2024qed,PVLDB,2024,true,true,true,true,
 rigger2020norec,ESEC/FSE,2020,true,true,true,true,
 rigger2020sqlancer,OSDI,2020,true,true,true,true,
-slutz1998massive,VLDB,1998,true,true,true,true,
-sqlsmith,misc,2015,true,true,true,true,
 chandra1977optimal,STOC,1977,true,true,true,true,
 aho1979equivalences,SIAM Journal on Computing,1979,true,true,true,true,
 green2007provenance,PODS,2007,true,true,true,true,
@@ -74,13 +72,13 @@ clickhouse_docs,misc,2026,true,true,true,true,
 calcite_docs,misc,2026,true,true,true,true,
 datafusion_docs,misc,2026,true,true,true,true,
 presto_docs,misc,2026,true,true,true,true,
-__count_70_to_80__,global,75,true,true,true,true,
+__count_70_to_80__,global,73,true,true,true,true,
 __all_cites_resolve__,global,0,true,true,true,true,
 __no_uncited_bibtex_entries__,global,0,true,true,true,true,
 __no_duplicate_bibtex_keys__,global,0,true,true,true,true,
-__bibtex_entries_parse__,global,75,true,true,true,true,
-__adjudication_keys_match_bibtex__,global,75,true,true,true,true,extra=[];missing=[]
-__guard_keys_match_bibtex__,global,75,true,true,true,true,extra=[];missing=[]
+__bibtex_entries_parse__,global,73,true,true,true,true,
+__adjudication_keys_match_bibtex__,global,73,true,true,true,true,extra=[];missing=[]
+__guard_keys_match_bibtex__,global,73,true,true,true,true,extra=[];missing=[]
 guard_adjudicated:codd1970relational,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/362384.362685;note=exact_doi_record; title_similarity=1.000; container=Communications of the ACM; page=377-387
 guard_adjudicated:selinger1979access,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/582095.582099;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the 1979 ACM SIGMOD international conference on Management of data  - SIGMOD '79; page=23
 guard_adjudicated:graefe1990volcano,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/93597.98720;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the 1990 ACM SIGMOD international conference on Management of data; page=102-111
@@ -116,8 +114,6 @@ guard_adjudicated:chu2018usemiring,Crossref DOI,REVIEW,true,true,true,true,guard
 guard_adjudicated:wang2024qed,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.14778/3681954.3682024;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the VLDB Endowment; page=3602-3614
 guard_adjudicated:rigger2020norec,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/3368089.3409710;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the 28th ACM Joint Meeting on European Software Engineering Conference and Symposium on the F
 guard_adjudicated:rigger2020sqlancer,USENIX official page,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=https://www.usenix.org/conference/osdi20/presentation/rigger;note=OSDI 2020; pages 667--682; authors Manuel Rigger and Zhendong Su
-guard_adjudicated:slutz1998massive,VLDB official PDF,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=https://www.vldb.org/conf/1998/p618.pdf;note=VLDB 1998; pages 618--622; author Donald R. Slutz
-guard_adjudicated:sqlsmith,Official project repository,FAIL,true,true,true,true,guard=FAIL;adjudication=PASS;identifier=https://github.com/anse1/sqlsmith;note=project page; author Andreas Seltenreich; accessed 2026-07-04
 guard_adjudicated:chandra1977optimal,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/800105.803397;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the ninth annual ACM symposium on Theory of computing  - STOC '77; page=77-90
 guard_adjudicated:aho1979equivalences,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1137/0208017;note=exact_doi_record; title_similarity=1.000; container=SIAM Journal on Computing; page=218-246
 guard_adjudicated:green2007provenance,Crossref DOI,REVIEW,true,true,true,true,guard=REVIEW;adjudication=PASS;identifier=10.1145/1265530.1265535;note=exact_doi_record; title_similarity=1.000; container=Proceedings of the twenty-sixth ACM SIGMOD-SIGACT-SIGART symposium on Principles of database systems; page=3
@@ -156,4 +152,4 @@ guard_adjudicated:presto_docs,Official URL,FAIL,true,true,true,true,guard=FAIL;a
 guard_adjudicated:trino_pushdown_docs,Official URL,PASS,true,true,true,true,guard=PASS;adjudication=PASS;identifier=https://trino.io/docs/current/optimizer/pushdown.html;note=http=200; official page; content_type=text/html; final=https://trino.io/docs/current/optimizer/pushdown.html
 guard_adjudicated:trino_dynamic_filtering_docs,Official URL,PASS,true,true,true,true,guard=PASS;adjudication=PASS;identifier=https://trino.io/docs/current/admin/dynamic-filtering.html;note=http=200; official page; content_type=text/html; final=https://trino.io/docs/current/admin/dynamic-filtering.html
 guard_adjudicated:bigquery_federated_docs,Official URL,PASS,true,true,true,true,guard=PASS;adjudication=PASS;identifier=https://docs.cloud.google.com/bigquery/docs/federated-queries-intro;note=http=200; official page; content_type=text/html; final=https://docs.cloud.google.com/bigquery/docs/federated-queries-intro
-__guard_review_fail_closed_by_primary_sources__,global,FAIL=10;PASS=3;REVIEW=62,true,true,true,true,
+__guard_review_fail_closed_by_primary_sources__,global,FAIL=9;PASS=3;REVIEW=61,true,true,true,true,

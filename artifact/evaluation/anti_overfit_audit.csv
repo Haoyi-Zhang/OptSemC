@@ -3,7 +3,7 @@ negative control,strict reference,false=0,pass,reference equality is not counted
 source removal,keyword,nonzero=26/26,pass,keyword collisions survive every single-source removal
 source removal,operator-only,nonzero=26/26,pass,operator-only collisions survive every single-source removal
 source removal,yes/no,nonzero=25/26,source-sensitive,yes/no is sparse; do not claim every source-removal run remains nonzero
-probe subsample,keyword/operator 10%,30/30; 30/30,pass,headline keyword/operator effects are not carried by one probe slice
-feature-family stress,fixed layer+placement,keyword:0; operator-only:0; yes/no:0,pass,"overlapping feature-family stress, not a disjoint held-out test"
-engine-family stress,fixed layer+placement,keyword:0; operator-only:0; yes/no:0,pass,"fixed predeclared basis stress, not learned repair transfer"
-learned engine-pair repair,point-learned minima,keyword:48; operator-only:120; yes/no:6,stress-fails,do not claim point-learned repairs generalize across held-out engine pairs
+probe subsample,keyword/operator 10%,30/30; 30/30,within-denominator,headline keyword/operator effects are not carried by one probe slice; not an independent population test
+feature-family stress,reported layer+placement,keyword:0; operator-only:0; yes/no:0,within-denominator,"overlapping feature-family stress, not a disjoint held-out test"
+engine-family stress,reported layer+placement,keyword:0; operator-only:0; yes/no:0,within-denominator,"reported basis stress from the predeclared field universe, not learned repair transfer"
+learned engine-pair repair,point-learned pair minima,keyword:48; operator-only:120; yes/no:6,stress-fails,do not claim point-learned repairs generalize across held-out engine pairs

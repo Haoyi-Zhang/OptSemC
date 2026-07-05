@@ -5,6 +5,7 @@ engine_pair_dispersion_present,true,4
 keyword_count_matches_baseline,true,254
 operator_only_count_matches_baseline,true,238
 yesno_count_matches_baseline,true,6
-all_feature_dimensions_touched,true,"{'headline_false_witnesses': '498', 'headline_distinct_probes': '486', 'headline_distinct_engine_pairs': '4', 'feature_dimensions_full_coverage': '10', 'feature_dimensions_total': '12', 'greedy_cover_rows': '486'}"
+all_feature_dimensions_touched_exact,true,touched=12;total=12
+feature_value_full_coverage_at_least_10_of_12,true,full=10;total=12
 greedy_cover_reaches_all_witnesses,true,"{'rank': '486', 'probe_id': 'P4156', 'new_witnesses': '1', 'cumulative_witnesses': '498', 'total_witnesses': '498', 'coverage_fraction': '1.000000'}"
 feature_table_has_twelve_dimensions,true,12

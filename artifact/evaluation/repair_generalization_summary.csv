@@ -1,0 +1,4 @@
+method,folds,heldout_false_equivalences,heldout_resolved,heldout_unresolved,heldout_resolution_rate,distinct_learned_repairs,canonical_source
+keyword,10,254,254,0,1.000000,placement,evaluation/grounded/repair_generalization_summary.csv
+yesno,10,6,6,0,1.000000,layer,evaluation/grounded/repair_generalization_summary.csv
+operator_only,10,238,238,0,1.000000,layer,evaluation/grounded/repair_generalization_summary.csv

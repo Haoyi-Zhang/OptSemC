@@ -4,11 +4,11 @@ claim_ledger_outputs_current,true,outputs=2;inputs=3
 environment_outputs_current,true,outputs=2;inputs=2
 real_engine_validation_check_current,true,outputs=2;inputs=12
 claim_graph_outputs_current,true,outputs=3;inputs=2
-repair_generalization_outputs_current,true,outputs=3;inputs=3
+repair_generalization_outputs_current,true,outputs=4;inputs=3
 git_tree_state_outputs_current,true,outputs=3;inputs=1
 package_manifest_outputs_current,true,outputs=3;inputs=2
 package_fingerprint_outputs_current,true,outputs=2;inputs=2
 repository_quality_outputs_current,true,outputs=3;inputs=3
-pdf_certificate_current,true,outputs=2;inputs=73
+pdf_certificate_current,true,outputs=2;inputs=72
 paper_table_source_check_current,true,outputs=2;inputs=124
-real_engine_evidence_hashes_bound,true,"digests=50d3447e2ee3,bee4216e30ff,b4c87f4c192b,98673c625dc3,31fcdd079160,79580126d8fa,83b9c1e0261d;rows=8432/142"
+real_engine_evidence_hashes_bound,true,"digests=50d3447e2ee3,bee4216e30ff,b4c87f4c192b,98673c625dc3,97969a12fbb0,79580126d8fa,83b9c1e0261d;rows=8432/142"
