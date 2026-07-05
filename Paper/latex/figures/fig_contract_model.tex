@@ -2,14 +2,14 @@
 \centering
 \begin{tikzpicture}[
   stage/.style={vpanel, draw=vldbBlue!66, fill=vldbMist,
-    text width=3.18cm, minimum height=1.32cm,
+    text width=3.05cm, minimum height=1.32cm,
     font=\rmfamily\fontsize{7.25}{7.95}\selectfont, text=black!73,
     align=center, inner xsep=2.6pt, inner ysep=2.2pt},
   audit/.style={stage, draw=vldbRose!78!black, fill=vldbRose!8,
     text=vldbRose!78!black, font=\rmfamily\bfseries\fontsize{7.25}{7.95}\selectfont},
   cert/.style={stage, draw=vldbTeal!76!black, fill=vldbMint},
   ribbon/.style={rounded corners=1.6pt, draw=vldbGold!56!black, fill=vldbWarm,
-    minimum width=15.90cm, minimum height=.42cm,
+    minimum width=15.35cm, minimum height=.42cm,
     font=\rmfamily\bfseries\fontsize{6.95}{7.55}\selectfont,
     text=vldbInk, align=center, inner xsep=2.0pt, inner ysep=.75pt,
     text height=1.45ex, text depth=.24ex},
@@ -24,23 +24,23 @@
   flow/.style={-{Latex[length=1.75mm]}, line width=.70pt,
     draw=black!48, line cap=round, line join=round}
 ]
-\path[use as bounding box] (-.04,-.12) rectangle (17.62,3.92);
+\path[use as bounding box] (-.04,-.12) rectangle (17.08,3.92);
 
 \node[vhead, anchor=west] at (.10,3.62) {Contract-denominator audit};
 \node[token, anchor=east, draw=vldbTeal!42!black, fill=vldbMint,
-      text=vldbTeal!58!black] at (17.42,3.60)
+      text=vldbTeal!58!black] at (16.86,3.60)
   {finite public evidence};
-\node[ribbon] at (8.80,3.10)
-  {frozen before counting: source manifest, schema, projection portfolio, repair-field universe, compute/check scripts};
+\node[ribbon] at (8.52,3.10)
+  {fixed before counting: source manifest, schema, projection portfolio, and repair-field universe};
 
-\node[stage] (admit) at (2.20,1.94)
+\node[stage] (admit) at (2.10,1.94)
   {\textbf{1. Admit}\\26 public sources\\287 grounded rules};
-\node[stage] (ref) at (6.60,1.94)
+\node[stage] (ref) at (6.38,1.94)
   {\textbf{2. Materialize}\\4,216 probes\\1,288 reference classes};
-\node[audit] (proj) at (11.00,1.94)
+\node[audit] (proj) at (10.66,1.94)
   {\textbf{3. Audit}\\254 keyword false pairs\\238 operator false pairs};
-\node[cert] (out) at (15.40,1.94)
-  {\textbf{4. Certify}\\repair basis\\replayable claim ledger};
+\node[cert] (out) at (14.94,1.94)
+  {\textbf{4. Certify}\\repair fields\\counter-witnesses};
 
 \draw[flow] ($(admit.south east)+(.08,-.10)$) --
   ($(ref.south west)+(-.08,-.10)$);
@@ -49,10 +49,10 @@
 \draw[flow, draw=vldbTeal!72!black] ($(proj.south east)+(.08,-.10)$) --
   ($(out.south west)+(-.08,-.10)$);
 
-\node[detail] at (2.20,.70) {denominator: source spans and reachable probes};
-\node[detail] at (6.60,.70) {reference: full public optimizer-contract payload};
-\node[detail] at (11.00,.70) {test: projected equality versus reference inequality};
-\node[detail] at (15.40,.70) {output: counter-witnesses, repairs, and checks};
+\node[detail] at (2.10,.70) {denominator: source spans and reachable probes};
+\node[detail] at (6.38,.70) {reference: full public optimizer-contract payload};
+\node[detail] at (10.66,.70) {test: projected equality versus reference inequality};
+\node[detail] at (14.94,.70) {output: counter-witnesses and repairs};
 
 \node[token] at (5.05,.02) {guard};
 \node[token] at (6.15,.02) {action};
@@ -62,9 +62,9 @@
   at (8.54,.02) {placement};
 \node[token] at (9.82,.02) {observability};
 \node[token, draw=vldbRose!35, fill=vldbRose!7, text=vldbRose!72!black]
-  at (12.72,.02) {coarse labels are\\tested, not trusted};
+  at (12.72,.02) {projection equality\\is audited};
 \end{tikzpicture}
-\caption{OptSem-C's contract-comparison dataflow. Inputs are frozen before witness counting; reference signatures define the denominator; projection audits test coarse equality against reference inequality; and each reported repair is tied to regenerated counter-witnesses and claim checks.}
+\caption{OptSem-C's contract-comparison dataflow. Inputs are fixed before witness counting; reference signatures define the denominator; projection audits test coarse equality against reference inequality; and each reported repair is tied to regenerated counter-witnesses and source checks.}
 \Description{A four-stage dataflow from admission denominator to reference maps, projection audit, and certified output, with a small strip showing retained fields and repair evidence.}
 \label{fig:contract-model}
 \end{figure*}

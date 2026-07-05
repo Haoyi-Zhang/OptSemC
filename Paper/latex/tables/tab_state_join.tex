@@ -1,16 +1,16 @@
 \begin{table}[t]
 \centering
-\caption{Conflict-aware state join for contract support states (U=UNSPEC, N=MUST\_NOT, C=CONFLICT).}
+\caption{Conflict-aware state join for contract support states. Conflict entries mark evidence combinations that require corpus repair before admission.}
 \label{tab:state-join}
-\small
-\begin{tabular}{lcccc}
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}lcccc@{}}
 \toprule
-$\sqcup$ & U & MAY & MUST & N \\
+$\sqcup$ & $\mathsf{U}$ & $\mathsf{MAY}$ & $\mathsf{MUST}$ & $\mathsf{N}$ \\
 \midrule
-U & U & MAY & MUST & N \\
-MAY & MAY & MAY & MUST & C \\
-MUST & MUST & MUST & MUST & C \\
-N & N & C & C & N \\
+$\mathsf{U}$ & $\mathsf{U}$ & $\mathsf{MAY}$ & $\mathsf{MUST}$ & $\mathsf{N}$ \\
+$\mathsf{MAY}$ & $\mathsf{MAY}$ & $\mathsf{MAY}$ & $\mathsf{MUST}$ & \textbf{\textcolor{vldbRose}{$\mathsf{C}$}} \\
+$\mathsf{MUST}$ & $\mathsf{MUST}$ & $\mathsf{MUST}$ & $\mathsf{MUST}$ & \textbf{\textcolor{vldbRose}{$\mathsf{C}$}} \\
+$\mathsf{N}$ & $\mathsf{N}$ & \textbf{\textcolor{vldbRose}{$\mathsf{C}$}} & \textbf{\textcolor{vldbRose}{$\mathsf{C}$}} & $\mathsf{N}$ \\
 \bottomrule
 \end{tabular}
 \end{table}

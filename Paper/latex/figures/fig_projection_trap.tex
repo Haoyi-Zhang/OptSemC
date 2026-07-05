@@ -47,11 +47,11 @@
 \node[lanetag, anchor=west, draw=vldbBlue!30, text=vldbBlue!70!black]
   at (.18,-.42) {ref.\\sig.};
 \node[contract] (c1) at (2.20,-.76)
-  {\textbf{A}\\filter delegation\\source-side};
+  {\textbf{BigQuery}\\federated filter\\source-side};
 \node[contract] (c2) at (5.52,-.76)
-  {\textbf{B}\\runtime filtering\\engine-side};
+  {\textbf{Trino}\\dynamic filter\\engine-side};
 \node[chip, draw=vldbBlue!30, text=vldbBlue!70!black] (diff) at (3.86,-.76)
-  {$S(A)\ne S(B)$};
+  {$S(\mathrm{BQ})\ne S(\mathrm{Trino})$};
 
 \node[lanetag, anchor=west, draw=vldbRose!35, text=vldbRose!72!black]
   at (.18,-1.58) {coarse\\view};
@@ -76,7 +76,7 @@
 \draw[flow, draw=vldbTeal!72!black] ($(keep.south)+(-.36,-.05)$) -- ++(0,-.19) -| (r1.north);
 \draw[flow, draw=vldbTeal!72!black] ($(keep.south)+(.36,-.05)$) -- ++(0,-.19) -| (r2.north);
 \end{tikzpicture}
-\caption{Projection loss as a finite contract witness. Two source-backed contracts differ under the reference signature, collapse under a coarse \texttt{pushdown=yes} denominator, and separate after retaining layer and placement.}
+\caption{Projection loss as a finite contract witness. BigQuery federated filtering and Trino dynamic filtering differ under the reference signature, collapse under a coarse \texttt{pushdown=yes} denominator, and separate after retaining layer and placement.}
 \Description{Two distinct public optimizer contracts collapse into a pushdown=yes projection and are separated by retaining layer and placement.}
 \label{fig:projection-trap}
 \end{figure}

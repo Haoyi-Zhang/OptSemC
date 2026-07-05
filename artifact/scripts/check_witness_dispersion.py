@@ -27,7 +27,11 @@ try:
     add("keyword_count_matches_baseline", int(dispersion["keyword"]["false_witnesses"]) == 254, dispersion["keyword"]["false_witnesses"])
     add("operator_only_count_matches_baseline", int(dispersion["operator_only"]["false_witnesses"]) == 238, dispersion["operator_only"]["false_witnesses"])
     add("yesno_count_matches_baseline", int(dispersion["yesno"]["false_witnesses"]) == 6, dispersion["yesno"]["false_witnesses"])
-    add("all_feature_dimensions_touched", int(summary.get("feature_dimensions_full_coverage", "0")) >= 10, str(summary))
+    touched = sum(1 for row in features if int(row.get("touched_values", "0")) > 0)
+    full = int(summary.get("feature_dimensions_full_coverage", "0"))
+    total = int(summary.get("feature_dimensions_total", "0"))
+    add("all_feature_dimensions_touched_exact", touched == 12 and total == 12, f"touched={touched};total={total}")
+    add("feature_value_full_coverage_at_least_10_of_12", full >= 10 and total == 12, f"full={full};total={total}")
     add("greedy_cover_reaches_all_witnesses", cover and cover[-1]["cumulative_witnesses"] == summary.get("headline_false_witnesses"), cover[-1] if cover else "empty")
     add("feature_table_has_twelve_dimensions", len(features) == 12, str(len(features)))
 except Exception as exc:

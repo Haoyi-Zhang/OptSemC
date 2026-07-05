@@ -115,7 +115,7 @@ def resource_table() -> None:
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Finite-audit replay cost. Time and RSS are lower-better cloud replay measurements; rows exclude cold-start setup, archive rebuild, paper regeneration, and artifact packaging. The 8$\times$ row lifts the same comparison relation.}",
+        r"\caption{Finite-audit replay cost. Time and RSS are lower-better cloud replay measurements; rows exclude cold-start setup, archive rebuild, paper regeneration, and public-package assembly. The 8$\times$ row lifts the same comparison relation.}",
         r"\label{tab:resource-profile}",
         r"\footnotesize",
         r"\setlength{\tabcolsep}{3.0pt}",

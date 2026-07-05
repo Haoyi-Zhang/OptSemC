@@ -30,6 +30,16 @@ def main() -> int:
     add("scale_points", {row["scale"] for row in scale} == {"1x", "2x", "4x", "8x"}, ",".join(row["scale"] for row in scale))
     add("sql_validation_nonzero", any(row["stage"] == "SQL catalog validation" and int(row["output_rows"]) > 0 for row in profile), "sql output rows")
     add("scale_throughput_nonzero", all(float(row["throughput_per_s"]) > 0 for row in scale), "projection replay lift")
+    eight = next((row for row in scale if row["scale"] == "8x"), None)
+    add("eight_x_lift_rows_current", bool(eight) and int(eight["input_rows"]) >= 2_833_152, eight["input_rows"] if eight else "missing")
+    add("eight_x_lift_throughput_floor", bool(eight) and float(eight["throughput_per_s"]) >= 200_000.0, eight["throughput_per_s"] if eight else "missing")
+    add("scale_notes_disallow_new_corpus_reading", all("not new corpus" in row["note"].lower() for row in scale), ";".join(row["note"] for row in scale))
+    if scale:
+        rss_values = [float(row["peak_rss_mb"]) for row in scale]
+        rss_bounded = max(rss_values) <= min(rss_values) * 1.10 + 1.0
+        add("scale_peak_rss_bounded", rss_bounded, f"min={min(rss_values):.3f};max={max(rss_values):.3f}")
+    else:
+        add("scale_peak_rss_bounded", False, "missing scale rows")
 
     with OUT.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=["check", "passed", "detail"])
