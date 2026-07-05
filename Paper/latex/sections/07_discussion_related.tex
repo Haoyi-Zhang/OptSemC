@@ -18,4 +18,4 @@ Benchmarks ask downstream questions: TPC-H/TPC-DS define workloads~\cite{tpch,tp
 
 SQL equivalence and testing systems such as Cosette, QED, SQLancer, and NoREC target query semantics or DBMS bugs~\cite{chu2017cosette,wang2024qed,rigger2020sqlancer,rigger2020norec}.  They do not define equality for optimizer-contract labels such as pushdown, runtime adaptation, or plan evidence.
 
-\noindent\textbf{Conclusion.} OptSem-C checks the public-contract denominator needed before optimizer labels support latency, cardinality, or plan-quality comparisons.
+\noindent\textbf{Conclusion.} OptSem-C checks the public-contract denominator needed before optimizer labels support latency, cardinality, or plan-quality comparisons.  Its output is a replayable contract ledger: unsafe public labels, witness records, repair fields, and stress checks that state when a comparison denominator can carry a performance claim.  This keeps benchmark evidence readable without pretending that documentation labels are optimizer semantics.
