@@ -29,7 +29,7 @@ cd artifact
 PYTHONDONTWRITEBYTECODE=1 ./run_deep_checks.sh
 ```
 
-The deep replay rebuilds derived measurements from the grounded corpus and benchmark specifications. It is more expensive than the fast check because it regenerates contract maps, probe coverage, SQL validation, projection diagnostics, repair certificates, and paper-alignment tables. In an anonymous artifact-only archive, paper-build checks are skipped automatically and the package snapshot is checked against the replay package scope.
+The deep replay rebuilds derived measurements from the grounded corpus and benchmark specifications. It is more expensive than the fast check because it regenerates contract maps, probe coverage, SQL validation, projection diagnostics, repair certificates, anti-overfit boundary tables, resource profiles, the evidence-freeze manifest, and paper-alignment tables. In an anonymous artifact-only archive, paper-build checks are skipped automatically and the package snapshot is checked against the replay package scope.
 
 ## Cloud real-engine validation
 
@@ -46,9 +46,12 @@ This replay runs the generated probes on DuckDB and PostgreSQL and then checks t
 - 287 public evidence spans.
 - 4,216 executable SQL probes.
 - 7,112 valid optimizer-feature interactions.
+- 99 generated probes forced by admitted public rule guards; the rest are feature-interaction coverage probes.
 - 90/90 external optimizer motifs covered, with generated SQL representatives validated on deterministic catalogs.
 - 254 keyword false equivalences, 238 operator-only false equivalences, and 6 yes/no false equivalences.
 - 44 unsafe retained-field vocabularies among all 256 retained-field subsets.
 - 498 headline witnesses repaired by the layer+placement semantic basis.
 - 12,648 probe-catalog SQL executions with zero failures.
 - 8,432 DuckDB/PostgreSQL full-corpus executions and 142 motif-representative executions with zero failures.
+
+The repair and robustness targets are finite stability checks over the declared public-contract denominator. They should not be read as a learned generalization guarantee for future engines, private optimizer behavior, or third-party workload performance.

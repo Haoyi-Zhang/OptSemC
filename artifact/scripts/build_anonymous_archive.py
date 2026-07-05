@@ -28,7 +28,6 @@ EXCLUDED_DIRS = {
     "dist",
 }
 EXCLUDED_FILE_NAMES = {
-    "build_anonymous_archive.py",
     "check_format_compliance.py",
     "check_latex_compile.py",
     "check_manuscript_style.py",
@@ -45,7 +44,6 @@ EXCLUDED_FILE_NAMES = {
     "manuscript_style.csv",
     "package_coherence.csv",
     "package_files.csv",
-    "paper_claim_ledger.csv",
     "paper_numeric_claims.csv",
     "paper_quality.csv",
     "paper_table_manifest.csv",
@@ -248,6 +246,12 @@ def prime_stage_checks(stage: Path) -> None:
     commands = [
         "check_package_cleanliness.py",
         "check_package_integrity.py",
+        "build_evidence_freeze_manifest.py",
+        "check_evidence_freeze_manifest.py",
+        "compute_anti_overfit_audit.py",
+        "check_anti_overfit_audit.py",
+        "compute_resource_profile.py",
+        "check_resource_profile.py",
         "compute_practice_projection_surfaces.py",
         "check_practice_projection_surfaces.py",
         "build_environment_report.py",

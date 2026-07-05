@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Probe-cluster generalization check for OptSem-C repair certificates.
+"""Probe-fold stability check for OptSem-C repair certificates.
 
-The repair certificate is finite-corpus. This script adds an
-out-of-probe check: learn a minimal semantic repair field set on 9 folds of
+The repair certificate is finite-corpus. This script adds a probe-fold
+stability check: learn a minimal semantic repair field set on nine folds of
 false-equivalence witnesses and test whether that repair resolves the held-out
 probe fold. Folds are by probe id, not by individual engine pair, so correlated
-engine-pair comparisons from the same generated query probe stay together.
+engine-pair comparisons from the same generated query probe stay together. This
+is not an engine-pair transfer claim; the stricter engine-pair stress is
+reported separately as a boundary when it fails.
 """
 from __future__ import annotations
 import csv, hashlib, itertools, json
@@ -171,7 +173,7 @@ def main():
     with (OUTDIR/'repair_generalization_summary.csv').open('w', newline='', encoding='utf-8') as f:
         fields=['method','folds','heldout_false_equivalences','heldout_resolved','heldout_unresolved','heldout_resolution_rate','distinct_learned_repairs']
         w=csv.DictWriter(f, fieldnames=fields); w.writeheader(); w.writerows(summary)
-    print('Wrote grounded repair-generalization check')
+    print('Wrote grounded probe-fold repair-stability check')
 
 if __name__ == '__main__':
     main()

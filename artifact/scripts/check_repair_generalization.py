@@ -10,27 +10,27 @@ def add(check, passed, details=''):
     check_rows.append({'check':check,'passed':str(bool(passed)).lower(),'details':str(details)})
 if not path.exists():
     print('missing repair_generalization_summary.csv')
-    add('repair_generalization_summary_present', False, 'missing')
+    add('probe_fold_repair_stability_summary_present', False, 'missing')
     out.parent.mkdir(parents=True, exist_ok=True)
     with out.open('w', newline='', encoding='utf-8') as f:
         w=csv.DictWriter(f, fieldnames=['check','passed','details']); w.writeheader(); w.writerows(check_rows)
     sys.exit(1)
 summary_rows=list(csv.DictReader(path.open()))
 errors=[]
-add('repair_generalization_summary_present', bool(summary_rows), f'rows={len(summary_rows)}')
+add('probe_fold_repair_stability_summary_present', bool(summary_rows), f'rows={len(summary_rows)}')
 for r in summary_rows:
     if float(r['heldout_resolution_rate']) < 1.0:
         errors.append(f"{r['method']} heldout resolution below 1.0")
     if int(r['heldout_false_equivalences']) <= 0 and r['method'] in {'keyword','operator_only'}:
         errors.append(f"{r['method']} has no heldout false equivalences")
 methods={r.get('method') for r in summary_rows}
-add('repair_generalization_methods_present', methods == {'keyword','operator_only','yesno'}, ';'.join(sorted(methods)))
-add('repair_generalization_resolves_heldout', not errors, ';'.join(errors[:10]))
+add('probe_fold_repair_stability_methods_present', methods == {'keyword','operator_only','yesno'}, ';'.join(sorted(methods)))
+add('probe_fold_repair_stability_resolves_heldout', not errors, ';'.join(errors[:10]))
 out.parent.mkdir(parents=True, exist_ok=True)
 with out.open('w', newline='', encoding='utf-8') as f:
     w=csv.DictWriter(f, fieldnames=['check','passed','details']); w.writeheader(); w.writerows(check_rows)
 if errors:
-    print('Repair generalization check FAILED')
+    print('Probe-fold repair stability check FAILED')
     for e in errors: print(e)
     sys.exit(1)
-print(f'Repair generalization check: {sum(r["passed"]=="true" for r in check_rows)}/{len(check_rows)} passed')
+print(f'Probe-fold repair stability check: {sum(r["passed"]=="true" for r in check_rows)}/{len(check_rows)} passed')

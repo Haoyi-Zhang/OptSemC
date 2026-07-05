@@ -27,12 +27,37 @@ def main() -> int:
     def add(name: str, passed: bool, detail: str) -> None:
         checks.append({"check": name, "passed": str(passed).lower(), "detail": detail})
 
-    add("manifest_has_core_inputs", len(rows) >= 10, str(len(rows)))
+    add("manifest_has_core_inputs", len(rows) >= 20, str(len(rows)))
     roles = {row["role"] for row in rows}
     add(
         "core_roles_present",
-        {"schema", "feature_space", "source_manifest", "evidence_spans", "admitted_rules", "projection_portfolio"}.issubset(roles),
+        {
+            "schema",
+            "feature_space",
+            "source_manifest",
+            "evidence_spans",
+            "admitted_rules",
+            "projection_portfolio",
+            "executable_logic",
+            "compute_script",
+            "check_script",
+            "release_gate",
+            "replay_entrypoint",
+        }.issubset(roles),
         ",".join(sorted(roles)),
+    )
+    frozen_paths = {row["path"] for row in rows}
+    add(
+        "result_determining_code_present",
+        {
+            "optsemc/baselines.py",
+            "optsemc/projections.py",
+            "optsemc/repair_stability.py",
+            "scripts/compute_anti_overfit_audit.py",
+            "scripts/compute_resource_profile.py",
+            "scripts/check_git_tree_state.py",
+        }.issubset(frozen_paths),
+        ",".join(sorted(path for path in frozen_paths if path.startswith(("optsemc/", "scripts/")))[:12]),
     )
     for row in rows:
         rel = row["path"]

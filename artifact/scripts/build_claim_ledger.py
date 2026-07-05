@@ -41,10 +41,27 @@ def keyed_csv(path: Path) -> dict[str, str]:
     return {row.get("key", "") or row.get("check", ""): row.get("value", "") or row.get("passed", "") for row in read_csv(path)}
 
 
+def pass_summary(path: Path) -> str:
+    if not path.exists():
+        return "missing"
+    rows = read_csv(path)
+    passable = [row for row in rows if "passed" in row]
+    if not passable:
+        return f"rows={len(rows)}"
+    return f"{sum(row.get('passed') == 'true' for row in passable)}/{len(passable)}"
+
+
 def main() -> None:
     m = metric_summary()
     p = practice_summary()
     public_sources = p["public_sources"]
+    freeze_rows = read_csv(E / "evidence_freeze_manifest.csv") if (E / "evidence_freeze_manifest.csv").exists() else []
+    freeze_roles = {row.get("role", "") for row in freeze_rows}
+    anti_rows = read_csv(E / "anti_overfit_audit.csv") if (E / "anti_overfit_audit.csv").exists() else []
+    anti_verdicts = {row.get("verdict", "") for row in anti_rows}
+    resource_rows = read_csv(E / "resource_profile.csv") if (E / "resource_profile.csv").exists() else []
+    resource_scale = read_csv(E / "resource_profile_scale.csv") if (E / "resource_profile_scale.csv").exists() else []
+    git_state = keyed_csv(E / "git_tree_state.csv")
     rows = [
         {"claim_id": "C1-grounded-corpus", "paper_claim": "The grounded mainline contains 287 admitted source-linked rules, 287 evidence spans, and 26 sources.", "value": f"{m['grounded_rules']}/{m['grounded_segments']}/{m['public_sources']}", "artifact_support": "artifact/grounded/verified_rules.jsonl;artifact/grounded/verified_segments.jsonl;artifact/grounded/verified_sources.csv"},
         {"claim_id": "C2-probe-coverage", "paper_claim": "OptSemBench-C generates 4,216 probes covering 7,112 renderable feature interactions.", "value": f"{m['generated_probes']}/{m['valid_interactions']}", "artifact_support": "artifact/benchmark/generated_probes.jsonl;artifact/evaluation/coverage_interactions.csv;artifact/evaluation/probe_validity.csv"},
@@ -59,6 +76,11 @@ def main() -> None:
         {"claim_id": "C11-external-suite", "paper_claim": "The external benchmark-family suite covers 90/90 declared optimizer motifs across 12 families; each motif has a deterministic-catalog validation representative.", "value": f"{m['external_benchmark_motifs_covered']}/{m['external_benchmark_motifs']};executed={m['external_motif_representative_executed_motifs']}/{m['external_motif_representative_external_motifs']};suites={m['external_benchmark_suites']}", "artifact_support": "artifact/evaluation/external_benchmark_suite.csv;artifact/evaluation/external_benchmark_suite_check.csv;artifact/evaluation/external_motif_execution_summary.csv;artifact/evaluation/external_motif_execution_check.csv"},
         {"claim_id": "C12-real-engine-validation", "paper_claim": "The generated probes execute on DuckDB and PostgreSQL with zero failures for the full corpus and the motif representatives.", "value": f"engines={m['real_engine_full_engines']};full={m['real_engine_full_execution_successes']}/{m['real_engine_full_validations']};failures={m['real_engine_full_execution_failures']};motif={m['real_engine_motif_execution_successes']}/{m['real_engine_motif_validations']}", "artifact_support": "artifact/evaluation/real_engine_probe_validation_full.csv;artifact/evaluation/real_engine_probe_validation_full_summary.csv;artifact/evaluation/real_engine_probe_validation_motif.csv;artifact/evaluation/real_engine_probe_validation_motif_summary.csv;artifact/evaluation/real_engine_validation_check.csv;artifact/evaluation/real_engine_validation_environment.csv;artifact/evaluation/real_engine_fresh_run.csv"},
         {"claim_id": "C13-formal-obligations", "paper_claim": "Every finite formal obligation asserted in the paper is checked by the replay package.", "value": "10/10", "artifact_support": "artifact/evaluation/theorem_ledger.csv"},
+        {"claim_id": "C14-rule-aware-probe-denominator", "paper_claim": "The probe denominator is a rule-aware coverage benchmark rather than an independent held-out generalization set.", "value": "forced_by_rule_guard=99", "artifact_support": "artifact/benchmark/generated_probes.jsonl;artifact/evaluation/probe_validity.csv;artifact/scripts/generate_probes.py;artifact/recompute_grounded_mainline.sh"},
+        {"claim_id": "C15-evidence-freeze-protocol", "paper_claim": "The freeze manifest hashes schema, source inputs, projection/baseline specifications, result-determining code, compute/check scripts, and replay entrypoints.", "value": f"rows={len(freeze_rows)};roles={len(freeze_roles)};check={pass_summary(E / 'evidence_freeze_manifest_check.csv')}", "artifact_support": "artifact/evaluation/evidence_freeze_manifest.csv;artifact/evaluation/evidence_freeze_manifest_check.csv;artifact/scripts/build_evidence_freeze_manifest.py;artifact/scripts/check_evidence_freeze_manifest.py;artifact/optsemc/baselines.py;artifact/optsemc/projections.py"},
+        {"claim_id": "C16-anti-overfit-boundaries", "paper_claim": "The anti-overfit audit separates robust passes from source-sensitive, overlapping-fold, and failed learned-transfer boundaries.", "value": f"rows={len(anti_rows)};verdicts={','.join(sorted(anti_verdicts))}", "artifact_support": "artifact/evaluation/anti_overfit_audit.csv;artifact/evaluation/anti_overfit_audit_check.csv;artifact/scripts/compute_anti_overfit_audit.py;artifact/scripts/check_anti_overfit_audit.py"},
+        {"claim_id": "C17-resource-profile", "paper_claim": "The resource profile reports the finite-comparison replay cost and labels the 8x row as a deterministic replay lift, not a new corpus.", "value": f"stages={len(resource_rows)};scale_points={len(resource_scale)};check={pass_summary(E / 'resource_profile_check.csv')}", "artifact_support": "artifact/evaluation/resource_profile.csv;artifact/evaluation/resource_profile_scale.csv;artifact/evaluation/resource_profile_check.csv;artifact/scripts/compute_resource_profile.py;artifact/scripts/check_resource_profile.py"},
+        {"claim_id": "C18-clean-archive-gate", "paper_claim": "The long-term anonymous archive builder refuses a dirty source tree for release construction and records the source-tree state inside the package.", "value": f"intent={git_state.get('tree_state_intent','pending')};require_clean={git_state.get('require_clean','pending')}", "artifact_support": "artifact/scripts/build_anonymous_archive.py;artifact/scripts/check_git_tree_state.py;artifact/evaluation/git_tree_state.csv;artifact/evaluation/git_tree_state_check.csv"},
     ]
     with OUT.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=["claim_id", "paper_claim", "value", "artifact_support"])
@@ -93,7 +115,11 @@ def main() -> None:
             real_check.get("fresh_run_marker_present") == "true" and real_check.get("fresh_marker_after_engine_outputs") == "true",
             str({k: real_check.get(k, "missing") for k in ("fresh_run_marker_present", "fresh_marker_after_engine_outputs")}),
         )
-    add("ledger_has_benchmark_theory_artifact_rows", len(rows) >= 13, f"rows={len(rows)}")
+    add("ledger_has_benchmark_theory_artifact_rows", len(rows) >= 18, f"rows={len(rows)}")
+    add("freeze_manifest_covers_executable_logic", {"executable_logic", "compute_script", "check_script", "release_gate", "replay_entrypoint"}.issubset(freeze_roles), ",".join(sorted(freeze_roles)))
+    add("anti_overfit_boundaries_current", {"source-sensitive", "stress-fails"}.issubset(anti_verdicts) and len(anti_rows) >= 8, ",".join(sorted(anti_verdicts)))
+    add("resource_profile_current", len(resource_rows) >= 5 and {row.get("scale") for row in resource_scale} == {"1x", "2x", "4x", "8x"}, f"profile={len(resource_rows)};scale={','.join(row.get('scale','') for row in resource_scale)}")
+    add("release_gate_recorded", by_id["C18-clean-archive-gate"]["value"] != "intent=pending;require_clean=pending", by_id["C18-clean-archive-gate"]["value"])
     with CHECK.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=["check", "passed", "details"])
         writer.writeheader(); writer.writerows(checks)

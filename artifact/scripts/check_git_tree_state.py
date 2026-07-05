@@ -112,6 +112,13 @@ def write_outputs(state_rows: list[dict[str, str]], status_text: str) -> None:
 
 artifact_only = not (ROOT / "Paper").exists()
 if artifact_only and not (ROOT / ".git").exists():
+    existing_rows: list[dict[str, str]] = []
+    if STATE.exists():
+        try:
+            with STATE.open(newline="", encoding="utf-8") as handle:
+                existing_rows = list(csv.DictReader(handle))
+        except Exception:
+            existing_rows = []
     status_text = "artifact-only archive: .git is not packaged; source-tree clean state is enforced before archive construction\n"
     status_sha = sha256_text(status_text)
     add("git_head_available", True, "artifact-only-not-packaged")
@@ -120,12 +127,14 @@ if artifact_only and not (ROOT / ".git").exists():
     add("clean_tree_when_required", True, "artifact-only-not-packaged")
     add("tree_state_hashes_recorded", len(status_sha) == 64, status_sha[:12])
     write_outputs(
-        [
+        existing_rows
+        + [
             {"key": "git_head", "value": "artifact-only-not-packaged"},
             {"key": "tracked_dirty_count", "value": "0"},
             {"key": "untracked_count", "value": "0"},
             {"key": "ignored_boundary_count", "value": "0"},
             {"key": "require_clean", "value": "not-applicable"},
+            {"key": "tree_state_intent", "value": "source-clean-recorded-artifact-only"},
             {"key": "status_sha256", "value": status_sha},
             {"key": "diff_sha256", "value": sha256_text("")},
             {"key": "cached_diff_sha256", "value": sha256_text("")},
@@ -145,16 +154,18 @@ dirty = porcelain(include_ignored=False)
 with_ignored = porcelain(include_ignored=True)
 ignored = ignored_boundary(with_ignored)
 release_gate = os.environ.get("OPTSEMC_RELEASE_GATE", "0") == "1"
-require_clean = release_gate or os.environ.get("OPTSEMC_REQUIRE_CLEAN_GIT", "0") == "1"
+development_snapshot = os.environ.get("OPTSEMC_DEVELOPMENT_SNAPSHOT", "0") == "1"
+require_clean = release_gate or os.environ.get("OPTSEMC_REQUIRE_CLEAN_GIT", "0") == "1" or not development_snapshot
 
 tracked_or_untracked = [line for line in dirty if not line.startswith("!! ")]
 untracked = [line for line in tracked_or_untracked if line.startswith("?? ")]
 tracked = [line for line in tracked_or_untracked if not line.startswith("?? ")]
 
 add("git_head_available", head_code == 0 and bool(head.strip()), head.strip()[:80])
-add("tree_state_recorded", True, f"tracked={len(tracked)};untracked={len(untracked)};require_clean={require_clean};release_gate={release_gate}")
+add("tree_state_recorded", True, f"tracked={len(tracked)};untracked={len(untracked)};require_clean={require_clean};release_gate={release_gate};development_snapshot={development_snapshot}")
 add("no_ignored_boundary_files", not ignored, ";".join(ignored[:20]))
 add("release_gate_requires_clean_tree", (not release_gate) or require_clean, f"release_gate={release_gate};require_clean={require_clean}")
+add("dirty_tree_requires_explicit_development_snapshot", require_clean or development_snapshot, f"require_clean={require_clean};development_snapshot={development_snapshot}")
 add("clean_tree_when_required", (not require_clean) or not tracked_or_untracked, ";".join(tracked_or_untracked[:20]))
 
 status_sha = sha256_text(status_out) if status_code == 0 else ""
@@ -168,7 +179,11 @@ state_rows = [
     {"key": "ignored_boundary_count", "value": str(len(ignored))},
     {"key": "require_clean", "value": str(require_clean).lower()},
     {"key": "release_gate", "value": str(release_gate).lower()},
-    {"key": "tree_state_intent", "value": "release-clean-required" if release_gate else "development-record-only"},
+    {"key": "development_snapshot", "value": str(development_snapshot).lower()},
+    {
+        "key": "tree_state_intent",
+        "value": "development-record-only" if development_snapshot else "clean-tree-required",
+    },
     {"key": "status_sha256", "value": status_sha or f"unavailable:exit{status_code}"},
     {"key": "diff_sha256", "value": diff_sha or f"unavailable:exit{diff_code}"},
     {"key": "cached_diff_sha256", "value": cached_diff_sha or f"unavailable:exit{cached_diff_code}"},

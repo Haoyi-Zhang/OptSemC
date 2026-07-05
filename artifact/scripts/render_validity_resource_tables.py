@@ -71,7 +71,7 @@ def anti_overfit_table() -> None:
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Anti-overfitting audit.  The table separates passes from boundary cases: yes/no is source-sensitive, and point-learned engine-pair repairs are reported as a failed stress rather than as a claim.}",
+        r"\caption{Anti-overfitting audit.  The table separates passes from boundary cases: yes/no is source-sensitive, feature-family folds overlap, and point-learned engine-pair repairs are reported as a failed stress rather than as a transfer claim.}",
         r"\label{tab:anti-overfit-audit}",
         r"\footnotesize",
         r"\setlength{\tabcolsep}{2.0pt}",

@@ -186,6 +186,8 @@ run_py scripts/compute_repair_hitting_sets.py
 run_py scripts/check_projection_proof_obligations.py
 run_py scripts/check_projection_contract_semantics.py
 run_py scripts/check_theorem_ledger.py
+echo "[deep] OPTSEMC_DEVELOPMENT_SNAPSHOT=1 python scripts/check_git_tree_state.py"
+OPTSEMC_DEVELOPMENT_SNAPSHOT=1 timeout "$PY_TIMEOUT" python -u scripts/check_git_tree_state.py
 run_py scripts/build_claim_metric_summary.py
 run_py scripts/build_claim_ledger.py
 run_py scripts/check_artifact_hygiene.py
@@ -203,7 +205,8 @@ run_py scripts/build_claim_metric_summary.py
 run_py scripts/build_claim_ledger.py
 run_py scripts/build_claim_evidence_graph.py
 run_py scripts/check_claim_evidence_graph.py
-run_py scripts/check_git_tree_state.py
+echo "[deep] OPTSEMC_DEVELOPMENT_SNAPSHOT=1 python scripts/check_git_tree_state.py"
+OPTSEMC_DEVELOPMENT_SNAPSHOT=1 timeout "$PY_TIMEOUT" python -u scripts/check_git_tree_state.py
 run_py scripts/build_package_fingerprint.py
 clean_transients
 run_py scripts/build_package_manifest.py

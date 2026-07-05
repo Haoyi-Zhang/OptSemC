@@ -11,13 +11,17 @@ The active manuscript source is `Paper/latex/paper.tex`. The artifact entry poin
 
 ## Artifact archive
 
-The public anonymous replay package is archived at https://doi.org/10.5281/zenodo.21198009. The expected SHA-256 for `optsemc-artifact.zip` is:
+The public anonymous replay package is archived at https://doi.org/10.5281/zenodo.21198009. The expected SHA-256 for the archived `optsemc-artifact.zip` is:
 
 ```text
 a0776b2c41f9cd7985487e7519c47a01b2e30dffaf515c74e286a9b9d8a3ee4b
 ```
 
-The archived replay package records its source Git state in `artifact/evaluation/git_tree_state.csv`. Later public repository commits may update the paper availability block, compiled PDF, archive digest, or repository metadata; they do not change the replay code, grounded corpus, generated probes, or validation scripts stored in the published archive.
+The archived replay package records its source Git state in `artifact/evaluation/git_tree_state.csv`. The digest above applies only to that uploaded archive. Any commit that changes replay code, grounded corpus inputs, generated-probe logic, validation scripts, or paper-facing evidence must rebuild the anonymous archive from a clean source tree and update both the repository README and the PVLDB availability block.
+
+## Evidence scope
+
+OptSem-C is a finite public-contract audit, not a learned model and not a hidden-optimizer oracle. OptSemBench-C is rule-aware by design: 99 probes are forced by admitted public rule guards so that the declared contract denominator is reachable, while the remaining probes cover optimizer-feature interactions. The paper therefore treats robustness checks as source/probe/feature/engine stress evidence, not as proof that a point-learned repair generalizes to arbitrary future engines. Resource-profile rows report the cost of rerunning this finite comparison audit; the deterministic 8x lift is a scalability check of the comparison inner loop, not a new corpus or engine-count claim.
 
 ## Execution environment
 

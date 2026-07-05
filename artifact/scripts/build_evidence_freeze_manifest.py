@@ -20,6 +20,20 @@ FROZEN_INPUTS = [
     ("projection_portfolio", "config/practice_projection_surfaces.csv", "public comparison surfaces"),
     ("external_motifs", "external/workload_motifs.yaml", "published workload motif requirements"),
     ("baseline_portfolio", "baselines/baseline_catalog.yaml", "baseline comparison vocabulary"),
+    ("executable_logic", "optsemc/baselines.py", "baseline/projection portfolio implementation"),
+    ("executable_logic", "optsemc/projections.py", "projection-kernel witness implementation"),
+    ("executable_logic", "optsemc/repair_stability.py", "repair-basis stability implementation"),
+    ("executable_logic", "optsemc/algorithmic_scaling.py", "finite replay scaling implementation"),
+    ("compute_script", "scripts/compute_anti_overfit_audit.py", "anti-overfitting audit construction"),
+    ("compute_script", "scripts/compute_resource_profile.py", "cloud replay resource-profile measurement"),
+    ("compute_script", "scripts/compute_repair_generalization.py", "probe-fold repair-stability measurement"),
+    ("check_script", "scripts/check_anti_overfit_audit.py", "anti-overfitting audit gate"),
+    ("check_script", "scripts/check_resource_profile.py", "resource-profile gate"),
+    ("check_script", "scripts/check_evidence_freeze_manifest.py", "freeze-manifest hash gate"),
+    ("release_gate", "scripts/check_git_tree_state.py", "clean-source-tree release gate"),
+    ("release_gate", "scripts/build_anonymous_archive.py", "anonymous archive construction gate"),
+    ("replay_entrypoint", "run_deep_checks.sh", "cloud replay and paper-gate entry point"),
+    ("replay_entrypoint", "recompute_grounded_mainline.sh", "from-grounded replay entry point"),
 ]
 
 

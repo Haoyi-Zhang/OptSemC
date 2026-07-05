@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Engine-pair holdout generalization for repair certificates.
+"""Engine-pair holdout stress for repair certificates.
 
-This complements probe-cluster holdout. For each coarse projection, it learns a
+This complements probe-fold stability. For each coarse projection, it learns a
 minimal semantic repair from false-equivalence witnesses excluding one engine
 pair, and tests the repair on the held-out engine pair. This detects whether a
-repair field only explains a single pair of engines or generalizes across engine
-pair hotspots.
+repair field only explains a single pair of engines. A failure is reported as a
+boundary, not used as a transfer claim.
 """
 from __future__ import annotations
 import csv, itertools, json
@@ -131,7 +131,7 @@ def main():
     with (OUTDIR/'repair_enginepair_generalization_summary.csv').open('w', newline='', encoding='utf-8') as f:
         fields=['method','heldout_engine_pairs','heldout_false_equivalences','heldout_resolved','heldout_unresolved','heldout_resolution_rate','distinct_learned_repairs']
         w=csv.DictWriter(f, fieldnames=fields); w.writeheader(); w.writerows(summary)
-    print('Wrote engine-pair repair generalization')
+    print('Wrote engine-pair repair stress')
 
 if __name__ == '__main__':
     main()
