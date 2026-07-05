@@ -12,7 +12,7 @@ The public anonymous replay package is archived at https://doi.org/10.5281/zenod
 sha256sum optsemc-artifact.zip
 ```
 
-The archive records its source Git commit and clean-tree status in `artifact/evaluation/git_tree_state.csv`. The recorded SHA-256 applies only to the uploaded zip. If replay code, grounded corpus inputs, generated-probe logic, validation scripts, or paper-facing evidence changes, the release gate requires a new clean-tree archive build and a new digest in the repository README and PVLDB availability block.
+The archive records its source Git commit and clean-tree status in `artifact/evaluation/git_tree_state.csv`. The recorded SHA-256 applies only to the uploaded zip. If replay code, grounded corpus inputs, generated-probe logic, validation scripts, or paper-facing evidence changes, the archive gate requires a new clean-tree archive build and a new digest in the repository README and PVLDB availability block.
 
 ## Main research objects
 
