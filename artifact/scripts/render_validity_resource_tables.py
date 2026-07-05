@@ -71,7 +71,7 @@ def anti_overfit_table() -> None:
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Anti-overfitting audit.  The table separates controls, source/probe stress inside the frozen denominator, overlapping feature/engine stress, and failed point-learned transfer; no row is an independent held-out population claim.}",
+        r"\caption{Anti-overfitting audit. Boundary labels separate controls, finite-denominator stress, source sensitivity, overlapping folds, and failed learned transfer; no row is an independent population claim.}",
         r"\label{tab:anti-overfit-audit}",
         r"\footnotesize",
         r"\setlength{\tabcolsep}{2.0pt}",
@@ -115,7 +115,7 @@ def resource_table() -> None:
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Finite-audit replay cost and resource profile. Times and peak RSS come from the cloud replay worker; rows are selected audit stages, not cold-start setup, archive rebuild, or paper regeneration. The 8$\times$ row is a deterministic inner-loop lift of the same finite comparison relation.}",
+        r"\caption{Finite-audit replay cost. Cloud time and RSS cover selected audit stages, excluding cold-start setup, archive rebuild, and paper regeneration; the 8$\times$ row lifts the same comparison relation.}",
         r"\label{tab:resource-profile}",
         r"\footnotesize",
         r"\setlength{\tabcolsep}{3.0pt}",
