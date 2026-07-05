@@ -61,6 +61,10 @@ python scripts/check_projection_resolution_lattice.py
 
 python scripts/check_theorem_ledger.py
 python scripts/build_claim_metric_summary.py
+python scripts/build_evidence_freeze_manifest.py
+python scripts/check_evidence_freeze_manifest.py
+python scripts/compute_anti_overfit_audit.py
+python scripts/check_anti_overfit_audit.py
 python scripts/build_claim_ledger.py
 run_if_present scripts/build_adversarial_audit_matrix.py
 
