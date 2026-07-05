@@ -65,6 +65,16 @@ def main() -> None:
     resource_scale = read_csv(E / "resource_profile_scale.csv") if (E / "resource_profile_scale.csv").exists() else []
     resource_total = read_csv(E / "resource_profile_end_to_end.csv") if (E / "resource_profile_end_to_end.csv").exists() else []
     git_state = keyed_csv(E / "git_tree_state.csv")
+    if "source_tree_clean" in git_state or "allow_dirty_source" in git_state:
+        archive_gate_value = (
+            f"source_tree_clean={git_state.get('source_tree_clean','pending')};"
+            f"allow_dirty_source={git_state.get('allow_dirty_source','pending')}"
+        )
+    else:
+        archive_gate_value = (
+            f"intent={git_state.get('tree_state_intent','pending')};"
+            f"require_clean={git_state.get('require_clean','pending')}"
+        )
     rows = [
         {"claim_id": "C1-grounded-corpus", "paper_claim": "The grounded mainline contains 287 admitted source-linked rules, 287 evidence spans, and 26 sources.", "value": f"{m['grounded_rules']}/{m['grounded_segments']}/{m['public_sources']}", "artifact_support": "artifact/grounded/verified_rules.jsonl;artifact/grounded/verified_segments.jsonl;artifact/grounded/verified_sources.csv"},
         {"claim_id": "C2-probe-coverage", "paper_claim": "OptSemBench-C generates 4,216 probes covering 7,112 renderable feature interactions.", "value": f"{m['generated_probes']}/{m['valid_interactions']}", "artifact_support": "artifact/benchmark/generated_probes.jsonl;artifact/evaluation/coverage_interactions.csv;artifact/evaluation/probe_validity.csv"},
@@ -83,7 +93,7 @@ def main() -> None:
         {"claim_id": "C15-evidence-freeze-protocol", "paper_claim": "The freeze manifest hashes schema, source inputs, projection/baseline specifications, result-determining code, compute/check scripts, and replay entrypoints.", "value": f"rows={len(freeze_rows)};roles={len(freeze_roles)};check={pass_summary(E / 'evidence_freeze_manifest_check.csv')}", "artifact_support": "artifact/evaluation/evidence_freeze_manifest.csv;artifact/evaluation/evidence_freeze_manifest_check.csv;artifact/scripts/build_evidence_freeze_manifest.py;artifact/scripts/check_evidence_freeze_manifest.py;artifact/optsemc/baselines.py;artifact/optsemc/projections.py"},
         {"claim_id": "C16-anti-overfit-boundaries", "paper_claim": "The anti-overfit audit separates controls and finite-denominator stress from source-sensitive, overlapping-fold, and failed learned-transfer boundaries.", "value": f"rows={len(anti_rows)};verdicts={','.join(sorted(anti_verdicts))}", "artifact_support": "artifact/evaluation/anti_overfit_audit.csv;artifact/evaluation/anti_overfit_audit_check.csv;artifact/scripts/compute_anti_overfit_audit.py;artifact/scripts/check_anti_overfit_audit.py"},
         {"claim_id": "C17-resource-profile", "paper_claim": "The resource profile reports stage-level and total finite-audit replay cost and labels the 8x row as a deterministic inner-loop lift, not a new corpus, source set, or engine set.", "value": f"stages={len(resource_rows)};total_rows={len(resource_total)};scale_points={len(resource_scale)};check={pass_summary(E / 'resource_profile_check.csv')}", "artifact_support": "artifact/evaluation/resource_profile.csv;artifact/evaluation/resource_profile_end_to_end.csv;artifact/evaluation/resource_profile_scale.csv;artifact/evaluation/resource_profile_check.csv;artifact/scripts/compute_resource_profile.py;artifact/scripts/check_resource_profile.py"},
-        {"claim_id": "C18-clean-archive-gate", "paper_claim": "The long-term anonymous archive builder refuses a dirty source tree for release construction and records the source-tree state inside the package.", "value": f"intent={git_state.get('tree_state_intent','pending')};require_clean={git_state.get('require_clean','pending')}", "artifact_support": "artifact/scripts/build_anonymous_archive.py;artifact/scripts/check_git_tree_state.py;artifact/evaluation/git_tree_state.csv;artifact/evaluation/git_tree_state_check.csv"},
+        {"claim_id": "C18-clean-archive-gate", "paper_claim": "The long-term anonymous archive builder refuses a dirty source tree for release construction and records the source-tree state inside the package.", "value": archive_gate_value, "artifact_support": "artifact/scripts/build_anonymous_archive.py;artifact/scripts/check_git_tree_state.py;artifact/evaluation/git_tree_state.csv;artifact/evaluation/git_tree_state_check.csv"},
     ]
     with OUT.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=["claim_id", "paper_claim", "value", "artifact_support"])
@@ -132,7 +142,12 @@ def main() -> None:
     add("freeze_manifest_covers_executable_logic", {"executable_logic", "compute_script", "check_script", "release_gate", "replay_entrypoint"}.issubset(freeze_roles), ",".join(sorted(freeze_roles)))
     add("anti_overfit_boundaries_current", {"source-sensitive", "within-denominator", "stress-fails"}.issubset(anti_verdicts) and len(anti_rows) >= 8, ",".join(sorted(anti_verdicts)))
     add("resource_profile_current", len(resource_rows) >= 5 and len(resource_total) == 1 and {row.get("scale") for row in resource_scale} == {"1x", "2x", "4x", "8x"}, f"profile={len(resource_rows)};total={len(resource_total)};scale={','.join(row.get('scale','') for row in resource_scale)}")
-    add("release_gate_recorded", by_id["C18-clean-archive-gate"]["value"] != "intent=pending;require_clean=pending", by_id["C18-clean-archive-gate"]["value"])
+    archive_value = by_id["C18-clean-archive-gate"]["value"]
+    if "source_tree_clean" in git_state or "allow_dirty_source" in git_state:
+        release_gate_ok = git_state.get("source_tree_clean") == "true" and git_state.get("allow_dirty_source") == "false"
+    else:
+        release_gate_ok = archive_value != "intent=pending;require_clean=pending"
+    add("release_gate_recorded", release_gate_ok, archive_value)
     with CHECK.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=["check", "passed", "details"])
         writer.writeheader(); writer.writerows(checks)
