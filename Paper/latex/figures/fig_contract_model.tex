@@ -18,7 +18,7 @@
     font=\rmfamily\fontsize{6.75}{7.35}\selectfont, text=vldbGray,
     align=center, inner xsep=1.8pt, inner ysep=.75pt,
     text height=1.38ex, text depth=.22ex},
-  gate/.style={rounded corners=1.5pt, draw=vldbRule, fill=white,
+  detail/.style={rounded corners=1.5pt, draw=vldbRule, fill=white,
     text width=3.92cm, minimum height=.58cm,
     font=\rmfamily\fontsize{6.85}{7.45}\selectfont, text=black!64,
     align=center, inner xsep=2.0pt, inner ysep=.8pt,
@@ -48,10 +48,10 @@
 \draw[flow, draw=vldbRose!72!black] (ref.east) -- (proj.west);
 \draw[flow, draw=vldbTeal!72!black] (proj.east) -- (out.west);
 
-\node[gate] at (2.20,.70) {denominator: source spans and reachable probes};
-\node[gate] at (6.60,.70) {reference: full public optimizer-contract payload};
-\node[gate] at (11.00,.70) {test: projected equality versus reference inequality};
-\node[gate] at (15.40,.70) {output: counter-witnesses, repairs, and checks};
+\node[detail] at (2.20,.70) {denominator: source spans and reachable probes};
+\node[detail] at (6.60,.70) {reference: full public optimizer-contract payload};
+\node[detail] at (11.00,.70) {test: projected equality versus reference inequality};
+\node[detail] at (15.40,.70) {output: counter-witnesses, repairs, and checks};
 
 \node[token] at (5.05,.02) {guard};
 \node[token] at (6.15,.02) {action};
