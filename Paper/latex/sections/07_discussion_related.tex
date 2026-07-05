@@ -8,7 +8,7 @@
 \section{Related Work}
 \label{sec:related}
 
-Optimizer architectures supply the contract fields: System R separates access paths and costing~\cite{selinger1979access}; Volcano and Cascades expose rule search~\cite{graefe1990volcano,graefe1995cascades}; Calcite and Orca make adapters visible~\cite{begoli2018calcite,soliman2014orca}; and Garlic, BigDAWG, Snowflake, and Dremel surface placement and service stages~\cite{carey1995garlic,stonebraker2015bigdawg,dageville2016snowflake,melnik2010dremel}.  Benchmarks and testing systems standardize workloads, estimates, SQL equivalence, or bug finding~\cite{tpch,tpcds,leis2015good,chronis2024cardbench,chu2017cosette,wang2024qed,rigger2020sqlancer,rigger2020norec}; they supply controls, not equality predicates for public optimizer-contract labels.
+Optimizer architectures supply the schema fields: System R, Volcano/Cascades, Calcite/Orca, Garlic, BigDAWG, Snowflake, and Dremel expose access paths, rule search, adapters, placement, and service stages~\cite{selinger1979access,graefe1990volcano,graefe1995cascades,begoli2018calcite,soliman2014orca,carey1995garlic,stonebraker2015bigdawg,dageville2016snowflake,melnik2010dremel}.  Benchmarks and testing systems such as TPC-H/TPC-DS, JOB/CardBench, Cosette/QED, and SQLancer/NoREC standardize workloads, estimates, SQL equivalence, or bug finding~\cite{tpch,tpcds,leis2015good,chronis2024cardbench,chu2017cosette,wang2024qed,rigger2020sqlancer,rigger2020norec}; they supply controls, not contract-label equality predicates.
 
 \section{Conclusion}
 OptSem-C checks the public-contract denominator that must hold before optimizer labels can support latency, cardinality, or plan-quality comparisons.
