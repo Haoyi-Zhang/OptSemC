@@ -10,7 +10,7 @@ The baselines are executable comparison vocabularies, not DBMS-testing tools.  C
 
 \input{sections/06_cases}
 
-Table~\ref{tab:baseline-portfolio} compresses the remaining result path into the roles a denominator benchmark should expose: controls, public-label failures, stress tests, repairs, and the finite resolution frontier.  The table is deliberately organized by claim rather than by derivation order.  It shows that the zero rows are controls or repaired vocabularies, the nonzero rows are fixed public projections or retained-field stress tests, and the repair rows are supported by smaller-field counter-witnesses rather than by adding labels until the benchmark passes.
+Table~\ref{tab:baseline-portfolio} compresses the remaining result path into the roles a denominator benchmark should expose: controls, public-label failures, stress tests, repairs, and the finite resolution frontier.  Zero rows are controls or repaired vocabularies; nonzero rows are fixed public projections or retained-field stress tests; repair rows rest on smaller-field counter-witnesses rather than added labels.
 
 \input{tables/tab_baseline_portfolio}
 
@@ -36,7 +36,7 @@ Because the 287-rule corpus is finite, the remaining checks test whether the ker
 
 \input{tables/tab_witness_dispersion}
 
-\textbf{Cost and scalability.}  A VLDB evaluation should not have to trust an expensive hand audit.  Table~\ref{tab:resource-profile} reports the cloud replay resource profile for the paper-facing phases: projection audit, fixed-basis repair, deterministic SQL validation, and an 8$\times$ deterministic lift of the finite comparison relation.  The lift is intentionally not a new corpus, engine-count, or semantic-domain claim; it checks that the finite-comparison inner loop remains linear when the same comparison work is replayed at larger scale.  Table~\ref{tab:scalability-family} complements that resource view with projection-level scalability and dispersion.  Full audits cover all 88,536 engine--probe checks per projection in seconds, with full-audit throughput above 50,000 checks/s; the 8$\times$ lift reaches 708,288 checks with throughput above 200,000 checks/s and prefix-scaling $R^2\geq0.98$.  Streaming maintenance has zero drift, and a source refresh is local: the largest source affects 46 rules, 4,216 maps, and 14.3\% of rule--probe rows.
+\textbf{Cost and scalability.}  A VLDB evaluation should not have to trust an expensive hand audit.  Table~\ref{tab:resource-profile} reports the cloud replay cost for projection audit, fixed-basis repair, SQL validation, and an 8$\times$ deterministic lift of the finite comparison relation.  The lift is not a new corpus, engine-count, or semantic-domain claim; it checks that the comparison inner loop remains linear at larger scale.  Table~\ref{tab:scalability-family} adds projection-level dispersion: full audits cover all 88,536 engine--probe checks per projection in seconds, the 8$\times$ lift reaches 708,288 checks above 200,000 checks/s with prefix-scaling $R^2\geq0.98$, streaming maintenance has zero drift, and the largest source refresh affects 46 rules, 4,216 maps, and 14.3\% of rule--probe rows.
 
 \input{tables/tab_resource_profile}
 
