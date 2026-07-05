@@ -47,9 +47,15 @@ def main() -> int:
     add("operator_source_loo_exact", has_row("source removal", "operator-only", "nonzero=26/26", "pass"), "operator source removal")
     add("probe_subsample_exact", has_row("probe subsample", "keyword/operator 10%", "30/30; 30/30", "within-denominator"), "probe subsample")
     add("yesno_source_sensitive_exact", has_row("source removal", "yes/no", "nonzero=25/26", "source-sensitive"), "yes/no source boundary")
-    feature = by_gate_scope.get(("feature-family stress", "fixed layer+placement"))
-    engine = by_gate_scope.get(("engine-family stress", "fixed layer+placement"))
-    learned = by_gate_scope.get(("learned engine-pair repair", "point-learned pair minima"))
+    def find_row(gate: str, scope_substring: str) -> dict[str, str] | None:
+        for row in rows:
+            if row["gate"] == gate and scope_substring in row["scope"]:
+                return row
+        return None
+
+    feature = find_row("feature-family stress", "layer+placement")
+    engine = find_row("engine-family stress", "layer+placement")
+    learned = find_row("learned engine-pair repair", "point-learned")
     add("fixed_basis_feature_stress_zero", unresolved_counts(feature) == [0, 0, 0], feature["evidence"] if feature else "missing")
     add("fixed_basis_engine_stress_zero", unresolved_counts(engine) == [0, 0, 0], engine["evidence"] if engine else "missing")
     learned_counts = unresolved_counts(learned)
