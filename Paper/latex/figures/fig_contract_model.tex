@@ -1,71 +1,69 @@
 \begin{figure*}[t]
 \centering
 \begin{tikzpicture}[
-  stage/.style={vpanel, draw=vldbBlue!68, fill=vldbMist,
-    text width=3.08cm, minimum height=1.05cm,
-    font=\rmfamily\fontsize{7.15}{7.85}\selectfont, text=black!72,
-    align=center, inner xsep=2.2pt, inner ysep=1.4pt},
-  audit/.style={vpanel, draw=vldbRose!78!black, fill=vldbRose!8,
-    text width=3.08cm, minimum height=1.05cm,
-    font=\rmfamily\bfseries\fontsize{7.15}{7.85}\selectfont,
-    text=vldbRose!78!black, align=center, inner xsep=2.2pt,
-    inner ysep=1.4pt},
-  cert/.style={vpanel, draw=vldbTeal!76!black, fill=vldbMint,
-    text width=3.08cm, minimum height=1.05cm,
-    font=\rmfamily\fontsize{7.15}{7.85}\selectfont, text=black!72,
-    align=center, inner xsep=2.2pt, inner ysep=1.4pt},
-  strip/.style={rounded corners=1.6pt, draw=vldbGold!55!black, fill=vldbWarm,
-    font=\rmfamily\bfseries\fontsize{6.85}{7.45}\selectfont,
-    text=vldbInk, align=center, inner xsep=2.0pt, inner ysep=.85pt},
-  field/.style={rounded corners=1.3pt, draw=black!14, fill=white,
-    font=\rmfamily\fontsize{6.65}{7.25}\selectfont, text=vldbGray,
-    align=center, inner xsep=1.7pt, inner ysep=.65pt},
-  frozen/.style={rounded corners=1.4pt, draw=vldbGold!55!black,
-    fill=vldbWarm, font=\rmfamily\bfseries\fontsize{6.6}{7.2}\selectfont,
-    text=vldbInk, align=center, inner xsep=1.8pt, inner ysep=.75pt},
-  note/.style={font=\rmfamily\fontsize{6.75}{7.35}\selectfont,
-    text=black!58, align=center},
+  stage/.style={vpanel, draw=vldbBlue!66, fill=vldbMist,
+    text width=3.18cm, minimum height=1.16cm,
+    font=\rmfamily\fontsize{7.25}{7.95}\selectfont, text=black!73,
+    align=center, inner xsep=2.6pt, inner ysep=1.6pt,
+    text height=1.52ex, text depth=.28ex},
+  audit/.style={stage, draw=vldbRose!78!black, fill=vldbRose!8,
+    text=vldbRose!78!black, font=\rmfamily\bfseries\fontsize{7.25}{7.95}\selectfont},
+  cert/.style={stage, draw=vldbTeal!76!black, fill=vldbMint},
+  ribbon/.style={rounded corners=1.6pt, draw=vldbGold!56!black, fill=vldbWarm,
+    minimum width=15.90cm, minimum height=.42cm,
+    font=\rmfamily\bfseries\fontsize{6.95}{7.55}\selectfont,
+    text=vldbInk, align=center, inner xsep=2.0pt, inner ysep=.75pt,
+    text height=1.45ex, text depth=.24ex},
+  token/.style={rounded corners=1.3pt, draw=black!16, fill=white,
+    font=\rmfamily\fontsize{6.75}{7.35}\selectfont, text=vldbGray,
+    align=center, inner xsep=1.8pt, inner ysep=.75pt,
+    text height=1.38ex, text depth=.22ex},
+  gate/.style={rounded corners=1.5pt, draw=vldbRule, fill=white,
+    text width=3.92cm, minimum height=.58cm,
+    font=\rmfamily\fontsize{6.85}{7.45}\selectfont, text=black!64,
+    align=center, inner xsep=2.0pt, inner ysep=.8pt,
+    text height=1.42ex, text depth=.24ex},
   flow/.style={-{Latex[length=1.75mm]}, line width=.70pt,
     draw=black!48, line cap=round, line join=round}
 ]
-\path[use as bounding box] (-.04,-.08) rectangle (17.62,3.62);
+\path[use as bounding box] (-.04,-.12) rectangle (17.62,3.92);
 
-\node[frozen] at (3.00,3.26) {source manifest};
-\node[frozen] at (5.42,3.26) {contract schema};
-\node[frozen] at (7.78,3.26) {projection portfolio};
-\node[frozen] at (10.32,3.26) {repair-field universe};
-\node[frozen] at (13.10,3.26) {compute/check scripts};
+\node[vhead, anchor=west] at (.10,3.62) {Contract-denominator audit};
+\node[token, anchor=east, draw=vldbTeal!42!black, fill=vldbMint,
+      text=vldbTeal!58!black] at (17.42,3.60)
+  {finite public evidence};
+\node[ribbon] at (8.80,3.10)
+  {frozen before counting: source manifest, schema, projection portfolio, repair-field universe, compute/check scripts};
 
-\node[stage] (admit) at (2.00,2.12)
-  {\textbf{Admission}\\rule spans + SQL probes\\287 rules / 4,216 probes};
-\node[stage] (ref) at (6.20,2.12)
-  {\textbf{Reference maps}\\engine--probe state table\\1,288 signature classes};
-\node[audit] (proj) at (10.40,2.12)
-  {\textbf{Projection audit}\\keyword: 254 false pairs\\operator-only: 238};
-\node[cert] (out) at (14.60,2.12)
-  {\textbf{Certified output}\\layer+placement basis\\claim ledger and replay checks};
+\node[stage] (admit) at (2.20,1.94)
+  {\textbf{1. Admit}\\26 public sources\\287 grounded rules};
+\node[stage] (ref) at (6.60,1.94)
+  {\textbf{2. Materialize}\\4,216 probes\\1,288 reference classes};
+\node[audit] (proj) at (11.00,1.94)
+  {\textbf{3. Audit}\\254 keyword false pairs\\238 operator false pairs};
+\node[cert] (out) at (15.40,1.94)
+  {\textbf{4. Certify}\\layer+placement basis\\replayable claim ledger};
 
 \draw[flow] (admit.east) -- (ref.west);
 \draw[flow, draw=vldbRose!72!black] (ref.east) -- (proj.west);
 \draw[flow, draw=vldbTeal!72!black] (proj.east) -- (out.west);
 
-\node[note] at (2.00,.98) {sources and probes\\define the denominator};
-\node[note] at (6.20,.98) {full public payload\\is the reference};
-\node[note] at (10.40,.98) {coarse equality is tested\\against reference inequality};
-\node[note] at (14.60,.98) {each claim points to\\regenerated evidence};
+\node[gate] at (2.20,.70) {denominator: source spans and reachable probes};
+\node[gate] at (6.60,.70) {reference: full public optimizer-contract payload};
+\node[gate] at (11.00,.70) {test: projected equality versus reference inequality};
+\node[gate] at (15.40,.70) {output: counter-witnesses, repairs, and checks};
 
-\node[field] at (4.10,.34) {guard};
-\node[field] at (5.18,.34) {action};
-\node[field] at (6.20,.34) {layer};
-\node[field] at (7.38,.34) {placement};
-\node[field] at (8.70,.34) {evidence};
-\draw[vldbRule, densely dashed, line width=.36pt] (ref.south) -- (6.20,.58);
-\draw[vldbRule, line width=.40pt] (3.48,.34) -- (3.76,.34);
-\draw[vldbRule, line width=.40pt] (9.20,.34) -- (9.48,.34);
-\node[strip, fill=white, draw=vldbTeal!42!black] at (12.45,.34)
-  {counter-witnesses + finite repair certificates};
+\node[token] at (5.05,.02) {guard};
+\node[token] at (6.15,.02) {action};
+\node[token, draw=vldbTeal!45!black, fill=vldbMint, text=vldbTeal!58!black]
+  at (7.25,.02) {layer};
+\node[token, draw=vldbTeal!45!black, fill=vldbMint, text=vldbTeal!58!black]
+  at (8.54,.02) {placement};
+\node[token] at (9.82,.02) {observability};
+\node[token, draw=vldbRose!35, fill=vldbRose!7, text=vldbRose!72!black]
+  at (12.72,.02) {coarse labels are tested, not trusted};
 \end{tikzpicture}
-\caption{OptSem-C's contract-comparison dataflow. Evidence and probes are admitted before witness counting; reference signatures define the denominator; projection-kernel audits test coarse equality against reference inequality; and each reported repair is tied to regenerated counter-witnesses and claim checks.}
+\caption{OptSem-C's contract-comparison dataflow. Inputs are frozen before witness counting; reference signatures define the denominator; projection audits test coarse equality against reference inequality; and each reported repair is tied to regenerated counter-witnesses and claim checks.}
 \Description{A four-stage dataflow from admission denominator to reference maps, projection audit, and certified output, with a small strip showing retained fields and repair evidence.}
 \label{fig:contract-model}
 \end{figure*}

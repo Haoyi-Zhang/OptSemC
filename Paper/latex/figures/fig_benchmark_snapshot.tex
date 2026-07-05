@@ -1,55 +1,64 @@
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[
-  tile/.style={vpanel, draw=vldbBlue!66, fill=vldbMist,
-    text width=1.42cm, minimum height=.76cm,
-    font=\rmfamily\fontsize{6.85}{7.45}\selectfont, text=black!72,
-    align=center, inner xsep=1.3pt, inner ysep=1pt},
-  checknode/.style={vpanel, draw=vldbTeal!74!black, fill=vldbMint,
-    text width=1.50cm, minimum height=.52cm,
-    font=\rmfamily\bfseries\fontsize{6.75}{7.35}\selectfont,
-    text=vldbInk, align=center, inner xsep=1.1pt, inner ysep=.8pt},
-  axis/.style={rounded corners=1.4pt, draw=black!14, fill=white,
-    minimum width=.86cm, minimum height=.30cm,
-    font=\rmfamily\fontsize{6.55}{7.15}\selectfont, text=vldbGray,
-    align=center, inner xsep=1pt, inner ysep=.55pt},
-  group/.style={vpanel, draw=vldbRule, fill=white,
-    text width=1.84cm, minimum height=.55cm,
-    font=\rmfamily\fontsize{6.75}{7.35}\selectfont, text=black!66,
-    align=center, inner xsep=1.6pt, inner ysep=.8pt},
+  row/.style={vpanel, draw=vldbBlue!60, fill=vldbMist,
+    text width=6.55cm, minimum height=.66cm,
+    font=\rmfamily\fontsize{6.95}{7.55}\selectfont, text=black!72,
+    align=center, inner xsep=2.0pt, inner ysep=.9pt,
+    text height=1.45ex, text depth=.24ex},
+  gate/.style={vpanel, draw=vldbTeal!72!black, fill=vldbMint,
+    text width=1.54cm, minimum height=.54cm,
+    font=\rmfamily\bfseries\fontsize{6.62}{7.22}\selectfont,
+    text=vldbInk, align=center, inner xsep=1.0pt, inner ysep=.75pt,
+    text height=1.36ex, text depth=.22ex},
+  metric/.style={vpanel, draw=vldbBlue!66, fill=white,
+    text width=1.42cm, minimum height=.68cm,
+    font=\rmfamily\fontsize{6.65}{7.25}\selectfont, text=black!68,
+    align=center, inner xsep=1.1pt, inner ysep=.8pt,
+    text height=1.36ex, text depth=.22ex},
+  axis/.style={vpanel, draw=vldbRule, fill=white,
+    text width=1.88cm, minimum height=.46cm,
+    font=\rmfamily\fontsize{6.65}{7.25}\selectfont, text=black!64,
+    align=center, inner xsep=1.4pt, inner ysep=.7pt,
+    text height=1.36ex, text depth=.22ex},
   band/.style={vpanel, draw=vldbGold!58!black, fill=vldbWarm,
-    text width=6.48cm,
-    font=\rmfamily\bfseries\fontsize{6.75}{7.35}\selectfont,
-    text=vldbInk, align=center, inner xsep=2pt, inner ysep=.9pt},
+    text width=6.55cm, minimum height=.48cm,
+    font=\rmfamily\bfseries\fontsize{6.85}{7.45}\selectfont,
+    text=vldbInk, align=center, inner xsep=2pt, inner ysep=.8pt,
+    text height=1.42ex, text depth=.24ex},
   flow/.style={-{Latex[length=1.45mm]}, line width=.58pt,
     draw=black!45, line cap=round, line join=round}
 ]
-\path[use as bounding box] (-.05,-3.88) rectangle (7.22,.28);
+\path[use as bounding box] (-.05,-4.14) rectangle (7.22,.30);
 
-\node[band, minimum width=6.85cm, anchor=west] at (.18,.08)
-  {freeze boundary: schema, sources, probes, repairs\\fixed before outcomes};
+\node[vhead, anchor=west] at (.02,.10) {Frozen benchmark denominator};
+\node[band, anchor=west] at (.34,-.40)
+  {schema, sources, probes, and repair fields fixed before outcomes};
 
-\node[tile] (a) at (.82,-.70) {{\rmfamily\bfseries\fontsize{8.7}{9.3}\selectfont 26}\\sources};
-\node[tile] (b) at (2.62,-.70) {{\rmfamily\bfseries\fontsize{8.7}{9.3}\selectfont 287}\\source rules};
-\node[tile] (c) at (4.42,-.70) {{\rmfamily\bfseries\fontsize{8.7}{9.3}\selectfont 4,216}\\SQL probes};
-\node[tile] (d) at (6.22,-.70) {{\rmfamily\bfseries\fontsize{8.7}{9.3}\selectfont 90/90}\\motifs};
-\draw[flow] (a) -- (b);
-\draw[flow] (b) -- (c);
-\draw[flow] (c) -- (d);
+\node[metric] (a) at (.88,-1.18)
+  {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 26}\\sources};
+\node[metric] (b) at (2.66,-1.18)
+  {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 287}\\rules};
+\node[metric] (c) at (4.44,-1.18)
+  {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 4,216}\\probes};
+\node[metric] (d) at (6.22,-1.18)
+  {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 90/90}\\motifs};
+\draw[flow] (a.east) -- (b.west);
+\draw[flow] (b.east) -- (c.west);
+\draw[flow] (c.east) -- (d.west);
 
-\draw[vldbRule, line width=.36pt] (.15,-1.42) -- (7.03,-1.42);
-\node[vsmall, anchor=west, text=vldbGray] at (.02,-1.24)
-  {admission checks before collision counting};
-\node[checknode] at (.82,-1.84) {0/287\\invalid};
-\node[checknode] at (2.62,-1.84) {0/287\\conflict};
-\node[checknode] at (4.42,-1.84) {0/4,216\\SQL fail};
-\node[checknode] at (6.22,-1.84) {0/90\\motif miss};
+\node[row, anchor=west] at (.34,-2.02)
+  {admission gates run before any collision rate is counted};
+\node[gate] at (.88,-2.76) {0/287\\invalid};
+\node[gate] at (2.66,-2.76) {0/287\\conflict};
+\node[gate] at (4.44,-2.76) {0/4,216\\SQL fail};
+\node[gate] at (6.22,-2.76) {0/90\\motif miss};
 
-\node[vsmall, anchor=west, text=vldbGray] at (.02,-2.42)
-  {query-feature coverage summarized by axis families};
-\node[group] at (1.36,-3.00) {source / connector\\3 axes};
-\node[group] at (3.60,-3.00) {operator / shape\\6 axes};
-\node[group] at (5.84,-3.00) {runtime / control\\4 axes};
+\node[vsmall, anchor=west, text=vldbGray] at (.08,-3.34)
+  {covered query-feature axes};
+\node[axis] at (1.36,-3.78) {source / connector};
+\node[axis] at (3.60,-3.78) {operator / shape};
+\node[axis] at (5.84,-3.78) {runtime / control};
 \end{tikzpicture}
 \caption{Corpus, benchmark, and execution denominators. Source rules, probes, motifs, sources, and repair fields are frozen before outcome measurement; admission checks verify support, consistency, SQL execution, and motif coverage before collision rates are reported.}
 \Description{A compact validation-check diagram showing fixed evidence counts, zero-failure admission checks, and covered query-feature axes before collision counting.}
