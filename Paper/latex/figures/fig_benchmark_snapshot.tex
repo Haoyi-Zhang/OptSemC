@@ -6,7 +6,7 @@
     font=\rmfamily\fontsize{6.85}{7.45}\selectfont, text=black!72,
     align=center, inner xsep=1.3pt, inner ysep=1pt},
   checknode/.style={vpanel, draw=vldbTeal!74!black, fill=vldbMint,
-    text width=1.42cm, minimum height=.42cm,
+    text width=1.50cm, minimum height=.52cm,
     font=\rmfamily\bfseries\fontsize{6.75}{7.35}\selectfont,
     text=vldbInk, align=center, inner xsep=1.1pt, inner ysep=.8pt},
   axis/.style={rounded corners=1.4pt, draw=black!14, fill=white,
@@ -35,10 +35,10 @@
 \draw[vldbRule, line width=.36pt] (.15,-1.42) -- (7.03,-1.42);
 \node[vsmall, anchor=west, text=vldbGray] at (.02,-1.24)
   {admission checks before collision counting};
-\node[checknode] at (.82,-1.84) {0 invalid};
-\node[checknode] at (2.62,-1.84) {0 conflict};
-\node[checknode] at (4.42,-1.84) {0 SQL fail};
-\node[checknode] at (6.22,-1.84) {0 motif fail};
+\node[checknode] at (.82,-1.84) {0/287\\invalid};
+\node[checknode] at (2.62,-1.84) {0/287\\conflict};
+\node[checknode] at (4.42,-1.84) {0/4,216\\SQL fail};
+\node[checknode] at (6.22,-1.84) {0/90\\motif miss};
 
 \node[vsmall, anchor=west, text=vldbGray] at (.02,-2.42)
   {query-feature axes covered by generated probes};

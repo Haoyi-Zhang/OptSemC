@@ -8,19 +8,33 @@
         text=vldbGray]
         at (1.98,#1) {#3/#3};
   \draw[vldbRule, line width=.46pt] (2.32,#1) -- (5.92,#1);
-  \draw[vldbTeal!78!black, line width=1.25pt, line cap=round] (#4,#1) -- (#6,#1);
-  \node[circle, draw=vldbTeal!72!black, fill=white, line width=.55pt,
-        minimum size=4.2pt, inner sep=0pt] at (#4,#1) {};
-  \node[circle, draw=vldbTeal!72!black, fill=vldbTeal!34, line width=.55pt,
-        minimum size=5.2pt, inner sep=0pt] at (#5,#1) {};
-  \node[circle, draw=vldbTeal!72!black, fill=white, line width=.55pt,
-        minimum size=4.2pt, inner sep=0pt] at (#6,#1) {};
+  \draw[vldbTeal!78!black, line width=1.18pt, line cap=round] (#4,#1) -- (#6,#1);
+  \draw[vldbTeal!72!black, line width=.54pt] (#4,{#1-.055}) -- (#4,{#1+.055});
+  \draw[vldbTeal!72!black, line width=.54pt] (#6,{#1-.055}) -- (#6,{#1+.055});
+  \node[diamond, draw=vldbTeal!72!black, fill=vldbTeal!38, line width=.55pt,
+        minimum size=5.6pt, inner sep=0pt] at (#5,#1) {};
   \node[anchor=west, font=\rmfamily\fontsize{7.05}{7.65}\selectfont,
         text=vldbInk]
-        at (6.06,#1) {#7--#9};
+        at (6.06,#1) {#7/#8/#9};
+}
+\newcommand{\motifpoint}[9]{%
+  \node[anchor=east, align=right, text width=1.55cm,
+        font=\rmfamily\fontsize{7.15}{7.75}\selectfont, text=vldbInk]
+        at (1.58,#1) {#2};
+  \node[anchor=east, font=\rmfamily\fontsize{7.05}{7.65}\selectfont,
+        text=vldbGray]
+        at (1.98,#1) {#3/#3};
+  \draw[vldbRule, line width=.46pt] (2.32,#1) -- (5.92,#1);
+  \node[diamond, draw=vldbTeal!72!black, fill=white, line width=.45pt,
+        minimum size=7.4pt, inner sep=0pt] at (#5,#1) {};
+  \node[diamond, draw=vldbTeal!72!black, fill=vldbTeal!38, line width=.55pt,
+        minimum size=5.8pt, inner sep=0pt] at (#5,#1) {};
+  \node[anchor=west, font=\rmfamily\fontsize{7.05}{7.65}\selectfont,
+        text=vldbInk]
+        at (6.06,#1) {#7/#8/#9};
 }
 \begin{tikzpicture}[x=1cm,y=1cm]
-\path[use as bounding box] (-.02,-5.16) rectangle (7.18,.30);
+\path[use as bounding box] (-.02,-5.16) rectangle (7.28,.30);
   \node[vhead, anchor=west] at (.02,.08) {Published motif coverage};
   \node[rounded corners=1.5pt, draw=vldbTeal!60!black, fill=vldbMint,
         font=\rmfamily\bfseries\fontsize{6.85}{7.45}\selectfont,
@@ -29,9 +43,11 @@
   \node[vsmall, anchor=east, text=vldbGray] at (1.58,-.34) {family};
   \node[vsmall, anchor=east, text=vldbGray] at (1.98,-.34) {cov.};
   \node[vsmall, anchor=west, text=vldbGray] at (2.32,-.34)
-    {matching probes (log)};
+    {matching probes (log10)};
+  \node[vsmall, anchor=west, text=vldbGray] at (6.06,-.34)
+    {min/med/max};
   \draw[vldbRule, line width=.46pt] (2.32,-.62) -- (5.92,-.62);
-  \foreach \x/\lab in {2.32/1,3.34/10,4.36/100,5.38/1000} {
+  \foreach \x/\lab in {2.32/1,3.34/10,4.36/100,5.38/1000,5.87/3000} {
     \draw[vldbRule, line width=.46pt] (\x,-.69) -- (\x,-.55);
     \node[vsmall, text=vldbGray] at (\x,-.86) {\lab};
   }
@@ -43,13 +59,13 @@
   \motifrange{-2.54}{CardEst}{7}{4.19}{4.70}{4.76}{72}{228}{259}
   \motifrange{-2.88}{Adaptive}{6}{4.19}{4.65}{4.72}{72}{205.5}{235}
   \motifrange{-3.22}{Federated}{8}{4.19}{4.30}{5.16}{72}{91.5}{633}
-  \motifrange{-3.56}{Controls}{8}{4.18}{4.19}{4.20}{70}{72}{73}
-  \motifrange{-3.90}{PostgreSQL}{8}{4.19}{4.20}{4.20}{72}{73}{73}
+  \motifpoint{-3.56}{Controls}{8}{4.18}{4.19}{4.20}{70}{72}{73}
+  \motifpoint{-3.90}{PostgreSQL}{8}{4.19}{4.20}{4.20}{72}{73}{73}
   \motifrange{-4.24}{DuckDB}{8}{4.17}{4.19}{4.92}{68}{72}{364}
-  \motifrange{-4.58}{ClickHouse}{7}{4.18}{4.18}{4.18}{70}{70}{70}
+  \motifpoint{-4.58}{ClickHouse}{7}{4.18}{4.18}{4.18}{70}{70}{70}
   \motifrange{-4.92}{Spark/Trino}{8}{4.18}{4.18}{4.72}{69}{70}{236}
 \end{tikzpicture}
-\caption{Published optimizer-motif denominator. Each requirement has an executable representative; filled dots mark medians and open endpoints mark the minimum and maximum matching probes per family.}
+\caption{Published optimizer-motif denominator. Each requirement has an executable representative; teal ranges show minimum--maximum matching probes, diamonds mark medians, and ringed diamonds mark collapsed or submarker-width intervals.}
 \Description{A log-scale range plot showing covered motif requirements and min, median, and max matching-probe counts for twelve optimizer and benchmark families.}
 \label{fig:external-motifs}
 \end{figure}
