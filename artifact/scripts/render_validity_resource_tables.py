@@ -71,7 +71,7 @@ def anti_overfit_table() -> None:
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Anti-overfitting audit.  The table separates passes from boundary cases: yes/no is source-sensitive, feature-family folds overlap, and point-learned engine-pair repairs are reported as a failed stress rather than as a transfer claim.}",
+        r"\caption{Anti-overfitting audit.  The table separates controls, source/probe stress inside the frozen denominator, overlapping feature/engine stress, and failed point-learned transfer; no row is an independent held-out population claim.}",
         r"\label{tab:anti-overfit-audit}",
         r"\footnotesize",
         r"\setlength{\tabcolsep}{2.0pt}",
@@ -81,12 +81,18 @@ def anti_overfit_table() -> None:
         r"\midrule",
     ]
     for row in selected:
-        if row["gate"] == "source removal" and row["scope"] == "yes/no":
+        if row["gate"] == "negative control":
+            boundary = "control"
+        elif row["gate"] == "source removal" and row["scope"] == "yes/no":
             boundary = "sparse; not all LOO nonzero"
+        elif row["gate"] == "source removal":
+            boundary = "all sources"
+        elif row["gate"] == "probe subsample":
+            boundary = "within-denom."
         elif row["gate"] == "learned engine-pair repair":
             boundary = "stress exposes non-transfer"
         elif row["gate"] == "engine-family stress":
-            boundary = "fixed-basis only"
+            boundary = "within-denom."
         elif row["gate"] == "feature-family stress":
             boundary = "overlapping folds"
         else:
@@ -109,13 +115,13 @@ def resource_table() -> None:
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Finite-audit replay cost and resource profile.  Times and peak RSS come from the cloud replay worker; the 8$\times$ row is a deterministic inner-loop lift of the same finite comparison relation, not a new corpus, source set, or engine set.}",
+        r"\caption{Finite-audit replay cost and resource profile. Times and peak RSS come from the cloud replay worker; rows are selected audit stages, not cold-start setup, archive rebuild, or paper regeneration. The 8$\times$ row is a deterministic inner-loop lift of the same finite comparison relation.}",
         r"\label{tab:resource-profile}",
         r"\footnotesize",
-        r"\setlength{\tabcolsep}{2.4pt}",
+        r"\setlength{\tabcolsep}{3.0pt}",
         r"\begin{tabular}{@{}lrrrr@{}}",
         r"\toprule",
-        "Stage & Input & Output & Time(s) & RSS(MB)" + ROW,
+        "Stage & Input & Out. & s & RSS" + ROW,
         r"\midrule",
     ]
     for row in profile:

@@ -71,8 +71,8 @@
 \draw[flow, draw=vldbRose!72!black] (c1.south) -- ++(0,-.28) -| (k.west);
 \draw[flow, draw=vldbRose!72!black] (c2.south) -- ++(0,-.28) -| (k.east);
 \draw[flow, draw=vldbTeal!72!black] (k.south) -- (keep.north);
-\draw[flow, draw=vldbTeal!72!black] (keep.south west) -- ++(-.34,-.18) -| (r1port);
-\draw[flow, draw=vldbTeal!72!black] (keep.south east) -- ++(.34,-.18) -| (r2port);
+\draw[flow, draw=vldbTeal!72!black] ([yshift=-.08cm]keep.south west) -- ++(-.34,-.16) -| (r1port);
+\draw[flow, draw=vldbTeal!72!black] ([yshift=-.08cm]keep.south east) -- ++(.34,-.16) -| (r2port);
 \draw[vldbTeal!72!black, line width=.52pt, line cap=round] (r1port) -- ($(r1.north)+(0,.04)$);
 \draw[vldbTeal!72!black, line width=.52pt, line cap=round] (r2port) -- ($(r2.north)+(0,.04)$);
 \end{tikzpicture}

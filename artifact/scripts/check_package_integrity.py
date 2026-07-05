@@ -8,8 +8,8 @@ IGNORED_DIRS = {'.git', '.reference_guard_cache', '__pycache__', '.pytest_cache'
 rows=[]
 def add(check, ok, detail=''):
     rows.append({'check':check,'passed':str(bool(ok)).lower(),'details':str(detail)})
-root_items=sorted(p.name for p in ROOT.iterdir())
-allowed_top_level={'.git','.github','.gitattributes','.gitignore','.cloudignore','Paper','README.md','artifact','zenodo_artifact'}
+root_items=sorted(p.name for p in ROOT.iterdir() if p.name not in IGNORED_DIRS)
+allowed_top_level={'.github','.gitattributes','.gitignore','.cloudignore','Paper','README.md','artifact'}
 unexpected=[item for item in root_items if item not in allowed_top_level]
 paper_present=(ROOT/'Paper').exists()
 required_top={'Paper','artifact'} if paper_present else {'artifact'}

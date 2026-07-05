@@ -76,7 +76,7 @@ def baseline_table() -> None:
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Executable projection baselines. Bold zeros are exact or strengthened controls; underlining marks the worst one-field projection, exposing the shown range.}",
+        r"\caption{Selected representative executable projection baselines from the 17-row portfolio. Bold zeros are exact or strengthened controls; underlining marks the worst one-field projection within the shown summary rows.}",
         r"\label{tab:baseline-portfolio}",
         r"\footnotesize",
         r"\setlength{\tabcolsep}{3pt}",

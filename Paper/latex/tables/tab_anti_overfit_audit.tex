@@ -1,6 +1,6 @@
 \begin{table}[t]
 \centering
-\caption{Anti-overfitting audit.  The table separates passes from boundary cases: yes/no is source-sensitive, feature-family folds overlap, and point-learned engine-pair repairs are reported as a failed stress rather than as a transfer claim.}
+\caption{Anti-overfitting audit.  The table separates controls, source/probe stress inside the frozen denominator, overlapping feature/engine stress, and failed point-learned transfer; no row is an independent held-out population claim.}
 \label{tab:anti-overfit-audit}
 \footnotesize
 \setlength{\tabcolsep}{2.0pt}
@@ -8,13 +8,13 @@
 \toprule
 Check & Scope & Evidence & Boundary \\
 \midrule
-Reference ctrl. & strict reference & false=0 & pass \\
-Source LOO & keyword & nonzero=26/26 & pass \\
-Source LOO & operator-only & nonzero=26/26 & pass \\
+Reference ctrl. & strict reference & false=0 & control \\
+Source LOO & keyword & nonzero=26/26 & all sources \\
+Source LOO & operator-only & nonzero=26/26 & all sources \\
 Source LOO & yes/no & nonzero=25/26 & sparse; not all LOO nonzero \\
-Probe 10\% & keyword/operator 10\% & 30/30; 30/30 & pass \\
+Probe 10\% & keyword/operator 10\% & 30/30; 30/30 & within-denom. \\
 Feature stress & fixed layer+placement & keyword:0; operator-only:0; yes/no:0 & overlapping folds \\
-Engine stress & fixed layer+placement & keyword:0; operator-only:0; yes/no:0 & fixed-basis only \\
+Engine stress & fixed layer+placement & keyword:0; operator-only:0; yes/no:0 & within-denom. \\
 Learned split & point-learned pair minima & keyword:48; operator-only:120; yes/no:6 & stress exposes non-transfer \\
 \bottomrule
 \end{tabular}

@@ -61,8 +61,8 @@ def add(check, passed, details=''):
     rows.append({'check':check,'passed':str(bool(passed)).lower(),'details':str(details)})
 
 paper_present = (ROOT / 'Paper').exists()
-allowed_top_level = {'.git', '.github', '.gitattributes', '.gitignore', '.cloudignore', 'Paper', 'README.md', 'artifact', 'zenodo_artifact'}
-top = sorted(p.name for p in ROOT.iterdir())
+allowed_top_level = {'.github', '.gitattributes', '.gitignore', '.cloudignore', 'Paper', 'README.md', 'artifact'}
+top = sorted(p.name for p in ROOT.iterdir() if p.name not in IGNORED_DIRS)
 unexpected_top = [name for name in top if name not in allowed_top_level]
 required_top = {'artifact'} if not paper_present else {'Paper', 'artifact'}
 add('clean_top_level', not unexpected_top and required_top.issubset(set(top)), ','.join(unexpected_top))

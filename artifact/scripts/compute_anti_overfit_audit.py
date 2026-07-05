@@ -77,8 +77,8 @@ def main() -> int:
             "gate": "probe subsample",
             "scope": "keyword/operator 10%",
             "evidence": f"{subsample_nonzero('keyword','0.1')}; {subsample_nonzero('operator_only','0.1')}",
-            "verdict": "pass",
-            "claim_boundary": "headline keyword/operator effects are not carried by one probe slice",
+            "verdict": "within-denominator",
+            "claim_boundary": "headline keyword/operator effects are not carried by one probe slice; not an independent population test",
         },
         {
             "gate": "feature-family stress",
@@ -86,7 +86,7 @@ def main() -> int:
             "evidence": "; ".join(
                 f"{label(m)}:{feature[m]['robust_basis_unresolved_total']}" for m in ("keyword", "operator_only", "yesno")
             ),
-            "verdict": "pass",
+            "verdict": "within-denominator",
             "claim_boundary": "overlapping feature-family stress, not a disjoint held-out test",
         },
         {
@@ -95,8 +95,8 @@ def main() -> int:
             "evidence": "; ".join(
                 f"{label(m)}:{engine[m]['unresolved_after_layer_placement']}" for m in ("keyword", "operator_only", "yesno")
             ),
-            "verdict": "pass",
-            "claim_boundary": "fixed predeclared basis stress, not learned repair transfer",
+            "verdict": "within-denominator",
+            "claim_boundary": "fixed basis stress from the predeclared field universe, not learned repair transfer",
         },
         {
             "gate": "learned engine-pair repair",
