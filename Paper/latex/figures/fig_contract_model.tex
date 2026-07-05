@@ -44,9 +44,12 @@
 \node[cert] (out) at (15.40,1.94)
   {\textbf{4. Certify}\\layer+placement basis\\replayable claim ledger};
 
-\draw[flow] (admit.east) -- (ref.west);
-\draw[flow, draw=vldbRose!72!black] (ref.east) -- (proj.west);
-\draw[flow, draw=vldbTeal!72!black] (proj.east) -- (out.west);
+\draw[flow] ($(admit.south east)+(.08,-.10)$) --
+  ($(ref.south west)+(-.08,-.10)$);
+\draw[flow, draw=vldbRose!72!black] ($(ref.south east)+(.08,-.10)$) --
+  ($(proj.south west)+(-.08,-.10)$);
+\draw[flow, draw=vldbTeal!72!black] ($(proj.south east)+(.08,-.10)$) --
+  ($(out.south west)+(-.08,-.10)$);
 
 \node[detail] at (2.20,.70) {denominator: source spans and reachable probes};
 \node[detail] at (6.60,.70) {reference: full public optimizer-contract payload};
