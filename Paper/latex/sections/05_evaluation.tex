@@ -42,8 +42,6 @@ Because the 287-rule corpus is finite, the remaining checks test whether the ker
 
 \input{tables/tab_scalability_family}
 
-Subsample and mutation checks stress the same claim from opposite directions.  At 10\% and 50\% probe subsamples, keyword and operator-only projections retain at least one collision in every trial.  Mutation expands the vocabulary neighborhood: reference signatures stay zero-false, one-field projections create much larger kernels, and strengthened projections return to the reference denominator.
-
 \textbf{Repair certificates identify the missing semantics.} Table~\ref{tab:contract-collision} reports collision counts, severity, and minimum repair diagnosis.  Table~\ref{tab:repair-certificate-summary} breaks the repair evidence into residual paths and held-out checks: placement repairs keyword collisions, layer repairs operator-only collisions, and the fixed layer and placement basis repairs all 498 keyword, yes/no, and operator-only records without fine-grained action-variant labels.  Each certificate is a finite proof obligation: every counted record differs under reference contracts while matching the tested projection, is separated by the reported repair, and has a grounded counter-witness against smaller universal repairs.
 
 \input{tables/tab_repair_certificate_summary}
@@ -62,5 +60,3 @@ The attribution and interpretation columns explain why the repair fields are que
 
 \input{tables/tab_workload_sensitivity}
 \FloatBarrier
-
-Public optimizer sources populate the nontrivial kernel; the information profile, frontier certificate, and SQL validation show a distinguishable, repairable, executable denominator.
