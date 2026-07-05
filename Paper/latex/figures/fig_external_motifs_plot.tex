@@ -50,17 +50,16 @@
         text=black!65, text height=1.42ex, text depth=.24ex] at (1.98,-.34) {cov.};
   \node[anchor=west, font=\rmfamily\fontsize{7.1}{7.7}\selectfont,
         text=black!65, text height=1.42ex, text depth=.24ex] at (2.32,-.34)
-    {matching probes};
+    {matching probes (log$_{10}$)};
   \node[anchor=west, font=\rmfamily\fontsize{7.1}{7.7}\selectfont,
         text=black!65, text height=1.42ex, text depth=.24ex] at (6.02,-.34)
     {\motifvals{min}{med}{max}};
   \draw[vldbRule, line width=.46pt] (2.32,-.62) -- (5.92,-.62);
-  \foreach \x/\lab in {2.32/1,3.34/10,4.36/100,5.38/1k} {
+  \foreach \x/\lab in {2.32/1,3.34/10,4.36/100,5.38/1k,5.92/3.4k} {
     \draw[vldbRule, line width=.46pt] (\x,-.69) -- (\x,-.55);
     \node[font=\rmfamily\fontsize{7.1}{7.7}\selectfont, text=black!65,
           text height=1.42ex, text depth=.24ex] at (\x,-.86) {\lab};
   }
-  \draw[vldbRule, line width=.46pt] (5.92,-.69) -- (5.92,-.55);
 
   \motifrange{-1.18}{TPC-H}{8}{2.32}{4.28}{5.52}{1}{87}{1384}
   \motifrange{-1.52}{TPC-DS}{8}{4.27}{4.55}{4.80}{86}{164.5}{287}

@@ -4,7 +4,7 @@
   lane/.style={vpanel, draw=vldbRule, fill=vldbSoft,
     minimum width=6.88cm, minimum height=.86cm},
   contract/.style={vpanel, draw=vldbBlue!72, fill=vldbMist,
-    text width=2.22cm, minimum height=.72cm,
+    text width=2.06cm, minimum height=.72cm,
     font=\rmfamily\fontsize{6.85}{7.45}\selectfont, text=black!72,
     align=center, inner xsep=2.0pt, inner ysep=1.2pt,
     text height=1.42ex, text depth=.24ex},
@@ -14,7 +14,7 @@
     text=vldbRose!78!black, align=center, inner xsep=2.2pt,
     inner ysep=1.3pt, text height=1.44ex, text depth=.24ex},
   repair/.style={vpanel, draw=vldbTeal!74!black, fill=vldbMint,
-    text width=2.28cm, minimum height=.62cm,
+    text width=2.12cm, minimum height=.62cm,
     font=\rmfamily\fontsize{6.85}{7.45}\selectfont, text=black!72,
     align=center, inner xsep=2.0pt, inner ysep=1.1pt,
     text height=1.42ex, text depth=.24ex},
@@ -23,7 +23,7 @@
     align=center, inner xsep=1.8pt, inner ysep=.75pt,
     text height=1.36ex, text depth=.22ex},
   lanetag/.style={rounded corners=1.5pt, draw=black!18, fill=white,
-    text width=1.36cm,
+    text width=.78cm,
     font=\rmfamily\bfseries\fontsize{6.95}{7.65}\selectfont,
     align=center, inner xsep=1.6pt, inner ysep=.85pt,
     text height=1.42ex, text depth=.24ex},
@@ -45,29 +45,29 @@
 \end{scope}
 
 \node[lanetag, anchor=west, draw=vldbBlue!30, text=vldbBlue!70!black]
-  at (.18,-.42) {reference\\contracts};
-\node[contract] (c1) at (1.72,-.76)
+  at (.18,-.42) {ref.\\contracts};
+\node[contract] (c1) at (2.20,-.76)
   {\textbf{A}\\filter delegation\\source-side};
-\node[contract] (c2) at (5.48,-.76)
+\node[contract] (c2) at (5.52,-.76)
   {\textbf{B}\\runtime filtering\\engine-side};
-\node[chip, draw=vldbBlue!30, text=vldbBlue!70!black] (diff) at (3.60,-.76)
+\node[chip, draw=vldbBlue!30, text=vldbBlue!70!black] (diff) at (3.86,-.76)
   {$S(A)\ne S(B)$};
 
 \node[lanetag, anchor=west, draw=vldbRose!35, text=vldbRose!72!black]
-  at (.18,-1.58) {lossy\\projection};
-\node[kernel] (k) at (3.60,-1.92)
+  at (.18,-1.58) {coarse\\view};
+\node[kernel] (k) at (3.86,-1.92)
   {\texttt{pushdown=yes}: declares equality};
 \node[chip, anchor=east, text width=1.70cm, draw=vldbRose!35,
       text=vldbRose!72!black] (drop)
   at (6.94,-1.92) {drops layer\\and placement};
 
 \node[lanetag, anchor=west, draw=vldbTeal!45, text=vldbTeal!58!black]
-  at (.18,-2.92) {repaired\\view};
-\node[chip, draw=vldbTeal!45, text=vldbTeal!58!black] (keep) at (3.60,-2.78)
+  at (.18,-2.92) {fixed\\view};
+\node[chip, draw=vldbTeal!45, text=vldbTeal!58!black] (keep) at (3.86,-2.78)
   {retain layer + placement};
-\node[repair] (r1) at (1.72,-3.58)
+\node[repair] (r1) at (2.20,-3.58)
   {source-side\\planning contract};
-\node[repair] (r2) at (5.48,-3.58)
+\node[repair] (r2) at (5.52,-3.58)
   {engine-side\\runtime contract};
 
 \draw[flow, draw=vldbRose!72!black] ($(c1.south)+(0,-.03)$) -- ++(0,-.24) -| ($(k.north)+(-.70,0)$);

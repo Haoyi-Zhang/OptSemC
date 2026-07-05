@@ -1,12 +1,12 @@
 \begin{table}[t]
 \centering
-\caption{Finite-audit replay cost. Time is wall-clock seconds and RSS is peak MB on the cloud replay host; rows exclude cold-start setup, archive rebuild, and paper regeneration. The 8$\times$ row lifts the same comparison relation.}
+\caption{Finite-audit replay cost. Time and RSS are lower-better cloud replay measurements; rows exclude cold-start setup, archive rebuild, and paper regeneration. The 8$\times$ row lifts the same comparison relation.}
 \label{tab:resource-profile}
 \footnotesize
 \setlength{\tabcolsep}{3.0pt}
 \begin{tabular}{@{}lrrrr@{}}
 \toprule
-Stage & Input & Out. & Time & RSS \\
+Stage & Input rows & Output rows & Time (s)$\downarrow$ & RSS (MB)$\downarrow$ \\
 \midrule
 Projection audit & 442,680 & 498 & 1.68 & 275.5 \\
 Repair check & 498 & 0 & 0.01 & 275.5 \\

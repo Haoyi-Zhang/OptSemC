@@ -7,7 +7,7 @@
     align=center, inner xsep=2.0pt, inner ysep=.9pt,
     text height=1.45ex, text depth=.24ex},
   checknode/.style={vpanel, draw=vldbTeal!72!black, fill=vldbMint,
-    text width=1.54cm, minimum height=.54cm,
+    text width=1.64cm, minimum height=.54cm,
     font=\rmfamily\bfseries\fontsize{6.62}{7.22}\selectfont,
     text=vldbInk, align=center, inner xsep=1.0pt, inner ysep=.75pt,
     text height=1.36ex, text depth=.22ex},
@@ -51,8 +51,8 @@
   {admission checks run before any collision rate is counted};
 \node[checknode] at (.88,-2.76) {0/287\\invalid};
 \node[checknode] at (2.66,-2.76) {0/287\\conflict};
-\node[checknode] at (4.44,-2.76) {0/4,216\\SQL fail};
-\node[checknode] at (6.22,-2.76) {0/90\\motif miss};
+\node[checknode] at (4.44,-2.76) {SQL\\0 fails};
+\node[checknode] at (6.22,-2.76) {motifs\\0 miss};
 
 \node[vsmall, anchor=west, text=vldbGray] at (.08,-3.34)
   {covered query-feature axes};
