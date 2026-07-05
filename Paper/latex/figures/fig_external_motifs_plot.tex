@@ -44,16 +44,15 @@
   \node[vsmall, anchor=east, text=vldbGray] at (1.58,-.34) {family};
   \node[vsmall, anchor=east, text=vldbGray] at (1.98,-.34) {cov.};
   \node[vsmall, anchor=west, text=vldbGray] at (2.32,-.34)
-    {matching probes (log10)};
+    {matching probes (log10; max 3.4k)};
   \node[vsmall, anchor=west, text=vldbGray] at (6.02,-.34)
     {\motifvals{min}{med}{max}};
   \draw[vldbRule, line width=.46pt] (2.32,-.62) -- (5.92,-.62);
-  \foreach \x/\lab in {2.32/1,3.34/10,4.36/100,5.38/1000} {
+  \foreach \x/\lab in {2.32/1,3.34/10,4.36/100,5.38/1k} {
     \draw[vldbRule, line width=.46pt] (\x,-.69) -- (\x,-.55);
     \node[vsmall, text=vldbGray] at (\x,-.86) {\lab};
   }
   \draw[vldbRule, line width=.46pt] (5.92,-.69) -- (5.92,-.55);
-  \node[vsmall, anchor=east, text=vldbGray] at (5.92,-.86) {3.4k};
 
   \motifrange{-1.18}{TPC-H}{8}{2.32}{4.28}{5.52}{1}{87}{1384}
   \motifrange{-1.52}{TPC-DS}{8}{4.27}{4.55}{4.80}{86}{164.5}{287}

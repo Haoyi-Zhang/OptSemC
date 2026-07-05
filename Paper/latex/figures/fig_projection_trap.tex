@@ -20,14 +20,15 @@
     font=\rmfamily\fontsize{6.7}{7.35}\selectfont, text=vldbGray,
     align=center, inner xsep=1.8pt, inner ysep=.75pt},
   lanetag/.style={rounded corners=1.5pt, draw=black!18, fill=white,
+    text width=1.22cm,
     font=\rmfamily\bfseries\fontsize{7.05}{7.75}\selectfont,
-    align=left, inner xsep=2.1pt, inner ysep=.85pt},
+    align=center, inner xsep=1.6pt, inner ysep=.85pt},
   hlabel/.style={font=\rmfamily\bfseries\fontsize{7.2}{7.9}\selectfont,
     text=vldbInk, align=left},
   flow/.style={-{Latex[length=1.65mm]}, line width=.66pt,
     draw=black!48, line cap=round, line join=round}
 ]
-\path[use as bounding box] (-.05,-4.44) rectangle (7.22,.32);
+\path[use as bounding box] (-.05,-4.52) rectangle (7.22,.32);
 
 \node[hlabel, anchor=west] at (.04,.08) {Projection loss in one witness};
 \node[chip, anchor=east, draw=vldbGold!50!black, text=vldbInk] at (7.04,.08)
@@ -40,7 +41,7 @@
 \end{scope}
 
 \node[lanetag, anchor=west, draw=vldbBlue!30, text=vldbBlue!70!black]
-  at (.18,-.34) {reference distinction};
+  at (.18,-.34) {reference\\signature};
 \node[contract] (c1) at (1.75,-.98)
   {\textbf{A}\\filter delegation\\source placement};
 \node[contract] (c2) at (5.45,-.98)
@@ -49,7 +50,7 @@
   {$S(A)\neq S(B)$};
 
 \node[lanetag, anchor=west, draw=vldbRose!35, text=vldbRose!72!black]
-  at (.18,-1.66) {coarse vocabulary};
+  at (.18,-1.66) {coarse\\label};
 \node[kernel] (k) at (3.60,-2.20)
   {\texttt{pushdown=yes}\\declares equality};
 \node[chip, anchor=east, text width=1.34cm, draw=vldbRose!35,
@@ -57,15 +58,15 @@
   at (7.00,-2.20) {drops layer\\+ placement};
 
 \node[lanetag, anchor=west, draw=vldbTeal!45, text=vldbTeal!58!black]
-  at (.18,-3.04) {repaired denominator};
+  at (.18,-3.00) {repair\\fields};
 \node[repair] (r1) at (1.75,-3.66)
   {source-side\\planning contract};
 \node[repair] (r2) at (5.45,-3.66)
   {engine-side\\runtime contract};
 \node[chip, draw=vldbTeal!45, text=vldbTeal!58!black] (keep) at (3.60,-3.10)
   {retain layer + placement};
-\coordinate (r1port) at ($(r1.north)+(0,.24)$);
-\coordinate (r2port) at ($(r2.north)+(0,.24)$);
+\coordinate (r1port) at ($(r1.north)+(0,.31)$);
+\coordinate (r2port) at ($(r2.north)+(0,.31)$);
 
 \draw[flow, draw=vldbRose!72!black] (c1.south) -- ++(0,-.28) -| (k.west);
 \draw[flow, draw=vldbRose!72!black] (c2.south) -- ++(0,-.28) -| (k.east);

@@ -100,7 +100,7 @@ def main() -> int:
         },
         {
             "gate": "learned engine-pair repair",
-            "scope": "point-learned minima",
+            "scope": "point-learned pair minima",
             "evidence": "; ".join(
                 f"{label(m)}:{engine_learned[m]['heldout_unresolved']}" for m in ("keyword", "operator_only", "yesno")
             ),
