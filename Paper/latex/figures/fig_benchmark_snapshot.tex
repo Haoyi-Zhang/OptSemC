@@ -18,6 +18,7 @@
     font=\rmfamily\fontsize{6.75}{7.35}\selectfont, text=black!66,
     align=center, inner xsep=1.6pt, inner ysep=.8pt},
   band/.style={vpanel, draw=vldbGold!58!black, fill=vldbWarm,
+    text width=6.48cm,
     font=\rmfamily\bfseries\fontsize{6.75}{7.35}\selectfont,
     text=vldbInk, align=center, inner xsep=2pt, inner ysep=.9pt},
   flow/.style={-{Latex[length=1.45mm]}, line width=.58pt,
@@ -26,12 +27,12 @@
 \path[use as bounding box] (-.05,-3.88) rectangle (7.22,.28);
 
 \node[band, minimum width=6.85cm, anchor=west] at (.18,.08)
-  {freeze boundary: schema, sources, probes, and repairs fixed before outcomes};
+  {freeze boundary: schema, sources, probes, repairs\\fixed before outcomes};
 
-\node[tile] (a) at (.82,-.70) {{\rmfamily\bfseries\fontsize{8.7}{9.3}\selectfont 287}\\source rules};
-\node[tile] (b) at (2.62,-.70) {{\rmfamily\bfseries\fontsize{8.7}{9.3}\selectfont 4,216}\\SQL probes};
-\node[tile] (c) at (4.42,-.70) {{\rmfamily\bfseries\fontsize{8.7}{9.3}\selectfont 90/90}\\motifs};
-\node[tile] (d) at (6.22,-.70) {{\rmfamily\bfseries\fontsize{8.7}{9.3}\selectfont 26}\\sources};
+\node[tile] (a) at (.82,-.70) {{\rmfamily\bfseries\fontsize{8.7}{9.3}\selectfont 26}\\sources};
+\node[tile] (b) at (2.62,-.70) {{\rmfamily\bfseries\fontsize{8.7}{9.3}\selectfont 287}\\source rules};
+\node[tile] (c) at (4.42,-.70) {{\rmfamily\bfseries\fontsize{8.7}{9.3}\selectfont 4,216}\\SQL probes};
+\node[tile] (d) at (6.22,-.70) {{\rmfamily\bfseries\fontsize{8.7}{9.3}\selectfont 90/90}\\motifs};
 \draw[flow] (a) -- (b);
 \draw[flow] (b) -- (c);
 \draw[flow] (c) -- (d);

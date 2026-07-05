@@ -85,6 +85,8 @@ def anti_overfit_table() -> None:
             boundary = "sparse; not all LOO nonzero"
         elif row["gate"] == "learned engine-pair repair":
             boundary = "stress exposes non-transfer"
+        elif row["gate"] == "engine-family stress":
+            boundary = "fixed-basis only"
         elif row["gate"] == "feature-family stress":
             boundary = "overlapping folds"
         else:

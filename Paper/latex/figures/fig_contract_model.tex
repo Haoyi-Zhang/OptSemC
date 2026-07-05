@@ -20,6 +20,9 @@
   field/.style={rounded corners=1.3pt, draw=black!14, fill=white,
     font=\rmfamily\fontsize{6.65}{7.25}\selectfont, text=vldbGray,
     align=center, inner xsep=1.7pt, inner ysep=.65pt},
+  frozen/.style={rounded corners=1.4pt, draw=vldbGold!55!black,
+    fill=vldbWarm, font=\rmfamily\bfseries\fontsize{6.6}{7.2}\selectfont,
+    text=vldbInk, align=center, inner xsep=1.8pt, inner ysep=.75pt},
   note/.style={font=\rmfamily\fontsize{6.75}{7.35}\selectfont,
     text=black!58, align=center},
   flow/.style={-{Latex[length=1.75mm]}, line width=.70pt,
@@ -27,13 +30,16 @@
 ]
 \path[use as bounding box] (-.04,-.08) rectangle (17.62,3.62);
 
-\node[strip, minimum width=16.95cm, anchor=west] at (.30,3.26)
-  {frozen comparison protocol: admit public evidence before projection, repair search, or table generation};
+\node[frozen] at (3.00,3.26) {source manifest};
+\node[frozen] at (5.42,3.26) {contract schema};
+\node[frozen] at (7.78,3.26) {projection portfolio};
+\node[frozen] at (10.32,3.26) {repair-field universe};
+\node[frozen] at (13.10,3.26) {compute/check scripts};
 
 \node[stage] (admit) at (2.00,2.12)
-  {\textbf{Admission}\\287 source rules\\4,216 executable probes};
+  {\textbf{Admission}\\rule spans + SQL probes\\287 rules / 4,216 probes};
 \node[stage] (ref) at (6.20,2.12)
-  {\textbf{Reference maps}\\state-joined engine--probe contracts\\1,288 signature classes};
+  {\textbf{Reference maps}\\engine--probe state table\\1,288 signature classes};
 \node[audit] (proj) at (10.40,2.12)
   {\textbf{Projection audit}\\keyword: 254 false pairs\\operator-only: 238};
 \node[cert] (out) at (14.60,2.12)
@@ -53,6 +59,7 @@
 \node[field] at (6.20,.34) {layer};
 \node[field] at (7.38,.34) {placement};
 \node[field] at (8.70,.34) {evidence};
+\draw[vldbRule, densely dashed, line width=.36pt] (ref.south) -- (6.20,.58);
 \draw[vldbRule, line width=.40pt] (3.48,.34) -- (3.76,.34);
 \draw[vldbRule, line width=.40pt] (9.20,.34) -- (9.48,.34);
 \node[strip, fill=white, draw=vldbTeal!42!black] at (12.45,.34)

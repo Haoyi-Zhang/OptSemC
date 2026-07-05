@@ -30,6 +30,8 @@
 \path[use as bounding box] (-.05,-4.44) rectangle (7.22,.32);
 
 \node[hlabel, anchor=west] at (.04,.08) {Projection loss in one witness};
+\node[chip, anchor=east, draw=vldbGold!50!black, text=vldbInk] at (7.04,.08)
+  {P0009};
 
 \begin{scope}[on background layer]
   \node[lane] at (3.60,-.86) {};
@@ -50,8 +52,9 @@
   at (.18,-1.66) {coarse vocabulary};
 \node[kernel] (k) at (3.60,-2.20)
   {\texttt{pushdown=yes}\\declares equality};
-\node[chip, anchor=west, draw=vldbRose!35, text=vldbRose!72!black] (drop)
-  at (5.22,-2.20) {drops layer + placement};
+\node[chip, anchor=east, text width=1.34cm, draw=vldbRose!35,
+      text=vldbRose!72!black] (drop)
+  at (7.00,-2.20) {drops layer\\+ placement};
 
 \node[lanetag, anchor=west, draw=vldbTeal!45, text=vldbTeal!58!black]
   at (.18,-3.04) {repaired denominator};
