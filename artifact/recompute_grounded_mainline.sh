@@ -43,7 +43,6 @@ python scripts/audit_grounded_core.py
 run_if_present scripts/check_grounded_readiness.py
 python scripts/check_grounded_traceability.py
 python scripts/check_mainline_grounded_only.py
-run_paper_if_present scripts/check_paper_table_sources.py
 python scripts/check_stale_diagnostic_outputs.py
 python scripts/run_unit_tests.py
 
@@ -97,3 +96,4 @@ python scripts/compute_incremental_audit.py
 python scripts/check_incremental_audit.py
 python scripts/render_scaling_and_incremental_tables.py
 run_paper_if_present scripts/check_paper_numeric_claims.py
+run_paper_if_present scripts/check_paper_table_sources.py
