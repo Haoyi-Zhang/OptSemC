@@ -92,6 +92,7 @@ run_py scripts/render_scaling_and_incremental_tables.py
 run_paper_py scripts/check_paper_numeric_claims.py
 run_py scripts/check_architecture_contract.py
 run_py scripts/check_packaging_installability.py
+clean_transients
 run_py scripts/export_sql_probe_bundle.py
 run_py scripts/check_sql_probe_bundle.py
 run_py scripts/execute_sql_probe_suite.py
