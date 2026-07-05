@@ -115,13 +115,13 @@ def resource_table() -> None:
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Finite-audit replay cost. Cloud time and RSS cover selected audit stages, excluding cold-start setup, archive rebuild, and paper regeneration; the 8$\times$ row lifts the same comparison relation.}",
+        r"\caption{Finite-audit replay cost. Time is wall-clock seconds and RSS is peak MB on the cloud replay host; rows exclude cold-start setup, archive rebuild, and paper regeneration. The 8$\times$ row lifts the same comparison relation.}",
         r"\label{tab:resource-profile}",
         r"\footnotesize",
         r"\setlength{\tabcolsep}{3.0pt}",
         r"\begin{tabular}{@{}lrrrr@{}}",
         r"\toprule",
-        "Stage & Input & Out. & s & RSS" + ROW,
+        "Stage & Input & Out. & Time & RSS" + ROW,
         r"\midrule",
     ]
     for row in profile:

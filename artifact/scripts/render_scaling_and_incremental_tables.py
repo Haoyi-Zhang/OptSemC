@@ -74,12 +74,12 @@ def main() -> int:
         r"\begin{table}[t]",
         r"\centering",
         r"\footnotesize",
-        r"\caption{Finite-comparison replay and dispersion. False/Drift are lower-better; Checks/s is higher-better for the projection inner loop, not end-to-end construction. Bold marks per-column best values.}",
+        r"\caption{Finite-comparison replay and dispersion. False and Drift are lower-better; Checks/s is higher-better for the projection inner loop, not end-to-end construction. Bold marks per-column best values.}",
         r"\label{tab:scalability-family}",
         r"\setlength{\tabcolsep}{2.5pt}",
         r"\begin{tabular}{@{}lrrrrrr@{}}",
         r"\toprule",
-        "Proj. & False & Probes & Axes & Fam. & Checks/s & Drift" + ROW,
+        "Proj. & False$\\downarrow$ & Probes & Axes & Fam. & Checks/s$\\uparrow$ & Drift$\\downarrow$" + ROW,
         r"\midrule",
     ]
     for r in paper_rows:
