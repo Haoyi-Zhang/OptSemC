@@ -4,6 +4,7 @@ import csv, sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 path=ROOT/'evaluation/grounded/repair_generalization_summary.csv'
+root_summary=ROOT/'evaluation/repair_generalization_summary.csv'
 out=ROOT/'evaluation/repair_generalization_check.csv'
 check_rows=[]
 def add(check, passed, details=''):
@@ -18,6 +19,12 @@ if not path.exists():
 summary_rows=list(csv.DictReader(path.open()))
 errors=[]
 add('probe_fold_repair_stability_summary_present', bool(summary_rows), f'rows={len(summary_rows)}')
+if root_summary.exists():
+    root_rows=list(csv.DictReader(root_summary.open()))
+    root_projection=[{k:v for k,v in row.items() if k!='canonical_source'} for row in root_rows]
+    add('root_repair_stability_summary_mirrors_canonical', root_projection == summary_rows, f'rows={len(root_rows)}')
+else:
+    add('root_repair_stability_summary_mirrors_canonical', False, 'missing')
 for r in summary_rows:
     if float(r['heldout_resolution_rate']) < 1.0:
         errors.append(f"{r['method']} heldout resolution below 1.0")

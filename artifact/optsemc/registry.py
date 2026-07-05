@@ -156,6 +156,7 @@ def default_artifact_registry() -> tuple[ArtifactSpec, ...]:
         ArtifactSpec('evaluation/grounded/semantic_field_shapley.csv', 'csv', 1),
         ArtifactSpec('evaluation/grounded/diagnostic_probe_order.csv', 'csv', 1),
         ArtifactSpec('evaluation/grounded/repair_generalization_summary.csv', 'csv', 1),
+        ArtifactSpec('evaluation/repair_generalization_summary.csv', 'csv', 1),
         ArtifactSpec('evaluation/repair_generalization_check.csv', 'csv', 1),
         ArtifactSpec('evaluation/grounded/trap_rate.csv', 'csv', 1),
         ArtifactSpec('evaluation/grounded/conditional_trap_rate.csv', 'csv', 1),

@@ -13,6 +13,10 @@
     minimum width=.86cm, minimum height=.30cm,
     font=\rmfamily\fontsize{6.55}{7.15}\selectfont, text=vldbGray,
     align=center, inner xsep=1pt, inner ysep=.55pt},
+  group/.style={vpanel, draw=vldbRule, fill=white,
+    text width=1.84cm, minimum height=.55cm,
+    font=\rmfamily\fontsize{6.75}{7.35}\selectfont, text=black!66,
+    align=center, inner xsep=1.6pt, inner ysep=.8pt},
   band/.style={vpanel, draw=vldbGold!58!black, fill=vldbWarm,
     font=\rmfamily\bfseries\fontsize{6.75}{7.35}\selectfont,
     text=vldbInk, align=center, inner xsep=2pt, inner ysep=.9pt},
@@ -21,8 +25,8 @@
 ]
 \path[use as bounding box] (-.05,-3.88) rectangle (7.22,.28);
 
-\node[vhead, anchor=west] at (.02,.08) {Frozen denominator before outcomes};
-\node[band, anchor=east] at (7.05,.08) {no tuning from results};
+\node[band, minimum width=6.85cm, anchor=west] at (.18,.08)
+  {freeze boundary: schema, sources, probes, and repairs fixed before outcomes};
 
 \node[tile] (a) at (.82,-.70) {{\rmfamily\bfseries\fontsize{8.7}{9.3}\selectfont 287}\\source rules};
 \node[tile] (b) at (2.62,-.70) {{\rmfamily\bfseries\fontsize{8.7}{9.3}\selectfont 4,216}\\SQL probes};
@@ -41,22 +45,12 @@
 \node[checknode] at (6.22,-1.84) {0/90\\motif miss};
 
 \node[vsmall, anchor=west, text=vldbGray] at (.02,-2.42)
-  {query-feature axes covered by generated probes};
-\node[axis] at (.62,-2.76) {source};
-\node[axis] at (1.62,-2.76) {conn.};
-\node[axis] at (2.62,-2.76) {join};
-\node[axis] at (3.62,-2.76) {pred.};
-\node[axis] at (4.62,-2.76) {adapt};
-\node[axis] at (5.62,-2.76) {ctrl};
-\node[axis] at (6.62,-2.76) {dist.};
-\node[axis] at (1.10,-3.22) {agg.};
-\node[axis] at (2.10,-3.22) {stats};
-\node[axis] at (3.10,-3.22) {reuse};
-\node[axis] at (4.10,-3.22) {limit};
-\node[axis] at (5.10,-3.22) {order};
-\node[axis] at (6.10,-3.22) {bound.};
+  {query-feature coverage summarized by axis families};
+\node[group] at (1.36,-3.00) {source / connector\\3 axes};
+\node[group] at (3.60,-3.00) {operator / shape\\6 axes};
+\node[group] at (5.84,-3.00) {runtime / control\\4 axes};
 \end{tikzpicture}
-\caption{Corpus, benchmark, and execution denominators. Source rules, probes, motifs, and sources are frozen before outcome measurement; admission checks verify support, consistency, SQL execution, and motif coverage before collision rates are reported.}
+\caption{Corpus, benchmark, and execution denominators. Source rules, probes, motifs, sources, and repair fields are frozen before outcome measurement; admission checks verify support, consistency, SQL execution, and motif coverage before collision rates are reported.}
 \Description{A compact validation-check diagram showing fixed evidence counts, zero-failure admission checks, and covered query-feature axes before collision counting.}
 \label{fig:benchmark-snapshot}
 \end{figure}

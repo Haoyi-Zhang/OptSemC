@@ -1,5 +1,6 @@
 \begin{figure}[t]
 \centering
+\newcommand{\motifvals}[3]{\makebox[.25in][r]{#1}\makebox[.36in][r]{#2}\makebox[.33in][r]{#3}}
 \newcommand{\motifrange}[9]{%
   \node[anchor=east, align=right, text width=1.55cm,
         font=\rmfamily\fontsize{7.15}{7.75}\selectfont, text=vldbInk]
@@ -15,7 +16,7 @@
         minimum size=5.6pt, inner sep=0pt] at (#5,#1) {};
   \node[anchor=west, font=\rmfamily\fontsize{7.05}{7.65}\selectfont,
         text=vldbInk]
-        at (6.06,#1) {#7/#8/#9};
+        at (6.02,#1) {\motifvals{#7}{#8}{#9}};
 }
 \newcommand{\motifpoint}[9]{%
   \node[anchor=east, align=right, text width=1.55cm,
@@ -25,13 +26,13 @@
         text=vldbGray]
         at (1.98,#1) {#3/#3};
   \draw[vldbRule, line width=.46pt] (2.32,#1) -- (5.92,#1);
-  \node[diamond, draw=vldbTeal!72!black, fill=white, line width=.45pt,
+  \node[diamond, draw=vldbGold!78!black, fill=white, line width=.50pt,
         minimum size=7.4pt, inner sep=0pt] at (#5,#1) {};
   \node[diamond, draw=vldbTeal!72!black, fill=vldbTeal!38, line width=.55pt,
         minimum size=5.8pt, inner sep=0pt] at (#5,#1) {};
   \node[anchor=west, font=\rmfamily\fontsize{7.05}{7.65}\selectfont,
         text=vldbInk]
-        at (6.06,#1) {#7/#8/#9};
+        at (6.02,#1) {\motifvals{#7}{#8}{#9}};
 }
 \begin{tikzpicture}[x=1cm,y=1cm]
 \path[use as bounding box] (-.02,-5.16) rectangle (7.28,.30);
@@ -44,13 +45,15 @@
   \node[vsmall, anchor=east, text=vldbGray] at (1.98,-.34) {cov.};
   \node[vsmall, anchor=west, text=vldbGray] at (2.32,-.34)
     {matching probes (log10)};
-  \node[vsmall, anchor=west, text=vldbGray] at (6.06,-.34)
-    {min/med/max};
+  \node[vsmall, anchor=west, text=vldbGray] at (6.02,-.34)
+    {\motifvals{min}{med}{max}};
   \draw[vldbRule, line width=.46pt] (2.32,-.62) -- (5.92,-.62);
-  \foreach \x/\lab in {2.32/1,3.34/10,4.36/100,5.38/1000,5.87/3000} {
+  \foreach \x/\lab in {2.32/1,3.34/10,4.36/100,5.38/1000} {
     \draw[vldbRule, line width=.46pt] (\x,-.69) -- (\x,-.55);
     \node[vsmall, text=vldbGray] at (\x,-.86) {\lab};
   }
+  \draw[vldbRule, line width=.46pt] (5.92,-.69) -- (5.92,-.55);
+  \node[vsmall, anchor=east, text=vldbGray] at (5.92,-.86) {max};
 
   \motifrange{-1.18}{TPC-H}{8}{2.32}{4.28}{5.52}{1}{87}{1384}
   \motifrange{-1.52}{TPC-DS}{8}{4.27}{4.55}{4.80}{86}{164.5}{287}

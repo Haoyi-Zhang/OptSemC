@@ -21,7 +21,7 @@ The archived replay package records its source Git state in `artifact/evaluation
 
 ## Evidence scope
 
-OptSem-C is a finite public-contract audit, not a learned model and not a hidden-optimizer oracle. OptSemBench-C is rule-aware by design: 99 probes are forced by admitted public rule guards so that the declared contract denominator is reachable, while the remaining probes cover optimizer-feature interactions. The paper therefore treats robustness checks as source/probe/feature/engine stress evidence, not as proof that a point-learned repair generalizes to arbitrary future engines. Resource-profile rows report the cost of rerunning this finite comparison audit; the deterministic 8x lift is a scalability check of the comparison inner loop, not a new corpus or engine-count claim.
+OptSem-C is a finite public-contract audit, not a learned model and not a hidden-optimizer oracle. OptSemBench-C is rule-aware by design: 99 probes are forced by admitted public rule guards so that the declared contract denominator is reachable, while the remaining probes cover optimizer-feature interactions. The paper therefore treats robustness checks as source/probe/feature/engine stress evidence, not as proof that a point-learned repair generalizes to arbitrary future engines. Resource-profile rows report the cost of rerunning this finite comparison audit; the deterministic 8x lift checks only the comparison inner loop, not a new corpus, source set, or engine-count claim.
 
 ## Execution environment
 

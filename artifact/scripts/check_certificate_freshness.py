@@ -111,6 +111,7 @@ outputs_current(
     [
         E / "grounded" / "repair_generalization_folds.csv",
         E / "grounded" / "repair_generalization_summary.csv",
+        E / "repair_generalization_summary.csv",
         E / "repair_generalization_check.csv",
     ],
     [

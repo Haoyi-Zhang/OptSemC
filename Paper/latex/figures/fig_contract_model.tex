@@ -1,79 +1,64 @@
 \begin{figure*}[t]
 \centering
 \begin{tikzpicture}[
-  lane/.style={vpanel, draw=vldbRule, fill=vldbSoft, minimum height=3.10cm},
-  ltitle/.style={font=\rmfamily\bfseries\fontsize{7.25}{7.95}\selectfont,
-    text=vldbInk, align=center},
-  item/.style={vpanel, draw=vldbBlue!68, fill=vldbMist,
-    text width=2.48cm, minimum height=.64cm,
-    font=\rmfamily\fontsize{6.95}{7.6}\selectfont, text=black!72,
-    align=center, inner xsep=2pt, inner ysep=1.1pt},
+  stage/.style={vpanel, draw=vldbBlue!68, fill=vldbMist,
+    text width=3.08cm, minimum height=1.05cm,
+    font=\rmfamily\fontsize{7.15}{7.85}\selectfont, text=black!72,
+    align=center, inner xsep=2.2pt, inner ysep=1.4pt},
   audit/.style={vpanel, draw=vldbRose!78!black, fill=vldbRose!8,
-    text width=3.18cm, minimum height=.76cm,
-    font=\rmfamily\bfseries\fontsize{7.05}{7.75}\selectfont,
-    text=vldbRose!78!black, align=center, inner xsep=2pt,
-    inner ysep=1.3pt},
+    text width=3.08cm, minimum height=1.05cm,
+    font=\rmfamily\bfseries\fontsize{7.15}{7.85}\selectfont,
+    text=vldbRose!78!black, align=center, inner xsep=2.2pt,
+    inner ysep=1.4pt},
   cert/.style={vpanel, draw=vldbTeal!76!black, fill=vldbMint,
-    text width=2.58cm, minimum height=.68cm,
-    font=\rmfamily\fontsize{6.95}{7.6}\selectfont, text=black!72,
-    align=center, inner xsep=2pt, inner ysep=1.1pt},
-  chip/.style={rounded corners=1.3pt, draw=black!14, fill=white,
-    font=\rmfamily\fontsize{6.7}{7.3}\selectfont, text=vldbGray,
-    align=center, inner xsep=1.8pt, inner ysep=.7pt},
-  flow/.style={-{Latex[length=1.65mm]}, line width=.68pt,
+    text width=3.08cm, minimum height=1.05cm,
+    font=\rmfamily\fontsize{7.15}{7.85}\selectfont, text=black!72,
+    align=center, inner xsep=2.2pt, inner ysep=1.4pt},
+  strip/.style={rounded corners=1.6pt, draw=vldbGold!55!black, fill=vldbWarm,
+    font=\rmfamily\bfseries\fontsize{6.85}{7.45}\selectfont,
+    text=vldbInk, align=center, inner xsep=2.0pt, inner ysep=.85pt},
+  field/.style={rounded corners=1.3pt, draw=black!14, fill=white,
+    font=\rmfamily\fontsize{6.65}{7.25}\selectfont, text=vldbGray,
+    align=center, inner xsep=1.7pt, inner ysep=.65pt},
+  note/.style={font=\rmfamily\fontsize{6.75}{7.35}\selectfont,
+    text=black!58, align=center},
+  flow/.style={-{Latex[length=1.75mm]}, line width=.70pt,
     draw=black!48, line cap=round, line join=round}
 ]
-\path[use as bounding box] (-.04,-.06) rectangle (17.58,3.86);
+\path[use as bounding box] (-.04,-.08) rectangle (17.62,3.62);
 
-\begin{scope}[on background layer]
-  \node[lane, minimum width=3.55cm] at (1.82,1.84) {};
-  \node[lane, minimum width=4.35cm] at (5.82,1.84) {};
-  \node[lane, minimum width=5.10cm] at (10.68,1.84) {};
-  \node[lane, minimum width=3.35cm] at (15.78,1.84) {};
-\end{scope}
+\node[strip, minimum width=16.95cm, anchor=west] at (.30,3.26)
+  {frozen comparison protocol: admit public evidence before projection, repair search, or table generation};
 
-\node[ltitle] at (1.82,3.37) {1. admission denominator};
-\node[ltitle] at (5.82,3.37) {2. reference signatures};
-\node[ltitle] at (10.68,3.37) {3. projection-kernel audit};
-\node[ltitle] at (15.78,3.37) {4. repair certificate};
+\node[stage] (admit) at (2.00,2.12)
+  {\textbf{Admission}\\287 source rules\\4,216 executable probes};
+\node[stage] (ref) at (6.20,2.12)
+  {\textbf{Reference maps}\\state-joined engine--probe contracts\\1,288 signature classes};
+\node[audit] (proj) at (10.40,2.12)
+  {\textbf{Projection audit}\\keyword: 254 false pairs\\operator-only: 238};
+\node[cert] (out) at (14.60,2.12)
+  {\textbf{Certified output}\\layer+placement basis\\claim ledger and replay checks};
 
-\node[item] (sources) at (1.82,2.54)
-  {\textbf{287} source-linked rules\\\textbf{4,216} executable probes};
-\node[chip] (frozen) at (1.82,1.62)
-  {schema + sources frozen first};
-\node[chip, draw=vldbTeal!35, text=vldbTeal!58!black] at (1.82,.82)
-  {execution validates; it does not admit};
+\draw[flow] (admit.east) -- (ref.west);
+\draw[flow, draw=vldbRose!72!black] (ref.east) -- (proj.west);
+\draw[flow, draw=vldbTeal!72!black] (proj.east) -- (out.west);
 
-\node[item] (maps) at (4.82,2.54)
-  {state-joined\\engine--probe maps};
-\node[item] (refs) at (6.82,1.62)
-  {\textbf{1,288} reference\\signature classes};
-\node[chip] at (5.82,.82)
-  {public evidence payload retained};
+\node[note] at (2.00,.98) {sources and probes\\define the denominator};
+\node[note] at (6.20,.98) {full public payload\\is the reference};
+\node[note] at (10.40,.98) {coarse equality is tested\\against reference inequality};
+\node[note] at (14.60,.98) {each claim points to\\regenerated evidence};
 
-\node[item] (proj) at (9.12,2.54)
-  {keyword vocabulary\\\texttt{pushdown}, \texttt{join}, \dots};
-\node[audit] (kernel) at (11.10,1.62)
-  {\textbf{254} false pairs\\\textbf{148} keyword classes\\\textbf{81} mixed-reference classes};
-\node[chip, draw=vldbRose!35, text=vldbRose!72!black] at (10.68,.82)
-  {projected equality contradicts reference inequality};
-
-\node[cert] (basis) at (15.78,2.54)
-  {retain layer\\+ placement};
-\node[cert, fill=white] (ledger) at (15.78,1.62)
-  {counter-witness ledger\\and claim checks};
-\node[chip, draw=vldbTeal!35, text=vldbTeal!58!black] at (15.78,.82)
-  {zero unresolved headline records};
-
-\draw[flow] (sources.east) -- (maps.west);
-\draw[flow] (maps.east) -- (refs.west);
-\draw[flow] (refs.east) -- ++(.55,0) |- (proj.west);
-\draw[flow, draw=vldbRose!72!black] (proj.east) -- (kernel.west);
-\draw[flow, draw=vldbTeal!72!black] (kernel.east) -- (basis.west);
-\draw[flow, draw=vldbTeal!72!black] (basis.south) -- (ledger.north);
-\draw[flow, draw=vldbTeal!65!black] (frozen.east) -- ++(1.10,0) |- (refs.south);
+\node[field] at (4.10,.34) {guard};
+\node[field] at (5.18,.34) {action};
+\node[field] at (6.20,.34) {layer};
+\node[field] at (7.38,.34) {placement};
+\node[field] at (8.70,.34) {evidence};
+\draw[vldbRule, line width=.40pt] (3.48,.34) -- (3.76,.34);
+\draw[vldbRule, line width=.40pt] (9.20,.34) -- (9.48,.34);
+\node[strip, fill=white, draw=vldbTeal!42!black] at (12.45,.34)
+  {counter-witnesses + finite repair certificates};
 \end{tikzpicture}
-\caption{OptSem-C's contract-comparison dataflow. Evidence and probes are admitted before witness counting; reference signatures define the denominator; the projection-kernel audit exposes keyword equality that contradicts reference inequality; the repair certificate records which retained fields separate every headline witness.}
-\Description{A four-lane dataflow from admission denominator to reference signatures, projection-kernel audit, and repair certificate, with the key keyword counts centered in the audit lane.}
+\caption{OptSem-C's contract-comparison dataflow. Evidence and probes are admitted before witness counting; reference signatures define the denominator; projection-kernel audits test coarse equality against reference inequality; and each reported repair is tied to regenerated counter-witnesses and claim checks.}
+\Description{A four-stage dataflow from admission denominator to reference maps, projection audit, and certified output, with a small strip showing retained fields and repair evidence.}
 \label{fig:contract-model}
 \end{figure*}

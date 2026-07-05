@@ -40,22 +40,6 @@ def command_output(args: list[str], timeout: int = 8) -> str:
     return text[:240] if proc.returncode == 0 else f"unavailable:exit{proc.returncode}:{text[:160]}"
 
 
-def git_dirty_count() -> str:
-    try:
-        proc = subprocess.run(
-            ["git", "-C", str(ROOT.parent), "status", "--porcelain=v1"],
-            text=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            timeout=8,
-        )
-    except Exception as exc:
-        return f"unavailable:{type(exc).__name__}"
-    if proc.returncode != 0:
-        return f"unavailable:exit{proc.returncode}"
-    return str(len([line for line in proc.stdout.splitlines() if line.strip()]))
-
-
 def redacted_executable_name() -> str:
     name = Path(sys.executable).name
     return re.sub(r"[^A-Za-z0-9_.-]", "_", name) or "python"
@@ -88,7 +72,6 @@ rows = [
     {"key": "psycopg", "value": module_version("psycopg")},
     {"key": "postgres", "value": postgres_version()},
     {"key": "git_head", "value": command_output(["git", "-C", str(ROOT.parent), "rev-parse", "--short=12", "HEAD"])},
-    {"key": "git_dirty_count", "value": git_dirty_count()},
     {"key": "artifact_readme_sha256", "value": file_digest(ROOT / "README.md")},
 ]
 

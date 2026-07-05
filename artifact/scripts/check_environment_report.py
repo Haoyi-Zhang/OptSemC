@@ -23,7 +23,7 @@ if IN.exists():
 else:
     data = {}
 
-required = ["scope", "python", "platform", "machine", "python_executable_name", "pyyaml", "duckdb", "psycopg", "postgres", "git_head", "git_dirty_count", "artifact_readme_sha256"]
+required = ["scope", "python", "platform", "machine", "python_executable_name", "pyyaml", "duckdb", "psycopg", "postgres", "git_head", "artifact_readme_sha256"]
 missing = [key for key in required if not data.get(key)]
 add("environment_report_present", IN.exists(), str(IN.relative_to(ROOT)) if IN.exists() else "missing")
 add("required_environment_fields", not missing, ";".join(missing))

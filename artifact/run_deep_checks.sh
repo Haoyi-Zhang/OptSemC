@@ -219,3 +219,9 @@ run_py scripts/build_package_manifest.py
 run_py scripts/check_package_manifest.py
 run_py scripts/check_package_snapshot.py
 run_py scripts/run_integrity_suite.py
+if [[ "${OPTSEMC_RELEASE_GATE:-0}" == "1" ]]; then
+  echo "[deep] final release clean-tree assertion"
+  OPTSEMC_RELEASE_GATE=1 timeout "$PY_TIMEOUT" python -u scripts/check_git_tree_state.py
+  git -C .. diff --exit-code -- artifact/evaluation/git_tree_state.csv artifact/evaluation/git_tree_porcelain.txt artifact/evaluation/git_tree_state_check.csv
+  test -z "$(git -C .. status --porcelain=v1 --untracked-files=all)"
+fi

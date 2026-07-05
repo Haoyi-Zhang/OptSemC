@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import csv, sys
+import csv, os, sys
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PKG = ROOT.parent
@@ -12,6 +12,12 @@ def add(check, ok, details=''):
     rows.append({'check':check,'passed':str(bool(ok)).lower(),'details':str(details)})
 def read_csv(path):
     with path.open(newline='', encoding='utf-8') as f: return list(csv.DictReader(f))
+def keyed_csv(path: Path) -> dict[str,str]:
+    if not path.exists(): return {}
+    try:
+        return {row.get('key',''): row.get('value','') for row in read_csv(path)}
+    except Exception:
+        return {}
 def cert_pass(path: Path) -> tuple[bool,str]:
     if not path.exists(): return False,'missing'
     try: rows=read_csv(path)
@@ -31,7 +37,7 @@ required = [
  E/'projection_resolution_lattice.csv', E/'projection_frontier_antichains.csv', E/'side_balanced_witness_support.csv', E/'claim_evidence_graph.csv', E/'repository_audit.csv', E/'repository_quality.csv',
  ROOT/'config/practice_projection_surfaces.csv', E/'practice_projection_surfaces.csv', E/'practice_projection_surface_summary.csv', E/'practice_projection_surfaces_check.csv',
  E/'real_engine_validation_environment.csv', E/'environment.csv', E/'environment_check.csv', E/'git_tree_state.csv', E/'git_tree_porcelain.txt', E/'git_tree_state_check.csv',
- E/'grounded/repair_generalization_folds.csv', E/'grounded/repair_generalization_summary.csv', E/'repair_generalization_check.csv'
+ E/'grounded/repair_generalization_folds.csv', E/'grounded/repair_generalization_summary.csv', E/'repair_generalization_summary.csv', E/'repair_generalization_check.csv'
 ]
 if not ARTIFACT_ONLY:
     required += [PKG/'Paper/latex/paper.tex', PKG/'Paper/latex/paper.pdf', PKG/'Paper/supplemental/supplement.pdf']
@@ -62,6 +68,25 @@ for name in certificate_names:
     path=E/f'{name}.csv'
     ok, detail=cert_pass(path)
     add(f'certificate:{name}', ok, detail)
+if os.environ.get('OPTSEMC_RELEASE_GATE', '0') == '1':
+    git_state=keyed_csv(E/'git_tree_state.csv')
+    if ARTIFACT_ONLY:
+        add(
+            'release_archive_source_tree_clean',
+            git_state.get('source_tree_clean') == 'true' and git_state.get('allow_dirty_source') == 'false',
+            f"source_tree_clean={git_state.get('source_tree_clean','missing')};allow_dirty_source={git_state.get('allow_dirty_source','missing')}",
+        )
+    else:
+        add(
+            'release_snapshot_uses_strict_git_gate',
+            git_state.get('require_clean') == 'true' and git_state.get('development_snapshot') == 'false',
+            f"require_clean={git_state.get('require_clean','missing')};development_snapshot={git_state.get('development_snapshot','missing')}",
+        )
+        add(
+            'release_snapshot_tree_is_clean',
+            git_state.get('tracked_dirty_count') == '0' and git_state.get('untracked_count') == '0',
+            f"tracked={git_state.get('tracked_dirty_count','missing')};untracked={git_state.get('untracked_count','missing')}",
+        )
 OUT.parent.mkdir(parents=True, exist_ok=True)
 with OUT.open('w',newline='',encoding='utf-8') as f:
     w=csv.DictWriter(f, fieldnames=['check','passed','details']); w.writeheader(); w.writerows(rows)

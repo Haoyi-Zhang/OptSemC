@@ -363,6 +363,8 @@ def main() -> None:
     parser.add_argument("--allow-dirty-source", action="store_true",
                         help="Development-only override. Release/Zenodo archives must leave this off.")
     args = parser.parse_args()
+    if args.allow_dirty_source and os.environ.get("OPTSEMC_ALLOW_DIRTY_ARCHIVE") != "I_UNDERSTAND_DEV_ONLY":
+        parser.error("--allow-dirty-source requires OPTSEMC_ALLOW_DIRTY_ARCHIVE=I_UNDERSTAND_DEV_ONLY")
     source_state = collect_source_tree_state(args.allow_dirty_source)
     copy_tree(args.stage)
     write_source_tree_state(args.stage, source_state)

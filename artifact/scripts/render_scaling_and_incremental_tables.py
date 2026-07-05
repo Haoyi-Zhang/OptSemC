@@ -74,7 +74,7 @@ def main() -> int:
         r"\begin{table}[t]",
         r"\centering",
         r"\footnotesize",
-        r"\caption{Finite-comparison scalability and dispersion. False and Drift are lower-better; Checks/s is higher-better. Bold marks per-column best values for directional columns. Probes/Axes/Fam. describe where witnesses appear.}",
+        r"\caption{Finite-comparison replay cost and dispersion. False and Drift are lower-better; Checks/s is higher-better for the projection inner loop, not for end-to-end corpus construction. Bold marks per-column best values for directional columns. Probes/Axes/Fam. describe where witnesses appear.}",
         r"\label{tab:scalability-family}",
         r"\setlength{\tabcolsep}{2.5pt}",
         r"\begin{tabular}{@{}lrrrrrr@{}}",

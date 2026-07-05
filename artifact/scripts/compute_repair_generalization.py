@@ -16,6 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MAPS = ROOT / 'evaluation' / 'grounded_contract_maps.jsonl'
 OUTDIR = ROOT / 'evaluation' / 'grounded'
+ROOT_SUMMARY = ROOT / 'evaluation' / 'repair_generalization_summary.csv'
 METHODS = ['keyword','yesno','operator_only']
 FIELDS = ['operator','kind','layer','placement','decision_time','observability','state']
 ALL_FIELDS = ['operator','kind','variant','layer','placement','decision_time','observability','state']
@@ -173,6 +174,13 @@ def main():
     with (OUTDIR/'repair_generalization_summary.csv').open('w', newline='', encoding='utf-8') as f:
         fields=['method','folds','heldout_false_equivalences','heldout_resolved','heldout_unresolved','heldout_resolution_rate','distinct_learned_repairs']
         w=csv.DictWriter(f, fieldnames=fields); w.writeheader(); w.writerows(summary)
+    with ROOT_SUMMARY.open('w', newline='', encoding='utf-8') as f:
+        fields=['method','folds','heldout_false_equivalences','heldout_resolved','heldout_unresolved','heldout_resolution_rate','distinct_learned_repairs','canonical_source']
+        w=csv.DictWriter(f, fieldnames=fields); w.writeheader()
+        for row in summary:
+            out = dict(row)
+            out['canonical_source'] = 'evaluation/grounded/repair_generalization_summary.csv'
+            w.writerow(out)
     print('Wrote grounded probe-fold repair-stability check')
 
 if __name__ == '__main__':

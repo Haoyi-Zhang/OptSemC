@@ -107,7 +107,7 @@ def resource_table() -> None:
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Replay cost and resource profile.  Times and peak RSS come from the cloud replay worker; the 8$\times$ row is a deterministic replay lift of the same finite comparison relation, not a new corpus.}",
+        r"\caption{Finite-audit replay cost and resource profile.  Times and peak RSS come from the cloud replay worker; the 8$\times$ row is a deterministic inner-loop lift of the same finite comparison relation, not a new corpus, source set, or engine set.}",
         r"\label{tab:resource-profile}",
         r"\footnotesize",
         r"\setlength{\tabcolsep}{2.4pt}",
