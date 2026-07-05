@@ -18,6 +18,7 @@ def rows(path: Path) -> list[dict[str, str]]:
 def main() -> int:
     profile = rows(E / "resource_profile.csv")
     scale = rows(E / "resource_profile_scale.csv")
+    end_to_end = rows(E / "resource_profile_end_to_end.csv")
     checks = []
 
     def add(name: str, passed: bool, detail: str) -> None:
@@ -25,8 +26,8 @@ def main() -> int:
 
     stages = {row["stage"] for row in profile}
     add("required_stages", {"projection audit", "fixed-basis repair", "SQL catalog validation"}.issubset(stages), ",".join(sorted(stages)))
-    add("positive_elapsed", all(float(row["elapsed_ms"]) > 0 for row in profile + scale), "all rows")
-    add("positive_peak_rss", all(float(row["peak_rss_mb"]) > 0 for row in profile + scale), "all rows")
+    add("positive_elapsed", all(float(row["elapsed_ms"]) > 0 for row in profile + scale + end_to_end), "all rows")
+    add("positive_peak_rss", all(float(row["peak_rss_mb"]) > 0 for row in profile + scale + end_to_end), "all rows")
     add("scale_points", {row["scale"] for row in scale} == {"1x", "2x", "4x", "8x"}, ",".join(row["scale"] for row in scale))
     add("sql_validation_nonzero", any(row["stage"] == "SQL catalog validation" and int(row["output_rows"]) > 0 for row in profile), "sql output rows")
     add("scale_throughput_nonzero", all(float(row["throughput_per_s"]) > 0 for row in scale), "projection replay lift")
@@ -40,6 +41,17 @@ def main() -> int:
         add("scale_peak_rss_bounded", rss_bounded, f"min={min(rss_values):.3f};max={max(rss_values):.3f}")
     else:
         add("scale_peak_rss_bounded", False, "missing scale rows")
+    total = end_to_end[0] if end_to_end else None
+    add("end_to_end_total_present", bool(total) and total["stage"] == "paper-facing replay total", total["stage"] if total else "missing")
+    if total:
+        expected_input = sum(int(float(row["input_rows"])) for row in profile)
+        expected_output = sum(int(float(row["output_rows"])) for row in profile)
+        note = total["note"].lower()
+        add("end_to_end_total_matches_stages", int(float(total["input_rows"])) == expected_input and int(float(total["output_rows"])) == expected_output, f"input={total['input_rows']}/{expected_input};output={total['output_rows']}/{expected_output}")
+        add("end_to_end_scope_excludes_setup", all(token in note for token in ("excludes", "setup", "paper build", "archive", "dbms")), total["note"])
+    else:
+        add("end_to_end_total_matches_stages", False, "missing")
+        add("end_to_end_scope_excludes_setup", False, "missing")
 
     with OUT.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=["check", "passed", "detail"])

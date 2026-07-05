@@ -32,6 +32,14 @@ def main() -> int:
             return False
         return True
 
+    def evidence_has(gate: str, scope: str, patterns: list[str], verdict: str | None = None) -> bool:
+        row = by_gate_scope.get((gate, scope))
+        if row is None:
+            return False
+        if verdict is not None and row["verdict"] != verdict:
+            return False
+        return all(pattern in row["evidence"] for pattern in patterns)
+
     def unresolved_counts(row: dict[str, str] | None) -> list[int]:
         if not row:
             return []
@@ -43,10 +51,10 @@ def main() -> int:
     add("has_within_denominator_boundary", "within-denominator" in verdicts, ",".join(sorted(verdicts)))
     add("reported_basis_keywords_present", {"keyword", "operator-only", "yes/no"}.issubset(scopes) or any("reported layer+placement" in s for s in scopes), ",".join(sorted(scopes)))
     add("claim_boundaries_nonempty", all(row["claim_boundary"].strip() for row in rows), "all rows")
-    add("keyword_source_loo_exact", has_row("source removal", "keyword", "nonzero=26/26", "pass"), "keyword source removal")
-    add("operator_source_loo_exact", has_row("source removal", "operator-only", "nonzero=26/26", "pass"), "operator source removal")
+    add("keyword_source_loo_identity", evidence_has("source removal", "keyword", ["nonzero=26/26", "kept>=", "new<="], "within-denominator"), "keyword source removal")
+    add("operator_source_loo_identity", evidence_has("source removal", "operator-only", ["nonzero=26/26", "kept>=", "new<="], "within-denominator"), "operator source removal")
     add("probe_subsample_exact", has_row("probe subsample", "keyword/operator 10%", "30/30; 30/30", "within-denominator"), "probe subsample")
-    add("yesno_source_sensitive_exact", has_row("source removal", "yes/no", "nonzero=25/26", "source-sensitive"), "yes/no source boundary")
+    add("yesno_source_sensitive_identity", evidence_has("source removal", "yes/no", ["nonzero=25/26", "kept>=", "new<="], "source-sensitive"), "yes/no source boundary")
     def find_row(gate: str, scope_substring: str) -> dict[str, str] | None:
         for row in rows:
             if row["gate"] == gate and scope_substring in row["scope"]:

@@ -22,8 +22,8 @@ external_motif_difficulty,Paper/latex/tables/tab_motif_difficulty.tex,2,0,,0,man
 external_motif_execution,Paper/latex/tables/tab_external_execution.tex,3,0,,0,manifest-sourced-static,true
 false_equivalence_severity,Paper/latex/tables/tab_false_equivalence_severity.tex,2,0,,0,manifest-sourced-static,true
 sql_multicatalog_execution,Paper/latex/tables/tab_sql_multicatalog.tex,3,0,,1,scripts/render_validity_resource_tables.py,true
-anti_overfit_audit,Paper/latex/tables/tab_anti_overfit_audit.tex,4,0,,1,scripts/render_validity_resource_tables.py,true
-resource_profile,Paper/latex/tables/tab_resource_profile.tex,3,0,,1,scripts/render_validity_resource_tables.py,true
+anti_overfit_audit,Paper/latex/tables/tab_anti_overfit_audit.tex,5,0,,1,scripts/render_validity_resource_tables.py,true
+resource_profile,Paper/latex/tables/tab_resource_profile.tex,4,0,,1,scripts/render_validity_resource_tables.py,true
 projection_resolution_lattice,Paper/latex/tables/tab_resolution_lattice.tex,4,0,,0,manifest-sourced-static,true
 scalability_family,Paper/latex/tables/tab_scalability_family.tex,10,0,,2,scripts/check_paper_numeric_claims.py|scripts/render_scaling_and_incremental_tables.py,true
 guard_quality,Paper/latex/tables/tab_guard_quality.tex,12,0,,0,manifest-sourced-static,true

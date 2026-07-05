@@ -1,0 +1,5 @@
+check,passed,details
+real_engine_outputs_present,true,
+core_collision_repair_code_independent,true,
+core_paper_tables_do_not_source_real_engine,true,
+paper_table_source_gate_available,true,artifact/evaluation/paper_table_source_check.csv

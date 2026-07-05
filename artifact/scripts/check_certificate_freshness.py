@@ -76,7 +76,43 @@ outputs_current(
 outputs_current(
     "claim_ledger_outputs_current",
     [E / "paper_claim_ledger.csv", E / "claim_ledger_check.csv"],
-    [ART / "scripts" / "build_claim_ledger.py", E / "practice_projection_surfaces_check.csv", E / "real_engine_validation_check.csv"],
+    [
+        ART / "scripts" / "build_claim_ledger.py",
+        E / "practice_projection_surfaces_check.csv",
+        E / "real_engine_validation_check.csv",
+        E / "real_engine_noninterference_check.csv",
+        E / "resource_profile_end_to_end.csv",
+        E / "anti_overfit_audit.csv",
+        E / "grounded" / "source_robustness_identity_summary.csv",
+    ],
+)
+outputs_current(
+    "source_robustness_outputs_current",
+    [
+        E / "grounded" / "source_robustness.csv",
+        E / "grounded" / "source_robustness_summary.csv",
+        E / "grounded" / "source_robustness_identity.csv",
+        E / "grounded" / "source_robustness_identity_summary.csv",
+    ],
+    [
+        ART / "scripts" / "compute_grounded_source_robustness.py",
+        ART / "grounded" / "verified_rules.jsonl",
+        E / "grounded_applicable_rules.jsonl",
+    ],
+)
+outputs_current(
+    "anti_overfit_outputs_current",
+    [E / "anti_overfit_audit.csv", E / "anti_overfit_audit_check.csv"],
+    [
+        ART / "scripts" / "compute_anti_overfit_audit.py",
+        ART / "scripts" / "check_anti_overfit_audit.py",
+        E / "grounded" / "source_robustness_summary.csv",
+        E / "grounded" / "source_robustness_identity_summary.csv",
+        E / "feature_holdout_repair_summary.csv",
+        E / "engine_family_stress_summary.csv",
+        E / "grounded" / "probe_subsample_robustness.csv",
+        E / "grounded" / "repair_enginepair_generalization_summary.csv",
+    ],
 )
 outputs_current(
     "environment_outputs_current",
@@ -85,9 +121,10 @@ outputs_current(
 )
 outputs_current(
     "real_engine_validation_check_current",
-    [E / "real_engine_validation_check.csv", E / "real_engine_validation_environment.csv"],
+    [E / "real_engine_validation_check.csv", E / "real_engine_validation_environment.csv", E / "real_engine_noninterference_check.csv"],
     [
         ART / "scripts" / "check_real_engine_validation.py",
+        ART / "scripts" / "check_real_engine_noninterference.py",
         E / "environment.csv",
         E / "real_engine_probe_validation_full.csv",
         E / "real_engine_probe_validation_full_summary.csv",
@@ -99,7 +136,14 @@ outputs_current(
         E / "sql_probe_multicatalog_summary.csv",
         E / "sql_probe_multicatalog_totals.csv",
         E / "sql_probe_multicatalog_check.csv",
+        E / "paper_table_manifest.csv",
+        E / "paper_table_source_check.csv",
     ],
+)
+outputs_current(
+    "resource_profile_outputs_current",
+    [E / "resource_profile.csv", E / "resource_profile_scale.csv", E / "resource_profile_end_to_end.csv", E / "resource_profile_check.csv"],
+    [ART / "scripts" / "compute_resource_profile.py", ART / "scripts" / "check_resource_profile.py"],
 )
 outputs_current(
     "claim_graph_outputs_current",
@@ -145,9 +189,31 @@ if (ROOT / "Paper").exists():
     tex_inputs = sorted((ROOT / "Paper" / "latex").rglob("*.tex"))
     bib_inputs = sorted((ROOT / "Paper" / "latex").rglob("*.bib"))
     outputs_current(
+        "python_figure_outputs_current",
+        [
+            E / "python_figure_renderers.csv",
+            E / "paper_figure_manifest.csv",
+            ROOT / "Paper" / "latex" / "generated_figures" / "fig_projection_information.pdf",
+            ROOT / "Paper" / "latex" / "generated_figures" / "fig_external_motifs.pdf",
+            ROOT / "Paper" / "latex" / "generated_figures" / "fig_semantic_frontier.pdf",
+            ROOT / "Paper" / "latex" / "generated_figures" / "fig_sql_execution.pdf",
+        ],
+        [
+            ART / "scripts" / "render_python_figures.py",
+            E / "projection_information_paper.csv",
+            E / "benchmark_motif_difficulty_paper.csv",
+            E / "grounded" / "semantic_frontier.csv",
+            E / "sql_probe_execution_summary.csv",
+        ],
+    )
+    outputs_current(
         "pdf_certificate_current",
         [E / "latex_compile_check.csv", E / "pdf_integrity.csv"],
-        tex_inputs + bib_inputs + [ART / "scripts" / "check_latex_compile.py", ART / "scripts" / "check_pdf_integrity.py"],
+        tex_inputs + bib_inputs + [
+            ART / "scripts" / "check_latex_compile.py",
+            ART / "scripts" / "check_pdf_integrity.py",
+            E / "python_figure_renderers.csv",
+        ],
     )
     outputs_current(
         "paper_table_source_check_current",
@@ -162,6 +228,7 @@ real_engine_files = [
     E / "real_engine_probe_validation_motif_summary.csv",
     E / "real_engine_validation_check.csv",
     E / "real_engine_validation_environment.csv",
+    E / "real_engine_noninterference_check.csv",
     ART / "benchmark" / "generated_probes.jsonl",
 ]
 missing = [path.relative_to(ROOT).as_posix() for path in real_engine_files if not path.exists()]

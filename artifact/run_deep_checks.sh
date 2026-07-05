@@ -86,6 +86,7 @@ run_py scripts/compute_feature_holdout_repair.py
 run_py scripts/check_feature_holdout_repair.py
 run_py scripts/compute_repair_generalization.py
 run_py scripts/check_repair_generalization.py
+run_py scripts/compute_grounded_source_robustness.py
 run_py scripts/compute_anti_overfit_audit.py
 run_py scripts/check_anti_overfit_audit.py
 run_py scripts/render_scaling_and_incremental_tables.py
@@ -102,11 +103,13 @@ run_py scripts/check_sql_probe_multicatalog_execution.py
 run_py scripts/compute_resource_profile.py
 run_py scripts/check_resource_profile.py
 run_paper_py scripts/render_validity_resource_tables.py
+run_paper_py scripts/render_python_figures.py
 run_py scripts/compute_benchmark_motif_difficulty.py
 run_py scripts/check_benchmark_motif_difficulty.py
 run_py scripts/execute_external_motif_suite.py
 run_py scripts/check_external_motif_execution.py
 run_real_engine_validation_gate
+run_py scripts/check_real_engine_noninterference.py
 run_py scripts/check_no_cache_package.py
 run_py scripts/refresh_grounded_summaries.py
 run_py scripts/check_grounded_summary_consistency.py
@@ -202,6 +205,7 @@ run_py scripts/check_artifact_registry.py
 run_py scripts/build_environment_report.py
 run_py scripts/check_environment_report.py
 run_real_engine_check scripts/check_real_engine_validation.py
+run_py scripts/check_real_engine_noninterference.py
 run_py scripts/build_claim_metric_summary.py
 run_py scripts/build_claim_ledger.py
 run_py scripts/build_claim_evidence_graph.py

@@ -23,7 +23,7 @@
     align=center, inner xsep=1.8pt, inner ysep=.75pt,
     text height=1.36ex, text depth=.22ex},
   lanetag/.style={rounded corners=1.5pt, draw=black!18, fill=white,
-    text width=.78cm,
+    text width=1.02cm,
     font=\rmfamily\bfseries\fontsize{6.95}{7.65}\selectfont,
     align=center, inner xsep=1.6pt, inner ysep=.85pt,
     text height=1.42ex, text depth=.24ex},
@@ -34,7 +34,7 @@
 ]
 \path[use as bounding box] (-.05,-4.30) rectangle (7.22,.32);
 
-\node[hlabel, anchor=west] at (.04,.08) {Projection loss in one witness};
+\node[hlabel, anchor=west] at (.04,.08) {One witness: unequal $\rightarrow$ false equality $\rightarrow$ repair};
 \node[chip, anchor=east, draw=vldbGold!50!black, text=vldbInk] at (7.04,.08)
   {P0009};
 
@@ -45,7 +45,7 @@
 \end{scope}
 
 \node[lanetag, anchor=west, draw=vldbBlue!30, text=vldbBlue!70!black]
-  at (.18,-.42) {ref.\\sig.};
+  at (.18,-.42) {ref.\\unequal};
 \node[contract] (c1) at (2.20,-.76)
   {\textbf{BigQuery}\\federated filter\\source-side};
 \node[contract] (c2) at (5.52,-.76)
@@ -54,21 +54,21 @@
   {$S_{\mathrm{BQ}}\ne S_{\mathrm{Trino}}$};
 
 \node[lanetag, anchor=west, draw=vldbRose!35, text=vldbRose!72!black]
-  at (.18,-1.58) {coarse\\view};
+  at (.18,-1.58) {coarse\\false =};
 \node[kernel] (k) at (3.86,-1.92)
-  {\texttt{pushdown=yes}\\declares equality};
+  {\texttt{pushdown=yes}\\false equality};
 \node[chip, anchor=east, text width=1.70cm, draw=vldbRose!35,
       text=vldbRose!72!black] (drop)
   at (6.94,-1.92) {drops layer\\and placement};
 
 \node[lanetag, anchor=west, draw=vldbTeal!45, text=vldbTeal!58!black]
-  at (.18,-2.92) {fixed\\view};
+  at (.18,-2.92) {repair\\separates};
 \node[chip, draw=vldbTeal!45, text=vldbTeal!58!black] (keep) at (3.86,-2.78)
-  {retain layer + placement};
+  {retained fields: layer + placement};
 \node[repair] (r1) at (2.20,-3.58)
-  {source planning};
+  {BQ: source planning};
 \node[repair] (r2) at (5.52,-3.58)
-  {runtime filtering};
+  {Trino: runtime filtering};
 
 \draw[flow, draw=vldbRose!72!black] ($(c1.south)+(0,-.03)$) -- ++(0,-.24) -| ($(k.north)+(-.70,0)$);
 \draw[flow, draw=vldbRose!72!black] ($(c2.south)+(0,-.03)$) -- ++(0,-.24) -| ($(k.north)+(.70,0)$);
@@ -76,7 +76,7 @@
 \draw[flow, draw=vldbTeal!72!black] ($(keep.south)+(-.36,-.05)$) -- ++(0,-.19) -| (r1.north);
 \draw[flow, draw=vldbTeal!72!black] ($(keep.south)+(.36,-.05)$) -- ++(0,-.19) -| (r2.north);
 \end{tikzpicture}
-\caption{Projection loss as a finite contract witness. BigQuery federated filtering and Trino dynamic filtering differ under the reference signature, collapse under a coarse \texttt{pushdown=yes} denominator, and separate after retaining layer and placement.}
+\caption{Projection loss as one finite contract witness from the 498 headline witness records. BigQuery federated filtering and Trino dynamic filtering differ under the reference signature, collapse under a coarse \texttt{pushdown=yes} denominator, and separate after retaining layer and placement.}
 \Description{Two distinct public optimizer contracts collapse into a pushdown=yes projection and are separated by retaining layer and placement.}
 \label{fig:projection-trap}
 \end{figure}

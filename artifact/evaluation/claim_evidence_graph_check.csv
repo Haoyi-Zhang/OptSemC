@@ -1,6 +1,6 @@
 check,passed,details
 claim_graph_has_claims,true,claims=53
-claim_graph_has_edges,true,edges=187
+claim_graph_has_edges,true,edges=192
 all_claims_have_existing_support,true,53/53
 gate_cover_nonempty,true,cover_size=29
 gate_cover_files_pass,true,checked=3;failed=

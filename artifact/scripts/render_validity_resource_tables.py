@@ -68,6 +68,12 @@ def anti_overfit_table() -> None:
         "engine-family stress": "Engine stress",
         "learned engine-pair repair": "Learned split",
     }
+    scope_labels = {
+        "strict reference": "reference",
+        "keyword/operator 10%": "kw/op 10\\%",
+        "reported layer+placement": "layer+place",
+        "point-learned pair minima": "pair minima",
+    }
     lines = [
         r"\begin{table}[t]",
         r"\centering",
@@ -75,7 +81,7 @@ def anti_overfit_table() -> None:
         r"\label{tab:anti-overfit-audit}",
         r"\footnotesize",
         r"\setlength{\tabcolsep}{2.0pt}",
-        r"\begin{tabular}{@{}p{0.67in}p{0.73in}p{0.64in}p{1.12in}@{}}",
+        r"\begin{tabular}{@{}p{0.60in}p{0.62in}p{0.92in}p{1.03in}@{}}",
         r"\toprule",
         "Check & Scope & Evidence & Boundary" + ROW,
         r"\midrule",
@@ -84,11 +90,11 @@ def anti_overfit_table() -> None:
         if row["gate"] == "negative control":
             boundary = "control"
         elif row["gate"] == "source removal" and row["scope"] == "yes/no":
-            boundary = "sparse; not all LOO nonzero"
+            boundary = "source-sensitive"
         elif row["gate"] == "source removal":
-            boundary = "all sources"
+            boundary = "identity-tracked LOO"
         elif row["gate"] == "probe subsample":
-            boundary = "within-denom."
+            boundary = "finite subsample"
         elif row["gate"] == "learned engine-pair repair":
             boundary = "stress exposes non-transfer"
         elif row["gate"] == "engine-family stress":
@@ -98,7 +104,7 @@ def anti_overfit_table() -> None:
         else:
             boundary = row["verdict"]
         lines.append(
-            f"{labels.get(row['gate'], esc(row['gate']))} & {esc(row['scope'])} & {esc(row['evidence'])} & {esc(boundary)}" + ROW
+            f"{labels.get(row['gate'], esc(row['gate']))} & {scope_labels.get(row['scope'], esc(row['scope']))} & {esc(row['evidence'])} & {esc(boundary)}" + ROW
         )
     lines += [r"\bottomrule", r"\end{tabular}", r"\end{table}"]
     write(TABLES / "tab_anti_overfit_audit.tex", lines)
@@ -107,15 +113,15 @@ def anti_overfit_table() -> None:
 def resource_table() -> None:
     profile = rows(E / "resource_profile.csv")
     scale = rows(E / "resource_profile_scale.csv")
+    end_to_end = rows(E / "resource_profile_end_to_end.csv")
     stage_labels = {
         "projection audit": "Projection audit",
-        "fixed-basis repair": "Repair check",
         "SQL catalog validation": "SQL validation",
     }
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Finite-audit replay cost. Time and RSS are lower-better cloud replay measurements; rows exclude cold-start setup, archive rebuild, paper regeneration, and public-package assembly. The 8$\times$ row lifts the same comparison relation.}",
+        r"\caption{Cloud replay cost. Down arrows mark lower-better measurements; replay total folds map/probe loading, projection audit, fixed-basis repair, and deterministic SQL validation, while the 8$\times$ row repeats the same relation.}",
         r"\label{tab:resource-profile}",
         r"\footnotesize",
         r"\setlength{\tabcolsep}{3.0pt}",
@@ -129,6 +135,11 @@ def resource_table() -> None:
             continue
         lines.append(
             f"{stage_labels[row['stage']]} & {fmt_int(row['input_rows'])} & {fmt_int(row['output_rows'])} & {fmt_s(row['elapsed_ms'])} & {float(row['peak_rss_mb']):.1f}" + ROW
+        )
+    if end_to_end:
+        total = end_to_end[0]
+        lines.append(
+            f"Replay total & {fmt_int(total['input_rows'])} & {fmt_int(total['output_rows'])} & {fmt_s(total['elapsed_ms'])} & {float(total['peak_rss_mb']):.1f}" + ROW
         )
     eight = next(row for row in scale if row["scale"] == "8x")
     lines.append(

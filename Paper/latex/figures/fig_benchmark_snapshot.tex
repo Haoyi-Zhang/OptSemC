@@ -38,9 +38,8 @@
   {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 4,216}\\probes};
 \node[metric] (d) at (6.22,-1.18)
   {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 90/90}\\motifs};
-\draw[flow] (a.east) -- (b.west);
-\draw[flow] (b.east) -- (c.west);
-\draw[flow] (c.east) -- (d.west);
+\node[vsmall, text=vldbGray] at (3.55,-1.72)
+  {parallel fixed denominators, not a generation chain};
 
 \node[row, anchor=west] at (.34,-2.02)
   {admission checks run before any collision rate is counted};
@@ -55,7 +54,7 @@
 \node[axis] at (3.60,-3.78) {operator / shape};
 \node[axis] at (5.84,-3.78) {runtime / control};
 \end{tikzpicture}
-\caption{Corpus, benchmark, and execution denominators. Sources, rules, probes, and motif requirements are fixed before collision measurement; zero-failure checks validate support, consistency, SQL execution, and motif coverage.}
+\caption{Corpus, benchmark, and execution denominators: 26 public sources, 287 admitted rules, 4,216 executable probes, and 90/90 published motif requirements. These are parallel fixed denominators; zero-failure checks validate support, consistency, SQL execution, and motif coverage before collision measurement.}
 \Description{A compact validation-check diagram showing fixed evidence counts, zero-failure admission checks, and covered query-feature axes before collision counting.}
 \label{fig:benchmark-snapshot}
 \end{figure}

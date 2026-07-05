@@ -127,12 +127,14 @@ def main():
         rem,add=delta
         return frozenset((base - rem) | add)
     rows=[]
+    witness_sets={}
     for src in [None]+sources:
         # materialize projected ids per key/method lazily via dicts per method/source
         proj_by_method={m:{} for m in METHODS}
         for method in METHODS:
             projected=true_eq=false_eq=0
             cache=proj_by_method[method]
+            witnesses=set()
             for p in probes:
                 for e1,e2 in pairs:
                     idx1=key_idx[(e1,p)]; idx2=key_idx[(e2,p)]
@@ -143,7 +145,10 @@ def main():
                     if cache[idx1] == cache[idx2]:
                         projected += 1
                         if s1 == s2: true_eq += 1
-                        else: false_eq += 1
+                        else:
+                            false_eq += 1
+                            witnesses.add((method, e1, e2, p))
+            witness_sets[(src or '<none>', method)] = witnesses
             rows.append({
                 'removed_source': src or '<none>',
                 'removed_rules': 0 if src is None else source_counts[src],
@@ -178,5 +183,44 @@ def main():
         })
     with open(outdir/'source_robustness_summary.csv','w',newline='',encoding='utf-8') as f:
         fields=list(summary[0].keys()); w=csv.DictWriter(f,fieldnames=fields); w.writeheader(); w.writerows(summary)
+    identity=[]
+    identity_summary=[]
+    for method in METHODS:
+        full=witness_sets[('<none>', method)]
+        retained_rates=[]
+        lost_counts=[]
+        new_counts=[]
+        for src in sources:
+            current=witness_sets[(src, method)]
+            retained=len(full & current)
+            lost=len(full - current)
+            new=len(current - full)
+            retained_rate=(retained/len(full)) if full else 1.0
+            retained_rates.append(retained_rate)
+            lost_counts.append(lost)
+            new_counts.append(new)
+            identity.append({
+                'removed_source': src,
+                'method': method,
+                'full_witnesses': len(full),
+                'retained_original_witnesses': retained,
+                'lost_original_witnesses': lost,
+                'new_witnesses_after_removal': new,
+                'retained_original_rate': f'{retained_rate:.6f}',
+            })
+        identity_summary.append({
+            'method': method,
+            'full_witnesses': len(full),
+            'leave_one_source_runs': len(sources),
+            'min_retained_original_rate': f'{(min(retained_rates) if retained_rates else 1.0):.6f}',
+            'max_lost_original_witnesses': max(lost_counts) if lost_counts else 0,
+            'max_new_witnesses_after_removal': max(new_counts) if new_counts else 0,
+            'runs_retaining_any_original_witness': sum(1 for row in identity if row['method'] == method and int(row['retained_original_witnesses']) > 0),
+        })
+    with open(outdir/'source_robustness_identity.csv','w',newline='',encoding='utf-8') as f:
+        fields=['removed_source','method','full_witnesses','retained_original_witnesses','lost_original_witnesses','new_witnesses_after_removal','retained_original_rate']
+        w=csv.DictWriter(f,fieldnames=fields); w.writeheader(); w.writerows(identity)
+    with open(outdir/'source_robustness_identity_summary.csv','w',newline='',encoding='utf-8') as f:
+        fields=list(identity_summary[0].keys()); w=csv.DictWriter(f,fieldnames=fields); w.writeheader(); w.writerows(identity_summary)
     print(f'Wrote fast source robustness for {len(sources)} sources and {len(probes)} probes')
 if __name__ == '__main__': main()

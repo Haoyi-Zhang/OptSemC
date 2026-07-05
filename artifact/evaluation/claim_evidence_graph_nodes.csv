@@ -1,12 +1,12 @@
 node_id,kind,label,path
-claim:C10_source_robustness,claim,Keyword and operator-only projection-induced collisions remain nonzero after removing any single public source.,
+claim:C10_source_robustness,claim,"Keyword and operator-only projection-induced collisions remain nonzero after removing any single public source, while an identity audit records retained original witnesses and newly induced witnesses for that information-deletion stress.",
 claim:C11_external_suite,claim,The external benchmark-family suite covers 90/90 declared optimizer motifs across 12 families; each motif has a deterministic-catalog validation representative.,
-claim:C12_real_engine_validation,claim,The generated probes execute on DuckDB and PostgreSQL with zero failures for the full corpus and the motif representatives.,
+claim:C12_real_engine_validation,claim,"The generated probes execute on DuckDB and PostgreSQL with zero failures for the full corpus and the motif representatives, and this evidence is scoped away from collision and repair computation.",
 claim:C13_formal_obligations,claim,Every finite formal obligation asserted in the paper is checked by the replay package.,
 claim:C14_rule_aware_probe_denominator,claim,The probe denominator is a rule-aware coverage benchmark rather than an independent held-out generalization set.,
 claim:C15_evidence_freeze_protocol,claim,"The freeze manifest hashes schema, source inputs, projection/baseline specifications, result-determining code, compute/check scripts, and replay entrypoints.",
 claim:C16_anti_overfit_boundaries,claim,"The anti-overfit audit separates controls and finite-denominator stress from source-sensitive, overlapping-fold, and failed learned-transfer boundaries.",
-claim:C17_resource_profile,claim,"The resource profile reports the finite-audit replay cost and labels the 8x row as a deterministic inner-loop lift, not a new corpus, source set, or engine set.",
+claim:C17_resource_profile,claim,"The resource profile reports stage-level and total finite-audit replay cost and labels the 8x row as a deterministic inner-loop lift, not a new corpus, source set, or engine set.",
 claim:C18_clean_archive_gate,claim,The long-term anonymous archive builder refuses a dirty source tree for release construction and records the source-tree state inside the package.,
 claim:C1_grounded_corpus,claim,"The grounded mainline contains 287 admitted source-linked rules, 287 evidence spans, and 26 sources.",
 claim:C2_probe_coverage,claim,"OptSemBench-C generates 4,216 probes covering 7,112 renderable feature interactions.",
@@ -114,6 +114,8 @@ file:artifact_evaluation_grounded_repair_generalization_summary_csv,file,artifac
 file:artifact_evaluation_grounded_repair_hitting_sets_csv,file,artifact/evaluation/grounded/repair_hitting_sets.csv,artifact/evaluation/grounded/repair_hitting_sets.csv
 file:artifact_evaluation_grounded_semantic_field_shapley_csv,file,artifact/evaluation/grounded/semantic_field_shapley.csv,artifact/evaluation/grounded/semantic_field_shapley.csv
 file:artifact_evaluation_grounded_semantic_frontier_csv,file,artifact/evaluation/grounded/semantic_frontier.csv,artifact/evaluation/grounded/semantic_frontier.csv
+file:artifact_evaluation_grounded_source_robustness_identity_csv,file,artifact/evaluation/grounded/source_robustness_identity.csv,artifact/evaluation/grounded/source_robustness_identity.csv
+file:artifact_evaluation_grounded_source_robustness_identity_summary_csv,file,artifact/evaluation/grounded/source_robustness_identity_summary.csv,artifact/evaluation/grounded/source_robustness_identity_summary.csv
 file:artifact_evaluation_grounded_source_robustness_summary_csv,file,artifact/evaluation/grounded/source_robustness_summary.csv,artifact/evaluation/grounded/source_robustness_summary.csv
 file:artifact_evaluation_grounded_summary_consistency_csv,file,artifact/evaluation/grounded_summary_consistency.csv,artifact/evaluation/grounded_summary_consistency.csv
 file:artifact_evaluation_grounded_trap_rate_csv,file,artifact/evaluation/grounded/trap_rate.csv,artifact/evaluation/grounded/trap_rate.csv
@@ -127,6 +129,7 @@ file:artifact_evaluation_package_manifest_check_csv,file,artifact/evaluation/pac
 file:artifact_evaluation_package_manifest_csv,file,artifact/evaluation/package_manifest.csv,artifact/evaluation/package_manifest.csv
 file:artifact_evaluation_package_manifest_summary_csv,file,artifact/evaluation/package_manifest_summary.csv,artifact/evaluation/package_manifest_summary.csv
 file:artifact_evaluation_package_snapshot_check_csv,file,artifact/evaluation/package_snapshot_check.csv,artifact/evaluation/package_snapshot_check.csv
+file:artifact_evaluation_paper_figure_manifest_csv,file,artifact/evaluation/paper_figure_manifest.csv,artifact/evaluation/paper_figure_manifest.csv
 file:artifact_evaluation_paper_quality_csv,file,artifact/evaluation/paper_quality.csv,artifact/evaluation/paper_quality.csv
 file:artifact_evaluation_paper_table_source_check_summary_csv,file,artifact/evaluation/paper_table_source_check_summary.csv,artifact/evaluation/paper_table_source_check_summary.csv
 file:artifact_evaluation_pdf_integrity_csv,file,artifact/evaluation/pdf_integrity.csv,artifact/evaluation/pdf_integrity.csv
@@ -143,7 +146,9 @@ file:artifact_evaluation_proof_carrying_semantics_json,file,artifact/evaluation/
 file:artifact_evaluation_provenance_deep_audit_csv,file,artifact/evaluation/provenance_deep_audit.csv,artifact/evaluation/provenance_deep_audit.csv
 file:artifact_evaluation_provenance_graph_edges_csv,file,artifact/evaluation/provenance_graph_edges.csv,artifact/evaluation/provenance_graph_edges.csv
 file:artifact_evaluation_public_provenance_summary_csv,file,artifact/evaluation/public_provenance_summary.csv,artifact/evaluation/public_provenance_summary.csv
+file:artifact_evaluation_python_figure_renderers_csv,file,artifact/evaluation/python_figure_renderers.csv,artifact/evaluation/python_figure_renderers.csv
 file:artifact_evaluation_real_engine_fresh_run_csv,file,artifact/evaluation/real_engine_fresh_run.csv,artifact/evaluation/real_engine_fresh_run.csv
+file:artifact_evaluation_real_engine_noninterference_check_csv,file,artifact/evaluation/real_engine_noninterference_check.csv,artifact/evaluation/real_engine_noninterference_check.csv
 file:artifact_evaluation_real_engine_probe_validation_full_csv,file,artifact/evaluation/real_engine_probe_validation_full.csv,artifact/evaluation/real_engine_probe_validation_full.csv
 file:artifact_evaluation_real_engine_probe_validation_full_summary_csv,file,artifact/evaluation/real_engine_probe_validation_full_summary.csv,artifact/evaluation/real_engine_probe_validation_full_summary.csv
 file:artifact_evaluation_real_engine_probe_validation_motif_csv,file,artifact/evaluation/real_engine_probe_validation_motif.csv,artifact/evaluation/real_engine_probe_validation_motif.csv
@@ -161,6 +166,7 @@ file:artifact_evaluation_repository_quality_csv,file,artifact/evaluation/reposit
 file:artifact_evaluation_reproducibility_package_csv,file,artifact/evaluation/reproducibility_package.csv,artifact/evaluation/reproducibility_package.csv
 file:artifact_evaluation_resource_profile_check_csv,file,artifact/evaluation/resource_profile_check.csv,artifact/evaluation/resource_profile_check.csv
 file:artifact_evaluation_resource_profile_csv,file,artifact/evaluation/resource_profile.csv,artifact/evaluation/resource_profile.csv
+file:artifact_evaluation_resource_profile_end_to_end_csv,file,artifact/evaluation/resource_profile_end_to_end.csv,artifact/evaluation/resource_profile_end_to_end.csv
 file:artifact_evaluation_resource_profile_scale_csv,file,artifact/evaluation/resource_profile_scale.csv,artifact/evaluation/resource_profile_scale.csv
 file:artifact_evaluation_schema_coverage_check_csv,file,artifact/evaluation/schema_coverage_check.csv,artifact/evaluation/schema_coverage_check.csv
 file:artifact_evaluation_semantic_field_attribution_check_csv,file,artifact/evaluation/semantic_field_attribution_check.csv,artifact/evaluation/semantic_field_attribution_check.csv
@@ -213,6 +219,7 @@ file:artifact_scripts_build_evidence_freeze_manifest_py,file,artifact/scripts/bu
 file:artifact_scripts_check_anti_overfit_audit_py,file,artifact/scripts/check_anti_overfit_audit.py,artifact/scripts/check_anti_overfit_audit.py
 file:artifact_scripts_check_evidence_freeze_manifest_py,file,artifact/scripts/check_evidence_freeze_manifest.py,artifact/scripts/check_evidence_freeze_manifest.py
 file:artifact_scripts_check_git_tree_state_py,file,artifact/scripts/check_git_tree_state.py,artifact/scripts/check_git_tree_state.py
+file:artifact_scripts_check_real_engine_noninterference_py,file,artifact/scripts/check_real_engine_noninterference.py,artifact/scripts/check_real_engine_noninterference.py
 file:artifact_scripts_check_resource_profile_py,file,artifact/scripts/check_resource_profile.py,artifact/scripts/check_resource_profile.py
 file:artifact_scripts_compute_anti_overfit_audit_py,file,artifact/scripts/compute_anti_overfit_audit.py,artifact/scripts/compute_anti_overfit_audit.py
 file:artifact_scripts_compute_resource_profile_py,file,artifact/scripts/compute_resource_profile.py,artifact/scripts/compute_resource_profile.py

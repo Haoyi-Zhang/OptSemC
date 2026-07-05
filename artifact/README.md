@@ -27,6 +27,10 @@ The archive records its source Git commit and clean-tree status in `artifact/eva
 - Side-balanced evidence audit: every headline false witness has public-source support on both compared sides.
 - Anti-overfit boundary ledger: source removal, probe subsampling, feature-family stress, engine-family stress, failed point-learned transfer, and resource-profile checks are reported separately so stress evidence is not overstated as a learned generalization claim.
 
+## Paper-facing evidence views
+
+The `evaluation/*_paper.csv` files are reproducible presentation views, not manually selected data. `scripts/compute_projection_information_profile.py` writes both the complete `evaluation/projection_information_profile.csv` and the compact `evaluation/projection_information_paper.csv`; `scripts/compute_benchmark_motif_difficulty.py` writes both `evaluation/benchmark_motif_difficulty.csv` and the plotted `evaluation/benchmark_motif_difficulty_paper.csv`. `scripts/render_python_figures.py` renders the quantitative paper figures from these frozen CSV views and records input/output hashes in `evaluation/paper_figure_manifest.csv`. Framework and dataflow figures remain native LaTeX/TikZ in the manuscript tree.
+
 ## Fast check
 
 Run from this directory:

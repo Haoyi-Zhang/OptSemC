@@ -54,17 +54,14 @@
 \node[detail] at (10.66,.70) {test: projected equality versus reference inequality};
 \node[detail] at (14.94,.70) {output: counter-witnesses and repairs};
 
-\node[token] at (5.05,.02) {guard};
-\node[token] at (6.15,.02) {action};
-\node[token, draw=vldbTeal!45!black, fill=vldbMint, text=vldbTeal!58!black]
-  at (7.25,.02) {layer};
-\node[token, draw=vldbTeal!45!black, fill=vldbMint, text=vldbTeal!58!black]
-  at (8.54,.02) {placement};
-\node[token] at (9.82,.02) {observability};
-\node[token, draw=vldbRose!35, fill=vldbRose!7, text=vldbRose!72!black]
-  at (12.72,.02) {projection equality\\is audited};
+\node[token, text width=3.28cm, draw=vldbTeal!45!black, fill=vldbMint,
+      text=vldbTeal!58!black] at (6.80,.02)
+  {repair atom: layer + placement};
+\node[token, text width=4.08cm, draw=vldbRose!35, fill=vldbRose!7,
+      text=vldbRose!72!black] at (11.08,.02)
+  {audited equality, not runtime ranking};
 \end{tikzpicture}
-\caption{OptSem-C's contract-comparison dataflow. Inputs are fixed before witness counting; reference signatures define the denominator; projection audits test coarse equality against reference inequality; and each reported repair is tied to regenerated counter-witnesses and source checks.}
+\caption{OptSem-C's contract-comparison dataflow over 26 public sources, 287 admitted rules, and 4,216 executable probes. Inputs are fixed before witness counting; projection audits test coarse equality against reference inequality, and repairs are tied to regenerated counter-witnesses and source checks.}
 \Description{A four-stage dataflow from admission denominator to reference maps, projection audit, and certified output, with a small strip showing retained fields and repair evidence.}
 \label{fig:contract-model}
 \end{figure*}

@@ -4,18 +4,18 @@
 \label{tab:anti-overfit-audit}
 \footnotesize
 \setlength{\tabcolsep}{2.0pt}
-\begin{tabular}{@{}p{0.67in}p{0.73in}p{0.64in}p{1.12in}@{}}
+\begin{tabular}{@{}p{0.60in}p{0.62in}p{0.92in}p{1.03in}@{}}
 \toprule
 Check & Scope & Evidence & Boundary \\
 \midrule
-Reference ctrl. & strict reference & false=0 & control \\
-Source LOO & keyword & nonzero=26/26 & all sources \\
-Source LOO & operator-only & nonzero=26/26 & all sources \\
-Source LOO & yes/no & nonzero=25/26 & sparse; not all LOO nonzero \\
-Probe 10\% & keyword/operator 10\% & 30/30; 30/30 & within-denom. \\
-Feature stress & reported layer+placement & keyword:0; operator-only:0; yes/no:0 & overlapping folds \\
-Engine stress & reported layer+placement & keyword:0; operator-only:0; yes/no:0 & within-denom. \\
-Learned split & point-learned pair minima & keyword:48; operator-only:120; yes/no:6 & stress exposes non-transfer \\
+Reference ctrl. & reference & false=0 & control \\
+Source LOO & keyword & nonzero=26/26; kept>=0.02; new<=208 & identity-tracked LOO \\
+Source LOO & operator-only & nonzero=26/26; kept>=0.48; new<=144 & identity-tracked LOO \\
+Source LOO & yes/no & nonzero=25/26; kept>=0.00; new<=114 & source-sensitive \\
+Probe 10\% & kw/op 10\% & 30/30; 30/30 & finite subsample \\
+Feature stress & layer+place & keyword:0; operator-only:0; yes/no:0 & overlapping folds \\
+Engine stress & layer+place & keyword:0; operator-only:0; yes/no:0 & within-denom. \\
+Learned split & pair minima & keyword:48; operator-only:120; yes/no:6 & stress exposes non-transfer \\
 \bottomrule
 \end{tabular}
 \end{table}

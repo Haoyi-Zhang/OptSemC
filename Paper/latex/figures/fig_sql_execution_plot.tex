@@ -1,26 +1,7 @@
 \begin{figure}[t]
 \centering
-\footnotesize
-\newcommand{\execrow}[5]{%
-  \node[anchor=east, font=\rmfamily\fontsize{6.8}{7.4}\selectfont, text=vldbInk]
-        at (1.55,#1) {#2};
-  \path[draw=#5!70!black, fill=#5!28, rounded corners=.7pt]
-        (1.82,{#1-.13}) rectangle ({1.82+#3},{#1+.13});
-  \node[anchor=west, font=\rmfamily\fontsize{6.8}{7.4}\selectfont, text=vldbGray]
-        at (3.22,#1) {#4};
-}
-\begin{tikzpicture}[x=1cm,y=1cm]
-  \node[vtitle, anchor=west, align=left] at (0,0.25)
-    {SQL validation: all probes execute};
-  \node[vsmall, anchor=west, align=left, text width=6.7cm] at (0,-0.20)
-    {Bars are normalized to the generated-probe denominator; failures remain at zero.};
-  \execrow{-0.86}{planned}{1.20}{4,216}{vldbBlue}
-  \execrow{-1.48}{executed}{1.20}{4,216}{vldbTeal}
-  \execrow{-2.10}{failures}{0.00}{0}{vldbRose}
-  \node[vsmall, anchor=west] at (0,-2.76)
-    {distinct plans: 91; returned rows: 18,448};
-\end{tikzpicture}
-\caption{Executable SQL-probe validation. Every generated probe plans and executes on the deterministic validation catalog; failures are zero.}
-\Description{A compact horizontal bar chart showing planned probes, executed probes, zero failures, distinct validation plans, and returned rows.}
+\includegraphics[width=\columnwidth]{generated_figures/fig_sql_execution.pdf}
+\caption{Executable SQL-probe validation rendered from frozen execution summaries. Every generated probe plans and executes on the deterministic validation catalog; the zero-failure mark is a catalog sanity check, not a multi-engine correctness claim.}
+\Description{A Python-rendered horizontal bar chart showing planned probes, executed probes, zero failures, distinct validation plans, and returned rows.}
 \label{fig:sql-execution}
 \end{figure}

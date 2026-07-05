@@ -9,5 +9,5 @@ pypdf,6.14.2
 duckdb,1.5.4
 psycopg,3.3.4
 postgres,14.23 (Ubuntu 14.23-0ubuntu0.22.04.1)
-git_head,5729c35c3915
-artifact_readme_sha256,de2f1bfadb0e84912bced3f22971c821997c25464404abb01dff9a216141d146
+git_head,5c102087d9a6
+artifact_readme_sha256,996d38c2750a15bad3cce27794581445331a01d9ad9f79c7181fe82b7b8af6bd

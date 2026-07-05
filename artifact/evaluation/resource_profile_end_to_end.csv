@@ -1,0 +1,2 @@
+stage,scale,input_rows,output_rows,elapsed_ms,peak_rss_mb,throughput_per_s,note
+paper-facing replay total,1x,455828,41704,3499.439,275.621,130257.440,"loads frozen maps/probes, audits projections, checks repairs, and validates deterministic SQL catalogs; excludes setup, paper build, archive packaging, and fresh external DBMS reruns"

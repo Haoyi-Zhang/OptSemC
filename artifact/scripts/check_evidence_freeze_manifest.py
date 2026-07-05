@@ -55,6 +55,7 @@ def main() -> int:
             "optsemc/repair_stability.py",
             "scripts/compute_anti_overfit_audit.py",
             "scripts/compute_resource_profile.py",
+            "scripts/check_real_engine_noninterference.py",
             "scripts/check_git_tree_state.py",
         }.issubset(frozen_paths),
         ",".join(sorted(path for path in frozen_paths if path.startswith(("optsemc/", "scripts/")))[:12]),

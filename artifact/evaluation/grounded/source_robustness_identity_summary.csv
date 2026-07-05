@@ -1,0 +1,4 @@
+method,full_witnesses,leave_one_source_runs,min_retained_original_rate,max_lost_original_witnesses,max_new_witnesses_after_removal,runs_retaining_any_original_witness
+keyword,254,26,0.023622,248,208,26
+yesno,6,26,0.000000,6,114,25
+operator_only,238,26,0.483193,123,144,26

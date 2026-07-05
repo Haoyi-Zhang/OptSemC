@@ -1,8 +1,8 @@
 gate,scope,evidence,verdict,claim_boundary
 negative control,strict reference,false=0,pass,reference equality is not counted as a collision source
-source removal,keyword,nonzero=26/26,pass,keyword collisions survive every single-source removal
-source removal,operator-only,nonzero=26/26,pass,operator-only collisions survive every single-source removal
-source removal,yes/no,nonzero=25/26,source-sensitive,yes/no is sparse; do not claim every source-removal run remains nonzero
+source removal,keyword,nonzero=26/26; kept>=0.02; new<=208,within-denominator,single-source removal is an information-deletion stress; it can retain old witnesses and create new ones
+source removal,operator-only,nonzero=26/26; kept>=0.48; new<=144,within-denominator,single-source removal is an information-deletion stress; it can retain old witnesses and create new ones
+source removal,yes/no,nonzero=25/26; kept>=0.00; new<=114,source-sensitive,yes/no is sparse; do not claim every source-removal run remains nonzero
 probe subsample,keyword/operator 10%,30/30; 30/30,within-denominator,headline keyword/operator effects are not carried by one probe slice; not an independent population test
 feature-family stress,reported layer+placement,keyword:0; operator-only:0; yes/no:0,within-denominator,"overlapping feature-family stress, not a disjoint held-out test"
 engine-family stress,reported layer+placement,keyword:0; operator-only:0; yes/no:0,within-denominator,"reported basis stress from the predeclared field universe, not learned repair transfer"

@@ -25,6 +25,18 @@ OUT = ROOT / "artifact" / "evaluation" / "latex_compile_check.csv"
 BACKUP = LATEX / f"{NAME}.pdf.backup"
 TRANSIENT_EXTS = ["aux", "log", "out", "toc", "bbl", "blg", "fls", "fdb_latexmk"]
 
+renderer = ROOT / "artifact" / "scripts" / "render_python_figures.py"
+if renderer.exists():
+    proc = subprocess.run([sys.executable, str(renderer)], cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=90)
+    if proc.returncode != 0:
+        OUT.parent.mkdir(parents=True, exist_ok=True)
+        with OUT.open("w", newline="", encoding="utf-8") as handle:
+            writer = csv.DictWriter(handle, fieldnames=["check", "passed", "count", "examples"])
+            writer.writeheader()
+            writer.writerow({"check": "python_figure_rendering", "passed": "false", "count": "1", "examples": "render_python_figures.py"})
+        print("LaTeX compile check: Python figure rendering failed")
+        sys.exit(1)
+
 if PDF.exists():
     shutil.copy2(PDF, BACKUP)
 

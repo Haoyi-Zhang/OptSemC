@@ -161,6 +161,26 @@ def main() -> int:
         ],
         fields,
     )
+    total_elapsed = sum(r.elapsed_ms for r in phase_results)
+    total_input = sum(r.input_rows for r in phase_results)
+    total_output = sum(r.output_rows for r in phase_results)
+    total_peak = max(r.peak_rss_mb for r in phase_results)
+    write_csv(
+        E / "resource_profile_end_to_end.csv",
+        [
+            {
+                "stage": "paper-facing replay total",
+                "scale": "1x",
+                "input_rows": total_input,
+                "output_rows": total_output,
+                "elapsed_ms": f"{total_elapsed:.3f}",
+                "peak_rss_mb": f"{total_peak:.3f}",
+                "throughput_per_s": f"{0.0 if total_elapsed <= 0 else total_input / (total_elapsed / 1000):.3f}",
+                "note": "loads frozen maps/probes, audits projections, checks repairs, and validates deterministic SQL catalogs; excludes setup, paper build, archive packaging, and fresh external DBMS reruns",
+            }
+        ],
+        fields,
+    )
     print(f"Resource profile: {len(phase_results)} stages, {len(scale_rows)} scale points")
     return 0
 

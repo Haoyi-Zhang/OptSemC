@@ -30,6 +30,7 @@ def write_csv(path: Path, data: list[dict[str, str]], fields: list[str]) -> None
 def main() -> int:
     negative = rows(G / "negative_control.csv")[0]
     source = by_key(G / "source_robustness_summary.csv", "method")
+    source_identity = by_key(G / "source_robustness_identity_summary.csv", "method")
     feature = by_key(E / "feature_holdout_repair_summary.csv", "method")
     engine = by_key(E / "engine_family_stress_summary.csv", "projection")
     subsample = rows(G / "probe_subsample_robustness.csv")
@@ -55,21 +56,21 @@ def main() -> int:
         {
             "gate": "source removal",
             "scope": "keyword",
-            "evidence": f"nonzero={source['keyword']['runs_with_nonzero_false_equivalences']}/{source['keyword']['leave_one_source_runs']}",
-            "verdict": "pass",
-            "claim_boundary": "keyword collisions survive every single-source removal",
+            "evidence": f"nonzero={source['keyword']['runs_with_nonzero_false_equivalences']}/{source['keyword']['leave_one_source_runs']}; kept>={float(source_identity['keyword']['min_retained_original_rate']):.2f}; new<={source_identity['keyword']['max_new_witnesses_after_removal']}",
+            "verdict": "within-denominator",
+            "claim_boundary": "single-source removal is an information-deletion stress; it can retain old witnesses and create new ones",
         },
         {
             "gate": "source removal",
             "scope": "operator-only",
-            "evidence": f"nonzero={source['operator_only']['runs_with_nonzero_false_equivalences']}/{source['operator_only']['leave_one_source_runs']}",
-            "verdict": "pass",
-            "claim_boundary": "operator-only collisions survive every single-source removal",
+            "evidence": f"nonzero={source['operator_only']['runs_with_nonzero_false_equivalences']}/{source['operator_only']['leave_one_source_runs']}; kept>={float(source_identity['operator_only']['min_retained_original_rate']):.2f}; new<={source_identity['operator_only']['max_new_witnesses_after_removal']}",
+            "verdict": "within-denominator",
+            "claim_boundary": "single-source removal is an information-deletion stress; it can retain old witnesses and create new ones",
         },
         {
             "gate": "source removal",
             "scope": "yes/no",
-            "evidence": f"nonzero={source['yesno']['runs_with_nonzero_false_equivalences']}/{source['yesno']['leave_one_source_runs']}",
+            "evidence": f"nonzero={source['yesno']['runs_with_nonzero_false_equivalences']}/{source['yesno']['leave_one_source_runs']}; kept>={float(source_identity['yesno']['min_retained_original_rate']):.2f}; new<={source_identity['yesno']['max_new_witnesses_after_removal']}",
             "verdict": "source-sensitive",
             "claim_boundary": "yes/no is sparse; do not claim every source-removal run remains nonzero",
         },

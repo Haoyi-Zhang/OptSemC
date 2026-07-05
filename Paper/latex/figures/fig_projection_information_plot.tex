@@ -1,57 +1,7 @@
 \begin{figure}[t]
 \centering
-\newcommand{\lossrow}[8]{%
-  \node[anchor=east, font=\rmfamily\bfseries\fontsize{6.65}{7.25}\selectfont,
-        text=vldbInk, text height=1.36ex, text depth=.22ex]
-        at (1.30,#1) {#2};
-  \draw[vldbRule, line width=.30pt] (2.12,#1) -- (4.12,#1);
-  \draw[#6!80!black, line width=1.35pt, line cap=round] (2.12,#1) -- (#4,#1);
-  \draw[vldbRule, line width=.30pt] (5.38,#1) -- (6.88,#1);
-  \draw[vldbTeal!76!black, line width=1.35pt, line cap=round] (5.38,#1) -- (#5,#1);
-  \node[circle, draw=#6!82!black, fill=#6!14, line width=.48pt,
-        minimum size=4.8pt, inner sep=0pt] at (#4,#1) {};
-  \node[circle, draw=vldbTeal!82!black, fill=white, line width=.48pt,
-        minimum size=4.8pt, inner sep=0pt] at (#5,#1) {};
-  \node[anchor=east, font=\rmfamily\fontsize{6.60}{7.20}\selectfont,
-        text=vldbGray, text height=1.25ex, text depth=.18ex]
-        at (5.06,#1) {#3};
-  \node[anchor=west, font=\rmfamily\fontsize{6.60}{7.20}\selectfont,
-        text=vldbGray, text height=1.25ex, text depth=.18ex]
-        at (7.06,#1) {#7};
-}
-\begin{tikzpicture}[x=1cm,y=1cm]
-  \path[use as bounding box] (-.04,-4.36) rectangle (7.42,.30);
-  \node[vhead, anchor=west] at (.02,.08) {Projection information profile};
-  \node[vsmall, anchor=west, text=vldbGray] at (2.12,-.38)
-    {collision rate};
-  \node[vsmall, anchor=east, text=vldbGray] at (5.06,-.38)
-    {false};
-  \node[vsmall, anchor=west, text=vldbGray] at (5.38,-.38)
-    {entropy retained};
-  \node[vsmall, text=vldbGray] at (2.12,-.66) {0};
-  \node[vsmall, text=vldbGray] at (3.16,-.66) {0.5};
-  \node[vsmall, text=vldbGray] at (4.12,-.66) {0.92};
-  \node[vsmall, text=vldbGray] at (5.38,-.66) {0};
-  \node[vsmall, text=vldbGray] at (6.13,-.66) {0.5};
-  \node[vsmall, text=vldbGray] at (6.88,-.66) {1};
-
-  \lossrow{-.98}{strict}{0}{2.12}{6.88}{vldbTeal}{1.000}{}
-  \lossrow{-1.52}{keyword}{254}{2.36}{6.34}{vldbRose}{0.638}{}
-  \lossrow{-2.06}{operator}{238}{2.35}{6.56}{vldbRose}{0.787}{}
-  \lossrow{-2.60}{placement}{10,702}{3.95}{5.80}{vldbRose}{0.280}{}
-  \lossrow{-3.14}{state}{23,593}{4.12}{5.71}{vldbRose}{0.217}{}
-  \lossrow{-3.68}{surface}{0}{2.12}{6.74}{vldbTeal}{0.904}{}
-
-  \node[circle, draw=vldbRose!82!black, fill=vldbRose!32, line width=.48pt,
-        minimum size=4.2pt, inner sep=0pt] at (2.62,-4.14) {};
-  \node[vsmall, anchor=west, text=vldbGray] at (2.74,-4.14)
-    {nonzero kernel};
-  \node[circle, draw=vldbTeal!82!black, fill=white, line width=.48pt,
-        minimum size=4.2pt, inner sep=0pt] at (4.66,-4.14) {};
-  \node[vsmall, anchor=west, text=vldbGray] at (4.78,-4.14)
-    {zero-false control};
-\end{tikzpicture}
-\caption{Projection information profile. Rose bars mark nonzero projection kernels; false-pair counts give witness denominators, while teal controls keep zero false pairs.}
-\Description{A dot profile showing conditional collision rate, false-pair count, and entropy retained for six projection vocabularies.}
+\includegraphics[width=\columnwidth]{generated_figures/fig_projection_information.pdf}
+\caption{Projection information profile from 24,342 rule--probe maps and 88,536 declared pair comparisons. A projection kernel is the set of reference-unequal contracts collapsed by a vocabulary; labels give false-equivalence counts, and interval checks remain in Table~\ref{tab:robustness}.}
+\Description{A two-panel Python-rendered evidence plot showing conditional collision rate and entropy retained for six projection vocabularies.}
 \label{fig:projection-information}
 \end{figure}

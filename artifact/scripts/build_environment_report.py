@@ -48,7 +48,8 @@ def redacted_executable_name() -> str:
 def postgres_version() -> str:
     dsn = os.environ.get("OPTSEMC_POSTGRES_DSN")
     if not dsn:
-        return "not-requested"
+        detected = command_output(["psql", "-d", "postgres", "-Atqc", "SHOW server_version"], timeout=5)
+        return detected if not detected.startswith("unavailable:") else "not-requested"
     try:
         import psycopg
         with psycopg.connect(dsn, connect_timeout=5) as conn:

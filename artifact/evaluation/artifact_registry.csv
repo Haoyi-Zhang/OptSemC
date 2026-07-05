@@ -32,7 +32,12 @@ evaluation/integrity_suite.csv,csv,1,true
 evaluation/practice_projection_surfaces.csv,csv,1,true
 evaluation/practice_projection_surface_summary.csv,csv,1,true
 evaluation/practice_projection_surfaces_check.csv,csv,1,true
+evaluation/resource_profile.csv,csv,1,true
+evaluation/resource_profile_end_to_end.csv,csv,1,true
+evaluation/resource_profile_scale.csv,csv,1,true
+evaluation/resource_profile_check.csv,csv,1,true
 evaluation/real_engine_validation_check.csv,csv,1,true
+evaluation/real_engine_noninterference_check.csv,csv,1,true
 evaluation/real_engine_validation_environment.csv,csv,1,true
 evaluation/real_engine_fresh_run.csv,csv,1,false
 evaluation/environment.csv,csv,1,true
@@ -54,6 +59,8 @@ evaluation/external_benchmark_crosswalk_check.csv,csv,1,true
 evaluation/baseline_portfolio_check.csv,csv,1,true
 evaluation/public_provenance_summary.csv,csv,1,true
 evaluation/grounded_summary_consistency.csv,csv,1,true
+evaluation/paper_figure_manifest.csv,csv,1,true
+evaluation/python_figure_renderers.csv,csv,1,true
 evaluation/paper_table_source_check_summary.csv,csv,1,true
 evaluation/paper_quality.csv,csv,1,true
 evaluation/pdf_integrity.csv,csv,1,true
@@ -88,6 +95,8 @@ evaluation/unit_test_results.csv,csv,1,true
 evaluation/grounded/projection_lattice_summary.csv,csv,1,true
 evaluation/grounded/benchmark_efficiency_summary.csv,csv,1,true
 evaluation/grounded/source_robustness_summary.csv,csv,1,true
+evaluation/grounded/source_robustness_identity.csv,csv,1,true
+evaluation/grounded/source_robustness_identity_summary.csv,csv,1,true
 evaluation/grounded/repair_basis_stability.csv,csv,1,true
 evaluation/grounded/semantic_field_shapley.csv,csv,1,true
 evaluation/grounded/diagnostic_probe_order.csv,csv,1,true

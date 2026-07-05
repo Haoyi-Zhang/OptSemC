@@ -7,13 +7,13 @@ E = ROOT/'evaluation'
 OUT = E/'integrity_suite.csv'
 ARTIFACT_ONLY = not (ROOT.parent/'Paper').exists()
 checks = [
- 'package_cleanliness','package_manifest_check','package_integrity','format_compliance','visual_latex_style','manuscript_style','latex_compile_check','pdf_integrity','reference_quality','paper_quality','paper_table_renderers','paper_table_source_check',
+ 'package_cleanliness','package_manifest_check','package_integrity','format_compliance','visual_latex_style','manuscript_style','python_figure_renderers','latex_compile_check','pdf_integrity','reference_quality','paper_quality','paper_table_renderers','paper_table_source_check',
  'data_contracts_check','claim_evidence_graph_check','projection_resolution_check','projection_frontier_antichain_check','projection_information_profile_check','proof_carrying_semantics_check','formal_obligations_check',
- 'side_balanced_witness_support_check','source_witness_support_check','guard_quality_check','feature_holdout_repair_check','repair_generalization_check','statistical_robustness_check','scalability_stress_check','engine_family_stress_check','artifact_registry_check','repository_quality_check','package_snapshot_check',
- 'practice_projection_surfaces_check','real_engine_validation_check','environment_check','git_tree_state_check','claim_ledger_check','certificate_freshness_check',
+ 'side_balanced_witness_support_check','source_witness_support_check','guard_quality_check','feature_holdout_repair_check','repair_generalization_check','anti_overfit_audit_check','statistical_robustness_check','scalability_stress_check','engine_family_stress_check','artifact_registry_check','repository_quality_check','package_snapshot_check',
+ 'practice_projection_surfaces_check','real_engine_validation_check','real_engine_noninterference_check','environment_check','git_tree_state_check','claim_ledger_check','certificate_freshness_check',
 ]
 paper_checks = {
- 'format_compliance','visual_latex_style','manuscript_style','latex_compile_check','pdf_integrity','reference_quality','paper_quality','paper_table_renderers','paper_table_source_check'
+ 'format_compliance','visual_latex_style','manuscript_style','python_figure_renderers','latex_compile_check','pdf_integrity','reference_quality','paper_quality','paper_table_renderers','paper_table_source_check'
 }
 def read_csv(path):
     with path.open(newline='', encoding='utf-8') as f: return list(csv.DictReader(f))
@@ -56,8 +56,12 @@ refresh_scripts = [
     'build_environment_report.py',
     'check_environment_report.py',
     'check_real_engine_validation.py',
+    'check_real_engine_noninterference.py',
     'compute_grounded_statistical_robustness.py',
     'check_statistical_robustness.py',
+    'compute_grounded_source_robustness.py',
+    'compute_anti_overfit_audit.py',
+    'check_anti_overfit_audit.py',
     'compute_repair_generalization.py',
     'check_repair_generalization.py',
     'build_claim_metric_summary.py',
@@ -80,14 +84,22 @@ refresh_scripts = [
 if not ARTIFACT_ONLY:
     refresh_scripts[1:1] = [
         'check_manuscript_style.py',
+        'render_python_figures.py',
+        'check_latex_compile.py',
         'check_pdf_integrity.py',
         'check_visual_latex_style.py',
         'check_reference_quality.py',
         'check_paper_quality.py',
     ]
-    refresh_scripts[refresh_scripts.index('check_certificate_freshness.py'):refresh_scripts.index('check_certificate_freshness.py')] = [
+    cert_idx = refresh_scripts.index('check_certificate_freshness.py')
+    refresh_scripts[cert_idx:cert_idx] = [
         'render_paper_tables.py',
         'check_paper_table_sources.py',
+        'check_real_engine_validation.py',
+        'check_real_engine_noninterference.py',
+        'build_claim_ledger.py',
+        'build_claim_evidence_graph.py',
+        'check_claim_evidence_graph.py',
     ]
 
 for script in refresh_scripts:

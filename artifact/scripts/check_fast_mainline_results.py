@@ -22,12 +22,12 @@ CERT_FILES = [
  'practice_projection_surfaces_check.csv',
  'scalability_stress_check.csv','algorithmic_scaling_check.csv','guard_quality_check.csv','feature_holdout_repair_check.csv','repair_generalization_check.csv','scalability_regression_check.csv','incremental_audit_check.csv','incremental_update_check.csv',
  'leave_out_stability_check.csv','engine_family_stress_check.csv','witness_diversity_check.csv','witness_dispersion_check.csv','paper_numeric_claims.csv',
- 'latex_compile_check.csv','pdf_integrity.csv','reference_quality.csv','paper_quality.csv','paper_table_renderers.csv','paper_table_source_check.csv','repository_quality_check.csv',
+ 'python_figure_renderers.csv','latex_compile_check.csv','pdf_integrity.csv','reference_quality.csv','paper_quality.csv','paper_table_renderers.csv','paper_table_source_check.csv','repository_quality_check.csv',
  'package_snapshot_check.csv','integrity_suite.csv','source_witness_support_check.csv','side_balanced_witness_support_check.csv','claim_evidence_graph_check.csv'
- ,'real_engine_validation_check.csv','environment_check.csv','git_tree_state_check.csv','claim_ledger_check.csv','certificate_freshness_check.csv'
+ ,'anti_overfit_audit_check.csv','real_engine_validation_check.csv','real_engine_noninterference_check.csv','environment_check.csv','git_tree_state_check.csv','claim_ledger_check.csv','certificate_freshness_check.csv'
 ]
 PAPER_CERT_FILES = {
- 'manuscript_style.csv','format_compliance.csv','visual_latex_style.csv','paper_numeric_claims.csv',
+ 'manuscript_style.csv','format_compliance.csv','visual_latex_style.csv','python_figure_renderers.csv','paper_numeric_claims.csv',
  'latex_compile_check.csv','pdf_integrity.csv','reference_quality.csv','paper_quality.csv',
  'paper_table_renderers.csv','paper_table_source_check.csv'
 }
