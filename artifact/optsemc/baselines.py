@@ -1,4 +1,4 @@
-"""Baseline and ablation definitions for public optimizer-contract comparison."""
+"""Projection-surface and ablation definitions for public optimizer-contract comparison."""
 from __future__ import annotations
 
 from dataclasses import dataclass

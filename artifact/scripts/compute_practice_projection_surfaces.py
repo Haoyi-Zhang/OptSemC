@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Summarize public comparison surfaces that motivate projection baselines."""
+"""Summarize public comparison surfaces that motivate projection surfaces."""
 from __future__ import annotations
 
 import csv

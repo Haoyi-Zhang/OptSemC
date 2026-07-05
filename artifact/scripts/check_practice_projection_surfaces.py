@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check the practice-surface audit used to justify projection baselines."""
+"""Check the practice-surface audit used to justify projection surfaces."""
 from __future__ import annotations
 
 import csv
@@ -40,9 +40,9 @@ reference_signature_payload = sum(yes(row, "reference_signature_payload") for ro
 urls = [row.get("url", "") for row in rows]
 
 add("all_public_sources_audited", len(rows) == source_count and source_count == 26, f"{len(rows)}/{source_count}")
-add("keyword_baseline_observed", keyword == 26 and summary.get("keyword_surfaces") == 26, str(keyword))
-add("yesno_baseline_observed", yesno == 12 and summary.get("yesno_surfaces") == 12, str(yesno))
-add("operator_baseline_observed", operator == 26 and summary.get("operator_surfaces") == 26, str(operator))
+add("keyword_surface_observed", keyword == 26 and summary.get("keyword_surfaces") == 26, str(keyword))
+add("yesno_surface_observed", yesno == 12 and summary.get("yesno_surfaces") == 12, str(yesno))
+add("operator_surface_observed", operator == 26 and summary.get("operator_surfaces") == 26, str(operator))
 add(
     "reference_signature_payload_not_public_surface",
     reference_signature_payload == 0 and summary.get("reference_signature_payload_surfaces") == 0,

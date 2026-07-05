@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compute a reader-facing baseline portfolio for optimizer-contract comparison.
+"""Compute a reader-facing projection-surface portfolio for optimizer-contract comparison.
 
 The portfolio deliberately includes (i) exact negative controls, (ii) common
 coarse comparison styles, (iii) single-field ablations, and (iv) adversarial
@@ -102,18 +102,18 @@ def main() -> None:
             f"{method}_matches_conditional_trap_rate",
             int(by_projection[method]["projected_equivalences"]) == int(reported[method]["projected_equivalences"])
             and int(by_projection[method]["false_equivalences"]) == int(reported[method]["false_equivalences"]),
-            f"baseline={by_projection[method]['projected_equivalences']}/{by_projection[method]['false_equivalences']};reported={reported[method]['projected_equivalences']}/{reported[method]['false_equivalences']}",
+            f"surface={by_projection[method]['projected_equivalences']}/{by_projection[method]['false_equivalences']};reported={reported[method]['projected_equivalences']}/{reported[method]['false_equivalences']}",
         )
-    add("strict_baseline_is_negative_control", int(by_projection["strict"]["false_equivalences"]) == 0 and int(by_projection["strict"]["false_differences"]) == 0)
-    add("headline_baselines_cover_three_granularities", all(method in by_projection for method in ["keyword", "yesno", "operator_only"]))
-    add("keyword_and_operator_baselines_are_lossy", int(by_projection["keyword"]["false_equivalences"]) > 0 and int(by_projection["operator_only"]["false_equivalences"]) > 0)
+    add("strict_surface_is_negative_control", int(by_projection["strict"]["false_equivalences"]) == 0 and int(by_projection["strict"]["false_differences"]) == 0)
+    add("headline_surfaces_cover_three_granularities", all(method in by_projection for method in ["keyword", "yesno", "operator_only"]))
+    add("keyword_and_operator_surfaces_are_lossy", int(by_projection["keyword"]["false_equivalences"]) > 0 and int(by_projection["operator_only"]["false_equivalences"]) > 0)
     add("diagnostic_ablations_noninflating", all(int(by_projection[m]["false_differences"]) == 0 for m in ["no_placement", "no_decision_time", "no_observability", "no_modality"]))
     add("adversarial_projection_suite_present", len(rows) >= 15 and all(m in by_projection for m in ["kind_only", "layer_only", "placement_only", "observability_only", "operator_kind_surface"]))
-    add("strengthened_surface_baseline_safe", int(by_projection["operator_kind_surface"]["false_equivalences"]) == 0)
-    add("coarse_one_field_baselines_fail", all(int(by_projection[m]["false_equivalences"]) > 0 for m in ["kind_only", "layer_only", "placement_only", "observability_only"]))
+    add("strengthened_projection_surface_safe", int(by_projection["operator_kind_surface"]["false_equivalences"]) == 0)
+    add("coarse_one_field_surfaces_fail", all(int(by_projection[m]["false_equivalences"]) > 0 for m in ["kind_only", "layer_only", "placement_only", "observability_only"]))
     write_csv(CHECK, checks, ["check", "passed", "details"])
     passed = sum(r["passed"] == "true" for r in checks)
-    print(f"Baseline portfolio: {passed}/{len(checks)} checks passed")
+    print(f"Projection-surface portfolio: {passed}/{len(checks)} checks passed")
     if passed != len(checks):
         for r in checks:
             if r["passed"] != "true":

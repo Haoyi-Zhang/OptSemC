@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render baseline and external benchmark crosswalk tables for the paper."""
+"""Render projection-surface and external benchmark crosswalk tables for the paper."""
 from __future__ import annotations
 
 import csv
@@ -76,7 +76,7 @@ def baseline_table() -> None:
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Representative projection baselines from a 17-row executable portfolio. Bold zeros are controls; underlining marks the worst shown one-field row.}",
+        r"\caption{Representative projection surfaces from a 17-row executable portfolio. Bold numeric zeros mark safe controls or repairs; underlining marks the worst shown risk row.}",
         r"\label{tab:baseline-portfolio}",
         r"\footnotesize",
         r"\setlength{\tabcolsep}{3pt}",
@@ -144,12 +144,12 @@ def external_table() -> None:
 
 def main() -> None:
     if not (ROOT / "Paper").exists():
-        print("Rendered baseline/external tables: skipped (artifact-only package)")
+        print("Rendered projection/external tables: skipped (artifact-only package)")
         return
     PAPER_TABLES.mkdir(parents=True, exist_ok=True)
     baseline_table()
     external_table()
-    print("Rendered baseline/external tables")
+    print("Rendered projection/external tables")
 
 
 if __name__ == "__main__":

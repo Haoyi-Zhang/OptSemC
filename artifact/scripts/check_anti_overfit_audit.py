@@ -23,7 +23,7 @@ def main() -> int:
     add("has_source_sensitive_yesno", any(row["scope"] == "yes/no" and row["verdict"] == "source-sensitive" for row in rows), "yes/no boundary recorded")
     add("has_stress_fail_boundary", "stress-fails" in verdicts, ",".join(sorted(verdicts)))
     add("has_within_denominator_boundary", "within-denominator" in verdicts, ",".join(sorted(verdicts)))
-    add("fixed_basis_keywords_present", {"keyword", "operator-only", "yes/no"}.issubset(scopes) or any("fixed layer+placement" in s for s in scopes), ",".join(sorted(scopes)))
+    add("reported_basis_keywords_present", {"keyword", "operator-only", "yes/no"}.issubset(scopes) or any("reported layer+placement" in s for s in scopes), ",".join(sorted(scopes)))
     add("claim_boundaries_nonempty", all(row["claim_boundary"].strip() for row in rows), "all rows")
 
     with OUT.open("w", newline="", encoding="utf-8") as handle:

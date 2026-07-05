@@ -82,7 +82,7 @@ def main() -> int:
         },
         {
             "gate": "feature-family stress",
-            "scope": "fixed layer+placement",
+            "scope": "reported layer+placement",
             "evidence": "; ".join(
                 f"{label(m)}:{feature[m]['robust_basis_unresolved_total']}" for m in ("keyword", "operator_only", "yesno")
             ),
@@ -91,12 +91,12 @@ def main() -> int:
         },
         {
             "gate": "engine-family stress",
-            "scope": "fixed layer+placement",
+            "scope": "reported layer+placement",
             "evidence": "; ".join(
                 f"{label(m)}:{engine[m]['unresolved_after_layer_placement']}" for m in ("keyword", "operator_only", "yesno")
             ),
             "verdict": "within-denominator",
-            "claim_boundary": "fixed basis stress from the predeclared field universe, not learned repair transfer",
+            "claim_boundary": "reported basis stress from the predeclared field universe, not learned repair transfer",
         },
         {
             "gate": "learned engine-pair repair",

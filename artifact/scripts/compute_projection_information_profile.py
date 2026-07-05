@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compute finite information-loss diagnostics for projection baselines."""
+"""Compute finite information-loss diagnostics for projection surfaces."""
 from __future__ import annotations
 import sys
 from pathlib import Path
