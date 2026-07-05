@@ -66,9 +66,9 @@
 \node[chip, draw=vldbTeal!45, text=vldbTeal!58!black] (keep) at (3.86,-2.78)
   {retain layer + placement};
 \node[repair] (r1) at (2.20,-3.58)
-  {source-side\\planning};
+  {source planning};
 \node[repair] (r2) at (5.52,-3.58)
-  {engine-side\\runtime};
+  {runtime filtering};
 
 \draw[flow, draw=vldbRose!72!black] ($(c1.south)+(0,-.03)$) -- ++(0,-.24) -| ($(k.north)+(-.70,0)$);
 \draw[flow, draw=vldbRose!72!black] ($(c2.south)+(0,-.03)$) -- ++(0,-.24) -| ($(k.north)+(.70,0)$);
