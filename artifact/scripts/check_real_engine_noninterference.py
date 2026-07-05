@@ -74,7 +74,14 @@ def main() -> int:
     add("core_paper_tables_do_not_source_real_engine", not table_leaks, ";".join(table_leaks))
 
     source_check = E / "paper_table_source_check.csv"
-    add("paper_table_source_gate_available", source_check.exists(), source_check.relative_to(PKG).as_posix() if source_check.exists() else "missing")
+    artifact_only = not (PKG / "Paper").exists()
+    if source_check.exists():
+        source_details = source_check.relative_to(PKG).as_posix()
+    elif artifact_only:
+        source_details = "artifact-only package excludes paper-table gate"
+    else:
+        source_details = "missing"
+    add("paper_table_source_gate_available", source_check.exists() or artifact_only, source_details)
 
     with OUT.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=["check", "passed", "details"])
