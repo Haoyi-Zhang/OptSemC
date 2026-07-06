@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[2]
 ART = ROOT / "artifact"
 E = ART / "evaluation"
 OUT = E / "certificate_freshness_check.csv"
+ARTIFACT_ONLY = not (ROOT / "Paper").exists()
 
 
 def sha256_file(path: Path) -> str:
@@ -119,10 +120,7 @@ outputs_current(
     [E / "environment.csv", E / "environment_check.csv"],
     [ART / "scripts" / "build_environment_report.py", ART / "scripts" / "check_environment_report.py"],
 )
-outputs_current(
-    "real_engine_validation_check_current",
-    [E / "real_engine_validation_check.csv", E / "real_engine_validation_environment.csv", E / "real_engine_noninterference_check.csv"],
-    [
+real_engine_freshness_inputs = [
         ART / "scripts" / "check_real_engine_validation.py",
         ART / "scripts" / "check_real_engine_noninterference.py",
         E / "environment.csv",
@@ -136,9 +134,16 @@ outputs_current(
         E / "sql_probe_multicatalog_summary.csv",
         E / "sql_probe_multicatalog_totals.csv",
         E / "sql_probe_multicatalog_check.csv",
+]
+if not ARTIFACT_ONLY:
+    real_engine_freshness_inputs += [
         E / "paper_table_manifest.csv",
         E / "paper_table_source_check.csv",
-    ],
+    ]
+outputs_current(
+    "real_engine_validation_check_current",
+    [E / "real_engine_validation_check.csv", E / "real_engine_validation_environment.csv", E / "real_engine_noninterference_check.csv"],
+    real_engine_freshness_inputs,
 )
 outputs_current(
     "resource_profile_outputs_current",
