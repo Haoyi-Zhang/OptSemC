@@ -11,10 +11,10 @@ The active manuscript source is `Paper/latex/paper.tex`. The artifact entry poin
 
 ## Artifact archive
 
-The public anonymous replay package is archived at https://doi.org/10.5281/zenodo.21211592. The expected SHA-256 for the archived `optsemc-artifact.zip` is:
+The public anonymous replay package is archived at https://doi.org/10.5281/zenodo.21211610. The expected SHA-256 for the archived `optsemc-artifact.zip` is:
 
 ```text
-08bfbe7b9be50ad8477a18ad76eb8c442a05b9210ad5e86353dc930471fa64a7
+b78a87658980f3123bbf82481118fb7d1a3efcbc928b6253beda3335863facb3
 ```
 
 The archived replay package records its source Git state in `artifact/evaluation/git_tree_state.csv`. The digest above applies only to that uploaded archive. Any commit that changes replay code, grounded corpus inputs, generated-probe logic, validation scripts, or paper-facing evidence must rebuild the anonymous archive from a clean source tree and update both the repository README and the PVLDB availability block.
