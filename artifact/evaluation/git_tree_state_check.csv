@@ -1,8 +1,8 @@
 check,passed,details
-git_head_available,true,5c102087d9a6
-tree_state_recorded,true,tracked=97;untracked=12;require_clean=False;release_gate=False;development_snapshot=True
+git_head_available,true,c94167213e79
+tree_state_recorded,true,tracked=16;untracked=0;require_clean=False;release_gate=False;development_snapshot=True
 no_ignored_boundary_files,true,
 release_gate_requires_clean_tree,true,release_gate=False;require_clean=False
 dirty_tree_requires_explicit_development_snapshot,true,require_clean=False;development_snapshot=True
-clean_tree_when_required,true, M Paper/latex/figures/fig_benchmark_snapshot.tex; M Paper/latex/figures/fig_contract_model.tex; M Paper/latex/figures/fig_external_motifs_plot.tex; M Paper/latex/figures/fig_projection_information_plot.tex; M Paper/latex/figures/fig_projection_trap.tex; M Paper/latex/figures/fig_semantic_frontier_plot.tex; M Paper/latex/figures/fig_sql_execution_plot.tex; M Paper/latex/paper.pdf; M Paper/latex/paper.tex; M Paper/latex/sections/01_intro.tex; M Paper/latex/sections/05_evaluation.tex; M Paper/latex/sections/07_discussion_related.tex; M Paper/latex/tables/tab_anti_overfit_audit.tex; M Paper/latex/tables/tab_mechanism_hotspots.tex; M Paper/latex/tables/tab_repair_certificate_summary.tex; M Paper/latex/tables/tab_resource_profile.tex; M Paper/latex/tables/tab_scalability_family.tex; M Paper/latex/tables/tab_semantic_frontier.tex; M Paper/latex/tables/tab_workload_sensitivity.tex; M artifact/README.md
-tree_state_hashes_recorded,true,status=5e98f7d7e8be;diff=8cc0d5cb0406;cached=e3b0c44298fc
+clean_tree_when_required,true, M Paper/latex/generated_figures/fig_external_motifs.pdf; M Paper/latex/generated_figures/fig_projection_information.pdf; M Paper/latex/generated_figures/fig_semantic_frontier.pdf; M Paper/latex/generated_figures/fig_sql_execution.pdf; M Paper/latex/paper.pdf; M artifact/evaluation/environment.csv; M artifact/evaluation/paper_figure_manifest.csv; M artifact/evaluation/paper_table_source_check.csv; M artifact/evaluation/paper_table_source_check_summary.csv; M artifact/evaluation/real_engine_fresh_run.csv; M artifact/evaluation/real_engine_validation_check.csv; M artifact/evaluation/repository_audit.csv; M artifact/evaluation/resource_profile.csv; M artifact/evaluation/resource_profile_check.csv; M artifact/evaluation/resource_profile_end_to_end.csv; M artifact/evaluation/resource_profile_scale.csv
+tree_state_hashes_recorded,true,status=9e718733e3f5;diff=5c192947f797;cached=e3b0c44298fc

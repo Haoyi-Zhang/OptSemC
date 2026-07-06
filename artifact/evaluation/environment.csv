@@ -3,11 +3,11 @@ scope,full-repository
 python,"3.10.12 (main, Mar  3 2026, 11:56:32) [GCC 11.4.0]"
 platform,Linux-6.2.0-37-generic-x86_64-with-glibc2.35
 machine,x86_64
-python_executable_name,python
+python_executable_name,python3
 pyyaml,6.0.3
 pypdf,6.14.2
 duckdb,1.5.4
 psycopg,3.3.4
 postgres,14.23 (Ubuntu 14.23-0ubuntu0.22.04.1)
-git_head,5c102087d9a6
-artifact_readme_sha256,996d38c2750a15bad3cce27794581445331a01d9ad9f79c7181fe82b7b8af6bd
+git_head,c94167213e79
+artifact_readme_sha256,ff7b059c896f7c5c87d601a526d589fedf7db22cbaf6a4c3024c6f29e1f2513f

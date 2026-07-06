@@ -18,6 +18,8 @@ refresh:check_statistical_robustness.py,true,ok
 refresh:compute_grounded_source_robustness.py,true,ok
 refresh:compute_anti_overfit_audit.py,true,ok
 refresh:check_anti_overfit_audit.py,true,ok
+refresh:compute_resource_profile.py,true,ok
+refresh:check_resource_profile.py,true,ok
 refresh:compute_repair_generalization.py,true,ok
 refresh:check_repair_generalization.py,true,ok
 refresh:build_claim_metric_summary.py,true,ok
