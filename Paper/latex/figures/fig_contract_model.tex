@@ -19,6 +19,10 @@
     font=\rmfamily\bfseries\fontsize{6.70}{7.25}\selectfont, text=vldbInk,
     align=center, inner xsep=2.0pt, inner ysep=.9pt,
     text height=1.35ex, text depth=.22ex},
+  auditbar/.style={rounded corners=1.4pt, draw=vldbViolet!58!black, fill=vldbSoft,
+    font=\rmfamily\bfseries\fontsize{6.50}{7.05}\selectfont, text=vldbInk,
+    align=center, inner xsep=2.1pt, inner ysep=.8pt,
+    text height=1.32ex, text depth=.22ex},
   flow/.style={-{Latex[length=1.65mm]}, line width=.66pt,
     draw=black!46, line cap=round, line join=round},
   flowrisk/.style={flow, draw=vldbRose!70!black},
@@ -35,7 +39,7 @@
 
 \node[lanehead, anchor=east] at (2.03,3.86) {public evidence};
 \node[lanehead, anchor=east] at (2.03,2.72) {contract maps};
-\node[lanehead, anchor=east] at (2.03,1.58) {projection audit};
+\node[lanehead, anchor=east] at (2.03,1.58) {parallel audits};
 \node[lanehead, anchor=east] at (2.03,.44) {certified output};
 
 \node[cell] (src) at (3.78,3.86) {\textbf{26 sources}\\spans, URLs, digests};
@@ -47,6 +51,9 @@
 \node[datacell] (motif) at (7.05,2.72) {\textbf{90 motifs}\\71 SQL representatives};
 \node[cell] (map) at (10.32,2.72) {\textbf{engine--probe maps}\\source-supported signatures};
 \node[cell] (ref) at (13.59,2.72) {\textbf{1,288 classes}\\reference payload};
+
+\node[auditbar] (auditrel) at (8.52,2.13)
+  {one frozen contract-map relation; projection surfaces run side by side};
 
 \node[riskcell] (kw) at (3.78,1.58) {keyword\\254 false pairs};
 \node[riskcell] (op) at (7.05,1.58) {operator-only\\238 false pairs};
@@ -64,17 +71,11 @@
 \draw[flowok] (probe) -- (motif);
 \draw[flow] (motif) -- (map);
 \draw[flow] (map) -- (ref);
-\draw[flowrisk] (probe.south) -- (kw.north);
-\draw[flowrisk] (motif.south) -- (op.north);
-\draw[flowrisk] (map.south) -- (yn.north);
-\draw[flow] (ref.south) -- (pairs.north);
+\draw[flow] (map.south) -- (auditrel.north);
 \draw[flowok] (kw.south) -- (repair.north);
 \draw[flowok] (op.south) -- (counter.north);
 \draw[flow] (yn.south) -- (stress.north);
 \draw[flow] (pairs.south) -- (replay.north);
-\draw[flowok] (repair) -- (counter);
-\draw[flowok] (counter) -- (stress);
-\draw[flow] (stress) -- (replay);
 \end{tikzpicture}
 \caption{OptSem-C as a denominator-audit system. Public evidence admits rules into a fixed schema; generated probes materialize source-supported contract maps; predeclared projection vocabularies are audited in parallel against reference signatures; and repair certificates, stress checks, and replay costs report the finite comparison boundary.}
 \Description{A four-lane system diagram showing public evidence, contract maps, projection audit, and certified output. The diagram highlights 26 public surfaces, 287 rules, 4,216 probes, 90 motifs represented by 71 SQL probes, the keyword and operator collision counts, and the layer-plus-placement repair basis.}
