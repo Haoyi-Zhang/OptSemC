@@ -3,4 +3,8 @@ external_motifs,90
 matched_motifs,90
 executed_motifs,90
 execution_failures,0
+distinct_representative_probes,71
+motifs_per_representative_min,1
+motifs_per_representative_max,3
+shared_representative_probes,15
 suites,12

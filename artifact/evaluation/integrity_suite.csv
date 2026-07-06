@@ -54,10 +54,10 @@ manuscript_style,true,7/7
 python_figure_renderers,true,4/4
 latex_compile_check,true,10/10
 pdf_integrity,true,8/8
-reference_quality,true,154/154
+reference_quality,true,148/148
 paper_quality,true,7/7
-paper_table_renderers,true,29/29
-paper_table_source_check,true,29/29
+paper_table_renderers,true,30/30
+paper_table_source_check,true,30/30
 data_contracts_check,true,3/3
 claim_evidence_graph_check,true,5/5
 projection_resolution_check,true,12/12
@@ -74,7 +74,7 @@ anti_overfit_audit_check,true,13/13
 statistical_robustness_check,true,11/11
 scalability_stress_check,true,10/10
 engine_family_stress_check,true,9/9
-artifact_registry_check,true,142/142
+artifact_registry_check,true,145/145
 repository_quality_check,true,5/5
 package_snapshot_check,true,29/29
 practice_projection_surfaces_check,true,6/6

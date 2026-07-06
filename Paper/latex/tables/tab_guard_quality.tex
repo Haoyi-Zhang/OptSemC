@@ -17,8 +17,8 @@ SQL corpus & motif-cover prefix & 48 & human inspection & compact replay slice, 
 SQL execution & planned/executed probes & \textbf{4,216/4,216} & 91 distinct plans & every generated probe plans and runs \\
 SQL execution & shape/exec failures & \textbf{0/0} & 18,448 rows & no SQL-shape or runtime failures \\
 Real engines & full DuckDB/PostgreSQL & \textbf{8,432/8,432} & tags .705/.796 & SQL validation, not source truth \\
-Real engines & motif DuckDB/PostgreSQL & \textbf{142/142} & tags .756/.819 & budgeted open-engine sanity \\
-Published motifs & covered requirements & \textbf{90/90} & 12 families & every declared motif has executable probe support \\
+Real engines & motif DuckDB/PostgreSQL & \textbf{142/142} & 71 reps $\times$ 2 & budgeted open-engine sanity \\
+Published motifs & covered requirements & \textbf{90/90} & 71 representatives & shared probes are explicit, not hidden \\
 \bottomrule
 \end{tabular}
 \Description{A combined denominator dashboard covering grounded rules, guard checks, SQL probes, execution validation, and published motif coverage.}

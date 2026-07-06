@@ -76,13 +76,13 @@ def baseline_table() -> None:
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Representative projection surfaces from a 17-row executable portfolio. Bold numeric zeros mark safe controls or repairs; underlining marks the worst shown risk row.}",
-        r"\label{tab:baseline-portfolio}",
+        r"\caption{Projection-surface portfolio used for controls, public-label failures, stress surfaces, and repairs. Bold numeric zeros mark safe controls or repairs; underlining marks the worst shown risk row.}",
+        r"\label{tab:projection-surface-portfolio}",
         r"\footnotesize",
         r"\setlength{\tabcolsep}{3pt}",
         r"\begin{tabular}{@{}lrrr@{}}",
         r"\toprule",
-        "Baseline & Eq. & False & Rate" + ROW_END,
+        "Surface & Eq. & False & Rate" + ROW_END,
         r"\midrule",
     ]
     for projection in ordered:

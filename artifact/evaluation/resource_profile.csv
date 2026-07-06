@@ -1,6 +1,6 @@
 stage,scale,input_rows,output_rows,elapsed_ms,peak_rss_mb,throughput_per_s,note
-load contract maps,1x,1,24342,1077.650,216.426,0.928,frozen source-linked maps
-load probes,1x,1,4216,35.626,229.551,28.070,generated SQL denominator
-projection audit,1x,442680,498,1723.112,275.676,256907.229,all engine-pair/probe checks
-fixed-basis repair,1x,498,0,8.556,275.676,58207.728,layer+placement unresolved count
-SQL catalog validation,1x,12648,12648,572.162,275.676,22105.640,"catalog sizes=(1, 5, 17)"
+load contract maps,1x,1,24342,1077.876,216.254,0.928,frozen source-linked maps
+load probes,1x,1,4216,34.891,229.379,28.660,generated SQL denominator
+projection audit,1x,442680,498,1710.888,275.629,258742.763,all engine-pair/probe checks
+fixed-basis repair,1x,498,0,8.488,275.629,58669.330,layer+placement unresolved count
+SQL catalog validation,1x,12648,12648,571.436,275.629,22133.714,"catalog sizes=(1, 5, 17)"

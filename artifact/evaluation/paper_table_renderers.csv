@@ -11,6 +11,7 @@ case_summary,Paper/latex/tables/tab_cases.tex,1,0,,0,manifest-sourced-static,tru
 projection_ladder,Paper/latex/tables/tab_projection_ladder.tex,1,0,,0,manifest-sourced-static,true
 evidence_examples,Paper/latex/tables/tab_evidence_examples.tex,2,0,,0,manifest-sourced-static,true
 false_equivalence_robustness,Paper/latex/tables/tab_robustness.tex,3,0,,0,manifest-sourced-static,true
+robustness_replay_dashboard,Paper/latex/tables/tab_robustness_replay_dashboard.tex,10,0,,0,manifest-sourced-static,true
 probe_subsample_robustness,Paper/latex/tables/tab_probe_subsample.tex,2,0,,0,manifest-sourced-static,true
 baseline_portfolio,Paper/latex/tables/tab_baseline_portfolio.tex,2,0,,1,scripts/render_baseline_external_tables.py,true
 external_benchmark_crosswalk,Paper/latex/tables/tab_external_crosswalk.tex,2,0,,1,scripts/render_baseline_external_tables.py,true

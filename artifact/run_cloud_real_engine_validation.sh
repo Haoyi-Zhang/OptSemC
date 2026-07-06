@@ -7,19 +7,27 @@ export PYTHONPATH="$SCRIPT_DIR:$SCRIPT_DIR/scripts${PYTHONPATH:+:$PYTHONPATH}"
 
 PYTHON_BIN="${PYTHON:-python}"
 ENGINES="${OPTSEMC_REAL_ENGINES:-duckdb,postgres}"
-POSTGRES_DSN="${OPTSEMC_POSTGRES_DSN:-dbname=optsemc user=optsemc}"
+POSTGRES_DSN="${OPTSEMC_POSTGRES_DSN:-}"
+if [[ "$ENGINES" == *postgres* && -z "$POSTGRES_DSN" ]]; then
+  echo "OPTSEMC_POSTGRES_DSN must be set for PostgreSQL validation." >&2
+  exit 2
+fi
+POSTGRES_ARGS=()
+if [[ -n "$POSTGRES_DSN" ]]; then
+  POSTGRES_ARGS=(--postgres-dsn "$POSTGRES_DSN")
+fi
 
 "$PYTHON_BIN" scripts/run_real_engine_validation.py \
   --engines "$ENGINES" \
   --subset motif \
-  --postgres-dsn "$POSTGRES_DSN" \
+  "${POSTGRES_ARGS[@]}" \
   --out evaluation/real_engine_probe_validation_motif.csv \
   --summary-out evaluation/real_engine_probe_validation_motif_summary.csv
 
 "$PYTHON_BIN" scripts/run_real_engine_validation.py \
   --engines "$ENGINES" \
   --subset full \
-  --postgres-dsn "$POSTGRES_DSN" \
+  "${POSTGRES_ARGS[@]}" \
   --out evaluation/real_engine_probe_validation_full.csv \
   --summary-out evaluation/real_engine_probe_validation_full_summary.csv
 

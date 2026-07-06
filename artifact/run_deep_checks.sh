@@ -5,7 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 export PYTHONPATH="$SCRIPT_DIR:$SCRIPT_DIR/scripts${PYTHONPATH:+:$PYTHONPATH}"
 clean_transients() {
-  find .. -type d \( -name "__pycache__" -o -name ".pytest_cache" -o -name "*.egg-info" \) -prune -exec rm -rf {} +
+  find .. -type d \( -name "__pycache__" -o -name ".pytest_cache" -o -name "*.egg-info" -o -name "build" -o -name "dist" \) -prune -exec rm -rf {} +
   find .. -type f \( -name "*.pyc" -o -name "*.pyo" -o -name "*.aux" -o -name "*.log" -o -name "*.out" -o -name "*.toc" -o -name "*.fls" -o -name "*.fdb_latexmk" -o -name "*.bbl" -o -name "*.blg" -o -name "*.backup" \) -delete
   find .. -type f -name "git_tree_status.txt" -delete
 }
@@ -224,7 +224,7 @@ run_py scripts/check_package_manifest.py
 run_py scripts/check_package_snapshot.py
 run_py scripts/run_integrity_suite.py
 if [[ "${OPTSEMC_RELEASE_GATE:-0}" == "1" ]]; then
-  echo "[deep] final release clean-tree assertion"
+  echo "[deep] clean-tree assertion"
   OPTSEMC_RELEASE_GATE=1 timeout "$PY_TIMEOUT" python -u scripts/check_git_tree_state.py
   git -C .. diff --exit-code -- artifact/evaluation/git_tree_state.csv artifact/evaluation/git_tree_porcelain.txt artifact/evaluation/git_tree_state_check.csv
   test -z "$(git -C .. status --porcelain=v1 --untracked-files=all)"

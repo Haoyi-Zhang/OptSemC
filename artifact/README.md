@@ -6,7 +6,7 @@ The manuscript source is intentionally outside the anonymous replay archive. The
 
 ## Archive verification
 
-The public anonymous replay package is archived under the stable concept DOI https://doi.org/10.5281/zenodo.21092812. The repository README and the PVLDB availability block record the exact version DOI and SHA-256 for the uploaded `optsemc-artifact.zip`. Verify a downloaded archive with:
+The public anonymous replay package is archived under the stable concept DOI https://doi.org/10.5281/zenodo.21092812. The repository README and the PVLDB availability block record the archival DOI and SHA-256 for the uploaded `optsemc-artifact.zip`. Verify a downloaded archive with:
 
 ```bash
 sha256sum optsemc-artifact.zip
@@ -20,7 +20,7 @@ The archive records its source Git commit and clean-tree status in `artifact/eva
 - OptSemBench-C: 4,216 generated SQL probes covering 7,112 renderable valid feature interactions. The generator is rule-aware: 99 probes are forced by admitted public rule guards, and the remaining probes come from the feature-interaction universe.
 - SQL validation: 12,648 probe-catalog executions across three deterministic validation catalogs, with zero failures.
 - Real-engine SQL validation: 8,432 DuckDB/PostgreSQL full-corpus executions and 142 motif-representative executions, with zero failures.
-- Published-motif denominator: 90/90 motifs across 12 optimizer/workload families are covered; each motif has a generated SQL representative validated on the deterministic catalog.
+- Published-motif denominator: 90/90 motifs across 12 optimizer/workload families are covered by 71 distinct generated SQL representatives; the deterministic-catalog validation and many-to-one motif map are recorded.
 - Projection-kernel evaluation: exact, lossy, ablation, mutation, strengthened, and exhaustive field-resolution projections.
 - Repair certificates: finite separator and field-lattice certificates for semantic repair.
 - Claim-evidence graph: paper claims linked to generated outputs and integrity gates.
@@ -50,7 +50,7 @@ Fast mainline checks: passed
 
 ## Execution environment
 
-The artifact is designed for standard Linux systems with Python 3 and the dependencies in `requirements.txt`. Development edits were made on Windows, while the full replay and integrity gates were validated on Linux. Cloud execution was used as the validation host, not as a private service dependency. The tested environment is recorded in `evaluation/environment.csv` after a replay. The public replay does not require project-specific credentials or private infrastructure.
+The artifact is designed for standard Linux systems with Python 3.10 and the pinned dependencies in `requirements.txt` and `constraints.txt`. Development edits were made on Windows, while the full replay and integrity gates were validated on Linux. Cloud execution was used as the validation host, not as a private service dependency. The tested environment is recorded in `evaluation/environment.csv` after a replay. The public replay does not require project-specific credentials or private infrastructure.
 
 ## Full no-cache replay
 

@@ -1,21 +1,20 @@
 \begin{table}[t]
 \centering
-\caption{Concrete collision audits linking coarse labels to hidden contract pairs.  Repair keys are case-local separators; the reported layer+placement basis covers all headline records.}
+\caption{Concrete collision audits linking coarse labels to hidden contract pairs. Repair keys are case-local separators; the reported layer+placement basis covers all headline records.}
 \label{tab:cases}
 \footnotesize
-\setlength{\tabcolsep}{1.8pt}
-\renewcommand{\arraystretch}{1.10}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.23in}
-                >{\raggedright\arraybackslash}p{0.49in}
-                >{\raggedright\arraybackslash}p{0.68in}
-                >{\raggedright\arraybackslash}p{1.51in}@{}}
+\setlength{\tabcolsep}{2.4pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.38in}
+                >{\raggedright\arraybackslash}p{1.36in}
+                >{\raggedright\arraybackslash}p{1.38in}@{}}
 \toprule
-Case & Trace & Repair key & Audit \\
+Case & Hidden comparison & Repair read \\
 \midrule
-C1 & P0009; 4 sources & operator; placement; decision time & \texttt{pushdown}+\texttt{explain} hides BigQuery source delegation and stage evidence versus Trino connector pushdown and dynamic filtering. \\
-C2 & C2; 16 rules & observability; placement & Plan evidence hides local estimates versus cloud-service stages and distributed-worker evidence. \\
-C3 & C3; 16 rules & layer; decision time & Adaptive execution hides compile-time planning versus runtime repartition, AQE, and conversion. \\
-C4 & C4; 16 rules & variant; guard state & CTE materialization hides inline, materialize, reuse, and disable-guard contracts. \\
+C1 & P0009 links four sources where \texttt{pushdown}+\texttt{explain} hides BigQuery source delegation and stage evidence versus Trino connector pushdown and dynamic filtering. & Operator, placement, and decision time separate the public contracts. \\
+C2 & Sixteen estimate and plan-evidence rules mix local estimates, cloud-service stages, and distributed-worker evidence under one exposed-plan label. & Observability and placement distinguish what the audit can inspect. \\
+C3 & Sixteen adaptive-execution rules merge compile-time planning with runtime repartition, AQE, and conversion behavior. & Layer and decision time separate when the optimizer commits. \\
+C4 & Sixteen CTE rules collapse inline, materialize, reuse, and disable-guard contracts into one materialization label. & Variant and guard state identify the case-local separator. \\
 \bottomrule
 \end{tabular}
 \end{table}

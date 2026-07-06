@@ -28,6 +28,7 @@ CORE_COMPUTE_FILES = [
 CORE_TABLES = {
     "core_results",
     "false_equivalence_robustness",
+    "robustness_replay_dashboard",
     "projection_resolution_lattice",
     "semantic_frontier",
     "anti_overfit_audit",

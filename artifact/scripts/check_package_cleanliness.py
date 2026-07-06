@@ -24,7 +24,7 @@ def add(check: str, passed: bool, details: str = '') -> None:
 
 transient = transient_paths(PKG, suffixes=(
     '.pyc', '.pyo', '.aux', '.log', '.out', '.toc', '.fls', '.fdb_latexmk', '.synctex.gz', '.backup', '.egg-info',
-), names={'__pycache__', '.DS_Store', '.pytest_cache'})
+), names={'__pycache__', '.DS_Store', '.pytest_cache', 'build', 'dist'})
 add('no_transient_or_build_byproducts', not transient, '|'.join(transient[:20]))
 
 version_hits = []

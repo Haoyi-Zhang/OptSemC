@@ -1,6 +1,6 @@
 \begin{table}[t]
 \centering
-\caption{External benchmark-motif representative validation. Each motif is mapped to a generated probe and validated on the deterministic catalog.}
+\caption{External benchmark-motif representative validation. The 90 declared motif requirements map to 71 distinct generated SQL probes because some probes satisfy multiple optimizer-decision requirements; every motif representative validates on the deterministic catalog.}
 \label{tab:external-execution}
 \small
 \begin{tabular}{lrrr}
@@ -20,7 +20,7 @@ DuckDB-Controls & 8 & 8 & 20 \\
 ClickHouse-JoinAlgorithms & 7 & 7 & 35 \\
 Spark-Trino-Distribution & 8 & 8 & 40 \\
 \midrule
-Total & 90 & 90 & 383 \\
+Total & \textbf{90} & \textbf{90} & 383 \\
 \bottomrule
 \end{tabular}
 \end{table}

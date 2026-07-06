@@ -289,7 +289,7 @@ def render_sql_execution(plt, output: Path) -> None:
     denom = max(summary["executed_sql_probes"], 1)
     colors = [COLORS["blue"], COLORS["teal"], COLORS["rose"]]
 
-    fig, ax = plt.subplots(figsize=(3.2, 1.45))
+    fig, ax = plt.subplots(figsize=(3.2, 1.62))
     y = list(range(len(labels)))
     ax.barh(y, [v / denom for v in values], color=colors, alpha=0.78, height=0.42)
     for yi, value in zip(y, values):
@@ -302,14 +302,14 @@ def render_sql_execution(plt, output: Path) -> None:
     ax.invert_yaxis()
     ax.set_xlim(0, 1.05)
     ax.set_xlabel("share of generated probes")
-    ax.set_title("SQL validation: all generated probes execute")
+    ax.set_title("SQL validation", loc="left", pad=2.0)
     ax.spines[["top", "right", "left"]].set_visible(False)
     ax.tick_params(axis="y", length=0)
     ax.grid(axis="x", color=COLORS["rule"], linewidth=0.35, alpha=0.65)
     ax.text(
         0.0,
-        -0.55,
-        f"deterministic catalog, n={denom:,}; distinct plans: {summary['distinct_plan_hashes']}; rows: {summary['total_result_rows']:,}",
+        -0.32,
+        f"all generated probes execute; n={denom:,}; plans={summary['distinct_plan_hashes']}; rows={summary['total_result_rows']:,}",
         fontsize=6.2,
         color=COLORS["gray"],
     )

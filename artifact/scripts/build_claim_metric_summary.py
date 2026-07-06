@@ -114,7 +114,17 @@ def add_baseline_and_external_metrics(rows: list[dict[str, str]]) -> None:
         add(rows, "external_benchmark_matching_probes", sum(int(row["matching_probes"]) for row in suite_rows), "evaluation/external_benchmark_suite.csv")
 
     exec_summary = {row["metric"]: row["value"] for row in optional_csv(E / "external_motif_execution_summary.csv") or []}
-    for key in ["external_motifs", "matched_motifs", "executed_motifs", "execution_failures", "suites"]:
+    for key in [
+        "external_motifs",
+        "matched_motifs",
+        "executed_motifs",
+        "execution_failures",
+        "distinct_representative_probes",
+        "motifs_per_representative_min",
+        "motifs_per_representative_max",
+        "shared_representative_probes",
+        "suites",
+    ]:
         if key in exec_summary:
             add(rows, f"external_motif_representative_{key}", exec_summary[key], "evaluation/external_motif_execution_summary.csv")
 

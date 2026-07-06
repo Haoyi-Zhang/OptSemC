@@ -8,7 +8,7 @@ and engine-pair-level partitions. The basis deliberately excludes action
 variants and uses query-processing fields only.
 """
 from __future__ import annotations
-import csv, itertools, json
+import csv, hashlib, itertools, json
 from collections import defaultdict
 from pathlib import Path
 
@@ -102,7 +102,7 @@ def fold_id(probe_id: str, folds: int = 10):
     try:
         n = int(''.join(ch for ch in probe_id if ch.isdigit()))
     except ValueError:
-        n = abs(hash(probe_id))
+        n = int(hashlib.sha256(probe_id.encode('utf-8')).hexdigest()[:12], 16)
     return n % folds
 
 

@@ -1,0 +1,4 @@
+\section{Archive and Replay}
+\label{sec:archive-replay}
+
+Each paper-facing number is bound to a replay ledger over a fixed schema, source set, projection vocabulary, motif crosswalk, probe denominator, and repair universe; changing any input creates a new denominator and requires a full replay.  The archive keeps the 70-paper bibliography separate from source-record ledgers.  DuckDB and PostgreSQL executions validate that generated SQL runs over deterministic catalogs, but those outputs are scoped away from collision and repair counts.  The timed rows measure only post-admission finite-audit replay; source discovery, manual admission, package construction, and fresh engine installation remain outside the reported costs.  They are engineering replay bounds for an already admitted denominator, not human-audit baselines.

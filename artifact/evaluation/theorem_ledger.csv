@@ -8,4 +8,4 @@ F6 minimum repair certificates,"direct enumeration, lower-bound checks, and hitt
 F7 semantic repair basis,layer+placement repairs all projections in the core field universe,repair_basis_stability.csv; semantic_frontier_check.csv,true,
 F8 benchmark coverage,valid probes cover all target interactions and external motif requirements,probe_validity.csv; coverage_interactions.csv; external_benchmark_crosswalk.csv,true,probe_issues=0;motifs=5
 F9 public provenance,every grounded rule has public locator and clean provenance,public_provenance_summary.csv,true,"{'verified_segments': '287', 'segments_with_public_locator': '287', 'internal_construction_refs': '0', 'public_provenance_issues': '0'}"
-C1 adversarial baseline suite,coarse one-field baselines fail while high-information surface baseline is safe,baseline_portfolio.csv; baseline_portfolio_check.csv,true,placement_only=10702;surface=0
+C1 projection-surface stress suite,coarse one-field surfaces fail while the high-information surface control is safe,baseline_portfolio.csv; baseline_portfolio_check.csv,true,placement_only=10702;surface=0

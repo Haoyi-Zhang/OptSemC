@@ -11,7 +11,7 @@ certificate:projection_resolution_check,true,12/12
 certificate:projection_frontier_antichain_check,true,11/11
 certificate:package_manifest_check,true,6/6
 certificate:repository_quality_check,true,5/5
-certificate:artifact_registry_check,true,142/142
+certificate:artifact_registry_check,true,145/145
 certificate:practice_projection_surfaces_check,true,6/6
 certificate:anti_overfit_audit_check,true,13/13
 certificate:real_engine_validation_check,true,30/30
@@ -26,5 +26,5 @@ certificate:manuscript_style,true,7/7
 certificate:python_figure_renderers,true,4/4
 certificate:latex_compile_check,true,10/10
 certificate:pdf_integrity,true,8/8
-certificate:reference_quality,true,154/154
-certificate:paper_table_source_check,true,29/29
+certificate:reference_quality,true,148/148
+certificate:paper_table_source_check,true,30/30

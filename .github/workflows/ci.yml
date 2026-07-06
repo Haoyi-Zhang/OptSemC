@@ -6,27 +6,63 @@ on:
 
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10.12'
       - name: Install package
         run: |
           python3 -m pip install --upgrade pip
-          python3 -m pip install -e "artifact[realengines]"
+          python3 -m pip install -c artifact/constraints.txt -e "artifact[realengines]"
       - name: Run mainline checks
         run: |
           cd artifact
           ./run_mainline_checks.sh
   package-gate:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10.12'
       - name: Install package
         run: |
           python3 -m pip install --upgrade pip
-          python3 -m pip install -e "artifact[realengines]"
+          python3 -m pip install -c artifact/constraints.txt -e "artifact[realengines]"
       - name: Run artifact-only deep checks
         run: |
           cd artifact
           OPTSEMC_REQUIRE_CLEAN_GIT=1 python scripts/check_git_tree_state.py
-          ANONYMOUS_ARTIFACT_ONLY=1 ./run_deep_checks.sh
+          ANONYMOUS_ARTIFACT_ONLY=1 OPTSEMC_RELEASE_GATE=1 ./run_deep_checks.sh
+  real-engine-smoke:
+    runs-on: ubuntu-22.04
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_DB: optsemc
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10.12'
+      - name: Install package
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -c artifact/constraints.txt -e "artifact[realengines]"
+      - name: Run fresh DuckDB/PostgreSQL validation
+        env:
+          OPTSEMC_POSTGRES_DSN: postgresql://postgres@127.0.0.1:5432/optsemc
+        run: |
+          cd artifact
+          ./run_cloud_real_engine_validation.sh

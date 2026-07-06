@@ -71,6 +71,18 @@ Paper/latex/sections/05_evaluation.tex,artifact/,0,yes
 Paper/latex/sections/05_evaluation.tex,\.jsonl,0,yes
 Paper/latex/sections/05_evaluation.tex,\.csv,0,yes
 Paper/latex/sections/05_evaluation.tex,\.py,0,yes
+Paper/latex/sections/06_archive_replay.tex,current corpus contains 746,0,yes
+Paper/latex/sections/06_archive_replay.tex,746 accepted contract rules,0,yes
+Paper/latex/sections/06_archive_replay.tex,112 public source records,0,yes
+Paper/latex/sections/06_archive_replay.tex,747 frozen evidence segments,0,yes
+Paper/latex/sections/06_archive_replay.tex,legacy 746-rule corpus is retained,0,yes
+Paper/latex/sections/06_archive_replay.tex,stress-test layer,0,yes
+Paper/latex/sections/06_archive_replay.tex,optsem_c_v2[0-6]_,0,yes
+Paper/latex/sections/06_archive_replay.tex,paper/latex/,0,yes
+Paper/latex/sections/06_archive_replay.tex,artifact/,0,yes
+Paper/latex/sections/06_archive_replay.tex,\.jsonl,0,yes
+Paper/latex/sections/06_archive_replay.tex,\.csv,0,yes
+Paper/latex/sections/06_archive_replay.tex,\.py,0,yes
 Paper/latex/sections/06_cases.tex,current corpus contains 746,0,yes
 Paper/latex/sections/06_cases.tex,746 accepted contract rules,0,yes
 Paper/latex/sections/06_cases.tex,112 public source records,0,yes

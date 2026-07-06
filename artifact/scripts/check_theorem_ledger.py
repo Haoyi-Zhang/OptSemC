@@ -107,9 +107,9 @@ def main() -> None:
     try:
         bp = {r["projection"]: r for r in read_csv(G / "baseline_portfolio.csv")}
         ok = int(bp["placement_only"]["false_equivalences"]) > 10000 and int(bp["operator_kind_surface"]["false_equivalences"]) == 0
-        add("C1 adversarial baseline suite", "coarse one-field baselines fail while high-information surface baseline is safe", "baseline_portfolio.csv; baseline_portfolio_check.csv", ok and all_true(E / "baseline_portfolio_check.csv"), f"placement_only={bp['placement_only']['false_equivalences']};surface={bp['operator_kind_surface']['false_equivalences']}")
+        add("C1 projection-surface stress suite", "coarse one-field surfaces fail while the high-information surface control is safe", "baseline_portfolio.csv; baseline_portfolio_check.csv", ok and all_true(E / "baseline_portfolio_check.csv"), f"placement_only={bp['placement_only']['false_equivalences']};surface={bp['operator_kind_surface']['false_equivalences']}")
     except Exception as exc:
-        add("C1 adversarial baseline suite", "coarse one-field baselines fail while high-information surface baseline is safe", "baseline_portfolio.csv", False, type(exc).__name__)
+        add("C1 projection-surface stress suite", "coarse one-field surfaces fail while the high-information surface control is safe", "baseline_portfolio.csv", False, type(exc).__name__)
 
     with OUT.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=["theorem_or_claim", "finite_obligation", "support", "passed", "details"])

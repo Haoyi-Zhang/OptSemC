@@ -98,7 +98,9 @@
 
 \begin{document}
 \begin{abstract}
-Analytical SQL engines often summarize optimizer behavior with public labels such as \texttt{pushdown}, \texttt{join}, or \texttt{cost based}.  Those labels are convenient, but they are not equality predicates: one \texttt{pushdown} cell can hide local rewrite, connector delegation, service-side stages, or runtime filtering.  OptSem-C treats this as a public-contract denominator problem.  It encodes each source-supported optimizer claim as a guarded contract over query features, action kind, optimizer layer, execution placement, decision time, observability, and evidence provenance, then audits which distinctions a comparison vocabulary preserves.  The schema, projection portfolio, source manifest, and repair-field universe are fixed before witness counting; robustness checks remain finite-denominator stress tests rather than independent-population generalization.  On seven analytical SQL engines, 287 source-linked rules, and 4,216 executable probes, keyword, operator-only, and yes/no vocabularies create 254, 238, and 6 projection-induced contract collisions.  The 498 headline witness records occupy four observed engine pairs and 486 distinct probes; they are denominator errors over the admitted public-contract corpus, not private optimizer bug claims or estimates of proprietary workloads, future engine versions, or operator classes outside the declared schema.  Placement repairs keyword collisions, optimizer layer repairs operator-only collisions, and layer plus placement is one interpretable two-field repair basis for the headline witness relation.  OptSem-C provides replayable finite counter-witnesses and repair certificates that can be checked before latency, cardinality, or plan-quality comparisons are interpreted.
+Optimizer comparisons in database papers often start with public labels such as pushdown, join, or cost-based optimization.  Those labels are readable, but they are not equality predicates for query-processing behavior.  A BigQuery stage label, a Trino connector-pushdown claim, a local rewrite, and a runtime filter can all be summarized as ``pushdown'' even though they support different comparison conclusions.  OptSem-C studies this data-management denominator before latency, cardinality, or plan-quality measurements are read.  It encodes each source-supported optimizer claim as a guarded public contract over action, query guard, optimizer layer, execution placement, decision time, observability, and evidence support, then asks which public distinctions a comparison vocabulary preserves.
+
+The audit is fixed before witness counting: schema, sources, projections, motif crosswalk, and repair-field universe are all replay inputs.  On seven analytical SQL engines, 287 source-linked rules, 4,216 executable probes, and 26 observed comparison surfaces, keyword, operator-only, and yes/no vocabularies induce 254, 238, and 6 contract-collision witnesses.  These witnesses occupy four observed engine pairs and 486 distinct probes; they are denominator errors over public contracts, not private optimizer bug claims or population estimates for future engines.  The benchmark also covers 90 published optimizer-motif requirements through 71 distinct SQL representatives.  Placement repairs the keyword collisions, optimizer layer repairs the operator-only collisions, and layer plus placement repairs all 498 headline witnesses.  The result is a replayable public-contract audit: comparison papers can check which optimizer distinction they collapsed, which retained fields repair it, and where the finite evidence stops.
 \end{abstract}
 
 \maketitle
@@ -134,13 +136,13 @@ The source code, data, and/or other artifacts have been made available at \url{\
 \input{sections/03_model}
 \input{sections/04_benchmark_corpus}
 \input{sections/05_evaluation}
+\input{sections/06_archive_replay}
 \input{sections/07_discussion_related}
 
 
 \begingroup
 \clubpenalty=10000
 \widowpenalty=10000
-\interlinepenalty=10000
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{refs}
 \endgroup

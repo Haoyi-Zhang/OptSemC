@@ -1,4 +1,4 @@
-﻿@article{codd1970relational,
+@article{codd1970relational,
   author = {E. F. Codd},
   title = {A Relational Model of Data for Large Shared Data Banks},
   year = {1970},
@@ -500,22 +500,35 @@
   doi = {10.14778/3648160.3648175}
 }
 
-@misc{tpcds,
-  author = {Transaction Processing Performance Council},
-  title = {{TPC} Benchmark {DS} Standard Specification},
-  year = {2024},
-  howpublished = {{TPC}},
-  url = {https://www.tpc.org/tpcds/},
-  note = {Accessed 2026-06-16}
+@article{poess2000tpc,
+  author = {Meikel Poess and Chris Floyd},
+  title = {New {TPC} Benchmarks for Decision Support and Web Commerce},
+  year = {2000},
+  journal = {ACM SIGMOD Record},
+  pages = {64--71},
+  number = {4},
+  volume = {29},
+  doi = {10.1145/369275.369291}
 }
 
-@misc{tpch,
-  author = {Transaction Processing Performance Council},
-  title = {{TPC} Benchmark {H} Standard Specification},
-  year = {2024},
-  howpublished = {{TPC}},
-  url = {https://www.tpc.org/tpch/},
-  note = {Accessed 2026-06-16}
+@inproceedings{nambiar2006tpcds,
+  author = {Raghunath Othayoth Nambiar and Meikel Poess},
+  title = {The Making of {TPC-DS}},
+  year = {2006},
+  booktitle = {VLDB},
+  pages = {1049--1058},
+  url = {https://www.vldb.org/conf/2006/p1049-othayoth.pdf}
+}
+
+@article{darmont2007benchmarking,
+  author = {J{\'e}r{\^o}me Darmont and Fadila Bentayeb and Omar Boussa{\"i}d},
+  title = {Benchmarking Data Warehouses},
+  year = {2007},
+  journal = {International Journal of Business Intelligence and Data Mining},
+  pages = {79--104},
+  number = {1},
+  volume = {2},
+  doi = {10.1504/IJBIDM.2007.012947}
 }
 
 @inproceedings{oneil2009ssb,
@@ -546,15 +559,6 @@
   url = {https://www.vldb.org/conf/1983/P008.PDF}
 }
 
-@incollection{turbyfill1993as3ap,
-  author = {C. Turbyfill and C. Orji and D. Bitton},
-  title = {{AS3AP}: An {ANSI SQL} Standard Scaleable and Portable Benchmark for Relational Database Systems},
-  year = {1993},
-  booktitle = {The Benchmark Handbook for Database and Transaction Processing Systems},
-  pages = {95--121},
-  url = {https://www.odbms.org/2014/03/benchmark-handbook-1993/}
-}
-
 @article{deng2024lakebench,
   author = {Yuhao Deng and Chengliang Chai and Lei Cao and Qin Yuan and Siyuan Chen and Yanrui Yu and Zhaoze Sun and Junyi Wang and Jiajun Li and Ziqi Cao and Kaisen Jin and Chi Zhang and Yuqing Jiang and Yuanfang Zhang and Yuping Wang and Ye Yuan and Guoren Wang and Nan Tang},
   title = {{LakeBench}: A Benchmark for Discovering Joinable and Unionable Tables in Data Lakes},
@@ -566,13 +570,22 @@
   doi = {10.14778/3659437.3659448}
 }
 
-@misc{clickbench,
-  author = {ClickHouse Inc.},
-  title = {{ClickBench}: A Benchmark for Analytical {DBMS}},
-  year = {2024},
-  howpublished = {Online benchmark},
-  url = {https://benchmark.clickhouse.com/},
-  note = {Accessed 2026-06-16}
+@inproceedings{cooper2010ycsb,
+  author = {Brian F. Cooper and Adam Silberstein and Erwin Tam and Raghu Ramakrishnan and Russell Sears},
+  title = {Benchmarking Cloud Serving Systems with {YCSB}},
+  year = {2010},
+  booktitle = {SoCC},
+  pages = {143--154},
+  doi = {10.1145/1807128.1807152}
+}
+
+@inproceedings{pavlo2009comparison,
+  author = {Andrew Pavlo and Erik Paulson and Alexander Rasin and Daniel J. Abadi and David J. DeWitt and Samuel Madden and Michael Stonebraker},
+  title = {A Comparison of Approaches to Large-Scale Data Analysis},
+  year = {2009},
+  booktitle = {SIGMOD},
+  pages = {165--178},
+  doi = {10.1145/1559845.1559865}
 }
 
 @inproceedings{carey1995garlic,
@@ -596,119 +609,86 @@
   doi = {10.1145/2814710.2814713}
 }
 
-@misc{postgresql_docs,
-  author = {PostgreSQL Global Development Group},
-  title = {{PostgreSQL} Documentation: 18: 14.1. Using {EXPLAIN}},
-  year = {2026},
-  howpublished = {Documentation},
-  url = {https://www.postgresql.org/docs/18/using-explain.html},
-  note = {Accessed 2026-06-16}
+@inproceedings{stonebraker2005cstore,
+  author = {Michael Stonebraker and Daniel J. Abadi and Adam Batkin and Xuedong Chen and Mitch Cherniack and Miguel Ferreira and Edmond Lau and Amerson Lin and Samuel Madden and Elizabeth J. O'Neil and Patrick E. O'Neil and Alexander Rasin and Nga Tran and Stanley B. Zdonik},
+  title = {{C-Store}: A Column-Oriented {DBMS}},
+  year = {2005},
+  booktitle = {VLDB},
+  pages = {553--564},
+  doi = {10.5555/1083592.1083658}
 }
 
-@misc{trino_docs,
-  author = {Trino Software Foundation},
-  title = {Cost-Based Optimizations: Trino 482 Documentation},
-  year = {2026},
-  howpublished = {Documentation},
-  url = {https://trino.io/docs/482/optimizer/cost-based-optimizations.html},
-  note = {Accessed 2026-06-16}
+@inproceedings{abadi2008columnstores,
+  author = {Daniel J. Abadi and Samuel R. Madden and Nabil Hachem},
+  title = {Column-Stores vs. Row-Stores: How Different Are They Really?},
+  year = {2008},
+  booktitle = {SIGMOD},
+  pages = {967--980},
+  doi = {10.1145/1376616.1376712}
 }
 
-@misc{trino_pushdown_docs,
-  author = {Trino Software Foundation},
-  title = {Pushdown: Trino 482 Documentation},
-  year = {2026},
-  howpublished = {Documentation},
-  url = {https://trino.io/docs/current/optimizer/pushdown.html},
-  note = {Accessed 2026-07-04}
+@article{abadi2013columnoriented,
+  author = {Daniel Abadi and Peter Boncz and Stavros Harizopoulos and Stratos Idreos and Samuel Madden},
+  title = {The Design and Implementation of Modern Column-Oriented Database Systems},
+  year = {2013},
+  journal = {Foundations and Trends in Databases},
+  pages = {197--280},
+  number = {3},
+  volume = {5},
+  doi = {10.1561/1900000024}
 }
 
-@misc{trino_dynamic_filtering_docs,
-  author = {Trino Software Foundation},
-  title = {Dynamic Filtering: Trino 482 Documentation},
-  year = {2026},
-  howpublished = {Documentation},
-  url = {https://trino.io/docs/current/admin/dynamic-filtering.html},
-  note = {Accessed 2026-07-04}
+@inproceedings{abadi2007materialization,
+  author = {Daniel J. Abadi and Daniel S. Myers and David J. DeWitt and Samuel R. Madden},
+  title = {Materialization Strategies in a Column-Oriented {DBMS}},
+  year = {2007},
+  booktitle = {ICDE},
+  pages = {466--475},
+  url = {https://www.cs.umd.edu/~abadi/papers/abadiicde2007.pdf}
 }
 
-@misc{bigquery_docs,
-  author = {Google Cloud},
-  title = {Query Plan and Timeline},
-  year = {2026},
-  howpublished = {Documentation},
-  url = {https://cloud.google.com/bigquery/docs/query-plan-explanation},
-  note = {Accessed 2026-06-16}
+@inproceedings{abadi2006compression,
+  author = {Daniel J. Abadi and Samuel R. Madden and Miguel Ferreira},
+  title = {Integrating Compression and Execution in Column-Oriented Database Systems},
+  year = {2006},
+  booktitle = {SIGMOD},
+  pages = {671--682},
+  doi = {10.1145/1142473.1142548}
 }
 
-@misc{bigquery_federated_docs,
-  author = {Google Cloud},
-  title = {Introduction to Federated Queries},
-  year = {2026},
-  howpublished = {Documentation},
-  url = {https://docs.cloud.google.com/bigquery/docs/federated-queries-intro},
-  note = {Accessed 2026-07-04}
+@inproceedings{kemper2011hyper,
+  author = {Alfons Kemper and Thomas Neumann},
+  title = {{HyPer}: A Hybrid {OLTP\&OLAP} Main Memory Database System Based on Virtual Memory Snapshots},
+  year = {2011},
+  booktitle = {ICDE},
+  pages = {195--206},
+  doi = {10.1109/ICDE.2011.5767867}
 }
 
-@misc{spark_docs,
-  author = {Apache Software Foundation},
-  title = {Performance Tuning: Spark 4.1.2 Documentation},
-  year = {2026},
-  howpublished = {Documentation},
-  url = {https://spark.apache.org/docs/4.1.2/sql-performance-tuning.html},
-  note = {Accessed 2026-06-16}
+@article{thusoo2009hive,
+  author = {Ashish Thusoo and Joydeep Sen Sarma and Namit Jain and Zheng Shao and Prasad Chakka and Suresh Anthony and Hao Liu and Pete Wyckoff and Raghotham Murthy},
+  title = {Hive: A Warehousing Solution over a Map-Reduce Framework},
+  year = {2009},
+  journal = {PVLDB},
+  pages = {1626--1629},
+  number = {2},
+  volume = {2},
+  doi = {10.14778/1687553.1687609}
 }
 
-@misc{snowflake_docs,
-  author = {Snowflake Inc.},
-  title = {{EXPLAIN}: Snowflake Documentation},
-  year = {2026},
-  howpublished = {Documentation},
-  url = {https://docs.snowflake.com/en/sql-reference/sql/explain},
-  note = {Accessed 2026-06-16}
+@inproceedings{kornacker2015impala,
+  author = {Marcel Kornacker and Alexander Behm and Victor Bittorf and Taras Bobrovytsky and Casey Ching and Alan Choi and Justin Erickson and Martin Grund and Daniel Hecht and Matthew Jacobs and Ishaan Joshi and Lenni Kuff and Dileep Kumar and Alex Leblang and Nong Li and Ippokratis Pandis and Henry Robinson and David Rorke and Silvius Rus and John Russell and Dimitris Tsirogiannis and Skye Wanderman-Milne and Michael Yoder},
+  title = {Impala: A Modern, Open-Source {SQL} Engine for Hadoop},
+  year = {2015},
+  booktitle = {CIDR},
+  url = {https://www.cidrdb.org/cidr2015/Papers/CIDR15_Paper28.pdf}
 }
 
-@misc{duckdb_docs,
-  author = {DuckDB Foundation},
-  title = {{DuckDB} Documentation: {WITH} Clause and {CTE} Materialization},
-  year = {2026},
-  howpublished = {Documentation},
-  url = {https://duckdb.org/docs/stable/sql/query_syntax/with.html},
-  note = {Accessed 2026-06-16}
-}
-
-@misc{clickhouse_docs,
-  author = {ClickHouse Inc.},
-  title = {Using {JOINs} in {ClickHouse}},
-  year = {2026},
-  howpublished = {Documentation},
-  url = {https://clickhouse.com/docs/guides/joining-tables},
-  note = {Accessed 2026-06-16}
-}
-
-@misc{calcite_docs,
-  author = {Apache Software Foundation},
-  title = {Apache Calcite Documentation},
-  year = {2026},
-  howpublished = {Documentation},
-  url = {https://calcite.apache.org/docs/},
-  note = {Accessed 2026-06-16}
-}
-
-@misc{datafusion_docs,
-  author = {Apache Software Foundation},
-  title = {Reading Explain Plans},
-  year = {2026},
-  howpublished = {Documentation},
-  url = {https://datafusion.apache.org/user-guide/explain-usage.html},
-  note = {Accessed 2026-06-16}
-}
-
-@misc{presto_docs,
-  author = {Presto Foundation},
-  title = {Cost Based Optimizations: Presto 0.298.1 Documentation},
-  year = {2026},
-  howpublished = {Documentation},
-  url = {https://prestodb.github.io/docs/current/optimizer/cost-based-optimizations.html},
-  note = {Accessed 2026-06-16}
+@inproceedings{zukowski2012vectorwise,
+  author = {Marcin Zukowski and Mark van de Wiel and Peter Boncz},
+  title = {Vectorwise: A Vectorized Analytical {DBMS}},
+  year = {2012},
+  booktitle = {ICDE},
+  pages = {1349--1350},
+  doi = {10.1109/ICDE.2012.148}
 }

@@ -1,5 +1,8 @@
 check,passed,details
 external_motif_rows_present,true,rows=90
-twelve_external_suites_present,true,"{'external_motifs': '90', 'matched_motifs': '90', 'executed_motifs': '90', 'execution_failures': '0', 'suites': '12'}"
-all_external_motifs_matched,true,"{'external_motifs': '90', 'matched_motifs': '90', 'executed_motifs': '90', 'execution_failures': '0', 'suites': '12'}"
-all_external_motif_probes_executable,true,"{'external_motifs': '90', 'matched_motifs': '90', 'executed_motifs': '90', 'execution_failures': '0', 'suites': '12'}"
+twelve_external_suites_present,true,"{'external_motifs': '90', 'matched_motifs': '90', 'executed_motifs': '90', 'execution_failures': '0', 'distinct_representative_probes': '71', 'motifs_per_representative_min': '1', 'motifs_per_representative_max': '3', 'shared_representative_probes': '15', 'suites': '12'}"
+all_external_motifs_matched,true,"{'external_motifs': '90', 'matched_motifs': '90', 'executed_motifs': '90', 'execution_failures': '0', 'distinct_representative_probes': '71', 'motifs_per_representative_min': '1', 'motifs_per_representative_max': '3', 'shared_representative_probes': '15', 'suites': '12'}"
+all_external_motif_probes_executable,true,"{'external_motifs': '90', 'matched_motifs': '90', 'executed_motifs': '90', 'execution_failures': '0', 'distinct_representative_probes': '71', 'motifs_per_representative_min': '1', 'motifs_per_representative_max': '3', 'shared_representative_probes': '15', 'suites': '12'}"
+representative_probe_map_present,true,map=71;distinct=71
+ninety_motifs_have_seventy_one_representatives,true,"{'external_motifs': '90', 'matched_motifs': '90', 'executed_motifs': '90', 'execution_failures': '0', 'distinct_representative_probes': '71', 'motifs_per_representative_min': '1', 'motifs_per_representative_max': '3', 'shared_representative_probes': '15', 'suites': '12'}"
+shared_representatives_are_explicit,true,"{'external_motifs': '90', 'matched_motifs': '90', 'executed_motifs': '90', 'execution_failures': '0', 'distinct_representative_probes': '71', 'motifs_per_representative_min': '1', 'motifs_per_representative_max': '3', 'shared_representative_probes': '15', 'suites': '12'}"

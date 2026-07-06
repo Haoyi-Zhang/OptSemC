@@ -1,67 +1,82 @@
 \begin{figure*}[t]
 \centering
 \begin{tikzpicture}[
-  stage/.style={vpanel, draw=vldbBlue!66, fill=vldbMist,
-    text width=3.05cm, minimum height=1.32cm,
-    font=\rmfamily\fontsize{7.25}{7.95}\selectfont, text=black!73,
-    align=center, inner xsep=2.6pt, inner ysep=2.2pt},
-  audit/.style={stage, draw=vldbRose!78!black, fill=vldbRose!8,
-    text=vldbRose!78!black, font=\rmfamily\bfseries\fontsize{7.25}{7.95}\selectfont},
-  cert/.style={stage, draw=vldbTeal!76!black, fill=vldbMint},
-  ribbon/.style={rounded corners=1.6pt, draw=vldbGold!56!black, fill=vldbWarm,
-    minimum width=15.35cm, minimum height=.42cm,
-    font=\rmfamily\bfseries\fontsize{6.95}{7.55}\selectfont,
-    text=vldbInk, align=center, inner xsep=2.0pt, inner ysep=.75pt,
+  lane/.style={rounded corners=2.2pt, draw=vldbRule, fill=vldbSoft,
+    line width=.45pt, minimum width=16.72cm, minimum height=.88cm},
+  lanehead/.style={font=\rmfamily\bfseries\fontsize{7.15}{7.8}\selectfont,
+    text=vldbInk, align=right, text width=2.05cm,
     text height=1.45ex, text depth=.24ex},
-  token/.style={rounded corners=1.3pt, draw=black!16, fill=white,
-    font=\rmfamily\fontsize{6.75}{7.35}\selectfont, text=vldbGray,
-    align=center, inner xsep=1.8pt, inner ysep=.75pt,
-    text height=1.38ex, text depth=.22ex},
-  detail/.style={rounded corners=1.5pt, draw=vldbRule, fill=white,
-    text width=3.92cm, minimum height=.74cm,
-    font=\rmfamily\fontsize{6.85}{7.45}\selectfont, text=black!64,
-    align=center, inner xsep=2.0pt, inner ysep=1.1pt},
-  flow/.style={-{Latex[length=1.75mm]}, line width=.70pt,
-    draw=black!48, line cap=round, line join=round}
+  cell/.style={rounded corners=2.0pt, draw=vldbBlue!48, fill=white,
+    line width=.48pt, text width=3.16cm, minimum height=.68cm,
+    font=\rmfamily\fontsize{6.75}{7.35}\selectfont, text=black!70,
+    align=center, inner xsep=2.0pt, inner ysep=1.0pt,
+    text height=1.42ex, text depth=.24ex},
+  datacell/.style={cell, draw=vldbTeal!58!black, fill=vldbMint,
+    text=vldbTeal!62!black},
+  riskcell/.style={cell, draw=vldbRose!68!black, fill=vldbRose!7,
+    text=vldbRose!76!black, font=\rmfamily\bfseries\fontsize{6.75}{7.35}\selectfont},
+  guard/.style={rounded corners=1.5pt, draw=vldbGold!54!black, fill=vldbWarm,
+    font=\rmfamily\bfseries\fontsize{6.70}{7.25}\selectfont, text=vldbInk,
+    align=center, inner xsep=2.0pt, inner ysep=.9pt,
+    text height=1.35ex, text depth=.22ex},
+  flow/.style={-{Latex[length=1.65mm]}, line width=.66pt,
+    draw=black!46, line cap=round, line join=round},
+  flowrisk/.style={flow, draw=vldbRose!70!black},
+  flowok/.style={flow, draw=vldbTeal!70!black}
 ]
-\path[use as bounding box] (-.04,-.12) rectangle (17.08,3.92);
+\path[use as bounding box] (-.06,-.16) rectangle (17.08,4.92);
 
-\node[vhead, anchor=west] at (.10,3.62) {Contract-denominator audit};
-\node[token, anchor=east, draw=vldbTeal!42!black, fill=vldbMint,
-      text=vldbTeal!58!black] at (16.86,3.60)
-  {finite public evidence};
-\node[ribbon] at (8.52,3.10)
-  {fixed before counting: source manifest, schema, projection portfolio, and repair-field universe};
+\node[vhead, anchor=west] at (.06,4.58) {Contract-denominator system};
+\node[guard, anchor=east] at (16.92,4.58) {fixed before witness counting};
+\node[lane] at (8.52,3.86) {};
+\node[lane] at (8.52,2.72) {};
+\node[lane] at (8.52,1.58) {};
+\node[lane] at (8.52,.44) {};
 
-\node[stage] (admit) at (2.10,1.94)
-  {\textbf{1. Admit}\\26 public sources\\287 grounded rules};
-\node[stage] (ref) at (6.38,1.94)
-  {\textbf{2. Materialize}\\4,216 probes\\1,288 reference classes};
-\node[audit] (proj) at (10.66,1.94)
-  {\textbf{3. Audit}\\254 keyword false pairs\\238 operator false pairs};
-\node[cert] (out) at (14.94,1.94)
-  {\textbf{4. Certify}\\repair fields\\counter-witnesses};
+\node[lanehead, anchor=east] at (2.03,3.86) {public evidence};
+\node[lanehead, anchor=east] at (2.03,2.72) {contract maps};
+\node[lanehead, anchor=east] at (2.03,1.58) {projection audit};
+\node[lanehead, anchor=east] at (2.03,.44) {certified output};
 
-\draw[flow] ($(admit.south east)+(.08,-.10)$) --
-  ($(ref.south west)+(-.08,-.10)$);
-\draw[flow, draw=vldbRose!72!black] ($(ref.south east)+(.08,-.10)$) --
-  ($(proj.south west)+(-.08,-.10)$);
-\draw[flow, draw=vldbTeal!72!black] ($(proj.south east)+(.08,-.10)$) --
-  ($(out.south west)+(-.08,-.10)$);
+\node[cell] (src) at (3.78,3.86) {\textbf{26 sources}\\spans, URLs, digests};
+\node[cell] (rules) at (7.05,3.86) {\textbf{287 rules}\\action, guard, evidence};
+\node[cell] (schema) at (10.32,3.86) {\textbf{fixed schema}\\layer, placement, time};
+\node[datacell] (surface) at (13.59,3.86) {\textbf{26 surfaces}\\0 expose full payload};
 
-\node[detail] at (2.10,.70) {denominator: source spans and reachable probes};
-\node[detail] at (6.38,.70) {reference: full public optimizer-contract payload};
-\node[detail] at (10.66,.70) {test: projected equality versus reference inequality};
-\node[detail] at (14.94,.70) {output: counter-witnesses and repairs};
+\node[cell] (probe) at (3.78,2.72) {\textbf{4,216 probes}\\feature-interaction cover};
+\node[datacell] (motif) at (7.05,2.72) {\textbf{90 motifs}\\71 SQL representatives};
+\node[cell] (map) at (10.32,2.72) {\textbf{engine--probe maps}\\source-supported signatures};
+\node[cell] (ref) at (13.59,2.72) {\textbf{1,288 classes}\\reference payload};
 
-\node[token, text width=3.28cm, draw=vldbTeal!45!black, fill=vldbMint,
-      text=vldbTeal!58!black] at (6.80,.02)
-  {repair atom: layer + placement};
-\node[token, text width=4.08cm, draw=vldbRose!35, fill=vldbRose!7,
-      text=vldbRose!72!black] at (11.08,.02)
-  {audited equality, not runtime ranking};
+\node[riskcell] (kw) at (3.78,1.58) {keyword\\254 false pairs};
+\node[riskcell] (op) at (7.05,1.58) {operator-only\\238 false pairs};
+\node[cell, draw=vldbGold!60!black, fill=vldbWarm] (yn) at (10.32,1.58) {yes/no\\6 sparse pairs};
+\node[cell] (pairs) at (13.59,1.58) {4 engine pairs\\486 distinct probes};
+
+\node[datacell] (repair) at (3.78,.44) {repair basis\\layer + placement};
+\node[datacell] (counter) at (7.05,.44) {counter-witnesses\\finite relation};
+\node[cell] (stress) at (10.32,.44) {stress checks\\source, probe, feature};
+\node[cell] (replay) at (13.59,.44) {replay cost\\post-admission kernel};
+
+\draw[flow] (src) -- (rules);
+\draw[flow] (rules) -- (schema);
+\draw[flow] (schema) -- (surface);
+\draw[flowok] (probe) -- (motif);
+\draw[flow] (motif) -- (map);
+\draw[flow] (map) -- (ref);
+\draw[flowrisk] (probe.south) -- (kw.north);
+\draw[flowrisk] (motif.south) -- (op.north);
+\draw[flowrisk] (map.south) -- (yn.north);
+\draw[flow] (ref.south) -- (pairs.north);
+\draw[flowok] (kw.south) -- (repair.north);
+\draw[flowok] (op.south) -- (counter.north);
+\draw[flow] (yn.south) -- (stress.north);
+\draw[flow] (pairs.south) -- (replay.north);
+\draw[flowok] (repair) -- (counter);
+\draw[flowok] (counter) -- (stress);
+\draw[flow] (stress) -- (replay);
 \end{tikzpicture}
-\caption{OptSem-C's contract-comparison dataflow over 26 public sources, 287 admitted rules, and 4,216 executable probes. Inputs are fixed before witness counting; projection audits test coarse equality against reference inequality, and repairs are tied to regenerated counter-witnesses and source checks.}
-\Description{A four-stage dataflow from admission denominator to reference maps, projection audit, and certified output, with a small strip showing retained fields and repair evidence.}
+\caption{OptSem-C as a denominator-audit system. Public evidence admits rules into a fixed schema; generated probes materialize source-supported contract maps; predeclared projection vocabularies are audited in parallel against reference signatures; and repair certificates, stress checks, and replay costs report the finite comparison boundary.}
+\Description{A four-lane system diagram showing public evidence, contract maps, projection audit, and certified output. The diagram highlights 26 public surfaces, 287 rules, 4,216 probes, 90 motifs represented by 71 SQL probes, the keyword and operator collision counts, and the layer-plus-placement repair basis.}
 \label{fig:contract-model}
 \end{figure*}

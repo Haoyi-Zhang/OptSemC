@@ -19,7 +19,11 @@ try:
     dynamic_fields = set(project.get("dynamic", []))
     add("project_version_not_hardcoded", "version" not in project and "version" in dynamic_fields, f"dynamic={sorted(dynamic_fields)}")
     build_requires = set(data.get("build-system", {}).get("requires", []))
-    add("dynamic_version_backend_declared", any(req.startswith("setuptools-scm") for req in build_requires), str(sorted(build_requires)))
+    add(
+        "dynamic_version_backend_declared",
+        "setuptools-scm==8.3.1" in build_requires and "setuptools==80.9.0" in build_requires,
+        str(sorted(build_requires)),
+    )
     scm = data.get("tool", {}).get("setuptools_scm", {})
     add(
         "dynamic_version_git_root_declared",

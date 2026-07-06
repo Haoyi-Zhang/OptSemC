@@ -1,8 +1,8 @@
 check,status,value,target
-section_count_between_7_and_9,PASS,7,7..9
+section_count_between_7_and_9,PASS,8,7..9
 has_at_least_3_figures,PASS,6,>=3
-has_at_least_8_result_tables,PASS,17,>=8
-word_count_at_least_4500,PASS,9036,>=4500
+has_at_least_8_result_tables,PASS,10,>=8
+word_count_at_least_4500,PASS,9385,>=4500
 no_repository_implementation_terms_in_paper,PASS,,none
 uses_grounded_mainline_not_legacy,PASS,source-linked grounded rules,287 source-linked rules; no legacy corpus markers
 all_figures_have_descriptions,PASS,,none

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import ast
+import hashlib
 import itertools
 from collections import defaultdict
 from dataclasses import dataclass
@@ -12,6 +13,11 @@ from .domain import Probe
 
 def interaction_key(items: Sequence[tuple[str, str]]) -> str:
     return repr(tuple(sorted(items)))
+
+
+def stable_sql_hash(sql: str) -> str:
+    """Return a deterministic short digest for probe SQL text."""
+    return hashlib.sha256(sql.encode("utf-8")).hexdigest()[:16]
 
 
 def combinations_from_vector(vector: Mapping[str, str], strength: int) -> tuple[str, ...]:
@@ -134,8 +140,7 @@ def greedy_probe_cover(probes: Sequence[Probe], universe: Iterable[str], max_ste
             "probe_id": best.probe_id,
             "new_interactions": str(len(gain)),
             "remaining_interactions": str(len(remaining)),
-            "sql_skeleton_hash": str(abs(hash(best.sql_skeleton))),
+            "sql_skeleton_hash": stable_sql_hash(best.sql_skeleton),
         })
         available = [probe for probe in available if probe.probe_id != best.probe_id]
     return chosen
-

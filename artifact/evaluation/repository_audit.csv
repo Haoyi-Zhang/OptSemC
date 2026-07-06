@@ -3,7 +3,7 @@ project_entrypoints_present,true,10,10,"root README, Paper, artifact"
 replay_entrypoints_present,true,10,10,
 grounded_provenance_present,true,10,10,
 claim_evidence_outputs_present,true,10,10,
-semantic_library_reused_by_scripts,true,10,10,modules=53;classes=87;functions=1974;script_import_edges=147
+semantic_library_reused_by_scripts,true,10,10,modules=53;classes=87;functions=1975;script_import_edges=147
 unit_test_entrypoints_present,true,10,10,tests=35
 ci_and_cli,true,10,10,"ci, pyproject, makefile present"
 package_manifest_covers_research_artifacts,true,10,10,missing=
