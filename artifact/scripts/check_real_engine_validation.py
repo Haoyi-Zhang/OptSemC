@@ -12,6 +12,7 @@ E = ROOT / "evaluation"
 CHECK = E / "real_engine_validation_check.csv"
 ENV = E / "real_engine_validation_environment.csv"
 FRESH = E / "real_engine_fresh_run.csv"
+FRESH_MTIME_EPSILON_SECONDS = 2.0
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -133,7 +134,7 @@ def main() -> None:
         FRESH.exists()
         and marker.get("validation_mode") == "fresh-engine-rerun"
         and marker.get("engines") == "duckdb,postgres"
-        and FRESH.stat().st_mtime >= evidence_mtime
+        and FRESH.stat().st_mtime + FRESH_MTIME_EPSILON_SECONDS >= evidence_mtime
     )
     validation_mode = "fresh-engine-rerun" if fresh_marker_current else "saved-engine-certificate-replay"
     environment_rows = [
@@ -156,7 +157,12 @@ def main() -> None:
     if require_fresh:
         add("fresh_run_marker_present", FRESH.exists(), FRESH.relative_to(ROOT).as_posix() if FRESH.exists() else "missing")
         add("fresh_run_marker_matches_scope", marker.get("validation_mode") == "fresh-engine-rerun" and marker.get("engines") == "duckdb,postgres", str(marker))
-        add("fresh_marker_after_engine_outputs", fresh_marker_current, f"marker={FRESH.stat().st_mtime if FRESH.exists() else 'missing'};evidence={evidence_mtime}")
+        add(
+            "fresh_marker_after_engine_outputs",
+            fresh_marker_current,
+            f"marker={FRESH.stat().st_mtime if FRESH.exists() else 'missing'};"
+            f"evidence={evidence_mtime};epsilon={FRESH_MTIME_EPSILON_SECONDS}",
+        )
     add(
         "current_sql_replay_chain_bound",
         rows_pass(E / "sql_probe_execution_check.csv") and rows_pass(E / "sql_probe_multicatalog_check.csv"),

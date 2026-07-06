@@ -62,6 +62,8 @@ refresh_scripts = [
     'compute_grounded_source_robustness.py',
     'compute_anti_overfit_audit.py',
     'check_anti_overfit_audit.py',
+    'compute_resource_profile.py',
+    'check_resource_profile.py',
     'compute_repair_generalization.py',
     'check_repair_generalization.py',
     'build_claim_metric_summary.py',
