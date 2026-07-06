@@ -6,7 +6,7 @@ The manuscript source is intentionally outside the anonymous replay archive. The
 
 ## Archive verification
 
-The public anonymous replay package is archived at https://doi.org/10.5281/zenodo.21198009. The repository README and the PVLDB availability block record the exact SHA-256 for the uploaded `optsemc-artifact.zip`. Verify a downloaded archive with:
+The public anonymous replay package is archived under the stable concept DOI https://doi.org/10.5281/zenodo.21092812. The repository README and the PVLDB availability block record the exact version DOI and SHA-256 for the uploaded `optsemc-artifact.zip`. Verify a downloaded archive with:
 
 ```bash
 sha256sum optsemc-artifact.zip
