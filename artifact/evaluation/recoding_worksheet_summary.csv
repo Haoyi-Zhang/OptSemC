@@ -1,0 +1,7 @@
+metric,value
+worksheet_rows,287
+distinct_sources,26
+distinct_engines,7
+rows_with_locator,287
+rows_with_hash,287
+blank_recoder_columns,10

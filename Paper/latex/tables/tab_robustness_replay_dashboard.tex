@@ -1,26 +1,26 @@
 \begin{table*}[t]
 \centering
-\caption{Freeze, robustness, boundary, and replay dashboard. Down arrows mark lower-better risk or cost; bold zeros are controls or repaired surfaces. All rates are finite-denominator summaries, not population estimates.}
+\caption{Freeze, robustness, boundary, and replay dashboard. Bold zeros mark controls or separating-field surfaces; collapsed-comparison fractions are finite-corpus summaries, and source leave-one-out is an information-deletion check rather than a sampling estimate.}
 \label{tab:robustness}
 \footnotesize
 \setlength{\tabcolsep}{3.4pt}
 \begin{tabular}{@{}llrrlp{3.72cm}@{}}
 \toprule
-Panel & Row & False$\downarrow$ & Rate/Cost & Stress & Boundary read \\
+Panel & Row & Coll.$\downarrow$ & Frac./Cost & Stress & Boundary read \\
 \midrule
-Freeze & Denominator & -- & pre-count & SHA manifest & schema, sources, projections, motifs, and replay code locked \\
+Freeze & Denominator & -- & pre-count & SHA manifest & schema, sources, projections, replay locked \\
 \midrule
-Collision & Strict reference & \textbf{0} & 0.000 & control & full public payload, no induced equality error \\
-Collision & Keyword labels & 254 & 0.111 & finite [.099,.125] & public keyword cells hide placement distinctions \\
-Collision & Operator labels & 238 & 0.105 & finite [.093,.118] & operator-family equality hides optimizer layer \\
-Collision & Strengthened surface & \textbf{0} & 0.000 & repaired & retained fields remove headline witnesses \\
+Collision & Strict reference & \textbf{0} & 0.000 & control & no collapsed public signatures \\
+Collision & Keyword labels & 254 & 0.111 & finite [.099,.125] & keywords hide placement \\
+Collision & Operator labels & 238 & 0.105 & finite [.093,.118] & operators hide optimizer layer \\
+Collision & Strengthened surface & \textbf{0} & 0.000 & separated & retained fields remove witnesses \\
 \midrule
-Boundary & Source LOO & -- & nonzero 26/26 & kept/new tracked & information deletion, not exchangeable sampling \\
-Boundary & Pair + basis & \textbf{0} & 498/498 repaired & 4 pairs; 486 probes & concentrated signal with scoped layer+placement repair \\
+Boundary & Source LOO & -- & nonzero 26/26 & kept/new tracked & deletion check, not sampling \\
+Boundary & Pair + basis & \textbf{0} & 492+6 separated & 4 pairs; 486 probes & scoped layer+placement basis \\
 \midrule
-Replay & Replay total & -- & 3.50 s & 455,828 input rows & excludes source admission and package construction \\
-Replay & 8$\times$ audit lift & -- & 2.49 s & 708,288 checks/projection & deterministic inner-loop lift, not new engines \\
+Replay & Replay total & -- & 3.50 s & 455,828 input rows & excludes admission/package build \\
+Replay & 8$\times$ audit lift & -- & 2.49 s & 708,288 checks/projection & inner-loop lift, not new engines \\
 \bottomrule
 \end{tabular}
-\Description{A combined table summarizing frozen inputs, robustness, boundary checks, and replay costs. It reports collision rates, source leave-one-out behavior, pair concentration, repair coverage, and replay timing without presenting population-level claims.}
+\Description{A combined table summarizing frozen inputs, robustness, boundary checks, and replay costs. It reports finite-corpus collapsed-comparison fractions, source leave-one-out behavior, pair concentration, separation coverage, and replay timing without presenting population-level claims.}
 \end{table*}

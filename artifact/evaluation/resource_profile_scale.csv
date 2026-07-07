@@ -1,5 +1,5 @@
 stage,scale,input_rows,output_rows,elapsed_ms,peak_rss_mb,throughput_per_s,note
-projection replay lift,1x,354144,492,1367.032,277.055,259060.411,"deterministic replay lift, not new corpus"
-projection replay lift,2x,708288,984,1576.552,277.055,449264.054,"deterministic replay lift, not new corpus"
-projection replay lift,4x,1416576,1968,2199.380,277.055,644079.758,"deterministic replay lift, not new corpus"
-projection replay lift,8x,2833152,3936,2576.291,277.066,1099701.832,"deterministic replay lift, not new corpus"
+projection replay lift,1x,354144,492,1199.190,276.910,295319.300,"deterministic replay lift, not new corpus"
+projection replay lift,2x,708288,984,1392.195,276.910,508756.309,"deterministic replay lift, not new corpus"
+projection replay lift,4x,1416576,1968,1693.856,276.934,836302.649,"deterministic replay lift, not new corpus"
+projection replay lift,8x,2833152,3936,2349.294,277.258,1205958.718,"deterministic replay lift, not new corpus"

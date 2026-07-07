@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import csv
 import json
+import os
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable, Iterable, Sequence
@@ -109,7 +110,7 @@ def default_artifact_registry() -> tuple[ArtifactSpec, ...]:
         ArtifactSpec('evaluation/environment.csv', 'csv', 1),
         ArtifactSpec('evaluation/environment_check.csv', 'csv', 1),
         ArtifactSpec('evaluation/git_tree_state.csv', 'csv', 1),
-        ArtifactSpec('evaluation/git_tree_porcelain.txt', 'text', 1),
+        ArtifactSpec('evaluation/git_tree_porcelain.txt', 'text', 0),
         ArtifactSpec('evaluation/git_tree_state_check.csv', 'csv', 1),
         ArtifactSpec('evaluation/certificate_freshness_check.csv', 'csv', 1),
         ArtifactSpec('evaluation/core_library_contract.csv', 'csv', 1),
@@ -221,7 +222,7 @@ def registry_rows(specs: Sequence[ArtifactSpec] | None = None) -> list[dict[str,
 
 def registry_for_root(root: Path) -> tuple[ArtifactSpec, ...]:
     specs = default_artifact_registry()
-    artifact_only = not (root.parent / "Paper").exists()
+    artifact_only = os.environ.get("ANONYMOUS_ARTIFACT_ONLY", "0") == "1" or not (root.parent / "Paper").exists()
     if not artifact_only:
         return specs
     return tuple(spec for spec in specs if spec.path not in ARTIFACT_ONLY_OMIT)

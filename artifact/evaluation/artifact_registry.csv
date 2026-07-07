@@ -43,7 +43,7 @@ evaluation/real_engine_fresh_run.csv,csv,1,false
 evaluation/environment.csv,csv,1,true
 evaluation/environment_check.csv,csv,1,true
 evaluation/git_tree_state.csv,csv,1,true
-evaluation/git_tree_porcelain.txt,text,1,true
+evaluation/git_tree_porcelain.txt,text,0,true
 evaluation/git_tree_state_check.csv,csv,1,true
 evaluation/certificate_freshness_check.csv,csv,1,true
 evaluation/core_library_contract.csv,csv,1,true

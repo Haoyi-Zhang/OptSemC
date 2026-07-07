@@ -1,9 +1,9 @@
 check,passed,details
 required_outputs_present,true,
 scale_grid_complete,true,rows=16
-strict_false_counts_scale_linearly,true,"{'projection': 'strict', 'max_scale_factor': '8', 'max_pairwise_checks': '708288', 'min_checks_per_second': '234778.73', 'false_equivalences_at_1x': '0', 'false_equivalences_at_max_scale': '0'}"
-keyword_false_counts_scale_linearly,true,"{'projection': 'keyword', 'max_scale_factor': '8', 'max_pairwise_checks': '708288', 'min_checks_per_second': '280127.40', 'false_equivalences_at_1x': '254', 'false_equivalences_at_max_scale': '2032'}"
-operator_only_false_counts_scale_linearly,true,"{'projection': 'operator_only', 'max_scale_factor': '8', 'max_pairwise_checks': '708288', 'min_checks_per_second': '306102.35', 'false_equivalences_at_1x': '238', 'false_equivalences_at_max_scale': '1904'}"
-operator_kind_surface_false_counts_scale_linearly,true,"{'projection': 'operator_kind_surface', 'max_scale_factor': '8', 'max_pairwise_checks': '708288', 'min_checks_per_second': '246253.53', 'false_equivalences_at_1x': '0', 'false_equivalences_at_max_scale': '0'}"
-minimum_throughput_reasonable,true,min_checks_per_second=234778.73
+strict_false_counts_scale_linearly,true,"{'projection': 'strict', 'max_scale_factor': '8', 'max_pairwise_checks': '708288', 'min_checks_per_second': '229921.85', 'false_equivalences_at_1x': '0', 'false_equivalences_at_max_scale': '0'}"
+keyword_false_counts_scale_linearly,true,"{'projection': 'keyword', 'max_scale_factor': '8', 'max_pairwise_checks': '708288', 'min_checks_per_second': '275299.96', 'false_equivalences_at_1x': '254', 'false_equivalences_at_max_scale': '2032'}"
+operator_only_false_counts_scale_linearly,true,"{'projection': 'operator_only', 'max_scale_factor': '8', 'max_pairwise_checks': '708288', 'min_checks_per_second': '300985.75', 'false_equivalences_at_1x': '238', 'false_equivalences_at_max_scale': '1904'}"
+operator_kind_surface_false_counts_scale_linearly,true,"{'projection': 'operator_kind_surface', 'max_scale_factor': '8', 'max_pairwise_checks': '708288', 'min_checks_per_second': '241832.49', 'false_equivalences_at_1x': '0', 'false_equivalences_at_max_scale': '0'}"
+minimum_throughput_reasonable,true,min_checks_per_second=229921.85
 max_denominator_reaches_700k_checks,true,max_checks=708288

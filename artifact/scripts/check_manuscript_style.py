@@ -30,7 +30,7 @@ hits=[pat for pat in blocked if re.search(pat, visible, re.I)]
 add('no_visible_repository_or_report_terms', not hits, ';'.join(hits))
 # Structure checks.
 sections = re.findall(r'\\section\{([^}]*)\}', text)
-expected = ['Introduction','Precision Loss in Optimizer Comparisons','Contract Formalization and Notation','Benchmark and Grounded Corpus','Evaluation']
+expected = ['Introduction','Precision Loss in Optimizer Comparisons','Contract Formalization and Notation','Contract Probe Suite and Grounded Corpus','Evaluation']
 add('has_regular_research_structure', sections[:5] == expected, '|'.join(sections[:7]))
 add('has_tikz_mechanism_figure', '\\begin{tikzpicture}' in text and 'Projection kernel' in text, '')
 theorem_count = text.count('\\begin{theorem}')

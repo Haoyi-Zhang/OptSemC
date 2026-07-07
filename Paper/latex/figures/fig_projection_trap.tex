@@ -2,81 +2,74 @@
 \centering
 \begin{tikzpicture}[
   lane/.style={vpanel, draw=vldbRule, fill=vldbSoft,
-    minimum width=6.88cm, minimum height=.86cm},
+    minimum width=7.04cm, minimum height=.90cm},
+  laneRose/.style={lane, draw=vldbRose!35, fill=vldbRose!6},
+  laneTeal/.style={lane, draw=vldbTeal!42, fill=vldbMint},
+  rowtag/.style={font=\rmfamily\bfseries\fontsize{6.9}{7.5}\selectfont,
+    text=black!58, align=right, inner sep=.3pt,
+    text height=1.30ex, text depth=.23ex},
   contract/.style={vpanel, draw=vldbBlue!72, fill=vldbMist,
-    text width=2.06cm, minimum height=.82cm,
-    font=\rmfamily\fontsize{6.85}{7.45}\selectfont, text=black!72,
-    align=center, inner xsep=2.0pt, inner ysep=1.55pt,
-    text height=1.42ex, text depth=.24ex},
+    text width=1.72cm, minimum height=.78cm,
+    font=\rmfamily\fontsize{7.7}{8.4}\selectfont, text=black!72,
+    align=center, inner xsep=2.0pt, inner ysep=2.0pt,
+    text height=1.35ex, text depth=.24ex},
   kernel/.style={vpanel, draw=vldbRose!78!black, fill=vldbRose!8,
-    text width=3.26cm, minimum height=.70cm,
-    font=\rmfamily\bfseries\fontsize{7.0}{7.7}\selectfont,
-    text=vldbRose!78!black, align=center, inner xsep=2.2pt,
-    inner ysep=1.5pt, text height=1.44ex, text depth=.24ex},
-  repair/.style={vpanel, draw=vldbTeal!74!black, fill=vldbMint,
-    text width=2.12cm, minimum height=.70cm,
-    font=\rmfamily\fontsize{6.85}{7.45}\selectfont, text=black!72,
-    align=center, inner xsep=2.0pt, inner ysep=1.55pt,
-    text height=1.42ex, text depth=.24ex},
+    text width=2.22cm, minimum height=.66cm,
+    font=\rmfamily\bfseries\fontsize{7.75}{8.5}\selectfont,
+    text=vldbRose!76!black, align=center, inner xsep=2.2pt,
+    inner ysep=1.45pt, text height=1.38ex, text depth=.24ex},
+  retain/.style={vpanel, draw=vldbTeal!74!black, fill=white,
+    text width=1.42cm, minimum height=.54cm,
+    font=\rmfamily\bfseries\fontsize{7.35}{8.05}\selectfont,
+    text=vldbTeal!60!black, align=center, inner xsep=1.5pt,
+    inner ysep=1.15pt, text height=1.30ex, text depth=.23ex},
   chip/.style={rounded corners=1.4pt, draw=black!14, fill=white,
-    font=\rmfamily\fontsize{6.7}{7.35}\selectfont, text=vldbGray,
-    align=center, inner xsep=1.8pt, inner ysep=.75pt,
-    text height=1.36ex, text depth=.22ex},
-  lanetag/.style={rounded corners=1.5pt, draw=black!18, fill=white,
-    text width=1.02cm,
-    font=\rmfamily\bfseries\fontsize{6.95}{7.65}\selectfont,
-    align=center, inner xsep=1.6pt, inner ysep=.85pt,
-    text height=1.42ex, text depth=.24ex},
-  hlabel/.style={font=\rmfamily\bfseries\fontsize{7.2}{7.9}\selectfont,
-    text=vldbInk, align=left, text height=1.46ex, text depth=.24ex},
-  flow/.style={-{Latex[length=1.65mm]}, line width=.66pt,
-    draw=black!48, line cap=round, line join=round}
+    font=\rmfamily\fontsize{6.65}{7.2}\selectfont, text=vldbGray,
+    align=center, inner xsep=1.8pt, inner ysep=.8pt,
+    text height=1.26ex, text depth=.22ex},
+  flow/.style={-{Latex[length=1.55mm]}, line width=.62pt,
+    draw=black!46, line cap=round, line join=round}
 ]
-\path[use as bounding box] (-.05,-4.30) rectangle (7.22,.32);
-
-\node[hlabel, anchor=west] at (.04,.08) {One witness: unequal $\rightarrow$ false equality $\rightarrow$ repair};
-\node[chip, anchor=east, draw=vldbGold!50!black, text=vldbInk] at (7.04,.08)
-  {P0009};
+\path[use as bounding box] (-.02,-3.56) rectangle (7.18,.14);
 
 \begin{scope}[on background layer]
-  \node[lane] at (3.60,-.76) {};
-  \node[lane, draw=vldbRose!30, fill=vldbRose!5] at (3.60,-1.92) {};
-  \node[lane, draw=vldbTeal!30, fill=vldbMint] at (3.60,-3.28) {};
+  \node[lane] at (3.58,-.44) {};
+  \node[laneRose] at (3.58,-1.62) {};
+  \node[laneTeal] at (3.58,-2.80) {};
 \end{scope}
 
-\node[lanetag, anchor=west, draw=vldbBlue!30, text=vldbBlue!70!black]
-  at (.18,-.42) {ref.\\unequal};
-\node[contract] (c1) at (2.20,-.76)
-  {\textbf{BigQuery}\\federated filter\\source-side};
-\node[contract] (c2) at (5.52,-.76)
-  {\textbf{Trino}\\dynamic filter\\engine-side};
-\node[chip, draw=vldbBlue!30, text=vldbBlue!70!black] (diff) at (3.86,-.76)
-  {$S_{\mathrm{BQ}}\ne S_{\mathrm{Trino}}$};
+\node[rowtag, anchor=east, text=vldbBlue!70!black] at (1.10,-.44)
+  {reference\\split};
+\node[contract] (bq) at (2.20,-.44)
+  {\textbf{BigQuery}};
+\node[chip, draw=vldbBlue!30, text=vldbBlue!70!black] (neq) at (3.58,-.44)
+  {$\neq$};
+\node[contract] (trino) at (4.96,-.44)
+  {\textbf{Trino}};
 
-\node[lanetag, anchor=west, draw=vldbRose!35, text=vldbRose!72!black]
-  at (.18,-1.58) {coarse\\false =};
-\node[kernel] (k) at (3.86,-1.92)
-  {\texttt{pushdown=yes}\\false equality};
-\node[chip, anchor=east, text width=1.70cm, draw=vldbRose!35,
-      text=vldbRose!72!black] (drop)
-  at (6.94,-1.92) {drops layer\\and placement};
+\node[rowtag, anchor=east, text=vldbRose!72!black] at (1.10,-1.62)
+  {coarse\\view};
+\node[kernel] (k) at (3.58,-1.62)
+  {\texttt{pushdown}\\$+$ \texttt{explain}};
+\node[chip, draw=vldbRose!35, text=vldbRose!72!black]
+  at (5.32,-1.62) {declares equal};
 
-\node[lanetag, anchor=west, draw=vldbTeal!45, text=vldbTeal!58!black]
-  at (.18,-2.92) {repair\\separates};
-\node[chip, draw=vldbTeal!45, text=vldbTeal!58!black] (keep) at (3.86,-2.78)
-  {retained fields: layer + placement};
-\node[repair] (r1) at (2.20,-3.58)
-  {BQ: source planning};
-\node[repair] (r2) at (5.52,-3.58)
-  {Trino: runtime filtering};
+\node[rowtag, anchor=east, text=vldbTeal!58!black] at (1.10,-2.80)
+  {retained\\fields};
+\node[retain] (layer) at (2.20,-2.80) {layer};
+\node[retain] (place) at (3.58,-2.80) {placement};
+\node[retain] (obs) at (4.96,-2.80) {obs.};
 
-\draw[flow, draw=vldbRose!72!black] ($(c1.south)+(0,-.03)$) -- ++(0,-.24) -| ($(k.north)+(-.70,0)$);
-\draw[flow, draw=vldbRose!72!black] ($(c2.south)+(0,-.03)$) -- ++(0,-.24) -| ($(k.north)+(.70,0)$);
-\draw[flow, draw=vldbTeal!72!black] (k.south) -- (keep.north);
-\draw[flow, draw=vldbTeal!72!black] ($(keep.south)+(-.36,-.05)$) -- ++(0,-.19) -| (r1.north);
-\draw[flow, draw=vldbTeal!72!black] ($(keep.south)+(.36,-.05)$) -- ++(0,-.19) -| (r2.north);
+\coordinate (splitStart) at (3.58,-2.05);
+\coordinate (split) at (3.58,-2.18);
+\draw[flow, draw=vldbRose!72!black] (bq.south) -- ++(0,-.20) -| ($(k.north west)+(.30,0)$);
+\draw[flow, draw=vldbRose!72!black] (trino.south) -- ++(0,-.20) -| ($(k.north east)+(-.30,0)$);
+\draw[flow, draw=vldbTeal!72!black] (splitStart) -- (split);
+\draw[flow, draw=vldbTeal!72!black] (split) -| (layer.north);
+\draw[flow, draw=vldbTeal!72!black] (split) -- (place.north);
+\draw[flow, draw=vldbTeal!72!black] (split) -| (obs.north);
 \end{tikzpicture}
-\caption{Projection loss as one finite contract witness from the 498 headline witness records. BigQuery federated filtering and Trino dynamic filtering differ under the reference signature, collapse under a coarse \texttt{pushdown=yes} denominator, and separate after retaining layer and placement.}
-\Description{Two distinct public optimizer contracts collapse into a pushdown=yes projection and are separated by retaining layer and placement.}
+\caption{Projection collapse on P0009.  The group-by aggregate probe separates BigQuery source/stage evidence from Trino connector aggregate-pushdown evidence under the reference signature; the coarse \texttt{pushdown}+\texttt{explain} vocabulary declares them equal until layer, placement, and observability are retained.}
+\Description{A three-row diagram showing reference-unequal BigQuery and Trino aggregate-pushdown contracts, their collapse under a coarse pushdown and explain projection, and separation by retaining layer, placement, and observability.}
 \label{fig:projection-trap}
 \end{figure}

@@ -21,6 +21,7 @@ certificate:git_tree_state_check,true,7/7
 certificate:repair_generalization_check,true,4/4
 certificate:claim_ledger_check,true,16/16
 certificate:certificate_freshness_check,true,17/17
+certificate:recoding_worksheet_check,true,10/10
 certificate:format_compliance,true,8/8
 certificate:manuscript_style,true,7/7
 certificate:python_figure_renderers,true,4/4

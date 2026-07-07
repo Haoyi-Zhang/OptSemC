@@ -1,83 +1,68 @@
 \begin{figure*}[t]
 \centering
 \begin{tikzpicture}[
-  lane/.style={rounded corners=2.2pt, draw=vldbRule, fill=vldbSoft,
-    line width=.45pt, minimum width=16.72cm, minimum height=.88cm},
-  lanehead/.style={font=\rmfamily\bfseries\fontsize{7.15}{7.8}\selectfont,
-    text=vldbInk, align=right, text width=2.05cm,
-    text height=1.45ex, text depth=.24ex},
-  cell/.style={rounded corners=2.0pt, draw=vldbBlue!48, fill=white,
-    line width=.48pt, text width=3.16cm, minimum height=.68cm,
-    font=\rmfamily\fontsize{6.75}{7.35}\selectfont, text=black!70,
-    align=center, inner xsep=2.0pt, inner ysep=1.0pt,
-    text height=1.42ex, text depth=.24ex},
-  datacell/.style={cell, draw=vldbTeal!58!black, fill=vldbMint,
-    text=vldbTeal!62!black},
-  riskcell/.style={cell, draw=vldbRose!68!black, fill=vldbRose!7,
-    text=vldbRose!76!black, font=\rmfamily\bfseries\fontsize{6.75}{7.35}\selectfont},
-  guard/.style={rounded corners=1.5pt, draw=vldbGold!54!black, fill=vldbWarm,
-    font=\rmfamily\bfseries\fontsize{6.70}{7.25}\selectfont, text=vldbInk,
-    align=center, inner xsep=2.0pt, inner ysep=.9pt,
-    text height=1.35ex, text depth=.22ex},
-  auditbar/.style={rounded corners=1.4pt, draw=vldbViolet!58!black, fill=vldbSoft,
-    font=\rmfamily\bfseries\fontsize{6.50}{7.05}\selectfont, text=vldbInk,
-    align=center, inner xsep=2.1pt, inner ysep=.8pt,
-    text height=1.32ex, text depth=.22ex},
-  flow/.style={-{Latex[length=1.65mm]}, line width=.66pt,
-    draw=black!46, line cap=round, line join=round},
-  flowrisk/.style={flow, draw=vldbRose!70!black},
-  flowok/.style={flow, draw=vldbTeal!70!black}
+  stage/.style={vpanel, draw=vldbRule, fill=white,
+    minimum width=3.70cm, minimum height=3.38cm},
+  stagehead/.style={font=\rmfamily\bfseries\fontsize{8.05}{8.85}\selectfont,
+    text=vldbInk, align=center, text width=3.25cm,
+    inner sep=.5pt, text height=1.52ex, text depth=.28ex},
+  item/.style={rounded corners=1.7pt, draw=black!15, fill=vldbSoft,
+    line width=.38pt, text width=3.02cm, minimum height=.62cm,
+    font=\rmfamily\fontsize{7.10}{7.82}\selectfont, text=black!69,
+    align=center, inner xsep=2.2pt, inner ysep=1.6pt},
+  keyitem/.style={item, draw=vldbBlue!52, fill=vldbMist,
+    text=vldbBlue!62!black},
+  okitem/.style={item, draw=vldbTeal!56!black, fill=vldbMint,
+    text=vldbTeal!58!black},
+  riskitem/.style={item, draw=vldbRose!68!black, fill=vldbRose!7,
+    text=vldbRose!76!black, font=\rmfamily\bfseries\fontsize{7.10}{7.82}\selectfont},
+  costitem/.style={item, draw=vldbGold!55!black, fill=vldbWarm,
+    text=vldbInk},
+  note/.style={rounded corners=1.6pt, draw=vldbViolet!45, fill=vldbSoft,
+    font=\rmfamily\bfseries\fontsize{7.0}{7.7}\selectfont,
+    text=vldbViolet!58!black, align=center, inner xsep=2.5pt,
+    inner ysep=1.0pt},
+  flow/.style={-{Latex[length=1.8mm]}, line width=.72pt,
+    draw=black!50, line cap=round, line join=round}
 ]
-\path[use as bounding box] (-.06,-.16) rectangle (17.08,4.92);
+\path[use as bounding box] (-.08,-.10) rectangle (16.90,4.55);
 
-\node[vhead, anchor=west] at (.06,4.58) {Contract-denominator system};
-\node[guard, anchor=east] at (16.92,4.58) {fixed before witness counting};
-\node[lane] at (8.52,3.86) {};
-\node[lane] at (8.52,2.72) {};
-\node[lane] at (8.52,1.58) {};
-\node[lane] at (8.52,.44) {};
+\node[vhead, anchor=west] at (.04,4.24) {OptSem-C freezes a public-contract denominator before any projection audit};
+\node[note, anchor=east] at (16.74,4.24) {schema, sources, probes, crosswalk, and fields are replay inputs};
 
-\node[lanehead, anchor=east] at (2.03,3.86) {public evidence};
-\node[lanehead, anchor=east] at (2.03,2.72) {contract maps};
-\node[lanehead, anchor=east] at (2.03,1.58) {parallel audits};
-\node[lanehead, anchor=east] at (2.03,.44) {certified output};
+\node[stage] (s1) at (2.02,2.10) {};
+\node[stage] (s2) at (6.25,2.10) {};
+\node[stage] (s3) at (10.48,2.10) {};
+\node[stage] (s4) at (14.71,2.10) {};
 
-\node[cell] (src) at (3.78,3.86) {\textbf{26 sources}\\spans, URLs, digests};
-\node[cell] (rules) at (7.05,3.86) {\textbf{287 rules}\\action, guard, evidence};
-\node[cell] (schema) at (10.32,3.86) {\textbf{fixed schema}\\layer, placement, time};
-\node[datacell] (surface) at (13.59,3.86) {\textbf{26 surfaces}\\0 expose full payload};
+\node[stagehead, yshift=-.35cm] at (s1.north) {1. admit evidence};
+\node[stagehead, yshift=-.35cm] at (s2.north) {2. build relation};
+\node[stagehead, yshift=-.35cm] at (s3.north) {3. audit projections};
+\node[stagehead, yshift=-.35cm] at (s4.north) {4. certify boundary};
 
-\node[cell] (probe) at (3.78,2.72) {\textbf{4,216 probes}\\feature-interaction cover};
-\node[datacell] (motif) at (7.05,2.72) {\textbf{90 motifs}\\71 SQL representatives};
-\node[cell] (map) at (10.32,2.72) {\textbf{engine--probe maps}\\source-supported signatures};
-\node[cell] (ref) at (13.59,2.72) {\textbf{1,288 classes}\\reference payload};
+\node[keyitem] (e1) at ($(s1.center)+(0,.58)$) {\textbf{26 public sources}\\URLs, spans, digests};
+\node[keyitem] (e2) at ($(s1.center)+(0,-.20)$) {\textbf{287 grounded rules}\\action, guard, evidence};
+\node[costitem] (e3) at ($(s1.center)+(0,-.98)$) {fixed schema\\layer, placement, time};
 
-\node[auditbar] (auditrel) at (8.52,2.13)
-  {one frozen contract-map relation; projection surfaces run side by side};
+\node[keyitem] (r1) at ($(s2.center)+(0,.58)$) {\textbf{4,216 SQL probes}\\feature-interaction cover};
+\node[okitem] (r2) at ($(s2.center)+(0,-.20)$) {\textbf{90 feature requirements}\\71 SQL representatives};
+\node[item] (r3) at ($(s2.center)+(0,-.98)$) {engine--probe contract maps\\over reference signatures};
 
-\node[riskcell] (kw) at (3.78,1.58) {keyword\\254 false pairs};
-\node[riskcell] (op) at (7.05,1.58) {operator-only\\238 false pairs};
-\node[cell, draw=vldbGold!60!black, fill=vldbWarm] (yn) at (10.32,1.58) {yes/no\\6 sparse pairs};
-\node[cell] (pairs) at (13.59,1.58) {4 engine pairs\\486 distinct probes};
+\node[riskitem] (a1) at ($(s3.center)+(0,.58)$) {keyword: 254\\operator-only: 238};
+\node[costitem] (a2) at ($(s3.center)+(0,-.20)$) {yes/no controls:\\6 source-sensitive witnesses};
+\node[item] (a3) at ($(s3.center)+(0,-.98)$) {all surfaces run over\\the same frozen relation};
 
-\node[datacell] (repair) at (3.78,.44) {repair basis\\layer + placement};
-\node[datacell] (counter) at (7.05,.44) {counter-witnesses\\finite relation};
-\node[cell] (stress) at (10.32,.44) {stress checks\\source, probe, feature};
-\node[cell] (replay) at (13.59,.44) {replay cost\\post-admission kernel};
+\node[okitem] (c1) at ($(s4.center)+(0,.58)$) {layer + placement\\separates 498 witnesses};
+\node[item] (c2) at ($(s4.center)+(0,-.20)$) {source, probe, feature,\\engine-family stress checks};
+\node[costitem] (c3) at ($(s4.center)+(0,-.98)$) {replay cost\\post-admission kernel};
 
-\draw[flow] (src) -- (rules);
-\draw[flow] (rules) -- (schema);
-\draw[flow] (schema) -- (surface);
-\draw[flowok] (probe) -- (motif);
-\draw[flow] (motif) -- (map);
-\draw[flow] (map) -- (ref);
-\draw[flow] (map.south) -- (auditrel.north);
-\draw[flowok] (kw.south) -- (repair.north);
-\draw[flowok] (op.south) -- (counter.north);
-\draw[flow] (yn.south) -- (stress.north);
-\draw[flow] (pairs.south) -- (replay.north);
+\draw[flow] (s1.east) -- (s2.west);
+\draw[flow] (s2.east) -- (s3.west);
+\draw[flow] (s3.east) -- (s4.west);
+\draw[flow, draw=vldbTeal!68!black] (a1.east) -- (c1.west);
+
 \end{tikzpicture}
-\caption{OptSem-C as a denominator-audit system. Public evidence admits rules into a fixed schema; generated probes materialize source-supported contract maps; predeclared projection vocabularies are audited in parallel against reference signatures; and repair certificates, stress checks, and replay costs report the finite comparison boundary.}
-\Description{A four-lane system diagram showing public evidence, contract maps, projection audit, and certified output. The diagram highlights 26 public surfaces, 287 rules, 4,216 probes, 90 motifs represented by 71 SQL probes, the keyword and operator collision counts, and the layer-plus-placement repair basis.}
+\caption{End-to-end replay boundary for OptSem-C. Evidence admission, probe construction, projection comparison, and field certification all operate on the same frozen public-contract relation, so collision counts and separation claims share one finite denominator.}
+\Description{A four-stage diagram showing evidence admission, contract-map construction, projection auditing, and certified outputs over one frozen public-contract denominator.}
 \label{fig:contract-model}
 \end{figure*}

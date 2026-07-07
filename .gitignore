@@ -39,3 +39,8 @@ zenodo_*/
 *.tar
 *.tar.gz
 venv/
+
+# Local review and submission QA logs
+reference_guard_audit.md
+artifact/evaluation/external_opus_blind_review_round*.md
+artifact/evaluation/dual_blind_review_round*_disposition.md

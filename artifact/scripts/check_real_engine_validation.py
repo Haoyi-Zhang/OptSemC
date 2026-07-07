@@ -50,6 +50,16 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def evidence_bundle_sha256(paths: list[Path]) -> str:
+    digest = hashlib.sha256()
+    for path in sorted(paths, key=lambda p: p.relative_to(ROOT).as_posix()):
+        digest.update(path.relative_to(ROOT).as_posix().encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(sha256_file(path).encode("ascii"))
+        digest.update(b"\n")
+    return digest.hexdigest()
+
+
 def environment_value(key: str) -> str:
     env_path = E / "environment.csv"
     if not env_path.exists():
@@ -129,12 +139,17 @@ def main() -> None:
         E / "real_engine_probe_validation_motif_summary.csv",
     ]
     marker = fresh_marker_rows()
-    evidence_mtime = max(path.stat().st_mtime for path in evidence_files if path.exists())
+    existing_evidence_files = [path for path in evidence_files if path.exists()]
+    evidence_mtime = max(path.stat().st_mtime for path in existing_evidence_files)
+    evidence_sha = evidence_bundle_sha256(existing_evidence_files)
     fresh_marker_current = (
         FRESH.exists()
         and marker.get("validation_mode") == "fresh-engine-rerun"
         and marker.get("engines") == "duckdb,postgres"
-        and FRESH.stat().st_mtime + FRESH_MTIME_EPSILON_SECONDS >= evidence_mtime
+        and (
+            marker.get("evidence_bundle_sha256") == evidence_sha
+            or FRESH.stat().st_mtime + FRESH_MTIME_EPSILON_SECONDS >= evidence_mtime
+        )
     )
     validation_mode = "fresh-engine-rerun" if fresh_marker_current else "saved-engine-certificate-replay"
     environment_rows = [
@@ -146,6 +161,7 @@ def main() -> None:
         {"key": "current_postgres", "value": environment_value("postgres")},
     ]
     environment_rows.extend({"key": f"{path.name}_sha256", "value": sha256_file(path)} for path in evidence_files)
+    environment_rows.append({"key": "real_engine_evidence_bundle_sha256", "value": evidence_sha})
     with ENV.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=["key", "value"])
         writer.writeheader()
@@ -158,10 +174,12 @@ def main() -> None:
         add("fresh_run_marker_present", FRESH.exists(), FRESH.relative_to(ROOT).as_posix() if FRESH.exists() else "missing")
         add("fresh_run_marker_matches_scope", marker.get("validation_mode") == "fresh-engine-rerun" and marker.get("engines") == "duckdb,postgres", str(marker))
         add(
-            "fresh_marker_after_engine_outputs",
+            "fresh_marker_binds_engine_outputs",
             fresh_marker_current,
-            f"marker={FRESH.stat().st_mtime if FRESH.exists() else 'missing'};"
-            f"evidence={evidence_mtime};epsilon={FRESH_MTIME_EPSILON_SECONDS}",
+            f"marker_sha={marker.get('evidence_bundle_sha256','missing')[:12]};"
+            f"evidence_sha={evidence_sha[:12]};"
+            f"marker_mtime={FRESH.stat().st_mtime if FRESH.exists() else 'missing'};"
+            f"evidence_mtime={evidence_mtime};epsilon={FRESH_MTIME_EPSILON_SECONDS}",
         )
     add(
         "current_sql_replay_chain_bound",

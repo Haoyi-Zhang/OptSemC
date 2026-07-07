@@ -8,6 +8,7 @@ prevents manuscript changes from drifting away from regenerated outputs.
 from __future__ import annotations
 
 import csv
+import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -65,15 +66,25 @@ def main() -> None:
     resource_scale = read_csv(E / "resource_profile_scale.csv") if (E / "resource_profile_scale.csv").exists() else []
     resource_total = read_csv(E / "resource_profile_end_to_end.csv") if (E / "resource_profile_end_to_end.csv").exists() else []
     git_state = keyed_csv(E / "git_tree_state.csv")
+    archive_builder = ROOT / "scripts" / "build_anonymous_archive.py"
+    archive_builder_text = archive_builder.read_text(encoding="utf-8") if archive_builder.exists() else ""
+    archive_builder_enforces_clean = (
+        "source tree is dirty; commit or clean before building the release archive" in archive_builder_text
+        and "allow_dirty_source" in archive_builder_text
+    )
     if "source_tree_clean" in git_state or "allow_dirty_source" in git_state:
         archive_gate_value = (
-            f"source_tree_clean={git_state.get('source_tree_clean','pending')};"
+            f"archive_source_tree_clean={git_state.get('source_tree_clean','pending')};"
             f"allow_dirty_source={git_state.get('allow_dirty_source','pending')}"
         )
     else:
         archive_gate_value = (
-            f"intent={git_state.get('tree_state_intent','pending')};"
-            f"require_clean={git_state.get('require_clean','pending')}"
+            f"builder_default=clean-required;"
+            f"current_tree_record={git_state.get('tree_state_intent','pending')};"
+            f"require_clean={git_state.get('require_clean','pending')};"
+            f"development_snapshot={git_state.get('development_snapshot','pending')};"
+            f"tracked={git_state.get('tracked_dirty_count','pending')};"
+            f"untracked={git_state.get('untracked_count','pending')}"
         )
     rows = [
         {"claim_id": "C1-grounded-corpus", "paper_claim": "The grounded mainline contains 287 admitted source-linked rules, 287 evidence spans, and 26 sources.", "value": f"{m['grounded_rules']}/{m['grounded_segments']}/{m['public_sources']}", "artifact_support": "artifact/grounded/verified_rules.jsonl;artifact/grounded/verified_segments.jsonl;artifact/grounded/verified_sources.csv"},
@@ -83,11 +94,11 @@ def main() -> None:
         {"claim_id": "C5-reference-negative-control", "paper_claim": "Reference-signature comparison over admitted public evidence produces zero projection-induced collisions.", "value": m['strict_baseline_false_equivalences'], "artifact_support": "artifact/evaluation/grounded/baseline_portfolio.csv;artifact/evaluation/baseline_portfolio_check.csv"},
         {"claim_id": "C6-adversarial-baselines", "paper_claim": "The projection-surface portfolio contains 17 executable vocabularies, including one-field stress surfaces and strengthened control surfaces.", "value": m['baseline_portfolio_size'], "artifact_support": "artifact/evaluation/grounded/baseline_portfolio.csv;artifact/evaluation/baseline_portfolio_check.csv"},
         {"claim_id": "C7-practice-projection-surfaces", "paper_claim": "The public source-surface audit observes keyword labels in all 26 sources, yes/no controls in 12 sources, operator-family labels in all 26 sources, and no source exposes the full reference-signature payload.", "value": f"keyword={p['keyword_surfaces']}/{public_sources};yesno={p['yesno_surfaces']}/{public_sources};operator={p['operator_surfaces']}/{public_sources};reference={p['reference_signature_payload_surfaces']}/{public_sources}", "artifact_support": "artifact/evaluation/practice_projection_surface_summary.csv;artifact/evaluation/practice_projection_surfaces.csv;artifact/evaluation/practice_projection_surfaces_check.csv"},
-        {"claim_id": "C8-repair-basis", "paper_claim": "The layer+placement semantic basis repairs all 498 projection-induced collisions across headline projections.", "value": f"{m['semantic_basis']}:{m['semantic_basis_resolved']}/{m['semantic_basis_false_equivalences']}", "artifact_support": "artifact/evaluation/grounded/repair_basis_stability.csv;artifact/evaluation/grounded/semantic_frontier.csv;artifact/evaluation/semantic_frontier_check.csv"},
+        {"claim_id": "C8-repair-basis", "paper_claim": "The layer+placement semantic basis separates all 498 projection-induced collisions across headline projections.", "value": f"{m['semantic_basis']}:{m['semantic_basis_resolved']}/{m['semantic_basis_false_equivalences']}", "artifact_support": "artifact/evaluation/grounded/repair_basis_stability.csv;artifact/evaluation/grounded/semantic_frontier.csv;artifact/evaluation/semantic_frontier_check.csv"},
         {"claim_id": "C9-minimality", "paper_claim": "Repair certificates are sufficient and minimal under finite enumeration and hitting-set checks.", "value": "passed", "artifact_support": "artifact/evaluation/repair_certificate_minimality.csv;artifact/evaluation/repair_hitting_set_check.csv;artifact/evaluation/projection_proof_obligations.csv"},
         {"claim_id": "C10-source-robustness", "paper_claim": "Keyword and operator-only projection-induced collisions remain nonzero after removing any single public source, while an identity audit records retained original witnesses and newly induced witnesses for that information-deletion stress.", "value": f"keyword=26/26;kept>={float(source_identity.get('keyword', {}).get('min_retained_original_rate', '0')):.2f};new<={source_identity.get('keyword', {}).get('max_new_witnesses_after_removal', 'missing')};operator=26/26;kept>={float(source_identity.get('operator_only', {}).get('min_retained_original_rate', '0')):.2f};new<={source_identity.get('operator_only', {}).get('max_new_witnesses_after_removal', 'missing')}", "artifact_support": "artifact/evaluation/grounded/source_robustness_summary.csv;artifact/evaluation/grounded/source_robustness_identity.csv;artifact/evaluation/grounded/source_robustness_identity_summary.csv"},
-        {"claim_id": "C11-external-suite", "paper_claim": "The external benchmark-family suite covers 90/90 declared optimizer motifs across 12 families; those motifs are represented by 71 distinct deterministic-catalog SQL probes because some probes satisfy multiple declared requirements.", "value": f"{m['external_benchmark_motifs_covered']}/{m['external_benchmark_motifs']};executed={m['external_motif_representative_executed_motifs']}/{m['external_motif_representative_external_motifs']};representatives={m['external_motif_representative_distinct_representative_probes']};suites={m['external_benchmark_suites']}", "artifact_support": "artifact/evaluation/external_benchmark_suite.csv;artifact/evaluation/external_benchmark_suite_check.csv;artifact/evaluation/external_motif_execution_summary.csv;artifact/evaluation/external_motif_execution_check.csv;artifact/evaluation/external_motif_probe_map.csv"},
-        {"claim_id": "C12-real-engine-validation", "paper_claim": "The generated probes execute on DuckDB and PostgreSQL with zero failures for the full corpus and the motif representatives, and this evidence is scoped away from collision and repair computation.", "value": f"engines={m['real_engine_full_engines']};full={m['real_engine_full_execution_successes']}/{m['real_engine_full_validations']};failures={m['real_engine_full_execution_failures']};motif={m['real_engine_motif_execution_successes']}/{m['real_engine_motif_validations']}", "artifact_support": "artifact/evaluation/real_engine_probe_validation_full.csv;artifact/evaluation/real_engine_probe_validation_full_summary.csv;artifact/evaluation/real_engine_probe_validation_motif.csv;artifact/evaluation/real_engine_probe_validation_motif_summary.csv;artifact/evaluation/real_engine_validation_check.csv;artifact/evaluation/real_engine_validation_environment.csv;artifact/evaluation/real_engine_fresh_run.csv;artifact/evaluation/real_engine_noninterference_check.csv;artifact/scripts/check_real_engine_noninterference.py"},
+        {"claim_id": "C11-external-suite", "paper_claim": "The external benchmark-family suite covers 90/90 declared optimizer feature requirements across 12 families; those requirements are represented by 71 distinct deterministic-catalog SQL probes because some probes satisfy multiple declared requirements.", "value": f"{m['external_benchmark_motifs_covered']}/{m['external_benchmark_motifs']};executed={m['external_motif_representative_executed_motifs']}/{m['external_motif_representative_external_motifs']};representatives={m['external_motif_representative_distinct_representative_probes']};suites={m['external_benchmark_suites']}", "artifact_support": "artifact/evaluation/external_benchmark_suite.csv;artifact/evaluation/external_benchmark_suite_check.csv;artifact/evaluation/external_motif_execution_summary.csv;artifact/evaluation/external_motif_execution_check.csv;artifact/evaluation/external_motif_probe_map.csv"},
+        {"claim_id": "C12-real-engine-validation", "paper_claim": "The generated probes execute on DuckDB and PostgreSQL with zero failures for the full corpus and the feature-space representatives, and this evidence is scoped away from collision and field-certificate computation.", "value": f"engines={m['real_engine_full_engines']};full={m['real_engine_full_execution_successes']}/{m['real_engine_full_validations']};failures={m['real_engine_full_execution_failures']};motif={m['real_engine_motif_execution_successes']}/{m['real_engine_motif_validations']}", "artifact_support": "artifact/evaluation/real_engine_probe_validation_full.csv;artifact/evaluation/real_engine_probe_validation_full_summary.csv;artifact/evaluation/real_engine_probe_validation_motif.csv;artifact/evaluation/real_engine_probe_validation_motif_summary.csv;artifact/evaluation/real_engine_validation_check.csv;artifact/evaluation/real_engine_validation_environment.csv;artifact/evaluation/real_engine_fresh_run.csv;artifact/evaluation/real_engine_noninterference_check.csv;artifact/scripts/check_real_engine_noninterference.py"},
         {"claim_id": "C13-formal-obligations", "paper_claim": "Every finite formal obligation asserted in the paper is checked by the replay package.", "value": "10/10", "artifact_support": "artifact/evaluation/theorem_ledger.csv"},
         {"claim_id": "C14-rule-aware-probe-denominator", "paper_claim": "The probe denominator is a rule-aware coverage benchmark rather than an independent held-out generalization set.", "value": "forced_by_rule_guard=99", "artifact_support": "artifact/benchmark/generated_probes.jsonl;artifact/evaluation/probe_validity.csv;artifact/scripts/generate_probes.py;artifact/recompute_grounded_mainline.sh"},
         {"claim_id": "C15-evidence-freeze-protocol", "paper_claim": "The freeze manifest hashes schema, source inputs, projection/baseline specifications, result-determining code, compute/check scripts, and replay entrypoints.", "value": f"rows={len(freeze_rows)};roles={len(freeze_roles)};check={pass_summary(E / 'evidence_freeze_manifest_check.csv')}", "artifact_support": "artifact/evaluation/evidence_freeze_manifest.csv;artifact/evaluation/evidence_freeze_manifest_check.csv;artifact/scripts/build_evidence_freeze_manifest.py;artifact/scripts/check_evidence_freeze_manifest.py;artifact/optsemc/baselines.py;artifact/optsemc/projections.py"},
@@ -114,7 +125,7 @@ def main() -> None:
     real_env = keyed_csv(E / "real_engine_validation_environment.csv")
     real_check = keyed_csv(E / "real_engine_validation_check.csv")
     validation_mode = real_env.get("validation_mode", "missing")
-    artifact_only = not (PKG / "Paper").exists()
+    artifact_only = not (PKG / "Paper").exists() or os.environ.get("ANONYMOUS_ARTIFACT_ONLY", "0") == "1"
     if artifact_only:
         add("real_engine_evidence_mode_supported", validation_mode in {"fresh-engine-rerun", "saved-engine-certificate-replay"}, validation_mode)
         add(
@@ -127,8 +138,8 @@ def main() -> None:
         add("real_engine_evidence_is_fresh_rerun", validation_mode == "fresh-engine-rerun", validation_mode)
         add(
             "real_engine_fresh_marker_checked",
-            real_check.get("fresh_run_marker_present") == "true" and real_check.get("fresh_marker_after_engine_outputs") == "true",
-            str({k: real_check.get(k, "missing") for k in ("fresh_run_marker_present", "fresh_marker_after_engine_outputs")}),
+            real_check.get("fresh_run_marker_present") == "true" and real_check.get("fresh_marker_binds_engine_outputs") == "true",
+            str({k: real_check.get(k, "missing") for k in ("fresh_run_marker_present", "fresh_marker_binds_engine_outputs")}),
         )
         noninterference = keyed_csv(E / "real_engine_noninterference_check.csv")
         add(
@@ -146,7 +157,18 @@ def main() -> None:
     if "source_tree_clean" in git_state or "allow_dirty_source" in git_state:
         release_gate_ok = git_state.get("source_tree_clean") == "true" and git_state.get("allow_dirty_source") == "false"
     else:
-        release_gate_ok = archive_value != "intent=pending;require_clean=pending"
+        development_record = (
+            git_state.get("development_snapshot") == "true"
+            and git_state.get("require_clean") == "false"
+            and git_state.get("tree_state_intent") == "development-record-only"
+        )
+        strict_clean_record = (
+            git_state.get("require_clean") == "true"
+            and git_state.get("development_snapshot") == "false"
+            and git_state.get("tracked_dirty_count") == "0"
+            and git_state.get("untracked_count") == "0"
+        )
+        release_gate_ok = archive_builder_enforces_clean and (development_record or strict_clean_record)
     add("release_gate_recorded", release_gate_ok, archive_value)
     with CHECK.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=["check", "passed", "details"])

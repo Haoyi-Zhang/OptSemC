@@ -1,0 +1,11 @@
+check,passed,details
+worksheet_present,true,evaluation/recoding_worksheet.csv
+summary_present,true,evaluation/recoding_worksheet_summary.csv
+worksheet_row_count,true,rows=287
+worksheet_source_count,true,sources=26
+worksheet_engine_count,true,engines=7
+all_rows_have_source_locator,true,
+all_rows_have_segment_hash,true,missing_or_invalid=0
+all_rows_have_current_fields,true,
+recoder_columns_present,true,"recoder_accept,recoder_state,recoder_operator,recoder_action_kind,recoder_optimizer_layer,recoder_execution_placement,recoder_decision_time,recoder_observability,recoder_variant,recoder_notes"
+summary_matches_rows,true,"{'worksheet_rows': '287', 'distinct_sources': '26', 'distinct_engines': '7', 'rows_with_locator': '287', 'rows_with_hash': '287', 'blank_recoder_columns': '10'}"

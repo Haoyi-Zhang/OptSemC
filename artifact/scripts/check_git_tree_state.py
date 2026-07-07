@@ -161,7 +161,8 @@ tracked_or_untracked = [line for line in dirty if not line.startswith("!! ")]
 untracked = [line for line in tracked_or_untracked if line.startswith("?? ")]
 tracked = [line for line in tracked_or_untracked if not line.startswith("?? ")]
 
-add("git_head_available", head_code == 0 and bool(head.strip()), head.strip()[:80])
+head_available = head_code == 0 and bool(head.strip())
+add("git_head_available", head_available, "runtime-verified" if head_available else head.strip()[:80])
 add("tree_state_recorded", True, f"tracked={len(tracked)};untracked={len(untracked)};require_clean={require_clean};release_gate={release_gate};development_snapshot={development_snapshot}")
 add("no_ignored_boundary_files", not ignored, ";".join(ignored[:20]))
 add("release_gate_requires_clean_tree", (not release_gate) or require_clean, f"release_gate={release_gate};require_clean={require_clean}")
@@ -173,7 +174,7 @@ diff_sha = sha256_text(diff_out) if diff_code == 0 else ""
 cached_diff_sha = sha256_text(cached_diff_out) if cached_diff_code == 0 else ""
 add("tree_state_hashes_recorded", all(len(value) == 64 for value in (status_sha, diff_sha, cached_diff_sha)), f"status={status_sha[:12]};diff={diff_sha[:12]};cached={cached_diff_sha[:12]}")
 state_rows = [
-    {"key": "git_head", "value": head.strip() if head_code == 0 else f"unavailable:exit{head_code}"},
+    {"key": "git_head", "value": "runtime-verified" if head_available else f"unavailable:exit{head_code}"},
     {"key": "tracked_dirty_count", "value": str(len(tracked))},
     {"key": "untracked_count", "value": str(len(untracked))},
     {"key": "ignored_boundary_count", "value": str(len(ignored))},

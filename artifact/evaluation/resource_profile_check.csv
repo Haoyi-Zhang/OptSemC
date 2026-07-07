@@ -6,9 +6,9 @@ scale_points,true,"1x,2x,4x,8x"
 sql_validation_nonzero,true,sql output rows
 scale_throughput_nonzero,true,projection replay lift
 eight_x_lift_rows_current,true,2833152
-eight_x_lift_throughput_floor,true,1099701.832
+eight_x_lift_throughput_floor,true,1205958.718
 scale_notes_disallow_new_corpus_reading,true,"deterministic replay lift, not new corpus;deterministic replay lift, not new corpus;deterministic replay lift, not new corpus;deterministic replay lift, not new corpus"
-scale_peak_rss_bounded,true,min=277.055;max=277.066
+scale_peak_rss_bounded,true,min=276.910;max=277.258
 end_to_end_total_present,true,paper-facing replay total
 end_to_end_total_matches_stages,true,input=455828/455828;output=41704/41704
 end_to_end_scope_excludes_setup,true,"loads frozen maps/probes, audits projections, checks repairs, and validates deterministic SQL catalogs; excludes setup, paper build, archive packaging, and fresh external DBMS reruns"

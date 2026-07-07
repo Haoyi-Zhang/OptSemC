@@ -6,7 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PKG = ROOT.parent
 E = ROOT/'evaluation'
 OUT = E/'package_snapshot_check.csv'
-ARTIFACT_ONLY = not (PKG/'Paper').exists()
+ARTIFACT_ONLY = not (PKG/'Paper').exists() or os.environ.get('ANONYMOUS_ARTIFACT_ONLY', '0') == '1'
 rows=[]
 def add(check, ok, details=''):
     rows.append({'check':check,'passed':str(bool(ok)).lower(),'details':str(details)})
@@ -63,7 +63,7 @@ try:
     sb=read_csv(E/'side_balanced_witness_support_check.csv')
     add('side_balanced_witness_support', bool(sb) and all(r.get('passed')=='true' for r in sb), f'{sum(r.get("passed")=="true" for r in sb)}/{len(sb)}')
 except Exception as e: add('side_balanced_witness_support', False, type(e).__name__)
-certificate_names = ['package_integrity','claim_evidence_graph_check','data_contracts_check','projection_resolution_check','projection_frontier_antichain_check','package_manifest_check','repository_quality_check','artifact_registry_check','practice_projection_surfaces_check','anti_overfit_audit_check','real_engine_validation_check','real_engine_noninterference_check','environment_check','git_tree_state_check','repair_generalization_check','claim_ledger_check','certificate_freshness_check']
+certificate_names = ['package_integrity','claim_evidence_graph_check','data_contracts_check','projection_resolution_check','projection_frontier_antichain_check','package_manifest_check','repository_quality_check','artifact_registry_check','practice_projection_surfaces_check','anti_overfit_audit_check','real_engine_validation_check','real_engine_noninterference_check','environment_check','git_tree_state_check','repair_generalization_check','claim_ledger_check','certificate_freshness_check','recoding_worksheet_check']
 if not ARTIFACT_ONLY:
     certificate_names += ['format_compliance','manuscript_style','python_figure_renderers','latex_compile_check','pdf_integrity','reference_quality','paper_table_source_check']
 for name in certificate_names:
@@ -72,7 +72,8 @@ for name in certificate_names:
     add(f'certificate:{name}', ok, detail)
 if os.environ.get('OPTSEMC_RELEASE_GATE', '0') == '1':
     git_state=keyed_csv(E/'git_tree_state.csv')
-    if ARTIFACT_ONLY:
+    archive_state = 'source_tree_clean' in git_state or 'allow_dirty_source' in git_state
+    if ARTIFACT_ONLY and archive_state:
         add(
             'release_archive_source_tree_clean',
             git_state.get('source_tree_clean') == 'true' and git_state.get('allow_dirty_source') == 'false',

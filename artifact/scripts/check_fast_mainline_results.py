@@ -7,15 +7,10 @@ ROOT = Path(__file__).resolve().parents[2]
 ART = ROOT / 'artifact'
 EVAL = ART / 'evaluation'
 OUT = EVAL / 'fast_mainline_results.csv'
+sys.path.insert(0, str(ART))
+from optsemc.manifest import should_skip as manifest_should_skip
 TRANSIENT_SUFFIXES = ('.aux','.log','.out','.toc','.bbl','.blg','.fls','.fdb_latexmk','.pyc','.pyo','.backup')
 IGNORED_DIRS = {'.git','.reference_guard_cache','__pycache__','.pytest_cache','.mypy_cache','build','dist','tmp','zenodo_artifact'}
-SKIP = {
- 'artifact/evaluation/package_manifest.csv','artifact/evaluation/package_manifest_summary.csv','artifact/evaluation/package_manifest_check.csv',
- 'artifact/evaluation/package_files.csv','artifact/evaluation/package_fingerprint_summary.csv',
- 'artifact/evaluation/package_snapshot_check.csv','artifact/evaluation/integrity_suite.csv','artifact/evaluation/fast_mainline_results.csv',
- 'artifact/evaluation/optsemc-artifact.sha256','artifact/evaluation/reference_guard_audit_latest.json','artifact/evaluation/reference_guard_audit_latest.md',
- 'artifact/evaluation/git_tree_status.txt',
-}
 CERT_FILES = [
  'package_cleanliness.csv','package_manifest_check.csv','package_integrity.csv','manuscript_style.csv','format_compliance.csv','visual_latex_style.csv',
  'projection_resolution_check.csv','projection_frontier_antichain_check.csv','architecture_contract.csv','packaging_installability.csv',
@@ -24,7 +19,7 @@ CERT_FILES = [
  'leave_out_stability_check.csv','engine_family_stress_check.csv','witness_diversity_check.csv','witness_dispersion_check.csv','paper_numeric_claims.csv',
  'python_figure_renderers.csv','latex_compile_check.csv','pdf_integrity.csv','reference_quality.csv','paper_quality.csv','paper_table_renderers.csv','paper_table_source_check.csv','repository_quality_check.csv',
  'package_snapshot_check.csv','integrity_suite.csv','source_witness_support_check.csv','side_balanced_witness_support_check.csv','claim_evidence_graph_check.csv'
- ,'anti_overfit_audit_check.csv','real_engine_validation_check.csv','real_engine_noninterference_check.csv','environment_check.csv','git_tree_state_check.csv','claim_ledger_check.csv','certificate_freshness_check.csv'
+ ,'anti_overfit_audit_check.csv','real_engine_validation_check.csv','real_engine_noninterference_check.csv','environment_check.csv','git_tree_state_check.csv','claim_ledger_check.csv','certificate_freshness_check.csv','recoding_worksheet_check.csv'
 ]
 PAPER_CERT_FILES = {
  'manuscript_style.csv','format_compliance.csv','visual_latex_style.csv','python_figure_renderers.csv','paper_numeric_claims.csv',
@@ -40,12 +35,7 @@ def sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 def skip_path(path: Path) -> bool:
-    rel = path.relative_to(ROOT).as_posix()
-    if rel in SKIP: return True
-    if any(part in IGNORED_DIRS or part.endswith('.egg-info') for part in path.relative_to(ROOT).parts): return True
-    if path.name.startswith('paper_build'): return True
-    if path.name.endswith(TRANSIENT_SUFFIXES): return True
-    return False
+    return manifest_should_skip(path, ROOT)
 
 def read_csv(path: Path) -> list[dict[str,str]]:
     with path.open(newline='', encoding='utf-8') as f: return list(csv.DictReader(f))

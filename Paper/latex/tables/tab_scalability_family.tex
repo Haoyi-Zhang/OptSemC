@@ -1,17 +1,17 @@
 \begin{table}[t]
 \centering
 \footnotesize
-\caption{Finite-comparison replay and dispersion. False and Drift are lower-better; Checks/s is higher-better for the projection inner loop, not end-to-end construction. Bold marks per-column best values.}
+\caption{Finite-comparison replay and dispersion. Coll. and Drift are lower-better; Checks/s is higher-better for the projection inner loop, not end-to-end construction. Bold marks per-column best values.}
 \label{tab:scalability-family}
 \setlength{\tabcolsep}{2.5pt}
 \begin{tabular}{@{}lrrrrrr@{}}
 \toprule
-Proj. & False$\downarrow$ & Probes & Axes & Fam. & Checks/s$\uparrow$ & Drift$\downarrow$ \\
+Proj. & Coll.$\downarrow$ & Probes & Axes & Fam. & Checks/s$\uparrow$ & Drift$\downarrow$ \\
 \midrule
-strict & \textbf{0} & -- & -- & 0/6 & 234,779 & \textbf{0} \\
-keyword & 254 & 254 & 9 & 3/6 & 280,127 & \textbf{0} \\
-operator-only & 238 & 238 & 8 & 2/6 & \textbf{306,102} & \textbf{0} \\
-surface & \textbf{0} & -- & -- & 0/6 & 246,254 & \textbf{0} \\
+strict & \textbf{0} & -- & -- & 0/6 & 229,922 & \textbf{0} \\
+keyword & 254 & 254 & 9 & 3/6 & 275,300 & \textbf{0} \\
+operator-only & 238 & 238 & 8 & 2/6 & \textbf{300,986} & \textbf{0} \\
+surface & \textbf{0} & -- & -- & 0/6 & 241,832 & \textbf{0} \\
 \bottomrule
 \end{tabular}
 \end{table}

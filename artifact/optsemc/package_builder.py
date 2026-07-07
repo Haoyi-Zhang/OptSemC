@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Sequence
@@ -45,7 +46,14 @@ GENERATED_SELF_CHECKS = {
     "artifact/evaluation/reference_guard_audit_latest.json",
     "artifact/evaluation/reference_guard_audit_latest.md",
     "artifact/evaluation/git_tree_status.txt",
+    "artifact/evaluation/git_tree_state.csv",
+    "artifact/evaluation/git_tree_state_check.csv",
+    "artifact/evaluation/git_tree_porcelain.txt",
 }
+REVIEW_LOG_PREFIXES = (
+    "external_opus_blind_review_round",
+    "dual_blind_review_round",
+)
 CHUNK_SIZE = 1024 * 1024
 TEXT_PROBE_BYTES = 16 * 1024
 
@@ -62,11 +70,24 @@ class PackageFile:
         return {"path": self.path, "size": str(self.size), "sha256": self.sha256, "text": str(self.text).lower(), "category": self.category}
 
 
-def should_include(rel: Path, path: Path) -> bool:
+def artifact_only_requested(root: Path) -> bool:
+    return os.environ.get("ANONYMOUS_ARTIFACT_ONLY", "0") == "1" or not (root / "Paper").exists()
+
+
+def should_include(root: Path, rel: Path, path: Path) -> bool:
+    if artifact_only_requested(root) and rel.parts[:1] == ("Paper",):
+        return False
     parts = set(rel.parts)
     if parts & EXCLUDE_DIRS:
         return False
     rel_posix = rel.as_posix()
+    if rel_posix == "reference_guard_audit.md":
+        return False
+    if rel.parts[:2] == ("artifact", "evaluation") and (
+        any(path.name.startswith(prefix) for prefix in REVIEW_LOG_PREFIXES)
+        or path.name.endswith("_disposition.md")
+    ):
+        return False
     if rel_posix in GENERATED_SELF_CHECKS:
         return False
     if path.suffix in TRANSIENT_SUFFIXES:
@@ -127,7 +148,7 @@ def package_files(root: Path) -> tuple[PackageFile, ...]:
     rows: list[PackageFile] = []
     for path in sorted(root.rglob("*")):
         rel = path.relative_to(root)
-        if not should_include(rel, path):
+        if not should_include(root, rel, path):
             continue
         rows.append(PackageFile(rel.as_posix(), path.stat().st_size, file_sha256(path), is_text_file(path), categorize(rel)))
     return tuple(rows)

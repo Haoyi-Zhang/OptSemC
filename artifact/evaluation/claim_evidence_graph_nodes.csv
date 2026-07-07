@@ -1,7 +1,7 @@
 node_id,kind,label,path
 claim:C10_source_robustness,claim,"Keyword and operator-only projection-induced collisions remain nonzero after removing any single public source, while an identity audit records retained original witnesses and newly induced witnesses for that information-deletion stress.",
-claim:C11_external_suite,claim,The external benchmark-family suite covers 90/90 declared optimizer motifs across 12 families; those motifs are represented by 71 distinct deterministic-catalog SQL probes because some probes satisfy multiple declared requirements.,
-claim:C12_real_engine_validation,claim,"The generated probes execute on DuckDB and PostgreSQL with zero failures for the full corpus and the motif representatives, and this evidence is scoped away from collision and repair computation.",
+claim:C11_external_suite,claim,The external benchmark-family suite covers 90/90 declared optimizer feature requirements across 12 families; those requirements are represented by 71 distinct deterministic-catalog SQL probes because some probes satisfy multiple declared requirements.,
+claim:C12_real_engine_validation,claim,"The generated probes execute on DuckDB and PostgreSQL with zero failures for the full corpus and the feature-space representatives, and this evidence is scoped away from collision and field-certificate computation.",
 claim:C13_formal_obligations,claim,Every finite formal obligation asserted in the paper is checked by the replay package.,
 claim:C14_rule_aware_probe_denominator,claim,The probe denominator is a rule-aware coverage benchmark rather than an independent held-out generalization set.,
 claim:C15_evidence_freeze_protocol,claim,"The freeze manifest hashes schema, source inputs, projection/baseline specifications, result-determining code, compute/check scripts, and replay entrypoints.",
@@ -15,7 +15,7 @@ claim:C4_operator_false_equivalence,claim,"Operator-only projection induces 238 
 claim:C5_reference_negative_control,claim,Reference-signature comparison over admitted public evidence produces zero projection-induced collisions.,
 claim:C6_adversarial_baselines,claim,"The projection-surface portfolio contains 17 executable vocabularies, including one-field stress surfaces and strengthened control surfaces.",
 claim:C7_practice_projection_surfaces,claim,"The public source-surface audit observes keyword labels in all 26 sources, yes/no controls in 12 sources, operator-family labels in all 26 sources, and no source exposes the full reference-signature payload.",
-claim:C8_repair_basis,claim,The layer+placement semantic basis repairs all 498 projection-induced collisions across headline projections.,
+claim:C8_repair_basis,claim,The layer+placement semantic basis separates all 498 projection-induced collisions across headline projections.,
 claim:C9_minimality,claim,Repair certificates are sufficient and minimal under finite enumeration and hitting-set checks.,
 claim:formal_C1_projection_surface_stress_suite,claim,C1 projection-surface stress suite,
 claim:formal_F1_finite_evaluation,claim,F1 finite evaluation,

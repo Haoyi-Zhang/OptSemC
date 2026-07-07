@@ -61,12 +61,12 @@ def load_matplotlib():
         {
             "font.family": "serif",
             "font.serif": [
+                "DejaVu Serif",
                 "Linux Libertine O",
                 "LinLibertine",
                 "Libertinus Serif",
                 "Nimbus Roman",
                 "Times New Roman",
-                "DejaVu Serif",
             ],
             "font.size": 7.2,
             "axes.titlesize": 8.0,
@@ -103,7 +103,12 @@ def save(fig, path: Path) -> None:
         format="pdf",
         bbox_inches="tight",
         pad_inches=0.04,
-        metadata={"Creator": "OptSem-C Python figure renderer", "Producer": "OptSem-C"},
+        metadata={
+            "Creator": "OptSem-C Python figure renderer",
+            "Producer": "OptSem-C",
+            "CreationDate": None,
+            "ModDate": None,
+        },
     )
 
 
@@ -127,30 +132,47 @@ def render_projection_information(plt, output: Path) -> None:
     false_counts = [int(float(row["false_equivalences"])) for row in shown]
     colors = [COLORS["teal"] if count == 0 else COLORS["rose"] for count in false_counts]
 
-    fig, (ax1, ax2) = plt.subplots(
-        ncols=2,
-        figsize=(3.42, 2.05),
-        gridspec_kw={"width_ratios": [1.05, 0.95], "wspace": 0.35},
+    fig, (ax1, axc, ax2) = plt.subplots(
+        ncols=3,
+        sharey=True,
+        figsize=(3.42, 2.45),
+        gridspec_kw={"width_ratios": [1.08, 0.30, 0.96], "wspace": 0.10},
     )
     fig.patch.set_facecolor("white")
-    ax1.barh(y, false_rates, color=colors, alpha=0.78, height=0.45, edgecolor="none")
-    for yi, rate, count in zip(y, false_rates, false_counts):
-        xpos = min(max(rate + 0.025, 0.06), 0.92)
-        ax1.text(xpos, yi, f"{count:,}", va="center", ha="left", color=COLORS["gray"], fontsize=6.4)
+    bars = ax1.barh(y, false_rates, color=colors, alpha=0.78, height=0.45, edgecolor="white", linewidth=0.25)
+    for bar, count in zip(bars, false_counts):
+        if count:
+            bar.set_hatch("////")
+    for yi in y:
+        ax1.axhline(yi, color=COLORS["rule"], linewidth=0.28, alpha=0.35, zorder=0)
+        ax2.axhline(yi, color=COLORS["rule"], linewidth=0.28, alpha=0.35, zorder=0)
     ax1.set_yticks(y)
     ax1.set_yticklabels([label[row["projection"]] for row in shown])
     ax1.invert_yaxis()
     ax1.set_xlim(0, 1.0)
-    ax1.set_xlabel("collision rate")
+    ax1.set_xlabel("collapsed/equivalent")
     ax1.set_title("projection kernel")
     ax1.grid(axis="x", color=COLORS["rule"], linewidth=0.35, alpha=0.65)
     ax1.spines[["top", "right", "left"]].set_visible(False)
     ax1.tick_params(axis="y", length=0)
 
+    axc.set_xlim(0, 1)
+    axc.set_xticks([])
+    axc.set_yticks(y)
+    axc.tick_params(axis="y", left=False, labelleft=False)
+    for spine in axc.spines.values():
+        spine.set_visible(False)
+    axc.text(0.50, -0.62, "coll.", transform=axc.get_yaxis_transform(), ha="center", va="bottom", color=COLORS["gray"], fontsize=6.35)
+    for yi, count in zip(y, false_counts):
+        axc.text(0.50, yi, f"{count:,}", va="center", ha="center", color=COLORS["gray"], fontsize=6.45)
+
     ax2.scatter(entropy, y, s=28, facecolor="white", edgecolor=COLORS["teal"], linewidth=0.9, zorder=3)
     for yi, value, count in zip(y, entropy, false_counts):
         ax2.hlines(yi, 0, value, color=COLORS["teal"] if count == 0 else COLORS["rose"], linewidth=1.3, alpha=0.72)
-    ax2.set_yticks([])
+    ax2.set_yticks(y)
+    ax2.set_yticklabels([label[row["projection"]] for row in shown])
+    ax2.yaxis.tick_right()
+    ax2.tick_params(axis="y", length=0, pad=1.2, colors=COLORS["gray"])
     ax2.set_xlim(0, 1.06)
     ax2.set_xlabel("entropy retained")
     ax2.set_title("information kept")
@@ -194,8 +216,8 @@ def render_motif_denominator(plt, output: Path) -> None:
     ax.set_yticks(y)
     ax.set_yticklabels([f"{name}  n={count}" for name, count in zip(names, motifs)])
     ax.invert_yaxis()
-    ax.set_xlabel("matching probes (log scale)")
-    ax.set_title("motif coverage", loc="left")
+    ax.set_xlabel("matching SQL representatives (log scale)")
+    ax.set_title("feature crosswalk", loc="left")
     ax.grid(axis="x", color=COLORS["rule"], linewidth=0.35, alpha=0.72)
     ax.spines[["top", "right", "left"]].set_visible(False)
     ax.tick_params(axis="y", length=0, pad=1.5)
@@ -203,7 +225,7 @@ def render_motif_denominator(plt, output: Path) -> None:
     ax.text(
         0.99,
         1.02,
-        f"{total_motifs} motifs; {sparse_motifs} sparse",
+        f"{total_motifs} reqs.; {sparse_motifs} sparse",
         transform=ax.transAxes,
         ha="right",
         va="bottom",
@@ -214,7 +236,7 @@ def render_motif_denominator(plt, output: Path) -> None:
     ax.text(
         0.01,
         -0.18,
-        "ranges are finite matching-probe spans, not population estimates",
+        "ranges are finite feature-space spans, not workload substitution",
         transform=ax.transAxes,
         ha="left",
         va="top",
@@ -241,14 +263,15 @@ def render_semantic_frontier(plt, Rectangle, output: Path) -> None:
     fig, ax = plt.subplots(figsize=(3.42, 2.02))
     fig.patch.set_facecolor("white")
     ax.set_xlim(-1.90, 4.58)
-    ax.set_ylim(-0.28, len(shown) + 0.62)
+    ax.set_ylim(-0.28, len(shown) + 0.74)
     ax.axis("off")
-    ax.text(-1.84, len(shown) + 0.26, "core state-free repair frontier", fontsize=8.0, weight="bold", color=COLORS["ink"])
-    ax.text(0.38, len(shown) - 0.08, "retained depth", fontsize=6.45, color=COLORS["gray"])
+    ax.text(-1.84, len(shown) + 0.38, "core state-free separation frontier", fontsize=8.0, weight="bold", color=COLORS["ink"])
+    ax.text(-1.84, len(shown) + 0.13, "U=unsafe   S=first safe   -=already safe", fontsize=6.15, color=COLORS["gray"])
+    ax.text(0.38, len(shown) - 0.20, "retained depth", fontsize=6.45, color=COLORS["gray"])
     for j, depth in enumerate(depths):
-        ax.text(0.35 + j * 0.62, len(shown) - 0.46, depth, ha="center", fontsize=6.4, color=COLORS["gray"])
-    ax.text(2.38, len(shown) - 0.46, "basis", fontsize=6.4, color=COLORS["gray"])
-    ax.text(4.05, len(shown) - 0.46, "safe/unsafe", ha="center", fontsize=6.4, color=COLORS["gray"])
+        ax.text(0.35 + j * 0.62, len(shown) - 0.56, depth, ha="center", fontsize=6.4, color=COLORS["gray"])
+    ax.text(2.38, len(shown) - 0.56, "basis", fontsize=6.4, color=COLORS["gray"])
+    ax.text(4.05, len(shown) - 0.56, "safe/unsafe", ha="center", fontsize=6.4, color=COLORS["gray"])
 
     for i, row in enumerate(shown):
         y = len(shown) - 1 - i
@@ -275,8 +298,15 @@ def render_semantic_frontier(plt, Rectangle, output: Path) -> None:
             ax.text(x0 + 0.26, y, txt, ha="center", va="center", fontsize=7.0, weight="bold", color=fg)
         basis = row["representative_minimum_safe_set"].replace("+", " + ")
         basis_count = len([item for item in row["minimum_safe_sets"].split(";") if item])
-        compact_basis = basis.replace("placement", "place").replace("operator", "op").replace("decision_time", "time").replace("observability", "obs")
-        ax.text(2.38, y, f"{compact_basis} ({basis_count})", va="center", fontsize=6.15, color=COLORS["ink"])
+        compact_basis = (
+            basis.replace("layer + placement", "L+P")
+            .replace("placement", "P")
+            .replace("operator", "Op")
+            .replace("decision_time", "T")
+            .replace("observability", "Obs")
+            .replace("layer", "L")
+        )
+        ax.text(2.38, y, f"{compact_basis} ({basis_count})", va="center", fontsize=6.05, color=COLORS["ink"])
         ax.text(4.05, y, f"{row['safe_subsets']}/{row['unsafe_subsets']}", va="center", ha="center", fontsize=6.35, color=COLORS["gray"])
     save(fig, output)
     plt.close(fig)

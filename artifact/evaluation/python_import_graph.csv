@@ -188,6 +188,7 @@ artifact/optsemc/minimization.py,typing,from
 artifact/optsemc/package_builder.py,__future__,from
 artifact/optsemc/package_builder.py,hashlib,import
 artifact/optsemc/package_builder.py,json,import
+artifact/optsemc/package_builder.py,os,import
 artifact/optsemc/package_builder.py,dataclasses,from
 artifact/optsemc/package_builder.py,pathlib,from
 artifact/optsemc/package_builder.py,typing,from
@@ -209,6 +210,7 @@ artifact/optsemc/quality.py,typing,from
 artifact/optsemc/registry.py,__future__,from
 artifact/optsemc/registry.py,csv,import
 artifact/optsemc/registry.py,json,import
+artifact/optsemc/registry.py,os,import
 artifact/optsemc/registry.py,dataclasses,from
 artifact/optsemc/registry.py,pathlib,from
 artifact/optsemc/registry.py,typing,from
@@ -241,6 +243,7 @@ artifact/optsemc/reporting.py,pathlib,from
 artifact/optsemc/reporting.py,typing,from
 artifact/optsemc/repository.py,__future__,from
 artifact/optsemc/repository.py,ast,import
+artifact/optsemc/repository.py,os,import
 artifact/optsemc/repository.py,re,import
 artifact/optsemc/repository.py,dataclasses,from
 artifact/optsemc/repository.py,pathlib,from
@@ -365,6 +368,7 @@ artifact/scripts/build_claim_evidence_graph.py,optsemc.claim_graph,from
 artifact/scripts/build_claim_evidence_graph.py,optsemc.io,from
 artifact/scripts/build_claim_ledger.py,__future__,from
 artifact/scripts/build_claim_ledger.py,csv,import
+artifact/scripts/build_claim_ledger.py,os,import
 artifact/scripts/build_claim_ledger.py,pathlib,from
 artifact/scripts/build_claim_metric_summary.py,__future__,from
 artifact/scripts/build_claim_metric_summary.py,csv,import
@@ -455,6 +459,7 @@ artifact/scripts/check_benchmark_motif_difficulty.py,pathlib,from
 artifact/scripts/check_certificate_freshness.py,__future__,from
 artifact/scripts/check_certificate_freshness.py,csv,import
 artifact/scripts/check_certificate_freshness.py,hashlib,import
+artifact/scripts/check_certificate_freshness.py,os,import
 artifact/scripts/check_certificate_freshness.py,sys,import
 artifact/scripts/check_certificate_freshness.py,pathlib,from
 artifact/scripts/check_claim_evidence_graph.py,__future__,from

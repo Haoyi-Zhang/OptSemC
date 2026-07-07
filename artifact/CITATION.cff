@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: "OptSem-C: Benchmarking Projection Precision in Public Query-Optimizer Contracts"
+title: "OptSem-C: Auditing Federated SQL Optimizer Contracts"
 message: "If you use this artifact, cite the accompanying PVLDB paper."
 type: software
 authors:

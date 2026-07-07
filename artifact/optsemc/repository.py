@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import ast
+import os
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -119,7 +120,7 @@ def duplicate_markdown_titles(root: Path) -> list[str]:
 
 def repository_audit(root: Path) -> list[AuditCheck]:
     checks: list[AuditCheck] = []
-    artifact_only = not (root / "Paper").exists()
+    artifact_only = os.environ.get("ANONYMOUS_ARTIFACT_ONLY", "0") == "1" or not (root / "Paper").exists()
     classes, funcs = public_classes_and_functions(root)
     scripts = list((root / "artifact" / "scripts").glob("*.py")) if (root / "artifact" / "scripts").exists() else []
     tests = list((root / "artifact" / "tests").glob("test_*.py")) if (root / "artifact" / "tests").exists() else []

@@ -14,9 +14,9 @@ if path.exists():
     data=list(csv.DictReader(path.open(newline='', encoding='utf-8')))
     add('matrix_rows_present', len(data) >= 60, str(len(data)))
     methods={r['projection'] for r in data}
-    add('headline_methods_present', methods=={'keyword','yesno','operator_only'}, str(methods))
+    add('headline_methods_present', methods=={'keyword','yesno','operator_only'}, ','.join(sorted(methods)))
     sums={m:sum(int(r['false_equivalences']) for r in data if r['projection']==m) for m in methods}
-    add('headline_false_counts_match', sums.get('keyword')==254 and sums.get('yesno')==6 and sums.get('operator_only')==238, str(sums))
+    add('headline_false_counts_match', sums.get('keyword')==254 and sums.get('yesno')==6 and sums.get('operator_only')==238, ','.join(f"{key}={sums[key]}" for key in sorted(sums)))
 else:
     for name in ['matrix_rows_present','headline_methods_present','headline_false_counts_match']:
         add(name, False, 'missing')

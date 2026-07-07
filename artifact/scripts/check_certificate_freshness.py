@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import os
 import sys
 from pathlib import Path
 
@@ -11,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[2]
 ART = ROOT / "artifact"
 E = ART / "evaluation"
 OUT = E / "certificate_freshness_check.csv"
-ARTIFACT_ONLY = not (ROOT / "Paper").exists()
+ARTIFACT_ONLY = not (ROOT / "Paper").exists() or os.environ.get("ANONYMOUS_ARTIFACT_ONLY", "0") == "1"
 
 
 def sha256_file(path: Path) -> str:
@@ -190,7 +191,7 @@ outputs_current(
     [ART / "scripts" / "run_repository_audit.py", ART / "scripts" / "check_repository_quality.py", ART / "optsemc" / "repository.py"],
 )
 
-if (ROOT / "Paper").exists():
+if not ARTIFACT_ONLY and (ROOT / "Paper").exists():
     tex_inputs = sorted((ROOT / "Paper" / "latex").rglob("*.tex"))
     bib_inputs = sorted((ROOT / "Paper" / "latex").rglob("*.bib"))
     outputs_current(

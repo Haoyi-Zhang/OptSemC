@@ -85,7 +85,14 @@ MANIFEST_SKIP = {
     "artifact/evaluation/reference_guard_audit_latest.json",
     "artifact/evaluation/reference_guard_audit_latest.md",
     "artifact/evaluation/git_tree_status.txt",
+    "artifact/evaluation/git_tree_state.csv",
+    "artifact/evaluation/git_tree_state_check.csv",
+    "artifact/evaluation/git_tree_porcelain.txt",
 }
+REVIEW_LOG_PREFIXES = (
+    "external_opus_blind_review_round",
+    "dual_blind_review_round",
+)
 SOURCE_STATE_FILE = "artifact/evaluation/git_tree_state.csv"
 TEXT_SUFFIXES = {
     ".bib",
@@ -117,6 +124,13 @@ SECRET_PATTERNS = [
 def should_skip(rel: Path) -> bool:
     parts = set(rel.parts)
     if parts & EXCLUDED_DIRS:
+        return True
+    if rel.as_posix() == "reference_guard_audit.md":
+        return True
+    if rel.parts[:2] == ("artifact", "evaluation") and (
+        any(rel.name.startswith(prefix) for prefix in REVIEW_LOG_PREFIXES)
+        or rel.name.endswith("_disposition.md")
+    ):
         return True
     if rel.name in EXCLUDED_FILE_NAMES:
         return True
@@ -246,6 +260,8 @@ def prime_stage_checks(stage: Path) -> None:
     artifact = stage / "artifact"
     env["PYTHONDONTWRITEBYTECODE"] = "1"
     env["PYTHONPATH"] = str(artifact) + os.pathsep + str(artifact / "scripts")
+    env["ANONYMOUS_ARTIFACT_ONLY"] = "1"
+    env["OPTSEMC_RELEASE_GATE"] = "1"
     commands = [
         "check_package_cleanliness.py",
         "check_package_integrity.py",

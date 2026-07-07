@@ -19,7 +19,7 @@ jobs:
       - name: Run mainline checks
         run: |
           cd artifact
-          ./run_mainline_checks.sh
+          bash run_mainline_checks.sh
   package-gate:
     runs-on: ubuntu-22.04
     steps:
@@ -34,8 +34,9 @@ jobs:
       - name: Run artifact-only deep checks
         run: |
           cd artifact
-          OPTSEMC_REQUIRE_CLEAN_GIT=1 python scripts/check_git_tree_state.py
-          ANONYMOUS_ARTIFACT_ONLY=1 OPTSEMC_RELEASE_GATE=1 ./run_deep_checks.sh
+          find .. -type d \( -name "__pycache__" -o -name ".pytest_cache" -o -name "*.egg-info" -o -name "build" -o -name "dist" \) -prune -exec rm -rf {} +
+          OPTSEMC_RELEASE_GATE=1 OPTSEMC_REQUIRE_CLEAN_GIT=1 python scripts/check_git_tree_state.py
+          ANONYMOUS_ARTIFACT_ONLY=1 OPTSEMC_RELEASE_GATE=1 bash run_deep_checks.sh
   real-engine-smoke:
     runs-on: ubuntu-22.04
     services:
@@ -65,4 +66,4 @@ jobs:
           OPTSEMC_POSTGRES_DSN: postgresql://postgres@127.0.0.1:5432/optsemc
         run: |
           cd artifact
-          ./run_cloud_real_engine_validation.sh
+          bash run_cloud_real_engine_validation.sh

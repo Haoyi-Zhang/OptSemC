@@ -2,15 +2,15 @@
 \centering
 \begin{tikzpicture}[
   row/.style={vpanel, draw=vldbBlue!60, fill=vldbMist,
-    text width=6.55cm, minimum height=.72cm,
+    text width=6.50cm, minimum height=.62cm,
     font=\rmfamily\fontsize{6.95}{7.55}\selectfont, text=black!72,
     align=center, inner xsep=2.0pt, inner ysep=1.1pt},
   checknode/.style={vpanel, draw=vldbTeal!72!black, fill=vldbMint,
-    text width=1.64cm, minimum height=.68cm,
+    text width=1.56cm, minimum height=.62cm,
     font=\rmfamily\bfseries\fontsize{6.62}{7.22}\selectfont,
     text=vldbInk, align=center, inner xsep=1.0pt, inner ysep=1.05pt},
   metric/.style={vpanel, draw=vldbBlue!66, fill=white,
-    text width=1.46cm, minimum height=.96cm,
+    text width=1.44cm, minimum height=.88cm,
     font=\rmfamily\fontsize{6.65}{7.25}\selectfont, text=black!68,
     align=center, inner xsep=1.1pt, inner ysep=1.05pt,
     text height=1.45ex, text depth=.24ex},
@@ -20,43 +20,41 @@
     align=center, inner xsep=1.4pt, inner ysep=.85pt,
     text height=1.45ex, text depth=.24ex},
   band/.style={vpanel, draw=vldbGold!58!black, fill=vldbWarm,
-    text width=6.55cm, minimum height=.72cm,
+    text width=6.50cm, minimum height=.62cm,
     font=\rmfamily\bfseries\fontsize{6.85}{7.45}\selectfont,
     text=vldbInk, align=center, inner xsep=2pt, inner ysep=1.0pt},
   flow/.style={-{Latex[length=1.45mm]}, line width=.58pt,
     draw=black!45, line cap=round, line join=round}
 ]
-\path[use as bounding box] (-.05,-4.14) rectangle (7.22,.30);
+\path[use as bounding box] (-.05,-4.00) rectangle (7.22,.30);
 
-\node[vhead, anchor=west] at (.02,.10) {Frozen benchmark denominator};
-\node[band, anchor=west] at (.34,-.40)
-  {schema, sources, and probes fixed\\repair fields fixed before outcomes};
+\node[vhead, anchor=west] at (.02,.10) {Frozen contract-audit denominator};
+\node[band, anchor=west] at (.36,-.40)
+  {schema, sources, probes, crosswalk, and fields fixed before outcomes};
 
-\node[metric] (a) at (.88,-1.18)
+\node[metric] (a) at (.88,-1.14)
   {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 26}\\sources};
-\node[metric] (b) at (2.66,-1.18)
+\node[metric] (b) at (2.66,-1.14)
   {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 287}\\rules};
-\node[metric] (c) at (4.44,-1.18)
+\node[metric] (c) at (4.44,-1.14)
   {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 4,216}\\probes};
-\node[metric] (d) at (6.22,-1.18)
-  {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 90/90}\\motifs\\{\rmfamily\fontsize{6.70}{7.30}\selectfont 71 reps}};
-\node[vsmall, text=vldbGray] at (3.55,-1.72)
-  {parallel fixed denominators, not a generation chain};
+\node[metric] (d) at (6.22,-1.14)
+  {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 90/90}\\reqs.};
 
-\node[row, anchor=west] at (.34,-2.02)
-  {admission checks run before any collision rate is counted};
-\node[checknode] at (.88,-2.76) {0/287\\invalid};
-\node[checknode] at (2.66,-2.76) {0/287\\conflict};
-\node[checknode] at (4.44,-2.76) {SQL\\0 fails};
-\node[checknode] at (6.22,-2.76) {motifs\\0 miss};
+\node[row, anchor=west] at (.36,-1.96)
+  {parallel fixed denominators; admission checks precede collision counting};
+\node[checknode] at (.88,-2.62) {0/287\\invalid};
+\node[checknode] at (2.66,-2.62) {0/287\\conflict};
+\node[checknode] at (4.44,-2.62) {SQL\\0 fails};
+\node[checknode] at (6.22,-2.62) {reqs.\\0 miss};
 
-\node[vsmall, anchor=west, text=vldbGray] at (.08,-3.34)
+\node[vsmall, anchor=west, text=vldbGray] at (.08,-3.18)
   {covered query-feature axes};
-\node[axis] at (1.36,-3.78) {source / connector};
-\node[axis] at (3.60,-3.78) {operator / shape};
-\node[axis] at (5.84,-3.78) {runtime / control};
+\node[axis] at (1.36,-3.60) {source / connector};
+\node[axis] at (3.60,-3.60) {operator / shape};
+\node[axis] at (5.84,-3.60) {runtime / control};
 \end{tikzpicture}
-\caption{Corpus, benchmark, and execution denominators: 26 public sources, 287 admitted rules, 4,216 executable probes, and 90/90 published motif requirements represented by 71 distinct generated SQL probes. These are parallel fixed denominators; zero-failure checks validate support, consistency, SQL execution, and motif coverage before collision measurement.}
+\caption{Corpus, probe-suite, and execution denominators: 26 public sources, 287 admitted rules, 4,216 executable probes, and 90/90 published optimizer-decision requirements represented by 71 distinct generated SQL probes. These are parallel fixed denominators; zero-failure checks validate support, consistency, SQL execution, and feature-space representation before collision measurement.}
 \Description{A compact validation-check diagram showing fixed evidence counts, zero-failure admission checks, and covered query-feature axes before collision counting.}
 \label{fig:benchmark-snapshot}
 \end{figure}

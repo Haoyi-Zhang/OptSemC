@@ -1,17 +1,19 @@
 # Reproducibility Guide
 
-This artifact reproduces the numerical claims in *OptSem-C: Benchmarking Projection Precision in Public Query-Optimizer Contracts*.
+This artifact reproduces the numerical claims in *OptSem-C: Auditing Public Optimizer Contracts at Federated SQL Boundaries*.
 
 ## Fast verification
 
 ```bash
 cd artifact
-PYTHONDONTWRITEBYTECODE=1 ./run_mainline_checks.sh
+PYTHONDONTWRITEBYTECODE=1 bash run_mainline_checks.sh
 ```
 
 This command runs package unit tests, checks package hygiene, verifies manifest coherence, and then checks core frozen certificates, paper/table alignment, source-witness support, and key numerical targets.
 
 On the Linux validation machine used for replay, the fast path completes in minutes and the deep path regenerates derived corpus, projection, SQL, and integrity outputs. Exact package, Python, dependency, and platform details are written to `evaluation/environment.csv`.
+
+The CI archive-packaging gate is a stricter packaging certificate, not a substitute for the full no-cache replay. It verifies that committed certificates, manifests, and package snapshots are current under a clean source tree; use `run_from_scratch_no_cache.sh` when the goal is to regenerate derived evidence from raw grounded inputs.
 
 ## Unit tests
 
@@ -36,19 +38,19 @@ The tests cover finite relations, set cover, hitting sets, SQL shape normalizati
 
 ```bash
 cd artifact
-PYTHONDONTWRITEBYTECODE=1 ./run_deep_checks.sh
+PYTHONDONTWRITEBYTECODE=1 bash run_deep_checks.sh
 ```
 
-The deep replay rebuilds derived measurements from the grounded corpus and benchmark specifications. It is more expensive than the fast check because it regenerates contract maps, probe coverage, SQL validation, projection diagnostics, repair certificates, anti-overfit boundary tables, resource profiles, the evidence-freeze manifest, and paper-alignment tables. In an anonymous artifact-only archive, paper-build checks are skipped automatically and the package snapshot is checked against the replay package scope.
+The deep replay rebuilds derived measurements from the grounded corpus and benchmark specifications. It is more expensive than the fast check because it regenerates contract maps, probe coverage, SQL validation, projection diagnostics, retained-field certificates, anti-overfit boundary tables, resource profiles, the evidence-freeze manifest, and paper-alignment tables. In an anonymous artifact-only archive, paper-build checks are skipped automatically and the package snapshot is checked against the replay package scope.
 
 ## Cloud real-engine validation
 
 ```bash
 cd artifact
-PYTHON=/path/to/python OPTSEMC_POSTGRES_DSN="postgresql://USER@HOST:PORT/DBNAME" ./run_cloud_real_engine_validation.sh
+PYTHON=/path/to/python OPTSEMC_POSTGRES_DSN="postgresql://USER@HOST:PORT/DBNAME" bash run_cloud_real_engine_validation.sh
 ```
 
-This replay runs the generated probes on DuckDB and PostgreSQL and then checks the newly written certificates in fresh mode. It is intended for a validation host with PostgreSQL available; the deterministic-catalog checks remain the portable baseline. The saved CSVs in the package are certificate evidence until this command is rerun.
+This replay runs the generated probes on DuckDB and PostgreSQL and then checks the newly written certificates in fresh mode. It is intended for a validation host with PostgreSQL available; the deterministic-catalog checks remain the portable baseline. The saved CSVs in the package are certificate evidence until this command is rerun. A portable no-cache replay uses saved real-engine certificates by default; set `RUN_REAL_ENGINE_VALIDATION=1` plus `OPTSEMC_POSTGRES_DSN` when a fresh PostgreSQL rerun is required.
 
 ## Key targets
 
@@ -57,11 +59,11 @@ This replay runs the generated probes on DuckDB and PostgreSQL and then checks t
 - 4,216 executable SQL probes.
 - 7,112 valid optimizer-feature interactions.
 - 99 generated probes forced by admitted public rule guards; the rest are feature-interaction coverage probes.
-- 90/90 external optimizer motifs covered by 71 distinct generated SQL representatives, with deterministic-catalog validation and an explicit motif-to-probe map.
+- 90/90 published optimizer feature requirements covered by 71 distinct generated SQL representatives, with deterministic-catalog validation and an explicit requirement-to-probe map.
 - 254 keyword false equivalences, 238 operator-only false equivalences, and 6 yes/no false equivalences.
 - 44 unsafe retained-field vocabularies among all 256 retained-field subsets.
-- 498 headline witnesses repaired by the layer+placement semantic basis.
+- 498 headline witnesses separated by the layer+placement semantic basis.
 - 12,648 probe-catalog SQL executions with zero failures.
-- 8,432 DuckDB/PostgreSQL full-corpus executions and 142 motif-representative executions with zero failures (71 representatives on each engine).
+- 8,432 DuckDB/PostgreSQL full-corpus executions and 142 feature-space representative executions with zero failures (71 representatives on each engine).
 
-The repair and robustness targets are finite stability checks over the declared public-contract denominator. They should not be read as a learned generalization guarantee for future engines, private optimizer behavior, or third-party workload performance.
+The field-certificate and robustness targets are finite stability checks over the declared public-contract denominator. They should not be read as a learned generalization guarantee for future engines, private optimizer behavior, or third-party workload performance.

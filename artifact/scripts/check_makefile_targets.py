@@ -20,7 +20,7 @@ try:
         if not (ROOT/script).exists():
             missing_scripts.append(script)
     add("referenced_scripts_exist", not missing_scripts, ";".join(missing_scripts[:20]))
-    add("verify_uses_local_mainline", "./run_mainline_checks.sh" in text, "")
+    add("verify_uses_bash_mainline", "bash run_mainline_checks.sh" in text, "")
 except Exception as exc:
     add("makefile_exception", False, type(exc).__name__ + ":" + str(exc))
 OUT.parent.mkdir(parents=True, exist_ok=True)

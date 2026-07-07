@@ -2,10 +2,10 @@
 export PYTHONPATH := $(CURDIR):$(CURDIR)/scripts$(if $(PYTHONPATH),:$(PYTHONPATH))
 
 verify:
-	./run_mainline_checks.sh
+	bash run_mainline_checks.sh
 
 deep:
-	./run_deep_checks.sh
+	bash run_deep_checks.sh
 
 paper:
 	python scripts/check_latex_compile.py && python scripts/check_pdf_integrity.py && python scripts/check_format_compliance.py && python scripts/check_visual_latex_style.py

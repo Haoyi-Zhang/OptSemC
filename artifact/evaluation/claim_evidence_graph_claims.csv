@@ -1,7 +1,7 @@
 claim_id,claim,supporting_files,existing_supporting_files,checking_gates,passed
 claim:C10_source_robustness,"Keyword and operator-only projection-induced collisions remain nonzero after removing any single public source, while an identity audit records retained original witnesses and newly induced witnesses for that information-deletion stress.",3,3,1,true
-claim:C11_external_suite,The external benchmark-family suite covers 90/90 declared optimizer motifs across 12 families; those motifs are represented by 71 distinct deterministic-catalog SQL probes because some probes satisfy multiple declared requirements.,5,5,1,true
-claim:C12_real_engine_validation,"The generated probes execute on DuckDB and PostgreSQL with zero failures for the full corpus and the motif representatives, and this evidence is scoped away from collision and repair computation.",9,9,1,true
+claim:C11_external_suite,The external benchmark-family suite covers 90/90 declared optimizer feature requirements across 12 families; those requirements are represented by 71 distinct deterministic-catalog SQL probes because some probes satisfy multiple declared requirements.,5,5,1,true
+claim:C12_real_engine_validation,"The generated probes execute on DuckDB and PostgreSQL with zero failures for the full corpus and the feature-space representatives, and this evidence is scoped away from collision and field-certificate computation.",9,9,1,true
 claim:C13_formal_obligations,Every finite formal obligation asserted in the paper is checked by the replay package.,1,1,1,true
 claim:C14_rule_aware_probe_denominator,The probe denominator is a rule-aware coverage benchmark rather than an independent held-out generalization set.,4,4,1,true
 claim:C15_evidence_freeze_protocol,"The freeze manifest hashes schema, source inputs, projection/baseline specifications, result-determining code, compute/check scripts, and replay entrypoints.",6,6,1,true
@@ -15,7 +15,7 @@ claim:C4_operator_false_equivalence,"Operator-only projection induces 238 contra
 claim:C5_reference_negative_control,Reference-signature comparison over admitted public evidence produces zero projection-induced collisions.,2,2,1,true
 claim:C6_adversarial_baselines,"The projection-surface portfolio contains 17 executable vocabularies, including one-field stress surfaces and strengthened control surfaces.",2,2,1,true
 claim:C7_practice_projection_surfaces,"The public source-surface audit observes keyword labels in all 26 sources, yes/no controls in 12 sources, operator-family labels in all 26 sources, and no source exposes the full reference-signature payload.",3,3,1,true
-claim:C8_repair_basis,The layer+placement semantic basis repairs all 498 projection-induced collisions across headline projections.,3,3,1,true
+claim:C8_repair_basis,The layer+placement semantic basis separates all 498 projection-induced collisions across headline projections.,3,3,1,true
 claim:C9_minimality,Repair certificates are sufficient and minimal under finite enumeration and hitting-set checks.,3,3,1,true
 claim:formal_C1_projection_surface_stress_suite,C1 projection-surface stress suite,2,2,1,true
 claim:formal_F1_finite_evaluation,F1 finite evaluation,4,4,1,true

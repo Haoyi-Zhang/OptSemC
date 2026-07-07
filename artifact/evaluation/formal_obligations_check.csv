@@ -1,4 +1,4 @@
 check,passed,details
 obligation_rows_present,true,25
 all_obligations_pass,true,25/25
-state_projection_lattice_covered,true,"{'state_join_semilattice', 'strict_projection_identity', 'projection_determinism', 'field_lattice'}"
+state_projection_lattice_covered,true,"{'strict_projection_identity', 'state_join_semilattice', 'field_lattice', 'projection_determinism'}"

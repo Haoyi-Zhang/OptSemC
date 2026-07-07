@@ -53,10 +53,7 @@ try:
     text = proc.stdout if proc.returncode == 0 else ''
     add('pdf_text_extractable', proc.returncode == 0 and len(text) > 1000, len(text), '>1000 chars')
     normalized_text = ' '.join(text.split())
-    title_seen = (
-        'Benchmarking Projection Precision' in normalized_text
-        and 'Public Query-Optimizer Contracts' in normalized_text
-    )
+    title_seen = 'OptSem-C: Auditing Federated SQL Optimizer Contracts' in normalized_text
     add('title_present', title_seen, 'yes' if title_seen else 'no', 'yes')
     normalized = normalized_text.lower()
     collision_claim = (

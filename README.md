@@ -1,6 +1,6 @@
 # OptSem-C
 
-OptSem-C studies public optimizer behavior contracts for analytical SQL engines. It separates the public contract an engine exposes from hidden implementation behavior and latency measurements.
+OptSem-C studies public optimizer behavior contracts for analytical SQL engines, with emphasis on federated, cloud-service, connector, and distributed-runtime boundaries. It separates the public contract an engine exposes from hidden implementation behavior and latency measurements.
 
 The project has two primary directories:
 
@@ -21,7 +21,7 @@ The archived replay package records its source Git state in `artifact/evaluation
 
 ## Evidence scope
 
-OptSem-C is a finite public-contract audit, not a learned model and not a hidden-optimizer oracle. OptSemBench-C is rule-aware by design: 99 probes are forced by admitted public rule guards so that the declared contract denominator is reachable, while the remaining probes cover optimizer-feature interactions. The external benchmark-motif check covers 90 declared optimizer-decision requirements with 71 distinct SQL representatives because several representatives satisfy multiple requirements; the many-to-one map is recorded explicitly in `artifact/evaluation/external_motif_probe_map.csv`. The paper therefore treats robustness checks as source/probe/feature/engine stress evidence, not as proof that a point-learned repair generalizes to arbitrary future engines. Resource-profile rows report the cost of rerunning this finite comparison audit; the deterministic 8x lift checks only the comparison inner loop, not a new corpus, source set, or engine-count claim.
+OptSem-C is a finite public-contract audit, not a learned model and not a hidden-optimizer oracle. OptSemBench-C is rule-aware by design: 99 probes are forced by admitted public rule guards so that the declared contract denominator is reachable, while the remaining probes cover optimizer-feature interactions. The external benchmark crosswalk covers 90 declared optimizer-decision requirements with 71 distinct SQL representatives because several representatives satisfy multiple requirements; the many-to-one map is recorded explicitly in `artifact/evaluation/external_motif_probe_map.csv`. The paper therefore treats robustness checks as source/probe/feature/engine stress evidence, not as proof that a point-learned field basis generalizes to arbitrary future engines. Resource-profile rows report the cost of rerunning this finite comparison audit; the deterministic 8x lift checks only the comparison inner loop, not a new corpus, source set, or engine-count claim.
 
 ## Execution environment
 

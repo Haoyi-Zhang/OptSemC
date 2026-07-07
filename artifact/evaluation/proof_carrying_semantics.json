@@ -1,5 +1,5 @@
 {
-  "bundle_hash": "0556dcbde3fed9c3b16e8af2e2b2ed61e5e14783d8e7f86582a61089947f7e72",
+  "bundle_hash": "6ca7058d9cc66b1940efb9531a73d5705349831c6c7150e8e81fbbef87a7b18c",
   "certificate_count": 5,
   "certificates": [
     {
@@ -8,7 +8,7 @@
         "inputs": {
           "contract_maps": "c55cbd68dee531651ee4b85e61d8be527ad10062f9c8d61a70c3bc2c4d78f2f1",
           "generated_probes": "83b9c1e0261dd5341a6c61fd694a466dab5b4c1bfe28b462f73c2d87895e9f07",
-          "verified_rules": "2757b9c82c0cf5de93859a98aed926efdd3b469820352d7ebe8b72c1ccc2b084"
+          "verified_rules": "a8789705a97c7c89ea9c955b800bcf5c85bd2cedb5898dca443de6f019638526"
         },
         "produced_by": "build_proof_carrying_semantics.py",
         "version": "OptSemC"
@@ -275,7 +275,7 @@
         "inputs": {
           "contract_maps": "c55cbd68dee531651ee4b85e61d8be527ad10062f9c8d61a70c3bc2c4d78f2f1",
           "generated_probes": "83b9c1e0261dd5341a6c61fd694a466dab5b4c1bfe28b462f73c2d87895e9f07",
-          "verified_rules": "2757b9c82c0cf5de93859a98aed926efdd3b469820352d7ebe8b72c1ccc2b084"
+          "verified_rules": "a8789705a97c7c89ea9c955b800bcf5c85bd2cedb5898dca443de6f019638526"
         },
         "produced_by": "build_proof_carrying_semantics.py",
         "version": "OptSemC"
@@ -352,7 +352,7 @@
         "inputs": {
           "contract_maps": "c55cbd68dee531651ee4b85e61d8be527ad10062f9c8d61a70c3bc2c4d78f2f1",
           "generated_probes": "83b9c1e0261dd5341a6c61fd694a466dab5b4c1bfe28b462f73c2d87895e9f07",
-          "verified_rules": "2757b9c82c0cf5de93859a98aed926efdd3b469820352d7ebe8b72c1ccc2b084"
+          "verified_rules": "a8789705a97c7c89ea9c955b800bcf5c85bd2cedb5898dca443de6f019638526"
         },
         "produced_by": "build_proof_carrying_semantics.py",
         "version": "OptSemC"
@@ -619,7 +619,7 @@
         "inputs": {
           "contract_maps": "c55cbd68dee531651ee4b85e61d8be527ad10062f9c8d61a70c3bc2c4d78f2f1",
           "generated_probes": "83b9c1e0261dd5341a6c61fd694a466dab5b4c1bfe28b462f73c2d87895e9f07",
-          "verified_rules": "2757b9c82c0cf5de93859a98aed926efdd3b469820352d7ebe8b72c1ccc2b084"
+          "verified_rules": "a8789705a97c7c89ea9c955b800bcf5c85bd2cedb5898dca443de6f019638526"
         },
         "produced_by": "build_proof_carrying_semantics.py",
         "version": "OptSemC"
@@ -691,7 +691,7 @@
         "inputs": {
           "contract_maps": "c55cbd68dee531651ee4b85e61d8be527ad10062f9c8d61a70c3bc2c4d78f2f1",
           "generated_probes": "83b9c1e0261dd5341a6c61fd694a466dab5b4c1bfe28b462f73c2d87895e9f07",
-          "verified_rules": "2757b9c82c0cf5de93859a98aed926efdd3b469820352d7ebe8b72c1ccc2b084"
+          "verified_rules": "a8789705a97c7c89ea9c955b800bcf5c85bd2cedb5898dca443de6f019638526"
         },
         "produced_by": "build_proof_carrying_semantics.py",
         "version": "OptSemC"

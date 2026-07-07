@@ -15,7 +15,7 @@ if path.exists():
     add('obligation_rows_present', len(data)>=20, str(len(data)))
     add('all_obligations_pass', data and all(r['passed']=='true' for r in data), f"{sum(r['passed']=='true' for r in data)}/{len(data)}")
     obligations={r['theorem'] for r in data}
-    add('state_projection_lattice_covered', {'state_join_semilattice','projection_determinism','strict_projection_identity','field_lattice'}.issubset(obligations), str(obligations))
+    add('state_projection_lattice_covered', {'state_join_semilattice','projection_determinism','strict_projection_identity','field_lattice'}.issubset(obligations), ','.join(sorted(obligations)))
 else:
     for name in ['obligation_rows_present','all_obligations_pass','state_projection_lattice_covered']:
         add(name, False, 'missing')

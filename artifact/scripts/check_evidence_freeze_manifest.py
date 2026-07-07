@@ -50,9 +50,17 @@ def main() -> int:
     add(
         "result_determining_code_present",
         {
+            "benchmark/validity_constraints.yaml",
+            "benchmark/selected_3wise.yaml",
+            "external/benchmark_suites.yaml",
+            "optsemc/benchmark.py",
+            "optsemc/benchmark_compiler.py",
             "optsemc/baselines.py",
             "optsemc/projections.py",
             "optsemc/repair_stability.py",
+            "scripts/generate_probes.py",
+            "scripts/compile_benchmark_motifs.py",
+            "scripts/execute_external_motif_suite.py",
             "scripts/compute_anti_overfit_audit.py",
             "scripts/compute_resource_profile.py",
             "scripts/check_real_engine_noninterference.py",

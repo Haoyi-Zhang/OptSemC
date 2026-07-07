@@ -9,6 +9,8 @@ refresh:check_reference_quality.py,true,ok
 refresh:check_paper_quality.py,true,ok
 refresh:compute_practice_projection_surfaces.py,true,ok
 refresh:check_practice_projection_surfaces.py,true,ok
+refresh:build_recoding_worksheet.py,true,ok
+refresh:check_recoding_worksheet.py,true,ok
 refresh:build_environment_report.py,true,ok
 refresh:check_environment_report.py,true,ok
 refresh:check_real_engine_validation.py,true,ok
@@ -76,7 +78,7 @@ scalability_stress_check,true,10/10
 engine_family_stress_check,true,9/9
 artifact_registry_check,true,145/145
 repository_quality_check,true,5/5
-package_snapshot_check,true,29/29
+package_snapshot_check,true,30/30
 practice_projection_surfaces_check,true,6/6
 real_engine_validation_check,true,30/30
 real_engine_noninterference_check,true,4/4
@@ -84,3 +86,4 @@ environment_check,true,5/5
 git_tree_state_check,true,7/7
 claim_ledger_check,true,16/16
 certificate_freshness_check,true,17/17
+recoding_worksheet_check,true,10/10
