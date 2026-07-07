@@ -51,7 +51,12 @@ def outputs_current(name: str, outputs: list[Path], inputs: list[Path]) -> None:
     if missing_outputs or missing_inputs:
         add(name, False, f"missing_outputs={';'.join(missing_outputs)};missing_inputs={';'.join(missing_inputs)}")
         return
-    add(name, oldest(outputs) >= newest(inputs), f"outputs={len(outputs)};inputs={len(inputs)}")
+    output_time = oldest(outputs)
+    input_time = newest(inputs)
+    # Git checkouts can assign same-second mtimes in nondeterministic order.
+    # A small tolerance preserves stale-certificate detection while avoiding
+    # false failures for committed certificates whose contents are unchanged.
+    add(name, output_time + 1.0 >= input_time, f"outputs={len(outputs)};inputs={len(inputs)}")
 
 
 def paper_table_source_inputs() -> list[Path]:

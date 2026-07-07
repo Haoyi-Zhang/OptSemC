@@ -56,7 +56,6 @@ try:
             "wheel",
             str(ROOT),
             "--no-deps",
-            "--no-build-isolation",
             "-w",
             tmp,
         ]

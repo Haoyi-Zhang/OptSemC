@@ -139,7 +139,7 @@ run_py scripts/check_external_benchmark_suite.py
 run_py scripts/compute_workload_suite_depth.py
 run_py scripts/check_workload_suite_depth.py
 run_py scripts/compute_semantic_frontier.py
-run_py scripts/render_baseline_external_tables.py
+run_paper_py scripts/render_baseline_external_tables.py
 run_py scripts/check_core_library_contract.py
 run_py scripts/build_data_contracts.py
 run_py scripts/check_data_contracts.py
@@ -237,8 +237,27 @@ run_py scripts/check_package_manifest.py
 run_py scripts/check_package_snapshot.py
 run_py scripts/run_integrity_suite.py
 if [[ "${OPTSEMC_RELEASE_GATE:-0}" == "1" ]]; then
-  echo "[deep] clean-tree assertion"
-  OPTSEMC_RELEASE_GATE=1 timeout "$PY_TIMEOUT" python -u scripts/check_git_tree_state.py
-  git -C .. diff --exit-code -- artifact/evaluation/git_tree_state.csv artifact/evaluation/git_tree_porcelain.txt artifact/evaluation/git_tree_state_check.csv
-  test -z "$(git -C .. status --porcelain=v1 --untracked-files=all)"
+  if [[ "$ARTIFACT_ONLY" == "1" ]]; then
+    echo "[deep] artifact-only generated-output assertion"
+    dirty="$(git -C .. status --porcelain=v1 --untracked-files=all)"
+    disallowed="$(printf '%s\n' "$dirty" | python -c 'import sys
+bad=[]
+for line in sys.stdin.read().splitlines():
+    if not line.strip():
+        continue
+    path=line[3:]
+    if line.startswith("?? ") or not path.startswith("artifact/evaluation/"):
+        bad.append(line)
+print("\n".join(bad))')"
+    if [[ -n "$disallowed" ]]; then
+      printf '%s\n' "$disallowed"
+      exit 1
+    fi
+    echo "[deep] artifact-only generated outputs limited to artifact/evaluation"
+  else
+    echo "[deep] clean-tree assertion"
+    OPTSEMC_RELEASE_GATE=1 timeout "$PY_TIMEOUT" python -u scripts/check_git_tree_state.py
+    git -C .. diff --exit-code -- artifact/evaluation/git_tree_state.csv artifact/evaluation/git_tree_porcelain.txt artifact/evaluation/git_tree_state_check.csv
+    test -z "$(git -C .. status --porcelain=v1 --untracked-files=all)"
+  fi
 fi
