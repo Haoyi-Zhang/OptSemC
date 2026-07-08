@@ -6,13 +6,13 @@ The manuscript source is intentionally outside the anonymous replay archive. The
 
 ## Archive verification
 
-The public anonymous replay package is archived under the stable Zenodo concept record https://doi.org/10.5281/zenodo.21251442. The paper, repository README, and Zenodo landing page identify the current version DOI and external SHA-256 digest. The zip does not embed its version DOI or digest, so the package is not self-referential. Verify a downloaded archive by comparing the external digest with:
+The public anonymous replay package is archived as Zenodo version DOI https://doi.org/10.5281/zenodo.21251990, under stable concept DOI https://doi.org/10.5281/zenodo.21251442. The paper availability block and repository README identify the version DOI and external SHA-256 digest for the exact reviewed `optsemc-artifact.zip`. The zip does not embed its own version DOI or digest, so the package is not self-referential. Verify a downloaded archive by comparing the external digest with:
 
 ```bash
 sha256sum optsemc-artifact.zip
 ```
 
-The archive records its source-tree certificate in `artifact/evaluation/git_tree_state.csv`. If replay code, grounded corpus inputs, generated-probe logic, validation scripts, or paper-facing evidence changes, the archive gate requires rebuilding from a source tree with no pending edits and updating the external digest in the repository README and PVLDB availability block.
+The archive records its source-tree certificate in `artifact/evaluation/git_tree_state.csv`. The `git_head,runtime-verified` value is an anonymized release-certificate field rather than a public commit identifier; clean-tree status is recorded through zero dirty counts and the SHA-256 hashes of empty status/diff outputs. If replay code, grounded corpus inputs, generated-probe logic, validation scripts, or paper-facing evidence changes, the archive gate requires rebuilding from a source tree with no pending edits and updating the external digest in the repository README and PVLDB availability block.
 
 ## Main research objects
 

@@ -11,13 +11,13 @@ The active manuscript source is `Paper/latex/paper.tex`. The artifact entry poin
 
 ## Artifact archive
 
-The public anonymous replay package is archived at https://doi.org/10.5281/zenodo.21251990. The expected SHA-256 for the archived `optsemc-artifact.zip` is:
+The public anonymous replay package is archived as Zenodo version DOI https://doi.org/10.5281/zenodo.21251990, under concept DOI https://doi.org/10.5281/zenodo.21251442. The PVLDB availability block uses the version DOI because it names the exact reviewed `optsemc-artifact.zip`. The expected SHA-256 for that archived zip is:
 
 ```text
 ac21995fc19c6c41086b5286fc4cdb709408aec4fb424304519b3001eb5a4531
 ```
 
-The archived replay package records its source Git state in `artifact/evaluation/git_tree_state.csv`. The digest above applies only to that uploaded archive. Any commit that changes replay code, grounded corpus inputs, generated-probe logic, validation scripts, or paper-facing evidence must rebuild the anonymous archive from a clean source tree and update both the repository README and the PVLDB availability block.
+The archived replay package records its source-tree release certificate in `artifact/evaluation/git_tree_state.csv`. The `git_head,runtime-verified` value intentionally avoids embedding a repository commit in the anonymous package; the clean-tree guarantee is carried by the recorded zero dirty counts and empty status/diff hashes. The digest above applies only to that uploaded archive. Any commit that changes replay code, grounded corpus inputs, generated-probe logic, validation scripts, or paper-facing evidence must rebuild the anonymous archive from a clean source tree and update both the repository README and the PVLDB availability block.
 
 Reviewers who want a non-mutating first check can run:
 
