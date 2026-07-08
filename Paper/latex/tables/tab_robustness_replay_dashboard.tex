@@ -1,6 +1,6 @@
 \begin{table}[t]
 \centering
-\caption{Finite freeze, robustness, and replay dashboard. Fractions are corpus summaries; bold zeros mark controls or separated surfaces.}
+\caption{Finite freeze, robustness, and post-extraction replay dashboard. Fractions are corpus summaries; bold zeros mark controls or separated surfaces.}
 \label{tab:robustness}
 \footnotesize
 \setlength{\tabcolsep}{2.0pt}
@@ -16,11 +16,11 @@ Coll. & Operator & 238 & 0.105 & finite [.093,.118] & hides layer \\
 Coll. & Surface & \textbf{0} & 0.000 & separated & fields suffice \\
 \midrule
 Bound. & Src+dens. & -- & nonzero 26/26 & LOO+rule mass & bias check \\
-Bound. & Probe/stress & \textbf{0} & 30/30; 492+6 sep. & subsample / splits & fixed basis \\
+Bound. & Probe/stress & \textbf{0} & 30/30; 498 sep. & subsample / splits & fixed basis \\
 Bound. & Learned pair & 48/120/6 & held-out minima & point bases fail & no pair dictionary \\
 \midrule
-Replay & Full path & -- & 3.50 s & 455,828 rows & checks+audit \\
-Replay & Kernel 8$\times$ & -- & 2.49 s & 708,288 checks & projection only \\
+Replay & Full path & -- & 2.96 s & 455,828 rows & checks+audit \\
+Replay & Kernel 8$\times$ & -- & 2.35 s & 2,833,152 rows & 708,288/proj. \\
 \bottomrule
 \end{tabular}
 \Description{A combined table summarizing frozen inputs, robustness, anti-overfitting boundary checks, and replay costs. It reports finite-corpus collapsed-comparison fractions, source leave-one-out behavior, probe subsampling, feature and engine stress splits, failed point-learned pair transfer, and replay timing without presenting population-level claims.}

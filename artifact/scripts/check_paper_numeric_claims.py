@@ -90,12 +90,18 @@ try:
     stress = {row["metric"]: row["value"] for row in read_csv(E / "scalability_stress_summary.csv")}
     summary = {row["metric"]: row["value"] for row in read_csv(E / "scalability_regression_summary.csv")}
     alg = read_csv(E / "algorithmic_scaling_summary.csv")
+    e2e = read_csv(E / "resource_profile_end_to_end.csv")[0]
+    lift_rows = read_csv(E / "resource_profile_scale.csv")
+    lift8 = next(row for row in lift_rows if row["scale"] == "8x")
     min_cps = min(float(row["min_checks_per_second"]) for row in alg)
     min_r_squared = float(summary["min_r_squared"])
-    full_checks = fmt_int(stress["full_pairwise_comparisons_per_projection"])
+    full_rows = fmt_int(e2e["input_rows"])
+    full_seconds = f"{float(e2e['elapsed_ms']) / 1000.0:.2f}"
+    lifted_rows = fmt_int(lift8["input_rows"])
+    lifted_seconds = f"{float(lift8['elapsed_ms']) / 1000.0:.2f}"
     lifted_checks = fmt_int(max(int(row["max_pairwise_checks"]) for row in alg))
     full_min_cps = float(stress["full_min_comparisons_per_second"])
-    required = [full_checks, lifted_checks, "50,000", "190,000", "0.98"]
+    required = [full_rows, full_seconds, lifted_rows, lifted_seconds, lifted_checks, "0.98"]
     missing = [tok for tok in required if tok not in section]
     detail = "|".join(missing)
     if full_min_cps < 50000.0:
