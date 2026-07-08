@@ -1,60 +1,54 @@
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[
-  row/.style={vpanel, draw=vldbBlue!60, fill=vldbMist,
-    text width=6.50cm, minimum height=.62cm,
-    font=\rmfamily\fontsize{6.95}{7.55}\selectfont, text=black!72,
-    align=center, inner xsep=2.0pt, inner ysep=1.1pt},
-  checknode/.style={vpanel, draw=vldbTeal!72!black, fill=vldbMint,
-    text width=1.56cm, minimum height=.62cm,
-    font=\rmfamily\bfseries\fontsize{6.62}{7.22}\selectfont,
-    text=vldbInk, align=center, inner xsep=1.0pt, inner ysep=1.05pt},
-  metric/.style={vpanel, draw=vldbBlue!66, fill=white,
-    text width=1.44cm, minimum height=.88cm,
-    font=\rmfamily\fontsize{6.65}{7.25}\selectfont, text=black!68,
-    align=center, inner xsep=1.1pt, inner ysep=1.05pt,
-    text height=1.45ex, text depth=.24ex},
+  freeze/.style={vpanel, draw=vldbGold!62!black, fill=vldbWarm,
+    text width=6.42cm, minimum height=.48cm,
+    font=\rmfamily\bfseries\fontsize{6.95}{7.55}\selectfont,
+    text=vldbInk, align=center, inner xsep=2pt, inner ysep=1.15pt},
+  metric/.style={vpanel, draw=vldbBlue!64, fill=white,
+    text width=1.42cm, minimum height=.82cm,
+    font=\rmfamily\bfseries\fontsize{6.55}{7.15}\selectfont, text=vldbInk,
+    align=center, inner xsep=1.0pt, inner ysep=1.1pt},
+  gate/.style={vpanel, draw=vldbTeal!70!black, fill=vldbMint,
+    text width=1.42cm, minimum height=.66cm,
+    font=\rmfamily\bfseries\fontsize{6.35}{6.95}\selectfont,
+    text=vldbInk, align=center, inner xsep=.9pt, inner ysep=1.0pt},
   axis/.style={vpanel, draw=vldbRule, fill=white,
-    text width=1.88cm, minimum height=.52cm,
-    font=\rmfamily\fontsize{6.65}{7.25}\selectfont, text=black!64,
-    align=center, inner xsep=1.4pt, inner ysep=.85pt,
-    text height=1.45ex, text depth=.24ex},
-  band/.style={vpanel, draw=vldbGold!58!black, fill=vldbWarm,
-    text width=6.50cm, minimum height=.62cm,
-    font=\rmfamily\bfseries\fontsize{6.85}{7.45}\selectfont,
-    text=vldbInk, align=center, inner xsep=2pt, inner ysep=1.0pt},
-  flow/.style={-{Latex[length=1.45mm]}, line width=.58pt,
-    draw=black!45, line cap=round, line join=round}
+    text width=1.72cm, minimum height=.44cm,
+    font=\rmfamily\fontsize{6.2}{6.85}\selectfont, text=black!62,
+    align=center, inner xsep=1pt, inner ysep=.75pt},
+  rail/.style={line width=.46pt, draw=vldbRule, rounded corners=2pt}
 ]
-\path[use as bounding box] (-.05,-4.00) rectangle (7.22,.30);
+\path[use as bounding box] (-.04,-3.82) rectangle (7.22,.34);
 
-\node[vhead, anchor=west] at (.02,.10) {Frozen contract-audit denominator};
-\node[band, anchor=west] at (.36,-.40)
-  {schema, sources, probes, crosswalk, and fields fixed before outcomes};
+\node[vhead, anchor=west] at (.00,.14) {Frozen denominator before collision counting};
+\node[freeze, anchor=west] at (.40,-.36)
+  {schema + sources + probes + crosswalk + fields};
 
-\node[metric] (a) at (.88,-1.14)
-  {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 26}\\sources};
-\node[metric] (b) at (2.66,-1.14)
-  {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 287}\\rules};
-\node[metric] (c) at (4.44,-1.14)
-  {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 4,216}\\probes};
-\node[metric] (d) at (6.22,-1.14)
-  {{\rmfamily\bfseries\fontsize{8.6}{9.2}\selectfont 90/90}\\reqs.};
+\draw[rail] (.72,-.86) -- (6.48,-.86);
+\foreach \x in {.84,2.68,4.52,6.36} {
+  \draw[rail] (\x,-.86) -- (\x,-.99);
+}
 
-\node[row, anchor=west] at (.36,-1.96)
-  {parallel fixed denominators; admission checks precede collision counting};
-\node[checknode] at (.88,-2.62) {0/287\\invalid};
-\node[checknode] at (2.66,-2.62) {0/287\\conflict};
-\node[checknode] at (4.44,-2.62) {SQL\\0 fails};
-\node[checknode] at (6.22,-2.62) {reqs.\\0 miss};
+\node[metric] (a) at (.84,-1.34) {public\\sources};
+\node[metric] (b) at (2.68,-1.34) {admitted\\contracts};
+\node[metric] (c) at (4.52,-1.34) {executable\\probes};
+\node[metric] (d) at (6.36,-1.34) {motif\\crosswalk};
 
-\node[vsmall, anchor=west, text=vldbGray] at (.08,-3.18)
-  {covered query-feature axes};
-\node[axis] at (1.36,-3.60) {source / connector};
-\node[axis] at (3.60,-3.60) {operator / shape};
-\node[axis] at (5.84,-3.60) {runtime / control};
+\node[vsmall, anchor=west, text=vldbGray] at (.08,-2.04)
+  {validation gates};
+\node[gate] at (.84,-2.48) {source\\support};
+\node[gate] at (2.68,-2.48) {clean\\joins};
+\node[gate] at (4.52,-2.48) {SQL\\validity};
+\node[gate] at (6.36,-2.48) {covered\\motifs};
+
+\node[vsmall, anchor=west, text=vldbGray] at (.08,-3.10)
+  {covered axes};
+\node[axis] at (1.48,-3.42) {source};
+\node[axis] at (3.60,-3.42) {operator};
+\node[axis] at (5.72,-3.42) {runtime};
 \end{tikzpicture}
-\caption{Corpus, probe-suite, and execution denominators: 26 public sources, 287 admitted rules, 4,216 executable probes, and 90/90 published optimizer-decision requirements represented by 71 distinct generated SQL probes. These are parallel fixed denominators; zero-failure checks validate support, consistency, SQL execution, and feature-space representation before collision measurement.}
-\Description{A compact validation-check diagram showing fixed evidence counts, zero-failure admission checks, and covered query-feature axes before collision counting.}
+\caption{Corpus, probe-suite, and execution denominators. The diagram separates frozen inputs, validation gates, and covered query-feature axes before collision measurement; exact counts are reported in the surrounding text and data tables.}
+\Description{A compact validation-check diagram showing frozen evidence inputs, admission checks, and covered query-feature axes before collision counting.}
 \label{fig:benchmark-snapshot}
 \end{figure}
