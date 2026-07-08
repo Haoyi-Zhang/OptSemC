@@ -26,6 +26,8 @@ certificate:format_compliance,true,8/8
 certificate:manuscript_style,true,7/7
 certificate:python_figure_renderers,true,4/4
 certificate:latex_compile_check,true,10/10
-certificate:pdf_integrity,true,8/8
+certificate:pdf_integrity,true,9/9
 certificate:reference_quality,true,148/148
 certificate:paper_table_source_check,true,30/30
+release_snapshot_uses_strict_git_gate,true,require_clean=true;development_snapshot=false
+release_snapshot_tree_is_clean,true,tracked=0;untracked=0

@@ -1,8 +1,8 @@
 check,passed,details
 git_head_available,true,runtime-verified
-tree_state_recorded,true,tracked=23;untracked=0;require_clean=False;release_gate=False;development_snapshot=True
+tree_state_recorded,true,tracked=0;untracked=0;require_clean=True;release_gate=True;development_snapshot=False
 no_ignored_boundary_files,true,
-release_gate_requires_clean_tree,true,release_gate=False;require_clean=False
-dirty_tree_requires_explicit_development_snapshot,true,require_clean=False;development_snapshot=True
-clean_tree_when_required,true, M Paper/latex/paper.pdf; M artifact/evaluation/artifact_registry_check.csv; M artifact/evaluation/certificate_freshness_check.csv; M artifact/evaluation/claim_ledger_check.csv; M artifact/evaluation/environment.csv; M artifact/evaluation/git_tree_porcelain.txt; M artifact/evaluation/git_tree_state.csv; M artifact/evaluation/git_tree_state_check.csv; M artifact/evaluation/integrity_suite.csv; M artifact/evaluation/package_files.csv; M artifact/evaluation/package_fingerprint_summary.csv; M artifact/evaluation/package_manifest.csv; M artifact/evaluation/package_manifest_check.csv; M artifact/evaluation/package_manifest_summary.csv; M artifact/evaluation/package_snapshot_check.csv; M artifact/evaluation/paper_claim_ledger.csv; M artifact/evaluation/paper_figure_manifest.csv; M artifact/evaluation/paper_table_source_check.csv; M artifact/evaluation/python_figure_renderers.csv; M artifact/evaluation/resource_profile.csv
-tree_state_hashes_recorded,true,status=ccee549d9a6d;diff=cd4f982e2504;cached=e3b0c44298fc
+release_gate_requires_clean_tree,true,release_gate=True;require_clean=True
+dirty_tree_requires_explicit_development_snapshot,true,require_clean=True;development_snapshot=False
+clean_tree_when_required,true,
+tree_state_hashes_recorded,true,status=e3b0c44298fc;diff=e3b0c44298fc;cached=e3b0c44298fc
