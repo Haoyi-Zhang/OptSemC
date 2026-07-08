@@ -187,7 +187,12 @@ def collect_source_tree_state(allow_dirty: bool) -> list[dict[str, str]]:
             + preview
         )
     return [
-        {"key": "git_head", "value": head.strip()},
+        # The anonymous zip must have a stable digest after the external
+        # availability record is updated.  Recording the exact commit inside
+        # the zip makes the archive hash depend on metadata commits that only
+        # update that external digest, so the packaged certificate records the
+        # clean-source fact and the empty status/diff hashes instead.
+        {"key": "git_head", "value": "source-tree-clean" if head.strip() else "unavailable"},
         {"key": "source_tree_clean", "value": str(not tracked_or_untracked).lower()},
         {"key": "tracked_or_untracked_count", "value": str(len(tracked_or_untracked))},
         {"key": "allow_dirty_source", "value": str(bool(allow_dirty)).lower()},

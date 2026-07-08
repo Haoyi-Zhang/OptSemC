@@ -1,0 +1,7 @@
+check,passed,details
+claim_severity_file_present,true,rows=3
+headline_counts_match,true,
+keyword_not_taxonomy_only,true,"{'projection': 'keyword', 'collapsed_witnesses': '254', 'placement_claim_risk': '254', 'layer_claim_risk': '212', 'decision_time_claim_risk': '248', 'observability_claim_risk': '248', 'state_claim_risk': '53', 'taxonomy_only_witnesses': '0', 'reference_disjoint_witnesses': '254', 'mean_atom_delta': '9.094'}"
+operator_not_taxonomy_only,true,"{'projection': 'operator_only', 'collapsed_witnesses': '238', 'placement_claim_risk': '206', 'layer_claim_risk': '238', 'decision_time_claim_risk': '89', 'observability_claim_risk': '118', 'state_claim_risk': '160', 'taxonomy_only_witnesses': '0', 'reference_disjoint_witnesses': '238', 'mean_atom_delta': '5.845'}"
+yesno_is_narrow_boundary,true,"{'projection': 'yesno', 'collapsed_witnesses': '6', 'placement_claim_risk': '6', 'layer_claim_risk': '6', 'decision_time_claim_risk': '0', 'observability_claim_risk': '0', 'state_claim_risk': '6', 'taxonomy_only_witnesses': '0', 'reference_disjoint_witnesses': '6', 'mean_atom_delta': '3.000'}"
+all_headline_witnesses_reference_disjoint,true,

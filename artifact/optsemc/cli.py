@@ -11,6 +11,9 @@ import yaml
 
 from .corpus import load_contract_maps, load_engines_probes
 from .metrics import equivalence_metrics
+from .projections import false_equivalence_witnesses
+from .semantics import ActionAtom, ContractSignature, FIELDS, UNSPEC
+from .severity import field_value_delta, symmetric_atom_delta
 from .manifest import build_manifest, manifest_fingerprint, manifest_summary
 from .repository import repository_audit, score_row
 from .data_contracts import validate_contracts, result_rows
@@ -33,6 +36,77 @@ def _write_rows(rows: Iterable[dict[str, str]], path: Path | None) -> None:
             writer.writeheader(); writer.writerows(rows)
 
 
+def _atom_text(signature: ContractSignature) -> str:
+    return ";".join("|".join(atom.as_tuple()) for atom in sorted(signature))
+
+
+def _witness_rows(
+    maps: dict[tuple[str, str], ContractSignature],
+    engines: tuple[str, ...],
+    probes: tuple[str, ...],
+    projections: list[str],
+    limit: int,
+) -> list[dict[str, str]]:
+    empty: ContractSignature = frozenset()
+    rows: list[dict[str, str]] = []
+    for projection in projections:
+        for method, probe_id, left_key, right_key in false_equivalence_witnesses(maps, engines, probes, projection)[:limit]:
+            left = maps.get(left_key, empty)
+            right = maps.get(right_key, empty)
+            field_delta = field_value_delta(left, right)
+            rows.append(
+                {
+                    "projection": method,
+                    "probe_id": probe_id,
+                    "engine_left": left_key[0],
+                    "engine_right": right_key[0],
+                    "atom_delta": str(symmetric_atom_delta(left, right)),
+                    "differing_fields": ";".join(field for field, _count in field_delta.most_common()),
+                    "left_atoms": _atom_text(left),
+                    "right_atoms": _atom_text(right),
+                }
+            )
+    return rows
+
+
+def _contract_maps_from_csv(path: Path) -> tuple[dict[tuple[str, str], ContractSignature], tuple[str, ...], tuple[str, ...]]:
+    required = {"engine", "probe_id", "operator", "kind", "layer", "placement", "decision_time", "observability"}
+    maps: dict[tuple[str, str], set[ActionAtom]] = {}
+    engines: set[str] = set()
+    probes: set[str] = set()
+    with path.open(newline="", encoding="utf-8-sig") as handle:
+        reader = csv.DictReader(handle)
+        missing = required - set(reader.fieldnames or ())
+        if missing:
+            raise SystemExit(f"input CSV missing required columns: {','.join(sorted(missing))}")
+        for line_no, row in enumerate(reader, 2):
+            engine = (row.get("engine") or "").strip()
+            probe_id = (row.get("probe_id") or "").strip()
+            if not engine or not probe_id:
+                raise SystemExit(f"{path}:{line_no}: engine and probe_id are required")
+            state = (row.get("state") or "MUST").strip() or "MUST"
+            if state == UNSPEC:
+                continue
+            atom = ActionAtom(
+                operator=(row.get("operator") or "").strip(),
+                kind=(row.get("kind") or "").strip(),
+                variant=(row.get("variant") or "").strip(),
+                layer=(row.get("layer") or "").strip(),
+                placement=(row.get("placement") or "").strip(),
+                decision_time=(row.get("decision_time") or "").strip(),
+                observability=(row.get("observability") or "").strip(),
+                state=state,
+            )
+            if any(not atom.field(field) for field in FIELDS if field != "variant"):
+                raise SystemExit(f"{path}:{line_no}: empty required atom field")
+            key = (engine, probe_id)
+            maps.setdefault(key, set()).add(atom)
+            engines.add(engine)
+            probes.add(probe_id)
+    frozen = {key: frozenset(value) for key, value in maps.items()}
+    return frozen, tuple(sorted(engines)), tuple(sorted(probes))
+
+
 def cmd_summary(args: argparse.Namespace) -> int:
     root = Path(args.root)
     cm = load_contract_maps(root / "artifact")
@@ -49,6 +123,24 @@ def cmd_metrics(args: argparse.Namespace) -> int:
     root = Path(args.root)
     cm = load_contract_maps(root / "artifact")
     rows = [equivalence_metrics(cm.maps, cm.engines, cm.probes, projection).as_row() for projection in args.projection]
+    _write_rows(rows, Path(args.output) if args.output else None)
+    return 0
+
+
+def cmd_witnesses(args: argparse.Namespace) -> int:
+    root = Path(args.root)
+    cm = load_contract_maps(root / "artifact")
+    rows = _witness_rows(cm.maps, cm.engines, cm.probes, args.projection, args.limit)
+    _write_rows(rows, Path(args.output) if args.output else None)
+    return 0
+
+
+def cmd_audit_csv(args: argparse.Namespace) -> int:
+    maps, engines, probes = _contract_maps_from_csv(Path(args.input))
+    if args.mode == "metrics":
+        rows = [equivalence_metrics(maps, engines, probes, projection).as_row() for projection in args.projection]
+    else:
+        rows = _witness_rows(maps, engines, probes, args.projection, args.limit)
     _write_rows(rows, Path(args.output) if args.output else None)
     return 0
 
@@ -117,6 +209,18 @@ def build_parser() -> argparse.ArgumentParser:
     p_metrics.add_argument("--projection", nargs="+", default=["keyword", "yesno", "operator_only"])
     p_metrics.add_argument("--output")
     p_metrics.set_defaults(func=cmd_metrics)
+    p_witnesses = sub.add_parser("witnesses", help="print projection-collision witness rows from the artifact")
+    p_witnesses.add_argument("--projection", nargs="+", default=["keyword", "yesno", "operator_only"])
+    p_witnesses.add_argument("--limit", type=int, default=20, help="maximum witnesses per projection")
+    p_witnesses.add_argument("--output")
+    p_witnesses.set_defaults(func=cmd_witnesses)
+    p_audit_csv = sub.add_parser("audit-csv", help="audit a user CSV of public contract atoms")
+    p_audit_csv.add_argument("--input", required=True, help="CSV with engine, probe_id, operator, kind, layer, placement, decision_time, observability, and optional variant/state")
+    p_audit_csv.add_argument("--projection", nargs="+", default=["keyword", "yesno", "operator_only"])
+    p_audit_csv.add_argument("--mode", choices=["metrics", "witnesses"], default="witnesses")
+    p_audit_csv.add_argument("--limit", type=int, default=20, help="maximum witnesses per projection")
+    p_audit_csv.add_argument("--output")
+    p_audit_csv.set_defaults(func=cmd_audit_csv)
     p_manifest = sub.add_parser("manifest", help="build package manifest")
     p_manifest.add_argument("--summary", action="store_true")
     p_manifest.add_argument("--output")
@@ -147,4 +251,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":  # pragma: no cover
     raise SystemExit(main())
-

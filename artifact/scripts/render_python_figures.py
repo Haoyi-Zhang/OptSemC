@@ -61,12 +61,12 @@ def load_matplotlib():
         {
             "font.family": "serif",
             "font.serif": [
-                "DejaVu Serif",
                 "Linux Libertine O",
                 "LinLibertine",
                 "Libertinus Serif",
                 "Nimbus Roman",
                 "Times New Roman",
+                "DejaVu Serif",
             ],
             "font.size": 7.2,
             "axes.titlesize": 8.0,
@@ -236,7 +236,7 @@ def render_motif_denominator(plt, output: Path) -> None:
     ax.text(
         0.01,
         -0.18,
-        "ranges are finite feature-space spans, not workload substitution",
+        "line=min-max; diamond=median; finite spans, not workload substitution",
         transform=ax.transAxes,
         ha="left",
         va="top",

@@ -58,8 +58,8 @@
 \newcommand\vldbyear{2027}
 \newcommand\vldbauthors{\authors}
 \newcommand\vldbtitle{\shorttitle}
-\newcommand\vldbavailabilityurl{https://doi.org/10.5281/zenodo.21215168}
-\newcommand\vldbarchivesha{\texttt{39fd8a46\allowbreak{}dd36600f\allowbreak{}ecd50e70\allowbreak{}fe8939d9\allowbreak{}7bde7c5b\allowbreak{}8062cdce\allowbreak{}4bceac58\allowbreak{}b9e18627}}
+\newcommand\vldbavailabilityurl{https://doi.org/10.5281/zenodo.21251443}
+\newcommand\vldbarchivesha{\texttt{886d1758\allowbreak{}b3e3cafa\allowbreak{}0650e15f\allowbreak{}4bf254ab\allowbreak{}2807dc49\allowbreak{}45053709\allowbreak{}98ede2d1\allowbreak{}b9fa410b}}
 \newcommand\vldbpagestyle{plain}
 
 \title{OptSem-C: Auditing Federated SQL Optimizer Contracts}
@@ -98,9 +98,13 @@
 }
 \email{tegawende.bissyande@uni.lu}
 
+\AtBeginDocument{\hypersetup{%
+  pdftitle={OptSem-C: Auditing Federated SQL Optimizer Contracts},
+  pdfauthor={Haoyi Zhang, Huaijin Ran, Xunzhu Tang, and Tegawende F. Bissyande}}}
+
 \begin{document}
 \begin{abstract}
-Optimizer comparisons often start from compact public labels: pushdown, join, cost based, adaptive, or enabled.  Those labels are useful only after the denominator is clear.  In federated and cloud SQL systems, a filter or aggregate can be rewritten locally, delegated to a connector, exposed as a service-stage graph, or applied as a runtime filter; treating these public contracts as one row can make a later latency or plan-quality explanation ambiguous.  OptSem-C audits that denominator.  It encodes each source-supported optimizer statement as a guarded public contract over action, guard, layer, placement, decision time, observability, and evidence support, then tests which distinctions a comparison vocabulary drops.  In a finite seven-engine audit with 287 source-linked rules, 4,216 executable SQL probes, and 26 admitted public surfaces, keyword and operator-only vocabularies collapse 254 and 238 unequal public-contract signatures, concentrated in four architectural-boundary pairs; the other 17 engine pairs have no headline collision in this corpus.  Public yes/no controls add only six corpus-specific witnesses, a positive boundary result for enablement-style controls rather than a broad danger claim.  Placement separates keyword witnesses; optimizer layer separates operator-only witnesses; and layer plus placement separates all 498 counted records, the 492 primary witnesses plus the six yes/no boundary witnesses, inside this declared corpus.  OptSem-C is a corpus-specific, replayable public-contract audit for deciding when a comparison vocabulary is specific enough, not a population estimate, a practice survey, a performance benchmark, or a private-engine validation study.
+Database studies sometimes summarize optimizer features with compact labels such as pushdown, join, adaptive, or enabled.  In federated and cloud SQL systems, the same label can name different public contracts: a local rewrite, connector delegation, service-stage execution, runtime filtering, or only a plan-evidence surface.  A later latency, portability, or plan-quality claim can then compare the label rather than the optimizer behavior the public systems expose.  OptSem-C makes this denominator check executable.  It encodes each source-supported optimizer statement as a guarded public contract over action, guard, layer, placement, decision time, observability, and evidence support, then tests whether a declared comparison vocabulary collapses contracts that differ under the full public evidence payload.  In a seven-engine case study with 287 source-linked rules, 4,216 executable SQL probes, and 26 admitted public surfaces, keyword and operator-only vocabularies collapse 254 and 238 unequal public-contract signatures.  The failures are concentrated, not pervasive: they occur in four architectural-boundary pairs involving cloud-service, connector, and distributed-runtime behavior, while the other 17 engine pairs have no headline collision in this corpus.  The audit also gives a positive result: yes/no enablement controls add only six boundary witnesses.  Within the declared corpus, placement separates keyword witnesses, optimizer layer separates operator-only witnesses, and layer plus placement separates all 498 counted records.  OptSem-C is therefore a replayable finite audit, not a universal field ontology, for deciding when a comparison vocabulary is specific enough before downstream performance, portability, or plan-evidence claims are interpreted.
 \end{abstract}
 
 \maketitle

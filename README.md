@@ -11,13 +11,37 @@ The active manuscript source is `Paper/latex/paper.tex`. The artifact entry poin
 
 ## Artifact archive
 
-The public anonymous replay package is archived at https://doi.org/10.5281/zenodo.21215168. The expected SHA-256 for the archived `optsemc-artifact.zip` is:
+The public anonymous replay package is archived at https://doi.org/10.5281/zenodo.21251443. The expected SHA-256 for the archived `optsemc-artifact.zip` is:
 
 ```text
-39fd8a46dd36600fecd50e70fe8939d97bde7c5b8062cdce4bceac58b9e18627
+886d1758b3e3cafa0650e15f4bf254ab2807dc494505370998ede2d1b9fa410b
 ```
 
 The archived replay package records its source Git state in `artifact/evaluation/git_tree_state.csv`. The digest above applies only to that uploaded archive. Any commit that changes replay code, grounded corpus inputs, generated-probe logic, validation scripts, or paper-facing evidence must rebuild the anonymous archive from a clean source tree and update both the repository README and the PVLDB availability block.
+
+Reviewers who want a non-mutating first check can run:
+
+```bash
+cd artifact
+PYTHONDONTWRITEBYTECODE=1 python scripts/check_readonly_certificate.py
+```
+
+This reads the existing certificate CSVs and PDF only. The replay scripts below intentionally rebuild generated outputs in a clean workspace.
+
+## Projection audit CLI
+
+The artifact is not only a table dump.  From `artifact/`, reviewers can run the same projection audit machinery that builds the paper tables:
+
+```bash
+python -m optsemc.cli --root .. metrics --projection keyword operator_only
+python -m optsemc.cli --root .. witnesses --projection keyword --limit 5
+```
+
+For an external comparison table, `audit-csv` accepts one public-contract atom per row with columns `engine`, `probe_id`, `operator`, `kind`, `layer`, `placement`, `decision_time`, `observability`, and optional `variant`/`state`:
+
+```bash
+python -m optsemc.cli audit-csv --input contracts.csv --projection keyword --mode witnesses
+```
 
 ## Evidence scope
 

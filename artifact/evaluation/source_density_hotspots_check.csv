@@ -1,0 +1,14 @@
+check,passed,details
+inputs_present,true,
+rule_counts_match_expected,true,"{'BigQuery': 37, 'ClickHouse': 26, 'DuckDB': 21, 'PostgreSQL': 80, 'Snowflake': 26, 'Spark SQL': 36, 'Trino': 61}"
+hotspot_rows_match_engine_pairs,true,63
+headline_projections_present,true,"keyword,operator_only,yesno"
+opportunity_denominators_consistent,true,
+normalized_rates_finite_nonnegative,true,
+zero_false_rows_have_zero_false_rates,true,
+headline_false_counts_preserved,true,"{'yesno': 6, 'keyword': 254, 'operator_only': 238}"
+headline_nonzero_pair_counts_preserved,true,"{'yesno': 1, 'keyword': 3, 'operator_only': 2}"
+summary_rows_match_projections,true,"['keyword', 'operator_only', 'yesno']"
+keyword_summary_consistent,true,"{'projection': 'keyword', 'engine_pairs': '21', 'nonzero_pairs': '3', 'total_false_equivalences': '254', 'total_projected_equivalences': '2284', 'top_pair_by_rule_mass': 'BigQuery--ClickHouse', 'top_false_per_rule_mass': '3.222222', 'top_pair_by_rule_product': 'BigQuery--ClickHouse', 'top_false_per_rule_product': '0.211019'}"
+operator_only_summary_consistent,true,"{'projection': 'operator_only', 'engine_pairs': '21', 'nonzero_pairs': '2', 'total_false_equivalences': '238', 'total_projected_equivalences': '2268', 'top_pair_by_rule_mass': 'ClickHouse--Trino', 'top_false_per_rule_mass': '1.413793', 'top_pair_by_rule_product': 'ClickHouse--Trino', 'top_false_per_rule_product': '0.077554'}"
+yesno_summary_consistent,true,"{'projection': 'yesno', 'engine_pairs': '21', 'nonzero_pairs': '1', 'total_false_equivalences': '6', 'total_projected_equivalences': '2036', 'top_pair_by_rule_mass': 'ClickHouse--Trino', 'top_false_per_rule_mass': '0.068966', 'top_pair_by_rule_product': 'ClickHouse--Trino', 'top_false_per_rule_product': '0.003783'}"

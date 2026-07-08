@@ -1,6 +1,6 @@
 # Reproducibility Guide
 
-This artifact reproduces the numerical claims in *OptSem-C: Auditing Public Optimizer Contracts at Federated SQL Boundaries*.
+This artifact reproduces the numerical claims in *OptSem-C: Auditing Federated SQL Optimizer Contracts*.
 
 ## Fast verification
 

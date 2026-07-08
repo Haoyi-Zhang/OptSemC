@@ -3,18 +3,21 @@
 \caption{Representative witness audits and safe comparison rewrites.  Separators are case-local fields; the reported layer+placement basis covers the primary keyword/operator records and the yes/no boundary records.}
 \label{tab:cases}
 \footnotesize
-\setlength{\tabcolsep}{2.4pt}
-\renewcommand{\arraystretch}{1.08}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.38in}
-                >{\raggedright\arraybackslash}p{1.36in}
-                >{\raggedright\arraybackslash}p{1.38in}@{}}
+\setlength{\tabcolsep}{1.5pt}
+\renewcommand{\arraystretch}{1.04}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.24in}
+                >{\raggedright\arraybackslash}p{0.57in}
+                >{\raggedright\arraybackslash}p{0.42in}
+                >{\raggedright\arraybackslash}p{1.78in}@{}}
 \toprule
-Witness & Collapsed public label & Safe rewrite \\
+Row & Pair/probe & Coarse label & Hidden distinction and safe rewrite \\
 \midrule
-C1 & P0009 links source records where \texttt{pushdown}+\texttt{explain} hides BigQuery source delegation, stage-graph evidence, and aggregate-pushdown support/blocking versus Trino connector aggregate-pushdown evidence. & Keep an existence claim, or retain placement, layer, decision time, and observability before explaining portability or latency. \\
-C2 & Sixteen estimate and plan-evidence rules mix local estimates, cloud-service stages, and distributed-worker evidence under one exposed-plan label. & Compare plan evidence only after naming observability and placement; otherwise report a coarse exposed-plan scope. \\
-C3 & Sixteen adaptive-execution rules merge compile-time planning with runtime repartition, AQE, and conversion behavior. & Separate compile-time, runtime, and conversion claims before ranking adaptive behavior. \\
-C4 & Sixteen CTE rules collapse inline, materialize, reuse, and disable-guard contracts into one materialization label. & State the variant and guard; a single materialization label is safe only for a narrow existence claim. \\
+C1 & BQ--Trino P0009 & keyword & \texttt{pushdown}+\texttt{explain} hides source delegation, stage evidence, and aggregate support/blocking versus connector evidence; retain placement, layer, time, and observability. \\
+C2 & BQ--ClickHouse P0038 & keyword & A join label hides cloud runtime join-side choice and stage graph versus local compile-time join choice and profile trace; retain placement, decision time, and observability. \\
+C3 & BQ--ClickHouse P0040 & keyword & The same join label hides BigQuery cloud-stage evidence versus ClickHouse build-side/default local join selection; retain layer and placement before ranking join behavior. \\
+C4 & Spark--Trino P0022 & operator & A plan operator hides Spark compile-time partition-hint choice versus Trino runtime adaptive-plan disabling; retain action kind, layer, time, and state. \\
+C5 & ClickHouse--Trino P0104 & operator & A join operator hides local optional two-table reordering versus distributed fallback and no-cost-order rules; retain layer, placement, and state. \\
+C6 & ClickHouse--Trino P0456 & yes/no & A binary join-reorder control hides optional local reorder versus distributed no-reorder contracts; report this as a narrow boundary, not broad binary-control risk. \\
 \bottomrule
 \end{tabular}
 \end{table}

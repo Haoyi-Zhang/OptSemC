@@ -1,0 +1,4 @@
+projection,engine_pairs,nonzero_pairs,total_false_equivalences,total_projected_equivalences,top_pair_by_rule_mass,top_false_per_rule_mass,top_pair_by_rule_product,top_false_per_rule_product
+keyword,21,3,254,2284,BigQuery--ClickHouse,3.222222,BigQuery--ClickHouse,0.211019
+operator_only,21,2,238,2268,ClickHouse--Trino,1.413793,ClickHouse--Trino,0.077554
+yesno,21,1,6,2036,ClickHouse--Trino,0.068966,ClickHouse--Trino,0.003783

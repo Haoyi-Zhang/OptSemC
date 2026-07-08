@@ -1,75 +1,51 @@
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[
-  lane/.style={vpanel, draw=vldbRule, fill=vldbSoft,
-    minimum width=7.04cm, minimum height=.90cm},
-  laneRose/.style={lane, draw=vldbRose!35, fill=vldbRose!6},
-  laneTeal/.style={lane, draw=vldbTeal!42, fill=vldbMint},
-  rowtag/.style={font=\rmfamily\bfseries\fontsize{6.9}{7.5}\selectfont,
-    text=black!58, align=right, inner sep=.3pt,
-    text height=1.30ex, text depth=.23ex},
-  contract/.style={vpanel, draw=vldbBlue!72, fill=vldbMist,
-    text width=1.72cm, minimum height=.78cm,
-    font=\rmfamily\fontsize{7.7}{8.4}\selectfont, text=black!72,
-    align=center, inner xsep=2.0pt, inner ysep=2.0pt,
-    text height=1.35ex, text depth=.24ex},
-  kernel/.style={vpanel, draw=vldbRose!78!black, fill=vldbRose!8,
-    text width=2.22cm, minimum height=.66cm,
-    font=\rmfamily\bfseries\fontsize{7.75}{8.5}\selectfont,
-    text=vldbRose!76!black, align=center, inner xsep=2.2pt,
-    inner ysep=1.45pt, text height=1.38ex, text depth=.24ex},
-  retain/.style={vpanel, draw=vldbTeal!74!black, fill=white,
-    text width=1.42cm, minimum height=.54cm,
-    font=\rmfamily\bfseries\fontsize{7.35}{8.05}\selectfont,
-    text=vldbTeal!60!black, align=center, inner xsep=1.5pt,
-    inner ysep=1.15pt, text height=1.30ex, text depth=.23ex},
-  chip/.style={rounded corners=1.4pt, draw=black!14, fill=white,
-    font=\rmfamily\fontsize{6.65}{7.2}\selectfont, text=vldbGray,
-    align=center, inner xsep=1.8pt, inner ysep=.8pt,
-    text height=1.26ex, text depth=.22ex},
+  sig/.style={vpanel, draw=vldbBlue!50, fill=vldbMist,
+    text width=2.72cm, minimum height=1.42cm,
+    font=\rmfamily\fontsize{7.15}{7.85}\selectfont,
+    text=black!70, align=left, inner xsep=4.0pt, inner ysep=3.0pt},
+  kernel/.style={vpanel, draw=vldbRose!72!black, fill=vldbRose!7,
+    text width=6.30cm, minimum height=.82cm,
+    font=\rmfamily\bfseries\fontsize{7.45}{8.15}\selectfont,
+    text=vldbRose!76!black, align=center, inner xsep=3.0pt,
+    inner ysep=2.0pt},
+  retain/.style={vpanel, draw=vldbTeal!70!black, fill=white,
+    text width=1.45cm, minimum height=.52cm,
+    font=\rmfamily\bfseries\fontsize{7.15}{7.85}\selectfont,
+    text=vldbTeal!60!black, align=center, inner xsep=1.8pt,
+    inner ysep=1.0pt},
+  rail/.style={font=\rmfamily\bfseries\fontsize{6.75}{7.35}\selectfont,
+    text=black!55, align=center, inner sep=.5pt},
   flow/.style={-{Latex[length=1.55mm]}, line width=.62pt,
     draw=black!46, line cap=round, line join=round}
 ]
-\path[use as bounding box] (-.02,-3.56) rectangle (7.18,.14);
+\path[use as bounding box] (-.06,-3.62) rectangle (7.12,.08);
 
-\begin{scope}[on background layer]
-  \node[lane] at (3.58,-.44) {};
-  \node[laneRose] at (3.58,-1.62) {};
-  \node[laneTeal] at (3.58,-2.80) {};
-\end{scope}
+\node[sig] (bq) at (1.82,-.78)
+  {{\bfseries\textcolor{vldbBlue!65!black}{BigQuery $\sigma_{BQ}$}}\\[-1pt]
+   source delegation\\
+   cloud-stage evidence\\
+   aggregate support split};
+\node[sig] (trino) at (5.22,-.78)
+  {{\bfseries\textcolor{vldbBlue!65!black}{Trino $\sigma_T$}}\\[-1pt]
+   connector aggregate pushdown\\
+   estimated-plan evidence\\
+   expression aggregate blocked};
+\node[rail, draw=vldbBlue!28, fill=white, rounded corners=1.5pt,
+  text=vldbBlue!70!black, inner xsep=2.0pt] at (3.52,-.78) {$\neq$};
 
-\node[rowtag, anchor=east, text=vldbBlue!70!black] at (1.10,-.44)
-  {reference\\split};
-\node[contract] (bq) at (2.20,-.44)
-  {\textbf{BigQuery}};
-\node[chip, draw=vldbBlue!30, text=vldbBlue!70!black] (neq) at (3.58,-.44)
-  {$\neq$};
-\node[contract] (trino) at (4.96,-.44)
-  {\textbf{Trino}};
+\node[kernel] (k) at (3.52,-2.08)
+  {Projection kernel $K_{\pi}$ declares equality:\\[-1pt]
+   $\pi(\sigma_{BQ})=\pi(\sigma_T)$ as \texttt{pushdown}+\texttt{explain}};
 
-\node[rowtag, anchor=east, text=vldbRose!72!black] at (1.10,-1.62)
-  {coarse\\view};
-\node[kernel] (k) at (3.58,-1.62)
-  {\texttt{pushdown}\\$+$ \texttt{explain}};
-\node[chip, draw=vldbRose!35, text=vldbRose!72!black]
-  at (5.32,-1.62) {declares equal};
-
-\node[rowtag, anchor=east, text=vldbTeal!58!black] at (1.10,-2.80)
-  {retained\\fields};
-\node[retain] (layer) at (2.20,-2.80) {layer};
-\node[retain] (place) at (3.58,-2.80) {placement};
-\node[retain] (obs) at (4.96,-2.80) {obs.};
-
-\coordinate (splitStart) at (3.58,-2.05);
-\coordinate (split) at (3.58,-2.18);
-\draw[flow, draw=vldbRose!72!black] (bq.south) -- ++(0,-.20) -| ($(k.north west)+(.30,0)$);
-\draw[flow, draw=vldbRose!72!black] (trino.south) -- ++(0,-.20) -| ($(k.north east)+(-.30,0)$);
-\draw[flow, draw=vldbTeal!72!black] (splitStart) -- (split);
-\draw[flow, draw=vldbTeal!72!black] (split) -| (layer.north);
-\draw[flow, draw=vldbTeal!72!black] (split) -- (place.north);
-\draw[flow, draw=vldbTeal!72!black] (split) -| (obs.north);
+\node[retain] (place) at (1.82,-3.20) {placement};
+\node[retain] (layer) at (3.52,-3.20) {layer};
+\node[retain] (obs) at (5.22,-3.20) {observability};
+\node[rail, text=vldbTeal!60!black] at (3.52,-2.74)
+  {retained fields reopen the split};
 \end{tikzpicture}
-\caption{Projection collapse on P0009.  The group-by aggregate probe separates BigQuery source/stage evidence from Trino connector aggregate-pushdown evidence under the reference signature; the coarse \texttt{pushdown}+\texttt{explain} vocabulary declares them equal until layer, placement, and observability are retained.}
-\Description{A three-row diagram showing reference-unequal BigQuery and Trino aggregate-pushdown contracts, their collapse under a coarse pushdown and explain projection, and separation by retaining layer, placement, and observability.}
+\caption{Projection collapse on P0009.  BigQuery and Trino expose different source-supported contracts, but the keyword projection maps both to \texttt{pushdown}+\texttt{explain}; retaining placement, layer, and observability separates the comparison.}
+\Description{A three-stage diagram showing unequal BigQuery and Trino reference signatures, equality under a keyword projection kernel, and separation after retaining placement, layer, and observability.}
 \label{fig:projection-trap}
 \end{figure}

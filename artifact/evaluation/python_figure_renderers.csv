@@ -1,5 +1,5 @@
 figure,passed,details
-projection_information,true,Paper/latex/generated_figures/fig_projection_information.pdf bytes=14163
-external_motifs,true,Paper/latex/generated_figures/fig_external_motifs.pdf bytes=21246
-semantic_frontier,true,Paper/latex/generated_figures/fig_semantic_frontier.pdf bytes=21702
-sql_execution,true,Paper/latex/generated_figures/fig_sql_execution.pdf bytes=12811
+projection_information,true,Paper/latex/generated_figures/fig_projection_information.pdf bytes=17687
+external_motifs,true,Paper/latex/generated_figures/fig_external_motifs.pdf bytes=24206
+semantic_frontier,true,Paper/latex/generated_figures/fig_semantic_frontier.pdf bytes=26218
+sql_execution,true,Paper/latex/generated_figures/fig_sql_execution.pdf bytes=15466

@@ -12,7 +12,6 @@ E = ROOT / "evaluation"
 CHECK = E / "real_engine_validation_check.csv"
 ENV = E / "real_engine_validation_environment.csv"
 FRESH = E / "real_engine_fresh_run.csv"
-FRESH_MTIME_EPSILON_SECONDS = 2.0
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -146,10 +145,7 @@ def main() -> None:
         FRESH.exists()
         and marker.get("validation_mode") == "fresh-engine-rerun"
         and marker.get("engines") == "duckdb,postgres"
-        and (
-            marker.get("evidence_bundle_sha256") == evidence_sha
-            or FRESH.stat().st_mtime + FRESH_MTIME_EPSILON_SECONDS >= evidence_mtime
-        )
+        and marker.get("evidence_bundle_sha256") == evidence_sha
     )
     validation_mode = "fresh-engine-rerun" if fresh_marker_current else "saved-engine-certificate-replay"
     environment_rows = [
@@ -179,7 +175,7 @@ def main() -> None:
             f"marker_sha={marker.get('evidence_bundle_sha256','missing')[:12]};"
             f"evidence_sha={evidence_sha[:12]};"
             f"marker_mtime={FRESH.stat().st_mtime if FRESH.exists() else 'missing'};"
-            f"evidence_mtime={evidence_mtime};epsilon={FRESH_MTIME_EPSILON_SECONDS}",
+            f"evidence_mtime={evidence_mtime}",
         )
     add(
         "current_sql_replay_chain_bound",

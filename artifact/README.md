@@ -6,19 +6,13 @@ The manuscript source is intentionally outside the anonymous replay archive. The
 
 ## Archive verification
 
-The public anonymous replay package is archived as the versioned Zenodo record https://doi.org/10.5281/zenodo.21215168 under the stable concept record https://doi.org/10.5281/zenodo.21092812. The expected SHA-256 for the uploaded `optsemc-artifact.zip` is:
-
-```text
-39fd8a46dd36600fecd50e70fe8939d97bde7c5b8062cdce4bceac58b9e18627
-```
-
-Verify a downloaded archive with:
+The public anonymous replay package is archived under the stable Zenodo concept record https://doi.org/10.5281/zenodo.21251442. The paper, repository README, and Zenodo landing page identify the current version DOI and external SHA-256 digest. The zip does not embed its version DOI or digest, so the package is not self-referential. Verify a downloaded archive by comparing the external digest with:
 
 ```bash
 sha256sum optsemc-artifact.zip
 ```
 
-The archive records its source Git commit and clean-tree status in `artifact/evaluation/git_tree_state.csv`. The recorded SHA-256 applies only to the uploaded zip for the version DOI above. If replay code, grounded corpus inputs, generated-probe logic, validation scripts, or paper-facing evidence changes, the archive gate requires a new clean-tree archive build and a new digest in the repository README, this artifact README, and the PVLDB availability block.
+The archive records its source-tree certificate in `artifact/evaluation/git_tree_state.csv`. If replay code, grounded corpus inputs, generated-probe logic, validation scripts, or paper-facing evidence changes, the archive gate requires rebuilding from a source tree with no pending edits and updating the external digest in the repository README and PVLDB availability block.
 
 ## Main research objects
 
@@ -32,7 +26,7 @@ The archive records its source Git commit and clean-tree status in `artifact/eva
 - Claim-evidence graph: paper claims linked to generated outputs and integrity gates.
 - Recoding worksheet: every admitted rule exported with source locator, line range, digest, paraphrase, current fields, and blank independent-coding columns.
 - Side-balanced evidence audit: every headline false witness has public-source support on both compared sides.
-- Anti-overfit boundary ledger: source removal, probe subsampling, feature-family stress, engine-family stress, failed point-learned transfer, and resource-profile checks are reported separately so stress evidence is not overstated as a learned generalization claim.
+- Anti-overfit boundary ledger: source removal, probe subsampling, feature-family stress, engine-family stress, source-density-normalized hotspot diagnostics, failed point-learned transfer, and resource-profile checks are reported separately so stress evidence is not overstated as a learned generalization claim.
 
 ## Paper-facing evidence views
 
@@ -55,6 +49,29 @@ Package manifest check: passed
 Fast mainline checks: passed
 ```
 
+For a non-mutating certificate check, run:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python scripts/check_readonly_certificate.py
+```
+
+This command only reads existing certificates and reports whether they are passing. Use the replay commands below when you want to regenerate outputs in a separate clean workspace.
+
+## Projection audit CLI
+
+The reusable command-line entry point is `python -m optsemc.cli`.  The paper's headline projection counts can be recomputed with:
+
+```bash
+python -m optsemc.cli --root .. metrics --projection keyword yesno operator_only
+python -m optsemc.cli --root .. witnesses --projection keyword --limit 5
+```
+
+`audit-csv` applies the same projection and witness logic to a user-supplied comparison table with one public-contract atom per row.  Required columns are `engine`, `probe_id`, `operator`, `kind`, `layer`, `placement`, `decision_time`, and `observability`; `variant` and `state` are optional.
+
+```bash
+python -m optsemc.cli audit-csv --input contracts.csv --projection keyword --mode witnesses
+```
+
 ## Execution environment
 
 The artifact is designed for standard Linux systems with Python 3.10 and the pinned dependencies in `requirements.txt` and `constraints.txt`. Development edits were made on Windows, while the full replay and integrity gates were validated on Linux. Cloud execution was used as the validation host, not as a private service dependency. The tested environment is recorded in `evaluation/environment.csv` after a replay. The public replay does not require project-specific credentials or private infrastructure.
@@ -73,4 +90,4 @@ The saved real-engine CSV files are replay certificates. A fresh DuckDB/PostgreS
 
 ## Scope notes
 
-The corpus is a public-contract denominator, not a private optimizer oracle. Source-linked rules are admitted from public evidence spans with digests, line ranges, guards, and observability fields. DuckDB and PostgreSQL real-engine runs validate that the generated SQL denominator is executable on two open systems; they do not admit rules for other engines or turn documentation into private implementation truth. The field-stability outputs test whether the finite kernel is a one-source, one-probe, or one-engine-family artifact; they do not claim that a field basis learned on one engine pair transfers to arbitrary future systems. Testing tools such as SQLsmith and SQLancer are complementary implementation bug finders, while this artifact audits whether an optimizer comparison vocabulary collapses distinct public contracts.
+The corpus is a public-contract denominator, not a private optimizer oracle. Source-linked rules are admitted from public evidence spans with digests, line ranges, guards, and observability fields. DuckDB and PostgreSQL real-engine runs validate that the generated SQL denominator is executable on two open systems; they do not admit rules for other engines or turn documentation into private implementation truth. The field-stability outputs test whether the finite kernel is a one-source, one-probe, or one-engine-family artifact; they do not claim that a field basis learned on one engine pair transfers to arbitrary future systems. Source-density hotspot outputs normalize pair counts by admitted rule mass and rule product as sensitivity diagnostics; they are not documentation-normalized prevalence estimates. Testing tools such as SQLsmith and SQLancer are complementary implementation bug finders, while this artifact audits whether an optimizer comparison vocabulary collapses distinct public contracts.

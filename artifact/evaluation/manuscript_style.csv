@@ -1,8 +1,8 @@
 check,passed,details
 no_visible_repository_or_report_terms,true,
-has_regular_research_structure,true,Introduction|Precision Loss in Optimizer Comparisons|Contract Formalization and Notation|Contract Probe Suite and Grounded Corpus|Evaluation|Limitations and Conclusion|Using the Archive and Replay
+has_regular_research_structure,true,Introduction|Precision Loss in Optimizer Comparisons|Contract Formalization and Notation|Contract Probe Suite and Grounded Corpus|Evaluation|Limitations|Conclusion
 has_tikz_mechanism_figure,true,
-has_formal_statements_and_proofs,true,formal=7;theorems=0;lemmas=3;propositions=1;observations=3;proofs=6
+has_formal_statements_and_proofs,true,formal=7;theorems=0;lemmas=3;propositions=0;observations=4;proofs=6
 references_70_to_80,true,70
 pdf_has_no_unresolved_references,true,
 pdf_does_not_expose_source_paths,true,

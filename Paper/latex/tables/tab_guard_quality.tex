@@ -1,6 +1,6 @@
 \begin{table*}[t]
 \centering
-\caption{Probe-suite denominator and validation checks across corpus, SQL, open-engine execution, and feature-space crosswalk layers. Bold marks complete coverage or zero SQL-shape failures; execution rows validate constructability, not contract truth.}
+\caption{Contract-corpus and SQL-denominator checks. Evidence rows admit public contracts; execution rows validate SQL constructability, not source truth.}
 \label{tab:denominator-dashboard}
 \footnotesize
 \setlength{\tabcolsep}{4pt}
@@ -8,18 +8,18 @@
 \toprule
 Layer & Check & Value & Scope & Interpretation \\
 \midrule
-Corpus & grounded rules & \textbf{287} & 26 sources & finite public-contract relation \\
-Projection & public surfaces & \textbf{26} & 26 kw/op; 12 yes/no & catalog, not practice survey \\
-Corpus & probe-supported rules & \textbf{287/287} & median support 102 & every admitted rule is triggerable \\
-Corpus & non-global guards & 252 & 3 containments & query-conditional, audited overlaps \\
+Evidence & grounded rules & \textbf{287} & 26 sources & finite public-contract relation \\
+Surface & public labels & \textbf{26} & 26 kw/op; 12 yes/no & catalog, not practice survey \\
+Evidence & probe-supported rules & \textbf{287/287} & median support 102 probes & every admitted rule is triggerable \\
+Evidence & non-global guards & 252 & 3 containments & query-conditional, audited overlaps \\
 Guard schema & invalid dimensions & \textbf{0} & fixed feature domain & no out-of-domain guard values \\
-SQL corpus & generated probes & \textbf{4,216} & digest \texttt{df107f018e37} & full executable denominator \\
-SQL corpus & feature-cover prefix & 48 & human inspection & compact replay slice, not cherry-picking \\
-SQL execution & planned/executed probes & \textbf{4,216/4,216} & 91 distinct plans & every generated probe plans and runs \\
-SQL execution & shape/exec failures & \textbf{0/0} & 18,448 rows & no SQL-shape or runtime failures \\
-Real engines & full DuckDB/PostgreSQL & \textbf{8,432/8,432} & tags .705/.796 & SQL constructability, not source truth \\
-Real engines & feature reps DuckDB/PostgreSQL & \textbf{142/142} & 71 reps $\times$ 2 & budgeted open-engine sanity \\
-Contract truth & private optimizer behavior & -- & closed engines & not inferred from execution \\
+SQL denom. & generated probes & \textbf{4,216} & digest \texttt{df107f018e37} & full executable denominator \\
+SQL denom. & feature-cover prefix & 48 & human inspection & compact replay slice, not cherry-picking \\
+SQL validity & planned/executed probes & \textbf{4,216/4,216} & 91 distinct plans & every generated probe plans and runs \\
+SQL validity & shape/exec failures & \textbf{0/0} & 18,448 rows & no SQL-shape or runtime failures \\
+Open-engine & full DuckDB/PostgreSQL & \textbf{8,432/8,432} & tags .705/.796 & SQL constructability, not source truth \\
+Open-engine & feature reps DuckDB/PostgreSQL & \textbf{142/142} & 71 reps $\times$ 2 & budgeted visible-plan sanity \\
+Excluded & private optimizer behavior & -- & closed engines & not inferred from execution \\
 Crosswalk & feature requirements & \textbf{90/90} & 71 SQL reps & not workload substitution \\
 \bottomrule
 \end{tabular}

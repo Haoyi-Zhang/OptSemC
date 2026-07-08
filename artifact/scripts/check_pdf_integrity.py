@@ -16,7 +16,14 @@ try:
     from pypdf import PdfReader
     reader = PdfReader(str(PDF))
     pages = len(reader.pages)
+    expected_title = 'OptSem-C: Auditing Federated SQL Optimizer Contracts'
     add('pdf_readable_by_pypdf', True, 'readable', 'readable')
+    metadata_title = ''
+    try:
+        metadata_title = str(reader.metadata.title or '')
+    except Exception:
+        metadata_title = ''
+    add('pdf_metadata_title_matches_source', metadata_title == expected_title, metadata_title, expected_title)
     add('total_pages_with_references', pages >= 13, pages, 'body pages plus unlimited references')
     page_texts = [page.extract_text() or '' for page in reader.pages]
     ref_pages = [
@@ -53,7 +60,7 @@ try:
     text = proc.stdout if proc.returncode == 0 else ''
     add('pdf_text_extractable', proc.returncode == 0 and len(text) > 1000, len(text), '>1000 chars')
     normalized_text = ' '.join(text.split())
-    title_seen = 'OptSem-C: Auditing Federated SQL Optimizer Contracts' in normalized_text
+    title_seen = expected_title in normalized_text
     add('title_present', title_seen, 'yes' if title_seen else 'no', 'yes')
     normalized = normalized_text.lower()
     collision_claim = (

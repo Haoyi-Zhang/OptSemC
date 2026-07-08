@@ -25,7 +25,7 @@ saved_evidence_environment_bound,true,rows=18
 current_dependency_status_recorded,true,"{'duckdb': '1.5.4', 'psycopg': '3.3.4', 'postgres': '14.23 (Ubuntu 14.23-0ubuntu0.22.04.1)'}"
 fresh_dependency_available_when_required,true,"{'duckdb': '1.5.4', 'psycopg': '3.3.4', 'postgres': '14.23 (Ubuntu 14.23-0ubuntu0.22.04.1)'}"
 fresh_run_marker_present,true,evaluation/real_engine_fresh_run.csv
-fresh_run_marker_matches_scope,true,"{'validation_mode': 'fresh-engine-rerun', 'engines': 'duckdb,postgres', 'subsets': 'motif,full', 'unix_time': '1783422304.626374'}"
-fresh_marker_binds_engine_outputs,true,marker_sha=missing;evidence_sha=cac4b537640a;marker_mtime=1783422304.0;evidence_mtime=1783422304.0;epsilon=2.0
+fresh_run_marker_matches_scope,true,"{'validation_mode': 'fresh-engine-rerun', 'engines': 'duckdb,postgres', 'subsets': 'motif,full', 'evidence_bundle_sha256': 'cac4b537640a99276e47ccab9ac3009735ba8e54dc2158dac0a155aaac56b4bb', 'unix_time': '1783445838.428072'}"
+fresh_marker_binds_engine_outputs,true,marker_sha=cac4b537640a;evidence_sha=cac4b537640a;marker_mtime=1783468292.3466375;evidence_mtime=1783446137.6576192
 current_sql_replay_chain_bound,true,full-sql-plus-three-catalog-replay
 current_sql_replay_counts_match_corpus,true,"sql_rows=4216;multicatalog={'catalogs': '3', 'probes_per_catalog': '4216', 'total_probe_catalog_runs': '12648', 'total_execution_successes': '12648', 'total_execution_failures': '0', 'total_result_rows': '77003'}"

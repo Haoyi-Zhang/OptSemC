@@ -1,0 +1,4 @@
+projection,collapsed_witnesses,placement_claim_risk,layer_claim_risk,decision_time_claim_risk,observability_claim_risk,state_claim_risk,taxonomy_only_witnesses,reference_disjoint_witnesses,mean_atom_delta
+keyword,254,254,212,248,248,53,0,254,9.094
+operator_only,238,206,238,89,118,160,0,238,5.845
+yesno,6,6,6,0,0,6,0,6,3.000

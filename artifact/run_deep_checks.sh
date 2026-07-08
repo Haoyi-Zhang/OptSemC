@@ -71,6 +71,8 @@ run_py scripts/compute_projection_information_profile.py
 run_py scripts/check_projection_information_profile.py
 run_py scripts/compute_false_equivalence_severity.py
 run_py scripts/check_false_equivalence_severity.py
+run_py scripts/compute_claim_severity.py
+run_py scripts/check_claim_severity.py
 run_py scripts/compute_projection_resolution_lattice.py
 run_py scripts/check_projection_resolution_lattice.py
 run_py scripts/compute_projection_frontier_antichains.py
@@ -173,6 +175,8 @@ run_py scripts/compute_probe_coverage_matrix.py
 run_py scripts/check_probe_coverage_depth.py
 run_py scripts/compute_engine_pair_matrix.py
 run_py scripts/check_engine_pair_matrix.py
+run_py scripts/compute_source_density_hotspots.py
+run_py scripts/check_source_density_hotspots.py
 run_py scripts/compute_projection_mutation_suite.py
 run_py scripts/check_projection_mutation_suite.py
 run_py scripts/compute_counterfactual_repair_ablation.py
