@@ -111,6 +111,12 @@ try:
     if min_r_squared < 0.98:
         detail += f";min_r_squared={min_r_squared:.6f}"
     add("evaluation_scaling_claims_match_outputs", not missing and full_min_cps >= 50000.0 and min_cps >= 190000.0 and min_r_squared >= 0.98, detail)
+    dashboard = PKG / "Paper" / "latex" / "tables" / "tab_robustness_replay_dashboard.tex"
+    ok, dashboard_detail = contains_all(dashboard, required[:-1])
+    add("table10_replay_claims_match_outputs", ok, dashboard_detail)
+    resource_table = PKG / "Paper" / "latex" / "tables" / "tab_resource_profile.tex"
+    ok, resource_detail = contains_all(resource_table, [full_rows, full_seconds, lifted_rows, lifted_seconds])
+    add("resource_profile_table_matches_outputs", ok, resource_detail)
 except Exception as exc:
     add("evaluation_scaling_claims_match_outputs", False, type(exc).__name__ + ":" + str(exc))
 
